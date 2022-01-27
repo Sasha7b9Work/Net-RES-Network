@@ -589,6 +589,16 @@
           <GroupName>Modules/BME280</GroupName>
           <Files>
             <File>
+              <FileName>BME280.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\BME280\BME280.h</FilePath>
+            </File>
+            <File>
+              <FileName>BME280.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\BME280\BME280.cpp</FilePath>
+            </File>
+            <File>
               <FileName>bme280_application.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Modules\BME280\bme280_application.c</FilePath>

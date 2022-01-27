@@ -1,9 +1,9 @@
 #include "main.h"
 #include "usb_device.h"
 #include "i2c.h"
-#include "bme280_application.h"
 #include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
+#include "Modules/BME280/BME280.h"
 
 
 int main(void)
@@ -14,19 +14,11 @@ int main(void)
 
     HC12_Init();
 
-    struct bme280_dev dev;
-
-    dev.dev_id = BME280_I2C_ADDR_SEC;
-    dev.intf = BME280_I2C_INTF;
-    dev.read = user_i2c_read;
-    dev.write = user_i2c_write;
-    dev.delay_ms = user_delay_ms;
-
-    bme280_init(&dev);
+    BME280::Init();
 
     while (1)
     {
-        stream_sensor_data_normal_mode(&dev);
+        BME280::Update();
     }
 }
 
