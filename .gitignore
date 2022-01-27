@@ -1,6 +1,7 @@
 *.o
 *.d
 *.lst
+*.scvd
 
 sources/Device/Listings
 sources/Device/Objects
