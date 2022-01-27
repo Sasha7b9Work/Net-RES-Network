@@ -2,7 +2,7 @@
 #define __BME280_APPLICATION_H__
 
 #include "stm32f1xx_hal.h"
-#include "bme280.h"
+#include "bme280_driver.h"
 #include "bme280_selftest.h"
 
 
