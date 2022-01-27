@@ -21,7 +21,7 @@ int main(void)
 
         CDC_Transmit_FS((unsigned char *)buffer, strlen(buffer));
 
-        HC12::Send(buffer);         
+        HC12::Send(buffer);
 
         HAL::Delay(1000);
     }
