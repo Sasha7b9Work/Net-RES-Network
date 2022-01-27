@@ -1,6 +1,6 @@
 #include "main.h"
-#include "i2c.h"
 #include "usb_device.h"
+#include "i2c.h"
 #include "bme280_application.h"
 #include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
@@ -9,7 +9,6 @@
 int main(void)
 {
     HAL::Init();
-    MX_I2C1_Init();
     MX_USB_DEVICE_Init();
 
     HC12_Init();

@@ -1,5 +1,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "main.h"
+#include "i2c.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -12,6 +13,7 @@ void HAL::Init()
     HAL_Init();
     SystemClock_Config();
     MX_GPIO_Init();
+    MX_I2C1_Init();
 }
 
 
