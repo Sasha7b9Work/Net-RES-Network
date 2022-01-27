@@ -20,7 +20,7 @@ int main(void)
 
         CDC::Transmit(buffer);
 
-        HC12::Send(buffer);
+        HC12::Transmit(buffer);
 
         HAL::Delay(1000);
     }
