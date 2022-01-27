@@ -33,7 +33,7 @@ static void SystemClock_Config()
     RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
-      Error_Handler();
+        Error_Handler();
     }
   
     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -66,3 +66,21 @@ static void MX_GPIO_Init()
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+void Error_Handler()
+{
+    while(1)
+    {
+    }
+}
+
+
+#ifdef __cplusplus
+}
+#endif
