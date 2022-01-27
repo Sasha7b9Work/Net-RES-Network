@@ -1,6 +1,6 @@
 #include "Modules/BME280/BME280.h"
-#include "bme280_application.h"
 #include "Hardware/I2C/i2c.h"
+#include "Modules/BME280/bme280_driver.h"
 
 
 static struct bme280_dev dev;
@@ -43,7 +43,7 @@ void BME280::Update(char buffer[128])
     dev.delay_ms(70);
 
     bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
-    
-    
-    
+
+    sprintf(buffer, "t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
+        comp_data.temperature, comp_data.pressure/100, comp_data.pressure/133.3223684, comp_data.humidity);
 }

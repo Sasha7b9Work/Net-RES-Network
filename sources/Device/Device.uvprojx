@@ -599,16 +599,6 @@
               <FilePath>.\src\Modules\BME280\BME280.cpp</FilePath>
             </File>
             <File>
-              <FileName>bme280_application.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_application.c</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_application.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_application.h</FilePath>
-            </File>
-            <File>
               <FileName>bme280_defs.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\BME280\bme280_defs.h</FilePath>
