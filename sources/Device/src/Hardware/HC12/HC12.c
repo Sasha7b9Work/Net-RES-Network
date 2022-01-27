@@ -1,5 +1,9 @@
 #include "Hardware/HC12/HC12.h"
 #include "stm32f1xx_hal.h"
+#include <string.h>
+
+
+UART_HandleTypeDef UartHandle;
 
 
 void HC12_Init()
@@ -15,9 +19,23 @@ void HC12_Init()
     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
 
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    UartHandle.Instance        = USART1;
+
+    UartHandle.Init.BaudRate   = 9600;
+    UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
+    UartHandle.Init.StopBits   = UART_STOPBITS_1;
+    UartHandle.Init.Parity     = UART_PARITY_ODD;
+    UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
+    UartHandle.Init.Mode       = UART_MODE_TX_RX;
+
+    if (HAL_UART_Init(&UartHandle) != HAL_OK)
+    {
+    }
 }
 
 
 void HC12_Send(char *buffer)
 {
+    HAL_UART_Transmit(&UartHandle, (uint8_t *)buffer, strlen(buffer), 0xFFFF);
 }

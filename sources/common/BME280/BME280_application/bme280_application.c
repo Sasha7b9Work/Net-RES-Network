@@ -1,6 +1,8 @@
 #include"bme280_application.h"
 #include "usb_device.h"
 #include "usbd_cdc_if.h"
+#include "Hardware/HC12/HC12.h"
+
 /*
 In file in bme280_defs.h
 In case of the macro "BME280_FLOAT_ENABLE" enabled, The outputs are in double and the units are
@@ -19,15 +21,12 @@ In case if "BME280_FLOAT_ENABLE" is not enabled, then it is
 char buffer_USB[60] = {0};
 void print_sensor_data(struct bme280_data *comp_data)
 {
-#ifdef BME280_FLOAT_ENABLE
-	//printf("temperature:%0.2f*C   pressure:%0.2fhPa   humidity:%0.2f%%\r\n",comp_data->temperature, comp_data->pressure/100, comp_data->humidity);
-    sprintf(buffer_USB, "t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",comp_data->temperature, comp_data->pressure/100, comp_data->pressure/133.3223684, comp_data->humidity);
-	CDC_Transmit_FS((uint8_t*)buffer_USB, strlen(buffer_USB));
-#else
-	//printf("temperature:%ld*C   pressure:%ldhPa   humidity:%ld%%\r\n",comp_data->temperature, comp_data->pressure/100, comp_data->humidity);
-    sprintf(buffer_USB, "temperature:%0.2f*C   pressure:%0.2fhPa   humidity:%0.2f%%\r\n",comp_data->temperature, comp_data->pressure/100, comp_data->humidity);
-	CDC_Transmit_FS((uint8_t*)buffer_USB, strlen(buffer_USB));
-#endif
+    sprintf(buffer_USB, "t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
+        comp_data->temperature, comp_data->pressure/100, comp_data->pressure/133.3223684, comp_data->humidity);
+
+    CDC_Transmit_FS((uint8_t*)buffer_USB, strlen(buffer_USB));
+
+    HC12_Send(buffer_USB);
 }
 
 
