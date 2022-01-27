@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/BME280/BME280.h"
@@ -14,12 +15,10 @@ int main(void)
 
     while (1)
     {
-        const char *buffer = BME280::GetMeasure();
+        const char *measure = BME280::GetMeasure(1000);
 
-        CDC::Transmit(buffer);
+        CDC::Transmit(measure);
 
-        HC12::Transmit(buffer);
-
-        HAL::Delay(1000);
+        HC12::Transmit(measure);
     }
 }

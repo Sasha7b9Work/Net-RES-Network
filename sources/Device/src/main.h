@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #ifndef __MAIN_H
 #define __MAIN_H
 

@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/I2C/i2c.h"
 #include "usb_device.h"

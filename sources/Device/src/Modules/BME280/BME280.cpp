@@ -1,9 +1,12 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Modules/BME280/BME280.h"
 #include "Hardware/I2C/i2c.h"
 #include "Modules/BME280/bme280_driver.h"
 
 
 static bme280_dev dev;
+
+static unsigned int timeNext = 1;       // Время следующего измерения
 
 
 void BME280::Init()
@@ -39,14 +42,22 @@ void BME280::Init()
 }
 
 
-const char *BME280::GetMeasure()
+const char *BME280::GetMeasure(unsigned int dT)
 {
+    static char buffer[128];
+
     bme280_data comp_data;
+
+    while(HAL_GetTick() < timeNext)
+    {
+    }
+
+    timeNext += dT;
 
     bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
 
-    static char buffer[128];
-
     sprintf(buffer, "t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
         comp_data.temperature, comp_data.pressure/100, comp_data.pressure/133.3223684, comp_data.humidity);
+
+    return buffer;
 }
