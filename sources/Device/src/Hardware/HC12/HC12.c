@@ -26,14 +26,13 @@ void HC12_Init()
     
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    UartHandle.Instance        = USART1;
-
-    UartHandle.Init.BaudRate   = 9600;
-    UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-    UartHandle.Init.StopBits   = UART_STOPBITS_1;
-    UartHandle.Init.Parity     = UART_PARITY_NONE;
-    UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-    UartHandle.Init.Mode       = UART_MODE_TX_RX;
+    UartHandle.Instance          = USART1;
+    UartHandle.Init.BaudRate     = 9600;
+    UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
+    UartHandle.Init.StopBits     = UART_STOPBITS_1;
+    UartHandle.Init.Parity       = UART_PARITY_NONE;
+    UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+    UartHandle.Init.Mode         = UART_MODE_TX_RX;
     UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
 
     if (HAL_UART_Init(&UartHandle) != HAL_OK)
@@ -45,7 +44,5 @@ void HC12_Init()
 
 void HC12_Send(char *buffer)
 {
-    HAL_StatusTypeDef res = HAL_UART_Transmit(&UartHandle, (uint8_t *)buffer, strlen(buffer), 0xFFFF);
-    
-    res = res;
+    HAL_UART_Transmit(&UartHandle, (uint8_t *)buffer, strlen(buffer), 0xFFFF);
 }
