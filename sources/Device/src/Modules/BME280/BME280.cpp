@@ -18,7 +18,7 @@ void BME280::Init()
 }
 
 
-void BME280::Update(char buffer[128])
+void BME280::GetMeasure(char buffer[128])
 {
     uint8_t settings_sel;
     struct bme280_data comp_data;

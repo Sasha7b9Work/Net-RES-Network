@@ -2,7 +2,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Modules/BME280/BME280.h"
 #include "Hardware/CDC/CDC.h"
-#include <string.h>
 
 
 int main(void)
@@ -17,9 +16,9 @@ int main(void)
     {
         char buffer[128];
 
-        BME280::Update(buffer);
+        BME280::GetMeasure(buffer);
 
-        CDC::Transmit((unsigned char *)buffer, strlen(buffer));
+        CDC::Transmit(buffer);
 
         HC12::Send(buffer);
 

@@ -104,7 +104,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
     return (USBD_OK);
 }
 
-uint8_t CDC::Transmit(uint8_t* Buf, uint16_t Len)
+uint8_t CDC::Transmit(char *buffer)
 {
     uint8_t result = USBD_OK;
 
@@ -115,7 +115,7 @@ uint8_t CDC::Transmit(uint8_t* Buf, uint16_t Len)
         return USBD_BUSY;
     }
 
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, Buf, Len);
+    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, strlen(buffer));
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;

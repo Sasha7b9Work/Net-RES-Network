@@ -10,7 +10,7 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 
 namespace CDC
 {
-     uint8_t Transmit(uint8_t* Buf, uint16_t Len);
+     uint8_t Transmit(char *buffer);
 }
 
 #ifdef __cplusplus

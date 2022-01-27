@@ -4,5 +4,5 @@
 namespace BME280
 {
     void Init();
-    void Update(char buffer[128]);
+    void GetMeasure(char buffer[128]);
 }
