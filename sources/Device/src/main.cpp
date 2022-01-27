@@ -9,6 +9,7 @@
 int main(void)
 {
     HAL::Init();
+
     MX_USB_DEVICE_Init();
 
     HC12_Init();

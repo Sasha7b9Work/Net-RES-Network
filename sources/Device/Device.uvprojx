@@ -586,9 +586,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware/USART</GroupName>
-        </Group>
-        <Group>
           <GroupName>Modules/BME280</GroupName>
           <Files>
             <File>
