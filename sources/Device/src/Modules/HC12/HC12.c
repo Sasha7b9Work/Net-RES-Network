@@ -1,5 +1,5 @@
 #include "main.h"
-#include "Hardware/HC12/HC12.h"
+#include "Modules/HC12/HC12.h"
 #include "stm32f1xx_hal.h"
 #include <string.h>
 

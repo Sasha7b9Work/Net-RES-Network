@@ -1,7 +1,7 @@
 #include"bme280_application.h"
 #include "usb_device.h"
 #include "usbd_cdc_if.h"
-#include "Hardware/HC12/HC12.h"
+#include "Modules/HC12/HC12.h"
 
 /*
 In file in bme280_defs.h
