@@ -1,5 +1,4 @@
-#ifndef __USBD_CDC_IF_H__
-#define __USBD_CDC_IF_H__
+#pragma once
 
 #ifdef __cplusplus
  extern "C" {
@@ -14,5 +13,3 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* __USBD_CDC_IF_H__ */

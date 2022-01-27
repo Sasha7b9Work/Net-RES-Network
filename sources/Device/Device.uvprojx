@@ -524,14 +524,14 @@
               <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
             </File>
             <File>
-              <FileName>CDC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.c</FilePath>
-            </File>
-            <File>
               <FileName>CDC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
+            </File>
+            <File>
+              <FileName>CDC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
             </File>
           </Files>
         </Group>
