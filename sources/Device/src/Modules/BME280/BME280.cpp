@@ -1,6 +1,6 @@
 #include "Modules/BME280/BME280.h"
 #include "bme280_application.h"
-#include "i2c.h"
+#include "Hardware/I2C/i2c.h"
 
 
 static struct bme280_dev dev;
