@@ -1,7 +1,7 @@
 #include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/BME280/BME280.h"
-#include "Hardware/USBD/usbd_cdc_if.h"
+#include "Hardware/CDC/usbd_cdc_if.h"
 #include <string.h>
 
 
