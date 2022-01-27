@@ -2,37 +2,42 @@
 #include "i2c.h"
 #include "usb_device.h"
 #include "bme280_application.h"
+#include "Hardware/HC12/HC12.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
 int main(void)
 {
-  HAL_Init();
-  SystemClock_Config();
-  MX_GPIO_Init();
-  MX_I2C1_Init();
-  MX_USB_DEVICE_Init();
-  struct bme280_dev dev;
-  int8_t rslt = BME280_OK;
-  
-  dev.dev_id = BME280_I2C_ADDR_SEC;
-  dev.intf = BME280_I2C_INTF;
-  dev.read = user_i2c_read;
-  dev.write = user_i2c_write;
-  dev.delay_ms = user_delay_ms;
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init();
+    MX_I2C1_Init();
+    MX_USB_DEVICE_Init();
 
-  rslt = bme280_init(&dev);
+    HC12_Init();
 
-  rslt = bme280_crc_selftest(&dev);
-  if(rslt == 0)
-  {
-    //printf("BME280 self test pass\r\n");
-  }
-  while (1)
-  {
-    stream_sensor_data_normal_mode(&dev);
-  }
+    struct bme280_dev dev;
+    int8_t rslt = BME280_OK;
+
+    dev.dev_id = BME280_I2C_ADDR_SEC;
+    dev.intf = BME280_I2C_INTF;
+    dev.read = user_i2c_read;
+    dev.write = user_i2c_write;
+    dev.delay_ms = user_delay_ms;
+
+    rslt = bme280_init(&dev);
+
+    rslt = bme280_crc_selftest(&dev);
+    if(rslt == 0)
+    {
+        //printf("BME280 self test pass\r\n");
+    }
+
+    while (1)
+    {
+        stream_sensor_data_normal_mode(&dev);
+    }
 }
 
 void SystemClock_Config(void)
