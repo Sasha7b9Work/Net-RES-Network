@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>C:\Projects\RES-Network\sources\common\BME280\BME280_application</LastAddFilePath>
+    <LastAddFilePath>C:\Projects\RES-Network\sources\Device\src\Hardware\CMSIS</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>

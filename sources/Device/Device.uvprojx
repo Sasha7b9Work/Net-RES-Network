@@ -564,11 +564,6 @@
               <FilePath>.\src\stm32f1xx_it.h</FilePath>
             </File>
             <File>
-              <FileName>system_stm32f1xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\system_stm32f1xx.c</FilePath>
-            </File>
-            <File>
               <FileName>usb_device.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\usb_device.c</FilePath>
@@ -608,10 +603,20 @@
               <FileType>5</FileType>
               <FilePath>.\src\usbd_desc.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/CMSIS</GroupName>
+          <Files>
             <File>
               <FileName>startup_stm32f103xb.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\src\startup_stm32f103xb.s</FilePath>
+              <FilePath>.\src\Hardware\CMSIS\startup_stm32f103xb.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f1xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CMSIS\system_stm32f1xx.c</FilePath>
             </File>
           </Files>
         </Group>
