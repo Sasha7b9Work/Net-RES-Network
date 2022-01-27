@@ -6,12 +6,9 @@
 #include "Hardware/HAL/HAL.h"
 
 
-static void MX_GPIO_Init(void);
-
 int main(void)
 {
     HAL::Init();
-    MX_GPIO_Init();
     MX_I2C1_Init();
     MX_USB_DEVICE_Init();
 
@@ -33,16 +30,6 @@ int main(void)
     }
 }
 
-static void MX_GPIO_Init(void)
-{
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-
-}
-
 
 void _Error_Handler(char *file, int line)
 {
@@ -50,6 +37,7 @@ void _Error_Handler(char *file, int line)
   {
   }
 }
+
 
 #ifdef  USE_FULL_ASSERT
 /**
