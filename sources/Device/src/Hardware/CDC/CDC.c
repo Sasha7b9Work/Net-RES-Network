@@ -20,7 +20,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_cdc_if.h"
+#include "Hardware/CDC/CDC.h"
 
 /* USER CODE BEGIN INCLUDE */
 
