@@ -13,6 +13,10 @@ int main(void)
 
     while (1)
     {
-        BME280::Update();
+        char buffer[128];
+
+        BME280::Update(buffer);
+
+        HAL::Delay(1000);
     }
 }

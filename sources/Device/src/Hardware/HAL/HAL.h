@@ -4,6 +4,8 @@
 namespace HAL
 {
     void Init();
+    
+    void Delay(unsigned int timeMS);
 }
 
 

@@ -4,5 +4,5 @@
 namespace BME280
 {
     void Init();
-    void Update();
+    void Update(char buffer[128]);
 }

@@ -18,6 +18,12 @@ void HAL::Init()
 }
 
 
+void HAL::Delay(unsigned int timeMS)
+{
+    HAL_Delay(timeMS);
+}
+
+
 static void SystemClock_Config()
 {
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
