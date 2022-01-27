@@ -30,7 +30,7 @@ void print_sensor_data(struct bme280_data *comp_data)
 
     CDC_Transmit_FS((uint8_t*)buffer_USB, strlen(buffer_USB));
 
-    HC12_Send(buffer_USB);              
+    HC12::Send(buffer_USB);              
 }
 
 

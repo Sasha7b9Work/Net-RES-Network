@@ -12,9 +12,7 @@ int main(void)
 
     BME280::Init();
 
-    MX_USB_DEVICE_Init();
-
-    HC12_Init();
+    HC12::Init();
 
     while (1)
     {

@@ -7,7 +7,7 @@
 UART_HandleTypeDef UartHandle;
 
 
-void HC12_Init()
+void HC12::Init()
 {
     GPIO_InitTypeDef  GPIO_InitStruct;
 
@@ -42,7 +42,7 @@ void HC12_Init()
 }
 
 
-void HC12_Send(char *buffer)
+void HC12::Send(char *buffer)
 {
     HAL_UART_Transmit(&UartHandle, (uint8_t *)buffer, strlen(buffer), 0xFFFF);
 }

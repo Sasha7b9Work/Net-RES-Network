@@ -1,6 +1,9 @@
 #pragma once
 
 
-void HC12_Init(void);
+namespace HC12
+{
+    void Init();
 
-void HC12_Send(char *buffer);
+    void Send(char *buffer);
+}

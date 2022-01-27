@@ -2,6 +2,7 @@
 #include "main.h"
 #include "i2c.h"
 #include "bme280_application.h"
+#include "usb_device.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -15,6 +16,7 @@ void HAL::Init()
     SystemClock_Config();
     MX_GPIO_Init();
     MX_I2C1_Init();
+    MX_USB_DEVICE_Init();
 }
 
 
