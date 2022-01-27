@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>C:\Projects\RES-Network\sources\Device\src</LastAddFilePath>
+    <LastAddFilePath>C:\Projects\RES-Network\sources\common\BME280\BME280_application</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -101,10 +101,10 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>39</Top>
-        <Left>154</Left>
-        <Right>1688</Right>
-        <Bottom>740</Bottom>
+        <Top>287</Top>
+        <Left>104</Left>
+        <Right>1638</Right>
+        <Bottom>988</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
