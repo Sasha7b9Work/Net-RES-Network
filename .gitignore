@@ -1,4 +1,7 @@
 *.o
 *.d
+*.lst
 
-sources/MDK-ARM/newd2/*
+sources/Device/Listings
+sources/Device/Objects
+sources/Device/DebugConfig

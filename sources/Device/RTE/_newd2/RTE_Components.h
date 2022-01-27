@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'newd2' 
+ * Project: 'Device' 
  * Target:  'newd2' 
  */
 
