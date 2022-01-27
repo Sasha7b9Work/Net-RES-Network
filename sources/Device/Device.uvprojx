@@ -604,16 +604,6 @@
               <FilePath>.\src\Modules\BME280\bme280_defs.h</FilePath>
             </File>
             <File>
-              <FileName>bme280_selftest.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_selftest.c</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_selftest.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_selftest.h</FilePath>
-            </File>
-            <File>
               <FileName>bme280_driver.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Modules\BME280\bme280_driver.c</FilePath>

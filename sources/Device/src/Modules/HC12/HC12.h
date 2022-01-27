@@ -5,5 +5,5 @@ namespace HC12
 {
     void Init();
 
-    void Transmit(char *buffer);
+    void Transmit(const char *buffer);
 }

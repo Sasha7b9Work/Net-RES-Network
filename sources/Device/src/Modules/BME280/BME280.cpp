@@ -39,11 +39,13 @@ void BME280::Init()
 }
 
 
-void BME280::GetMeasure(char buffer[128])
+const char *BME280::GetMeasure()
 {
     bme280_data comp_data;
 
     bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
+
+    static char buffer[128];
 
     sprintf(buffer, "t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
         comp_data.temperature, comp_data.pressure/100, comp_data.pressure/133.3223684, comp_data.humidity);

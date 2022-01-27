@@ -14,9 +14,7 @@ int main(void)
 
     while (1)
     {
-        char buffer[128];
-
-        BME280::GetMeasure(buffer);
+        const char *buffer = BME280::GetMeasure();
 
         CDC::Transmit(buffer);
 

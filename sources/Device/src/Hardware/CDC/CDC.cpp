@@ -104,7 +104,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
     return (USBD_OK);
 }
 
-uint8_t CDC::Transmit(char *buffer)
+uint8_t CDC::Transmit(const char *buffer)
 {
     uint8_t result = USBD_OK;
 
