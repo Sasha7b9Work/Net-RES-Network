@@ -3,7 +3,7 @@
 #include "Modules/BME280/bme280_driver.h"
 
 
-static struct bme280_dev dev;
+static bme280_dev dev;
 
 
 void BME280::Init()
@@ -15,13 +15,8 @@ void BME280::Init()
     dev.delay_ms = user_delay_ms;
 
     bme280_init(&dev);
-}
 
-
-void BME280::GetMeasure(char buffer[128])
-{
     uint8_t settings_sel;
-    struct bme280_data comp_data;
 
     dev.settings.osr_h = BME280_OVERSAMPLING_1X;
     dev.settings.osr_p = BME280_OVERSAMPLING_16X;
@@ -41,6 +36,12 @@ void BME280::GetMeasure(char buffer[128])
 
     /* Delay while the sensor completes a measurement */
     dev.delay_ms(70);
+}
+
+
+void BME280::GetMeasure(char buffer[128])
+{
+    bme280_data comp_data;
 
     bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
 
