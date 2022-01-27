@@ -18,7 +18,6 @@ int main(void)
     HC12_Init();
 
     struct bme280_dev dev;
-    int8_t rslt = BME280_OK;
 
     dev.dev_id = BME280_I2C_ADDR_SEC;
     dev.intf = BME280_I2C_INTF;
@@ -26,13 +25,7 @@ int main(void)
     dev.write = user_i2c_write;
     dev.delay_ms = user_delay_ms;
 
-    rslt = bme280_init(&dev);
-
-    rslt = bme280_crc_selftest(&dev);
-    if(rslt == 0)
-    {
-        //printf("BME280 self test pass\r\n");
-    }
+    bme280_init(&dev);
 
     while (1)
     {
