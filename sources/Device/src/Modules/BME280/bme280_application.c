@@ -3,6 +3,10 @@
 #include "usbd_cdc_if.h"
 #include "Modules/HC12/HC12.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 In file in bme280_defs.h
 In case of the macro "BME280_FLOAT_ENABLE" enabled, The outputs are in double and the units are
@@ -26,7 +30,7 @@ void print_sensor_data(struct bme280_data *comp_data)
 
     CDC_Transmit_FS((uint8_t*)buffer_USB, strlen(buffer_USB));
 
-    HC12_Send(buffer_USB);
+    HC12_Send(buffer_USB);              
 }
 
 
@@ -98,3 +102,8 @@ int8_t stream_sensor_data_forced_mode(struct bme280_dev *dev)
     }
     //return rslt;
 }
+
+
+#ifdef __cplusplus
+}
+#endif

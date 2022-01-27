@@ -3,13 +3,14 @@
 #include "usb_device.h"
 #include "bme280_application.h"
 #include "Modules/HC12/HC12.h"
+#include "Hardware/HAL/HAL.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
 int main(void)
 {
-    HAL_Init();
+    HAL::Init();
     SystemClock_Config();
     MX_GPIO_Init();
     MX_I2C1_Init();

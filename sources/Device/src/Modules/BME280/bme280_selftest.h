@@ -52,7 +52,7 @@ extern "C" {
 #endif
 
 /**\name API warning code */
-#define BME280_W_SELF_TEST_FAIL INT8_C(2)
+#define BME280_W_SELF_TEST_FAIL (signed char)(2)
 
 /*!
  * @brief This API reads the stored CRC and then compare with calculated CRC

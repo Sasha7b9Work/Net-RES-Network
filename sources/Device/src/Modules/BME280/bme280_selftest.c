@@ -38,12 +38,12 @@
 
 #include "bme280_selftest.h"
 
-#define BME280_CRC_DATA_ADDR   UINT8_C(0xE8)
-#define BME280_CRC_DATA_LEN    UINT8_C(1)
-#define BME280_CRC_CALIB1_ADDR UINT8_C(0x88)
-#define BME280_CRC_CALIB1_LEN  UINT8_C(26)
-#define BME280_CRC_CALIB2_ADDR UINT8_C(0xE1)
-#define BME280_CRC_CALIB2_LEN  UINT8_C(7)
+#define BME280_CRC_DATA_ADDR   (unsigned char)(0xE8)
+#define BME280_CRC_DATA_LEN    (unsigned char)(1)
+#define BME280_CRC_CALIB1_ADDR (unsigned char)(0x88)
+#define BME280_CRC_CALIB1_LEN  (unsigned char)(26)
+#define BME280_CRC_CALIB2_ADDR (unsigned char)(0xE1)
+#define BME280_CRC_CALIB2_LEN  (unsigned char)(7)
 
 /*!
  * @brief This API calculates the CRC
