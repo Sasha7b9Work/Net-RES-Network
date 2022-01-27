@@ -19,7 +19,7 @@ int main(void)
 
         BME280::Update(buffer);
 
-        CDC_Transmit_FS((unsigned char *)buffer, strlen(buffer));
+        CDC::Transmit((unsigned char *)buffer, strlen(buffer));
 
         HC12::Send(buffer);
 
