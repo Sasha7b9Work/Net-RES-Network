@@ -21,7 +21,7 @@ cmake ../../CMakeLists.txt -B../../generated/Keil -G "Visual Studio 16 2019" -A 
 :BUILDING
 if %isBuild%==0 goto EXIT
 @echo on
-MSBuild.exe ../../generated/Keil/CH3-96-2.sln -clp:ErrorsOnly;WarningsOnly -nologo /m
+MSBuild.exe ../../generated/Keil/RES-Network.sln -clp:ErrorsOnly;WarningsOnly -nologo /m
 @echo off
 goto EXIT
 
