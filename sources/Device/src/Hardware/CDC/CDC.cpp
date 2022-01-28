@@ -41,7 +41,7 @@ static int8_t CDC_DeInit_FS(void)
 }
 
 
-static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
+static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* /*pbuf*/, uint16_t /*length*/)
 {
     switch(cmd)
     {
@@ -97,7 +97,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 }
 
 
-static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
+static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t */*Len*/)
 {
     USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
     USBD_CDC_ReceivePacket(&hUsbDeviceFS);
@@ -115,7 +115,7 @@ uint8_t CDC::Transmit(const char *buffer)
         return USBD_BUSY;
     }
 
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, strlen(buffer));
+    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)strlen(buffer));
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;
