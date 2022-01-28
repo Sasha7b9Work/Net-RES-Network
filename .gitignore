@@ -4,7 +4,8 @@
 *.scvd
 
 sources/*.uvgui.*
+sources/generated/
 sources/Device/*.uvgui*
-sources/Device/Listings
-sources/Device/Objects
-sources/Device/DebugConfig
+sources/Device/Listings/
+sources/Device/Objects/
+sources/Device/DebugConfig/
