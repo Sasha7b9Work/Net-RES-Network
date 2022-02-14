@@ -54,22 +54,24 @@ file(GLOB STM32F1        src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h)
-file(GLOB SRC            src/*.*)
-file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*.*)
-file(GLOB HARDWARE_CDC   src/Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL   src/Hardware/HAL/*.*)
-file(GLOB HARDWARE_I2C   src/Hardware/I2C/*.*)
-file(GLOB MODULES_BME280 src/Modules/BME280/*.*)
-file(GLOB MODULES_HC12   src/Modules/HC12/*.*)
+file(GLOB SRC             src/*.*)
+file(GLOB HARDWARE_CMSIS  src/Hardware/CMSIS/*.*)
+file(GLOB HARDWARE_CDC    src/Hardware/CDC/*.*)
+file(GLOB HARDWARE_HAL    src/Hardware/HAL/*.*)
+file(GLOB HARDWARE_I2C    src/Hardware/I2C/*.*)
+file(GLOB MODULES_BME280  src/Modules/BME280/*.*)
+file(GLOB MODULES_CG_ANEM src/Modules/CG-Anem/*.*)
+file(GLOB MODULES_HC12    src/Modules/HC12/*.*)
 
-source_group(STM32F1        FILES ${STM32F1})
-source_group(src            FILES ${SRC})
-source_group(Hardware/CMSIS FILES ${HARDWARE_CMSIS})
-source_group(Hardware/CDC   FILES ${HARDWARE_CDC})
-source_group(Hardware/HAL   FILES ${HARDWARE_HAL})
-source_group(Hardware/I2C   FILES ${HARDWARE_I2C})
-source_group(Modules/BME280 FILES ${MODULES_BME280})
-source_group(Modules/HC12   FILES ${MODULES_HC12})
+source_group(STM32F1         FILES ${STM32F1})
+source_group(src             FILES ${SRC})
+source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
+source_group(Hardware/CDC    FILES ${HARDWARE_CDC})
+source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
+source_group(Hardware/I2C    FILES ${HARDWARE_I2C})
+source_group(Modules/BME280  FILES ${MODULES_BME280})
+source_group(Modules/CG-Anem FILES ${MODULES_CG_ANEM})
+source_group(Modules/HC12    FILES ${MODULES_HC12})
 
 set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
                             src/Hardware/CDC/usbd_desc.c
@@ -85,5 +87,6 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_HAL}
             ${HARDWARE_I2C}
             ${MODULES_BME280}
+            ${MODULES_CG_ANEM}
             ${MODULES_HC12}
             )

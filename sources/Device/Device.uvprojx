@@ -630,6 +630,21 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Modules/CG-Anem</GroupName>
+          <Files>
+            <File>
+              <FileName>CG-Anem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\CG-Anem\CG-Anem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CG-Anem.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\CG-Anem\CG-Anem.h</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
