@@ -53,9 +53,14 @@ const char *CG_Anem::GetMeasure(unsigned int dT)
     uint8 status;
     user_i2c_read(0x11, 0x06, &status, 1);
 
-    sprintf(buffer, "CG-Anem : id = 0x%X, status = 0x%X, in_voltage = %f V, adc_cold = %d, cold_T = %f *C, hot_T = %f *C, dT = %f*C",
+    BitSet32 velocity;
+    user_i2c_read(0x11, 0x07, &velocity.byte[1], 1);
+    user_i2c_read(0x11, 0x08, &velocity.byte[0], 1);
+
+    sprintf(buffer, "CG-Anem : id:0x%X, status:0x%X, velocity:%f m/s, in_voltage:%f V, adc_cold:%d, cold_T:%f *C, hot_T:%f *C, dT:%f*C",
         id,
         status,
+        (float)velocity.half_word[0] * 0.1,
         (float)input_voltage * 0.1,
         adc_cold.half_word[0],
 
