@@ -68,7 +68,7 @@ const char *CG_Anem::GetMeasure(unsigned int dT)
 //        (float)temp_hot.half_word[0] * 0.1,
 //        (float)deltaT.half_word[0] * 0.1);
 
-    sprintf(buffer, "CG-Anem : velocity:%f m/s, t:%f *C",
+    sprintf(buffer, "CG-Anem : velocity:%0.2f m/s, t:%0.2f *C",
         (float)velocity.half_word[0] * 0.1,
         (float)temp_cold.half_word[0] * 0.1);
 
