@@ -56,7 +56,7 @@ const char *BME280::GetMeasure(unsigned int dT)
 
     bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
 
-    sprintf(buffer, "t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
+    sprintf(buffer, "BME280 : t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
         comp_data.temperature, comp_data.pressure/100, comp_data.pressure/133.3223684, comp_data.humidity);
 
     return buffer;
