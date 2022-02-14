@@ -57,16 +57,20 @@ const char *CG_Anem::GetMeasure(unsigned int dT)
     user_i2c_read(0x11, 0x07, &velocity.byte[1], 1);
     user_i2c_read(0x11, 0x08, &velocity.byte[0], 1);
 
-    sprintf(buffer, "CG-Anem : id:0x%X, status:0x%X, velocity:%f m/s, in_voltage:%f V, adc_cold:%d, cold_T:%f *C, hot_T:%f *C, dT:%f*C",
-        id,
-        status,
-        (float)velocity.half_word[0] * 0.1,
-        (float)input_voltage * 0.1,
-        adc_cold.half_word[0],
+//    sprintf(buffer, "CG-Anem : id:0x%X, status:0x%X, velocity:%f m/s, in_voltage:%f V, adc_cold:%d, cold_T:%f *C, hot_T:%f *C, dT:%f*C",
+//        id,
+//        status,
+//        (float)velocity.half_word[0] * 0.1,
+//        (float)input_voltage * 0.1,
+//        adc_cold.half_word[0],
+//
+//        (float)temp_cold.half_word[0] * 0.1,
+//        (float)temp_hot.half_word[0] * 0.1,
+//        (float)deltaT.half_word[0] * 0.1);
 
-        (float)temp_cold.half_word[0] * 0.1,
-        (float)temp_hot.half_word[0] * 0.1,
-        (float)deltaT.half_word[0] * 0.1);
+    sprintf(buffer, "CG-Anem : velocity:%f m/s, t:%f *C",
+        (float)velocity.half_word[0] * 0.1,
+        (float)temp_cold.half_word[0] * 0.1);
 
     return buffer;
 }
