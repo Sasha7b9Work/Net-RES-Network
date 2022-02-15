@@ -44,7 +44,7 @@ void BME280::Init()
 
 const char *BME280::GetMeasure(unsigned int dT)
 {
-    static char buffer[128];
+    static char buffer[1024];
 
     bme280_data comp_data;
 

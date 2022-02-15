@@ -20,7 +20,7 @@ void CG_Anem::Init()
 
 const char *CG_Anem::GetMeasure(unsigned int dT)
 {
-    static char buffer[128];
+    static char buffer[1024];
 
     while (HAL_GetTick() < timeNext)
     {
