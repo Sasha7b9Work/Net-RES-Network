@@ -12,7 +12,7 @@ int main(void)
 
     BME280::Init();
 
-    HC12::Init();
+//    HC12::Init();
 
     CG_Anem::Init();
 
@@ -22,12 +22,12 @@ int main(void)
 
         CDC::Transmit(measure);
 
-        HC12::Transmit(measure);
+//        HC12::Transmit(measure);
 
-        measure = CG_Anem::GetMeasure(1000);
-
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
+//        measure = CG_Anem::GetMeasure(1000);
+//
+//        CDC::Transmit(measure);
+//
+//        HC12::Transmit(measure);
     }
 }
