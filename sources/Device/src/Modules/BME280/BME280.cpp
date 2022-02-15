@@ -3,6 +3,7 @@
 #include "Modules/BME280/BME280.h"
 #include "Hardware/I2C/i2c.h"
 #include "Modules/BME280/bme280_driver.h"
+#include <string.h>
 
 
 static bme280_dev dev;
@@ -64,7 +65,14 @@ const char *BME280::GetMeasure(unsigned int dT)
     }
     else
     {
-        sprintf(buffer, "!!! Error %d !!!", result);
+        if (result == BME280_E_COMM_FAIL)
+        {
+            sprintf(buffer, "BME280 : !!! Error communication");
+        }
+        else
+        {
+            sprintf(buffer, "BME280 : !!! Error %d !!!", result);
+        }
     }
 
 
