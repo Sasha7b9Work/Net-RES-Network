@@ -24,9 +24,9 @@ int main(void)
 
 //        HC12::Transmit(measure);
 
-//        measure = CG_Anem::GetMeasure(1000);
+        measure = CG_Anem::GetMeasure(1000);
 //
-//        CDC::Transmit(measure);
+        CDC::Transmit(measure);
 //
 //        HC12::Transmit(measure);
     }
