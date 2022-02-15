@@ -69,6 +69,9 @@
 /*! @name		Common macros		        */
 /********************************************************/
 
+#define UINT8_C (unsigned char)
+#define INT8_C (signed char)
+
 #if !defined(UINT8_C) && !defined(INT8_C)
 #define INT8_C(x)       S8_C(x)
 #define UINT8_C(x)      U8_C(x)
