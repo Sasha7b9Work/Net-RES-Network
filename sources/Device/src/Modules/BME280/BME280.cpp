@@ -1,4 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "main.h"
 #include "Modules/BME280/BME280.h"
 #include "Hardware/I2C/i2c.h"
 #include "Modules/BME280/bme280_driver.h"
@@ -54,10 +55,18 @@ const char *BME280::GetMeasure(unsigned int dT)
 
     timeNext += dT;
 
-    bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
+    int8 result = bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
 
-    sprintf(buffer, "BME280 : t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
-        comp_data.temperature, comp_data.pressure/100, comp_data.pressure/133.3223684, comp_data.humidity);
+    if (result == BME280_OK)
+    {
+        sprintf(buffer, "BME280 : t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
+            comp_data.temperature, comp_data.pressure / 100, comp_data.pressure / 133.3223684, comp_data.humidity);
+    }
+    else
+    {
+        sprintf(buffer, "!!! Error %d !!!", result);
+    }
+
 
     return buffer;
 }
