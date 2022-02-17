@@ -60,7 +60,7 @@ const char *BME280::GetMeasure(unsigned int dT)
 
     if (result == BME280_OK)
     {
-        sprintf(buffer, "BME280 : t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%\n",
+        sprintf(buffer, "BME280 : t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%",
             comp_data.temperature, comp_data.pressure / 100, comp_data.pressure / 133.3223684, comp_data.humidity);
     }
     else
