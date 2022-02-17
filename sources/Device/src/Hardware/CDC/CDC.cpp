@@ -115,7 +115,7 @@ uint8_t CDC::Transmit(const char *buffer)
         return USBD_BUSY;
     }
 
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)strlen(buffer));
+    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)(strlen(buffer) + 1));
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;
