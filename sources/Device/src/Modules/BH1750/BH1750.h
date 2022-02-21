@@ -7,5 +7,7 @@
 
 namespace BH1750
 {
+    void Init();
+
     pchar GetMeasure(unsigned int dT);
 }

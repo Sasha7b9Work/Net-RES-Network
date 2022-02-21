@@ -17,6 +17,8 @@ int main(void)
 
     CG_Anem::Init();
 
+//    BH1750::Init();
+
     while (1)
     {
         pchar measure = BME280::GetMeasure(1000);

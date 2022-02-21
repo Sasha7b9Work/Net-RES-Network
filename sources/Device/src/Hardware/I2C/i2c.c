@@ -150,6 +150,10 @@ int8_t user_i2c_read16(uint8_t dev_id, uint16_t *data)
 {
     HAL_StatusTypeDef status = HAL_I2C_Master_Receive(&hi2c1, dev_id << 1, (uint8_t *)&data, 2, 100);
 
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+
     return (status == HAL_OK) ? 0 : -1;
 }
 
@@ -175,6 +179,10 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 int8_t user_i2c_write8(uint8_t dev_id, uint8_t data)
 {
     HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c1, dev_id << 1, &data, 1, 100);
+
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
 
     return (status == HAL_OK) ? 0 : -1;
 }
