@@ -19,7 +19,7 @@ void CG_Anem::Init()
 }
 
 
-const char *CG_Anem::GetMeasure(unsigned int dT)
+pchar CG_Anem::GetMeasure(unsigned int dT)
 {
     static char buffer[1024];
 

@@ -146,6 +146,14 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
 }
 
 
+int8_t user_i2c_read16(uint8_t dev_id, uint16_t *data)
+{
+    HAL_StatusTypeDef status = HAL_I2C_Master_Receive(&hi2c1, dev_id << 1, (uint8_t *)&data, 2, 100);
+
+    return (status == HAL_OK) ? 0 : -1;
+}
+
+
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
@@ -163,6 +171,14 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 	}
     return rslt;
 }
+
+int8_t user_i2c_write8(uint8_t dev_id, uint8_t data)
+{
+    HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c1, dev_id << 1, &data, 1, 100);
+
+    return (status == HAL_OK) ? 0 : -1;
+}
+
 /* USER CODE END 1 */
 
 /**

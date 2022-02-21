@@ -7,6 +7,7 @@ typedef unsigned char uint8;
 typedef signed char int8;
 typedef unsigned short uint16;
 typedef unsigned int uint;
+typedef const char *pchar;
 
 union BitSet32
 {
