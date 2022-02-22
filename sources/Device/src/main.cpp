@@ -17,7 +17,7 @@ int main(void)
 
     CG_Anem::Init();
 
-//    BH1750::Init();
+    BH1750::Init();
 
     while (1)
     {

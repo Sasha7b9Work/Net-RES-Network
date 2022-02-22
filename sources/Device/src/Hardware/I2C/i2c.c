@@ -129,6 +129,10 @@ void user_delay_ms(uint32_t period)
 
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
 
 	HAL_StatusTypeDef status = HAL_OK; 
@@ -146,9 +150,13 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
 }
 
 
-int8_t user_i2c_read16(uint8_t dev_id, uint16_t *data)
+int8_t user_i2c_read16(uint8_t dev_id, uint8_t *data)
 {
-    HAL_StatusTypeDef status = HAL_I2C_Master_Receive(&hi2c1, dev_id << 1, (uint8_t *)&data, 2, 100);
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+
+    HAL_StatusTypeDef status = HAL_I2C_Master_Receive(&hi2c1, (dev_id << 1) + 1, data, 2, 10);
 
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
@@ -160,6 +168,10 @@ int8_t user_i2c_read16(uint8_t dev_id, uint16_t *data)
 
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+
+    }
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
 	
 	HAL_StatusTypeDef status = HAL_OK;
@@ -178,7 +190,11 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 int8_t user_i2c_write8(uint8_t dev_id, uint8_t data)
 {
-    HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c1, dev_id << 1, &data, 1, 100);
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+
+    HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c1, dev_id << 1, &data, 1, 10);
 
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {

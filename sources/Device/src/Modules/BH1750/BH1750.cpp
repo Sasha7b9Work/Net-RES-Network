@@ -7,24 +7,23 @@
 
 namespace BH1750
 {
-    static const uint8 BH1750_ON   = 0x01;
-    static const uint8 BH1750_RSET = 0x07;
-    static const uint8 BH1750_CON  = 0x10;
-    static const uint8 BH1750_ADDR = 0x46;
+    static const uint8 CMD_POWER_ON   = 0x01;
+    static const uint8 CMD_RESET      = 0x03;
+    static const uint8 CMD_H_RES_MODE = 0x10;
 
     uint timeNext = 1;
 
     bool WriteUINT8(uint8);
 
-    bool ReadUINT16(uint16 *);
+    bool ReadUINT16(uint8 *);
 }
 
 
 void BH1750::Init()
 {
-    WriteUINT8(BH1750_ON);
-    WriteUINT8(BH1750_RSET);
-    WriteUINT8(BH1750_ADDR);
+    WriteUINT8(CMD_POWER_ON);
+    WriteUINT8(CMD_RESET);
+    WriteUINT8(CMD_H_RES_MODE);
 }
 
 
@@ -38,22 +37,15 @@ pchar BH1750::GetMeasure(unsigned int dT)
 
     timeNext += dT;
 
-    if (!WriteUINT8(BH1750_CON))
-    {
-        sprintf(buffer, "BH1750 : !!! Error communication");
-    }
+    BitSet32 result;
 
-    HAL_Delay(200);
-
-    uint16 result = 0;
-
-    if (!ReadUINT16(&result))
+    if (!ReadUINT16(&result.byte[0]))
     {
         sprintf(buffer, "BH1750 : !!! Error communication");
     }
     else
     {
-        sprintf(buffer, "BH170 : %f lx", (float)result / 1.2f);
+        sprintf(buffer, "BH170 : %f lx", (float)(result.byte[0] | (result.byte[1] << 8)) / 1.2f);
     }
 
     return buffer;
@@ -66,7 +58,7 @@ bool BH1750::WriteUINT8(uint8 byte)
 }
 
 
-bool BH1750::ReadUINT16(uint16 *buffer)
+bool BH1750::ReadUINT16(uint8 *buffer)
 {
     return user_i2c_read16(0x23, buffer) == 0;
 }
