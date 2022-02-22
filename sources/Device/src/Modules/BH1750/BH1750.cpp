@@ -45,7 +45,7 @@ pchar BH1750::GetMeasure(unsigned int dT)
     }
     else
     {
-        sprintf(buffer, "BH170 : %f lx", (float)(result.byte[0] | (result.byte[1] << 8)) / 1.2f);
+        sprintf(buffer, "BH170 : %f lx", (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f);
     }
 
     return buffer;
