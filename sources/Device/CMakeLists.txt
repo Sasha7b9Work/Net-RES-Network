@@ -50,6 +50,8 @@ file(GLOB STM32F1        src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
+                         src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c
+                         src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.h
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
                          src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c
