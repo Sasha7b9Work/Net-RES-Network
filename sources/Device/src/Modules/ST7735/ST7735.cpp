@@ -54,8 +54,8 @@ void Display::Init()
     handle.Init.DataSize = SPI_DATASIZE_8BIT;
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
-    handle.Init.NSS = SPI_NSS_HARD_OUTPUT;
-    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+    handle.Init.NSS = SPI_NSS_SOFT;
+    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
     handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
     handle.Init.TIMode = SPI_TIMODE_DISABLE;
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -75,6 +75,17 @@ void Display::Init()
     gpio_struct.Pull = GPIO_NOPULL;
     gpio_struct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &gpio_struct);
+
+    SPI1->CR1 |= SPI_CR1_SPE;
+
+    HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
+
+    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET);
+    HAL_Delay(5);
+    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_RESET);
+    HAL_Delay(5);
+    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET);
+    HAL_Delay(5);
 
     SendCommand(0x01);
     HAL_Delay(12);
@@ -170,13 +181,11 @@ void Display::SendData8(uint8 data)
     SET_DC;
     RESET_CS;
 
-    SPI2->CR1 &= ~SPI_CR1_DFF;
-
-    while (!(SPI2->SR & SPI_SR_TXE));
+    while ((SPI2->SR & SPI_SR_TXE) == RESET);
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE));
-    while ((SPI2->SR & SPI_SR_BSY));
+    while ((SPI2->SR & SPI_SR_TXE) == RESET);
+    while ((SPI2->SR & SPI_SR_BSY) != RESET);
 
     SET_CS;
 }
