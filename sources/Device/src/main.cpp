@@ -5,51 +5,47 @@
 #include "Modules/CG-Anem/CG-Anem.h"
 #include "Modules/BH1750/BH1750.h"
 #include "Hardware/CDC/CDC.h"
+#include "Modules/ST7735/ST7735.h"
 
-
-#ifdef PROJECT_DISPLAY
-
-int main()
-{
-    while (1)
-    {
-    }
-}
-
-#else
 
 int main(void)
 {
     HAL::Init();
 
-    BME280::Init();
+    ST7735::Init();
 
-    HC12::Init();
-
-    CG_Anem::Init();
-
-    BH1750::Init();
+//    BME280::Init();
+//
+//    HC12::Init();
+//
+//    CG_Anem::Init();
+//
+//    BH1750::Init();
+    
+    int counter = 0;
 
     while (1)
     {
-        pchar measure = BME280::GetMeasure(1000);
+//        pchar measure = BME280::GetMeasure(1000);
+//
+//        CDC::Transmit(measure);
+//
+//        HC12::Transmit(measure);
+//
+//        measure = CG_Anem::GetMeasure(1000);
+//
+//        CDC::Transmit(measure);
+//
+//        HC12::Transmit(measure);
+//
+//        measure = BH1750::GetMeasure(1000);
+//
+//        CDC::Transmit(measure);
+//
+//        HC12::Transmit(measure);
 
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
-
-        measure = CG_Anem::GetMeasure(1000);
-
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
-
-        measure = BH1750::GetMeasure(1000);
-
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
+        ST7735::Update();
+        
+        counter++;
    }
 }
-
-#endif

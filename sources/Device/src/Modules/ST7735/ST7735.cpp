@@ -4,11 +4,11 @@
 
 
 /*
-    B1 - RS
-    B0 - RST
-    A7 - SDA
-    A5 - SCK
-    A4 - CS
+    B11 - RST    Reset
+    B12 - CS
+    B13 - SCK    SCL
+    B14 - RS     D/C
+    B15 - SDA    MOSI
 */
 
 void ST7735::Init()
