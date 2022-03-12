@@ -21,8 +21,6 @@ int main(void)
 //    CG_Anem::Init();
 //
 //    BH1750::Init();
-    
-    int counter = 0;
 
     while (1)
     {
@@ -45,7 +43,5 @@ int main(void)
 //        HC12::Transmit(measure);
 
         Display::Update();
-        
-        counter++;
    }
 }

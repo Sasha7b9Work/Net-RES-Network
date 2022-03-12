@@ -16,18 +16,21 @@
 
 namespace Display
 {
-#define SET_DC_HI  HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_SET);
-#define SET_DC_LOW HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_RESET);
+#define SET_DC   HAL_GPIO_WritePin(GPIOB, Display::PIN_DC, GPIO_PIN_SET);
+#define RESET_DC HAL_GPIO_WritePin(GPIOB, Display::PIN_DC, GPIO_PIN_RESET);
+#define SET_CS   HAL_GPIO_WritePin(GPIOB, Display::PIN_CS, GPIO_PIN_SET);
+#define RESET_CS HAL_GPIO_WritePin(GPIOB, Display::PIN_CS, GPIO_PIN_RESET);
 
     static const uint16 PIN_RESET = GPIO_PIN_11;
     static const uint16 PIN_DC = GPIO_PIN_14;
+    static const uint16 PIN_CS = GPIO_PIN_12;
 
     static SPI_HandleTypeDef handle;
 
     void SendCommand(uint8);
     void SendData8(uint8);
     void SendData16(uint16);
-
+    void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
 }
 
 
@@ -38,8 +41,7 @@ void Display::Init()
 
     GPIO_InitTypeDef spi_struct = {0};
 
-    spi_struct.Pin = GPIO_PIN_12 |     // CS
-                     GPIO_PIN_13 |     // SCL
+    spi_struct.Pin = GPIO_PIN_13 |     // SCL
                      GPIO_PIN_15;      // MOSI
     spi_struct.Mode = GPIO_MODE_AF_PP;
     spi_struct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -66,9 +68,9 @@ void Display::Init()
 
     GPIO_InitTypeDef gpio_struct = {0};
 
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET | PIN_DC, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOB, PIN_RESET | PIN_DC | PIN_CS, GPIO_PIN_RESET);
 
-    gpio_struct.Pin = PIN_RESET | PIN_DC;
+    gpio_struct.Pin = PIN_RESET | PIN_DC | PIN_CS;
     gpio_struct.Mode = GPIO_MODE_OUTPUT_PP;
     gpio_struct.Pull = GPIO_NOPULL;
     gpio_struct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -103,21 +105,53 @@ void Display::Update()
 
 void Display::BeginScene(Color)
 {
-    Rectangle(WIDTH, HEIGHT).Fill(0, 0, Color::WHITE);
+    Rectangle(50, 50).Fill(10, 10, Color::BLACK);
 }
 
 
-void Rectangle::Fill(int, int, Color)
+void Rectangle::Fill(int x, int y, Color)
 {
+    Display::SetWindow((uint8)x, (uint8)y, (uint8)width, (uint8)height);
 
+    Display::SendCommand(0x2C);
+
+    SPI2->CR1 |= SPI_CR1_DFF;
+    SET_DC;
+    RESET_CS;
+
+    for (int i = 0; i < width * height; i++) {
+        while (!(SPI2->SR & SPI_SR_TXE));
+        SPI2->DR = 0xf0f0;
+
+        while (!(SPI2->SR & SPI_SR_TXE));
+        while ((SPI2->SR & SPI_SR_BSY));
+    }
+
+    SET_CS;
+
+    SPI2->CR1 &= ~SPI_CR1_DFF;
+}
+
+
+void Display::SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY) {
+    SendCommand(0x2A);
+    SendData8(0x00);
+    SendData8(startX);
+    SendData8(0x00);
+    SendData8(stopX);
+
+    SendCommand(0x2B);
+    SendData8(0x00);
+    SendData8(startY);
+    SendData8(0x00);
+    SendData8(stopY);
 }
 
 
 void Display::SendData16(uint16 data)
 {
-    SET_DC_HI;
-
-//    LCD_CS_L;
+    SET_DC;
+    RESET_CS;
 
     SPI2->CR1 |= SPI_CR1_DFF;
 
@@ -127,15 +161,14 @@ void Display::SendData16(uint16 data)
     while (!(SPI2->SR & SPI_SR_TXE)) {};
     while ((SPI2->SR & SPI_SR_BSY)) {};
 
-//    LCD_CS_H;
+    SET_CS;
 }
 
 
 void Display::SendData8(uint8 data)
 {
-    SET_DC_HI;
-
-//    LCD_CS_L;
+    SET_DC;
+    RESET_CS;
 
     SPI2->CR1 &= ~SPI_CR1_DFF;
 
@@ -145,15 +178,14 @@ void Display::SendData8(uint8 data)
     while (!(SPI2->SR & SPI_SR_TXE));
     while ((SPI2->SR & SPI_SR_BSY));
 
-//    LCD_CS_H;
+    SET_CS;
 }
 
 
 void Display::SendCommand(uint8 data)
 {
-    SET_DC_LOW;
-
-//    LCD_CS_L;
+    RESET_DC;
+    RESET_CS;
 
     SPI2->CR1 &= ~SPI_CR1_DFF;
 
@@ -163,5 +195,5 @@ void Display::SendCommand(uint8 data)
     while (!(SPI2->SR & SPI_SR_TXE));
     while ((SPI2->SR & SPI_SR_BSY));
 
-//    LCD_CS_H;
+    SET_CS;
 }
