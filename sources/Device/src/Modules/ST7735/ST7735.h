@@ -5,9 +5,22 @@
 
 namespace Display
 {
+    static const int WIDTH = 160;
+    static const int HEIGHT = 128;
+
     void Init();
     void Update();
 
     void BeginScene(Color);
-    void EndScene();
 }
+
+
+struct Rectangle
+{
+    int width;
+    int height;
+
+    Rectangle(int w, int h) : width(w), height(h) { }
+
+    void Fill(int x, int y, Color);
+};
