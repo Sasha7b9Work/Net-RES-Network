@@ -3,6 +3,9 @@
 #define __MAIN_H
 
 
+#define PROJECT_DISPLAY
+
+
 typedef unsigned char uint8;
 typedef signed char int8;
 typedef unsigned short uint16;

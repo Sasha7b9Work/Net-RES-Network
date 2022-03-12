@@ -7,6 +7,17 @@
 #include "Hardware/CDC/CDC.h"
 
 
+#ifdef PROJECT_DISPLAY
+
+int main()
+{
+    while (1)
+    {
+    }
+}
+
+#else
+
 int main(void)
 {
     HAL::Init();
@@ -40,3 +51,5 @@ int main(void)
         HC12::Transmit(measure);
    }
 }
+
+#endif

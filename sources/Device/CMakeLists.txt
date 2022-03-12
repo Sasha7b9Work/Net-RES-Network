@@ -63,6 +63,7 @@ file(GLOB MODULES_BH1750  src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280  src/Modules/BME280/*.*)
 file(GLOB MODULES_CG_ANEM src/Modules/CG-Anem/*.*)
 file(GLOB MODULES_HC12    src/Modules/HC12/*.*)
+file(GLOB MODULES_ST7735  src/Modules/ST7735/*.*)
 
 source_group(STM32F1         FILES ${STM32F1})
 source_group(src             FILES ${SRC})
@@ -74,6 +75,7 @@ source_group(Modules/BH1750  FILES ${MODULES_BH1750})
 source_group(Modules/BME280  FILES ${MODULES_BME280})
 source_group(Modules/CG-Anem FILES ${MODULES_CG_ANEM})
 source_group(Modules/HC12    FILES ${MODULES_HC12})
+source_group(Modules/ST7735  FILES ${MODULES_ST7735})
 
 set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
                             src/Hardware/CDC/usbd_desc.c
@@ -92,4 +94,5 @@ add_library(${PROJECT_NAME}
             ${MODULES_BME280}
             ${MODULES_CG_ANEM}
             ${MODULES_HC12}
+            ${MODULES_ST7735}
             )
