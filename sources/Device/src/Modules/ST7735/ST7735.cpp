@@ -76,7 +76,7 @@ void Display::Init()
     gpio_struct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &gpio_struct);
 
-    SPI1->CR1 |= SPI_CR1_SPE;
+    SPI2->CR1 |= SPI_CR1_SPE;
 
     HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
 
