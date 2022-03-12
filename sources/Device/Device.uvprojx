@@ -660,6 +660,31 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Modules/ST7735</GroupName>
+          <Files>
+            <File>
+              <FileName>ST7735.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\ST7735\ST7735.h</FilePath>
+            </File>
+            <File>
+              <FileName>ST7735.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\ST7735\ST7735.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\ST7735\Colors.h</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\ST7735\Colors.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
