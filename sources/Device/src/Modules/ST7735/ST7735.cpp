@@ -144,7 +144,8 @@ void Rectangle::Fill(int x, int y, Color)
 }
 
 
-void Display::SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY) {
+void Display::SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY)
+{
     SendCommand(0x2A);
     SendData8(0x00);
     SendData8(startX);
