@@ -14,13 +14,16 @@
 */
 
 
-namespace ST7735
+namespace Display
 {
+    static const uint16 PIN_RESET = GPIO_PIN_11;
+    static const uint16 PIN_DC = GPIO_PIN_14;
+
     static SPI_HandleTypeDef handle;
 }
 
 
-void ST7735::Init()
+void Display::Init()
 {
     __HAL_RCC_SPI2_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -53,38 +56,31 @@ void ST7735::Init()
         Error_Handler();
     }
 
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitTypeDef gpio_struct = {0};
 
-    /* GPIO Ports Clock Enable */
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
+    HAL_GPIO_WritePin(GPIOB, PIN_RESET | PIN_DC, GPIO_PIN_RESET);
 
-    /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOB, LCD_Reset_Pin | LCD_C_D_Pin, GPIO_PIN_RESET);
-
-    /*Configure GPIO pins : LCD_Reset_Pin LCD_C_D_Pin */
-    GPIO_InitStruct.Pin = LCD_Reset_Pin | LCD_C_D_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    gpio_struct.Pin = PIN_RESET | PIN_DC;
+    gpio_struct.Mode = GPIO_MODE_OUTPUT_PP;
+    gpio_struct.Pull = GPIO_NOPULL;
+    gpio_struct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOB, &gpio_struct);
 }
 
 
-void ST7735::Update()
+void Display::Update()
 {
 
 }
 
 
-void ST7735::BeginScene(Color)
+void Display::BeginScene(Color)
 {
 
 }
 
 
-void ST7735::EndScene()
+void Display::EndScene()
 {
 
 }

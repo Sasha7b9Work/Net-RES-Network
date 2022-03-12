@@ -12,7 +12,7 @@ int main(void)
 {
     HAL::Init();
 
-    ST7735::Init();
+    Display::Init();
 
 //    BME280::Init();
 //
@@ -44,7 +44,7 @@ int main(void)
 //
 //        HC12::Transmit(measure);
 
-        ST7735::Update();
+        Display::Update();
         
         counter++;
    }

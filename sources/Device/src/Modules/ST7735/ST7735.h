@@ -3,7 +3,7 @@
 #include "Modules/ST7735/Colors.h"
 
 
-namespace ST7735
+namespace Display
 {
     void Init();
     void Update();
