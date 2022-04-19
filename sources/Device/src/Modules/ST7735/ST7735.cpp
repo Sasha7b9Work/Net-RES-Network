@@ -163,26 +163,26 @@ void Display::Update()
 
     Rectangle(140, 30).Fill(10, 5, color2);
 
-    static int x0 = 0;
+    static int x0 = 10;
 
-    VLine(30).Draw(x0, 40);
+    VLine(7).Draw(x0, 23, color1);
 
     x0++;
     
-    if (x0 == WIDTH)
+    if (x0 == 150)
     {
         x0 = 0;
     }
 
-    static int y0 = 0;
+    static int y0 = 40;
 
-    HLine(30).Draw(80, y0);
+    HLine(20).Draw(5, y0, color2);
 
     y0++;
 
     if (y0 == HEIGHT)
     {
-        y0 = 0;
+        y0 = 40;
     }
 
     Font::Set(TypeFont::_8);
