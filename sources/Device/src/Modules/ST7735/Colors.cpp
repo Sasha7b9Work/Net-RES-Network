@@ -9,7 +9,10 @@ Color::E Color::current = Color::Count;
 
 void Color::SetCurrent(Color::E color)
 {
-    current = color;
+    if (color != Color::Count)
+    {
+        current = color;
+    }
 }
 
 

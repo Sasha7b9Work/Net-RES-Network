@@ -111,6 +111,8 @@ void Display::Init()
 void Display::Update()
 {
     BeginScene(Color::BLACK);
+
+    Rectangle(1, 1).Fill(5, 5, Color::WHITE);
 }
 
 
