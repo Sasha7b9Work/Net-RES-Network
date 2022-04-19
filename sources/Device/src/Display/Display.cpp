@@ -6,6 +6,7 @@
 #include "Modules/ST7735/ST7735.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
+#include "Utils/Text/Text.h"
 #include <cstdlib>
 
 
@@ -14,13 +15,18 @@ namespace Display
     struct Measure
     {
         String<> old;
-        String<> curren;
+        String<> current;
+
+        float value;                // Последнее установленное значение
+        int position;               // Текущая отрисовываемая позиция
+        uint time;                  // Время последнего изменения текущей отрисовываемой позиции
+
+        Measure() : value(0.0f), position(0), time(0) {}
+
+        void Draw(int x, int y);
     };
 
-    static Measure measures[TypeMeasure::Count] =
-    {
-
-    };
+    static Measure measures[TypeMeasure::Count];
 
     static void DrawMeasures();
 
@@ -106,20 +112,6 @@ void Display::Update()
 }
 
 
-void Display::DrawMeasures()
-{
-    int x0 = 20;
-    int y0 = 45;
-    int dY = 15;
-
-    String<>("Давление :").Draw(x0, y0, Color::GREEN);
-    String<>("Освещённость :").Draw(x0, y0 + dY);
-    String<>("Влажность :").Draw(x0, y0 + 4 * dY);
-    String<>("Скорость :").Draw(x0, y0 + 2 * dY);
-    String<>("Температура :").Draw(x0, y0 + 3 * dY);
-}
-
-
 void Display::BeginScene(Color::E color)
 {
     Buffer::Fill(color);
@@ -182,7 +174,70 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void Display::SetMeasure(TypeMeasure::E, float)
+void Display::SetMeasure(TypeMeasure::E type, float value)
 {
+    Measure &measure = measures[type];
 
+    if (value == measure.value)
+    {
+        return;
+    };
+
+    measure.old.SetFormat(measure.current.c_str());
+
+    measure.position = 0;
+    measure.time = TIME_MS;
+    measure.value = value;
+
+    measure.current.SetFormat("%f", value);
+}
+
+
+void Display::DrawMeasures()
+{
+    int x0 = 20;
+    int y0 = 45;
+    int dY = 15;
+
+    String<>("Давление :").Draw(x0, y0, Color::GREEN);
+    String<>("Освещённость :").Draw(x0, y0 + dY);
+    String<>("Влажность :").Draw(x0, y0 + 4 * dY);
+    String<>("Скорость :").Draw(x0, y0 + 2 * dY);
+    String<>("Температура :").Draw(x0, y0 + 3 * dY);
+
+    for (int i = 0; i < TypeMeasure::Count; i++)
+    {
+        measures[i].Draw(90, y0 + i * dY);
+    }
+}
+
+
+void Display::Measure::Draw(int x, int y)
+{
+    if (position >= current.Size())
+    {
+        current.Draw(x, y);
+    }
+    else
+    {
+        if (TIME_MS - time > 20)
+        {
+            time = TIME_MS;
+            position++;
+        }
+
+        for (int i = 0; i < position; i++)
+        {
+            x = Char(current[i]).Draw(x, y) + 1;
+        }
+
+        Rectangle(8, 8).Fill(x, y);
+
+        x += 8;
+
+        for (int i = position; i < current.Size(); i++)
+        {
+            x = Char(old[i]).Draw(x, y) + 1;
+        }
+    }
 }
