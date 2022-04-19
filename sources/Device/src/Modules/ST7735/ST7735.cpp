@@ -87,24 +87,24 @@ void Display::Init()
     HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET);
     HAL_Delay(5);
 
-    SendCommand(0x01);
+    SendCommand(0x01);      // SWRESET Software reset
     HAL_Delay(12);
 
-    SendCommand(0x11);
+    SendCommand(0x11);      // SLPOUT Sleep out
     HAL_Delay(12);
 
-    SendCommand(0x3A);
-    SendData8(0x05);
+    SendCommand(0x3A);      // COLMOD Interface pixel format
+    SendData8(0x05);        // 16 bit / pixel
 
-    SendCommand(0x36);
+    SendCommand(0x36);      // MADCTL Memory Data Access Control
     SendData8(0xA0);
 
-    SendCommand(0xB1);
+    SendCommand(0xB1);      // FRMCTR1 Frame rate
     SendData16(0x000F);
     SendData16(0x000F);
     SendData16(0x000F);
 
-    SendCommand(0x29);
+    SendCommand(0x29);      // DISPON Display on
 }
 
 
@@ -126,9 +126,7 @@ void Rectangle::Fill(int x, int y, Color::E color)
 
     Display::SetWindow((uint8)x, (uint8)y, (uint8)width, (uint8)height);
 
-    uint16 color = Color::GetValue();
-
-    Display::SendCommand(0x2C);
+    Display::SendCommand(0x2C);         // RAMWR
 
     SPI2->CR1 |= SPI_CR1_DFF;
     SET_DC;
@@ -136,7 +134,7 @@ void Rectangle::Fill(int x, int y, Color::E color)
 
     for (int i = 0; i < width * height; i++) {
         while (!(SPI2->SR & SPI_SR_TXE));
-        SPI2->DR = color;
+        SPI2->DR = Color::GetValue();
 
         while (!(SPI2->SR & SPI_SR_TXE));
         while ((SPI2->SR & SPI_SR_BSY));
@@ -150,29 +148,47 @@ void Rectangle::Fill(int x, int y, Color::E color)
 
 void Rectangle::Draw(int x, int y, Color::E color)
 {
-    Color::SetCurrent(color);
+    HLine(width).Draw(x, y, color);
+    HLine(width).Draw(x, y + height);
+    VLine(height).Draw(x, y);
+    VLine(height).Draw(x + width, y);
+}
+
+
+void HLine::Draw(int x, int y, Color::E color)
+{
+    Rectangle(width, 1).Fill(x, y, color);
+}
+
+
+void VLine::Draw(int x, int y, Color::E color)
+{
+    Rectangle(1, height).Fill(x, y, color);
 }
 
 
 void Point::Set(int x, int y, Color::E color)
 {
-    Color::SetCurrent(color);
+    Rectangle(1, 1).Fill(x, y, color);
 }
 
 
-void Display::SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY)
+void Display::SetWindow(uint8 x, uint8 y, uint8 width, uint8 height)
 {
-    SendCommand(0x2A);
-    SendData8(0x00);
-    SendData8(startX);
-    SendData8(0x00);
-    SendData8(stopX);
+    int stopX = x + width;
+    int stopY = y + height;
 
-    SendCommand(0x2B);
+    SendCommand(0x2A);      // CASET
     SendData8(0x00);
-    SendData8(startY);
+    SendData8(x);
     SendData8(0x00);
-    SendData8(stopY);
+    SendData8((uint8)stopX);
+
+    SendCommand(0x2B);      // RASET
+    SendData8(0x00);
+    SendData8(y);
+    SendData8(0x00);
+    SendData8((uint8)stopY);
 }
 
 
