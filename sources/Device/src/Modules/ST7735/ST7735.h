@@ -9,9 +9,10 @@ namespace Display
     static const int HEIGHT = 128;
 
     void Init();
+
     void Update();
 
-    void BeginScene(Color);
+    void BeginScene(Color::E);
 }
 
 

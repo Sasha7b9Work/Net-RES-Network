@@ -17,3 +17,15 @@ Color::E Color::GetCurrent()
 {
     return current;
 }
+
+
+uint16 Color::GetValue()
+{
+    static const uint16 values[Color::Count] =
+    {
+        0xffff,
+        0x0000
+    };
+
+    return values[current];
+}

@@ -114,9 +114,9 @@ void Display::Update()
 }
 
 
-void Display::BeginScene(Color)
+void Display::BeginScene(Color::E color)
 {
-    Rectangle(50, 50).Fill(10, 10, Color::BLACK);
+    Rectangle(50, 100).Fill(0, 0, color);
 }
 
 
@@ -126,6 +126,8 @@ void Rectangle::Fill(int x, int y, Color::E color)
 
     Display::SetWindow((uint8)x, (uint8)y, (uint8)width, (uint8)height);
 
+    uint16 color = Color::GetValue();
+
     Display::SendCommand(0x2C);
 
     SPI2->CR1 |= SPI_CR1_DFF;
@@ -134,7 +136,7 @@ void Rectangle::Fill(int x, int y, Color::E color)
 
     for (int i = 0; i < width * height; i++) {
         while (!(SPI2->SR & SPI_SR_TXE));
-        SPI2->DR = 0xf0f0;
+        SPI2->DR = color;
 
         while (!(SPI2->SR & SPI_SR_TXE));
         while ((SPI2->SR & SPI_SR_BSY));
