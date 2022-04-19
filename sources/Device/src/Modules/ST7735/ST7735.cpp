@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
+#include "Display/Display.h"
 #include <stm32f1xx_hal.h>
 #include <cstring>
 
