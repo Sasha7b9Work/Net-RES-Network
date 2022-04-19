@@ -11,15 +11,16 @@
 
 namespace Display
 {
-    static String<> measures[TypeMeasure::Count] =
+    struct Measure
     {
-        String<>(""),
-        String<>(""),
-        String<>(""),
-        String<>(""),
-        String<>("")
+        String<> old;
+        String<> curren;
     };
 
+    static Measure measures[TypeMeasure::Count] =
+    {
+
+    };
 
     static void DrawMeasures();
 
