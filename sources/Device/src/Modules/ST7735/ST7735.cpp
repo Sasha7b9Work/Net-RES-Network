@@ -28,12 +28,12 @@ namespace Display
 
     static SPI_HandleTypeDef handle;
 
-    void SendCommand(uint8);
-    void SendData8(uint8);
-    void SendData16(uint16);
-    void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
+    static void SendCommand(uint8);
+    static void SendData8(uint8);
+    static void SendData16(uint16);
+    static void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
 
-    uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
+    static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
 }
 
 
@@ -113,22 +113,11 @@ void Display::Init()
 
 void Display::Update()
 {
-    static TimeMeterMS meter;
-
-    if (meter.ElapsedTime() < 1000)
-    {
-        return;
-    }
-
-    meter.Reset();
-
     BeginScene(Color::BLACK);
 
     Rectangle(1, 1).Fill(5, 5, Color::WHITE);
 
-    volatile uint time = meter.ElapsedTime();
-
-    time = time;
+    EndScene();
 }
 
 
@@ -138,11 +127,9 @@ void Display::BeginScene(Color::E color)
 }
 
 
-void Rectangle::Fill(int x, int y, Color::E color)
+void Display::EndScene()
 {
-    Color::SetCurrent(color);
-
-    Display::SetWindow((uint8)x, (uint8)y, (uint8)width, (uint8)height);
+    Display::SetWindow((uint8)0, (uint8)0, (uint8)WIDTH, (uint8)HEIGHT);
 
     Display::SendCommand(0x2C);         // RAMWR
 
@@ -150,7 +137,7 @@ void Rectangle::Fill(int x, int y, Color::E color)
     SET_DC;
     RESET_CS;
 
-    for (int i = 0; i < width * height; i++) {
+    for (int i = 0; i < WIDTH * HEIGHT; i++) {
         while (!(SPI2->SR & SPI_SR_TXE));
         SPI2->DR = Color::GetValue();
 
@@ -161,6 +148,14 @@ void Rectangle::Fill(int x, int y, Color::E color)
     SET_CS;
 
     SPI2->CR1 &= ~SPI_CR1_DFF;
+}
+
+
+void Rectangle::Fill(int x, int y, Color::E color)
+{
+    Color::SetCurrent(color);
+
+
 }
 
 
