@@ -1,7 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#ifndef __MAIN_H
-#define __MAIN_H
-
+#pragma once
 
 typedef unsigned char uint8;
 typedef signed char int8;
@@ -9,6 +7,11 @@ typedef unsigned short uint16;
 typedef unsigned int uint;
 typedef const char *pchar;
 typedef unsigned char uchar;
+
+#ifndef WIN32
+    #define nullptr 0
+    #pragma diag_suppress 2748
+#endif
 
 union BitSet32
 {
@@ -18,16 +21,21 @@ union BitSet32
 };
 
 
+#define _GET_BIT(value, bit)   (((value) >> (bit)) & 0x01)
+#define _SET_BIT(value, bit)   ((value) |= (1 << (bit)))
+#define _CLEAR_BIT(value, bit) ((value) &= (~(1 << (bit))))
+
+
+#define ERROR_VALUE_FLOAT   1.111e29f
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
 void Error_Handler();
-
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+
+#include "Log.h"

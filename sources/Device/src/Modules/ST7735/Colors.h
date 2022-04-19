@@ -7,10 +7,19 @@ struct Color
     enum E
     {
         WHITE,
-        BLACK
+        BLACK,
+        Count
     };
 
     E value;
 
     Color(E v) : value(v) {}
+
+    static void SetCurrent(E);
+
+    static E GetCurrent();
+
+private:
+
+    static Color::E current;
 };

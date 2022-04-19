@@ -22,5 +22,13 @@ struct Rectangle
 
     Rectangle(int w, int h) : width(w), height(h) { }
 
-    void Fill(int x, int y, Color);
+    void Fill(int x, int y, Color::E = Color::Count);
+
+    void Draw(int x, int y, Color::E = Color::Count);
+};
+
+
+struct Point
+{
+    void Set(int x, int y, Color::E color = Color::Count);
 };

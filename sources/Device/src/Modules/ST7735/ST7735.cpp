@@ -120,8 +120,10 @@ void Display::BeginScene(Color)
 }
 
 
-void Rectangle::Fill(int x, int y, Color)
+void Rectangle::Fill(int x, int y, Color::E color)
 {
+    Color::SetCurrent(color);
+
     Display::SetWindow((uint8)x, (uint8)y, (uint8)width, (uint8)height);
 
     Display::SendCommand(0x2C);
@@ -141,6 +143,18 @@ void Rectangle::Fill(int x, int y, Color)
     SET_CS;
 
     SPI2->CR1 &= ~SPI_CR1_DFF;
+}
+
+
+void Rectangle::Draw(int x, int y, Color::E color)
+{
+    Color::SetCurrent(color);
+}
+
+
+void Point::Set(int x, int y, Color::E color)
+{
+    Color::SetCurrent(color);
 }
 
 

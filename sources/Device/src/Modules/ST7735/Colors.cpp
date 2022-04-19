@@ -2,3 +2,18 @@
 #include "main.h"
 #include "Modules/ST7735/Colors.h"
 
+
+
+Color::E Color::current = Color::Count;
+
+
+void Color::SetCurrent(Color::E color)
+{
+    current = color;
+}
+
+
+Color::E Color::GetCurrent()
+{
+    return current;
+}

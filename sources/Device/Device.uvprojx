@@ -458,6 +458,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Log.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -715,6 +725,41 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Utils</GroupName>
+          <Files>
+            <File>
+              <FileName>Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Math.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Utils/Text</GroupName>
+          <Files>
+            <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Text\String.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>String.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Text\String.h</FilePath>
+            </File>
+            <File>
+              <FileName>Text.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Text\Text.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Text.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Text\Text.h</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
@@ -724,5 +769,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>Device</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>
