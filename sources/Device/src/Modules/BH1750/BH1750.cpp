@@ -36,6 +36,23 @@ bool BH1750::GetMeasure(unsigned int dT, float *illumination)
 
     timeNext += dT;
 
+#ifdef IN_MODE_TEST
+
+    static float value = 1.5f;
+
+    value *= 1.98f;
+
+    *illumination = value / 100.0f;
+
+    if (value > 1e4f)
+    {
+        value = 1.3f;
+    }
+
+    return true;
+
+#else
+
     BitSet32 result;
 
     if (ReadUINT16(&result.byte[0]))
@@ -46,6 +63,8 @@ bool BH1750::GetMeasure(unsigned int dT, float *illumination)
     }
 
     return false;
+
+#endif
 }
 
 
