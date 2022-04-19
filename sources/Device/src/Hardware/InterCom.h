@@ -1,5 +1,6 @@
-/// Sasha7b9@tut.by (c)
+// Sasha7b9@tut.by (c)
 #pragma once
+#include "Display/Display.h"
 
 
 struct Direction
@@ -19,4 +20,6 @@ namespace InterCom
     void SetDirection(Direction::E);
 
     void Send(pchar measure);
+
+    void Send(TypeMeasure::E, float measure);
 }

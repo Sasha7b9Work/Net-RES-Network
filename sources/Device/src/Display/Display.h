@@ -11,7 +11,8 @@ struct TypeMeasure
         Illumination,       // Освещённость
         Humidity,           // Влажность
         Velocity,           // Скорость
-        Temperature         // Температура
+        Temperature,        // Температура
+        Count
     };
 };
 
@@ -21,7 +22,7 @@ namespace Display
     static const int WIDTH = 160;
     static const int HEIGHT = 128;
 
-    void SetMeasure(TypeMeasure::E, pchar measure);
+    void SetMeasure(TypeMeasure::E, float measure);
 
     void Update();
 

@@ -44,15 +44,13 @@ void BME280::Init()
 }
 
 
-pchar BME280::GetMeasure(unsigned int dT)
+bool BME280::GetMeasures(unsigned int dT, float* temp, float* pressure, float* humidity)
 {
-    static char buffer[1024];
-
     bme280_data comp_data;
 
     if(HAL_GetTick() < timeNext)
     {
-        return nullptr;
+        return false;
     }
 
     timeNext += dT;
@@ -61,21 +59,10 @@ pchar BME280::GetMeasure(unsigned int dT)
 
     if (result == BME280_OK)
     {
-        sprintf(buffer, "BME280 : t:%0.2f*C   p:%0.2fhPa, %0.2fmmHg   h:%0.2f%%",
-            comp_data.temperature, comp_data.pressure / 100, comp_data.pressure / 133.3223684, comp_data.humidity);
-    }
-    else
-    {
-        if (result == BME280_E_COMM_FAIL)
-        {
-            sprintf(buffer, "BME280 : !!! Error communication");
-        }
-        else
-        {
-            sprintf(buffer, "BME280 : !!! Error %d !!!", result);
-        }
+        *temp = (float)comp_data.temperature;
+        *pressure = (float)comp_data.pressure / 100.0f;
+        *humidity = (float)comp_data.humidity;
     }
 
-
-    return buffer;
+    return (result == BME280_OK);
 }

@@ -162,7 +162,7 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void Display::SetMeasure(TypeMeasure::E, pchar)
+void Display::SetMeasure(TypeMeasure::E, float)
 {
 
 }

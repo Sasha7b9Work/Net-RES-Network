@@ -29,11 +29,18 @@ int main(void)
 
     while (1)
     {
-        pchar measure = BME280::GetMeasure(1000);           // Температура, давление, влажность
+        float temp = 0.0f;
+        float pressure = 0.0f;
+        float humidity = 0.0;
 
-        InterCom::Send(measure);
+        if (BME280::GetMeasures(1000, &temp, &pressure, &humidity))
+        {
+            InterCom::Send(TypeMeasure::Temperature, temp);
+            InterCom::Send(TypeMeasure::Pressure, pressure);
+            InterCom::Send(TypeMeasure::Humidity, humidity);
+        }
 
-        measure = CG_Anem::GetMeasure(1000);                // Скорость
+        pchar measure = CG_Anem::GetMeasure(1000);                // Скорость
 
         InterCom::Send(measure);
 
