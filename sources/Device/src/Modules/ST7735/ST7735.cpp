@@ -156,12 +156,9 @@ void Display::Init()
 
 void Display::Update()
 {
-    BeginScene(Color::BLACK);
+    BeginScene(Color::WHITE);
 
-    for (int x = 0; x < 40; x++)
-    {
-        VLine(30).Draw(x, 10, Color::WHITE);
-    }
+    Rectangle(150, 30).Fill(15, 5, Color::BLACK);
 
     static int x0 = 0;
 
@@ -187,7 +184,17 @@ void Display::Update()
 
     Font::Set(TypeFont::_8);
 
-    String<>("Тестовая строка").Draw(10, 10);
+    String<>("Тестовая строка").Draw(40, 10, Color::WHITE);
+
+    int y = 45;
+    int x = 30;
+    int dY = 15;
+
+    String<>("Давление : 100 МПa").Draw(x, y, Color::BLACK);
+    String<>("Освещённость : 100 люкс").Draw(x, y + dY);
+    String<>("Скорость : 10 км/сек").Draw(x, y + 2 * dY);
+    String<>("Температура : 23 С").Draw(x, y + 3 * dY);
+    String<>("Влажность : 100%").Draw(x, y + 4 * dY);
 
     EndScene();
 }
