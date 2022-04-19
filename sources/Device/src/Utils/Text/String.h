@@ -13,12 +13,7 @@ public:
 
     String() { buffer[0] = '\0'; }
 
-    explicit String(pchar text)
-    {
-        buffer[0] = '\0';
-
-        Append(text);
-    }
+    explicit String(pchar, ...);
 
     void SetFormat(pchar format, ...);
 

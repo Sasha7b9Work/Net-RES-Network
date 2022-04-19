@@ -10,7 +10,7 @@
 #include <cstdlib>
 
 
-template      String<(int)DEFAULT_SIZE_STRING>::String(pchar);
+template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
 template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color::E);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawInCenterRect(int x, int y, int width, int height, Color::E);
@@ -64,6 +64,21 @@ int String<capa>::Draw(int x, int y, Color::E color)
 
 template<int capacity>
 void String<capacity>::SetFormat(pchar format, ...)
+{
+    std::va_list args;
+    va_start(args, format);
+    int num_symbols = std::snprintf(buffer, capacity - 1, format, args);
+    va_end(args);
+
+    if(num_symbols < 0 || num_symbols > capacity - 1)
+    {
+        LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
+    }
+}
+
+
+template<int capacity>
+String<capacity>::String(pchar format, ...)
 {
     std::va_list args;
     va_start(args, format);
