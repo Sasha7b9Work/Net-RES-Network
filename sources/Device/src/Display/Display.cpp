@@ -11,6 +11,19 @@
 
 namespace Display
 {
+    static String<> measures[TypeMeasure::Count] =
+    {
+        String<>(""),
+        String<>(""),
+        String<>(""),
+        String<>(""),
+        String<>("")
+    };
+
+
+    static void DrawMeasures();
+
+
     namespace Buffer
     {
         static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
@@ -69,7 +82,7 @@ void Display::Update()
 
     static int y0 = 40;
 
-    HLine(20).Draw(5, y0, color2);
+    HLine(10).Draw(5, y0, color2);
 
     y0++;
 
@@ -82,21 +95,27 @@ void Display::Update()
 
     String<>("Тестовая строка").Draw(40, 10, color1);
 
-    int y = 45;
-    int x = 30;
-    int dY = 15;
-
-    String<>("Давление : 100 МПa").Draw(x, y, Color::GREEN);
-    String<>("Освещённость : 100 люкс").Draw(x, y + dY);
-    String<>("Скорость : 10 км/сек").Draw(x, y + 2 * dY);
-    String<>("Температура : 23 С").Draw(x, y + 3 * dY);
-    String<>("Влажность : 100%%").Draw(x, y + 4 * dY);
+    DrawMeasures();
 
     String<>("%d ms", time).Draw(125, 25, color1);
 
     EndScene();
 
     time = meter.ElapsedTime();
+}
+
+
+void Display::DrawMeasures()
+{
+    int x0 = 20;
+    int y0 = 45;
+    int dY = 15;
+
+    String<>("Давление :").Draw(x0, y0, Color::GREEN);
+    String<>("Освещённость :").Draw(x0, y0 + dY);
+    String<>("Влажность :").Draw(x0, y0 + 4 * dY);
+    String<>("Скорость :").Draw(x0, y0 + 2 * dY);
+    String<>("Температура :").Draw(x0, y0 + 3 * dY);
 }
 
 
