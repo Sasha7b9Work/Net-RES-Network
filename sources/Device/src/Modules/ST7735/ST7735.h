@@ -1,6 +1,6 @@
 // 2022/03/12 09:24:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Modules/ST7735/Colors.h"
+#include "Display/Colors.h"
 
 
 namespace Display

@@ -1,6 +1,6 @@
 // 2022/03/30 08:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "main.h"
-#include "Modules/ST7735/Font/Font.h"
+#include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
 #include "Modules/ST7735/ST7735.h"

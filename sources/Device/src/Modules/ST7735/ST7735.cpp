@@ -2,7 +2,7 @@
 #include "main.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
-#include "Modules/ST7735/Font/Font.h"
+#include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
 #include <stm32f1xx_hal.h>
 #include <cstring>

@@ -2,7 +2,7 @@
 #include "main.h"
 #include "Log.h"
 #include "Utils/Text/Text.h"
-#include "Modules/ST7735/Font/Font.h"
+#include "Display/Font/Font.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Utils/Math.h"
 #include <cstdarg>

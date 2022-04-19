@@ -1,6 +1,6 @@
 // 2022/02/15 09:14:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Modules/ST7735/Colors.h"
+#include "Display/Colors.h"
 #include "Utils/Text/String.h"
 
 

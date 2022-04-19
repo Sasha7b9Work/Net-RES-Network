@@ -57,6 +57,8 @@ file(GLOB STM32F1             src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/
                               src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c
                               src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h)
 file(GLOB SRC                 src/*.*)
+file(GLOB DISPLAY             src/Display/*.*)
+file(GLOB DISPLAY_FONT        src/Display/Font/*.*)
 file(GLOB HARDWARE            src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS      src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_CDC        src/Hardware/CDC/*.*)
@@ -67,11 +69,12 @@ file(GLOB MODULES_BME280      src/Modules/BME280/*.*)
 file(GLOB MODULES_CG_ANEM     src/Modules/CG-Anem/*.*)
 file(GLOB MODULES_HC12        src/Modules/HC12/*.*)
 file(GLOB MODULES_ST7735      src/Modules/ST7735/*.*)
-file(GLOB MODULES_ST7735_FONT src/Modules/ST7735/Font/*.*)
 file(GLOB UTILS_TEXT          src/Utils/Text/*.*)
 
 source_group(STM32F1             FILES ${STM32F1})
 source_group(src                 FILES ${SRC})
+source_group(Display             FILES ${DISPLAY})
+source_group(Display/Font        FILES ${DISPLAY_FONT})
 source_group(Hardware            FILES ${HARDWARE})
 source_group(Hardware/CMSIS      FILES ${HARDWARE_CMSIS})
 source_group(Hardware/CDC        FILES ${HARDWARE_CDC})
@@ -94,6 +97,8 @@ set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
 add_library(${PROJECT_NAME}
             ${STM32F1}
             ${SRC}
+            ${DISPLAY}
+            ${DISPLAY_FONT}
             ${HARDWARE}
             ${HARDWARE_CMSIS}
             ${HARDWARE_CDC}
