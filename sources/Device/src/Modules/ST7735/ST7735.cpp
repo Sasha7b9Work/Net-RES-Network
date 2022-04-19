@@ -1,6 +1,7 @@
 // 2022/03/12 09:24:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "main.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Hardware/Timer.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -110,6 +111,15 @@ void Display::Init()
 
 void Display::Update()
 {
+    static TimeMeterMS meter;
+
+    if (meter.ElapsedTime() < 1000)
+    {
+        return;
+    }
+
+    meter.Reset();
+
     BeginScene(Color::BLACK);
 
     Rectangle(1, 1).Fill(5, 5, Color::WHITE);
