@@ -30,15 +30,15 @@ bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
 
 #ifdef IN_MODE_TEST
 
-    static float velocity = 0.0f;
+    static float velocity = 1.0f;
 
-    velocity += 1.1f;
+    velocity *= 11.12f;
 
     *velocity_out = velocity / 100.0f;
 
     if (*velocity_out > 100.0f)
     {
-        velocity = 0.0f;
+        velocity = 1.0f;
     }
 
     return true;

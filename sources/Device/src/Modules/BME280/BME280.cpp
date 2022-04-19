@@ -46,14 +46,36 @@ void BME280::Init()
 
 bool BME280::GetMeasures(unsigned int dT, float* temp, float* pressure, float* humidity)
 {
-    bme280_data comp_data;
-
     if(HAL_GetTick() < timeNext)
     {
         return false;
     }
 
     timeNext += dT;
+
+#ifdef IN_MODE_TEST
+
+    static float value = 1.1f;
+
+    value *= 7.1f;
+    *temp = value / 100.0f;
+
+    value *= 1.2f;
+    *pressure = value / 100.0f;
+
+    value *= 0.83f;
+    *humidity = value / 99.28f;
+
+    if (value > 1e4f)
+    {
+        value = 1.34f;
+    }
+
+    return true;
+
+#else
+
+    bme280_data comp_data;
 
     int8 result = bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
 
@@ -65,4 +87,6 @@ bool BME280::GetMeasures(unsigned int dT, float* temp, float* pressure, float* h
     }
 
     return (result == BME280_OK);
+
+#endif
 }
