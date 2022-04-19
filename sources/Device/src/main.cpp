@@ -14,18 +14,18 @@ int main(void)
 
     Display::Init();
 
-//    BME280::Init();
-//
-//    HC12::Init();
-//
-//    CG_Anem::Init();
-//
-//    BH1750::Init();
+    BME280::Init();
+
+    HC12::Init();
+
+    CG_Anem::Init();
+
+    BH1750::Init();
 
     while (1)
     {
 //        pchar measure = BME280::GetMeasure(1000);
-//
+
 //        CDC::Transmit(measure);
 //
 //        HC12::Transmit(measure);
