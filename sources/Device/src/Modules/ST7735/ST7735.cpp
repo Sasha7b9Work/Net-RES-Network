@@ -110,13 +110,13 @@ void Display::Init()
 
 void Display::Update()
 {
-    BeginScene(Color::WHITE);
+    BeginScene(Color::BLACK);
 }
 
 
 void Display::BeginScene(Color::E color)
 {
-    Rectangle(50, 100).Fill(0, 0, color);
+    Rectangle(WIDTH, HEIGHT).Fill(0, 0, color);
 }
 
 
@@ -175,8 +175,8 @@ void Point::Set(int x, int y, Color::E color)
 
 void Display::SetWindow(uint8 x, uint8 y, uint8 width, uint8 height)
 {
-    int stopX = x + width;
-    int stopY = y + height;
+    int stopX = x + width - 1;
+    int stopY = y + height - 1;
 
     SendCommand(0x2A);      // CASET
     SendData8(0x00);
