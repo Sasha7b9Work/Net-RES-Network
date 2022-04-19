@@ -33,7 +33,15 @@ namespace Display
     static void SendData16(uint16);
     static void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
 
-    static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
+    namespace Buffer
+    {
+        static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
+
+        static uint8 *FirstPixels()
+        {
+            return &buffer[0];
+        }
+    }
 }
 
 
@@ -133,16 +141,27 @@ void Display::EndScene()
 
     Display::SendCommand(0x2C);         // RAMWR
 
+    uint8* points = Buffer::FirstPixels();
+
     SPI2->CR1 |= SPI_CR1_DFF;
     SET_DC;
     RESET_CS;
 
-    for (int i = 0; i < WIDTH * HEIGHT; i++) {
+    for (int i = 0; i < WIDTH * HEIGHT / 2; i++)
+    {
         while (!(SPI2->SR & SPI_SR_TXE));
-        SPI2->DR = Color::GetValue();
+        SPI2->DR = COLOR(*points & 0x0F);
 
         while (!(SPI2->SR & SPI_SR_TXE));
         while ((SPI2->SR & SPI_SR_BSY));
+
+        while (!(SPI2->SR & SPI_SR_TXE));
+        SPI2->DR = COLOR(((*points) >> 4) & 0x0F);
+
+        while (!(SPI2->SR & SPI_SR_TXE));
+        while ((SPI2->SR & SPI_SR_BSY));
+
+        points++;
     }
 
     SET_CS;

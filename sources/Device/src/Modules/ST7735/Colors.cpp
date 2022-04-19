@@ -6,6 +6,12 @@
 
 Color::E Color::current = Color::Count;
 
+const uint16 colors[Color::Count] =
+{
+    0xffff,
+    0x0000
+};
+
 
 void Color::SetCurrent(Color::E color)
 {
@@ -24,11 +30,5 @@ Color::E Color::GetCurrent()
 
 uint16 Color::GetValue()
 {
-    static const uint16 values[Color::Count] =
-    {
-        0xffff,
-        0x0000
-    };
-
-    return values[current];
+    return colors[current];
 }

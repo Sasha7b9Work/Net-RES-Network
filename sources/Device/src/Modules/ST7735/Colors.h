@@ -25,3 +25,8 @@ private:
 
     static Color::E current;
 };
+
+
+#define COLOR(color)    colors[color]
+
+extern const uint16 colors[Color::Count];
