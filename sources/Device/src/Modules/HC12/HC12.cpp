@@ -43,7 +43,12 @@ void HC12::Init()
 }
 
 
-void HC12::Transmit(const char *buffer)
+void HC12::Transmit(pchar buffer)
 {
+    if (!buffer)
+    {
+        return;
+    }
+
     HAL_UART_Transmit(&UartHandle, (uint8_t *)buffer, (uint16_t)(strlen(buffer) + 1), 0xFFFF);
 }

@@ -6,6 +6,7 @@
 #include "Modules/BH1750/BH1750.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Hardware/Timer.h"
 
 
 int main(void)

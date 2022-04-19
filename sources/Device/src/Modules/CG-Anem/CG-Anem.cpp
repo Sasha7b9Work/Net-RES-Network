@@ -23,8 +23,9 @@ pchar CG_Anem::GetMeasure(unsigned int dT)
 {
     static char buffer[1024];
 
-    while (HAL_GetTick() < timeNext)
+    if (HAL_GetTick() < timeNext)
     {
+        return nullptr;
     }
 
     timeNext += dT;
