@@ -190,6 +190,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     measure.value = value;
 
     measure.current.SetFormat("%f", value);
+    measure.current[6] = '\0';
 }
 
 

@@ -33,7 +33,7 @@ int main(void)
         float pressure = 0.0f;
         float humidity = 0.0;
 
-        if (BME280::GetMeasures(2000, &temp, &pressure, &humidity))
+        if (BME280::GetMeasures(2222, &temp, &pressure, &humidity))
         {
             InterCom::Send(TypeMeasure::Temperature, temp);
             InterCom::Send(TypeMeasure::Pressure, pressure);
@@ -42,14 +42,14 @@ int main(void)
 
         float velocity = 0.0f;
 
-        if (CG_Anem::GetMeasure(2250, &velocity))
+        if (CG_Anem::GetMeasure(2333, &velocity))
         {
             InterCom::Send(TypeMeasure::Velocity, velocity);
         }
 
         float illumination = 0.0f;
 
-        if (BH1750::GetMeasure(2500, &illumination))
+        if (BH1750::GetMeasure(2444, &illumination))
         {
             InterCom::Send(TypeMeasure::Illumination, illumination);
         }
