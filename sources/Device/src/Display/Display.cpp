@@ -207,7 +207,7 @@ void Display::DrawMeasures()
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
-        measures[i].Draw(90, y0 + i * dY);
+        measures[i].Draw(100, y0 + i * dY);
     }
 }
 
@@ -220,24 +220,18 @@ void Display::Measure::Draw(int x, int y)
     }
     else
     {
-        if (TIME_MS - time > 20)
-        {
-            time = TIME_MS;
-            position++;
-        }
-
         for (int i = 0; i < position; i++)
         {
             x = Char(current[i]).Draw(x, y) + 1;
         }
 
-        Rectangle(8, 8).Fill(x, y);
-
-        x += 8;
+        Rectangle(5, 7).Fill(x, y + 1);
 
         for (int i = position; i < current.Size(); i++)
         {
             x = Char(old[i]).Draw(x, y) + 1;
         }
+
+        position++;
     }
 }
