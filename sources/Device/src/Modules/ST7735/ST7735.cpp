@@ -185,7 +185,7 @@ void Display::Update()
     int x = 30;
     int dY = 15;
 
-    String<>("Давление : 100 МПa").Draw(x, y, color2);
+    String<>("Давление : 100 МПa").Draw(x, y, Color::GREEN);
     String<>("Освещённость : 100 люкс").Draw(x, y + dY);
     String<>("Скорость : 10 км/сек").Draw(x, y + 2 * dY);
     String<>("Температура : 23 С").Draw(x, y + 3 * dY);

@@ -6,14 +6,14 @@ struct Color
 {
     enum E
     {
-        WHITE,
-        BLACK,
-        RED,
-        GREEN,
-        BLUE,
-        GRAY_50,
-        GRAY_25,
-        GRAY_10,
+        WHITE,      // 0
+        BLACK,      // 1
+        RED,        // 2
+        GREEN,      // 3
+        BLUE,       // 4
+        GRAY_50,    // 5
+        GRAY_25,    // 6
+        GRAY_10,    // 7
         Count
     };
 
