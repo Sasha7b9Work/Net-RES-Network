@@ -6,7 +6,7 @@
   ******************************************************************************
   ** This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
+  * USER CODE END. Other portions of this file, whether
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
@@ -37,7 +37,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "i2c.h"
 //#include "i2c.h"
 #include "stm32f1xx_hal.h"
@@ -53,81 +53,81 @@ I2C_HandleTypeDef hi2c1;
 void MX_I2C1_Init(void)
 {
 
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 100000;
-  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    hi2c1.Instance = I2C1;
+    hi2c1.Init.ClockSpeed = 100000;
+    hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+    hi2c1.Init.OwnAddress1 = 0;
+    hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    hi2c1.Init.OwnAddress2 = 0;
+    hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+    if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+    {
+        Error_Handler();
+    }
 
 }
 
 void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
 {
 
-  GPIO_InitTypeDef GPIO_InitStruct;
-  if(i2cHandle->Instance==I2C1)
-  {
-  /* USER CODE BEGIN I2C1_MspInit 0 */
+    GPIO_InitTypeDef GPIO_InitStruct;
+    if (i2cHandle->Instance == I2C1)
+    {
+        /* USER CODE BEGIN I2C1_MspInit 0 */
 
-  /* USER CODE END I2C1_MspInit 0 */
-  
-    /**I2C1 GPIO Configuration    
-    PB6     ------> I2C1_SCL
-    PB7     ------> I2C1_SDA 
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    //GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+        /* USER CODE END I2C1_MspInit 0 */
 
-    /* I2C1 clock enable */
-    __HAL_RCC_I2C1_CLK_ENABLE();
-  /* USER CODE BEGIN I2C1_MspInit 1 */
+          /**I2C1 GPIO Configuration
+          PB6     ------> I2C1_SCL
+          PB7     ------> I2C1_SDA
+          */
+        GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+        //GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+        HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /* USER CODE END I2C1_MspInit 1 */
-  }
+        /* I2C1 clock enable */
+        __HAL_RCC_I2C1_CLK_ENABLE();
+        /* USER CODE BEGIN I2C1_MspInit 1 */
+
+        /* USER CODE END I2C1_MspInit 1 */
+    }
 }
 
 void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 {
 
-  if(i2cHandle->Instance==I2C1)
-  {
-  /* USER CODE BEGIN I2C1_MspDeInit 0 */
+    if (i2cHandle->Instance == I2C1)
+    {
+        /* USER CODE BEGIN I2C1_MspDeInit 0 */
 
-  /* USER CODE END I2C1_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_I2C1_CLK_DISABLE();
-  
-    /**I2C1 GPIO Configuration    
-    PB6     ------> I2C1_SCL
-    PB7     ------> I2C1_SDA 
-    */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6|GPIO_PIN_7);
+        /* USER CODE END I2C1_MspDeInit 0 */
+          /* Peripheral clock disable */
+        __HAL_RCC_I2C1_CLK_DISABLE();
 
-  /* USER CODE BEGIN I2C1_MspDeInit 1 */
+        /**I2C1 GPIO Configuration
+        PB6     ------> I2C1_SCL
+        PB7     ------> I2C1_SDA
+        */
+        HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6 | GPIO_PIN_7);
 
-  /* USER CODE END I2C1_MspDeInit 1 */
-  }
-} 
+        /* USER CODE BEGIN I2C1_MspDeInit 1 */
+
+        /* USER CODE END I2C1_MspDeInit 1 */
+    }
+}
 
 /* USER CODE BEGIN 1 */
 void user_delay_ms(uint32_t period)
 {
-	HAL_Delay(period);
+    HAL_Delay(period);
 }
 
-int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
+int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t* reg_data, uint16_t len)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
@@ -135,22 +135,22 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
 
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
 
-	HAL_StatusTypeDef status = HAL_OK; 
-	status = HAL_I2C_Mem_Read(&hi2c1, dev_id<<1, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 10);
-	
-	if (status == HAL_OK)
-	{
+    HAL_StatusTypeDef status = HAL_OK;
+    status = HAL_I2C_Mem_Read(&hi2c1, dev_id << 1, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 5);
+
+    if (status == HAL_OK)
+    {
         rslt = 0;
-	}
+    }
     else
-	{
+    {
         rslt = -1;
-	}
+    }
     return rslt;
 }
 
 
-int8_t user_i2c_read16(uint8_t dev_id, uint8_t *data)
+int8_t user_i2c_read16(uint8_t dev_id, uint8_t* data)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
@@ -166,25 +166,25 @@ int8_t user_i2c_read16(uint8_t dev_id, uint8_t *data)
 }
 
 
-int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
+int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t* reg_data, uint16_t len)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
 
     }
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
-	
-	HAL_StatusTypeDef status = HAL_OK;
-    status = HAL_I2C_Mem_Write(&hi2c1, dev_id<<1, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 0xffff);
-	
-	if (status == HAL_OK)
-	{
+
+    HAL_StatusTypeDef status = HAL_OK;
+    status = HAL_I2C_Mem_Write(&hi2c1, dev_id << 1, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 0xffff);
+
+    if (status == HAL_OK)
+    {
         rslt = 0;
-	}
+    }
     else
-	{
+    {
         rslt = -1;
-	}
+    }
     return rslt;
 }
 
@@ -209,8 +209,8 @@ int8_t user_i2c_write8(uint8_t dev_id, uint8_t data)
   * @}
   */
 
-/**
-  * @}
-  */
+  /**
+    * @}
+    */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+    /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

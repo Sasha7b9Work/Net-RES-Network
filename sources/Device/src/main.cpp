@@ -36,11 +36,11 @@ int main(void)
 
         HC12::Transmit(measure);
 
-//        measure = BH1750::GetMeasure(1000);
-//
-//        CDC::Transmit(measure);
-//
-//        HC12::Transmit(measure);
+        measure = BH1750::GetMeasure(1000);
+
+        CDC::Transmit(measure);
+
+        HC12::Transmit(measure);
 
         Display::Update();
    }
