@@ -156,9 +156,12 @@ void Display::Init()
 
 void Display::Update()
 {
-    BeginScene(Color::WHITE);
+    Color::E color2 = Color::WHITE;
+    Color::E color1 = Color::BLACK;
 
-    Rectangle(150, 30).Fill(15, 5, Color::BLACK);
+    BeginScene(color1);
+
+    Rectangle(140, 30).Fill(10, 5, color2);
 
     static int x0 = 0;
 
@@ -184,13 +187,13 @@ void Display::Update()
 
     Font::Set(TypeFont::_8);
 
-    String<>("Тестовая строка").Draw(40, 10, Color::WHITE);
+    String<>("Тестовая строка").Draw(40, 10, color1);
 
     int y = 45;
     int x = 30;
     int dY = 15;
 
-    String<>("Давление : 100 МПa").Draw(x, y, Color::BLACK);
+    String<>("Давление : 100 МПa").Draw(x, y, color2);
     String<>("Освещённость : 100 люкс").Draw(x, y + dY);
     String<>("Скорость : 10 км/сек").Draw(x, y + 2 * dY);
     String<>("Температура : 23 С").Draw(x, y + 3 * dY);
