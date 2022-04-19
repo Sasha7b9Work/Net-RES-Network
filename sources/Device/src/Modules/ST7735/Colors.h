@@ -11,6 +11,9 @@ struct Color
         RED,
         GREEN,
         BLUE,
+        GRAY_50,
+        GRAY_25,
+        GRAY_10,
         Count
     };
 

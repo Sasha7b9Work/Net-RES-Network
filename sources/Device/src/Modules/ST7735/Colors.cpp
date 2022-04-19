@@ -12,7 +12,10 @@ const uint16 colors[Color::Count] =
     0x0000,
     MAKE_COLOR(31, 0, 0),
     MAKE_COLOR(0, 63, 0),
-    MAKE_COLOR(0, 0, 31)
+    MAKE_COLOR(0, 0, 31),
+    MAKE_COLOR(15, 31, 15),
+    MAKE_COLOR(7, 15, 7),
+    MAKE_COLOR(3, 6, 3)
 };
 
 

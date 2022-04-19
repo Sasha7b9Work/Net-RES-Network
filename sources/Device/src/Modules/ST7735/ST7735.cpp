@@ -162,9 +162,9 @@ void Display::Update()
     Color::E color2 = Color::WHITE;
     Color::E color1 = Color::BLACK;
 
-    BeginScene(Color::BLUE);
+    BeginScene(Color::GRAY_25);
 
-    Rectangle(140, 30).Fill(10, 5, color2);
+    Rectangle(140, 30).Fill(10, 5, Color::BLUE);
 
     static int y0 = 40;
 
