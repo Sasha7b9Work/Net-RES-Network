@@ -136,7 +136,7 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
 
 	HAL_StatusTypeDef status = HAL_OK; 
-	status = HAL_I2C_Mem_Read(&hi2c1, dev_id<<1, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 0xffff);
+	status = HAL_I2C_Mem_Read(&hi2c1, dev_id<<1, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 10);
 	
 	if (status == HAL_OK)
 	{
