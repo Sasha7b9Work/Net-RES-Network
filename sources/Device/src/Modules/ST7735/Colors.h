@@ -8,6 +8,9 @@ struct Color
     {
         WHITE,
         BLACK,
+        RED,
+        GREEN,
+        BLUE,
         Count
     };
 
@@ -30,3 +33,5 @@ private:
 #define COLOR(color)    colors[color]
 
 extern const uint16 colors[Color::Count];
+
+#define MAKE_COLOR(r, g, b)  (uint16)(b + (g << 5) + (r << 11))

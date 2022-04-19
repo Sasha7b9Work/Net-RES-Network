@@ -9,7 +9,10 @@ Color::E Color::current = Color::Count;
 const uint16 colors[Color::Count] =
 {
     0xffff,
-    0x0000
+    0x0000,
+    MAKE_COLOR(31, 0, 0),
+    MAKE_COLOR(0, 63, 0),
+    MAKE_COLOR(0, 0, 31)
 };
 
 
