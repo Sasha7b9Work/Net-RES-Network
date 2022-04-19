@@ -49,20 +49,22 @@ namespace Display
             if (x >= WIDTH)  { return; }
             if (y >= HEIGHT) { return; }
 
-            uint8 *pixels = &buffer[(x * HEIGHT + y) / 2];
+            uint8 *pixels = &buffer[(y * WIDTH + x) / 2];
+
+            uint8 value = *pixels;
 
             if (x % 2)
             {
-                *pixels &= 0x0F;
-
-                *pixels |= Color::GetCurrent();
+                value &= 0x0F;
+                value |= Color::GetCurrent();
             }
             else
             {
-                *pixels &= 0xF0;
-
-                *pixels |= (Color::GetCurrent() << 4);
+                value &= 0x0F;
+                value |= (Color::GetCurrent() << 4);
             }
+
+            *pixels = value;
         }
     }
 }
@@ -146,7 +148,7 @@ void Display::Update()
 {
     BeginScene(Color::BLACK);
 
-    Rectangle(1, 1).Fill(5, 5, Color::WHITE);
+//    Rectangle(1, 1).Fill(5, 5, Color::WHITE);
 
     EndScene();
 }
@@ -173,7 +175,7 @@ void Display::EndScene()
     for (int i = 0; i < WIDTH * HEIGHT / 2; i++)
     {
         while (!(SPI2->SR & SPI_SR_TXE));
-        SPI2->DR = COLOR(*points & 0x0F);
+        SPI2->DR = COLOR((*points) & 0x0F);
 
         while (!(SPI2->SR & SPI_SR_TXE));
         while ((SPI2->SR & SPI_SR_BSY));
@@ -199,7 +201,7 @@ void Rectangle::Fill(int x0, int y0, Color::E color)
 
     for (int x = x0; x < x0 + width; x++)
     {
-        HLine(height).Draw(x, y0);
+        VLine(height).Draw(x, y0);
     }
 }
 
