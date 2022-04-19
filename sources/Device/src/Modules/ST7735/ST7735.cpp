@@ -156,7 +156,21 @@ void Display::Update()
 {
     BeginScene(Color::BLACK);
 
-//    Rectangle(1, 1).Fill(5, 5, Color::WHITE);
+    for (int x = 0; x < 40; x++)
+    {
+        VLine(30).Draw(x, 10, Color::WHITE);
+    }
+
+    static int x0 = 0;
+
+    VLine(30).Draw(x0, 70);
+
+    x0++;
+    
+    if (x0 == WIDTH)
+    {
+        x0 = 0;
+    }
 
     EndScene();
 }
