@@ -29,15 +29,15 @@ int main(void)
 
     while (1)
     {
-        pchar measure = BME280::GetMeasure(1000);
+        pchar measure = BME280::GetMeasure(1000);           // Температура, давление, влажность
 
         InterCom::Send(measure);
 
-        measure = CG_Anem::GetMeasure(1000);
+        measure = CG_Anem::GetMeasure(1000);                // Скорость
 
         InterCom::Send(measure);
 
-        measure = BH1750::GetMeasure(1000);
+        measure = BH1750::GetMeasure(1000);                 // Освещённость
 
         InterCom::Send(measure);
 
