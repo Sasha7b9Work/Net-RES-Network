@@ -187,7 +187,9 @@ void Display::Update()
 
     Font::Set(TypeFont::_8);
 
-    String<>("Тестовая строка").Draw(40, 10, color1);
+    String<> test_string;
+    test_string.SetFormat("Тестовая строка");
+    test_string.Draw(40, 10, color1);
 
     int y = 45;
     int x = 30;

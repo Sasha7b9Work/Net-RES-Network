@@ -67,16 +67,10 @@ void String<capacity>::SetFormat(pchar format, ...)
 {
     std::va_list args;
     va_start(args, format);
-    int num_symbols = std::vsprintf(nullptr, format, args);
+    int num_symbols = std::snprintf(buffer, capacity - 1, format, args);
     va_end(args);
 
-    if (capacity > num_symbols)
-    {
-        va_start(args, format);
-        std::vsprintf(buffer, format, args);
-        va_end(args);
-    }
-    else
+    if(num_symbols < 0 || num_symbols > capacity - 1)
     {
         LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
     }
