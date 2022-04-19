@@ -67,7 +67,7 @@ void String<capacity>::SetFormat(pchar format, ...)
 {
     std::va_list args;
     va_start(args, format);
-    int num_symbols = std::snprintf(buffer, capacity - 1, format, args);
+    int num_symbols = std::vsprintf(buffer, format, args);
     va_end(args);
 
     if(num_symbols < 0 || num_symbols > capacity - 1)
@@ -82,7 +82,7 @@ String<capacity>::String(pchar format, ...)
 {
     std::va_list args;
     va_start(args, format);
-    int num_symbols = std::snprintf(buffer, capacity - 1, format, args);
+    int num_symbols = std::vsprintf(buffer, format, args);
     va_end(args);
 
     if(num_symbols < 0 || num_symbols > capacity - 1)

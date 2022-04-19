@@ -156,6 +156,8 @@ void Display::Init()
 
 void Display::Update()
 {
+    TimeMeterMS meter;
+
     Color::E color2 = Color::WHITE;
     Color::E color1 = Color::BLACK;
 
@@ -197,7 +199,9 @@ void Display::Update()
     String<>("Освещённость : 100 люкс").Draw(x, y + dY);
     String<>("Скорость : 10 км/сек").Draw(x, y + 2 * dY);
     String<>("Температура : 23 С").Draw(x, y + 3 * dY);
-    String<>("Влажность : 100%").Draw(x, y + 4 * dY);
+    String<>("Влажность : 100%%").Draw(x, y + 4 * dY);
+
+    String<>("%d ms", meter.ElapsedTime()).Draw(15, 25, color1);
 
     EndScene();
 }
