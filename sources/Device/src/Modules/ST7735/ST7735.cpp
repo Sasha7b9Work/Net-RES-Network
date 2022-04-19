@@ -61,7 +61,7 @@ namespace Display
             }
             else
             {
-                value &= 0x0F;
+                value &= 0xF0;
                 value |= (Color::GetCurrent() << 4);
             }
 
@@ -163,7 +163,7 @@ void Display::Update()
 
     static int x0 = 0;
 
-    VLine(30).Draw(x0, 70);
+    VLine(30).Draw(x0, 40);
 
     x0++;
     
