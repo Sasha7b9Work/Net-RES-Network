@@ -59,12 +59,12 @@ namespace Display
             if (x % 2)
             {
                 value &= 0x0F;
-                value |= Color::GetCurrent();
+                value |= (Color::GetCurrent() << 4);
             }
             else
             {
                 value &= 0xF0;
-                value |= (Color::GetCurrent() << 4);
+                value |= Color::GetCurrent();
             }
 
             *pixels = value;
