@@ -2,6 +2,8 @@
 #include "main.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
+#include "Modules/ST7735/Font/Font.h"
+#include "Utils/Text/String.h"
 #include <stm32f1xx_hal.h>
 #include <cstring>
 
@@ -171,6 +173,21 @@ void Display::Update()
     {
         x0 = 0;
     }
+
+    static int y0 = 0;
+
+    HLine(30).Draw(80, y0);
+
+    y0++;
+
+    if (y0 == HEIGHT)
+    {
+        y0 = 0;
+    }
+
+    Font::Set(TypeFont::_8);
+
+    String<>("Тестовая строка").Draw(10, 10);
 
     EndScene();
 }
