@@ -19,7 +19,5 @@ namespace InterCom
 {
     void SetDirection(Direction::E);
 
-    void Send(pchar measure);
-
     void Send(TypeMeasure::E, float measure);
 }

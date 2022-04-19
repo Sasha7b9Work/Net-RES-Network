@@ -47,9 +47,12 @@ int main(void)
             InterCom::Send(TypeMeasure::Velocity, velocity);
         }
 
-        pchar measure = BH1750::GetMeasure(1000);                 // Освещённость
+        float illumination = 0.0f;
 
-        InterCom::Send(measure);
+        if (BH1750::GetMeasure(1000, &illumination))
+        {
+            InterCom::Send(TypeMeasure::Illumination, illumination);
+        }
 
         Display::Update();
    }

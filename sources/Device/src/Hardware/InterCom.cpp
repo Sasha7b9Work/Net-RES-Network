@@ -21,25 +21,6 @@ void InterCom::SetDirection(Direction::E dir)
 }
 
 
-void InterCom::Send(pchar measure)
-{
-    if (!measure)
-    {
-        return;
-    }
-
-    if (direction & Direction::CDC)
-    {
-        CDC::Transmit(measure);
-    }
-
-    if (direction & Direction::HC12)
-    {
-        HC12::Transmit(measure);
-    }
-}
-
-
 void InterCom::Send(TypeMeasure::E type, float measure)
 {
     static const pchar names[TypeMeasure::Count] =

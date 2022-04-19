@@ -27,29 +27,25 @@ void BH1750::Init()
 }
 
 
-pchar BH1750::GetMeasure(unsigned int dT)
+bool BH1750::GetMeasure(unsigned int dT, float *illumination)
 {
-    static char buffer[1024];
-
     if (HAL_GetTick() < timeNext)
     {
-        return nullptr;
+        return false;
     }
 
     timeNext += dT;
 
     BitSet32 result;
 
-    if (!ReadUINT16(&result.byte[0]))
+    if (ReadUINT16(&result.byte[0]))
     {
-        sprintf(buffer, "BH1750 : !!! Error communication");
-    }
-    else
-    {
-        sprintf(buffer, "BH170 : %f lx", (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f);
+        *illumination = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
+
+        return true;
     }
 
-    return buffer;
+    return false;
 }
 
 
