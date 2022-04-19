@@ -3,12 +3,25 @@
 #include "Display/Colors.h"
 
 
+struct TypeMeasure
+{
+    enum E
+    {
+        Pressure,           // Давление
+        Illumination,       // Освещённость
+        Humidity,           // Влажность
+        Velocity,           // Скорость
+        Temperature         // Температура
+    };
+};
+
+
 namespace Display
 {
     static const int WIDTH = 160;
     static const int HEIGHT = 128;
 
-    void SetMeasure(pchar measure);
+    void SetMeasure(TypeMeasure::E, pchar measure);
 
     void Update();
 

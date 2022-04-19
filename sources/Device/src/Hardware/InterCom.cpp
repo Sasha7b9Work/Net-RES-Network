@@ -39,6 +39,6 @@ void InterCom::Send(pchar measure)
 
     if (direction & Direction::Display)
     {
-        Display::SetMeasure(measure);
+        Display::SetMeasure(TypeMeasure::Pressure, measure);
     }
 }

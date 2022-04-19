@@ -6,6 +6,7 @@
 #include "Modules/ST7735/ST7735.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
+#include <cstdlib>
 
 
 namespace Display
@@ -161,7 +162,7 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void Display::SetMeasure(pchar)
+void Display::SetMeasure(TypeMeasure::E, pchar)
 {
 
 }
