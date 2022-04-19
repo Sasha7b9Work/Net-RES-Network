@@ -41,6 +41,29 @@ namespace Display
         {
             return &buffer[0];
         }
+
+        static void SetPoint(int x, int y)
+        {
+            if (x < 0)       { return; }
+            if (y < 0)       { return; }
+            if (x >= WIDTH)  { return; }
+            if (y >= HEIGHT) { return; }
+
+            uint8 *pixels = &buffer[(x * WIDTH + y) / 2];
+
+            if (y % 2)
+            {
+                *pixels &= 0x0F;
+
+                *pixels |= Color::GetCurrent();
+            }
+            else
+            {
+                *pixels &= 0xF0;
+
+                *pixels |= (Color::GetCurrent() << 4);
+            }
+        }
     }
 }
 
@@ -170,11 +193,14 @@ void Display::EndScene()
 }
 
 
-void Rectangle::Fill(int x, int y, Color::E color)
+void Rectangle::Fill(int x0, int y0, Color::E color)
 {
     Color::SetCurrent(color);
 
-
+    for (int x = x0; x < x0 + width; x++)
+    {
+        HLine(height).Draw(x, y0);
+    }
 }
 
 
@@ -187,21 +213,33 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void HLine::Draw(int x, int y, Color::E color)
+void HLine::Draw(int x0, int y, Color::E color)
 {
-    Rectangle(width, 1).Fill(x, y, color);
+    Color::SetCurrent(color);
+
+    for (int x = x0; x < x0 + width; x++)
+    {
+        Display::Buffer::SetPoint(x, y);
+    }
 }
 
 
-void VLine::Draw(int x, int y, Color::E color)
+void VLine::Draw(int x, int y0, Color::E color)
 {
-    Rectangle(1, height).Fill(x, y, color);
+    Color::SetCurrent(color);
+
+    for (int y = y0; y < y0 + height; y++)
+    {
+        Display::Buffer::SetPoint(x, y);
+    }
 }
 
 
 void Point::Set(int x, int y, Color::E color)
 {
-    Rectangle(1, 1).Fill(x, y, color);
+    Color::SetCurrent(color);
+
+    Display::Buffer::SetPoint(x, y);
 }
 
 
