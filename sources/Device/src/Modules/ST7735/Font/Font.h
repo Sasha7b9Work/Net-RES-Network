@@ -1,6 +1,6 @@
 // 2022/02/11 15:58:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "defines.h"
+#include "main.h"
 
 
 struct TypeFont
@@ -45,7 +45,4 @@ struct Font
     static void Set(TypeFont::E);
 
     static int GetSpacing();
-
-    // Возвращает размер шрифта, которым нужно выводить сообщения в консоли.
-    static int GetSizeFontForConsole();
 };

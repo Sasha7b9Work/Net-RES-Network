@@ -1,22 +1,13 @@
 // 2022/02/11 15:58:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "defines.h"
-#include "Display/DisplayTypes.h"
-#include "font.h"
+#include "main.h"
+#include "Font.h"
 
-#include "font8display.inc"
-#include "font5display.inc"
-#include "fontUGOdisplay.inc"
-#include "fontUGO2display.inc"
-
-#include "font8.inc"
 #include "font5.inc"
-#include "fontUGO.inc"
-#include "fontUGO2.inc"
-
-#include "Settings/Settings.h"
+#include "font8.inc"
 
 
-const Font *Font::fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2};
+
+const Font *Font::fonts[TypeFont::Count] = {&font5, &font8};
 const Font *Font::font = &font8;
 
 TypeFont::E Font::current = TypeFont::None;
@@ -55,10 +46,4 @@ int Font::GetLengthSymbol(uchar symbol)
 int Font::GetSpacing()
 {
     return 1;
-}
-
-
-int Font::GetSizeFontForConsole()
-{
-    return SIZE_FONT_CONSOLE ? 8 : 5;
 }

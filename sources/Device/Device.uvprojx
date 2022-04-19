@@ -690,6 +690,31 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Modules/ST7735/Font</GroupName>
+          <Files>
+            <File>
+              <FileName>Font.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\ST7735\Font\Font.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\ST7735\Font\Font.h</FilePath>
+            </File>
+            <File>
+              <FileName>font5.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\ST7735\Font\font5.inc</FilePath>
+            </File>
+            <File>
+              <FileName>font8.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\ST7735\Font\font8.inc</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
