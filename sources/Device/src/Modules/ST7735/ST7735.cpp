@@ -49,9 +49,9 @@ namespace Display
             if (x >= WIDTH)  { return; }
             if (y >= HEIGHT) { return; }
 
-            uint8 *pixels = &buffer[(x * WIDTH + y) / 2];
+            uint8 *pixels = &buffer[(x * HEIGHT + y) / 2];
 
-            if (y % 2)
+            if (x % 2)
             {
                 *pixels &= 0x0F;
 
