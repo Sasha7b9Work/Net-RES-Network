@@ -4,6 +4,7 @@
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Display/Display.h"
 #include <cstdarg>
 #include <cstring>
 #include <cstdio>
