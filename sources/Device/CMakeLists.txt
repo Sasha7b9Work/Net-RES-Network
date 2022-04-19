@@ -57,6 +57,7 @@ file(GLOB STM32F1             src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/
                               src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c
                               src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h)
 file(GLOB SRC                 src/*.*)
+file(GLOB HARDWARE            src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS      src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_CDC        src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL        src/Hardware/HAL/*.*)
@@ -71,6 +72,7 @@ file(GLOB UTILS_TEXT          src/Utils/Text/*.*)
 
 source_group(STM32F1             FILES ${STM32F1})
 source_group(src                 FILES ${SRC})
+source_group(Hardware            FILES ${HARDWARE})
 source_group(Hardware/CMSIS      FILES ${HARDWARE_CMSIS})
 source_group(Hardware/CDC        FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL        FILES ${HARDWARE_HAL})
@@ -92,6 +94,7 @@ set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
 add_library(${PROJECT_NAME}
             ${STM32F1}
             ${SRC}
+            ${HARDWARE}
             ${HARDWARE_CMSIS}
             ${HARDWARE_CDC}
             ${HARDWARE_HAL}
