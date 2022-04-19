@@ -7,6 +7,7 @@
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
+#include "Hardware/InterCom.h"
 
 
 int main(void)
@@ -23,25 +24,21 @@ int main(void)
 
     BH1750::Init();
 
+    InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
+
     while (1)
     {
         pchar measure = BME280::GetMeasure(1000);
 
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
+        InterCom::Send(measure);
 
         measure = CG_Anem::GetMeasure(1000);
 
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
+        InterCom::Send(measure);
 
         measure = BH1750::GetMeasure(1000);
 
-        CDC::Transmit(measure);
-
-        HC12::Transmit(measure);
+        InterCom::Send(measure);
 
         Display::Update();
    }

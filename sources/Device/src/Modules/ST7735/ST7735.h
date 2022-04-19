@@ -15,6 +15,8 @@ namespace Display
     void BeginScene(Color::E);
 
     void EndScene();
+
+    void SetMeasure(pchar measure);
 }
 
 

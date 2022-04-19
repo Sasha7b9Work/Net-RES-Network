@@ -471,6 +471,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>InterCom.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\InterCom.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterCom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\InterCom.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware/CMSIS</GroupName>
           <Files>
             <File>
@@ -757,21 +782,6 @@
               <FileName>Text.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Text\Text.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware</GroupName>
-          <Files>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1242,6 +1252,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>InterCom.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\InterCom.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterCom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\InterCom.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware/CMSIS</GroupName>
           <Files>
             <File>
@@ -1528,21 +1563,6 @@
               <FileName>Text.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Text\Text.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware</GroupName>
-          <Files>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>

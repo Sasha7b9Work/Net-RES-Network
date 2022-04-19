@@ -356,3 +356,9 @@ void Display::SendCommand(uint8 data)
 
     SET_CS;
 }
+
+
+void Display::SetMeasure(pchar)
+{
+
+}
