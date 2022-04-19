@@ -3,14 +3,9 @@
 #include "Display/Colors.h"
 
 
-namespace Display
+namespace ST7735
 {
     void Init();
 
-    void BeginScene(Color::E);
-
-    void EndScene();
-
-    void SetMeasure(pchar measure);
+    void WriteData(uint8 *);
 }
-

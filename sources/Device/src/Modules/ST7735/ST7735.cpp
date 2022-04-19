@@ -19,12 +19,12 @@
 */
 
 
-namespace Display
+namespace ST7735
 {
-#define SET_DC   HAL_GPIO_WritePin(GPIOB, Display::PIN_DC, GPIO_PIN_SET);
-#define RESET_DC HAL_GPIO_WritePin(GPIOB, Display::PIN_DC, GPIO_PIN_RESET);
-#define SET_CS   HAL_GPIO_WritePin(GPIOB, Display::PIN_CS, GPIO_PIN_SET);
-#define RESET_CS HAL_GPIO_WritePin(GPIOB, Display::PIN_CS, GPIO_PIN_RESET);
+#define SET_DC   HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_SET);
+#define RESET_DC HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_RESET);
+#define SET_CS   HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_SET);
+#define RESET_CS HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
 
     static const uint16 PIN_RESET = GPIO_PIN_11;
     static const uint16 PIN_DC = GPIO_PIN_14;
@@ -36,52 +36,10 @@ namespace Display
     static void SendData8(uint8);
     static void SendData16(uint16);
     static void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
-
-    namespace Buffer
-    {
-        static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
-
-        static uint8 *FirstPixels()
-        {
-            return &buffer[0];
-        }
-
-        static void SetPoint(int x, int y)
-        {
-            if (x < 0)       { return; }
-            if (y < 0)       { return; }
-            if (x >= WIDTH)  { return; }
-            if (y >= HEIGHT) { return; }
-
-            uint8 *pixels = &buffer[(y * WIDTH + x) / 2];
-
-            uint8 value = *pixels;
-
-            if (x % 2)
-            {
-                value &= 0x0F;
-                value |= (Color::GetCurrent() << 4);
-            }
-            else
-            {
-                value &= 0xF0;
-                value |= Color::GetCurrent();
-            }
-
-            *pixels = value;
-        }
-
-        static void Fill(Color::E color)
-        {
-            uint8 value = (uint8)((int)(color) | (int)(color << 4));
-
-            std::memset(buffer, value, WIDTH * HEIGHT / 2);
-        }
-    }
 }
 
 
-void Display::Init()
+void ST7735::Init()
 {
     __HAL_RCC_SPI2_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -155,25 +113,17 @@ void Display::Init()
 }
 
 
-void Display::BeginScene(Color::E color)
+void ST7735::WriteData(uint8 *points)
 {
-    Buffer::Fill(color);
-}
+    SetWindow((uint8)0, (uint8)0, (uint8)Display::WIDTH, (uint8)Display::HEIGHT);
 
-
-void Display::EndScene()
-{
-    Display::SetWindow((uint8)0, (uint8)0, (uint8)WIDTH, (uint8)HEIGHT);
-
-    Display::SendCommand(0x2C);         // RAMWR
-
-    uint8* points = Buffer::FirstPixels();
+    SendCommand(0x2C);         // RAMWR
 
     SPI2->CR1 |= SPI_CR1_DFF;
     SET_DC;
     RESET_CS;
 
-    for (int i = 0; i < WIDTH * HEIGHT / 2; i++)
+    for (int i = 0; i < Display::WIDTH * Display::HEIGHT / 2; i++)
     {
         while (!(SPI2->SR & SPI_SR_TXE));
         SPI2->DR = COLOR((*points) & 0x0F);
@@ -196,57 +146,7 @@ void Display::EndScene()
 }
 
 
-void Rectangle::Fill(int x0, int y0, Color::E color)
-{
-    Color::SetCurrent(color);
-
-    for (int x = x0; x < x0 + width; x++)
-    {
-        VLine(height).Draw(x, y0);
-    }
-}
-
-
-void Rectangle::Draw(int x, int y, Color::E color)
-{
-    HLine(width).Draw(x, y, color);
-    HLine(width).Draw(x, y + height);
-    VLine(height).Draw(x, y);
-    VLine(height).Draw(x + width, y);
-}
-
-
-void HLine::Draw(int x0, int y, Color::E color)
-{
-    Color::SetCurrent(color);
-
-    for (int x = x0; x < x0 + width; x++)
-    {
-        Display::Buffer::SetPoint(x, y);
-    }
-}
-
-
-void VLine::Draw(int x, int y0, Color::E color)
-{
-    Color::SetCurrent(color);
-
-    for (int y = y0; y < y0 + height; y++)
-    {
-        Display::Buffer::SetPoint(x, y);
-    }
-}
-
-
-void Point::Set(int x, int y, Color::E color)
-{
-    Color::SetCurrent(color);
-
-    Display::Buffer::SetPoint(x, y);
-}
-
-
-void Display::SetWindow(uint8 x, uint8 y, uint8 width, uint8 height)
+void ST7735::SetWindow(uint8 x, uint8 y, uint8 width, uint8 height)
 {
     int stopX = x + width - 1;
     int stopY = y + height - 1;
@@ -265,7 +165,7 @@ void Display::SetWindow(uint8 x, uint8 y, uint8 width, uint8 height)
 }
 
 
-void Display::SendData16(uint16 data)
+void ST7735::SendData16(uint16 data)
 {
     SET_DC;
     RESET_CS;
@@ -282,7 +182,7 @@ void Display::SendData16(uint16 data)
 }
 
 
-void Display::SendData8(uint8 data)
+void ST7735::SendData8(uint8 data)
 {
     SET_DC;
     RESET_CS;
@@ -297,7 +197,7 @@ void Display::SendData8(uint8 data)
 }
 
 
-void Display::SendCommand(uint8 data)
+void ST7735::SendCommand(uint8 data)
 {
     RESET_DC;
     RESET_CS;
@@ -311,10 +211,4 @@ void Display::SendCommand(uint8 data)
     while ((SPI2->SR & SPI_SR_BSY));
 
     SET_CS;
-}
-
-
-void Display::SetMeasure(pchar)
-{
-
 }

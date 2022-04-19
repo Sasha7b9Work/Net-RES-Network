@@ -8,7 +8,13 @@ namespace Display
     static const int WIDTH = 160;
     static const int HEIGHT = 128;
 
+    void SetMeasure(pchar measure);
+
     void Update();
+
+    void BeginScene(Color::E);
+
+    void EndScene();
 }
 
 

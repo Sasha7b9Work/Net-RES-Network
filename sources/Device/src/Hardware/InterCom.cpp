@@ -4,6 +4,7 @@
 #include "Hardware/CDC/CDC.h"
 #include "Modules/HC12/HC12.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Display/Display.h"
 
 
 namespace InterCom

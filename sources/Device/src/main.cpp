@@ -15,7 +15,7 @@ int main(void)
 {
     HAL::Init();
 
-    Display::Init();
+    ST7735::Init();
 
     BME280::Init();
 
