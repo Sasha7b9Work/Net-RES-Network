@@ -40,11 +40,14 @@ int main(void)
             InterCom::Send(TypeMeasure::Humidity, humidity);
         }
 
-        pchar measure = CG_Anem::GetMeasure(1000);                // Скорость
+        float velocity = 0.0f;
 
-        InterCom::Send(measure);
+        if (CG_Anem::GetMeasure(1000, &velocity))
+        {
+            InterCom::Send(TypeMeasure::Velocity, velocity);
+        }
 
-        measure = BH1750::GetMeasure(1000);                 // Освещённость
+        pchar measure = BH1750::GetMeasure(1000);                 // Освещённость
 
         InterCom::Send(measure);
 

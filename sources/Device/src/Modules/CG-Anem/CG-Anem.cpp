@@ -19,13 +19,11 @@ void CG_Anem::Init()
 }
 
 
-pchar CG_Anem::GetMeasure(unsigned int dT)
+bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
 {
-    static char buffer[1024];
-
     if (HAL_GetTick() < timeNext)
     {
-        return nullptr;
+        return false;
     }
 
     timeNext += dT;
@@ -58,14 +56,8 @@ pchar CG_Anem::GetMeasure(unsigned int dT)
 
     if (result)
     {
-        sprintf(buffer, "CG-Anem : velocity:%0.2f m/s, t:%0.2f *C",
-            (float)velocity.half_word[0] * 0.1,
-            (float)temp_cold.half_word[0] * 0.1);
-    }
-    else
-    {
-        sprintf(buffer, "CG-Anem : !!! Error communication");
+        *velocity_out = velocity.half_word[0] * 0.1f;
     }
 
-    return buffer;
+    return result;
 }
