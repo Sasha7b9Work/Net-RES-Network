@@ -3,8 +3,8 @@
 #include "Modules/CG-Anem/CG-Anem.h"
 #include "Hardware/I2C/i2c.h"
 #include <stm32f1xx_hal.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 
 namespace CG_Anem
@@ -27,6 +27,23 @@ bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
     }
 
     timeNext += dT;
+
+#ifdef IN_MODE_TEST
+
+    static float velocity = 0.0f;
+
+    velocity += 1.1f;
+
+    *velocity_out = velocity / 100.0f;
+
+    if (*velocity_out > 100.0f)
+    {
+        velocity = 0.0f;
+    }
+
+    return true;
+
+#else
 
     bool result = true;
 
@@ -60,4 +77,6 @@ bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
     }
 
     return result;
+
+#endif
 }

@@ -13,6 +13,10 @@ typedef unsigned char uchar;
     #pragma diag_suppress 2748
 #endif
 
+
+#define IN_MODE_TEST
+
+
 union BitSet32
 {
     uint   word;
