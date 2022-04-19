@@ -8,6 +8,7 @@
 #include "Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
+#include "Display/Display.h"
 
 
 int main(void)

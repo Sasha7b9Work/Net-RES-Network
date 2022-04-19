@@ -7,8 +7,6 @@ namespace Display
 {
     void Init();
 
-    void Update();
-
     void BeginScene(Color::E);
 
     void EndScene();
