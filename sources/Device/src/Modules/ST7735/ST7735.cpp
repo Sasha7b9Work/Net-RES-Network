@@ -202,7 +202,7 @@ void Display::Update()
     String<>("Температура : 23 С").Draw(x, y + 3 * dY);
     String<>("Влажность : 100%%").Draw(x, y + 4 * dY);
 
-    String<>("%d ms", time).Draw(15, 25, color1);
+    String<>("%d ms", time).Draw(125, 25, color1);
 
     EndScene();
 
