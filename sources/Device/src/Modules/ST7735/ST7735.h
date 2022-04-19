@@ -13,6 +13,8 @@ namespace Display
     void Update();
 
     void BeginScene(Color::E);
+
+    void EndScene();
 }
 
 

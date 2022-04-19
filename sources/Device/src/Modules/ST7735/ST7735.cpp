@@ -32,6 +32,8 @@ namespace Display
     void SendData8(uint8);
     void SendData16(uint16);
     void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
+
+    uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
 }
 
 
@@ -123,6 +125,10 @@ void Display::Update()
     BeginScene(Color::BLACK);
 
     Rectangle(1, 1).Fill(5, 5, Color::WHITE);
+
+    volatile uint time = meter.ElapsedTime();
+
+    time = time;
 }
 
 
