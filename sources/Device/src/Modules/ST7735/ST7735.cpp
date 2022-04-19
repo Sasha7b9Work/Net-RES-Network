@@ -3,6 +3,7 @@
 #include "Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
 #include <stm32f1xx_hal.h>
+#include <cstring>
 
 
 /*
@@ -65,6 +66,13 @@ namespace Display
             }
 
             *pixels = value;
+        }
+
+        static void Fill(Color::E color)
+        {
+            uint8 value = (uint8)((int)(color) | (int)(color << 4));
+
+            std::memset(buffer, value, WIDTH * HEIGHT / 2);
         }
     }
 }
@@ -156,7 +164,7 @@ void Display::Update()
 
 void Display::BeginScene(Color::E color)
 {
-    Rectangle(WIDTH, HEIGHT).Fill(0, 0, color);
+    Buffer::Fill(color);
 }
 
 
