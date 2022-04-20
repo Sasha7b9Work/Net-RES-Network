@@ -89,7 +89,6 @@ void Display::Update()
     static TimeMeterMS meter_draw;
     TimeMeterMS meter_fps;
     static uint time_fps = 0;
-    Color::E color2 = Color::WHITE;
     Color::E color1 = Color::BLACK;
 
 
@@ -104,17 +103,6 @@ void Display::Update()
         BeginScene(Color::GRAY_25);
 
         Rectangle(140, 30).Fill(10, 5, Color::BLUE);
-
-        static int y0 = 40;
-
-        HLine(10).Draw(5, y0, color2);
-
-        y0++;
-
-        if (y0 == HEIGHT)
-        {
-            y0 = 40;
-        }
 
         Font::Set(TypeFont::_8);
 
