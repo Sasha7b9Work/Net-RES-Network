@@ -97,7 +97,6 @@ namespace Display
 
 void Display::Update()
 {
-    static TimeMeterMS meter_draw;
     TimeMeterMS meter_fps;
     Color::E color1 = Color::BLACK;
 
