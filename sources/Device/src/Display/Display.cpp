@@ -115,7 +115,7 @@ void Display::Update()
 
         Font::Set(TypeFont::_8);
 
-        String<>("Тестовая строка").Draw(40, 10, color1);
+        String<>("ТЕСТОВАЯ СТРОКА").Draw(40, 10, color1);
 
         DrawMeasures();
 
@@ -128,7 +128,7 @@ void Display::Update()
 
     DrawZones();
 
-    zoneFPS.string.SetFormat("%d ms", meter_fps.ElapsedTime());
+    zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
 }
 
 
