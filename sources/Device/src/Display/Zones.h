@@ -9,8 +9,9 @@ public:
     int y;
     int width;
     int height;
+    Color::E background;
 
-    Zone(int _x, int _y, int _w, int _h) : x(_x), y(_y), width(_w), height(_h) { }
+    Zone(int _x, int _y, int _w, int _h, Color::E back) : x(_x), y(_y), width(_w), height(_h), background(back) { }
 
     virtual ~Zone() {}
 
@@ -28,9 +29,9 @@ class ZoneFPS : public Zone
 {
 public:
 
-    String<> sring;
+    String<> string;
 
-    ZoneFPS() : Zone(125, 25, 30, 7) { }
+    ZoneFPS() : Zone(125, 25, 30, 7, Color::BLACK) { }
 
     virtual void Draw();
 };

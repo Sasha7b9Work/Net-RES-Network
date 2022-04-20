@@ -99,7 +99,6 @@ void Display::Update()
 {
     static TimeMeterMS meter_draw;
     TimeMeterMS meter_fps;
-    static uint time_fps = 0;
     Color::E color1 = Color::BLACK;
 
     if (meter_draw.ElapsedTime() >= 1000)
@@ -120,20 +119,16 @@ void Display::Update()
 
         DrawMeasures();
 
-        String<>("%d ms", time_fps).Draw(125, 25, color1);
-
         EndScene();
 
         need_redraw = false;
-
-        time_fps = meter_fps.ElapsedTime();
     }
 
     DrawMeasures();
 
     DrawZones();
 
-    time_fps = meter_fps.ElapsedTime();
+    zoneFPS.string.SetFormat("%d ms", meter_fps.ElapsedTime());
 }
 
 
