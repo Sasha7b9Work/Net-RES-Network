@@ -50,11 +50,6 @@ namespace Display
     {
         static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
 
-        static uint8* FirstPixels()
-        {
-            return &buffer[0];
-        }
-
         uint8 GetPixels(int x, int y)
         {
             return buffer[(y * WIDTH + x) / 2];
@@ -140,7 +135,7 @@ void Display::BeginScene(Color::E color)
 
 void Display::EndScene()
 {
-    ST7735::WriteBuffer(Buffer::FirstPixels());
+    ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
 }
 
 
