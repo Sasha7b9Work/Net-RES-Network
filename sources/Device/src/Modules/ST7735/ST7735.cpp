@@ -139,17 +139,13 @@ void ST7735::WriteBuffer(uint8 *points)
 
     for (int i = 0; i < Display::WIDTH * Display::HEIGHT / 2; i++)
     {
-//        while (!(SPI2->SR & SPI_SR_TXE));
         SPI2->DR = colors[(*points) & 0x0F];
 
-//        while (!(SPI2->SR & SPI_SR_TXE));
-        while ((SPI2->SR & SPI_SR_BSY));
+        while ((SPI2->SR & SPI_SR_BSY)) {};
 
-//        while (!(SPI2->SR & SPI_SR_TXE));
         SPI2->DR = colors[((*points) >> 4) & 0x0F];
 
-//        while (!(SPI2->SR & SPI_SR_TXE));
-        while ((SPI2->SR & SPI_SR_BSY));
+        while ((SPI2->SR & SPI_SR_BSY)) {};
 
         points++;
     }
@@ -176,16 +172,12 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
         {
             uint8 points = Display::Buffer::GetPixels(x, y);
 
-//            while (!(SPI2->SR & SPI_SR_TXE));
             SPI2->DR = colors[points & 0x0F];
 
-//            while (!(SPI2->SR & SPI_SR_TXE));
             while ((SPI2->SR & SPI_SR_BSY));
 
-//            while (!(SPI2->SR & SPI_SR_TXE));
             SPI2->DR = colors[(points >> 4) & 0x0F];
 
-//            while (!(SPI2->SR & SPI_SR_TXE));
             while ((SPI2->SR & SPI_SR_BSY));
         }
     }
