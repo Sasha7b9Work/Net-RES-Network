@@ -27,7 +27,7 @@ namespace Display
 
         Measure() : value(0.0f), position(0), time(0) {}
 
-        void Draw(int x, int y);
+        void Draw(const int x, const int y);
     };
 
     static Measure measures[TypeMeasure::Count];
@@ -96,7 +96,7 @@ void Display::Update()
     if (meter_draw.ElapsedTime() >= 1000)
     {
         meter_draw.Reset();
-        need_redraw = true;
+//        need_redraw = true;
     }
 
     if (need_redraw)
@@ -130,12 +130,10 @@ void Display::Update()
 
         time_fps = meter_fps.ElapsedTime();
     }
-    else
-    {
-        DrawMeasures();
 
-        time_fps = meter_fps.ElapsedTime();
-    }
+    DrawMeasures();
+
+    time_fps = meter_fps.ElapsedTime();
 }
 
 
@@ -240,32 +238,38 @@ void Display::DrawMeasures()
 }
 
 
-void Display::Measure::Draw(int x, int y)
+void Display::Measure::Draw(const int x0, const int y0)
 {
-    Rectangle(30, 7).Fill(x, y + 1, Color::BLUE);
+    Rectangle(30, 7).Fill(x0, y0 + 1, Color::GRAY_25);
 
     Color::SetCurrent(Color::GREEN);
 
     if (position >= current.Size())
     {
-        current.Draw(x, y);
+        current.Draw(x0, y0);
     }
     else
     {
+        int x = x0;
+
         for (int i = 0; i < position; i++)
         {
-            x = Char(current[i]).Draw(x, y) + 1;
+            x = Char(current[i]).Draw(x, y0) + 1;
         }
 
-        Rectangle(5, 7).Fill(x, y + 1);
+        Rectangle(5, 7).Fill(x, y0 + 1);
 
         for (int i = position; i < current.Size(); i++)
         {
-            x = Char(old[i]).Draw(x, y) + 1;
+            x = Char(old[i]).Draw(x, y0) + 1;
         }
 
-        position++;
+        if (TIME_MS > time + 50)
+        {
+            position++;
+            time = TIME_MS;
+        }
     }
 
-    ST7735::WriteBuffer(x, y, 30, 10);
+    ST7735::WriteBuffer(x0, y0 + 1, 30, 7);
 }
