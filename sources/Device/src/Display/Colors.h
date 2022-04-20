@@ -10,10 +10,12 @@ struct Color
         BLACK,      // 1
         RED,        // 2
         GREEN,      // 3
-        BLUE,       // 4
-        GRAY_50,    // 5
-        GRAY_25,    // 6
-        GRAY_10,    // 7
+        _1,         // 4
+        GREEN_50,   // 5
+        BLUE,       // 6
+        GRAY_50,    // 7
+        GRAY_25,    // 8
+        GRAY_10,    // 9
         Count
     };
 
