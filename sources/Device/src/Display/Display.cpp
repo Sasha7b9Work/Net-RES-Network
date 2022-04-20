@@ -109,7 +109,7 @@ void Display::Update()
 
         Font::Set(TypeFont::_8);
 
-        String<>("ТЕСТОВАЯ СТРОКА").Draw(40, 10, color1);
+        String<>("Тестовая строка").Draw(40, 10, color1);
 
         int x0 = 20;
         int y0 = 45;
