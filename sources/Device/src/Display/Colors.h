@@ -25,16 +25,10 @@ struct Color
 
     static E GetCurrent();
 
-    static uint16 GetValue();
-
 private:
 
     static Color::E current;
 };
 
-
-#define COLOR(color)    colors[color]
-
-extern const uint16 colors[Color::Count];
 
 #define MAKE_COLOR(r, g, b)  (uint16)(b + (g << 5) + (r << 11))

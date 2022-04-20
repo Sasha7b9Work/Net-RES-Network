@@ -36,6 +36,18 @@ namespace ST7735
     static void SendData8(uint8);
     static void SendData16(uint16);
     static void SetWindow(int startX, int startY, int stopX, int stopY);
+
+    const uint16 colors[Color::Count] =
+    {
+        0xffff,
+        0x0000,
+        MAKE_COLOR(31, 0, 0),
+        MAKE_COLOR(0, 63, 0),
+        MAKE_COLOR(0, 0, 31),
+        MAKE_COLOR(15, 31, 15),
+        MAKE_COLOR(7, 15, 7),
+        MAKE_COLOR(3, 6, 3)
+    };
 }
 
 
@@ -126,13 +138,13 @@ void ST7735::WriteBuffer(uint8 *points)
     for (int i = 0; i < Display::WIDTH * Display::HEIGHT / 2; i++)
     {
         while (!(SPI2->SR & SPI_SR_TXE));
-        SPI2->DR = COLOR((*points) & 0x0F);
+        SPI2->DR = colors[(*points) & 0x0F];
 
         while (!(SPI2->SR & SPI_SR_TXE));
         while ((SPI2->SR & SPI_SR_BSY));
 
         while (!(SPI2->SR & SPI_SR_TXE));
-        SPI2->DR = COLOR(((*points) >> 4) & 0x0F);
+        SPI2->DR = colors[((*points) >> 4) & 0x0F];
 
         while (!(SPI2->SR & SPI_SR_TXE));
         while ((SPI2->SR & SPI_SR_BSY));
@@ -163,13 +175,13 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
             uint8 points = Display::Buffer::GetPixels(x, y);
 
             while (!(SPI2->SR & SPI_SR_TXE));
-            SPI2->DR = COLOR(points & 0x0F);
+            SPI2->DR = colors[points & 0x0F];
 
             while (!(SPI2->SR & SPI_SR_TXE));
             while ((SPI2->SR & SPI_SR_BSY));
 
             while (!(SPI2->SR & SPI_SR_TXE));
-            SPI2->DR = COLOR((points >> 4) & 0x0F);
+            SPI2->DR = colors[(points >> 4) & 0x0F];
 
             while (!(SPI2->SR & SPI_SR_TXE));
             while ((SPI2->SR & SPI_SR_BSY));
