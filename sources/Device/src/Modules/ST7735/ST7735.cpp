@@ -170,17 +170,21 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     for (int y = y0; y < y0 + height; y++)
     {
-        for (int x = x0; x < x0 + width; x += 2)
+        uint8 *points = Display::Buffer::GetLine(x0, y);
+
+        uint8 value = *points;
+
+        for (int i = 0; i < width; i += 2)
         {
-            uint8 points = Display::Buffer::GetPixels(x, y);
-
-            SPI2->DR = colors[points & 0x0F];
+            SPI2->DR = colors[value & 0x0F];
 
             while ((SPI2->SR & SPI_SR_BSY));
 
-            SPI2->DR = colors[(points >> 4) & 0x0F];
+            SPI2->DR = colors[(value >> 4) & 0x0F];
 
             while ((SPI2->SR & SPI_SR_BSY));
+
+            value = *(++points);
         }
     }
 

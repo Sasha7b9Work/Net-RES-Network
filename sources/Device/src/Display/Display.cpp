@@ -60,6 +60,11 @@ namespace Display
             return buffer[(y * WIDTH + x) / 2];
         }
 
+        uint8* GetLine(int x, int y)
+        {
+            return &buffer[(y * WIDTH + x) / 2];
+        }
+
         static void SetPoint(int x, int y)
         {
             if (x < 0) { return; }

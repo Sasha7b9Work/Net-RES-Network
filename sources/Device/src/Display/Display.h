@@ -34,8 +34,8 @@ namespace Display
 
     namespace Buffer
     {
-        // Возвращает для пикселя, стоящие подряд. x должен быть чётным
-        uint8 GetPixels(int x, int y);
+        // Возвращает указатель на строку
+        uint8 *GetLine(int x, int y);
     }
 }
 
