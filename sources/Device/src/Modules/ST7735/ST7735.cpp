@@ -133,21 +133,23 @@ void ST7735::WriteBuffer(uint8 *points)
 
     SendCommand(0x2C);         // RAMWR
 
+    uint8 value = *points;
+
     SPI2->CR1 |= SPI_CR1_DFF;
     SET_DC;
     RESET_CS;
 
     for (int i = 0; i < Display::WIDTH * Display::HEIGHT / 2; i++)
     {
-        SPI2->DR = colors[(*points) & 0x0F];
+        SPI2->DR = colors[value & 0x0F];
 
         while ((SPI2->SR & SPI_SR_BSY)) {};
 
-        SPI2->DR = colors[((*points) >> 4) & 0x0F];
+        SPI2->DR = colors[(value >> 4) & 0x0F];
 
         while ((SPI2->SR & SPI_SR_BSY)) {};
 
-        points++;
+        value = *(++points);
     }
 
     SET_CS;
