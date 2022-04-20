@@ -15,7 +15,12 @@ public:
     virtual ~Zone() {}
 
     virtual void Draw() = 0;
-private:
+
+protected:
+
+    void Clear();
+
+    void Send();
 };
 
 

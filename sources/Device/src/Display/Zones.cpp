@@ -2,7 +2,21 @@
 #include "Display/Zones.h"
 
 
-void ZoneFPS::Draw()
+void Zone::Clear()
 {
 
+}
+
+
+void Zone::Send()
+{
+
+}
+
+
+void ZoneFPS::Draw()
+{
+    Clear();
+
+    Send();
 }
