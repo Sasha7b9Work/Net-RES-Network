@@ -1,3 +1,4 @@
+// 2022/04/20 08:53:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Hardware/CDC/CDC.h"
 
 #define APP_RX_DATA_SIZE  1000

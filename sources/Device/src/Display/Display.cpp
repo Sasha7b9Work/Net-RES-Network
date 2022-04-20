@@ -1,4 +1,4 @@
-// Sasha7b9@tut.by (c)
+// 2022/04/20 08:53:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "main.h"
 #include "Display/Display.h"
 #include "Hardware/Timer.h"

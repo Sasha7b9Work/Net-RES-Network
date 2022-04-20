@@ -1,3 +1,4 @@
+// 2022/04/20 08:54:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 #ifdef __cplusplus

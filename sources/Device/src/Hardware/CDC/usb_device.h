@@ -1,3 +1,4 @@
+// 2022/04/20 08:54:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #ifndef __USB_DEVICE__H__
 #define __USB_DEVICE__H__
 

@@ -1,3 +1,4 @@
+// 2022/04/20 08:54:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "usb_device.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
