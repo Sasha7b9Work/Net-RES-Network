@@ -101,12 +101,6 @@ void Display::Update()
     TimeMeterMS meter_fps;
     Color::E color1 = Color::BLACK;
 
-    if (meter_draw.ElapsedTime() >= 1000)
-    {
-        meter_draw.Reset();
-//        need_redraw = true;
-    }
-
     if (need_redraw)
     {
         BeginScene(Color::GRAY_25);
@@ -117,7 +111,15 @@ void Display::Update()
 
         String<>("ТЕСТОВАЯ СТРОКА").Draw(40, 10, color1);
 
-        DrawMeasures();
+        int x0 = 20;
+        int y0 = 45;
+        int dY = 15;
+
+        String<>("Давление :").Draw(x0, y0, Color::GREEN);
+        String<>("Освещённость :").Draw(x0, y0 + dY);
+        String<>("Влажность :").Draw(x0, y0 + 4 * dY);
+        String<>("Скорость :").Draw(x0, y0 + 2 * dY);
+        String<>("Температура :").Draw(x0, y0 + 3 * dY);
 
         EndScene();
 
@@ -216,15 +218,8 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 
 void Display::DrawMeasures()
 {
-    int x0 = 20;
     int y0 = 45;
     int dY = 15;
-
-    String<>("Давление :").Draw(x0, y0, Color::GREEN);
-    String<>("Освещённость :").Draw(x0, y0 + dY);
-    String<>("Влажность :").Draw(x0, y0 + 4 * dY);
-    String<>("Скорость :").Draw(x0, y0 + 2 * dY);
-    String<>("Температура :").Draw(x0, y0 + 3 * dY);
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
