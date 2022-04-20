@@ -40,6 +40,11 @@ namespace Display
             return &buffer[0];
         }
 
+        uint8 GetPixels(int x, int y)
+        {
+            return buffer[(y * WIDTH + x) / 2];
+        }
+
         static void SetPoint(int x, int y)
         {
             if (x < 0) { return; }
@@ -120,7 +125,7 @@ void Display::BeginScene(Color::E color)
 
 void Display::EndScene()
 {
-    ST7735::WriteData(Buffer::FirstPixels());
+    ST7735::WriteBuffer(Buffer::FirstPixels());
 }
 
 

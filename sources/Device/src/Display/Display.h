@@ -29,6 +29,12 @@ namespace Display
     void BeginScene(Color::E);
 
     void EndScene();
+
+    namespace Buffer
+    {
+        // Возвращает для пикселя, стоящие подряд. x должен быть чётным
+        uint8 GetPixels(int x, int y);
+    }
 }
 
 

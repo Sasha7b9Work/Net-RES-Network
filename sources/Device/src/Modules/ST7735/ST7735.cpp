@@ -35,7 +35,7 @@ namespace ST7735
     static void SendCommand(uint8);
     static void SendData8(uint8);
     static void SendData16(uint16);
-    static void SetWindow(uint8 startX, uint8 startY, uint8 stopX, uint8 stopY);
+    static void SetWindow(int startX, int startY, int stopX, int stopY);
 }
 
 
@@ -113,7 +113,7 @@ void ST7735::Init()
 }
 
 
-void ST7735::WriteData(uint8 *points)
+void ST7735::WriteBuffer(uint8 *points)
 {
     SetWindow((uint8)0, (uint8)0, (uint8)Display::WIDTH, (uint8)Display::HEIGHT);
 
@@ -146,20 +146,56 @@ void ST7735::WriteData(uint8 *points)
 }
 
 
-void ST7735::SetWindow(uint8 x, uint8 y, uint8 width, uint8 height)
+void ST7735::WriteBuffer(int x0, int y0, int width, int height)
+{
+    SetWindow(x0, y0, width, height);
+
+    SendCommand(0x2C);
+
+    SPI2->CR1 |= SPI_CR1_DFF;
+    SET_DC;
+    RESET_CS;
+
+    for (int y = y0; y < y + height; y++)
+    {
+        for (int x = x0; x < x + width; x += 2)
+        {
+            uint8 points = Display::Buffer::GetPixels(x, y);
+
+            while (!(SPI2->SR & SPI_SR_TXE));
+            SPI2->DR = COLOR(points & 0x0F);
+
+            while (!(SPI2->SR & SPI_SR_TXE));
+            while ((SPI2->SR & SPI_SR_BSY));
+
+            while (!(SPI2->SR & SPI_SR_TXE));
+            SPI2->DR = COLOR((points >> 4) & 0x0F);
+
+            while (!(SPI2->SR & SPI_SR_TXE));
+            while ((SPI2->SR & SPI_SR_BSY));
+        }
+    }
+
+    SET_CS;
+
+    SPI2->CR1 &= ~SPI_CR1_DFF;
+}
+
+
+void ST7735::SetWindow(int x, int y, int width, int height)
 {
     int stopX = x + width - 1;
     int stopY = y + height - 1;
 
     SendCommand(0x2A);      // CASET
     SendData8(0x00);
-    SendData8(x);
+    SendData8((uint8)x);
     SendData8(0x00);
     SendData8((uint8)stopX);
 
     SendCommand(0x2B);      // RASET
     SendData8(0x00);
-    SendData8(y);
+    SendData8((uint8)y);
     SendData8(0x00);
     SendData8((uint8)stopY);
 }

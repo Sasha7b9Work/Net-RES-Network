@@ -7,5 +7,8 @@ namespace ST7735
 {
     void Init();
 
-    void WriteData(uint8 *);
+    void WriteBuffer(uint8 *);
+
+    // Записать часть буфера. x и width должны быть чётными
+    void WriteBuffer(int x, int y, int width, int height);
 }
