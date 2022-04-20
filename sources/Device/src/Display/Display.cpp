@@ -106,8 +106,6 @@ void Display::Update()
 
         Rectangle(140, 30).Fill(10, 5, Color::BLUE);
 
-        Font::Set(TypeFont::_8);
-
         String<>("Тестовая строка").Draw(40, 10, color1);
 
         int x0 = 20;

@@ -55,5 +55,5 @@ int main(void)
         }
 
         Display::Update();
-   }
+    }
 }
