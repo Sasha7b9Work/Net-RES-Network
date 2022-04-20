@@ -493,6 +493,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
+            <File>
+              <FileName>Zones.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Zones.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zones.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Zones.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1288,6 +1298,16 @@
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>Zones.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Zones.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Zones.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Zones.h</FilePath>
             </File>
           </Files>
         </Group>

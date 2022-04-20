@@ -7,6 +7,7 @@
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
+#include "Display/Zones.h"
 #include <cstdlib>
 
 
@@ -15,6 +16,16 @@ namespace Display
     bool need_redraw = true;
 
     uint time_prev_redraw = 0;
+
+    static ZoneFPS zoneFPS;
+
+    static Zone *zones[] =
+    {
+        &zoneFPS,
+        nullptr
+    };
+
+    static void DrawZones();
 
     struct Measure
     {
@@ -91,7 +102,6 @@ void Display::Update()
     static uint time_fps = 0;
     Color::E color1 = Color::BLACK;
 
-
     if (meter_draw.ElapsedTime() >= 1000)
     {
         meter_draw.Reset();
@@ -120,6 +130,8 @@ void Display::Update()
     }
 
     DrawMeasures();
+
+    DrawZones();
 
     time_fps = meter_fps.ElapsedTime();
 }
@@ -260,4 +272,20 @@ void Display::Measure::Draw(const int x0, const int y0)
     }
 
     ST7735::WriteBuffer(x0, y0 + 1, 30, 7);
+}
+
+
+void Display::DrawZones()
+{
+    for (int i = 0; true; i++)
+    {
+        Zone *zone = zones[i];
+
+        if (zone == nullptr)
+        {
+            break;
+        }
+
+        zone->Draw();
+    }
 }
