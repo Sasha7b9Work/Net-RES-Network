@@ -98,25 +98,21 @@ namespace Display
 void Display::Update()
 {
     TimeMeterMS meter_fps;
-    Color::E color1 = Color::BLACK;
 
     if (need_redraw)
     {
-        BeginScene(Color::GRAY_25);
+        BeginScene(Color::BLACK);
 
-        Rectangle(140, 30).Fill(10, 5, Color::BLUE);
+        int x0 = 10;
+        int dX = 125;
+        int y0 = 15;
+        int dY = 22;
 
-        String<>("рЕЯРНБЮЪ ЯРПНЙЮ").Draw(40, 10, color1);
-
-        int x0 = 20;
-        int y0 = 45;
-        int dY = 15;
-
-        String<>("дюбкемхе :").Draw(x0, y0, Color::GREEN);
-        String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);
-        String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);
-        String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);
-        String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);
+        String<>("дюбкемхе :").Draw(x0, y0, Color::GREEN);      String<>("лоЮ").Draw(x0 + dX, y0);
+        String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
+        String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+        String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);           String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
+        String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);        String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
 
         EndScene();
 
@@ -215,19 +211,19 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 
 void Display::DrawMeasures()
 {
-    int y0 = 45;
-    int dY = 15;
+    int y0 = 15;
+    int dY = 22;
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
-        measures[i].Draw(110, y0 + i * dY);
+        measures[i].Draw(100, y0 + i * dY);
     }
 }
 
 
 void Display::Measure::Draw(const int x0, const int y0)
 {
-    Rectangle(30, 7).Fill(x0, y0 + 1, Color::GRAY_25);
+    Rectangle(30, 7).Fill(x0, y0 + 1, Color::BLACK);
 
     Color::SetCurrent(Color::GREEN);
 

@@ -31,7 +31,7 @@ public:
 
     String<> string;
 
-    ZoneFPS() : Zone(124, 25, 24, 8, Color::BLUE) { }
+    ZoneFPS() : Zone(136, 119, 24, 8, Color::BLACK) { }
 
     virtual void Draw();
 };
