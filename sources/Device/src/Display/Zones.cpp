@@ -20,7 +20,7 @@ void ZoneFPS::Draw()
 {
     Clear();
 
-    string.Draw(x, y, Color::WHITE);
+    string.Draw(x, y, Color::BLACK);
 
     Send();
 }
