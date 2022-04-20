@@ -115,11 +115,11 @@ void Display::Update()
         int y0 = 45;
         int dY = 15;
 
-        String<>("Давление :").Draw(x0, y0, Color::GREEN);
-        String<>("Освещённость :").Draw(x0, y0 + dY);
-        String<>("Влажность :").Draw(x0, y0 + 4 * dY);
-        String<>("Скорость :").Draw(x0, y0 + 2 * dY);
-        String<>("Температура :").Draw(x0, y0 + 3 * dY);
+        String<>("ДАВЛЕНИЕ :").Draw(x0, y0, Color::GREEN);
+        String<>("ОСВЕЩЕННОСТЬ :").Draw(x0, y0 + dY);
+        String<>("ВЛАЖНОСТЬ :").Draw(x0, y0 + 4 * dY);
+        String<>("СКОРОСТЬ :").Draw(x0, y0 + 2 * dY);
+        String<>("ТЕМПЕРАТУРА :").Draw(x0, y0 + 3 * dY);
 
         EndScene();
 
@@ -223,7 +223,7 @@ void Display::DrawMeasures()
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
-        measures[i].Draw(100, y0 + i * dY);
+        measures[i].Draw(110, y0 + i * dY);
     }
 }
 
