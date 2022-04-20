@@ -12,6 +12,10 @@
 
 namespace Display
 {
+    bool need_redraw = true;
+
+    uint time_prev_redraw = 0;
+
     struct Measure
     {
         String<> old;
@@ -82,38 +86,52 @@ namespace Display
 
 void Display::Update()
 {
-    TimeMeterMS meter;
-    static uint time = 0;
-
+    static TimeMeterMS meter_draw;
+    TimeMeterMS meter_fps;
+    static uint time_fps = 0;
     Color::E color2 = Color::WHITE;
     Color::E color1 = Color::BLACK;
 
-    BeginScene(Color::GRAY_25);
 
-    Rectangle(140, 30).Fill(10, 5, Color::BLUE);
-
-    static int y0 = 40;
-
-    HLine(10).Draw(5, y0, color2);
-
-    y0++;
-
-    if (y0 == HEIGHT)
+    if (meter_draw.ElapsedTime() >= 1000)
     {
-        y0 = 40;
+        meter_draw.Reset();
+        need_redraw = true;
     }
 
-    Font::Set(TypeFont::_8);
+    if (need_redraw)
+    {
+        BeginScene(Color::GRAY_25);
 
-    String<>("Тестовая строка").Draw(40, 10, color1);
+        Rectangle(140, 30).Fill(10, 5, Color::BLUE);
 
-    DrawMeasures();
+        static int y0 = 40;
 
-    String<>("%d ms", time).Draw(125, 25, color1);
+        HLine(10).Draw(5, y0, color2);
 
-    EndScene();
+        y0++;
 
-    time = meter.ElapsedTime();
+        if (y0 == HEIGHT)
+        {
+            y0 = 40;
+        }
+
+        Font::Set(TypeFont::_8);
+
+        String<>("Тестовая строка").Draw(40, 10, color1);
+
+        DrawMeasures();
+
+        String<>("%d ms", time_fps).Draw(125, 25, color1);
+
+        EndScene();
+    }
+    else
+    {
+
+    }
+
+    time_fps = meter_fps.ElapsedTime();
 }
 
 

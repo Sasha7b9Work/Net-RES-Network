@@ -22,6 +22,8 @@ namespace Display
     static const int WIDTH = 160;
     static const int HEIGHT = 128;
 
+    extern bool need_redraw;
+
     void SetMeasure(TypeMeasure::E, float measure);
 
     void Update();
