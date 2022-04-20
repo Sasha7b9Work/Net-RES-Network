@@ -267,5 +267,5 @@ void Display::Measure::Draw(int x, int y)
         position++;
     }
 
-//    ST7735::WriteBuffer(x, y, 30, 10);
+    ST7735::WriteBuffer(x, y, 30, 10);
 }
