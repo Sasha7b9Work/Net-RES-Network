@@ -156,9 +156,9 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
     SET_DC;
     RESET_CS;
 
-    for (int y = y0; y < y + height; y++)
+    for (int y = y0; y < y0 + height; y++)
     {
-        for (int x = x0; x < x + width; x += 2)
+        for (int x = x0; x < x0 + width; x += 2)
         {
             uint8 points = Display::Buffer::GetPixels(x, y);
 
