@@ -41,6 +41,8 @@ bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
         velocity = 1.0f;
     }
 
+//    *velocity_out = (std::rand() % 10000) / 100.0f;
+
     return true;
 
 #else

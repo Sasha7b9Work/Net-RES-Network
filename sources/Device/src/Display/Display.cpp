@@ -259,12 +259,12 @@ void Display::Measure::Draw(const int x0, const int y0)
 
         Rectangle(5, 7).Fill(x, y0 + 1);
 
-        for (int i = position; i < current.Size(); i++)
+        for (int i = position; i < old.Size(); i++)
         {
             x = Char(old[i]).Draw(x, y0) + 1;
         }
 
-        if (TIME_MS > time + 50)
+        if (TIME_MS > time + 25)
         {
             position++;
             time = TIME_MS;
