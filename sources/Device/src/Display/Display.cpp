@@ -125,13 +125,17 @@ void Display::Update()
         String<>("%d ms", time_fps).Draw(125, 25, color1);
 
         EndScene();
+
+        need_redraw = false;
+
+        time_fps = meter_fps.ElapsedTime();
     }
     else
     {
+        DrawMeasures();
 
+        time_fps = meter_fps.ElapsedTime();
     }
-
-    time_fps = meter_fps.ElapsedTime();
 }
 
 
@@ -238,6 +242,10 @@ void Display::DrawMeasures()
 
 void Display::Measure::Draw(int x, int y)
 {
+    Rectangle(30, 7).Fill(x, y + 1, Color::BLUE);
+
+    Color::SetCurrent(Color::GREEN);
+
     if (position >= current.Size())
     {
         current.Draw(x, y);
@@ -258,4 +266,6 @@ void Display::Measure::Draw(int x, int y)
 
         position++;
     }
+
+//    ST7735::WriteBuffer(x, y, 30, 10);
 }
