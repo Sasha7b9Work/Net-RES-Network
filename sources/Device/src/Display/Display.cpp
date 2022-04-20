@@ -240,11 +240,11 @@ void Display::Measure::Draw(const int x0, const int y0)
             x = Char(current[i]).Draw(x, y0) + 1;
         }
 
-        Rectangle(5, 7).Fill(x, y0 + 1);
+        Rectangle(5, 7).Fill(x, y0 + 1, Color::WHITE);
 
         for (int i = position; i < old.Size(); i++)
         {
-            x = Char(old[i]).Draw(x, y0) + 1;
+            x = Char(old[i]).Draw(x, y0, Color::GREEN) + 1;
         }
 
         if (TIME_MS > time + 25)
