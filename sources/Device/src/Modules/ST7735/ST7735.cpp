@@ -137,23 +137,57 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
     SET_DC;
     RESET_CS;
 
-    for (int y = y0; y < y0 + height; y++)
+#define WRITE_NIBBLE(nibble)                    \
+            value >>= 4;                        \
+            while ((SPI2->SR & SPI_SR_BSY));    \
+            SPI2->DR = colors[value & 0x0f];
+
+    if ((x0 % 2) == 0 && ((width % 8) == 0))
     {
-        uint8 *points = Display::Buffer::GetLine(x0, y);
-
-        uint8 value = *points;
-
-        for (int i = 0; i < width; i += 2)
+        for (int y = y0; y < y0 + height; y++)
         {
-            SPI2->DR = colors[value & 0x0F];
+            uint* points = (uint *)Display::Buffer::GetLine(x0, y);
 
-            while ((SPI2->SR & SPI_SR_BSY));
+            uint value = *points;
 
-            SPI2->DR = colors[(value >> 4) & 0x0F];
+            for (int i = 0; i < width; i += 8)
+            {
+                while (SPI2->SR & SPI_SR_BSY) {};
 
-            while ((SPI2->SR & SPI_SR_BSY));
+                SPI2->DR = colors[value & 0x0f];            // 0 nibble
 
-            value = *(++points);
+                WRITE_NIBBLE(1);
+                WRITE_NIBBLE(2);
+                WRITE_NIBBLE(3);
+                WRITE_NIBBLE(4);
+                WRITE_NIBBLE(5);
+                WRITE_NIBBLE(6);
+                WRITE_NIBBLE(7);
+
+                value = *(++points);
+            }
+        }
+    }
+    else
+    {
+        for (int y = y0; y < y0 + height; y++)
+        {
+            uint8* points = Display::Buffer::GetLine(x0, y);
+
+            uint8 value = *points;
+
+            for (int i = 0; i < width; i += 2)
+            {
+                while ((SPI2->SR & SPI_SR_BSY));
+
+                SPI2->DR = colors[value & 0x0F];
+
+                while ((SPI2->SR & SPI_SR_BSY));
+
+                SPI2->DR = colors[value >> 4];
+
+                value = *(++points);
+            }
         }
     }
 
