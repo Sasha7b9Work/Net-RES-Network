@@ -142,7 +142,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
             while ((SPI2->SR & SPI_SR_BSY));    \
             SPI2->DR = colors[value & 0x0f];
 
-    if ((x0 % 2) == 0 && ((width % 8) == 0))
+    if ((x0 % 8) == 0 && ((width % 8) == 0))
     {
         for (int y = y0; y < y0 + height; y++)
         {
