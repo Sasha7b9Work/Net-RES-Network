@@ -3,7 +3,6 @@
 #include "wx/wx.h"
 #include "wx/image.h"
 #include "wx/imagpng.h"
-#include "wx/wxhtml.h"
 #include "wx/statline.h"
 
 #ifndef wxHAS_IMAGES_IN_RESOURCES
@@ -80,19 +79,9 @@ void MyFrame::OnQuit(wxCommandEvent &WXUNUSED(event))
 void MyFrame::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
-    wxHtmlWindow *html;
     wxDialog dlg(this, wxID_ANY, wxString(_("About")));
 
     topsizer = new wxBoxSizer(wxVERTICAL);
-
-    html = new wxHtmlWindow(&dlg, wxID_ANY, wxDefaultPosition, wxSize(380, 160), wxHW_SCROLLBAR_NEVER);
-    html->SetBorders(0);
-    html->LoadPage("data/about.htm");
-    html->SetHTMLBackgroundImage(wxBitmapBundle::FromSVGFile("data/bg.svg", wxSize(65, 45)));
-    html->SetInitialSize(wxSize(html->GetInternalRepresentation()->GetWidth(),
-        html->GetInternalRepresentation()->GetHeight()));
-
-    topsizer->Add(html, 1, wxALL, 10);
 
 #if wxUSE_STATLINE
     topsizer->Add(new wxStaticLine(&dlg, wxID_ANY), 0, wxEXPAND | wxLEFT | wxRIGHT, 10);
