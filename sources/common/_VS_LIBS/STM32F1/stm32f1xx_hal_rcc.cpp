@@ -6,3 +6,15 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef * /*RCC_ClkInitStruct*/
 {
     return HAL_OK;
 }
+
+
+HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef * /*RCC_OscInitStruct*/)
+{
+    return HAL_OK;
+}
+
+
+HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef * /*PeriphClkInit*/)
+{
+    return HAL_OK;
+}

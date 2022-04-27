@@ -17,3 +17,14 @@ uint HAL_GetTick()
 void HAL_IncTick()
 {
 }
+
+
+void HAL_Delay(uint time)
+{
+    uint end = HAL_GetTick() + time;
+
+    while (HAL_GetTick() < end)
+    {
+
+    }
+}

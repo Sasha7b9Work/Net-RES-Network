@@ -75,6 +75,11 @@ source_group(Modules/HC12    FILES ${MODULES_HC12})
 source_group(Modules/ST7735  FILES ${MODULES_ST7735})
 source_group(Utils/Text      FILES ${UTILS_TEXT})
 
+
+set_source_files_properties(../../Device/src/Hardware/CDC/usbd_conf.c
+                            ../../Device/src/Hardware/CDC/usb_device.cpp
+                            PROPERTIES HEADER_FILE_ONLY TRUE)
+
 add_executable( ${PROJECT_NAME}
                 ${LIBS_STM32F1}
                 ${LIBS_USBD}
