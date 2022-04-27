@@ -6,7 +6,7 @@ int main(void)
 {
     Device::Init();
 
-    while (1)
+    while (true)
     {
         Device::Update();
     }
