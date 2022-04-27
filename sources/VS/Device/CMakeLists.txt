@@ -7,7 +7,8 @@ set(CMAKE_UNITY_BUILD OFF)
 include_directories(Device
                     ../../Device/src
                     ../../VS/ThirdParty/wxWidgets/include 
-                    ../../generated/ThirdParty/lib/vc_dll/mswud)
+                    ../../generated/ThirdParty/lib/vc_dll/mswud
+                    ../../Device/src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
