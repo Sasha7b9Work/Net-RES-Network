@@ -30,7 +30,7 @@ bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
 
 #ifdef IN_MODE_TEST
 
-    *velocity_out = (std::rand() % 10000) / 100.0f;
+    *velocity_out = (float)(std::rand() % 10000) / 100.0f;
 
     return true;
 
