@@ -7,36 +7,9 @@
 #include "defines.h"
 #include "Hardware/CDC/CDC.h"
 
-/* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE END PV */
-
-
-//void Error_Handler(void);
-
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/* USER CODE BEGIN PFP */
-/* Private function prototypes -----------------------------------------------*/
-
-/* USER CODE END PFP */
-
-/* Private functions ---------------------------------------------------------*/
 static USBD_StatusTypeDef USBD_Get_USB_Status(HAL_StatusTypeDef hal_status);
-/* USER CODE BEGIN 1 */
 
-/* USER CODE END 1 */
 #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
 static void PCDEx_SetConnectionState(PCD_HandleTypeDef *hpcd, uint8_t state);
 else
