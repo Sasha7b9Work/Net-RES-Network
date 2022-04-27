@@ -38,6 +38,7 @@ if(WIN32)
                                     # function under -EHc.
     add_compile_options(/wd5045)
     add_compile_options(/wd5220)
+    add_compile_options(/wd26812)
 endif()
 
 file(GLOB LIBS_STM32F1    ../../common/_VS_LIBS/STM32f1/*.*)
@@ -46,6 +47,7 @@ file(GLOB SRC             *.h *.cpp
                           ../../Device/src/defines.h
                           ../../Device/src/Device.*)
 file(GLOB DISPLAY         ../../Device/src/Display/*.*)
+file(GLOB DISPLAY_FONT    ../../Device/src/Display/Font/*.*)
 file(GLOB HARDWARE        ../../Device/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*)
@@ -60,6 +62,7 @@ source_group(libs/STM32F1    FILES ${LIBS_STM32F1})
 source_group(libs/USBD       FILES ${LIBS_USBD})
 source_group(src             FILES ${SRC})
 source_group(Display         FILES ${DISPLAY})
+source_group(Display/Font    FILES ${DISPLAY_FONT})
 source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CDC    FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
@@ -75,6 +78,7 @@ add_executable( ${PROJECT_NAME}
                 ${LIBS_USBD}
                 ${SRC}
                 ${DISPLAY}
+                ${DISPLAY_FONT}
                 ${HARDWARE}
                 ${HARDWARE_CDC}
                 ${HARDWARE_HAL}
