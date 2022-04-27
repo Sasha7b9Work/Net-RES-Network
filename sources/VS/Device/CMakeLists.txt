@@ -31,6 +31,7 @@ if(WIN32)
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
                                     # function under -EHc.
     add_compile_options(/wd5045)
+    add_compile_options(/wd5220)
 endif()
 
 file(GLOB SRC       *.h *.cpp
