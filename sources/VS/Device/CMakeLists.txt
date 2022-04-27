@@ -42,23 +42,32 @@ endif()
 file(GLOB SRC             *.h *.cpp
                           ../../Device/src/defines.h
                           ../../Device/src/Device.*)
+file(GLOB DISPLAY         ../../Device/src/Display/*.*)
 file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*)
+file(GLOB MODULES_BH1750  ../../Device/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280  ../../Device/src/Modules/BME280/*.*)
 file(GLOB MODULES_CG_ANEM ../../Device/src/Modules/CG-Anem/*.*)
 file(GLOB MODULES_HC12    ../../Device/src/Modules/HC12/*.*)
+file(GLOB MODULES_ST7735  ../../Device/src/Modules/ST7735/*.*)
 
 source_group(src             FILES ${SRC})
+source_group(Display         FILES ${DISPLAY})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
+source_group(Modules/BH1750  FILES ${MODULES_BH1750})
 source_group(Modules/BME280  FILES ${MODULES_BME280})
 source_group(Modules/CG-Anem FILES ${MODULES_CG_ANEM})
 source_group(Modules/HC12    FILES ${MODULES_HC12})
+source_group(Modules/ST7735  FILES ${MODULES_ST7735})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
+                ${DISPLAY}
                 ${HARDWARE_HAL}
+                ${MODULES_BH1750}
                 ${MODULES_BME280}
                 ${MODULES_CG_ANEM}
                 ${MODULES_HC12}
+                ${MODULES_ST7735}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase31ud wxmsw31ud_core)
