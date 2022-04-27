@@ -604,11 +604,6 @@
               <FilePath>.\src\STM32Cube_F1\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
             <File>
-              <FileName>usb_device.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usb_device.c</FilePath>
-            </File>
-            <File>
               <FileName>usb_device.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usb_device.h</FilePath>
@@ -642,6 +637,11 @@
               <FileName>CDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usb_device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\usb_device.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1420,11 +1420,6 @@
               <FilePath>.\src\STM32Cube_F1\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
             <File>
-              <FileName>usb_device.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usb_device.c</FilePath>
-            </File>
-            <File>
               <FileName>usb_device.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usb_device.h</FilePath>
@@ -1458,6 +1453,11 @@
               <FileName>CDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usb_device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\usb_device.cpp</FilePath>
             </File>
           </Files>
         </Group>
