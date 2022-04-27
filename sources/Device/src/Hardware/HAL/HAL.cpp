@@ -74,20 +74,9 @@ static void MX_GPIO_Init()
 
 }
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 void Error_Handler()
 {
     while(1)
     {
     }
 }
-
-
-#ifdef __cplusplus
-}
-#endif

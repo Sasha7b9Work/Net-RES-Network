@@ -9,3 +9,6 @@
 
 #undef __HAL_RCC_GPIOB_CLK_ENABLE
 #define __HAL_RCC_GPIOB_CLK_ENABLE()
+
+#undef __HAL_RCC_SPI2_CLK_ENABLE
+#define __HAL_RCC_SPI2_CLK_ENABLE()
