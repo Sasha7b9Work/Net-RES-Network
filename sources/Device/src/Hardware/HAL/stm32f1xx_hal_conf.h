@@ -323,3 +323,7 @@
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef GUI
+    #include "stm32f1xx_hal_conf_gui.h"
+#endif
