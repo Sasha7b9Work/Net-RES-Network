@@ -796,7 +796,7 @@ String<> SU::Float2String(float value, bool alwaysSign, int numDigits)
         buffer[numDigits + 1] = '\0';
     }
 
-    float val = std::atof(buffer);
+    float val = (float)std::atof(buffer);
 
     if (NumDigitsInIntPart(val) != numDigitsInInt)
     {

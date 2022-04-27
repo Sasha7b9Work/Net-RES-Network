@@ -31,6 +31,7 @@ if(WIN32)
     add_compile_options(/wd4626)
     add_compile_options(/wd4774)
     add_compile_options(/wd4820)
+    add_compile_options(/wd4996)
     add_compile_options(/wd5026)
     add_compile_options(/wd5027)
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
@@ -43,31 +44,40 @@ file(GLOB SRC             *.h *.cpp
                           ../../Device/src/defines.h
                           ../../Device/src/Device.*)
 file(GLOB DISPLAY         ../../Device/src/Display/*.*)
+file(GLOB HARDWARE        ../../Device/src/Hardware/*.*)
+file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*)
 file(GLOB MODULES_BH1750  ../../Device/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280  ../../Device/src/Modules/BME280/*.*)
 file(GLOB MODULES_CG_ANEM ../../Device/src/Modules/CG-Anem/*.*)
 file(GLOB MODULES_HC12    ../../Device/src/Modules/HC12/*.*)
 file(GLOB MODULES_ST7735  ../../Device/src/Modules/ST7735/*.*)
+file(GLOB UTILS_TEXT      ../../Device/src/Utils/Text/*.*)
 
 source_group(src             FILES ${SRC})
 source_group(Display         FILES ${DISPLAY})
+source_group(Hardware        FILES ${HARDWARE})
+source_group(Hardware/CDC    FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
 source_group(Modules/BH1750  FILES ${MODULES_BH1750})
 source_group(Modules/BME280  FILES ${MODULES_BME280})
 source_group(Modules/CG-Anem FILES ${MODULES_CG_ANEM})
 source_group(Modules/HC12    FILES ${MODULES_HC12})
 source_group(Modules/ST7735  FILES ${MODULES_ST7735})
+source_group(Utils/Text      FILES ${UTILS_TEXT})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${DISPLAY}
+                ${HARDWARE}
+                ${HARDWARE_CDC}
                 ${HARDWARE_HAL}
                 ${MODULES_BH1750}
                 ${MODULES_BME280}
                 ${MODULES_CG_ANEM}
                 ${MODULES_HC12}
                 ${MODULES_ST7735}
+                ${UTILS_TEXT}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase31ud wxmsw31ud_core)
