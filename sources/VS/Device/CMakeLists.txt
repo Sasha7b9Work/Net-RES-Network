@@ -39,19 +39,22 @@ if(WIN32)
     add_compile_options(/wd5220)
 endif()
 
-file(GLOB SRC          *.h *.cpp
-                       ../../Device/src/defines.h
-                       ../../Device/src/Device.*)
-file(GLOB HARDWARE_HAL ../../Device/src/Hardware/HAL/*.*)
-file(GLOB MODULES_HC12 ../../Device/src/Modules/HC12/*.*)
+file(GLOB SRC            *.h *.cpp
+                         ../../Device/src/defines.h
+                         ../../Device/src/Device.*)
+file(GLOB HARDWARE_HAL   ../../Device/src/Hardware/HAL/*.*)
+file(GLOB MODULES_BME280 ../../Device/src/Modules/BME280/*.*)
+file(GLOB MODULES_HC12   ../../Device/src/Modules/HC12/*.*)
 
-source_group(src          FILES ${SRC})
-source_group(Hardware/HAL FILES ${HARDWARE_HAL})
-source_group(Modules/HC12 FILES ${MODULES_HC12})
+source_group(src            FILES ${SRC})
+source_group(Hardware/HAL   FILES ${HARDWARE_HAL})
+source_group(Modules/BME280 FILES ${MODULES_BME280})
+source_group(Modules/HC12   FILES ${MODULES_HC12})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${HARDWARE_HAL}
+                ${MODULES_BME280}
                 ${MODULES_HC12}
                 )
 
