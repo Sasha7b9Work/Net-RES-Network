@@ -3,7 +3,17 @@
 #include <ctime>
 
 
+HAL_StatusTypeDef HAL_Init()
+{
+    return HAL_OK;
+}
+
+
 uint HAL_GetTick()
 {
     return (uint)(clock());
+}
+
+void HAL_IncTick()
+{
 }
