@@ -5,6 +5,7 @@ project (Device)
 set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(Device
+                    ../../Device/src
                     ../../VS/ThirdParty/wxWidgets/include 
                     ../../generated/ThirdParty/lib/vc_dll/mswud)
 
@@ -15,11 +16,18 @@ add_definitions(-DSTM32F103xx -DWXUSINGDLL -DGUI -DDEVICE)
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+    add_compile_options(/wd4625)
+    add_compile_options(/wd4626)
+    add_compile_options(/wd4820)
+    add_compile_options(/wd5026)
+    add_compile_options(/wd5027)
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
                                     # function under -EHc.
+    add_compile_options(/wd5045)
 endif()
 
-file(GLOB SRC       *.h *.cpp)
+file(GLOB SRC       *.h *.cpp
+                    ../../Device/src/main.h)
 
 source_group(src    FILES ${SRC})
 

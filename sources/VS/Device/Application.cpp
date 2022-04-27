@@ -1,5 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #define WIN32_LEAN_AND_MEAN
+#include "main.h"
 #include "Application.h"
 #include <ctime>
 
@@ -65,8 +66,6 @@ bool Application::OnInit()
 
 int Application::OnExit()
 {
-    set.Save();
-
     return wxApp::OnExit();
 }
 
@@ -78,21 +77,6 @@ void Frame::SaveSettings()
     wxConfigBase::Set(pConfig);
 
     pConfig->SetPath(wxT("Cenerator/A"));
-
-    pConfig->Write(wxT("frequency"), TuneGeneratorDialog::frequency[0]);
-    pConfig->Write(wxT("amplitude"), TuneGeneratorDialog::amplitude[0]);
-    pConfig->Write(wxT("offset"), TuneGeneratorDialog::offset[0]);
-
-    pConfig->SetPath(wxT("../B"));
-    pConfig->Write(wxT("frequency"), TuneGeneratorDialog::frequency[1]);
-    pConfig->Write(wxT("amplitude"), TuneGeneratorDialog::amplitude[1]);
-    pConfig->Write(wxT("offset"), TuneGeneratorDialog::offset[1]);
-
-    pConfig->SetPath(wxT("../../ConsoleSCPI"));
-    pConfig->Write(wxT("x"), ConsoleSCPI::Self()->GetPosition().x);
-    pConfig->Write(wxT("y"), ConsoleSCPI::Self()->GetPosition().y);
-    pConfig->Write(wxT("width"), ConsoleSCPI::Self()->GetSize().x);
-    pConfig->Write(wxT("height"), ConsoleSCPI::Self()->GetSize().y);
 
     delete wxConfigBase::Set(nullptr);
 }
@@ -110,22 +94,6 @@ void Frame::LoadSettings()
     {
         config->SetPath(wxT("Cenerator/A"));
 
-        config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency[0], TuneGeneratorDialog::frequency[0]);
-        config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[0], TuneGeneratorDialog::amplitude[0]);
-        config->Read(wxT("offset"), &TuneGeneratorDialog::offset[0], TuneGeneratorDialog::offset[0]);
-
-        config->SetPath(wxT("../B"));
-        config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency[1], TuneGeneratorDialog::frequency[1]);
-        config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[1], TuneGeneratorDialog::amplitude[1]);
-        config->Read(wxT("offset"), &TuneGeneratorDialog::offset[1], TuneGeneratorDialog::offset[1]);
-
-        config->SetPath(wxT("../../ConsoleSCPI"));
-        wxRect rect;
-        config->Read(wxT("x"), &rect.x, ConsoleSCPI::Self()->GetPosition().x);
-        config->Read(wxT("y"), &rect.y, ConsoleSCPI::Self()->GetPosition().y);
-        config->Read(wxT("width"), &rect.width, ConsoleSCPI::Self()->GetSize().x);
-        config->Read(wxT("height"), &rect.height, ConsoleSCPI::Self()->GetSize().y);
-        ConsoleSCPI::Self()->SetSize(rect);
     }
 
     delete wxConfigBase::Set(nullptr);
@@ -173,8 +141,6 @@ Frame::Frame(const wxString& title)
     timer.Start(10);
 
     timerLongPress.SetOwner(this, TIMER_LONG_ID);
-
-    ConsoleSCPI::Self()->Show();
 
     frame = this;
 }
@@ -279,23 +245,17 @@ void Frame::OnClose(wxCloseEvent &event)
 {
     SaveSettings();
 
-    ConsoleSCPI::Self()->Destroy();
-
     event.Skip();
 }
 
 
 void Frame::OnGenerator(wxCommandEvent &)
 {
-    TuneGeneratorDialog dialog;
-
-    dialog.ShowModal();
 }
 
 
 void Frame::OnSCPI(wxCommandEvent &)
 {
-    ConsoleSCPI::Self()->SwitchVisibility();
 }
 
 
