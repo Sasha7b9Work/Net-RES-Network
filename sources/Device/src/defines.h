@@ -33,13 +33,4 @@ union BitSet32
 #define ERROR_VALUE_FLOAT   1.111e29f
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void Error_Handler();
-#ifdef __cplusplus
-}
-#endif
-
-
 #include "Log.h"

@@ -10,12 +10,4 @@ namespace HAL
 }
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void Error_Handler();
-
-#ifdef __cplusplus
-}
-#endif

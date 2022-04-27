@@ -644,11 +644,6 @@
               <FilePath>.\src\Hardware\HAL\stm32f1xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f1xx_hal_msp.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f1xx_it.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\stm32f1xx_it.h</FilePath>
@@ -1448,11 +1443,6 @@
               <FileName>stm32f1xx_hal_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\stm32f1xx_hal_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f1xx_hal_msp.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_it.h</FileName>

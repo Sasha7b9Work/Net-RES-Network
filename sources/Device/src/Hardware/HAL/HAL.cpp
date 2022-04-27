@@ -6,14 +6,20 @@
 
 
 static void SystemClock_Config();
-static void MX_GPIO_Init();
 
 
 void HAL::Init()
 {
     HAL_Init();
     SystemClock_Config();
-    MX_GPIO_Init();
+
+    __HAL_RCC_AFIO_CLK_ENABLE();
+    __HAL_RCC_PWR_CLK_ENABLE();
+
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+
     MX_I2C1_Init();
     CDC::Init();
 }
@@ -63,16 +69,6 @@ static void SystemClock_Config()
     }
 }
 
-
-static void MX_GPIO_Init()
-{
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-
-}
 
 void Error_Handler()
 {

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Modules/HC12/HC12.h"
 #include "stm32f1xx_hal.h"
+#include "Hardware/HAL/HAL.h"
 #include <string.h>
 
 
