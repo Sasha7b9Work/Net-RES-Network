@@ -2,6 +2,12 @@
 #include <stm32f1xx_hal.h>
 
 
+void  HAL_GPIO_Init(GPIO_TypeDef * /*GPIOx*/, GPIO_InitTypeDef * /*GPIO_Init*/)
+{
+
+}
+
+
 void HAL_GPIO_WritePin(GPIO_TypeDef * /*GPIOx*/, uint16_t /*GPIO_Pin*/, GPIO_PinState /*PinState*/)
 {
 

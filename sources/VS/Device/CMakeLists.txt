@@ -51,6 +51,7 @@ file(GLOB DISPLAY_FONT    ../../Device/src/Display/Font/*.*)
 file(GLOB HARDWARE        ../../Device/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*)
+file(GLOB HARDWARE_I2C    ../../Device/src/Hardware/I2C/*.*)
 file(GLOB MODULES_BH1750  ../../Device/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280  ../../Device/src/Modules/BME280/*.*)
 file(GLOB MODULES_CG_ANEM ../../Device/src/Modules/CG-Anem/*.*)
@@ -66,6 +67,7 @@ source_group(Display/Font    FILES ${DISPLAY_FONT})
 source_group(Hardware        FILES ${HARDWARE})
 source_group(Hardware/CDC    FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
+source_group(Hardware/I2C    FILES ${HARDWARE_I2C})
 source_group(Modules/BH1750  FILES ${MODULES_BH1750})
 source_group(Modules/BME280  FILES ${MODULES_BME280})
 source_group(Modules/CG-Anem FILES ${MODULES_CG_ANEM})
@@ -82,6 +84,7 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE}
                 ${HARDWARE_CDC}
                 ${HARDWARE_HAL}
+                ${HARDWARE_I2C}
                 ${MODULES_BH1750}
                 ${MODULES_BME280}
                 ${MODULES_CG_ANEM}
