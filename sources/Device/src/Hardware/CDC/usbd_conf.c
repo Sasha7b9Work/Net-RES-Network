@@ -5,6 +5,7 @@
 #include "usbd_core.h"
 #include "usbd_cdc.h"
 #include "defines.h"
+#include "Hardware/CDC/CDC.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -278,6 +279,8 @@ void HAL_PCD_DisconnectCallback(PCD_HandleTypeDef * hpcd)
   */
 USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef * pdev)
 {
+    PCD_HandleTypeDef &hpcd_USB_FS = *((PCD_HandleTypeDef *)CDC::handlePCD);
+
     /* Init USB Ip. */
     /* Link the driver to the stack. */
     hpcd_USB_FS.pData = pdev;

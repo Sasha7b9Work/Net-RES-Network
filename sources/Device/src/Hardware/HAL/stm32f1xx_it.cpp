@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "stm32f1xx_it.h"
 #include "stm32f1xx_hal.h"
+#include "Hardware/CDC/CDC.h"
 
 
 void NMI_Handler(void)
@@ -66,5 +67,5 @@ void SysTick_Handler(void)
 
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
-    HAL_PCD_IRQHandler(&hpcd_USB_FS);
+    CDC::OnIRQHandler();
 }

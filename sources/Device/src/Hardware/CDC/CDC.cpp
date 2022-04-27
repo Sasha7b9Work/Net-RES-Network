@@ -2,8 +2,12 @@
 #include "Hardware/CDC/CDC.h"
 #include <usbd_desc.h>
 
+
 USBD_HandleTypeDef hUsbDeviceFS;
-PCD_HandleTypeDef hpcd_USB_FS;
+static PCD_HandleTypeDef _handlePCD;
+
+void *CDC::handlePCD = &_handlePCD;
+
 
 #define APP_RX_DATA_SIZE  1000
 #define APP_TX_DATA_SIZE  1000
@@ -150,4 +154,10 @@ uint8_t CDC::Transmit(const char *buffer)
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;
+}
+
+
+void CDC::OnIRQHandler()
+{
+    HAL_PCD_IRQHandler(&_handlePCD);
 }
