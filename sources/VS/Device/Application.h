@@ -60,7 +60,6 @@ public:
     void OnPaint(wxPaintEvent& event);
 
     void OnTimer(wxTimerEvent &);
-    void OnTimerLong(wxTimerEvent &);
     void OnClose(wxCloseEvent &);
 
 private:
@@ -69,7 +68,6 @@ private:
     wxTimer timerLongPress;
 
     void DrawFPS();
-    void HandlerEvents();
 
     void SaveSettings();
     void LoadSettings();

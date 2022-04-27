@@ -130,7 +130,6 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_MENU, &Frame::OnGenerator, this, GENERATOR);
     Bind(wxEVT_MENU, &Frame::OnSCPI, this, SCPI);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
-    Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
 
@@ -149,8 +148,6 @@ Frame::Frame(const wxString& title)
 void Frame::OnTimer(wxTimerEvent&)
 {
     Application::Update();
-
-    HandlerEvents();
 
     DrawFPS();
 }
