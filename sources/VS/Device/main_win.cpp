@@ -1,57 +1,16 @@
 #define WIN32_LEAN_AND_MEAN
+#include "Frame.h"
 #include "wx/wxprec.h"
 #include "wx/wx.h"
 #include "wx/image.h"
 #include "wx/imagpng.h"
 #include "wx/statline.h"
 
-#ifndef wxHAS_IMAGES_IN_RESOURCES
-#include "../../sample.xpm"
-#endif
-
-
-class MyApp : public wxApp
-{
-public:
-    virtual bool OnInit() wxOVERRIDE;
-};
-
-class MyFrame : public wxFrame
-{
-public:
-    MyFrame(const wxString &title);
-
-    void OnQuit(wxCommandEvent &event);
-    void OnAbout(wxCommandEvent &event);
-
-private:
-    wxDECLARE_EVENT_TABLE();
-};
-
 
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
 EVT_MENU(wxID_EXIT, MyFrame::OnQuit)
 wxEND_EVENT_TABLE()
-
-
-wxIMPLEMENT_APP(MyApp);
-
-
-bool MyApp::OnInit()
-{
-    if (!wxApp::OnInit())
-        return false;
-
-    // we use a PNG image in our HTML page
-    wxImage::AddHandler(new wxPNGHandler);
-
-    // create and show the main application window
-    MyFrame *frame = new MyFrame(_("wxHtmlWindow testing application"));
-    frame->Show();
-
-    return true;
-}
 
 
 MyFrame::MyFrame(const wxString &title)
