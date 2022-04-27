@@ -1,5 +1,8 @@
 // 2022/04/20 08:53:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Hardware/CDC/CDC.h"
+#include <usbd_desc.h>
+
+USBD_HandleTypeDef hUsbDeviceFS;
 
 #define APP_RX_DATA_SIZE  1000
 #define APP_TX_DATA_SIZE  1000
@@ -26,6 +29,27 @@ USBD_CDC_ItfTypeDef USBD_Interface_fops_FS =
     CDC_Control_FS,
     CDC_Receive_FS
 };
+
+
+void CDC::Init()
+{
+    if (USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS) != USBD_OK)
+    {
+        Error_Handler();
+    }
+    if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
+    {
+        Error_Handler();
+    }
+    if (USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS) != USBD_OK)
+    {
+        Error_Handler();
+    }
+    if (USBD_Start(&hUsbDeviceFS) != USBD_OK)
+    {
+        Error_Handler();
+    }
+}
 
 
 static int8_t CDC_Init_FS(void)

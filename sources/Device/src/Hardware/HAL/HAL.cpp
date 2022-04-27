@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/I2C/i2c.h"
-#include "usb_device.h"
+#include "Hardware/CDC/CDC.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -15,7 +15,7 @@ void HAL::Init()
     SystemClock_Config();
     MX_GPIO_Init();
     MX_I2C1_Init();
-    MX_USB_DEVICE_Init();
+    CDC::Init();
 }
 
 

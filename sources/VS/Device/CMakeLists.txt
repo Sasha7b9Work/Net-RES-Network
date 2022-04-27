@@ -77,7 +77,6 @@ source_group(Utils/Text      FILES ${UTILS_TEXT})
 
 
 set_source_files_properties(../../Device/src/Hardware/CDC/usbd_conf.c
-                            ../../Device/src/Hardware/CDC/usb_device.cpp
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}

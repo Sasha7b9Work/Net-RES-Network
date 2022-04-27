@@ -7,13 +7,15 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
-namespace  CDC
-{
-     uint8_t Transmit(const char *buffer);
-}
+    namespace  CDC
+    {
+        void Init();
+
+        uint8_t Transmit(const char *buffer);
+    }
 
 #ifdef __cplusplus
 }
