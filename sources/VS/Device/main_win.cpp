@@ -5,6 +5,7 @@
 
 void Application::Init()
 {
+    static Frame *frame = new Frame("Device");
 }
 
 
