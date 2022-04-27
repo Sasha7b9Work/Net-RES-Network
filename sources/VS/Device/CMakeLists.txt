@@ -40,7 +40,8 @@ if(WIN32)
     add_compile_options(/wd5220)
 endif()
 
-file(GLOB STM32F1         ../../common/STM32f1/*.*)
+file(GLOB LIBS_STM32F1    ../../common/_VS_LIBS/STM32f1/*.*)
+file(GLOB LIBS_USBD       ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC             *.h *.cpp
                           ../../Device/src/defines.h
                           ../../Device/src/Device.*)
@@ -55,7 +56,8 @@ file(GLOB MODULES_HC12    ../../Device/src/Modules/HC12/*.*)
 file(GLOB MODULES_ST7735  ../../Device/src/Modules/ST7735/*.*)
 file(GLOB UTILS_TEXT      ../../Device/src/Utils/Text/*.*)
 
-source_group(STM32F1         FILES ${STM32F1})
+source_group(libs/STM32F1    FILES ${LIBS_STM32F1})
+source_group(libs/USBD       FILES ${LIBS_USBD})
 source_group(src             FILES ${SRC})
 source_group(Display         FILES ${DISPLAY})
 source_group(Hardware        FILES ${HARDWARE})
@@ -69,7 +71,8 @@ source_group(Modules/ST7735  FILES ${MODULES_ST7735})
 source_group(Utils/Text      FILES ${UTILS_TEXT})
 
 add_executable( ${PROJECT_NAME}
-                ${STM32F1}
+                ${LIBS_STM32F1}
+                ${LIBS_USBD}
                 ${SRC}
                 ${DISPLAY}
                 ${HARDWARE}
