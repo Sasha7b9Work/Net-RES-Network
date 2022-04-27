@@ -56,6 +56,8 @@
 /*---------- -----------*/
 #define MAX_STATIC_ALLOC_SIZE     512
 
+#define USBD_LPM_ENABLED 0
+
 /****************************************/
 /* #define for FS and HS identification */
 #define DEVICE_FS 		0

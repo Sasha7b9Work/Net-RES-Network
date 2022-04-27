@@ -6,12 +6,14 @@ set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(Device
                     ../../Device/src
+                    ../../Device/src/Hardware/HAL
                     ../../VS/ThirdParty/wxWidgets/include 
                     ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_KEIL/CMSIS
                     ../../Device/src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
                     ../../Device/src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../../Device/src/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include)
+                    ../../Device/src/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include
+                    ../../Device/src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -22,6 +24,7 @@ if(WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
     add_compile_options(/wd4365)
+    add_compile_options(/wd4514)
     add_compile_options(/wd4625)
     add_compile_options(/wd4626)
     add_compile_options(/wd4774)
