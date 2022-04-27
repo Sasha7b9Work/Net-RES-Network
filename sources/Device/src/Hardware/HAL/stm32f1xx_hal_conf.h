@@ -1,5 +1,4 @@
-#ifndef __STM32F1xx_HAL_CONF_H
-#define __STM32F1xx_HAL_CONF_H
+#pragma once
 
 #ifdef __cplusplus
  extern "C" {
@@ -324,7 +323,3 @@
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* __STM32F1xx_HAL_CONF_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
