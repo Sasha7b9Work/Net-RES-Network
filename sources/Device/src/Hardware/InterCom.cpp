@@ -1,5 +1,5 @@
 // Sasha7b9@tut.by (c)
-#include "main.h"
+#include "defines.h"
 #include "Hardware/InterCom.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/HC12/HC12.h"

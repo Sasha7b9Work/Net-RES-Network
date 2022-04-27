@@ -1,4 +1,4 @@
-#include "main.h"
+#include "defines.h"
 #include "Hardware/Timer.h"
 #include <stm32f1xx_hal.h>
 

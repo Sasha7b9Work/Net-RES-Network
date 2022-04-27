@@ -1,5 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "main.h"
+#include "defines.h"
 #include "Modules/HC12/HC12.h"
 #include "stm32f1xx_hal.h"
 #include <string.h>

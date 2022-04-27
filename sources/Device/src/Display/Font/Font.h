@@ -1,6 +1,6 @@
 // 2022/02/11 15:58:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "main.h"
+#include "defines.h"
 
 
 struct TypeFont

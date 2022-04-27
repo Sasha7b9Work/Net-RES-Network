@@ -5,7 +5,7 @@
 #endif
 
 #include "stm32f1xx_hal.h"
-#include "main.h"
+#include "defines.h"
 
 extern I2C_HandleTypeDef hi2c1;
 

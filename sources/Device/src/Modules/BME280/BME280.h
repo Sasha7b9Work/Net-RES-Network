@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "main.h"
+#include "defines.h"
 
 
 namespace BME280

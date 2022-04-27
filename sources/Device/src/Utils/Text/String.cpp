@@ -1,5 +1,5 @@
 // 2022/03/30 08:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "main.h"
+#include "defines.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"

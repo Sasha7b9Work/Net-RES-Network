@@ -1,5 +1,5 @@
 // 2022/03/12 09:37:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "main.h"
+#include "defines.h"
 #include "Display/Colors.h"
 
 

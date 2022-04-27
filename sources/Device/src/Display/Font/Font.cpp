@@ -1,5 +1,5 @@
 // 2022/02/11 15:58:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "main.h"
+#include "defines.h"
 #include "Font.h"
 
 #include "font5.inc"

@@ -4,7 +4,7 @@
 #include "usbd_def.h"
 #include "usbd_core.h"
 #include "usbd_cdc.h"
-#include "main.h"
+#include "defines.h"
 
 /* USER CODE BEGIN Includes */
 
