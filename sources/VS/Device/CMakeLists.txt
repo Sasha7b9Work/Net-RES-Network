@@ -24,6 +24,7 @@ if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
+    add_compile_options(/wd4255)
     add_compile_options(/wd4365)
     add_compile_options(/wd4514)
     add_compile_options(/wd4625)
