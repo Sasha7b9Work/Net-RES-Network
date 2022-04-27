@@ -30,7 +30,8 @@ if(WIN32)
 endif()
 
 file(GLOB SRC       *.h *.cpp
-                    ../../Device/src/main.h)
+                    ../../Device/src/defines.h
+                    ../../Device/src/Device.*)
 
 source_group(src    FILES ${SRC})
 
