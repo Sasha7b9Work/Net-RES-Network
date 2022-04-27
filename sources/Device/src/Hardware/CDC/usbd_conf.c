@@ -130,10 +130,6 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef * hpcd)
 {
     USBD_SpeedTypeDef speed = USBD_SPEED_FULL;
 
-    if (hpcd->Init.speed != PCD_SPEED_FULL)
-    {
-        Error_Handler();
-    }
     /* Set Speed. */
     USBD_LL_SetSpeed((USBD_HandleTypeDef *)hpcd->pData, speed);
 
@@ -265,10 +261,8 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef * pdev)
     hpcd_USB_FS.Init.low_power_enable = DISABLE;
     hpcd_USB_FS.Init.lpm_enable = DISABLE;
     hpcd_USB_FS.Init.battery_charging_enable = DISABLE;
-    if (HAL_PCD_Init(&hpcd_USB_FS) != HAL_OK)
-    {
-        Error_Handler();
-    }
+
+    HAL_PCD_Init(&hpcd_USB_FS);
 
 #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
     /* Register USB PCD CallBacks */
