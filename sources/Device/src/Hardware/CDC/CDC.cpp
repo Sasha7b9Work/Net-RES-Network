@@ -3,7 +3,7 @@
 #include <usbd_desc.h>
 
 
-USBD_HandleTypeDef hUsbDeviceFS;
+static USBD_HandleTypeDef hUsbDeviceFS;
 static PCD_HandleTypeDef _handlePCD;
 
 void *CDC::handlePCD = &_handlePCD;

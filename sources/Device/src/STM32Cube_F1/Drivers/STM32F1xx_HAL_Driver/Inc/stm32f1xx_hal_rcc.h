@@ -539,6 +539,7 @@ typedef struct
                                         UNUSED(tmpreg); \
                                       } while(0U)
 
+
 #define __HAL_RCC_GPIOD_CLK_ENABLE()   do { \
                                         __IO uint32_t tmpreg; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_IOPDEN);\
@@ -546,6 +547,7 @@ typedef struct
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_IOPDEN);\
                                         UNUSED(tmpreg); \
                                       } while(0U)
+
 
 #define __HAL_RCC_ADC1_CLK_ENABLE()   do { \
                                         __IO uint32_t tmpreg; \
