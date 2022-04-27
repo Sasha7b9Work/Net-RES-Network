@@ -8,12 +8,14 @@ include_directories(Device
                     ../../Device/src
                     ../../VS/ThirdParty/wxWidgets/include 
                     ../../generated/ThirdParty/lib/vc_dll/mswud
+                    ../../common/_VS_KEIL/CMSIS
                     ../../Device/src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../../Device/src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc)
+                    ../../Device/src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+                    ../../Device/src/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
-add_definitions(-DSTM32F103xx -DWXUSINGDLL -DGUI -DDEVICE)
+add_definitions(-DSTM32F103xB -DWXUSINGDLL -DGUI -DDEVICE)
 
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
