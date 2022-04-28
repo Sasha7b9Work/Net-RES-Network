@@ -31,7 +31,7 @@ class Screen : public wxPanel
 public:
     Screen(wxWindow *parent) : wxPanel(parent)
     {
-        SetMinSize({ Display::WIDTH, Display::HEIGHT });
+        SetMinSize({ Display::WIDTH * 2, Display::HEIGHT * 2 });
         SetDoubleBuffered(true);
         Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     }
@@ -40,13 +40,9 @@ public:
     {
         wxPaintDC dc(this);
 
-        wxMemoryDC memoryDC;
-        memoryDC.SelectObject(bitmap);
+        wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
 
-        wxSize size = dc.GetSize();
-        dc.Blit(0, 0, size.GetWidth(), size.GetHeight(), &memoryDC, 0, 0, wxCOPY);
-
-        memoryDC.SelectObject(wxNullBitmap);
+        dc.DrawBitmap(wxBitmap(image), 0, 0);
     }
 };
 
@@ -84,7 +80,7 @@ Frame::Frame(const wxString &title)
 
     timer.Start(1);
 
-    Show(true);
+    SetSize(Display::WIDTH * 2 + 20, Display::HEIGHT * 2 + 70);
 }
 
 
