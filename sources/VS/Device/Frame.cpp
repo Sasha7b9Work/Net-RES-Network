@@ -80,7 +80,7 @@ Frame::Frame(const wxString &title)
 
     timer.SetOwner(this, TIMER_ID);
 
-    timer.Start(1);
+    timer.Start(25);
 
     SetClientSize(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
 
@@ -176,6 +176,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     memDC.SelectObject(bitmap);
 
+    static wxPen pen = *wxWHITE_PEN;
+
     for (int y = y0; y < y0 + height; y++)
     {
         uint8 *points = Display::Buffer::GetLine(x0, y);
@@ -184,11 +186,15 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
         for (int x = x0; x < x0 + width; x += 2)
         {
-            memDC.SetPen(wxPen(colors[value >> 4]));
+            pen.SetColour(colors[value >> 4]);
+
+            memDC.SetPen(pen);
 
             memDC.DrawPoint(x + 1, y);
 
-            memDC.SetPen(wxPen(colors[value & 0x0f]));
+            pen.SetColour(colors[value & 0x0f]);
+
+            memDC.SetPen(pen);
 
             memDC.DrawPoint(x, y);
 
