@@ -138,24 +138,16 @@ void Frame::EndScene()
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
-    static const wxColour colors[16] =
+    wxColour colors[16] =
     {
-        {1.0f, 0.0f, 0.0f},
-        wxColour(0.0f, 1.0f, 0.0f),
-        wxColour(0.0f, 0.5f, 0.05f),
-        wxColour(0.0f, 0.5f, 0.0f),
-        wxColour(0.0f, 0.0f, 1.0f),
-        wxColour(0.5f, 0.5f, 0.5f),
-        wxColour(0.25f, 0.25f, 0.25f),
-        wxColour(0.12f, 0.12f, 0.12f),
-        wxColour(1.0f, 0.0f, 0.0f),
-        wxColour(0.0f, 1.0f, 0.0f),
-        wxColour(0.0f, 0.5f, 0.05f),
-        wxColour(0.0f, 0.5f, 0.0f),
-        wxColour(0.0f, 0.0f, 1.0f),
-        wxColour(0.5f, 0.5f, 0.5f),
-        wxColour(0.25f, 0.25f, 0.25f),
-        wxColour(0.12f, 0.12f, 0.12f)
+        wxColour(255, 0, 0),
+        wxColour(0,   255, 0),
+        wxColour(0,   127, 127),
+        wxColour(0,   127, 0),
+        wxColour(0,   0,   255),
+        wxColour(127, 127, 127),
+        wxColour(63,  63,  63),
+        wxColour(31,  31,  31)
     };
 
     for (int y = y0; y < y0 + height; y++)
@@ -166,7 +158,10 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
         for (int x = x0; x < x0 + width; x += 2)
         {
-            memDC.SetPen(wxPen(colors[value >> 4]));
+            wxPen pen = *wxWHITE_PEN;
+            pen.SetColour(colors[value >> 4]);
+
+            memDC.SetPen(pen);
 
             memDC.DrawPoint(x, y);
 
