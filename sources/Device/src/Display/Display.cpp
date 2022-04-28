@@ -230,11 +230,6 @@ void Display::DrawZones()
 }
 
 
-#ifdef GUI
-#include "Frame.h"
-#endif
-
-
 void Display::BeginScene(Color::E color)
 {
     Buffer::Fill(color);
@@ -245,6 +240,10 @@ void Display::EndScene()
 {
     ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
 }
+
+#ifdef GUI
+#include "Frame.h"
+#endif
 
 
 void Display::Update()

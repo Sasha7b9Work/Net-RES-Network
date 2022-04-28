@@ -38,23 +38,15 @@ public:
 
     void OnPaint(wxPaintEvent &)
     {
-//        memDC.SelectObject(bitmap);
-//
-//        wxPen pen(wxColor(0.0f, 0.0f, 1.0f));
-//
-//        memDC.SetPen(pen);
-//
-//        wxBrush brush(wxColor(0.0f, 0.0f, 1.0f));
-//
-//        memDC.SetBrush(wxColor(0.0f, 0.0f, 1.0f));
-//
-//        memDC.DrawRectangle(10, 10, 100, 100);
-//
-//        memDC.SelectObject(wxNullBitmap);
-
         wxPaintDC dc(this);
 
-        dc.DrawBitmap(bitmap, 0, 0);
+        wxMemoryDC memoryDC;
+        memoryDC.SelectObject(bitmap);
+
+        wxSize size = dc.GetSize();
+        dc.Blit(0, 0, size.GetWidth(), size.GetHeight(), &memoryDC, 0, 0, wxCOPY);
+
+        memoryDC.SelectObject(wxNullBitmap);
     }
 };
 
@@ -148,6 +140,14 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
     static const wxColour colors[16] =
     {
+        {1.0f, 0.0f, 0.0f},
+        wxColour(0.0f, 1.0f, 0.0f),
+        wxColour(0.0f, 0.5f, 0.05f),
+        wxColour(0.0f, 0.5f, 0.0f),
+        wxColour(0.0f, 0.0f, 1.0f),
+        wxColour(0.5f, 0.5f, 0.5f),
+        wxColour(0.25f, 0.25f, 0.25f),
+        wxColour(0.12f, 0.12f, 0.12f),
         wxColour(1.0f, 0.0f, 0.0f),
         wxColour(0.0f, 1.0f, 0.0f),
         wxColour(0.0f, 0.5f, 0.05f),
@@ -166,11 +166,11 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
         for (int x = x0; x < x0 + width; x += 2)
         {
-            memDC.SetBrush(colors[value & 0x0f]);
+            memDC.SetPen(wxPen(colors[value >> 4]));
 
             memDC.DrawPoint(x, y);
 
-            memDC.SetPen(colors[value >> 4]);
+            memDC.SetPen(wxPen(colors[value & 0x0f]));
 
             memDC.DrawPoint(x + 1, y);
 
