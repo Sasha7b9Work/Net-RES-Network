@@ -241,18 +241,10 @@ void Display::EndScene()
     ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
 }
 
-#ifdef GUI
-#include "Frame.h"
-#endif
-
 
 void Display::Update()
 {
     TimeMeterMS meter_fps;
-
-#ifdef GUI
-    Frame::Self()->BeginScene();
-#endif
 
     if (need_redraw)
     {
@@ -279,8 +271,4 @@ void Display::Update()
     DrawZones();
 
     zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
-
-#ifdef GUI
-    Frame::Self()->EndScene();
-#endif
 }
