@@ -48,7 +48,7 @@ Frame::Frame(const wxString &title)
 
     timer.SetOwner(this, TIMER_ID);
 
-    timer.Start(10);
+    timer.Start(1);
 }
 
 
@@ -82,9 +82,11 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
+    memDC.SelectObject(wxNullBitmap);
+
     wxPaintDC dc(this);
 
-    wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
+    wxImage image = bitmap.ConvertToImage();        // .Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
 
     wxBitmap bmp(image);
 
@@ -102,13 +104,25 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
     memDC.SelectObject(bitmap);
 
-    wxBrush brush({ 0, 0, 0 }, wxSOLID);
+    static const wxColour colors[16] =
+    {
+        wxColour(1.0f, 1.0f, 1.0f),
+        wxColour(0.0f, 0.0f, 0.0f)
+    };
 
-    memDC.SetBrush(brush);
+    for (int y = y0; y < y0 + height; y++)
+    {
+        uint8 *points = Display::Buffer::GetLine(x0, y);
 
-    memDC.DrawRectangle({ 0, 0, Display::WIDTH, Display::HEIGHT });
+        uint8 value = *points;
 
-    memDC.SelectObject(wxNullBitmap);
+        for (int x = x0; x < x0 + width; x += 2)
+        {
+            wxBrush brush(colors[value & 0x0f], wxSOLID);
 
-//    Frame::Self()->Refresh();
+            memDC.SetBrush(brush);
+
+            memDC.DrawPoint(x, y);
+        }
+    }
 }
