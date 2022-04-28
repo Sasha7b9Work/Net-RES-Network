@@ -325,5 +325,5 @@
 #endif
 
 #ifdef GUI
-    #include "stm32f1xx_hal_conf_gui.h"
+    #include "Hardware/HAL/stm32f1xx_hal_conf_gui.h"
 #endif

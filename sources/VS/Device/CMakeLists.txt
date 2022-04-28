@@ -4,7 +4,8 @@ project (Device)
 
 set(CMAKE_UNITY_BUILD OFF)
 
-include_directories(Device
+include_directories(.
+                    Device
                     ../../Device/src
                     ../../Device/src/Hardware/CDC
                     ../../Device/src/Hardware/HAL
@@ -51,7 +52,8 @@ file(GLOB DISPLAY         ../../Device/src/Display/*.*)
 file(GLOB DISPLAY_FONT    ../../Device/src/Display/Font/*.*)
 file(GLOB HARDWARE        ../../Device/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*)
+file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*
+                                           Hardware/HAL/*.*)
 file(GLOB HARDWARE_I2C    ../../Device/src/Hardware/I2C/*.*)
 file(GLOB MODULES_BH1750  ../../Device/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280  ../../Device/src/Modules/BME280/*.*)

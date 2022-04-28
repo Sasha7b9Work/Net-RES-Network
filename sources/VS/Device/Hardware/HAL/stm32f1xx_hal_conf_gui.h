@@ -16,6 +16,12 @@
 #undef __HAL_RCC_USART1_CLK_ENABLE
 #define __HAL_RCC_USART1_CLK_ENABLE()
 
+#undef __HAL_RCC_AFIO_CLK_ENABLE
+#define __HAL_RCC_AFIO_CLK_ENABLE()
+
+#undef __HAL_RCC_PWR_CLK_ENABLE
+#define __HAL_RCC_PWR_CLK_ENABLE()
+
 #undef SPI2
 extern SPI_TypeDef typeDefSPI2;
 #define SPI2  (&typeDefSPI2)
