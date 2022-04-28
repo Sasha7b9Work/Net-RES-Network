@@ -84,12 +84,11 @@ void Frame::OnPaint(wxPaintEvent &)
 {
     wxPaintDC dc(this);
 
-    wxImage image = bitmap.ConvertToImage();
-    image = image.Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
+    wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
 
     wxBitmap bmp(image);
 
-    dc.DrawBitmap(bitmap, 0, 0);
+    dc.DrawBitmap(bmp, 0, 0);
 }
 
 
@@ -111,5 +110,5 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     memDC.SelectObject(wxNullBitmap);
 
-    Frame::Self()->Refresh();
+//    Frame::Self()->Refresh();
 }
