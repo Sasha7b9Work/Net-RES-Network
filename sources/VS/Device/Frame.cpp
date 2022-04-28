@@ -78,7 +78,13 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
+    wxPaintDC ds(this);
 
+    wxBrush brush({ 0, 0, 0 }, wxSOLID);
+
+    ds.SetBrush(brush);
+
+    ds.DrawRectangle({ 10, 10, Display::WIDTH, Display::HEIGHT });
 }
 
 
