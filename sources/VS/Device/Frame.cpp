@@ -38,6 +38,8 @@ public:
 
     void OnPaint(wxPaintEvent &)
     {
+        memDC.SelectObject(wxNullBitmap);
+
         wxPaintDC dc(this);
 
         wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
@@ -120,20 +122,21 @@ void Frame::OnTimer(wxTimerEvent &)
 
 void Frame::BeginScene()
 {
-    memDC.SelectObject(bitmap);
 }
 
 
 void Frame::EndScene()
 {
-    memDC.SelectObject(wxNullBitmap);
-
     screen->Refresh();
 }
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
+    memDC.SelectObject(wxNullBitmap);
+
+    memDC.SelectObject(bitmap);
+
     wxColour colors[16] =
     {
         wxColour(255, 255, 255),
