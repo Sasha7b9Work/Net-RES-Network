@@ -82,7 +82,10 @@ Frame::Frame(const wxString &title)
 
     timer.Start(1);
 
-    SetSize(Display::WIDTH * 2 + 20, Display::HEIGHT * 2 + 70);
+    SetClientSize(Display::WIDTH * 2, Display::HEIGHT * 2);
+
+    SetMinSize(GetSize());
+    SetMaxSize(GetSize());
 }
 
 

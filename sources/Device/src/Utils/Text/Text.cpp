@@ -38,9 +38,9 @@ namespace Text
     // bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, pchar text, int *height);
 
-    bool ByteFontNotEmpty(int eChar, int byte);
+    bool ByteFontNotEmpty(uint eChar, int byte);
 
-    bool BitInFontIsExist(int eChar, int numByte, int bit);
+    bool BitInFontIsExist(uint eChar, int numByte, int bit);
 
     void DrawCharInColorDisplay(int eX, int eY, uchar symbol);
 
@@ -74,10 +74,10 @@ void Font::Set(TypeFont::E typeFont)
 }
 
 
-bool Text::ByteFontNotEmpty(int eChar, int byte)
+bool Text::ByteFontNotEmpty(uint eChar, int byte)
 {
     static const uint8 *bytes = 0;
-    static int prevChar = -1;
+    static uint prevChar = (uint)(-1);
 
     if (eChar != prevChar)
     {
@@ -89,17 +89,19 @@ bool Text::ByteFontNotEmpty(int eChar, int byte)
 }
 
 
-bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
+bool Text::BitInFontIsExist(uint eChar, int numByte, int bit)
 {
     static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
-    static int prevChar = -1;
+    static uint prevChar = (uint)(-1);
     static int prevNumByte = -1;
+
     if (prevNumByte != numByte || prevChar != eChar)
     {
         prevByte = Font::font->symbol[eChar].bytes[numByte];
         prevChar = eChar;
         prevNumByte = numByte;
     }
+
     return prevByte & (1 << bit);
 }
 
@@ -162,9 +164,11 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 }
 
 
-int Text::DrawCharHard(int eX, int eY, char symbol)
+int Text::DrawCharHard(int eX, int eY, char s)
 {
-    int8 width = (int8)Font::font->symbol[(uint8)symbol].width;
+    uint8 symbol = (uint8)s;
+
+    int8 width = (int8)Font::font->symbol[symbol].width;
     int8 height = (int8)Font::font->height;
 
     for (int b = 0; b < height; b++)
