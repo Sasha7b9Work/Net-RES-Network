@@ -15,6 +15,8 @@ static wxMemoryDC memDC;
 
 Frame *Frame::self = nullptr;
 
+static const int IMAGE_SCALE = 2;
+
 enum
 {
     TIMER_ID = 111
@@ -31,7 +33,7 @@ class Screen : public wxPanel
 public:
     Screen(wxWindow *parent) : wxPanel(parent)
     {
-        SetMinSize({ Display::WIDTH * 2, Display::HEIGHT * 2 });
+        SetMinSize({ Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE });
         SetDoubleBuffered(true);
         Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     }
@@ -40,7 +42,7 @@ public:
     {
         wxPaintDC dc(this);
 
-        wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
+        wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
 
         dc.DrawBitmap(wxBitmap(image), 0, 0);
     }
@@ -80,7 +82,7 @@ Frame::Frame(const wxString &title)
 
     timer.Start(1);
 
-    SetClientSize(Display::WIDTH * 2, Display::HEIGHT * 2);
+    SetClientSize(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
 
     SetMinSize(GetSize());
     SetMaxSize(GetSize());
