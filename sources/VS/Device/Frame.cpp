@@ -134,22 +134,38 @@ void Frame::EndScene()
 }
 
 
+static wxColour ConvertColor(Color::E e)
+{
+    uint16 value = Color::colors[e];
+
+    float b = (float)BLUE_FROM_COLOR(value);
+    float g = (float)GREEN_FROM_COLOR(value);
+    float r = (float)RED_FROM_COLOR(value);
+
+    int blue = (b / 31.0f) * 255;
+    int green = (g / 63.0f) * 255;
+    int red = (r / 31.0f) * 255;
+
+    return wxColour(red, green, blue);
+}
+
+
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
     memDC.SelectObject(bitmap);
 
-    wxColour colors[16] =
+    static const wxColour colors[16] =
     {
-        wxColour(255, 255, 255),
-        wxColour(0,   0,   0),
-        wxColour(255, 0,   0),
-        wxColour(0,   255, 0),
-        wxColour(0,   127, 127),
-        wxColour(0,   127, 0),
-        wxColour(0,   0,   255),
-        wxColour(127, 127, 127),
-        wxColour(63,  63,  63),
-        wxColour(31,  31,  31)
+        ConvertColor((Color::E)0),
+        ConvertColor((Color::E)1),
+        ConvertColor((Color::E)2),
+        ConvertColor((Color::E)3),
+        ConvertColor((Color::E)4),
+        ConvertColor((Color::E)5),
+        ConvertColor((Color::E)6),
+        ConvertColor((Color::E)7),
+        ConvertColor((Color::E)8),
+        ConvertColor((Color::E)9)
     };
 
     for (int y = y0; y < y0 + height; y++)
