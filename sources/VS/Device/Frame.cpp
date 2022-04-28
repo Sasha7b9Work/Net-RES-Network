@@ -8,6 +8,8 @@
 
 static wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
 
+Frame *Frame::self = nullptr;
+
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
 EVT_MENU(wxID_ABOUT, Frame::OnAbout)
@@ -29,6 +31,10 @@ Frame::Frame(const wxString &title)
     menuBar->Append(menuFile, _("&File"));
 
     SetMenuBar(menuBar);
+
+    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
+
+    self = this;
 }
 
 
@@ -60,7 +66,13 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 }
 
 
-void ST7735::WriteBuffer(int x0, int y0, int width, int height)
+void Frame::OnPaint(wxPaintEvent &)
 {
 
+}
+
+
+void ST7735::WriteBuffer(int x0, int y0, int width, int height)
+{
+    Frame::Self()->Refresh();
 }

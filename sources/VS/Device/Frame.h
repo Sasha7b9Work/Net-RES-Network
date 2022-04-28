@@ -9,9 +9,14 @@ class Frame : public wxFrame
 public:
     Frame(const wxString &title);
 
+    static Frame *Self() { return self; };
+
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
+    void OnPaint(wxPaintEvent &event);
 
 private:
     wxDECLARE_EVENT_TABLE();
+
+    static Frame *self;
 };
