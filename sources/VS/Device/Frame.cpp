@@ -86,6 +86,14 @@ Frame::Frame(const wxString &title)
 
     SetMinSize(GetSize());
     SetMaxSize(GetSize());
+
+    const int maxWidth = wxSystemSettings::GetMetric(wxSYS_SCREEN_X);
+    const int maxHeight = wxSystemSettings::GetMetric(wxSYS_SCREEN_Y);
+
+    int x = (maxWidth - GetSize().x) / 2;
+    int y = (maxHeight - GetSize().y) / 2;
+
+    SetPosition({ x, y });
 }
 
 
