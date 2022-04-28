@@ -13,7 +13,6 @@ public:
 
     void OnQuit(wxCommandEvent &);
     void OnAbout(wxCommandEvent &);
-    void OnPaint(wxPaintEvent &);
     void OnTimer(wxTimerEvent &);
 
     void BeginScene();

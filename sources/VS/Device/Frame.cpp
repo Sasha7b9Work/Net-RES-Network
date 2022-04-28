@@ -26,6 +26,42 @@ EVT_MENU(wxID_EXIT, Frame::OnQuit)
 wxEND_EVENT_TABLE()
 
 
+class Screen : public wxPanel
+{
+public:
+    Screen(wxWindow *parent) : wxPanel(parent)
+    {
+        SetMinSize({ Display::WIDTH, Display::HEIGHT });
+        SetDoubleBuffered(true);
+        Bind(wxEVT_PAINT, &Screen::OnPaint, this);
+    }
+
+    void OnPaint(wxPaintEvent &)
+    {
+//        memDC.SelectObject(bitmap);
+//
+//        wxPen pen(wxColor(0.0f, 0.0f, 1.0f));
+//
+//        memDC.SetPen(pen);
+//
+//        wxBrush brush(wxColor(0.0f, 0.0f, 1.0f));
+//
+//        memDC.SetBrush(wxColor(0.0f, 0.0f, 1.0f));
+//
+//        memDC.DrawRectangle(10, 10, 100, 100);
+//
+//        memDC.SelectObject(wxNullBitmap);
+
+        wxPaintDC dc(this);
+
+        dc.DrawBitmap(bitmap, 0, 0);
+    }
+};
+
+
+static Screen *screen = nullptr;
+
+
 Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
@@ -43,12 +79,20 @@ Frame::Frame(const wxString &title)
 
     self = this;
 
+    screen = new Screen(this);
+
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    sizer->Add(screen);
+    SetSizer(sizer);
+
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
 
     timer.SetOwner(this, TIMER_ID);
 
     timer.Start(1);
+
+    Show(true);
 }
 
 
@@ -80,18 +124,6 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 }
 
 
-void Frame::OnPaint(wxPaintEvent &)
-{
-    wxPaintDC dc(this);
-
-    wxImage image = bitmap.ConvertToImage();        // .Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
-
-    wxBitmap bmp(image);
-
-    dc.DrawBitmap(bmp, 0, 0);
-}
-
-
 void Frame::OnTimer(wxTimerEvent &)
 {
     Application::Self()->Update();
@@ -106,7 +138,9 @@ void Frame::BeginScene()
 
 void Frame::EndScene()
 {
-    Frame::Self()->Refresh();
+    memDC.SelectObject(wxNullBitmap);
+
+    screen->Refresh();
 }
 
 
@@ -132,14 +166,11 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
         for (int x = x0; x < x0 + width; x += 2)
         {
-            wxPen pen(colors[value & 0x0f]);
-            memDC.SetPen(pen);
+            memDC.SetBrush(colors[value & 0x0f]);
 
-            memDC.SetBrush(wxBrush(colors[value & 0x0f], wxSOLID));
+            memDC.DrawPoint(x, y);
 
-            memDC.DrawRectangle(x, y, 2, 2);
-
-            memDC.SetBrush(wxBrush(colors[value >> 4], wxSOLID));
+            memDC.SetPen(colors[value >> 4]);
 
             memDC.DrawPoint(x + 1, y);
 
