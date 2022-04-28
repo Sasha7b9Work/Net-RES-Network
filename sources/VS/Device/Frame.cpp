@@ -3,13 +3,13 @@
 #include "wx/statline.h"
 
 
-wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
-EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
-EVT_MENU(wxID_EXIT, MyFrame::OnQuit)
+wxBEGIN_EVENT_TABLE(Frame, wxFrame)
+EVT_MENU(wxID_ABOUT, Frame::OnAbout)
+EVT_MENU(wxID_EXIT, Frame::OnQuit)
 wxEND_EVENT_TABLE()
 
 
-MyFrame::MyFrame(const wxString &title)
+Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
     SetIcon(wxICON(sample));
@@ -26,12 +26,12 @@ MyFrame::MyFrame(const wxString &title)
 }
 
 
-void MyFrame::OnQuit(wxCommandEvent &WXUNUSED(event))
+void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
 }
 
-void MyFrame::OnAbout(wxCommandEvent &WXUNUSED(event))
+void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
     wxDialog dlg(this, wxID_ANY, wxString(_("About")));

@@ -4,10 +4,10 @@
 #include "wx/wx.h"
 
 
-class MyFrame : public wxFrame
+class Frame : public wxFrame
 {
 public:
-    MyFrame(const wxString &title);
+    Frame(const wxString &title);
 
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);

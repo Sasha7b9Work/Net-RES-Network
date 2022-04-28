@@ -15,7 +15,7 @@ bool Application::OnInit()
     wxImage::AddHandler(new wxPNGHandler);
 
     // create and show the main application window
-    MyFrame *frame = new MyFrame(_("wxHtmlWindow testing application"));
+    Frame *frame = new Frame(_("wxHtmlWindow testing application"));
     frame->Show();
 
     Init();
