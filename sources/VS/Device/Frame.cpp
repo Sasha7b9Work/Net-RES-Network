@@ -140,7 +140,9 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
     wxColour colors[16] =
     {
-        wxColour(255, 0, 0),
+        wxColour(255, 255, 255),
+        wxColour(0,   0,   0),
+        wxColour(255, 0,   0),
         wxColour(0,   255, 0),
         wxColour(0,   127, 127),
         wxColour(0,   127, 0),
@@ -158,16 +160,13 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
         for (int x = x0; x < x0 + width; x += 2)
         {
-            wxPen pen = *wxWHITE_PEN;
-            pen.SetColour(colors[value >> 4]);
+            memDC.SetPen(wxPen(colors[value >> 4]));
 
-            memDC.SetPen(pen);
-
-            memDC.DrawPoint(x, y);
+            memDC.DrawPoint(x + 1, y);
 
             memDC.SetPen(wxPen(colors[value & 0x0f]));
 
-            memDC.DrawPoint(x + 1, y);
+            memDC.DrawPoint(x, y);
 
             value = *(++points);
         }
