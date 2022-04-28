@@ -133,14 +133,10 @@ void Display::BeginScene(Color::E color)
 }
 
 
-#ifndef GUI
-
 void Display::EndScene()
 {
     ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
 }
-
-#endif
 
 
 void HLine::Draw(int x0, int y, Color::E color)

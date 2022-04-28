@@ -128,6 +128,8 @@ void ST7735::Init()
 }
 
 
+#ifndef GUI
+
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
     SetWindow(x0, y0, width, height);
@@ -212,6 +214,8 @@ void ST7735::SetWindow(int x, int y, int width, int height)
     SendData8(0x00);
     SendData8((uint8)(y + height - 1));
 }
+
+#endif
 
 
 void ST7735::SendData16(uint16 data)

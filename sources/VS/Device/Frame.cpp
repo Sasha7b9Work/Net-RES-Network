@@ -2,7 +2,11 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Display/Display.h"
+#include "Modules/ST7735/ST7735.h"
 #include "wx/statline.h"
+
+
+static wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
 
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
@@ -56,7 +60,7 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 }
 
 
-void Display::EndScene()
+void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
 
 }
