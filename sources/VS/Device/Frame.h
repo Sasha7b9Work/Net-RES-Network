@@ -16,6 +16,10 @@ public:
     void OnPaint(wxPaintEvent &);
     void OnTimer(wxTimerEvent &);
 
+    void BeginScene();
+
+    void EndScene();
+
 private:
     wxDECLARE_EVENT_TABLE();
 

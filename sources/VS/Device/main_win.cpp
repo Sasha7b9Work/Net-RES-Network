@@ -13,6 +13,4 @@ void Application::Init()
 void Application::Update()
 {
     Device::Update();
-
-    Frame::Self()->Refresh();
 }

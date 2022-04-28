@@ -82,11 +82,9 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
-    memDC.SelectObject(wxNullBitmap);
-
     wxPaintDC dc(this);
 
-    wxImage image = bitmap.ConvertToImage();        // .Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
+    wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
 
     wxBitmap bmp(image);
 
@@ -100,20 +98,32 @@ void Frame::OnTimer(wxTimerEvent &)
 }
 
 
+void Frame::BeginScene()
+{
+    memDC.SelectObjectAsSource(bitmap);
+}
+
+
+void Frame::EndScene()
+{
+    memDC.SelectObject(wxNullBitmap);
+
+    Frame::Self()->Refresh();
+}
+
+
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
-    memDC.SelectObject(bitmap);
-
-    static const wxColour colors[16] =
+    static const wxColor colors[16] =
     {
-        wxColour(1.0f, 0.0f, 0.0f),
-        wxColour(0.0f, 1.0f, 0.0f),
-        wxColour(0.0f, 0.5f, 0.05f),
-        wxColour(0.0f, 0.5f, 0.0f),
-        wxColour(0.0f, 0.0f, 1.0f),
-        wxColour(0.5f, 0.5f, 0.5f),
-        wxColour(0.25f, 0.25f, 0.25f),
-        wxColour(0.12f, 0.12f, 0.12f)
+        wxColor(1.0f, 0.0f, 0.0f),
+        wxColor(0.0f, 1.0f, 0.0f),
+        wxColor(0.0f, 0.5f, 0.05f),
+        wxColor(0.0f, 0.5f, 0.0f),
+        wxColor(0.0f, 0.0f, 1.0f),
+        wxColor(0.5f, 0.5f, 0.5f),
+        wxColor(0.25f, 0.25f, 0.25f),
+        wxColor(0.12f, 0.12f, 0.12f)
     };
 
     for (int y = y0; y < y0 + height; y++)
@@ -126,7 +136,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
         {
             memDC.SetBrush(wxBrush(colors[value & 0x0f], wxSOLID));
 
-            memDC.DrawPoint(x, y);
+            memDC.DrawRectangle(x, y, 2, 2);
 
             memDC.SetBrush(wxBrush(colors[value >> 4], wxSOLID));
 

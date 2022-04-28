@@ -95,50 +95,6 @@ namespace Display
 }
 
 
-void Display::Update()
-{
-    TimeMeterMS meter_fps;
-
-    if (need_redraw)
-    {
-        BeginScene(Color::BLACK);
-
-        int x0 = 10;
-        int dX = 125;
-        int y0 = 15;
-        int dY = 22;
-
-        String<>("дюбкемхе :").Draw(x0, y0, Color::_1);         String<>("лоЮ").Draw(x0 + dX, y0);
-        String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
-        String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
-        String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);           String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
-        String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);        String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
-
-        EndScene();
-
-        need_redraw = false;
-    }
-
-    DrawMeasures();
-
-    DrawZones();
-
-    zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
-}
-
-
-void Display::BeginScene(Color::E color)
-{
-    Buffer::Fill(color);
-}
-
-
-void Display::EndScene()
-{
-    ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
-}
-
-
 void HLine::Draw(int x0, int y, Color::E color)
 {
     Color::SetCurrent(color);
@@ -271,4 +227,65 @@ void Display::DrawZones()
 
         zone->Draw();
     }
+}
+
+
+#ifdef GUI
+#include "Frame.h"
+#endif
+
+
+void Display::BeginScene(Color::E color)
+{
+#ifdef GUI
+    Frame::Self()->BeginScene();
+#endif
+
+    Buffer::Fill(color);
+}
+
+
+void Display::EndScene()
+{
+    ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
+
+#ifdef GUI
+    Frame::Self()->EndScene();
+#endif
+}
+
+
+void Display::Update()
+{
+    TimeMeterMS meter_fps;
+
+    if (need_redraw)
+    {
+        BeginScene(Color::BLACK);
+
+        int x0 = 10;
+        int dX = 125;
+        int y0 = 15;
+        int dY = 22;
+
+        String<>("дюбкемхе :").Draw(x0, y0, Color::_1);         String<>("лоЮ").Draw(x0 + dX, y0);
+        String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
+        String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+        String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);           String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
+        String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);        String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
+
+        EndScene();
+
+        need_redraw = false;
+    }
+
+    DrawMeasures();
+
+    DrawZones();
+
+    zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+
+#ifdef GUI
+    Frame::Self()->EndScene();
+#endif
 }
