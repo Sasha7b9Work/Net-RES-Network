@@ -71,7 +71,7 @@ namespace Display
 
             uint8 value = *pixels;
 
-            if (x % 2)
+            if (x & 0x1)
             {
                 value &= 0x0F;
                 value |= (Color::GetCurrent() << 4);
