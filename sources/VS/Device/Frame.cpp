@@ -7,7 +7,11 @@
 #include "wx/statline.h"
 
 
+// Здесь нарисованная картинка
 static wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
+
+// Здесь будем рисовать
+static wxMemoryDC memDC;
 
 Frame *Frame::self = nullptr;
 
@@ -78,13 +82,14 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC ds(this);
+    wxPaintDC dc(this);
 
-    wxBrush brush({ 0, 0, 0 }, wxSOLID);
+    wxImage image = bitmap.ConvertToImage();
+    image = image.Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
 
-    ds.SetBrush(brush);
+    wxBitmap bmp(image);
 
-    ds.DrawRectangle({ 10, 10, Display::WIDTH, Display::HEIGHT });
+    dc.DrawBitmap(bitmap, 0, 0);
 }
 
 
@@ -96,5 +101,15 @@ void Frame::OnTimer(wxTimerEvent &)
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
+    memDC.SelectObject(bitmap);
+
+    wxBrush brush({ 0, 0, 0 }, wxSOLID);
+
+    memDC.SetBrush(brush);
+
+    memDC.DrawRectangle({ 0, 0, Display::WIDTH, Display::HEIGHT });
+
+    memDC.SelectObject(wxNullBitmap);
+
     Frame::Self()->Refresh();
 }
