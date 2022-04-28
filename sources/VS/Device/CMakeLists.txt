@@ -51,7 +51,8 @@ file(GLOB SRC             *.h *.cpp
 file(GLOB DISPLAY         ../../Device/src/Display/*.*)
 file(GLOB DISPLAY_FONT    ../../Device/src/Display/Font/*.*)
 file(GLOB HARDWARE        ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*)
+file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*
+                                           Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*
                                            Hardware/HAL/*.*)
 file(GLOB HARDWARE_I2C    ../../Device/src/Hardware/I2C/*.*)

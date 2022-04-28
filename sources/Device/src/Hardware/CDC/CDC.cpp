@@ -135,6 +135,9 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t */*Len*/)
     return (USBD_OK);
 }
 
+
+#ifndef GUI
+
 uint8_t CDC::Transmit(const char *buffer)
 {
     if (!buffer)
@@ -156,6 +159,8 @@ uint8_t CDC::Transmit(const char *buffer)
 
     return result;
 }
+
+#endif
 
 
 void CDC::OnIRQHandler()
