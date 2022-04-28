@@ -6,6 +6,9 @@
 wxIMPLEMENT_APP(Application);
 
 
+Application *Application::self = nullptr;
+
+
 bool Application::OnInit()
 {
     if (!wxApp::OnInit())
@@ -19,6 +22,8 @@ bool Application::OnInit()
     frame->Show();
 
     Init();
+
+    self = this;
 
     return true;
 }

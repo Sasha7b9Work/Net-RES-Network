@@ -11,12 +11,14 @@ public:
 
     static Frame *Self() { return self; };
 
-    void OnQuit(wxCommandEvent &event);
-    void OnAbout(wxCommandEvent &event);
-    void OnPaint(wxPaintEvent &event);
+    void OnQuit(wxCommandEvent &);
+    void OnAbout(wxCommandEvent &);
+    void OnPaint(wxPaintEvent &);
+    void OnTimer(wxTimerEvent &);
 
 private:
     wxDECLARE_EVENT_TABLE();
 
+    wxTimer timer;
     static Frame *self;
 };

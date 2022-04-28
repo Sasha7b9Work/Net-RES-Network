@@ -3,6 +3,7 @@
 #include "Frame.h"
 #include "Display/Display.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Application.h"
 #include "wx/statline.h"
 
 
@@ -10,6 +11,10 @@ static wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
 
 Frame *Frame::self = nullptr;
 
+enum
+{
+    TIMER_ID = 111
+};
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
 EVT_MENU(wxID_ABOUT, Frame::OnAbout)
@@ -32,9 +37,14 @@ Frame::Frame(const wxString &title)
 
     SetMenuBar(menuBar);
 
-    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
-
     self = this;
+
+    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
+    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+
+    timer.SetOwner(this, TIMER_ID);
+
+    timer.Start(10);
 }
 
 
@@ -69,6 +79,12 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 void Frame::OnPaint(wxPaintEvent &)
 {
 
+}
+
+
+void Frame::OnTimer(wxTimerEvent &)
+{
+    Application::Self()->Update();
 }
 
 

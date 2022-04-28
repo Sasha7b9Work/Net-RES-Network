@@ -9,7 +9,12 @@ class Application : public wxApp
 public:
     virtual bool OnInit() wxOVERRIDE;
 
+    static Application *Self() { return self; }
+
+    void Update();
+
 private:
     void Init();
-    void Update();
+
+    static Application *self;
 };
