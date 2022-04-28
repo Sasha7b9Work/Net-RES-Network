@@ -1,5 +1,7 @@
 // 2022/04/27 11:11:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "Frame.h"
+#include "Display/Display.h"
 #include "wx/statline.h"
 
 
@@ -51,4 +53,10 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Fit(&dlg);
 
     dlg.ShowModal();
+}
+
+
+void Display::EndScene()
+{
+
 }
