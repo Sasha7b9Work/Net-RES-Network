@@ -100,7 +100,7 @@ void Frame::OnTimer(wxTimerEvent &)
 
 void Frame::BeginScene()
 {
-    memDC.SelectObjectAsSource(bitmap);
+    memDC.SelectObject(bitmap);
 }
 
 
@@ -134,6 +134,9 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
         for (int x = x0; x < x0 + width; x += 2)
         {
+            wxPen pen(colors[value & 0x0f]);
+            memDC.SetPen(pen);
+
             memDC.SetBrush(wxBrush(colors[value & 0x0f], wxSOLID));
 
             memDC.DrawRectangle(x, y, 2, 2);
