@@ -237,10 +237,6 @@ void Display::DrawZones()
 
 void Display::BeginScene(Color::E color)
 {
-#ifdef GUI
-    Frame::Self()->BeginScene();
-#endif
-
     Buffer::Fill(color);
 }
 
@@ -248,16 +244,16 @@ void Display::BeginScene(Color::E color)
 void Display::EndScene()
 {
     ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
-
-#ifdef GUI
-    Frame::Self()->EndScene();
-#endif
 }
 
 
 void Display::Update()
 {
     TimeMeterMS meter_fps;
+
+#ifdef GUI
+    Frame::Self()->BeginScene();
+#endif
 
     if (need_redraw)
     {
