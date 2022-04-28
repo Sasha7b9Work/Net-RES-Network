@@ -38,8 +38,6 @@ public:
 
     void OnPaint(wxPaintEvent &)
     {
-        memDC.SelectObject(wxNullBitmap);
-
         wxPaintDC dc(this);
 
         wxImage image = bitmap.ConvertToImage().Rescale(Display::WIDTH * 2, Display::HEIGHT * 2);
@@ -142,9 +140,9 @@ static wxColour ConvertColor(Color::E e)
     float g = (float)GREEN_FROM_COLOR(value);
     float r = (float)RED_FROM_COLOR(value);
 
-    int blue = (b / 31.0f) * 255;
-    int green = (g / 63.0f) * 255;
-    int red = (r / 31.0f) * 255;
+    uint8 blue  = (uint8)((b / 31.0f) * 255);
+    uint8 green = (uint8)((g / 63.0f) * 255);
+    uint8 red   = (uint8)((r / 31.0f) * 255);
 
     return wxColour(red, green, blue);
 }
@@ -152,8 +150,6 @@ static wxColour ConvertColor(Color::E e)
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
-    memDC.SelectObject(bitmap);
-
     static const wxColour colors[16] =
     {
         ConvertColor((Color::E)0),
@@ -167,6 +163,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
         ConvertColor((Color::E)8),
         ConvertColor((Color::E)9)
     };
+
+    memDC.SelectObject(bitmap);
 
     for (int y = y0; y < y0 + height; y++)
     {
@@ -187,6 +185,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
             value = *(++points);
         }
     }
+
+    memDC.SelectObject(wxNullBitmap);
 
     screen->Refresh();
 }
