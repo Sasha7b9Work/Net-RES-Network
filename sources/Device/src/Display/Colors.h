@@ -27,6 +27,10 @@ struct Color
 
     static E GetCurrent();
 
+    static uint16 GetValue(E);
+
+    static const uint16 colors[Count];
+
 private:
 
     static Color::E current;

@@ -20,6 +20,21 @@
 */
 
 
+const uint16 Color::colors[Color::Count] =
+{
+    0xffff,                     // WHITE
+    0x0000,                     // BLACK
+    MAKE_COLOR(31, 0, 0),       // RED
+    MAKE_COLOR(0, 63, 0),       // GREEN
+    MAKE_COLOR(0, 38, 5),       // _1
+    MAKE_COLOR(0, 31, 0),       // GREEN_50
+    MAKE_COLOR(0, 0, 31),       // BLUE
+    MAKE_COLOR(15, 31, 15),
+    MAKE_COLOR(7, 15, 7),
+    MAKE_COLOR(3, 6, 3)
+};
+
+
 namespace ST7735
 {
 #define SET_DC   HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_SET);
@@ -37,20 +52,6 @@ namespace ST7735
     static void SendData8(uint8);
     static void SendData16(uint16);
     static void SetWindow(int startX, int startY, int stopX, int stopY);
-
-    const uint16 colors[Color::Count] =
-    {
-        0xffff,
-        0x0000,
-        MAKE_COLOR(31, 0, 0),       // RED
-        MAKE_COLOR(0, 63, 0),       // GREEN
-        MAKE_COLOR(0, 38, 5),       // _1
-        MAKE_COLOR(0, 31, 0),       // GREEN_50
-        MAKE_COLOR(0, 0, 31),       // BLUE
-        MAKE_COLOR(15, 31, 15),
-        MAKE_COLOR(7, 15, 7),
-        MAKE_COLOR(3, 6, 3)
-    };
 }
 
 
@@ -143,7 +144,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 #define WRITE_NIBBLE(nibble)                    \
             value >>= 4;                        \
             while ((SPI2->SR & SPI_SR_BSY));    \
-            SPI2->DR = colors[value & 0x0f];
+            SPI2->DR = Color::colors[value & 0x0f];
 
     if ((x0 % 8) == 0 && ((width % 8) == 0))
     {
@@ -157,7 +158,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
             {
                 while (SPI2->SR & SPI_SR_BSY) {};
 
-                SPI2->DR = colors[value & 0x0f];            // 0 nibble
+                SPI2->DR = Color::colors[value & 0x0f];            // 0 nibble
 
                 WRITE_NIBBLE(1);
                 WRITE_NIBBLE(2);
@@ -183,11 +184,11 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
             {
                 while ((SPI2->SR & SPI_SR_BSY));
 
-                SPI2->DR = colors[value & 0x0F];
+                SPI2->DR = Color::colors[value & 0x0F];
 
                 while ((SPI2->SR & SPI_SR_BSY));
 
-                SPI2->DR = colors[value >> 4];
+                SPI2->DR = Color::colors[value >> 4];
 
                 value = *(++points);
             }
