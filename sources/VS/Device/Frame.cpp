@@ -127,14 +127,12 @@ void Frame::BeginScene()
 
 void Frame::EndScene()
 {
-    screen->Refresh();
+
 }
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
-    memDC.SelectObject(wxNullBitmap);
-
     memDC.SelectObject(bitmap);
 
     wxColour colors[16] =
@@ -170,4 +168,6 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
             value = *(++points);
         }
     }
+
+    screen->Refresh();
 }
