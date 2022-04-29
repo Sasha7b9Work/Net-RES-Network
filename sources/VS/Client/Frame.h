@@ -13,8 +13,13 @@ public:
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
 
+    static Frame *Self() { return self; }
+
+    void OnPaint(wxPaintEvent &);
+
 private:
 
+    static Frame *self;
     wxToolBar *toolBar = nullptr;
 
     void OnViewBrief(wxCommandEvent &);

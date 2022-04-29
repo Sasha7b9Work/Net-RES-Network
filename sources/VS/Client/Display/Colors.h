@@ -10,7 +10,7 @@ struct Color
     static Color WHITE;
     static Color NONE;
 
-    wxColor value;
+    wxColour value;
 
-    Color(wxColor v) : value(v) {}
+    Color(wxColour v) : value(v) {}
 };

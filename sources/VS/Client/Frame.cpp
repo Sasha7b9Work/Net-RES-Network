@@ -1,7 +1,10 @@
 // 2022/04/29 13:56:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Frame.h"
+#include "Display/Display.h"
 #include <wx/statline.h>
 
+
+Frame *Frame::self = nullptr;
 
 enum
 {
@@ -26,6 +29,8 @@ enum
 Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
+    self = this;
+
     SetIcon(wxICON(MAIN_ICON));
 
     wxMenuBar *menuBar = new wxMenuBar;
@@ -48,6 +53,8 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_MENU, &Frame::OnViewBrief, this, TOOL_VIEW_BRIEF);
     Bind(wxEVT_MENU, &Frame::OnViewFull, this, TOOL_VIEW_FULL);
+
+    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
 
     CreateFrameToolBar();
 }
@@ -99,6 +106,7 @@ void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
     Close(true);
 }
 
+
 void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
@@ -119,4 +127,12 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Fit(&dlg);
 
     dlg.ShowModal();
+}
+
+
+void Frame::OnPaint(wxPaintEvent &)
+{
+    wxPaintDC dc(this);
+
+    dc.DrawBitmap(Display::bitmap, 0, 0);
 }
