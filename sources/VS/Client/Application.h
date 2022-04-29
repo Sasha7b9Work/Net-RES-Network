@@ -8,7 +8,11 @@ class Application : public wxApp
 public:
     virtual bool OnInit() wxOVERRIDE;
 
+    void OnTimer(wxTimerEvent &);
+
 private:
+
+    wxTimer timer;
 
     void Init();
 

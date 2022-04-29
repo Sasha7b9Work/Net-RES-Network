@@ -5,6 +5,11 @@
 
 wxIMPLEMENT_APP(Application);
 
+enum
+{
+    TIMER_ID = 111
+};
+
 
 bool Application::OnInit()
 {
@@ -16,9 +21,22 @@ bool Application::OnInit()
 
     // create and show the main application window
     Frame *frame = new Frame(_("Метеостанция"));
+
     frame->Show();
 
     Init();
 
+    Bind(wxEVT_TIMER, &Application::OnTimer, this, TIMER_ID);
+
+    timer.SetOwner(this, TIMER_ID);
+
+    timer.Start();
+
     return true;
+}
+
+
+void Application::OnTimer(wxTimerEvent &)
+{
+    Update();
 }
