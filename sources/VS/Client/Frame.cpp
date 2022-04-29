@@ -52,6 +52,8 @@ static Screen *screen = nullptr;
 Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
+    SetMinSize({ 600, 600 });
+
     self = this;
 
     SetIcon(wxICON(MAIN_ICON));

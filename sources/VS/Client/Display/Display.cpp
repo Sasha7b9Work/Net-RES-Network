@@ -29,7 +29,7 @@ void Display::Update()
 {
     BeginScene(Color::BLACK);
 
-    DrawText(150, 150, _("Тестовая строка"), Color::WHITE);
+    DrawText(50, 50, _("Тестовая строка"), Color::WHITE);
 
     EndScene();
 }
@@ -66,6 +66,6 @@ void Display::SetColor(Color &color)
     pen.SetColour(color.value);
     brush.SetColour(color.value);
 
-    memDC.SetPen(pen);
+//    memDC.SetPen(pen);
     memDC.SetBrush(brush);
 }
