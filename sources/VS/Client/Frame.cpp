@@ -6,6 +6,7 @@
 
 Frame *Frame::self = nullptr;
 
+
 enum
 {
     TOOL_OPEN,
@@ -24,6 +25,28 @@ enum
     MEAS_VELOCITY,          // Скорость
     MEAS_TEMPERATURE        // Температура
 };
+
+
+class Screen : public wxPanel
+{
+public:
+    Screen(wxWindow *parent) : wxPanel(parent)
+    {
+        SetMinSize({ Display::WIDTH, Display::HEIGHT });
+        SetDoubleBuffered(true);
+        Bind(wxEVT_PAINT, &Screen::OnPaint, this);
+    }
+
+    void OnPaint(wxPaintEvent &)
+    {
+        wxPaintDC dc(this);
+
+        dc.DrawBitmap(wxBitmap(Display::bitmap), 0, 0);
+    }
+};
+
+
+static Screen *screen = nullptr;
 
 
 Frame::Frame(const wxString &title)
@@ -57,6 +80,12 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
 
     CreateFrameToolBar();
+
+    screen = new Screen(this);
+
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    sizer->Add(screen);
+    SetSizer(sizer);
 }
 
 
@@ -132,7 +161,5 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC dc(this);
-
-    dc.DrawBitmap(Display::bitmap, 0, 0);
+    screen->Refresh();
 }
