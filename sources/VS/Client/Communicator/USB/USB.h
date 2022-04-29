@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace VCP
+namespace USB
 {
     void Update();
 }
