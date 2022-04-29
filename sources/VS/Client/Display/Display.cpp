@@ -27,7 +27,7 @@ namespace Display
 
 void Display::Update()
 {
-    BeginScene(Color::WHITE);
+    BeginScene(Color::BLACK);
 
     DrawText(50, 50, _("Тестовая строка"), Color::WHITE);
 
@@ -78,4 +78,6 @@ void Display::SetColor(Color &color)
 
     memDC.SetBrush(brush);
     memDC.SetPen(pen);
+
+    memDC.SetTextForeground(color.value);
 }
