@@ -7,4 +7,10 @@ class Application : public wxApp
 {
 public:
     virtual bool OnInit() wxOVERRIDE;
+
+private:
+
+    void Init();
+
+    void Update();
 };

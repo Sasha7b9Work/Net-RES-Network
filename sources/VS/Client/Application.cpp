@@ -18,5 +18,7 @@ bool Application::OnInit()
     Frame *frame = new Frame(_("Метеостанция"));
     frame->Show();
 
+    Init();
+
     return true;
 }
