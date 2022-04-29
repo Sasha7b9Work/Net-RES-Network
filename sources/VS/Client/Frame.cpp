@@ -5,6 +5,13 @@
 
 enum
 {
+    TOOL_OPEN,
+    TOOL_SAVE,
+    TOOL_NEW,
+
+    TOOL_UNDO,
+    TOOL_REDO,
+
     TOOL_VIEW_BRIEF,        // Сокращённый вид отображения
     TOOL_VIEW_FULL          // Полный вид отображения
 };
@@ -13,20 +20,19 @@ enum
 Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
-    SetIcon(wxICON(sample));
-
-    wxMenu *menuFile = new wxMenu;
-
-    menuFile->Append(wxID_ABOUT);
-    menuFile->Append(wxID_EXIT);
+    SetIcon(wxICON(MAIN_ICON));
 
     wxMenuBar *menuBar = new wxMenuBar;
+
+    wxMenu *menuFile = new wxMenu;
+    menuFile->Append(wxID_EXIT);
     menuBar->Append(menuFile, _("Файл"));
 
     wxMenu *menuSettings = new wxMenu;
     menuBar->Append(menuSettings, _("Настройки"));
 
     wxMenu *menuHelp = new wxMenu;
+    menuHelp->Append(wxID_ABOUT);
     menuBar->Append(menuHelp, _("Помощь"));
 
     SetMenuBar(menuBar);
@@ -35,10 +41,40 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU, &Frame::OnQuit, this, wxID_EXIT);
 
     Bind(wxEVT_MENU, &Frame::OnViewBrief, this, TOOL_VIEW_BRIEF);
+    Bind(wxEVT_MENU, &Frame::OnViewFull, this, TOOL_VIEW_FULL);
+
+    CreateFrameToolBar();
+}
+
+
+void Frame::CreateFrameToolBar()
+{
+    toolBar = CreateToolBar();
+
+    AddTool(TOOL_VIEW_BRIEF, _T("Краткий вид"), "TOOL_VIEW_BRIEF");
+    AddTool(TOOL_VIEW_FULL, _T("Полный вид"), "TOOL_VIEW_FULL");
+
+    toolBar->Realize();
+}
+
+
+void Frame::AddTool(int id, const wxString &label, pchar nameResource, pchar nameResourceDisabled)
+{
+    wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
+
+    wxBitmap bitmapDisabled(nameResourceDisabled ? wxBitmap(nameResourceDisabled, wxBITMAP_TYPE_BMP_RESOURCE) : bitmap);
+
+    toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
 }
 
 
 void Frame::OnViewBrief(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnViewFull(wxCommandEvent &)
 {
 
 }

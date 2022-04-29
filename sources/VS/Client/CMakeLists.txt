@@ -5,7 +5,7 @@ project (Client)
 set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
-                    ../../VS/ThirdParty/wxWidgets/include 
+                    ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
@@ -29,12 +29,14 @@ if(WIN32)
     add_compile_options(/wd5045)
 endif()
 
+file(GLOB RESOURCES          resources/*.*)
 file(GLOB SRC                *.h *.cpp)
 file(GLOB COMMUNICATOR       Communicator/*.*)
 file(GLOB COMMUNICATOR_VCP   Communicator/VCP/*.*)
 file(GLOB COMMUNICATOR_HC12  Communicator/HC12/*.*)
 file(GLOB COMMUNICATOR_RS232 Communicator/RS232/*.*)
 
+source_group(resources          FILES ${RESOURCES})
 source_group(src                FILES ${SRC})
 source_group(Communicator       FILES ${COMMUNICATOR})
 source_group(Communicator/VCP   FILES ${COMMUNICATOR_VCP})
@@ -42,6 +44,7 @@ source_group(Communicator/HC12  FILES ${COMMUNICATOR_HC12})
 source_group(Communicator/RS232 FILES ${COMMUNICATOR_RS232})
 
 add_executable( ${PROJECT_NAME}
+                ${RESOURCES}
                 ${SRC}
                 ${COMMUNICATOR}
                 ${COMMUNICATOR_VCP}

@@ -1,0 +1,17 @@
+/* The first icon in the resource file is the default icon in Explorer */
+
+MAIN_ICON           ICON "SKY.ico"
+                    
+TOOL_OPEN           BITMAP "tool_open.bmp"
+TOOL_SAVE           BITMAP "tool_save.bmp"
+TOOL_NEW            BITMAP "tool_new.bmp"
+                    
+TOOL_UNDO           BITMAP "tool_undo.bmp"
+TOOL_REDO           BITMAP "tool_redo.bmp"
+
+TOOL_VIEW_BRIEF     BITMAP "tool_triangle.bmp"
+TOOL_VIEW_FULL      BITMAP "tool_trapeze.bmp"
+
+
+#include "wx/msw/wx.rc"
+
