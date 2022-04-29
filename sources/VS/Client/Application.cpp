@@ -3,10 +3,10 @@
 #include "Frame.h"
 
 
-wxIMPLEMENT_APP(MyApp);
+wxIMPLEMENT_APP(Application);
 
 
-bool MyApp::OnInit()
+bool Application::OnInit()
 {
     if (!wxApp::OnInit())
         return false;
