@@ -27,9 +27,9 @@ namespace Display
 
 void Display::Update()
 {
-    BeginScene(Color::WHITE);
+    BeginScene(Color::BLACK);
 
-    DrawText(50, 50, _("Тестовая строка"), Color::BLACK);
+    DrawText(50, 50, _("Тестовая строка"), Color::WHITE);
 
     EndScene();
 }

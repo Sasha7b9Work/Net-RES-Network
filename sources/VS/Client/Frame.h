@@ -17,6 +17,8 @@ public:
 
     void OnPaint(wxPaintEvent &);
 
+    void OnCloseWindow(wxCloseEvent &);
+
 private:
 
     static Frame *self;

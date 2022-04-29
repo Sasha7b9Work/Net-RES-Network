@@ -75,6 +75,7 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &Frame::OnQuit, this, wxID_EXIT);
+    Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_MENU, &Frame::OnViewBrief, this, TOOL_VIEW_BRIEF);
     Bind(wxEVT_MENU, &Frame::OnViewFull, this, TOOL_VIEW_FULL);
@@ -137,6 +138,14 @@ void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
     self = nullptr;
 
     Close(true);
+}
+
+
+void Frame::OnCloseWindow(wxCloseEvent &event)
+{
+    self = nullptr;
+
+    event.Skip();
 }
 
 
