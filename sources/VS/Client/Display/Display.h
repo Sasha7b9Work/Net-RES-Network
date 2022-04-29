@@ -7,7 +7,7 @@
 namespace Display
 {
     static const int WIDTH = 320;
-    static const int HEIGHT = 240;
+    static const int HEIGHT = 320;
 
     extern wxBitmap bitmap;
 
