@@ -27,9 +27,9 @@ namespace Display
 
 void Display::Update()
 {
-    BeginScene(Color::BLACK);
+    BeginScene(Color::WHITE);
 
-    DrawText(50, 50, _("Тестовая строка"), Color::WHITE);
+    DrawText(50, 50, _("Тестовая строка"), Color::BLACK);
 
     EndScene();
 }
@@ -49,6 +49,13 @@ void Display::DrawText(int x, int y, const wxString &text, Color &color)
 {
     SetColor(color);
 
+    const wxFont font = memDC.GetFont();
+
+    wxFont new_font = font;
+    new_font.SetPointSize(20);
+
+    memDC.SetFont(new_font);
+
     memDC.DrawText(text, x, y);
 }
 
@@ -57,7 +64,10 @@ void Display::EndScene()
 {
     memDC.SelectObject(wxNullBitmap);
 
-    Frame::Self()->Refresh();
+    if (Frame::Self())
+    {
+        Frame::Self()->Refresh();
+    }
 }
 
 
@@ -66,6 +76,6 @@ void Display::SetColor(Color &color)
     pen.SetColour(color.value);
     brush.SetColour(color.value);
 
-//    memDC.SetPen(pen);
+    memDC.SetPen(pen);
     memDC.SetBrush(brush);
 }

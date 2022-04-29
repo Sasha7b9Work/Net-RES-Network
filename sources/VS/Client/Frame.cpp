@@ -134,6 +134,8 @@ void Frame::OnViewFull(wxCommandEvent &)
 
 void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
+    self = nullptr;
+
     Close(true);
 }
 
