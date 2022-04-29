@@ -29,21 +29,24 @@ if(WIN32)
     add_compile_options(/wd5045)
 endif()
 
-file(GLOB SRC               *.h *.cpp)
-file(GLOB COMMUNICATOR      Communicator/*.*)
-file(GLOB COMMUNICATOR_VCP  Communicator/VCP/*.*)
-file(GLOB COMMUNICATOR_HC12 Communicator/HC12/*.*)
+file(GLOB SRC                *.h *.cpp)
+file(GLOB COMMUNICATOR       Communicator/*.*)
+file(GLOB COMMUNICATOR_VCP   Communicator/VCP/*.*)
+file(GLOB COMMUNICATOR_HC12  Communicator/HC12/*.*)
+file(GLOB COMMUNICATOR_RS232 Communicator/RS232/*.*)
 
-source_group(src               FILES ${SRC})
-source_group(Communicator      FILES ${COMMUNICATOR})
-source_group(Communicator/VCP  FILES ${COMMUNICATOR_VCP})
-source_group(Communicator/HC12 FILES ${COMMUNICATOR_HC12})
+source_group(src                FILES ${SRC})
+source_group(Communicator       FILES ${COMMUNICATOR})
+source_group(Communicator/VCP   FILES ${COMMUNICATOR_VCP})
+source_group(Communicator/HC12  FILES ${COMMUNICATOR_HC12})
+source_group(Communicator/RS232 FILES ${COMMUNICATOR_RS232})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${COMMUNICATOR}
                 ${COMMUNICATOR_VCP}
                 ${COMMUNICATOR_HC12}
+                ${COMMUNICATOR_RS232}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase31ud wxmsw31ud_core)
