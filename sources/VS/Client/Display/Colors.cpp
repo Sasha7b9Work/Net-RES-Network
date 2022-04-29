@@ -2,5 +2,5 @@
 #include "Display/Colors.h"
 
 
-Color Color::WHITE(wxColor(255, 255, 255));
-Color Color::BLACK(wxColor(0, 0, 0));
+Color Color::WHITE(wxColour(255, 255, 255));
+Color Color::BLACK(wxColour(0, 0, 0));
