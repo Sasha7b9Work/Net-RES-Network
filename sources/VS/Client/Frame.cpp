@@ -13,7 +13,13 @@ enum
     TOOL_REDO,
 
     TOOL_VIEW_BRIEF,        // Сокращённый вид отображения
-    TOOL_VIEW_FULL          // Полный вид отображения
+    TOOL_VIEW_FULL,         // Полный вид отображения
+
+    MEAS_PRESSURE,          // Давление
+    MEAS_ILLUMINATION,      // Освещённость
+    MEAS_HUMIDITY,          // Влажность
+    MEAS_VELOCITY,          // Скорость
+    MEAS_TEMPERATURE        // Температура
 };
 
 
@@ -53,6 +59,14 @@ void Frame::CreateFrameToolBar()
 
     AddTool(TOOL_VIEW_BRIEF, _T("Краткий вид"), "TOOL_VIEW_BRIEF");
     AddTool(TOOL_VIEW_FULL, _T("Полный вид"), "TOOL_VIEW_FULL");
+
+    toolBar->AddSeparator();
+
+    AddTool(MEAS_PRESSURE, _T("Давление"), "MEAS_PRESSURE");
+    AddTool(MEAS_ILLUMINATION, _T("Освещённость"), "MEAS_ILLUMINATION");
+    AddTool(MEAS_HUMIDITY, _T("Влажность"), "MEAS_HUMIDITY");
+    AddTool(MEAS_VELOCITY, _T("Скорость"), "MEAS_VELOCITY");
+    AddTool(MEAS_TEMPERATURE, _T("Температура"), "MEAS_TEMPERATURE");
 
     toolBar->Realize();
 }
