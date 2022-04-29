@@ -21,6 +21,7 @@ if(WIN32)
     add_compile_options(/wd4626)
     add_compile_options(/wd4774)
     add_compile_options(/wd4820)
+    add_compile_options(/wd4996)
     add_compile_options(/wd5026)
     add_compile_options(/wd5027)
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
@@ -28,12 +29,21 @@ if(WIN32)
     add_compile_options(/wd5045)
 endif()
 
-file(GLOB SRC       *.h *.cpp)
+file(GLOB SRC               *.h *.cpp)
+file(GLOB COMMUNICATOR      Communicator/*.*)
+file(GLOB COMMUNICATOR_VCP  Communicator/VCP/*.*)
+file(GLOB COMMUNICATOR_HC12 Communicator/HC12/*.*)
 
-source_group(src    FILES ${SRC})
+source_group(src               FILES ${SRC})
+source_group(Communicator      FILES ${COMMUNICATOR})
+source_group(Communicator/VCP  FILES ${COMMUNICATOR_VCP})
+source_group(Communicator/HC12 FILES ${COMMUNICATOR_HC12})
 
 add_executable( ${PROJECT_NAME}
                 ${SRC}
+                ${COMMUNICATOR}
+                ${COMMUNICATOR_VCP}
+                ${COMMUNICATOR_HC12}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase31ud wxmsw31ud_core)

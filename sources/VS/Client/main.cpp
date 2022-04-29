@@ -47,7 +47,7 @@ bool MyApp::OnInit()
     wxImage::AddHandler(new wxPNGHandler);
 
     // create and show the main application window
-    MyFrame *frame = new MyFrame(_("wxHtmlWindow testing application"));
+    MyFrame *frame = new MyFrame(_("Метеостанция"));
     frame->Show();
 
     return true;
@@ -65,7 +65,13 @@ MyFrame::MyFrame(const wxString &title)
     menuFile->Append(wxID_EXIT);
 
     wxMenuBar *menuBar = new wxMenuBar;
-    menuBar->Append(menuFile, _("&File"));
+    menuBar->Append(menuFile, _("Файл"));
+
+    wxMenu *menuSettings = new wxMenu;
+    menuBar->Append(menuSettings, _("Настройки"));
+
+    wxMenu *menuHelp = new wxMenu;
+    menuBar->Append(menuHelp, _("Помощь"));
 
     SetMenuBar(menuBar);
 }
