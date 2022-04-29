@@ -3,10 +3,11 @@
 #include <wx/statline.h>
 
 
-wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-EVT_MENU(wxID_ABOUT, Frame::OnAbout)
-EVT_MENU(wxID_EXIT, Frame::OnQuit)
-wxEND_EVENT_TABLE()
+enum
+{
+    TOOL_VIEW_BRIEF,        // Сокращённый вид отображения
+    TOOL_VIEW_FULL          // Полный вид отображения
+};
 
 
 Frame::Frame(const wxString &title)
@@ -29,6 +30,17 @@ Frame::Frame(const wxString &title)
     menuBar->Append(menuHelp, _("Помощь"));
 
     SetMenuBar(menuBar);
+
+    Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, wxID_EXIT);
+
+    Bind(wxEVT_MENU, &Frame::OnViewBrief, this, TOOL_VIEW_BRIEF);
+}
+
+
+void Frame::OnViewBrief(wxCommandEvent &)
+{
+
 }
 
 

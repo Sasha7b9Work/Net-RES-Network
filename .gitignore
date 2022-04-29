@@ -3,6 +3,7 @@
 *.lst
 *.scvd
 *.out
+~*~
 
 sources/*.uvgui.*
 sources/generated/

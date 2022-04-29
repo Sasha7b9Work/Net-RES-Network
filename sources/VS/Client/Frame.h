@@ -13,5 +13,6 @@ public:
     void OnAbout(wxCommandEvent &event);
 
 private:
-    wxDECLARE_EVENT_TABLE();
+
+    void OnViewBrief(wxCommandEvent &);
 };
