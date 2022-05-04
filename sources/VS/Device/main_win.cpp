@@ -10,15 +10,12 @@
 void Application::Init()
 {
     Device::Init();
+
+    ClientTCP::Connect(777);
 }
 
 
 void Application::Update()
 {
     Device::Update();
-
-    if (!ClientTCP::Connected())
-    {
-        ClientTCP::Connect(777);
-    }
 }

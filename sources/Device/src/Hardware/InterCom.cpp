@@ -8,6 +8,7 @@
 #include "Utils/Text/String.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
+#include "Hardware/LAN/ClientTCP.h"
 
 
 namespace InterCom
@@ -72,4 +73,10 @@ void InterCom::Send(TypeMeasure::E type, float measure)
     {
         HC12::Transmit(data.Data(), 12);
     }
+
+#ifdef GUI
+
+    ClientTCP::Transmit(data.Data(), 12);
+
+#endif
 }
