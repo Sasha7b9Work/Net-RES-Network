@@ -3,6 +3,9 @@
 #include "Hardware/LAN/ServerTCP.h"
 #include "Hardware/LAN/libnet/netserver.h"
 #include "Hardware/LAN/libnet/netpacket.h"
+#include "Utils/Buffer.h"
+#include "Utils/Math.h"
+#include "Display/Display.h"
 
 
 namespace ServerTCP
@@ -14,6 +17,8 @@ namespace ServerTCP
     size_t OnReceiveData(net__::netpacket *, void *);
 
     size_t OnConnection(sock_t, void *);
+
+    void ProcessData(Buffer<uint8, 1024> &);
 }
 
 
@@ -46,15 +51,40 @@ void ServerTCP::Close()
 
 size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
 {
-    char buffer[1024];
+    static Buffer<uint8, 1024> buffer;
 
-    sprintf(buffer, "received %d bytes\n", (int)packet->get_maxsize());
+    buffer.Append(packet->get_ptr(), packet->get_maxsize());
 
-    DWORD num_chars = 0;
+    ProcessData(buffer);
 
-    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
+    return 0;
+}
 
-    return packet->get_maxsize();
+
+void ServerTCP::ProcessData(Buffer<uint8, 1024> &data)
+{
+    while (data.Size() >= 12 && !(data[0] == 'A' && data[1] == 'B' && data[2] == 'C'))
+    {
+        data.Front();
+    }
+
+    if (data.Size() < 12)
+    {
+        return;
+    }
+
+    uint hash = 0;
+
+    std::memcpy(&hash, &data[3], 4);
+
+    if (hash == Math::CalculateHash(&data[7], 5))
+    {
+        int type = data[7];
+        float value = 0.0f;
+        std::memcpy(&value, &data[8], 4);
+
+        Display::SetValue(type, value);
+    }
 }
 
 

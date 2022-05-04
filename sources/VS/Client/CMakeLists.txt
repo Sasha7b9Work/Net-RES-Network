@@ -40,6 +40,7 @@ file(GLOB DATA                Data/*.*)
 file(GLOB DISPLAY             Display/*.*)
 file(GLOB HARDWARE_LAN        Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET Hardware/LAN/libnet/*.*)
+file(GLOB UTILS               Utils/*.*)
 
 source_group(resources           FILES ${RESOURCES})
 source_group(src                 FILES ${SRC})
@@ -51,6 +52,7 @@ source_group(Data                FILES ${DATA})
 source_group(Display             FILES ${DISPLAY})
 source_group(Hardware/LAN        FILES ${HARDWARE_LAN})
 source_group(Hardware/LAN/libnet FILES ${HARDWARE_LAN_LIBNET})
+source_group(Utils               FILES ${UTILS})
 
 add_executable( ${PROJECT_NAME}
                 ${RESOURCES}
@@ -63,6 +65,7 @@ add_executable( ${PROJECT_NAME}
                 ${DISPLAY}
                 ${HARDWARE_LAN}
                 ${HARDWARE_LAN_LIBNET}
+                ${UTILS}
                 )
 
 target_link_libraries(${PROJECT_NAME} wxbase31ud wxmsw31ud_core Ws2_32)

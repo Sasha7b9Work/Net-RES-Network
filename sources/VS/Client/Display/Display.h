@@ -12,4 +12,6 @@ namespace Display
     extern wxBitmap bitmap;
 
     void Update();
+
+    void SetValue(int type, float value);
 }

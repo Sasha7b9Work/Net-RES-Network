@@ -81,3 +81,15 @@ void Display::SetColor(Color &color)
 
     memDC.SetTextForeground(color.value);
 }
+
+
+void Display::SetValue(int type, float value)
+{
+    char buffer[1024];
+
+    sprintf(buffer, "%d = %f\n", type, value);
+
+    DWORD num_chars = 0;
+
+    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
+}
