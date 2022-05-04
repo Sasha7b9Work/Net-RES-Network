@@ -85,9 +85,9 @@ void Display::SetColor(Color &color)
 
 void Display::SetValue(int type, float value)
 {
-    static char buffer[1024];
+    char buffer[1024];
 
-    sprintf(buffer, "%d = %f\0x0d\0x0a", type, value);
+    sprintf(buffer, "%d = %f", type, value);
 
     DWORD num_chars = 0;
 
