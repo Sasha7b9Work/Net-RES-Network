@@ -4,9 +4,11 @@
 
 namespace ServerTCP
 {
-    void Connect(uint16 port);
+    void Open(uint16 port);
 
-    bool Connected();
+    bool Opened();
 
-    void Disconnect();
+    void Close();
+
+    void Update();
 };

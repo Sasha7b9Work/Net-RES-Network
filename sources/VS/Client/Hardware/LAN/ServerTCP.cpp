@@ -15,9 +15,9 @@ namespace ServerTCP
 }
 
 
-void ServerTCP::Connect(uint16 port)
+void ServerTCP::Open(uint16 port)
 {
-    Disconnect();
+    Close();
 
     socket = server.openPort(port);
 
@@ -25,15 +25,15 @@ void ServerTCP::Connect(uint16 port)
 }
 
 
-bool ServerTCP::Connected()
+bool ServerTCP::Opened()
 {
     return !server.isClosed(socket);
 }
 
 
-void ServerTCP::Disconnect()
+void ServerTCP::Close()
 {
-    if (!Connected())
+    if (!Opened())
     {
         return;
     }
@@ -45,4 +45,10 @@ void ServerTCP::Disconnect()
 size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
 {
     return packet->get_maxsize();
+}
+
+
+void ServerTCP::Update()
+{
+    server.run();
 }
