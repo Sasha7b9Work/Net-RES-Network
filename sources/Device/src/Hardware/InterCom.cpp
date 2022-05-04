@@ -8,8 +8,6 @@
 #include "Utils/Text/String.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
-//#include <cstring>
-//#include <cstdlib>
 
 
 namespace InterCom
@@ -73,6 +71,6 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     if (direction & Direction::HC12)
     {
-        HC12::Transmit(message.c_str());
+        HC12::Transmit(data.Data(), 12);
     }
 }
