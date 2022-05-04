@@ -20,7 +20,7 @@ namespace InterCom
 
         message[0] = 'A';
         message[1] = 'B';
-        message[3] = 'C';
+        message[2] = 'C';
 
         uint8 buffer[5];
         buffer[0] = (uint8)type;
@@ -28,14 +28,13 @@ namespace InterCom
 
         uint hash = Math::CalculateHash(buffer, 5);
 
-        memcpy(&message[4], &hash, 4);
+        memcpy(&message[3], &hash, 4);
 
-        memcpy(&message[8], buffer, 5);
+        memcpy(&message[7], buffer, 5);
 
         return message;
     }
 }
-
 
 
 void InterCom::SetDirection(Direction::E dir)
