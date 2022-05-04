@@ -9,7 +9,7 @@
 
 void Application::Init()
 {
-//    AllocConsole();
+    AllocConsole();
 
     ServerTCP::Open(777);
 }
@@ -25,5 +25,5 @@ void Application::Update()
 
 void Frame::OnClose()
 {
-//    FreeConsole();
+    FreeConsole();
 }
