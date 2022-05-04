@@ -13,7 +13,7 @@ struct TypeMeasure
         Velocity,           // Скорость
         Temperature,        // Температура
         Count
-    };
+    }; 
 };
 
 

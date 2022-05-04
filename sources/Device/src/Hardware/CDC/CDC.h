@@ -7,7 +7,7 @@ struct CDC
 {
     static void Init();
 
-    static uint8_t Transmit(const char *buffer);
+    static uint8_t Transmit(const void *buffer, int size);
 
     static void OnIRQHandler();
 

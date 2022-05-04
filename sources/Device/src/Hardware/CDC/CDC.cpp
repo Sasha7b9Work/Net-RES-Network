@@ -138,7 +138,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t */*Len*/)
 
 #ifndef GUI
 
-uint8_t CDC::Transmit(const char *buffer)
+uint8_t CDC::Transmit(const void *buffer, int size)
 {
     if (!buffer)
     {
@@ -154,7 +154,7 @@ uint8_t CDC::Transmit(const char *buffer)
         return USBD_BUSY;
     }
 
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)(strlen(buffer) + 1));
+    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)size);
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;

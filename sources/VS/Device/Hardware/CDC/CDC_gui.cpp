@@ -2,7 +2,7 @@
 #include "Hardware/CDC/CDC.h"
 
 
-uint8 CDC::Transmit(const char *)
+uint8 CDC::Transmit(const void *, int)
 {
     return 0;
 }
