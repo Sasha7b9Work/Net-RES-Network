@@ -9,6 +9,4 @@ namespace ServerTCP
     bool Connected();
 
     void Disconnect();
-
-    void Transmit(const void *buffer, int size);
 };
