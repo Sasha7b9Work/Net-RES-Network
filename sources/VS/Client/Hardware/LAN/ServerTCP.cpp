@@ -12,6 +12,8 @@ namespace ServerTCP
     sock_t socket = -1;
 
     size_t OnReceiveData(net__::netpacket *, void *);
+
+    size_t OnConnection(sock_t, void *);
 }
 
 
@@ -19,9 +21,11 @@ void ServerTCP::Open(uint16 port)
 {
     Close();
 
-    socket = server.openPort(port);
-
     server.setConPktCB(socket, OnReceiveData, nullptr);
+
+    server.setConnectCB(OnConnection, nullptr);
+
+    socket = server.openPort(port);
 }
 
 
@@ -53,6 +57,12 @@ size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
     WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
 
     return packet->get_maxsize();
+}
+
+
+size_t ServerTCP::OnConnection(sock_t, void *)
+{
+    return 0;
 }
 
 
