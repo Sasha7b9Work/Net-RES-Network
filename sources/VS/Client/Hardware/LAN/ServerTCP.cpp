@@ -21,11 +21,9 @@ void ServerTCP::Open(uint16 port)
 {
     Close();
 
-    server.setConPktCB(socket, OnReceiveData, nullptr);
+    socket = server.openPort(port);
 
     server.setConnectCB(OnConnection, nullptr);
-
-    socket = server.openPort(port);
 }
 
 
@@ -60,8 +58,10 @@ size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
 }
 
 
-size_t ServerTCP::OnConnection(sock_t, void *)
+size_t ServerTCP::OnConnection(sock_t sock, void *)
 {
+    server.setConPktCB(sock, OnReceiveData, nullptr);
+
     return 0;
 }
 
