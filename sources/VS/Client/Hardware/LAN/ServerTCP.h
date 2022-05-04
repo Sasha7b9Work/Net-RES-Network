@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace ClientTCP
+namespace ServerTCP
 {
     void Connect(uint16 port);
 
