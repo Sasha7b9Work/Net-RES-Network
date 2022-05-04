@@ -16,6 +16,8 @@ void ClientTCP::Connect(uint16 port)
 {
     Disconnect();
 
+    client.setConnTimeout(0);
+
     socket = client.doConnect("localhost", port);
 }
 

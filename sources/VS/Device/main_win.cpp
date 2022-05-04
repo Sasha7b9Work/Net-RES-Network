@@ -5,17 +5,25 @@
 #include "Frame.h"
 #include "Device.h"
 #include "Hardware/LAN/ClientTCP.h"
+#include "Hardware/Timer.h"
 
 
 void Application::Init()
 {
     Device::Init();
-
-    ClientTCP::Connect(777);
 }
 
 
 void Application::Update()
 {
+    static TimeMeterMS meter;
+
+    if (!ClientTCP::Connected() && meter.ElapsedTime() > 1000)
+    {
+        meter.Reset();
+
+        ClientTCP::Connect(777);
+    }
+
     Device::Update();
 }
