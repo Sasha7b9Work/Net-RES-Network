@@ -47,7 +47,7 @@ bool netclient::setConnTimeout( int seconds, int microsec)
 
 //connect to server "address:port", return socket number
 sock_t netclient::doConnect(const string& serverAddress,
-                            uint16_t port, uint16_t lport)
+                            uint16_t port, uint16_t /*lport*/)
 {
 	struct	sockaddr_in sad;   //Server address struct
 	sock_t sdServer;            //socket descriptor of connection

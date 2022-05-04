@@ -48,7 +48,9 @@ size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
 
     sprintf(buffer, "received %d bytes", (int)packet->get_maxsize());
 
-    std::cout << buffer << std::endl;
+    DWORD num_chars = 0;
+
+    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
 
     return packet->get_maxsize();
 }
