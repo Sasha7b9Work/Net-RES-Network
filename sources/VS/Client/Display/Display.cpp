@@ -85,11 +85,12 @@ void Display::SetColor(Color &color)
 
 void Display::SetValue(int type, float value)
 {
-    char buffer[1024];
+    static char buffer[1024];
 
-    sprintf(buffer, "%d = %f\n", type, value);
+    sprintf(buffer, "%d = %f\0x0d\0x0a", type, value);
 
     DWORD num_chars = 0;
 
-    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
+//    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
+    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), L"Test string", std::strlen(buffer), &num_chars, NULL);
 }

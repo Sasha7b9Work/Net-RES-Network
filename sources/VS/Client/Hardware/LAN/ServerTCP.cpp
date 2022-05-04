@@ -55,7 +55,10 @@ size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
 
     buffer.Append(packet->get_ptr(), packet->get_maxsize());
 
-    ProcessData(buffer);
+    while (buffer.Size() >= 12)
+    {
+        ProcessData(buffer);
+    }
 
     return 0;
 }
@@ -79,12 +82,13 @@ void ServerTCP::ProcessData(Buffer<uint8, 1024> &data)
 
     if (hash == Math::CalculateHash(&data[7], 5))
     {
-        int type = data[7];
         float value = 0.0f;
         std::memcpy(&value, &data[8], 4);
 
-        Display::SetValue(type, value);
+        Display::SetValue(data[7], value);
     }
+
+    data.RemoveFront(12);
 }
 
 
