@@ -17,4 +17,6 @@ private:
     void Init();
 
     void Update();
+
+    void OnClose();
 };

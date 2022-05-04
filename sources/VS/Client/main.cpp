@@ -4,10 +4,13 @@
 #include "Communicator/Communicator.h"
 #include "Display/Display.h"
 #include "Hardware/LAN/ServerTCP.h"
+#include "Frame.h"
 
 
 void Application::Init()
 {
+    AllocConsole();
+
     ServerTCP::Open(777);
 }
 
@@ -17,4 +20,10 @@ void Application::Update()
     Communicator::Update();
     Display::Update();
     ServerTCP::Update();
+}
+
+
+void Frame::OnClose()
+{
+    FreeConsole();
 }
