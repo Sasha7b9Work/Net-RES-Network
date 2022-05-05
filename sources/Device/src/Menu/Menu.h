@@ -7,4 +7,8 @@ namespace Menu
     void ShortPress();
 
     void LongPress();
+
+    void Draw();
+
+    bool Opened();
 }
