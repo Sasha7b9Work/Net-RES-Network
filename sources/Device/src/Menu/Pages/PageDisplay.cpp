@@ -21,7 +21,7 @@ static const Item *items[] =
 
 static Page pageDisplay
 (
-    "Дисплей",
+    "ДИСЛЕЙ",
     MainPage::self,
     items
 );

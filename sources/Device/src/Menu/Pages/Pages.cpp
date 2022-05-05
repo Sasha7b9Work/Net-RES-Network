@@ -12,7 +12,7 @@ static const Item *items[] =
 
 static Page pageMain
 (
-    "Ìåíş",
+    "ÌÅÍŞ",
     nullptr,
     items
 );

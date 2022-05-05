@@ -4,15 +4,35 @@
 #include "Menu/Pages/Pages.h"
 #include "Display/Display.h"
 #include "Utils/Text/String.h"
+#include "Menu/Menu.h"
 
 
-const Page *Page::Opened()
+const Page *Menu::OpenedPage()
 {
     return MainPage::self;
 }
 
 
-void Page::Draw() const
+bool Item::Opened() const
+{
+    return true;
+}
+
+
+void Item::Draw() const
+{
+    if (Opened())
+    {
+        DrawOpened();
+    }
+    else
+    {
+        DrawClosed();
+    }
+}
+
+
+void Page::DrawOpened() const
 {
     DrawTitle();
 
@@ -32,9 +52,7 @@ void Page::DrawItems() const
 {
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
-        const Item *item = items[i];
-
-        item->Draw();
+        items[i]->DrawClosed();
     }
 }
 

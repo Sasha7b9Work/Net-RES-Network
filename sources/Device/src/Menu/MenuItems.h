@@ -28,7 +28,13 @@ struct Item
 
     pchar Title() const { return title; }
 
-    virtual void Draw() const {}
+    virtual void Draw() const;
+
+    virtual void DrawOpened() const {}
+
+    virtual void DrawClosed() const {}
+
+    bool Opened() const;
 };
 
 
@@ -40,9 +46,7 @@ struct Page : public Item
 
     Page(pchar title, const Page *keeper, const Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
 
-    static const Page *Opened();
-
-    virtual void Draw() const;
+    virtual void DrawOpened() const;
 
 private:
 
