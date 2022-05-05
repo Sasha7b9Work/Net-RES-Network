@@ -48,5 +48,8 @@ void ClientTCP::Transmit(const void *buffer, int size)
 
     net__::netpacket packet((size_t)size, (uint8 *)buffer);
 
-    client.sendPacket(socket, packet);
+    if (client.sendPacket(socket, packet) < 0)
+    {
+        client.disconnect(socket);
+    }
 }
