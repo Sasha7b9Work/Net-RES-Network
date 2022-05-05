@@ -95,15 +95,12 @@ private:
 
 struct Choice : public Item
 {
-    typedef void (*funcChanged)();
-
     uint8 *cell;
     uint8 count;
     pchar names[2];
-    funcChanged funcOnChanged;
 
-    Choice(pchar title, Page *keeper, uint8 *_cell, uint8 _count, funcChanged func, pchar name0, pchar name1) :
-        Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count), funcOnChanged(func)
+    Choice(pchar title, Page *keeper, uint8 *_cell, uint8 _count, pchar name0, pchar name1) :
+        Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count)
     {
         names[0] = name0;
         names[1] = name1;
