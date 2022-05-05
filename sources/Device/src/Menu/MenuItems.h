@@ -43,6 +43,8 @@ struct Page : public Item
 private:
 
     void DrawTitle() const;
+
+    void DrawItems() const;
 };
 
 

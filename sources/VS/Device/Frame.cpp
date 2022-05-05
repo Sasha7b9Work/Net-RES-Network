@@ -99,7 +99,7 @@ Frame::Frame(const wxString &title)
 
     SetPosition({ x, y });
 
-    timer.Start(25);
+    timer.StartOnce(25);
 }
 
 
@@ -133,7 +133,11 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnTimer(wxTimerEvent &)
 {
+    timer.Stop();
+
     Application::Self()->Update();
+
+    timer.Start(25);
 }
 
 

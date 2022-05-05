@@ -15,6 +15,8 @@ const Page *Page::Opened()
 void Page::Draw() const
 {
     DrawTitle();
+
+    DrawItems();
 }
 
 
@@ -23,4 +25,10 @@ void Page::DrawTitle() const
     Rectangle(Display::WIDTH - 1, 19).DrawFilled(0, 0, Color::BLACK, Color::WHITE);
 
     String<>(Title()).Draw(10, 5, Color::WHITE);
+}
+
+
+void Page::DrawItems() const
+{
+
 }

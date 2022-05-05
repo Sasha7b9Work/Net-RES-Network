@@ -58,5 +58,4 @@ void Device::Update()
     }
 
     Display::Update();
-
 }
