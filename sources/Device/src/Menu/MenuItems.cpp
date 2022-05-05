@@ -82,5 +82,17 @@ int Page::FirstItemOnScreen() const
 
 int Page::LastItemOnScreen() const
 {
-    return 1;
+    return NumItems();
+}
+
+
+int Page::NumItems() const
+{
+    for (int i = 0; ; i++)
+    {
+        if (items[i] == nullptr)
+        {
+            return i;
+        }
+    }
 }

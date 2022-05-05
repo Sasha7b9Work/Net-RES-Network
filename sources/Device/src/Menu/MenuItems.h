@@ -44,6 +44,8 @@ struct Item
 
 struct Page : public Item
 {
+    static const int NUM_ITEMS_ON_SCREEN = 5;
+
     const Item **items;
 
     uint8 currentItem;
@@ -65,6 +67,8 @@ private:
 
     // ѕоследний выводимый итем на текущей странице
     int LastItemOnScreen() const;
+
+    int NumItems() const;
 };
 
 
