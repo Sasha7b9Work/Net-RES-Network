@@ -15,6 +15,7 @@ struct TypeItem
 
 
 struct Page;
+struct Choice;
 
 
 struct Item
@@ -41,8 +42,10 @@ struct Item
     bool Opened() const;
 
     bool IsPage() const { return type == TypeItem::Page; }
+    bool IsChoice() const { return type == TypeItem::Choice; }
 
     Page *ReinterpetToPage() { return (Page *)this; }
+    Choice *ReinterpretToChoice() { return (Choice *)this; }
 };
 
 
@@ -98,4 +101,6 @@ struct Choice : public Item
     }
 
     virtual void DrawClosed(int x, int y) const;
+
+    void Change();
 };

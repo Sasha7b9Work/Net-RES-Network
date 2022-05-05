@@ -147,4 +147,19 @@ void Page::ChangeCurrentItem()
     {
         item->ReinterpetToPage()->Open();
     }
+    else if (item->IsChoice())
+    {
+        item->ReinterpretToChoice()->Change();
+    }
+}
+
+
+void Choice::Change()
+{
+    *cell = *cell + 1;
+
+    if (*cell == count)
+    {
+        *cell = 0;
+    }
 }
