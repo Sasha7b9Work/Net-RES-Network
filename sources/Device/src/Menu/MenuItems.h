@@ -9,6 +9,7 @@ struct TypeItem
     {
         Page,
         Choice,
+        Button,
         Count
     };
 };
@@ -43,6 +44,7 @@ struct Item
 
     bool IsPage() const { return type == TypeItem::Page; }
     bool IsChoice() const { return type == TypeItem::Choice; }
+    bool IsButton() const { return type == TypeItem::Button; }
 
     Page *ReinterpetToPage() { return (Page *)this; }
     Choice *ReinterpretToChoice() { return (Choice *)this; }
@@ -103,4 +105,14 @@ struct Choice : public Item
     virtual void DrawClosed(int x, int y) const;
 
     void Change();
+};
+
+
+struct Button : public Item
+{
+    typedef void (*funcPressButton)();
+
+    funcPressButton funcPress;
+
+    Button(pchar title, const Page *keeper, funcPressButton _funcPress) : Item(TypeItem::Button, title, keeper), funcPress(_funcPress) {}
 };
