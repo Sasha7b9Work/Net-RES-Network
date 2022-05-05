@@ -13,20 +13,23 @@ struct TypeItem
 };
 
 
+struct Page;
+
 
 struct Item
 {
     TypeItem::E type;
+    Page *keeper;
 };
 
 
 struct Page : public Item
 {
-
+    Item *items;
 };
 
 
 struct Choice : public Item
 {
-
+    uint8 *cell;
 };
