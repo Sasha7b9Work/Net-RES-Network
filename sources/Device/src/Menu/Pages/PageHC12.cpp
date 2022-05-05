@@ -34,4 +34,4 @@ static const Page pageHC12
 );
 
 
-const Page *PageHC12::self = &pageHC12;
+const Page * const PageHC12::self = &pageHC12;

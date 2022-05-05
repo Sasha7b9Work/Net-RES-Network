@@ -57,11 +57,11 @@ struct Page : public Item
 {
     static const int NUM_ITEMS_ON_SCREEN = 5;
 
-    const Item **items;
+    const Item * const *items;
 
     uint8 *currentItem;
 
-    Page(pchar title, const Page *keeper, const Item **_items, uint8 *_currentItem) : Item(TypeItem::Page, title, keeper), items(_items), currentItem(_currentItem) {}
+    Page(pchar title, const Page *keeper, const Item * const *_items, uint8 *_currentItem) : Item(TypeItem::Page, title, keeper), items(_items), currentItem(_currentItem) {}
 
     virtual void DrawOpened(int x, int y) const;
 
@@ -95,8 +95,8 @@ private:
 
 struct Choice : public Item
 {
-    uint8 *cell;
-    uint8 count;
+    uint8 * const cell;
+    const uint8 count;
     pchar names[2];
 
     Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count, pchar name0, pchar name1) :
@@ -116,7 +116,7 @@ struct Button : public Item
 {
     typedef void (*funcPressButton)();
 
-    funcPressButton funcPress;
+    const funcPressButton funcPress;
 
     Button(pchar title, const Page *keeper, funcPressButton _funcPress) : Item(TypeItem::Button, title, keeper), funcPress(_funcPress) {}
 

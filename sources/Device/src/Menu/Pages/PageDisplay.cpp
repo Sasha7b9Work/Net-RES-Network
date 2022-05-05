@@ -46,7 +46,7 @@ static const Button bCloseMeasures
 );
 
 
-static const Item *itemsMeasures[] =
+static const Item * const itemsMeasures[] =
 {
     &chPressure,
     &chIllumination,
@@ -81,7 +81,7 @@ static const Button bClosePageDisplay
 );
 
 
-static const Item *itemsDisplay[] =
+static const Item * const itemsDisplay[] =
 {
     PageDisplay::PageMeasures::self,
     &bClosePageDisplay,
@@ -101,5 +101,5 @@ static const Page pageDisplay
 );
 
 
-const Page *PageDisplay::self = &pageDisplay;
-const Page *PageDisplay::PageMeasures::self = &pageMeasures;
+const Page * const PageDisplay::self = &pageDisplay;
+const Page * const PageDisplay::PageMeasures::self = &pageMeasures;

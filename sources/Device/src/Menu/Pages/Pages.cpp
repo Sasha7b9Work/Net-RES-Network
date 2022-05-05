@@ -36,4 +36,4 @@ static const Page pageMain
 );
 
 
-const Page *PageMain::self = &pageMain;
+const Page * const PageMain::self = &pageMain;
