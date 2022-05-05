@@ -86,6 +86,22 @@ void Page::DrawClosed(int x, int y) const
 }
 
 
+void Choice::DrawClosed(int x, int y) const
+{
+    Color::E fill = Color::BLACK;
+    Color::E draw = Color::WHITE;
+
+    if (keeper->items[keeper->currentItem] == this)
+    {
+        fill = Color::GREEN_50;
+    }
+
+    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+
+    String<>(Title()).Draw(x + 10, y + 5, draw);
+}
+
+
 int Page::FirstItemOnScreen() const
 {
     return 0;

@@ -90,4 +90,6 @@ struct Choice : public Item
     uint8 count;
 
     Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count) : Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count) { }
+
+    virtual void DrawClosed(int x, int y) const;
 };
