@@ -4,34 +4,40 @@
 #include "Settings/Settings.h"
 
 
+static void OnChangedMeasure()
+{
+    Display::need_redraw = true;
+}
+
+
 static Choice chPressure
 (
     "Давление", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Pressure], 2,
-    "Откл", "Вкл"
+    OnChangedMeasure, "Откл", "Вкл"
 );
 
 static Choice chIllumination
 (
     "Освещённость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Illumination], 2,
-    "Откл", "Вкл"
+    OnChangedMeasure, "Откл", "Вкл"
 );
 
 static Choice chVelocity
 (
     "Скорость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Velocity], 2,
-    "Откл", "Вкл"
+    OnChangedMeasure, "Откл", "Вкл"
 );
 
 static Choice chTemperature
 (
     "Температура", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Temperature], 2,
-    "Откл", "Вкл"
+    OnChangedMeasure, "Откл", "Вкл"
 );
 
 static Choice chHumidity
 (
     "Влажность", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Humidity], 2,
-    "Откл", "Вкл"
+    OnChangedMeasure, "Откл", "Вкл"
 );
 
 static void CloseMeasures()

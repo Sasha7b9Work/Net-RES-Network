@@ -207,4 +207,9 @@ void Choice::Change()
     {
         *cell = 0;
     }
+
+    if (funcOnChanged)
+    {
+        funcOnChanged();
+    }
 }
