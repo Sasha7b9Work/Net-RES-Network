@@ -32,56 +32,78 @@ namespace Display
     void BeginScene(Color);
 
     void EndScene();
+
+    void DrawMeasure(TypeMeasure::E);
+}
+
+
+pchar TypeMeasure::GetTitle(TypeMeasure::E type)
+{
+    static const pchar titles[Count] =
+    {
+        "дюбкемхе",
+        "нябеыеммнярэ",
+        "бкюфмнярэ",
+        "яйнпнярэ",
+        "релоепюрспю"
+    };
+
+    return titles[type];
+}
+
+
+pchar TypeMeasure::GetUnits(TypeMeasure::E type)
+{
+    static const pchar units[Count] =
+    {
+        "лоЮ",
+        "КЙ",
+        "%%",
+        "Л/Я",
+        "ж"
+    };
+
+    return units[type];
 }
 
 
 void Display::Update()
 {
-    TimeMeterMS meter_fps;
-
     BeginScene(Color::BLACK);
+
+    for (int i = 0; i < TypeMeasure::Count; i++)
+    {
+        DrawMeasure((TypeMeasure::E)i);
+    }
+
+    EndScene();
+}
+
+
+void Display::DrawMeasure(TypeMeasure::E type)
+{
+    if (!measures[type].show)
+    {
+        return;
+    }
+
+    Font::SetSize(13);
 
     int x0 = 10;
     int dX = 250;
     int y0 = 15;
     int dY = 30;
 
-    Font::SetSize(13);
+    int y = y0 + dY * type;
 
-    COLOR_1.SetAsCurrent();
+    String<>(TypeMeasure::GetTitle(type)).Draw(x0, y, COLOR_1);
 
-    if (measures[TypeMeasure::Pressure].show)
+    String<>(TypeMeasure::GetUnits(type)).Draw(x0 + dX, y);
+
+    if (measures[type].valid)
     {
-        String<>("дюбкемхе :").Draw(x0, y0);     String<>("лоЮ").Draw(x0 + dX, y0);
+        String<>("%f", measures[type].value).Draw(x0 + dX - 70, y, Color::WHITE);
     }
-
-    if (measures[TypeMeasure::Illumination].show)
-    {
-        String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);       String<>("КЙ").Draw(x0 + dX, y0 + dY);
-    }
-
-    if (measures[TypeMeasure::Humidity].show)
-    {
-        String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);      String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
-    }
-
-    if (measures[TypeMeasure::Velocity].show)
-    {
-        String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);       String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
-    }
-
-    if (measures[TypeMeasure::Temperature].show)
-    {
-        String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);    String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
-    }
-
-//    DrawMeasures();
-
-//    DrawZones();
-
-//    zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
-
-    EndScene();
 }
 
 
