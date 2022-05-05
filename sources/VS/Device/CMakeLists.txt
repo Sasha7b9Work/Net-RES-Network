@@ -47,28 +47,30 @@ if(WIN32)
     add_compile_options(/wd26812)
 endif()
 
-file(GLOB LIBS_STM32F1    ../../common/_VS_LIBS/STM32f1/*.*)
-file(GLOB LIBS_USBD       ../../common/_VS_LIBS/USBD/*.*)
-file(GLOB SRC             *.h *.cpp
-                          ../../Device/src/defines.h
-                          ../../Device/src/Device.*)
-file(GLOB DISPLAY         ../../Device/src/Display/*.*)
-file(GLOB DISPLAY_FONT    ../../Device/src/Display/Font/*.*)
-file(GLOB HARDWARE        ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_CDC    ../../Device/src/Hardware/CDC/*.*
-                                           Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL    ../../Device/src/Hardware/HAL/*.*
-                                           Hardware/HAL/*.*)
-file(GLOB HARDWARE_I2C    ../../Device/src/Hardware/I2C/*.*)
-file(GLOB HARDWARE_LAN                     Hardware/LAN/*.*)
-file(GLOB HARDWARE_LAN_LIBNET             Hardware/LAN/libnet/*.*)
-file(GLOB MODULES_BH1750  ../../Device/src/Modules/BH1750/*.*)
-file(GLOB MODULES_BME280  ../../Device/src/Modules/BME280/*.*)
-file(GLOB MODULES_CG_ANEM ../../Device/src/Modules/CG-Anem/*.*)
-file(GLOB MODULES_HC12    ../../Device/src/Modules/HC12/*.*)
-file(GLOB MODULES_ST7735  ../../Device/src/Modules/ST7735/*.*)
-file(GLOB UTILS           ../../Device/src/Utils/*.*)
-file(GLOB UTILS_TEXT      ../../Device/src/Utils/Text/*.*)
+file(GLOB LIBS_STM32F1          ../../common/_VS_LIBS/STM32f1/*.*)
+file(GLOB LIBS_USBD             ../../common/_VS_LIBS/USBD/*.*)
+file(GLOB SRC                   *.h *.cpp
+                                ../../Device/src/defines.h
+                                ../../Device/src/Device.*)
+file(GLOB DISPLAY               ../../Device/src/Display/*.*)
+file(GLOB DISPLAY_FONT          ../../Device/src/Display/Font/*.*)
+file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
+file(GLOB HARDWARE_CDC          ../../Device/src/Hardware/CDC/*.*
+                                                 Hardware/CDC/*.*)
+file(GLOB HARDWARE_HAL          ../../Device/src/Hardware/HAL/*.*
+                                                 Hardware/HAL/*.*)
+file(GLOB HARDWARE_I2C          ../../Device/src/Hardware/I2C/*.*)
+file(GLOB HARDWARE_LAN                           Hardware/LAN/*.*)
+file(GLOB HARDWARE_LAN_LIBNET                    Hardware/LAN/libnet/*.*)
+file(GLOB MENU                  ../../Device/src/Menu/*.*)
+file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
+file(GLOB MODULES_BH1750        ../../Device/src/Modules/BH1750/*.*)
+file(GLOB MODULES_BME280        ../../Device/src/Modules/BME280/*.*)
+file(GLOB MODULES_CG_ANEM       ../../Device/src/Modules/CG-Anem/*.*)
+file(GLOB MODULES_HC12          ../../Device/src/Modules/HC12/*.*)
+file(GLOB MODULES_ST7735        ../../Device/src/Modules/ST7735/*.*)
+file(GLOB UTILS                 ../../Device/src/Utils/*.*)
+file(GLOB UTILS_TEXT            ../../Device/src/Utils/Text/*.*)
 
 source_group(libs/STM32F1        FILES ${LIBS_STM32F1})
 source_group(libs/USBD           FILES ${LIBS_USBD})
@@ -81,6 +83,8 @@ source_group(Hardware/HAL        FILES ${HARDWARE_HAL})
 source_group(Hardware/I2C        FILES ${HARDWARE_I2C})
 source_group(Hardware/LAN        FILES ${HARDWARE_LAN})
 source_group(Hardware/LAN/libnet FILES ${HARDWARE_LAN_LIBNET})
+source_group(Menu                FILES ${MENU})
+source_group(Menu/Pages          FILES ${MENU_PAGES})
 source_group(Modules/BH1750      FILES ${MODULES_BH1750})
 source_group(Modules/BME280      FILES ${MODULES_BME280})
 source_group(Modules/CG-Anem     FILES ${MODULES_CG_ANEM})
@@ -105,6 +109,8 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE_I2C}
                 ${HARDWARE_LAN}
                 ${HARDWARE_LAN_LIBNET}
+                ${MENU}
+                ${MENU_PAGES}
                 ${MODULES_BH1750}
                 ${MODULES_BME280}
                 ${MODULES_CG_ANEM}
