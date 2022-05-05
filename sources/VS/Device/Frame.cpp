@@ -20,7 +20,8 @@ static const int IMAGE_SCALE = 2;
 
 enum
 {
-    TIMER_ID = 111
+    TIMER_ID = 111,
+    TIMER_BUTTON_ID
 };
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
@@ -80,7 +81,9 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_TIMER, &Frame::OnTimerButton, this, TIMER_BUTTON_ID);
 
+    timerButton.SetOwner(this, TIMER_BUTTON_ID);
     timer.SetOwner(this, TIMER_ID);
 
     SetClientSize(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
@@ -147,20 +150,24 @@ void Frame::EndScene()
 
 void Frame::OnMouseDown(wxMouseEvent &)
 {
-    meter.Reset();
+    meterButton.Reset();
+    timerButton.StartOnce(500);
 }
 
 
 void Frame::OnMouseUp(wxMouseEvent &)
 {
-    if (meter.ElapsedTime() < 500)
+    if (meterButton.ElapsedTime() < 500)
     {
         Menu::ShortPress();
+        timerButton.Stop();
     }
-    else
-    {
-        Menu::LongPress();
-    }
+}
+
+
+void Frame::OnTimerButton(wxTimerEvent &)
+{
+    Menu::LongPress();
 }
 
 
