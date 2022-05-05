@@ -104,9 +104,9 @@ void Frame::CreateFrameToolBar()
 
     AddTool(MEAS_PRESSURE, _T("Давление"), "MEAS_PRESSURE");
     AddTool(MEAS_ILLUMINATION, _T("Освещённость"), "MEAS_ILLUMINATION");
-    AddTool(MEAS_HUMIDITY, _T("Влажность"), "MEAS_HUMIDITY");
     AddTool(MEAS_VELOCITY, _T("Скорость"), "MEAS_VELOCITY");
     AddTool(MEAS_TEMPERATURE, _T("Температура"), "MEAS_TEMPERATURE");
+    AddTool(MEAS_HUMIDITY, _T("Влажность"), "MEAS_HUMIDITY");
 
     Bind(wxEVT_MENU, &Frame::OnMeasurePressure, this, MEAS_PRESSURE);
     Bind(wxEVT_MENU, &Frame::OnMeasureIllumination, this, MEAS_ILLUMINATION);
