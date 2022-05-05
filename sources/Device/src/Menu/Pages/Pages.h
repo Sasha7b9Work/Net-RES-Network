@@ -12,6 +12,11 @@ struct MainPage
 struct PageDisplay
 {
     static Page *self;
+
+    struct PageMeasures
+    {
+        static Page *self;
+    };
 };
 
 

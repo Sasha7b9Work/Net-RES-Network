@@ -16,10 +16,25 @@ static Choice chIllumination
 );
 
 
-static Item *items[] =
+static Item *itemsMeasures[] =
 {
     &chPressure,
     &chIllumination,
+    nullptr
+};
+
+
+static Page pageMeasures
+{
+    "ÈÇÌÅĞÅÍÈß",
+    PageDisplay::self,
+    itemsMeasures
+};
+
+
+static Item *itemsDisplay[] =
+{
+    PageDisplay::PageMeasures::self,
     nullptr
 };
 
@@ -28,8 +43,9 @@ static Page pageDisplay
 (
     "ÄÈÑÏËÅÉ",
     MainPage::self,
-    items
+    itemsDisplay
 );
 
 
 Page *PageDisplay::self = &pageDisplay;
+Page *PageDisplay::PageMeasures::self = &pageMeasures;
