@@ -6,13 +6,27 @@
 
 static Choice chPressure
 (
-    "Давление", PageDisplay::self, &gset.display.show_measure[TypeMeasure::Pressure], 2
+    "Давление", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Pressure], 2
 );
-
 
 static Choice chIllumination
 (
-    "Освещённость", PageDisplay::self, &gset.display.show_measure[TypeMeasure::Illumination], 2
+    "Освещённость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Illumination], 2
+);
+
+static Choice chVelocity
+(
+    "Скорость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Velocity], 2
+);
+
+static Choice chTemperature
+(
+    "Температура", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Temperature], 2
+);
+
+static Choice chHumidity
+(
+    "Влажность", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Humidity], 2
 );
 
 
@@ -20,6 +34,9 @@ static Item *itemsMeasures[] =
 {
     &chPressure,
     &chIllumination,
+    &chVelocity,
+    &chTemperature,
+    &chHumidity,
     nullptr
 };
 
