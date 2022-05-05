@@ -14,18 +14,14 @@ namespace Display
     wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
 
     // Здесь будем рисовать
-    static wxMemoryDC memDC;
+    wxMemoryDC memDC;
 
-    static wxPen pen = *wxWHITE_PEN;
-    static wxBrush brush = *wxWHITE_BRUSH;
+    wxPen pen = *wxWHITE_PEN;
+    wxBrush brush = *wxWHITE_BRUSH;
 
     void BeginScene(Color &);
 
-    void DrawText(int x, int y, const wxString &, Color &);
-
     void EndScene();
-
-    void SetColor(Color &);
 }
 
 
@@ -60,24 +56,9 @@ void Display::BeginScene(Color &color)
 {
     memDC.SelectObject(bitmap);
 
-    SetColor(color);
+    color.SetAsCurrent();
 
     memDC.DrawRectangle(0, 0, WIDTH, HEIGHT);
-}
-
-
-void Display::DrawText(int x, int y, const wxString &text, Color &color)
-{
-    SetColor(color);
-
-    const wxFont font = memDC.GetFont();
-
-    wxFont new_font = font;
-    new_font.SetPointSize(20);
-
-    memDC.SetFont(new_font);
-
-    memDC.DrawText(text, x, y);
 }
 
 
@@ -89,18 +70,6 @@ void Display::EndScene()
     {
         Frame::Self()->Refresh();
     }
-}
-
-
-void Display::SetColor(Color &color)
-{
-    pen.SetColour(color.value);
-    brush.SetColour(color.value);
-
-    memDC.SetBrush(brush);
-    memDC.SetPen(pen);
-
-    memDC.SetTextForeground(color.value);
 }
 
 

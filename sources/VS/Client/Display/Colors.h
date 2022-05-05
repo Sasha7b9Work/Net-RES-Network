@@ -15,5 +15,5 @@ struct Color
 
     Color(wxColour v) : value(v) {}
 
-    static void SetCurrent(Color);
+    void SetAsCurrent();
 };
