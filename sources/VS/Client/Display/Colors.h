@@ -6,14 +6,17 @@
 
 struct Color
 {
-    static Color BLACK;
-    static Color WHITE;
-    static Color _1;
-    static Color NONE;
+    enum E
+    {
+        BLACK,
+        WHITE,
+        _1,
+        Count
+    };
 
-    wxColour value;
+    E value;
 
-    Color(wxColour v) : value(v) {}
+    Color(E v) : value(v) {}
 
     void SetAsCurrent();
 };

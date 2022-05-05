@@ -19,7 +19,7 @@ namespace Display
     wxPen pen = *wxWHITE_PEN;
     wxBrush brush = *wxWHITE_BRUSH;
 
-    void BeginScene(Color &);
+    void BeginScene(Color);
 
     void EndScene();
 }
@@ -52,7 +52,7 @@ void Display::Update()
 }
 
 
-void Display::BeginScene(Color &color)
+void Display::BeginScene(Color color)
 {
     memDC.SelectObject(bitmap);
 

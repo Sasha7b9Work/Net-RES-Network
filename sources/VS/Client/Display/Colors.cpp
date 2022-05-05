@@ -2,6 +2,14 @@
 #include "Display/Colors.h"
 
 
+wxColour colors[Color::Count] =
+{
+    wxColour(255, 255, 255),
+    wxColour(0, 0, 0),
+    wxColour(100, 100, 100)
+};
+
+
 namespace Display
 {
     // Здесь будем рисовать
@@ -12,24 +20,18 @@ namespace Display
 }
 
 
-Color Color::WHITE(wxColour(255, 255, 255));
-Color Color::BLACK(wxColour(0, 0, 0));
-Color Color::_1(wxColour(100, 100, 100));
-Color Color::NONE(wxColour(0, 0, 0));
-
-
 void Color::SetAsCurrent()
 {
-    if (this == &Color::NONE)
+    if (value == Count)
     {
         return;
     }
 
-    Display::pen.SetColour(value);
-    Display::brush.SetColour(value);
+    Display::pen.SetColour(colors[value]);
+    Display::brush.SetColour(colors[value]);
 
     Display::memDC.SetBrush(Display::brush);
     Display::memDC.SetPen(Display::pen);
 
-    Display::memDC.SetTextForeground(value);
+    Display::memDC.SetTextForeground(colors[value]);
 }
