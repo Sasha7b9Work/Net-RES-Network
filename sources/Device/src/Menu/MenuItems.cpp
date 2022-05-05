@@ -44,7 +44,7 @@ void Page::DrawTitle(int x, int y) const
 {
     Rectangle(Item::WIDTH, 28).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
-    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
+    String<>(Title()).Draw(x + 10, y + 10, Color::GRAY_50);
 }
 
 
@@ -60,9 +60,17 @@ void Page::DrawItems(int x, int y) const
 
 void Page::DrawClosed(int x, int y) const
 {
-    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, Color::BLACK, Color::WHITE);
+    Color::E fill = Color::BLACK;
+    Color::E draw = Color::WHITE;
 
-    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
+    if (keeper->items[keeper->currentItem] == this)
+    {
+        fill = Color::GREEN_50;
+    }
+
+    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+
+    String<>(Title()).Draw(x + 10, y + 5, draw);
 }
 
 

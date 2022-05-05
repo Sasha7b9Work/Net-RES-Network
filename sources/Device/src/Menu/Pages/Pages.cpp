@@ -6,6 +6,7 @@
 static const Item *items[] =
 {
     PageDisplay::self,
+    PageHC12::self,
     nullptr
 };
 
