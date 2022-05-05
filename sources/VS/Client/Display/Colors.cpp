@@ -4,8 +4,8 @@
 
 wxColour colors[Color::Count] =
 {
-    wxColour(255, 255, 255),
     wxColour(0, 0, 0),
+    wxColour(255, 255, 255),
     wxColour(100, 100, 100)
 };
 

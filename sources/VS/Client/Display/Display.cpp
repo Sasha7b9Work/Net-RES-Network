@@ -4,6 +4,7 @@
 #include "Frame.h"
 #include "Hardware/Timer.h"
 #include "Utils/Text/String.h"
+#include "Display/Font.h"
 
 
 namespace Display
@@ -32,9 +33,11 @@ void Display::Update()
     BeginScene(Color::BLACK);
 
     int x0 = 10;
-    int dX = 125;
+    int dX = 250;
     int y0 = 15;
-    int dY = 22;
+    int dY = 30;
+
+    Font::SetSize(15);
 
     String<>("дюбкемхе :").Draw(x0, y0, Color::_1);         String<>("лоЮ").Draw(x0 + dX, y0);
     String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
