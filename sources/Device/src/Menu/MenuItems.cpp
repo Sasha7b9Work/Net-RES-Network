@@ -42,7 +42,7 @@ void Page::DrawOpened(int x, int y) const
 
 void Page::DrawTitle(int x, int y) const
 {
-    Rectangle(Display::WIDTH - 1, 19).DrawFilled(x, y, Color::BLACK, Color::WHITE);
+    Rectangle(Item::WIDTH, 28).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
     String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
 }
@@ -53,13 +53,16 @@ void Page::DrawItems(int x, int y) const
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
         items[i]->DrawClosed(x, y);
-        y += 20;
+        y += Item::HEIGHT;
     }
 }
 
 
 void Page::DrawClosed(int x, int y) const
 {
+    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, Color::BLACK, Color::WHITE);
+
+    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
 }
 
 
