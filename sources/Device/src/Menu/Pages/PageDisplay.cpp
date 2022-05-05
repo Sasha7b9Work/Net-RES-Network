@@ -4,31 +4,31 @@
 #include "Settings/Settings.h"
 
 
-static Choice chPressure
+static const Choice chPressure
 (
     "Давление", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Pressure], 2,
     "Откл", "Вкл"
 );
 
-static Choice chIllumination
+static const Choice chIllumination
 (
     "Освещённость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Illumination], 2,
     "Откл", "Вкл"
 );
 
-static Choice chVelocity
+static const Choice chVelocity
 (
     "Скорость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Velocity], 2,
     "Откл", "Вкл"
 );
 
-static Choice chTemperature
+static const Choice chTemperature
 (
     "Температура", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Temperature], 2,
     "Откл", "Вкл"
 );
 
-static Choice chHumidity
+static const Choice chHumidity
 (
     "Влажность", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Humidity], 2,
     "Откл", "Вкл"
@@ -40,13 +40,13 @@ static void CloseMeasures()
 };
 
 
-static Button bCloseMeasures
+static const Button bCloseMeasures
 (
     "Закрыть", PageDisplay::PageMeasures::self, CloseMeasures
 );
 
 
-static Item *itemsMeasures[] =
+static const Item *itemsMeasures[] =
 {
     &chPressure,
     &chIllumination,
@@ -58,11 +58,14 @@ static Item *itemsMeasures[] =
 };
 
 
-static Page pageMeasures
+static uint8 ciPageMeasures = 0;
+
+static const Page pageMeasures
 (
     "ИЗМЕРЕНИЯ",
     PageDisplay::self,
-    itemsMeasures
+    itemsMeasures,
+    &ciPageMeasures
 );
 
 
@@ -72,13 +75,13 @@ void ClosePageDisplay()
 }
 
 
-static Button bClosePageDisplay
+static const Button bClosePageDisplay
 (
     "Закрыть", PageDisplay::self, ClosePageDisplay
 );
 
 
-static Item *itemsDisplay[] =
+static const Item *itemsDisplay[] =
 {
     PageDisplay::PageMeasures::self,
     &bClosePageDisplay,
@@ -86,13 +89,17 @@ static Item *itemsDisplay[] =
 };
 
 
-static Page pageDisplay
+uint8 ciPageDisplay = 0;
+
+
+static const Page pageDisplay
 (
     "ДИСПЛЕЙ",
     PageMain::self,
-    itemsDisplay
+    itemsDisplay,
+    &ciPageDisplay
 );
 
 
-Page *PageDisplay::self = &pageDisplay;
-Page *PageDisplay::PageMeasures::self = &pageMeasures;
+const Page *PageDisplay::self = &pageDisplay;
+const Page *PageDisplay::PageMeasures::self = &pageMeasures;

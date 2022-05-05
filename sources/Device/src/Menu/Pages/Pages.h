@@ -5,22 +5,22 @@
 
 struct PageMain
 {
-    static Page *self;
+    static const Page *self;
 };
 
 
 struct PageDisplay
 {
-    static Page *self;
+    static const Page *self;
 
     struct PageMeasures
     {
-        static Page *self;
+        static const Page *self;
     };
 };
 
 
 struct PageHC12
 {
-    static Page *self;
+    static const Page *self;
 };

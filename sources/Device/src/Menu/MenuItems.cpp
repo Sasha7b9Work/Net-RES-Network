@@ -9,28 +9,28 @@
 
 namespace Menu
 {
-    extern Page *opened;
+    extern const Page *opened;
 }
 
 
-Page *Menu::OpenedPage()
+const Page *Menu::OpenedPage()
 {
     return opened;
 }
 
 
-void Page::Open()
+void Page::Open() const
 {
     Menu::opened = this;
 
-    if (currentItem == NumItems() - 1)
+    if (*currentItem == NumItems() - 1)
     {
-        currentItem = 0;
+        *currentItem = 0;
     }
 }
 
 
-void Page::Close()
+void Page::Close() const
 {
     if (this == PageMain::self)
     {
@@ -93,7 +93,7 @@ void Page::DrawClosed(int x, int y) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (keeper->items[keeper->currentItem] == this)
+    if (keeper->items[*keeper->currentItem] == this)
     {
         fill = Color::GREEN_50;
     }
@@ -109,7 +109,7 @@ void Choice::DrawClosed(int x, int y) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (keeper->items[keeper->currentItem] == this)
+    if (keeper->items[*keeper->currentItem] == this)
     {
         fill = Color::GREEN_50;
     }
@@ -127,7 +127,7 @@ void Button::DrawClosed(int x, int y) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (keeper->items[keeper->currentItem] == this)
+    if (keeper->items[*keeper->currentItem] == this)
     {
         fill = Color::GREEN_50;
     }
@@ -140,7 +140,7 @@ void Button::DrawClosed(int x, int y) const
 
 int Page::FirstItemOnScreen() const
 {
-    return (currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
+    return (*currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
 }
 
 
@@ -169,20 +169,20 @@ int Page::NumItems() const
 }
 
 
-void Page::SelectNextItem()
+void Page::SelectNextItem() const
 {
-    currentItem++;
+    *currentItem = *currentItem + 1;
 
-    if (currentItem == NumItems())
+    if (*currentItem == NumItems())
     {
-        currentItem = 0;
+        *currentItem = 0;
     }
 }
 
 
-void Page::ChangeCurrentItem()
+void Page::ChangeCurrentItem() const
 {
-    Item *item = items[currentItem];
+    const Item *item = items[*currentItem];
 
     if (item->IsPage())
     {
@@ -199,7 +199,7 @@ void Page::ChangeCurrentItem()
 }
 
 
-void Choice::Change()
+void Choice::Change() const
 {
     *cell = *cell + 1;
 

@@ -8,7 +8,7 @@
 
 namespace Menu
 {
-    Page *opened = nullptr;
+    const Page *opened = nullptr;
 }
 
 

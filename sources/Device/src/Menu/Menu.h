@@ -13,5 +13,5 @@ namespace Menu
 
     bool Opened();
 
-    Page *OpenedPage();
+    const Page *OpenedPage();
 }
