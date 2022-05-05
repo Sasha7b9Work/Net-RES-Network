@@ -2,6 +2,8 @@
 #include "Display/Display.h"
 #include "Display/Colors.h"
 #include "Frame.h"
+#include "Hardware/Timer.h"
+#include "Utils/Text/String.h"
 
 
 namespace Display
@@ -29,9 +31,26 @@ namespace Display
 
 void Display::Update()
 {
+    TimeMeterMS meter_fps;
+
     BeginScene(Color::BLACK);
 
-    DrawText(50, 50, _("Òåñòîâàÿ ñòğîêà"), Color::WHITE);
+    int x0 = 10;
+    int dX = 125;
+    int y0 = 15;
+    int dY = 22;
+
+    String<>("ÄÀÂËÅÍÈÅ :").Draw(x0, y0, Color::_1);         String<>("ÌÏà").Draw(x0 + dX, y0);
+    String<>("ÎÑÂÅÙÅÍÍÎÑÒÜ :").Draw(x0, y0 + dY);           String<>("ëê").Draw(x0 + dX, y0 + dY);
+    String<>("ÂËÀÆÍÎÑÒÜ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+    String<>("ÑÊÎĞÎÑÒÜ :").Draw(x0, y0 + 2 * dY);           String<>("ì/ñ").Draw(x0 + dX, y0 + 2 * dY);
+    String<>("ÒÅÌÏÅĞÀÒÓĞÀ :").Draw(x0, y0 + 3 * dY);        String<>("¨Ñ").Draw(x0 + dX, y0 + 3 * dY);
+
+//    DrawMeasures();
+
+//    DrawZones();
+
+//    zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
 
     EndScene();
 }

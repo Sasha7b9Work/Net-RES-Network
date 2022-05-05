@@ -4,3 +4,5 @@
 
 Color Color::WHITE(wxColour(255, 255, 255));
 Color Color::BLACK(wxColour(0, 0, 0));
+Color Color::_1(wxColour(100, 100, 100));
+Color Color::NONE(wxColour(0, 0, 0));

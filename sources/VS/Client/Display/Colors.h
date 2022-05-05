@@ -8,9 +8,12 @@ struct Color
 {
     static Color BLACK;
     static Color WHITE;
+    static Color _1;
     static Color NONE;
 
     wxColour value;
 
     Color(wxColour v) : value(v) {}
+
+    static void SetCurrent(Color);
 };
