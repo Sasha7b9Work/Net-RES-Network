@@ -88,8 +88,14 @@ struct Choice : public Item
 {
     uint8 *cell;
     uint8 count;
+    pchar names[2];
 
-    Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count) : Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count) { }
+    Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count, pchar name0, pchar name1) :
+        Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count)
+    {
+        names[0] = name0;
+        names[1] = name1;
+    }
 
     virtual void DrawClosed(int x, int y) const;
 };

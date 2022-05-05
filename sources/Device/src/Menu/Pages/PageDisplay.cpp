@@ -6,27 +6,32 @@
 
 static Choice chPressure
 (
-    "Давление", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Pressure], 2
+    "Давление", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Pressure], 2,
+    "Откл", "Вкл"
 );
 
 static Choice chIllumination
 (
-    "Освещённость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Illumination], 2
+    "Освещённость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Illumination], 2,
+    "Откл", "Вкл"
 );
 
 static Choice chVelocity
 (
-    "Скорость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Velocity], 2
+    "Скорость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Velocity], 2,
+    "Откл", "Вкл"
 );
 
 static Choice chTemperature
 (
-    "Температура", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Temperature], 2
+    "Температура", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Temperature], 2,
+    "Откл", "Вкл"
 );
 
 static Choice chHumidity
 (
-    "Влажность", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Humidity], 2
+    "Влажность", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Humidity], 2,
+    "Откл", "Вкл"
 );
 
 

@@ -99,6 +99,8 @@ void Choice::DrawClosed(int x, int y) const
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
 
     String<>(Title()).Draw(x + 10, y + 5, draw);
+
+    String<>(names[*cell]).Draw(x + 130, y + 5, draw);
 }
 
 
