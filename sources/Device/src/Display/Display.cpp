@@ -8,6 +8,7 @@
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
 #include "Display/Zones.h"
+#include "Menu/Menu.h"
 #include <cstdlib>
 
 
@@ -246,29 +247,38 @@ void Display::Update()
 {
     TimeMeterMS meter_fps;
 
-    if (need_redraw)
+    if (Menu::Opened())
     {
-        BeginScene(Color::BLACK);
+        Menu::Draw();
 
-        int x0 = 10;
-        int dX = 125;
-        int y0 = 15;
-        int dY = 22;
-
-        String<>("дюбкемхе :").Draw(x0, y0, Color::_1);         String<>("лоЮ").Draw(x0 + dX, y0);
-        String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
-        String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
-        String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);           String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
-        String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);        String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
-
-        EndScene();
-
-        need_redraw = false;
+        need_redraw = true;
     }
+    else
+    {
+        if (need_redraw)
+        {
+            BeginScene(Color::BLACK);
 
-    DrawMeasures();
+            int x0 = 10;
+            int dX = 125;
+            int y0 = 15;
+            int dY = 22;
 
-    DrawZones();
+            String<>("дюбкемхе :").Draw(x0, y0, Color::_1);         String<>("лоЮ").Draw(x0 + dX, y0);
+            String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
+            String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+            String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);           String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
+            String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);        String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
 
-    zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+            EndScene();
+
+            need_redraw = false;
+        }
+
+        DrawMeasures();
+
+        DrawZones();
+
+        zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+    }
 }
