@@ -54,6 +54,9 @@ struct Page : public Item
 
     virtual void DrawOpened(int x, int y) const;
 
+    // Выделить следующий итем
+    void SelectNextItem();
+
 private:
 
     void DrawTitle(int x, int y) const;

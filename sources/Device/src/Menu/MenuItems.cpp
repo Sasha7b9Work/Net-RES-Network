@@ -7,7 +7,7 @@
 #include "Menu/Menu.h"
 
 
-const Page *Menu::OpenedPage()
+Page *Menu::OpenedPage()
 {
     return MainPage::self;
 }
@@ -94,5 +94,16 @@ int Page::NumItems() const
         {
             return i;
         }
+    }
+}
+
+
+void Page::SelectNextItem()
+{
+    currentItem++;
+
+    if (currentItem == NumItems())
+    {
+        currentItem = 0;
     }
 }

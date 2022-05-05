@@ -17,4 +17,4 @@ static Page pageHC12
 };
 
 
-const Page *PageHC12::self = &pageHC12;
+Page *PageHC12::self = &pageHC12;

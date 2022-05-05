@@ -5,17 +5,17 @@
 
 struct MainPage
 {
-    static const Page *self;
+    static Page *self;
 };
 
 
 struct PageDisplay
 {
-    static const Page *self;
+    static Page *self;
 };
 
 
 struct PageHC12
 {
-    static const Page *self;
+    static Page *self;
 };

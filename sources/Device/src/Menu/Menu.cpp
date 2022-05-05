@@ -19,7 +19,7 @@ void Menu::ShortPress()
     }
     else
     {
-
+        Menu::OpenedPage()->SelectNextItem();
     }
 }
 

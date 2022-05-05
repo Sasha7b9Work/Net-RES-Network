@@ -19,4 +19,4 @@ static Page pageMain
 );
 
 
-const Page *MainPage::self = &pageMain;
+Page *MainPage::self = &pageMain;
