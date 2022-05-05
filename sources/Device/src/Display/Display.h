@@ -48,6 +48,8 @@ struct Rectangle
 
     void Draw(int x, int y, Color::E = Color::Count);
 
+    void DrawFilled(int x, int y, Color::E fill, Color::E draw);
+
 private:
 
     int width;

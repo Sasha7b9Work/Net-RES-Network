@@ -12,6 +12,7 @@ static const Item *items[] =
 
 static Page pageMain
 (
+    "Μενώ",
     nullptr,
     items
 );

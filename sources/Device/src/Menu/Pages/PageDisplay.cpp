@@ -8,7 +8,7 @@ static uint8 measurePressure;
 
 static Choice choicePressure
 (
-    PageDisplay::self, &measurePressure, 2
+    "Давление", PageDisplay::self, &measurePressure, 2
 );
 
 
@@ -21,6 +21,7 @@ static const Item *items[] =
 
 static Page pageDisplay
 (
+    "Дисплей",
     MainPage::self,
     items
 );

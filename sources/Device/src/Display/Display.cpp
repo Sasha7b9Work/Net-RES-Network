@@ -137,6 +137,14 @@ void Rectangle::Fill(int x0, int y0, Color::E color)
 }
 
 
+void Rectangle::DrawFilled(int x, int y, Color::E fill, Color::E draw)
+{
+    Rectangle(width, height).Draw(x, y, draw);
+
+    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, fill);
+}
+
+
 void Rectangle::Draw(int x, int y, Color::E color)
 {
     HLine(width).Draw(x, y, color);

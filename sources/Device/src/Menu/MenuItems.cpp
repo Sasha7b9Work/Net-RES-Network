@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Pages.h"
+#include "Display/Display.h"
 
 
 const Page *Page::Opened()
@@ -12,5 +13,11 @@ const Page *Page::Opened()
 
 void Page::Draw() const
 {
+    DrawTitle();
+}
 
+
+void Page::DrawTitle() const
+{
+    Rectangle(Display::WIDTH - 1, 20).DrawFilled(0, 0, Color::BLACK, Color::WHITE);
 }

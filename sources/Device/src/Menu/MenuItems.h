@@ -19,9 +19,10 @@ struct Page;
 struct Item
 {
     TypeItem::E type;
+    pchar       title;
     const Page *keeper;
 
-    Item(TypeItem::E _type, const Page *_keeper) : type(_type), keeper(_keeper) { }
+    Item(TypeItem::E _type, pchar _title, const Page *_keeper) : type(_type), title(_title), keeper(_keeper) { }
 };
 
 
@@ -29,18 +30,26 @@ struct Page : public Item
 {
     const Item **items;
 
-    Page(const Page *keeper, const Item **_items) : Item(TypeItem::Page, keeper), items(_items) {}
+    uint8 currentItem;
+
+    Page(pchar title, const Page *keeper, const Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
 
     void Draw() const;
 
+    pchar Title();
+
     static const Page *Opened();
+
+private:
+
+    void DrawTitle() const;
 };
 
 
 struct Choice : public Item
 {
     uint8 *cell;
-    int count;
+    uint8 count;
 
-    Choice(const Page *keeper, uint8 *_cell, int _count) : Item(TypeItem::Choice, keeper), cell(_cell), count(_count) { }
+    Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count) : Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count) { }
 };
