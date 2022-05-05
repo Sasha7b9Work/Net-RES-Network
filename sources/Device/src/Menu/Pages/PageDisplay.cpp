@@ -3,7 +3,27 @@
 #include "Menu/Pages/Pages.h"
 
 
+static uint8 measurePressure;
 
+
+static Choice choicePressure
+(
+    PageDisplay::self, &measurePressure, 2
+);
+
+
+static const Item *items[] =
+{
+    &choicePressure,
+    nullptr
+};
+
+
+static Page pageDisplay
+(
+    MainPage::self,
+    items
+);
 
 
 const Page *PageDisplay::self = nullptr;

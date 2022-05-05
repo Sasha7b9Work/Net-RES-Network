@@ -19,9 +19,9 @@ struct Page;
 struct Item
 {
     TypeItem::E type;
-    Page *keeper;
+    const Page *keeper;
 
-    Item(TypeItem::E _type, Page *_keeper) : type(_type), keeper(_keeper) { }
+    Item(TypeItem::E _type, const Page *_keeper) : type(_type), keeper(_keeper) { }
 };
 
 
@@ -29,7 +29,7 @@ struct Page : public Item
 {
     const Item **items;
 
-    Page(Page *keeper, const Item **_items) : Item(TypeItem::Page, keeper), items(_items) {}
+    Page(const Page *keeper, const Item **_items) : Item(TypeItem::Page, keeper), items(_items) {}
 
     void Draw() const;
 
@@ -40,6 +40,7 @@ struct Page : public Item
 struct Choice : public Item
 {
     uint8 *cell;
+    int count;
 
-    Choice(Page *keeper) : Item(TypeItem::Choice, keeper) { }
+    Choice(const Page *keeper, uint8 *_cell, int _count) : Item(TypeItem::Choice, keeper), cell(_cell), count(_count) { }
 };
