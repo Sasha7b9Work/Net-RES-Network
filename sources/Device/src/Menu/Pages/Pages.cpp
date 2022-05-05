@@ -3,7 +3,7 @@
 #include "Menu/Pages/Pages.h"
 
 
-static const Item *items[] =
+static Item *items[] =
 {
     PageDisplay::self,
     PageHC12::self,

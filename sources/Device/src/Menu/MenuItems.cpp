@@ -7,9 +7,21 @@
 #include "Menu/Menu.h"
 
 
+namespace Menu
+{
+    Page *opened = MainPage::self;
+}
+
+
 Page *Menu::OpenedPage()
 {
-    return MainPage::self;
+    return opened;
+}
+
+
+void Page::Open()
+{
+    Menu::opened = this;
 }
 
 
@@ -105,5 +117,16 @@ void Page::SelectNextItem()
     if (currentItem == NumItems())
     {
         currentItem = 0;
+    }
+}
+
+
+void Page::ChangeCurrentItem()
+{
+    Item *item = items[currentItem];
+
+    if (item->IsPage())
+    {
+        item->ReinterpetToPage()->Open();
     }
 }

@@ -12,7 +12,7 @@ static Choice choicePressure
 );
 
 
-static const Item *items[] =
+static Item *items[] =
 {
     &choicePressure,
     nullptr

@@ -39,6 +39,10 @@ struct Item
     virtual void DrawClosed(int x, int y) const {}
 
     bool Opened() const;
+
+    bool IsPage() const { return type == TypeItem::Page; }
+
+    Page *ReinterpetToPage() { return (Page *)this; }
 };
 
 
@@ -46,16 +50,21 @@ struct Page : public Item
 {
     static const int NUM_ITEMS_ON_SCREEN = 5;
 
-    const Item **items;
+    Item **items;
 
     uint8 currentItem;
 
-    Page(pchar title, const Page *keeper, const Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
+    Page(pchar title, const Page *keeper, Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
 
     virtual void DrawOpened(int x, int y) const;
 
     // Выделить следующий итем
     void SelectNextItem();
+
+    // Изменить состояние текущего итема
+    void ChangeCurrentItem();
+
+    void Open();
 
 private:
 

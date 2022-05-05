@@ -32,7 +32,7 @@ void Menu::LongPress()
     }
     else
     {
-
+        Menu::OpenedPage()->ChangeCurrentItem();
     }
 }
 
