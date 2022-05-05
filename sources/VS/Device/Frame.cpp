@@ -4,6 +4,7 @@
 #include "Display/Display.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Application.h"
+#include "Menu/Menu.h"
 #include "wx/statline.h"
 
 
@@ -82,8 +83,6 @@ Frame::Frame(const wxString &title)
 
     timer.SetOwner(this, TIMER_ID);
 
-    timer.Start(25);
-
     SetClientSize(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
 
     SetMinSize(GetSize());
@@ -96,6 +95,8 @@ Frame::Frame(const wxString &title)
     int y = (maxHeight - GetSize().y) / 2;
 
     SetPosition({ x, y });
+
+    timer.Start(25);
 }
 
 
@@ -146,13 +147,20 @@ void Frame::EndScene()
 
 void Frame::OnMouseDown(wxMouseEvent &)
 {
-
+    meter.Reset();
 }
 
 
 void Frame::OnMouseUp(wxMouseEvent &)
 {
-
+    if (meter.ElapsedTime() < 500)
+    {
+        Menu::ShortPress();
+    }
+    else
+    {
+        Menu::LongPress();
+    }
 }
 
 

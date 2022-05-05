@@ -4,5 +4,7 @@
 
 namespace Menu
 {
+    void ShortPress();
 
+    void LongPress();
 }
