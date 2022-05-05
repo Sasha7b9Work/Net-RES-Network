@@ -66,9 +66,22 @@ static Page pageMeasures
 };
 
 
+void ClosePageDisplay()
+{
+    PageDisplay::self->Close();
+}
+
+
+static Button bClosePageDisplay
+(
+    "Закрыть", PageDisplay::self, ClosePageDisplay
+);
+
+
 static Item *itemsDisplay[] =
 {
     PageDisplay::PageMeasures::self,
+    &bClosePageDisplay,
     nullptr
 };
 

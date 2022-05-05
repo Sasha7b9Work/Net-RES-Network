@@ -3,8 +3,21 @@
 #include "Menu/Pages/Pages.h"
 
 
+void ClosePageHC12()
+{
+    PageHC12::self->Close();
+}
+
+
+static Button bClosePageHC12
+(
+    "Закрыть", PageHC12::self, ClosePageHC12
+);
+
+
 static Item *items[] =
 {
+    &bClosePageHC12,
     nullptr
 };
 
