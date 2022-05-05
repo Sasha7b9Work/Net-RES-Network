@@ -139,3 +139,12 @@ void Display::SwitchMeasure(TypeMeasure::E type)
 {
     measures[type].show = !measures[type].show;
 }
+
+
+void Display::Reset()
+{
+    for (int i = 0; i < TypeMeasure::Count; i++)
+    {
+        measures[i].valid = false;
+    }
+}

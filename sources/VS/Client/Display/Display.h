@@ -34,4 +34,6 @@ namespace Display
     void SetMeasure(TypeMeasure::E, float value);
 
     void SwitchMeasure(TypeMeasure::E);
+
+    void Reset();
 }

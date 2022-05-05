@@ -6,6 +6,7 @@
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
 #include "Display/Display.h"
+#include "Hardware/Timer.h"
 
 
 namespace ServerTCP
@@ -13,6 +14,8 @@ namespace ServerTCP
     net__::netserver server(2);
 
     sock_t socket = -1;
+
+    TimeMeterMS meter;
 
     size_t OnReceiveData(net__::netpacket *, void *);
 
@@ -62,6 +65,8 @@ size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
         ProcessData(buffer);
     }
 
+    meter.Reset();
+
     return num_bytes;
 }
 
@@ -105,4 +110,9 @@ size_t ServerTCP::OnConnection(sock_t sock, void *)
 void ServerTCP::Update()
 {
     server.run();
+
+    if (meter.ElapsedTime() > 4000)
+    {
+        Display::Reset();
+    }
 }
