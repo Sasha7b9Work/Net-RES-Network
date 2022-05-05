@@ -20,16 +20,26 @@ struct Item
 {
     TypeItem::E type;
     Page *keeper;
+
+    Item(TypeItem::E _type, Page *_keeper) : type(_type), keeper(_keeper) { }
 };
 
 
 struct Page : public Item
 {
-    Item *items;
+    const Item **items;
+
+    Page(Page *keeper, const Item **_items) : Item(TypeItem::Page, keeper), items(_items) {}
+
+    void Draw() const;
+
+    static const Page *Opened();
 };
 
 
 struct Choice : public Item
 {
     uint8 *cell;
+
+    Choice(Page *keeper) : Item(TypeItem::Choice, keeper) { }
 };

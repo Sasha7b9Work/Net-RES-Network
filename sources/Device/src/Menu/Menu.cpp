@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Menu.h"
 #include "Display/Display.h"
+#include "Menu/MenuItems.h"
 
 
 namespace Menu
@@ -45,6 +46,8 @@ bool Menu::Opened()
 void Menu::Draw()
 {
     Display::BeginScene(Color::BLACK);
+
+    Page::Opened()->Draw();
 
     Display::EndScene();
 }
