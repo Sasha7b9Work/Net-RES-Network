@@ -4,15 +4,22 @@
 #include "Settings/Settings.h"
 
 
-static Choice choicePressure
+static Choice chPressure
 (
     "Давление", PageDisplay::self, &gset.display.show_measure[TypeMeasure::Pressure], 2
 );
 
 
+static Choice chIllumination
+(
+    "Освещённость", PageDisplay::self, &gset.display.show_measure[TypeMeasure::Illumination], 2
+);
+
+
 static Item *items[] =
 {
-    &choicePressure,
+    &chPressure,
+    &chIllumination,
     nullptr
 };
 
