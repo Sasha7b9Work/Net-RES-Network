@@ -9,7 +9,16 @@
 
 namespace Display
 {
-    bool show_measure[5] = { true, true, true, true, true };
+    struct Measure
+    {
+        bool show;
+        bool valid;
+        float value;
+
+        Measure() : show(true), valid(false), value(1.0f) {}
+    };
+
+    Measure measures[TypeMeasure::Count];
 
     // Çäåñü íàğèñîâàííàÿ êàğòèíêà
     wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
@@ -41,27 +50,27 @@ void Display::Update()
 
     COLOR_1.SetAsCurrent();
 
-    if (show_measure[0])
+    if (measures[TypeMeasure::Pressure].show)
     {
         String<>("ÄÀÂËÅÍÈÅ :").Draw(x0, y0);     String<>("ÌÏà").Draw(x0 + dX, y0);
     }
 
-    if (show_measure[1])
+    if (measures[TypeMeasure::Illumination].show)
     {
         String<>("ÎÑÂÅÙÅÍÍÎÑÒÜ :").Draw(x0, y0 + dY);       String<>("ëê").Draw(x0 + dX, y0 + dY);
     }
 
-    if (show_measure[2])
+    if (measures[TypeMeasure::Humidity].show)
     {
         String<>("ÂËÀÆÍÎÑÒÜ :").Draw(x0, y0 + 4 * dY);      String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
     }
 
-    if (show_measure[3])
+    if (measures[TypeMeasure::Velocity].show)
     {
         String<>("ÑÊÎĞÎÑÒÜ :").Draw(x0, y0 + 2 * dY);       String<>("ì/ñ").Draw(x0 + dX, y0 + 2 * dY);
     }
 
-    if (show_measure[4])
+    if (measures[TypeMeasure::Temperature].show)
     {
         String<>("ÒÅÌÏÅĞÀÒÓĞÀ :").Draw(x0, y0 + 3 * dY);    String<>("¨Ñ").Draw(x0 + dX, y0 + 3 * dY);
     }
@@ -97,13 +106,14 @@ void Display::EndScene()
 }
 
 
-void Display::SetMeasure(TypeMeasure::E , float )
+void Display::SetMeasure(TypeMeasure::E type, float value)
 {
-
+    measures[type].valid = true;
+    measures[type].value = value;
 }
 
 
 void Display::SwitchMeasure(TypeMeasure::E type)
 {
-    show_measure[type] = !show_measure[type];
+    measures[type].show = !measures[type].show;
 }
