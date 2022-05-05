@@ -43,9 +43,9 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
     {
         "дюбкемхе",
         "нябеыеммнярэ",
-        "бкюфмнярэ",
         "яйнпнярэ",
-        "релоепюрспю"
+        "релоепюрспю",
+        "бкюфмнярэ"
     };
 
     return titles[type];
@@ -58,9 +58,9 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
     {
         "лоЮ",
         "КЙ",
-        "%%",
         "Л/Я",
-        "ж"
+        "ж",
+        "%%"
     };
 
     return units[type];
@@ -102,7 +102,7 @@ void Display::DrawMeasure(TypeMeasure::E type)
 
     if (measures[type].valid)
     {
-        String<>("%f", measures[type].value).Draw(x0 + dX - 70, y, Color::WHITE);
+        String<>("%f", measures[type].value).Draw(x0 + dX - 90, y, Color::WHITE);
     }
 }
 
