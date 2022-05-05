@@ -6,6 +6,8 @@
 
 namespace Display
 {
+    bool show_measure[5] = { true, true, true, true, true };
+
     // Здесь нарисованная картинка
     wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
 
@@ -83,14 +85,13 @@ void Display::SetColor(Color &color)
 }
 
 
-void Display::SetValue(int type, float value)
+void Display::SetMeasure(int , float )
 {
-    char buffer[1024];
 
-    sprintf(buffer, "%d = %f", type, value);
+}
 
-    DWORD num_chars = 0;
 
-//    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buffer, std::strlen(buffer), &num_chars, NULL);
-    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), L"Test string", std::strlen(buffer), &num_chars, NULL);
+void Display::SwitchMeasure(int type)
+{
+    show_measure[type] = !show_measure[type];
 }

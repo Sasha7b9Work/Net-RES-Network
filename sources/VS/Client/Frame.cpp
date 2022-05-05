@@ -108,6 +108,12 @@ void Frame::CreateFrameToolBar()
     AddTool(MEAS_VELOCITY, _T("Скорость"), "MEAS_VELOCITY");
     AddTool(MEAS_TEMPERATURE, _T("Температура"), "MEAS_TEMPERATURE");
 
+    Bind(wxEVT_MENU, &Frame::OnMeasurePressure, this, MEAS_PRESSURE);
+    Bind(wxEVT_MENU, &Frame::OnMeasureIllumination, this, MEAS_ILLUMINATION);
+    Bind(wxEVT_MENU, &Frame::OnMeasureHumidity, this, MEAS_HUMIDITY);
+    Bind(wxEVT_MENU, &Frame::OnMeasureVelocity, this, MEAS_VELOCITY);
+    Bind(wxEVT_MENU, &Frame::OnMeasureTemperature, this, MEAS_TEMPERATURE);
+
     toolBar->Realize();
 }
 
@@ -131,6 +137,36 @@ void Frame::OnViewBrief(wxCommandEvent &)
 void Frame::OnViewFull(wxCommandEvent &)
 {
 
+}
+
+
+void Frame::OnMeasurePressure(wxCommandEvent &)
+{
+    Display::SwitchMeasure(0);
+}
+
+
+void Frame::OnMeasureIllumination(wxCommandEvent &)
+{
+    Display::SwitchMeasure(1);
+}
+
+
+void Frame::OnMeasureHumidity(wxCommandEvent &)
+{
+    Display::SwitchMeasure(2);
+}
+
+
+void Frame::OnMeasureVelocity(wxCommandEvent &)
+{
+    Display::SwitchMeasure(3);
+}
+
+
+void Frame::OnMeasureTemperature(wxCommandEvent &)
+{
+    Display::SwitchMeasure(4);
 }
 
 

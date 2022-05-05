@@ -13,5 +13,7 @@ namespace Display
 
     void Update();
 
-    void SetValue(int type, float value);
+    void SetMeasure(int type, float value);
+
+    void SwitchMeasure(int type);
 }
