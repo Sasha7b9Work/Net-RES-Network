@@ -25,6 +25,19 @@ void Page::Open()
 }
 
 
+void Page::Close()
+{
+    if (this == MainPage::self)
+    {
+        Menu::opened = false;
+    }
+    else
+    {
+        Menu::opened = keeper;
+    }
+}
+
+
 bool Item::Opened() const
 {
     return true;
@@ -150,6 +163,10 @@ void Page::ChangeCurrentItem()
     else if (item->IsChoice())
     {
         item->ReinterpretToChoice()->Change();
+    }
+    else if (item->IsButton())
+    {
+        item->ReinterpretToButton()->FuncOnPress();
     }
 }
 

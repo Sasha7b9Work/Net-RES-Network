@@ -17,6 +17,7 @@ struct TypeItem
 
 struct Page;
 struct Choice;
+struct Button;
 
 
 struct Item
@@ -26,9 +27,9 @@ struct Item
 
     TypeItem::E type;
     pchar       title;
-    const Page *keeper;
+    Page       *keeper;
 
-    Item(TypeItem::E _type, pchar _title, const Page *_keeper) : type(_type), title(_title), keeper(_keeper) { }
+    Item(TypeItem::E _type, pchar _title, Page *_keeper) : type(_type), title(_title), keeper(_keeper) { }
 
     virtual ~Item() {}
 
@@ -48,6 +49,7 @@ struct Item
 
     Page *ReinterpetToPage() { return (Page *)this; }
     Choice *ReinterpretToChoice() { return (Choice *)this; }
+    Button *ReinterpretToButton() { return (Button *)this; }
 };
 
 
@@ -59,7 +61,7 @@ struct Page : public Item
 
     uint8 currentItem;
 
-    Page(pchar title, const Page *keeper, Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
+    Page(pchar title, Page *keeper, Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
 
     virtual void DrawOpened(int x, int y) const;
 
@@ -70,6 +72,8 @@ struct Page : public Item
     void ChangeCurrentItem();
 
     void Open();
+
+    void Close();
 
 private:
 
@@ -95,7 +99,7 @@ struct Choice : public Item
     uint8 count;
     pchar names[2];
 
-    Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count, pchar name0, pchar name1) :
+    Choice(pchar title, Page *keeper, uint8 *_cell, uint8 _count, pchar name0, pchar name1) :
         Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count)
     {
         names[0] = name0;
@@ -114,5 +118,7 @@ struct Button : public Item
 
     funcPressButton funcPress;
 
-    Button(pchar title, const Page *keeper, funcPressButton _funcPress) : Item(TypeItem::Button, title, keeper), funcPress(_funcPress) {}
+    Button(pchar title, Page *keeper, funcPressButton _funcPress) : Item(TypeItem::Button, title, keeper), funcPress(_funcPress) {}
+
+    void FuncOnPress() { funcPress(); }
 };

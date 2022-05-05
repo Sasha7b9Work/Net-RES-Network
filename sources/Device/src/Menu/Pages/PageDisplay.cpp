@@ -34,6 +34,17 @@ static Choice chHumidity
     "Откл", "Вкл"
 );
 
+static void CloseMeasures()
+{
+    PageDisplay::PageMeasures::self->Close();
+};
+
+
+static Button bCloseMeasures
+(
+    "Закрыть", PageDisplay::PageMeasures::self, CloseMeasures
+);
+
 
 static Item *itemsMeasures[] =
 {
@@ -42,6 +53,7 @@ static Item *itemsMeasures[] =
     &chVelocity,
     &chTemperature,
     &chHumidity,
+    &bCloseMeasures,
     nullptr
 };
 
