@@ -1,14 +1,12 @@
 // 2022/05/05 13:14:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
-
-
-static uint8 measurePressure;
+#include "Settings/Settings.h"
 
 
 static Choice choicePressure
 (
-    "Давление", PageDisplay::self, &measurePressure, 2
+    "Давление", PageDisplay::self, &gset.display.show_measure[TypeMeasure::Pressure], 2
 );
 
 
