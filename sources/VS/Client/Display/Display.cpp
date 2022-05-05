@@ -1,4 +1,4 @@
-// 2022/04/29 16:45:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+    // 2022/04/29 16:45:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Display/Display.h"
 #include "Display/Colors.h"
 #include "Frame.h"
@@ -102,7 +102,7 @@ void Display::DrawMeasure(TypeMeasure::E type)
 
     if (measures[type].valid)
     {
-        String<>("%f", measures[type].value).Draw(x0 + dX - 90, y, Color::WHITE);
+        String<>("%.4f", measures[type].value).Draw(x0 + dX - 90, y, Color::WHITE);
     }
 }
 
