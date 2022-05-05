@@ -88,8 +88,10 @@ Frame::Frame(const wxString &title)
     sizer->Add(screen);
     SetSizer(sizer);
 
-    SetMinSize({ 600, 600 });
-    SetSize({ 600, 600 });
+    SetClientSize(Display::WIDTH, Display::HEIGHT);
+
+    SetMinSize(GetSize());
+    SetMaxSize(GetSize());
 }
 
 

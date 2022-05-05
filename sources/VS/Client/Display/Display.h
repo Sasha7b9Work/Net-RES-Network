@@ -21,7 +21,7 @@ struct TypeMeasure
 namespace Display
 {
     static const int WIDTH = 320;
-    static const int HEIGHT = 320;
+    static const int HEIGHT = 180;
 
     extern wxBitmap bitmap;
 

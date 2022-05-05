@@ -37,7 +37,7 @@ void Display::Update()
     int y0 = 15;
     int dY = 30;
 
-    Font::SetSize(15);
+    Font::SetSize(13);
 
     COLOR_1.SetAsCurrent();
 
