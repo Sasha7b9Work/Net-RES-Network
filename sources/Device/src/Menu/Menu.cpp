@@ -47,7 +47,7 @@ void Menu::Draw()
 {
     Display::BeginScene(Color::BLACK);
 
-    Menu::OpenedPage()->Draw();
+    Menu::OpenedPage()->Draw(0, 0);
 
     Display::EndScene();
 }

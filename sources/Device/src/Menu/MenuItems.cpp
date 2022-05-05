@@ -19,41 +19,47 @@ bool Item::Opened() const
 }
 
 
-void Item::Draw() const
+void Item::Draw(int x, int y) const
 {
     if (Opened())
     {
-        DrawOpened();
+        DrawOpened(x, y);
     }
     else
     {
-        DrawClosed();
+        DrawClosed(x, y);
     }
 }
 
 
-void Page::DrawOpened() const
+void Page::DrawOpened(int x, int y) const
 {
-    DrawTitle();
+    DrawTitle(x, y);
 
-    DrawItems();
+    DrawItems(x, y + 28);
 }
 
 
-void Page::DrawTitle() const
+void Page::DrawTitle(int x, int y) const
 {
-    Rectangle(Display::WIDTH - 1, 19).DrawFilled(0, 0, Color::BLACK, Color::WHITE);
+    Rectangle(Display::WIDTH - 1, 19).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
-    String<>(Title()).Draw(10, 5, Color::WHITE);
+    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
 }
 
 
-void Page::DrawItems() const
+void Page::DrawItems(int x, int y) const
 {
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
-        items[i]->DrawClosed();
+        items[i]->DrawClosed(x, y);
+        y += 20;
     }
+}
+
+
+void Page::DrawClosed(int x, int y) const
+{
 }
 
 
@@ -66,10 +72,4 @@ int Page::FirstItemOnScreen() const
 int Page::LastItemOnScreen() const
 {
     return 1;
-}
-
-
-void Choice::Draw() const
-{
-
 }

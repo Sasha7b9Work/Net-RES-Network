@@ -28,11 +28,11 @@ struct Item
 
     pchar Title() const { return title; }
 
-    virtual void Draw() const;
+    virtual void Draw(int x, int y) const;
 
-    virtual void DrawOpened() const {}
+    virtual void DrawOpened(int x, int y) const {}
 
-    virtual void DrawClosed() const {}
+    virtual void DrawClosed(int x, int y) const {}
 
     bool Opened() const;
 };
@@ -46,13 +46,15 @@ struct Page : public Item
 
     Page(pchar title, const Page *keeper, const Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
 
-    virtual void DrawOpened() const;
+    virtual void DrawOpened(int x, int y) const;
 
 private:
 
-    void DrawTitle() const;
+    void DrawTitle(int x, int y) const;
 
-    void DrawItems() const;
+    void DrawItems(int x, int y) const;
+
+    virtual void DrawClosed(int x, int y) const;
 
     // Первый выводимый итем на текущей странице
     int FirstItemOnScreen() const;
@@ -68,6 +70,4 @@ struct Choice : public Item
     uint8 count;
 
     Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count) : Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count) { }
-
-    virtual void Draw() const;
 };
