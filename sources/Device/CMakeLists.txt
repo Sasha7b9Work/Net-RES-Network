@@ -6,10 +6,10 @@ message("-----------------------------------------------------------------------
 
 include_directories(../common/_VS_KEIL/CMSIS/
                     ../common/_VS_KEIL/std_includes/
-                    src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/
-                    src/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/
-                    src/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/
-                    src/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include/
+                    ../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/
+                    ../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/
+                    ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/
+                    ../common/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include/
                     src/Hardware/HAL/
                     src/Hardware/CDC/
                     src/
