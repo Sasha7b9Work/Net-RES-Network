@@ -23,11 +23,11 @@ static Item *items[] =
 
 
 static Page pageHC12
-{
+(
     "HC12",
     PageMain::self,
     items
-};
+);
 
 
 Page *PageHC12::self = &pageHC12;

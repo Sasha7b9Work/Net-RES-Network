@@ -59,11 +59,11 @@ static Item *itemsMeasures[] =
 
 
 static Page pageMeasures
-{
+(
     "ÈÇÌÅĞÅÍÈß",
     PageDisplay::self,
     itemsMeasures
-};
+);
 
 
 void ClosePageDisplay()
