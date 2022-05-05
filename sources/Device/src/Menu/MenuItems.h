@@ -23,6 +23,8 @@ struct Item
     const Page *keeper;
 
     Item(TypeItem::E _type, pchar _title, const Page *_keeper) : type(_type), title(_title), keeper(_keeper) { }
+
+    pchar Title() const { return title; }
 };
 
 
@@ -35,8 +37,6 @@ struct Page : public Item
     Page(pchar title, const Page *keeper, const Item **_items) : Item(TypeItem::Page, title, keeper), items(_items) {}
 
     void Draw() const;
-
-    pchar Title();
 
     static const Page *Opened();
 

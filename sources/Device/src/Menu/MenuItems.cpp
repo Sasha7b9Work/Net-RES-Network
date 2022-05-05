@@ -3,6 +3,7 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Pages.h"
 #include "Display/Display.h"
+#include "Utils/Text/String.h"
 
 
 const Page *Page::Opened()
@@ -19,5 +20,7 @@ void Page::Draw() const
 
 void Page::DrawTitle() const
 {
-    Rectangle(Display::WIDTH - 1, 20).DrawFilled(0, 0, Color::BLACK, Color::WHITE);
+    Rectangle(Display::WIDTH - 1, 19).DrawFilled(0, 0, Color::BLACK, Color::WHITE);
+
+    String<>(Title()).Draw(10, 5, Color::WHITE);
 }
