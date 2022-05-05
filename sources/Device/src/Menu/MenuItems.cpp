@@ -30,5 +30,26 @@ void Page::DrawTitle() const
 
 void Page::DrawItems() const
 {
+    for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
+    {
+        items[i]->Draw();
+    }
+}
+
+
+int Page::FirstItemOnScreen() const
+{
+    return 0;
+}
+
+
+int Page::LastItemOnScreen() const
+{
+    return 1;
+}
+
+
+void Choice::Draw() const
+{
 
 }
