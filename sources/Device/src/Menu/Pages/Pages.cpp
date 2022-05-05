@@ -3,10 +3,23 @@
 #include "Menu/Pages/Pages.h"
 
 
+static void CloseMainPage()
+{
+    PageMain::self->Close();
+}
+
+
+static Button bCloseMainPage
+(
+    "Закрыть", PageMain::self, CloseMainPage
+);
+
+
 static Item *items[] =
 {
     PageDisplay::self,
     PageHC12::self,
+    &bCloseMainPage,
     nullptr
 };
 
@@ -19,4 +32,4 @@ static Page pageMain
 );
 
 
-Page *MainPage::self = &pageMain;
+Page *PageMain::self = &pageMain;

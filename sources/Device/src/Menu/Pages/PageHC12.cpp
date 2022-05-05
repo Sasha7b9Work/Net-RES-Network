@@ -12,7 +12,7 @@ static Item *items[] =
 static Page pageHC12
 {
     "HC12",
-    MainPage::self,
+    PageMain::self,
     items
 };
 

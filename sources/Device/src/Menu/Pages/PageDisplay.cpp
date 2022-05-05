@@ -76,7 +76,7 @@ static Item *itemsDisplay[] =
 static Page pageDisplay
 (
     "ÄÈÑÏËÅÉ",
-    MainPage::self,
+    PageMain::self,
     itemsDisplay
 );
 

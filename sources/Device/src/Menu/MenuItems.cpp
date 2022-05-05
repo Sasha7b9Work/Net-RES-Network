@@ -9,7 +9,7 @@
 
 namespace Menu
 {
-    Page *opened = MainPage::self;
+    extern Page *opened;
 }
 
 
@@ -27,9 +27,9 @@ void Page::Open()
 
 void Page::Close()
 {
-    if (this == MainPage::self)
+    if (this == PageMain::self)
     {
-        Menu::opened = false;
+        Menu::opened = nullptr;
     }
     else
     {
@@ -114,6 +114,22 @@ void Choice::DrawClosed(int x, int y) const
     String<>(Title()).Draw(x + 10, y + 5, draw);
 
     String<>(names[*cell]).Draw(x + 130, y + 5, draw);
+}
+
+
+void Button::DrawClosed(int x, int y) const
+{
+    Color::E fill = Color::BLACK;
+    Color::E draw = Color::WHITE;
+
+    if (keeper->items[keeper->currentItem] == this)
+    {
+        fill = Color::GREEN_50;
+    }
+
+    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+
+    String<>(Title()).Draw(x + 10, y + 5, draw);
 }
 
 

@@ -121,4 +121,6 @@ struct Button : public Item
     Button(pchar title, Page *keeper, funcPressButton _funcPress) : Item(TypeItem::Button, title, keeper), funcPress(_funcPress) {}
 
     void FuncOnPress() { funcPress(); }
+
+    virtual void DrawClosed(int x, int y) const;
 };

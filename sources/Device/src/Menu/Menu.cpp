@@ -3,19 +3,20 @@
 #include "Menu/Menu.h"
 #include "Display/Display.h"
 #include "Menu/MenuItems.h"
+#include "Menu/Pages/Pages.h"
 
 
 namespace Menu
 {
-    bool opened = false;
+    Page *opened = nullptr;
 }
 
 
 void Menu::ShortPress()
 {
-    if (!opened)
+    if (!Opened())
     {
-        opened = true;
+        opened = PageMain::self;
     }
     else
     {
@@ -26,9 +27,9 @@ void Menu::ShortPress()
 
 void Menu::LongPress()
 {
-    if (!opened)
+    if (!Opened())
     {
-        opened = true;
+        opened = PageMain::self;
     }
     else
     {
@@ -39,7 +40,7 @@ void Menu::LongPress()
 
 bool Menu::Opened()
 {
-    return opened;
+    return (opened != nullptr);
 }
 
 

@@ -3,7 +3,7 @@
 #include "Menu/MenuItems.h"
 
 
-struct MainPage
+struct PageMain
 {
     static Page *self;
 };
