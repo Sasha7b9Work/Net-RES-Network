@@ -36,6 +36,8 @@ public:
         SetMinSize({ Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE });
         SetDoubleBuffered(true);
         Bind(wxEVT_PAINT, &Screen::OnPaint, this);
+        Bind(wxEVT_LEFT_DOWN, &Frame::OnMouseDown, Frame::Self());
+        Bind(wxEVT_LEFT_UP, &Frame::OnMouseUp, Frame::Self());
     }
 
     void OnPaint(wxPaintEvent &)
@@ -137,6 +139,18 @@ void Frame::BeginScene()
 
 
 void Frame::EndScene()
+{
+
+}
+
+
+void Frame::OnMouseDown(wxMouseEvent &)
+{
+
+}
+
+
+void Frame::OnMouseUp(wxMouseEvent &)
 {
 
 }

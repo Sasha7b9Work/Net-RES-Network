@@ -15,6 +15,9 @@ public:
     void OnAbout(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
 
+    void OnMouseDown(wxMouseEvent &);
+    void OnMouseUp(wxMouseEvent &);
+
     void BeginScene();
 
     void EndScene();
