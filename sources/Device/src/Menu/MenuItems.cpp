@@ -22,6 +22,11 @@ Page *Menu::OpenedPage()
 void Page::Open()
 {
     Menu::opened = this;
+
+    if (currentItem == NumItems() - 1)
+    {
+        currentItem = 0;
+    }
 }
 
 
@@ -135,13 +140,20 @@ void Button::DrawClosed(int x, int y) const
 
 int Page::FirstItemOnScreen() const
 {
-    return 0;
+    return (currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
 }
 
 
 int Page::LastItemOnScreen() const
 {
-    return NumItems();
+    int result = FirstItemOnScreen() + Page::NUM_ITEMS_ON_SCREEN;
+
+    if (result > NumItems())
+    {
+        result = NumItems();
+    }
+
+    return result;
 }
 
 
