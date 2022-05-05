@@ -39,11 +39,17 @@ void Display::Update()
 
     Font::SetSize(15);
 
-    String<>("дюбкемхе :").Draw(x0, y0, Color::_1);         String<>("лоЮ").Draw(x0 + dX, y0);
-    String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);           String<>("КЙ").Draw(x0 + dX, y0 + dY);
-    String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);          String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
-    String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);           String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
-    String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);        String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
+    COLOR_1.SetAsCurrent();
+
+    if (show_measure[0])
+    {
+        String<>("дюбкемхе :").Draw(x0, y0);     String<>("лоЮ").Draw(x0 + dX, y0);
+    }
+
+    String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);       String<>("КЙ").Draw(x0 + dX, y0 + dY);
+    String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);      String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+    String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);       String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
+    String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);    String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
 
 //    DrawMeasures();
 

@@ -10,6 +10,9 @@ wxColour colors[Color::Count] =
 };
 
 
+Color COLOR_1(Color::_1);
+
+
 namespace Display
 {
     // Здесь будем рисовать

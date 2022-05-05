@@ -20,3 +20,6 @@ struct Color
 
     void SetAsCurrent();
 };
+
+
+extern Color COLOR_1;
