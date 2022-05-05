@@ -37,9 +37,9 @@ struct Item
 
     virtual void Draw(int x, int y) const;
 
-    virtual void DrawOpened(int x, int y) const {}
+    virtual void DrawOpened(int, int) const {}
 
-    virtual void DrawClosed(int x, int y) const {}
+    virtual void DrawClosed(int, int) const {}
 
     bool Opened() const;
 

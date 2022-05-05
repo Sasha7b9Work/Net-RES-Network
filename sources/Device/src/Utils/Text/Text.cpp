@@ -138,14 +138,14 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (ByteFontNotEmpty((uint)symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (BitInFontIsExist((uint)symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

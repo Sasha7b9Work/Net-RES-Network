@@ -8,7 +8,10 @@
 #include "Utils/Text/String.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
-#include "Hardware/LAN/ClientTCP.h"
+
+#ifdef GUI
+    #include "Hardware/LAN/ClientTCP.h"
+#endif
 
 
 namespace InterCom
