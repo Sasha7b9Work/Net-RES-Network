@@ -27,4 +27,4 @@ static Page pageDisplay
 );
 
 
-const Page *PageDisplay::self = nullptr;
+const Page *PageDisplay::self = &pageDisplay;

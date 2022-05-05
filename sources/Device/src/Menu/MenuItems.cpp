@@ -32,7 +32,9 @@ void Page::DrawItems() const
 {
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
-        items[i]->Draw();
+        const Item *item = items[i];
+
+        item->Draw();
     }
 }
 
