@@ -48,13 +48,13 @@ void Page::DrawOpened(int x, int y) const
 {
     DrawTitle(x, y);
 
-    DrawItems(x, y + 28);
+    DrawItems(x, y + 27);
 }
 
 
 void Page::DrawTitle(int x, int y) const
 {
-    Rectangle(Item::WIDTH, 28).DrawFilled(x, y, Color::BLACK, Color::WHITE);
+    Rectangle(Item::WIDTH, 27).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
     String<>(Title()).Draw(x + 10, y + 10, Color::GRAY_50);
 }
