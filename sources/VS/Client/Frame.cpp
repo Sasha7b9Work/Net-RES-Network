@@ -142,31 +142,31 @@ void Frame::OnViewFull(wxCommandEvent &)
 
 void Frame::OnMeasurePressure(wxCommandEvent &)
 {
-    Display::SwitchMeasure(0);
+    Display::SwitchMeasure(TypeMeasure::Pressure);
 }
 
 
 void Frame::OnMeasureIllumination(wxCommandEvent &)
 {
-    Display::SwitchMeasure(1);
+    Display::SwitchMeasure(TypeMeasure::Illumination);
 }
 
 
 void Frame::OnMeasureHumidity(wxCommandEvent &)
 {
-    Display::SwitchMeasure(2);
+    Display::SwitchMeasure(TypeMeasure::Humidity);
 }
 
 
 void Frame::OnMeasureVelocity(wxCommandEvent &)
 {
-    Display::SwitchMeasure(3);
+    Display::SwitchMeasure(TypeMeasure::Velocity);
 }
 
 
 void Frame::OnMeasureTemperature(wxCommandEvent &)
 {
-    Display::SwitchMeasure(4);
+    Display::SwitchMeasure(TypeMeasure::Temperature);
 }
 
 

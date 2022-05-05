@@ -4,6 +4,20 @@
 #include <wx/wx.h>
 
 
+struct TypeMeasure
+{
+    enum E
+    {
+        Pressure,           // Давление
+        Illumination,       // Освещённость
+        Humidity,           // Влажность
+        Velocity,           // Скорость
+        Temperature,        // Температура
+        Count
+    };
+};
+
+
 namespace Display
 {
     static const int WIDTH = 320;
@@ -13,7 +27,7 @@ namespace Display
 
     void Update();
 
-    void SetMeasure(int type, float value);
+    void SetMeasure(TypeMeasure::E, float value);
 
-    void SwitchMeasure(int type);
+    void SwitchMeasure(TypeMeasure::E);
 }

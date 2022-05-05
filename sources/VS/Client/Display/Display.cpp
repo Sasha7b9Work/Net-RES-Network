@@ -97,13 +97,13 @@ void Display::EndScene()
 }
 
 
-void Display::SetMeasure(int , float )
+void Display::SetMeasure(TypeMeasure::E , float )
 {
 
 }
 
 
-void Display::SwitchMeasure(int type)
+void Display::SwitchMeasure(TypeMeasure::E type)
 {
     show_measure[type] = !show_measure[type];
 }
