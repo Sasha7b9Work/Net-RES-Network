@@ -30,7 +30,7 @@ static const Item *items[] =
 static uint8 ciPageMain = 0;
 
 
-static const DPage pageMain =
+const DPage pageMain =
 {
     TypeItem::Page,
     "лемч",

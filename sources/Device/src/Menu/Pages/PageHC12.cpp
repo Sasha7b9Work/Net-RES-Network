@@ -3,6 +3,10 @@
 #include "Menu/Pages/Pages.h"
 
 
+extern const DPage pageHC12;
+extern const DPage pageMain;
+
+
 void ClosePageHC12()
 {
     PageHC12::self->Close();
@@ -13,12 +17,12 @@ static const DButton bClosePageHC12 =
 {
     TypeItem::Button,
     "Закрыть",
-    PageHC12::self,
+    (const Page *)&pageHC12,
     ClosePageHC12
 };
 
 
-static const Item *items[] =
+static const Item * const items[] =
 {
     (Item *)&bClosePageHC12,
     nullptr
@@ -32,7 +36,7 @@ static const DPage pageHC12 =
 {
     TypeItem::Page,
     "HC12",
-    PageMain::self,
+    (const Page *)&pageMain,
     items,
     &ciPageHC12
 };
