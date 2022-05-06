@@ -52,9 +52,12 @@ void Keyboard::Update()
             if (!KEY_PRESSED)
             {
                 pressed = false;
-                taboo_long = false;
                 meter.Reset();
-                Menu::ShortPress();
+                if (!taboo_long)
+                {
+                    Menu::ShortPress();
+                }
+                taboo_long = false;
             }
         }
     }
