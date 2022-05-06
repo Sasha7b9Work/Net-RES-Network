@@ -85,6 +85,10 @@ struct Page : public Item
 
     void Close() const;
 
+    const DPage *ReinterpretToDPage() const { return (DPage *)this; }
+
+    const Item *CurrentItem() const;
+
 private:
 
     void DrawTitle(int x, int y) const;
@@ -118,6 +122,10 @@ struct Choice : public Item
     virtual void DrawClosed(int x, int y) const;
 
     void Change() const;
+
+    pchar CurrentName() const;
+
+    const DChoice *ReinterpretToDChoice() const { return (DChoice *)this; }
 };
 
 

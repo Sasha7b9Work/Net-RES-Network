@@ -23,6 +23,8 @@ void Page::Open() const
 {
     Menu::opened = this;
 
+    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+
     if (*currentItem == NumItems() - 1)
     {
         *currentItem = 0;
@@ -38,7 +40,7 @@ void Page::Close() const
     }
     else
     {
-        Menu::opened = keeper;
+        Menu::opened = ReinterpretToDPage()->keeper;
     }
 }
 
@@ -82,9 +84,19 @@ void Page::DrawItems(int x, int y) const
 {
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
-        items[i]->DrawClosed(x, y);
+        ReinterpretToDPage()->items[i]->DrawClosed(x, y);
         y += Item::HEIGHT;
     }
+}
+
+
+const Item *Page::CurrentItem() const
+{
+    const Item *const *items = ReinterpretToDPage()->items;
+
+    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+
+    return items[*currentItem];
 }
 
 
@@ -93,7 +105,7 @@ void Page::DrawClosed(int x, int y) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (keeper->items[*keeper->currentItem] == this)
+    if (ReinterpretToDPage()->keeper->CurrentItem() == this)
     {
         fill = Color::GREEN_50;
     }
@@ -101,6 +113,14 @@ void Page::DrawClosed(int x, int y) const
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
 
     String<>(Title()).Draw(x + 10, y + 5, draw);
+}
+
+
+pchar Choice::CurrentName() const
+{
+    const DChoice *choice = ReinterpretToDChoice();
+
+    return choice->names[*choice->cell];
 }
 
 
@@ -109,7 +129,7 @@ void Choice::DrawClosed(int x, int y) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (keeper->items[*keeper->currentItem] == this)
+    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
     {
         fill = Color::GREEN_50;
     }
@@ -118,7 +138,7 @@ void Choice::DrawClosed(int x, int y) const
 
     String<>(Title()).Draw(x + 10, y + 5, draw);
 
-    String<>(names[*cell]).Draw(x + 130, y + 5, draw);
+    String<>(CurrentName()).Draw(x + 130, y + 5, draw);
 }
 
 
@@ -127,7 +147,7 @@ void Button::DrawClosed(int x, int y) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (keeper->items[*keeper->currentItem] == this)
+    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
     {
         fill = Color::GREEN_50;
     }
@@ -140,7 +160,7 @@ void Button::DrawClosed(int x, int y) const
 
 int Page::FirstItemOnScreen() const
 {
-    return (*currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
+    return (*ReinterpretToDPage()->currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
 }
 
 
@@ -161,7 +181,7 @@ int Page::NumItems() const
 {
     for (int i = 0; ; i++)
     {
-        if (items[i] == nullptr)
+        if (ReinterpretToDPage()->items[i] == nullptr)
         {
             return i;
         }
@@ -171,6 +191,8 @@ int Page::NumItems() const
 
 void Page::SelectNextItem() const
 {
+    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+
     *currentItem = (uint8)(*currentItem + 1);
 
     if (*currentItem == NumItems())
@@ -182,7 +204,7 @@ void Page::SelectNextItem() const
 
 void Page::ChangeCurrentItem() const
 {
-    const Item *item = items[*currentItem];
+    const Item *item = CurrentItem();
 
     if (item->IsPage())
     {
@@ -201,9 +223,11 @@ void Page::ChangeCurrentItem() const
 
 void Choice::Change() const
 {
+    uint8 *cell = ReinterpretToDChoice()->cell;
+
     *cell = (uint8)(*cell + 1);
 
-    if (*cell == count)
+    if (*cell == ReinterpretToDChoice()->count)
     {
         *cell = 0;
     }
