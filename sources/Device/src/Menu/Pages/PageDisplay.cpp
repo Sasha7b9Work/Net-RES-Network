@@ -100,7 +100,7 @@ void ClosePageDisplay()
 static const DButton bClosePageDisplay =
 {
     TypeItem::Button,
-    "Закрыть", PageDisplay::self, ClosePageDisplay
+    "Закрыть", (const Page *)&pageDisplay, ClosePageDisplay
 };
 
 
