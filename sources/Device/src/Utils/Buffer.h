@@ -7,9 +7,9 @@ class Buffer
 {
 public:
 
-    Buffer() : size(size_buffer) {};
+    Buffer() : size(size_buffer) {}; //-V730
 
-    Buffer(int _size) : size(size_buffer)
+    Buffer(int _size) : size(size_buffer) //-V730
     {
         Realloc(_size);
     }

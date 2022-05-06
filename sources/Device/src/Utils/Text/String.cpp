@@ -51,8 +51,6 @@ int String<capa>::Draw(int x, int y, Color::E color)
 
     pchar text = c_str();
 
-    text = c_str();
-
     while (*text != '\0')
     {
         x = Char(*text).Draw(x, y) + 1;
