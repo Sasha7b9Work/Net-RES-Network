@@ -10,6 +10,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
 #include "Display/Display.h"
+#include "Hardware/Keyboard.h"
 
 
 void Device::Init()
@@ -25,6 +26,8 @@ void Device::Init()
     CG_Anem::Init();
 
     BH1750::Init();
+
+    Keyboard::Init();
 
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 }
@@ -56,6 +59,8 @@ void Device::Update()
     {
         InterCom::Send(TypeMeasure::Illumination, illumination);
     }
+
+    Keyboard::Update();
 
     Display::Update();
 }

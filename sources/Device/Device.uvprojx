@@ -563,6 +563,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\InterCom.h</FilePath>
             </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Keyboard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Keyboard.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -677,6 +687,56 @@
               <FileName>i2c.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\I2C\i2c.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu</GroupName>
+          <Files>
+            <File>
+              <FileName>Menu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Menu.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\MenuItems.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages</GroupName>
+          <Files>
+            <File>
+              <FileName>PageDisplay.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDisplay.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageHC12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageHC12.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pages.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\Pages.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -827,56 +887,6 @@
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\Settings.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu</GroupName>
-          <Files>
-            <File>
-              <FileName>Menu.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Menu.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Menu.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Menu.h</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItems.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu/Pages</GroupName>
-          <Files>
-            <File>
-              <FileName>PageDisplay.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDisplay.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageHC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageHC12.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pages.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\Pages.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pages.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1439,6 +1449,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\InterCom.h</FilePath>
             </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Keyboard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Keyboard.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1553,6 +1573,56 @@
               <FileName>i2c.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\I2C\i2c.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu</GroupName>
+          <Files>
+            <File>
+              <FileName>Menu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Menu.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\MenuItems.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages</GroupName>
+          <Files>
+            <File>
+              <FileName>PageDisplay.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDisplay.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageHC12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageHC12.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pages.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\Pages.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1703,56 +1773,6 @@
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\Settings.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu</GroupName>
-          <Files>
-            <File>
-              <FileName>Menu.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Menu.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Menu.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Menu.h</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItems.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu/Pages</GroupName>
-          <Files>
-            <File>
-              <FileName>PageDisplay.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDisplay.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageHC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageHC12.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pages.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\Pages.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pages.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
           </Files>
         </Group>
