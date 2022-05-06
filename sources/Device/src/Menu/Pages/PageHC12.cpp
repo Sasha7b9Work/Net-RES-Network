@@ -16,16 +16,6 @@ DEF_BUTTN(bClosePageHC12, "Закрыть", pageHC12, ClosePageHC12);
 
 DEF_ITEMS_1(itemsHC12, bClosePageHC12);
 
-static uint8 ciPageHC12 = 0;
-
-const DPage pageHC12 =
-{
-    TypeItem::Page,
-    "HC12",
-    (const Page *)&pageMain,
-    itemsHC12,
-    &ciPageHC12
-};
-
+DEF_PAGE(pageHC12, "HC12", pageMain, itemsHC12);
 
 const Page *const PageHC12::self = (const Page *)&pageHC12;

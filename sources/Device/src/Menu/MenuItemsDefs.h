@@ -18,3 +18,15 @@
         (Item *)&item,                  \
         nullptr                         \
     };
+
+
+#define DEF_PAGE(name, title, keeper, items)    \
+static uint8 ci##name = 0;                      \
+const DPage name =                              \
+{                                               \
+    TypeItem::Page,                             \
+    title,                                      \
+    (const Page *)&keeper,                      \
+    items,                                      \
+    &ci##name                                   \
+};
