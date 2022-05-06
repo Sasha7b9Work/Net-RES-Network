@@ -5,6 +5,8 @@
 *.out
 ~*~
 
+archive.zip
+
 sources/*.uvgui.*
 sources/generated/
 sources/Device/*.uvgui*

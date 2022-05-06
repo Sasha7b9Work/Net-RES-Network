@@ -20,20 +20,25 @@ struct Choice;
 struct Button;
 
 
+#define COMMON_PART_ITEM     TypeItem::E type;      \
+                             pchar       title;     \
+                             const Page *keeper;    \
+
+
+struct DItem
+{
+    COMMON_PART_ITEM;
+};
+
+
 struct Item
 {
     static const int WIDTH = Display::WIDTH - 1;
     static const int HEIGHT = 20;
 
-    TypeItem::E type;
-    pchar       title;
-    const Page *keeper;
-
-    Item(TypeItem::E _type, pchar _title, const Page *_keeper) : type(_type), title(_title), keeper(_keeper) { }
-
     virtual ~Item() {}
 
-    pchar Title() const { return title; }
+    pchar Title() const { return ReinterpretToDItem()->title; }
 
     virtual void Draw(int x, int y) const;
 
@@ -43,9 +48,11 @@ struct Item
 
     bool Opened() const;
 
-    bool IsPage() const { return type == TypeItem::Page; }
-    bool IsChoice() const { return type == TypeItem::Choice; }
-    bool IsButton() const { return type == TypeItem::Button; }
+    bool IsPage() const   { return (ReinterpretToDItem()->type == TypeItem::Page);   }
+    bool IsChoice() const { return (ReinterpretToDItem()->type == TypeItem::Choice); }
+    bool IsButton() const { return (ReinterpretToDItem()->type == TypeItem::Button); }
+
+    const DItem *ReinterpretToDItem() const { return (DItem *)this; }
 
     const Page *ReinterpetToPage() const { return (const Page *)this; }
     const Choice *ReinterpretToChoice() const { return (const Choice *)this; }
@@ -53,15 +60,18 @@ struct Item
 };
 
 
+struct DPage
+{
+    COMMON_PART_ITEM;
+
+    const Item *const *items;
+    uint8 *currentItem;
+};
+
+
 struct Page : public Item
 {
     static const int NUM_ITEMS_ON_SCREEN = 5;
-
-    const Item * const *items;
-
-    uint8 *currentItem;
-
-    Page(pchar title, const Page *keeper, const Item * const *_items, uint8 *_currentItem) : Item(TypeItem::Page, title, keeper), items(_items), currentItem(_currentItem) {}
 
     virtual void DrawOpened(int x, int y) const;
 
@@ -93,34 +103,39 @@ private:
 };
 
 
-struct Choice : public Item
+struct DChoice
 {
-    uint8 * const cell;
+    COMMON_PART_ITEM;
+
+    uint8 *const cell;
     const uint8 count;
     pchar names[2];
+};
 
-    Choice(pchar title, const Page *keeper, uint8 *_cell, uint8 _count, pchar name0, pchar name1) :
-        Item(TypeItem::Choice, title, keeper), cell(_cell), count(_count)
-    {
-        names[0] = name0;
-        names[1] = name1;
-    }
 
+struct Choice : public Item
+{
     virtual void DrawClosed(int x, int y) const;
 
     void Change() const;
 };
 
 
-struct Button : public Item
+struct DButton
 {
     typedef void (*funcPressButton)();
 
+    COMMON_PART_ITEM;
+
     const funcPressButton funcPress;
+};
 
-    Button(pchar title, const Page *keeper, funcPressButton _funcPress) : Item(TypeItem::Button, title, keeper), funcPress(_funcPress) {}
 
-    void FuncOnPress() const { funcPress(); }
+struct Button : public Item
+{
+    void FuncOnPress() const { ReinterpretToDButton()->funcPress(); }
 
     virtual void DrawClosed(int x, int y) const;
+
+    const DButton *ReinterpretToDButton() const { return (DButton *)this; }
 };
