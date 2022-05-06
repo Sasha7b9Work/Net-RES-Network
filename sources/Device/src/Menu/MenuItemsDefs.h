@@ -30,3 +30,8 @@ const DPage name =                              \
     items,                                      \
     &ci##name                                   \
 };
+
+
+#define DEF_PAGE_1(name, title, keeper, item1)  \
+    DEF_ITEMS_1(items##name, item1)             \
+    DEF_PAGE(name, title, keeper, items##name)

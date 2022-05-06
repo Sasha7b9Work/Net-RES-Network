@@ -18,14 +18,10 @@ DEF_BUTTN( bClosePageHC12,
     ClosePageHC12
 );
 
-DEF_ITEMS_1( itemsHC12,
-    bClosePageHC12
-);
-
-DEF_PAGE( pageHC12,
+DEF_PAGE_1( pageHC12,
     "HC12",
     pageMain,
-    itemsHC12
-);
+    bClosePageHC12
+)
 
 const Page *const PageHC12::self = (const Page *)&pageHC12;
