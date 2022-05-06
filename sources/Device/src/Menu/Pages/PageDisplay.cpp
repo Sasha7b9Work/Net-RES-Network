@@ -4,35 +4,50 @@
 #include "Settings/Settings.h"
 
 
-static const Choice chPressure
-(
-    "Давление", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Pressure], 2,
+static const DChoice chPressure =
+{
+    TypeItem::Choice,
+    "Давление",
+    PageDisplay::PageMeasures::self,
+    &gset.display.show_measure[TypeMeasure::Pressure], 2,
     "Откл", "Вкл"
-);
+};
 
-static const Choice chIllumination
-(
-    "Освещённость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Illumination], 2,
+static const DChoice chIllumination =
+{
+    TypeItem::Choice,
+    "Освещённость",
+    PageDisplay::PageMeasures::self,
+    &gset.display.show_measure[TypeMeasure::Illumination], 2,
     "Откл", "Вкл"
-);
+};
 
-static const Choice chVelocity
-(
-    "Скорость", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Velocity], 2,
+static const DChoice chVelocity =
+{
+    TypeItem::Choice,
+    "Скорость",
+    PageDisplay::PageMeasures::self,
+    &gset.display.show_measure[TypeMeasure::Velocity], 2,
     "Откл", "Вкл"
-);
+};
 
-static const Choice chTemperature
-(
-    "Температура", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Temperature], 2,
+static const DChoice chTemperature =
+{
+    TypeItem::Choice,
+    "Температура",
+    PageDisplay::PageMeasures::self,
+    &gset.display.show_measure[TypeMeasure::Temperature], 2,
     "Откл", "Вкл"
-);
+};
 
-static const Choice chHumidity
-(
-    "Влажность", PageDisplay::PageMeasures::self, &gset.display.show_measure[TypeMeasure::Humidity], 2,
+static const DChoice chHumidity =
+{
+    TypeItem::Choice,
+    "Влажность",
+    PageDisplay::PageMeasures::self,
+    &gset.display.show_measure[TypeMeasure::Humidity], 2,
     "Откл", "Вкл"
-);
+};
 
 static void CloseMeasures()
 {
@@ -40,33 +55,35 @@ static void CloseMeasures()
 };
 
 
-static const Button bCloseMeasures
-(
+static const DButton bCloseMeasures =
+{
+    TypeItem::Button,
     "Закрыть", PageDisplay::PageMeasures::self, CloseMeasures
-);
+};
 
 
 static const Item * const itemsMeasures[] =
 {
-    &chPressure,
-    &chIllumination,
-    &chVelocity,
-    &chTemperature,
-    &chHumidity,
-    &bCloseMeasures,
+    (Item *)&chPressure,
+    (Item *)&chIllumination,
+    (Item *)&chVelocity,
+    (Item *)&chTemperature,
+    (Item *)&chHumidity,
+    (Item *)&bCloseMeasures,
     nullptr
 };
 
 
 static uint8 ciPageMeasures = 0;
 
-static const Page pageMeasures
-(
+static const DPage pageMeasures =
+{
+    TypeItem::Page,
     "ИЗМЕРЕНИЯ",
     PageDisplay::self,
     itemsMeasures,
     &ciPageMeasures
-);
+};
 
 
 void ClosePageDisplay()
@@ -75,16 +92,17 @@ void ClosePageDisplay()
 }
 
 
-static const Button bClosePageDisplay
-(
+static const DButton bClosePageDisplay =
+{
+    TypeItem::Button,
     "Закрыть", PageDisplay::self, ClosePageDisplay
-);
+};
 
 
 static const Item * const itemsDisplay[] =
 {
     PageDisplay::PageMeasures::self,
-    &bClosePageDisplay,
+    (Item *)&bClosePageDisplay,
     nullptr
 };
 
@@ -92,14 +110,15 @@ static const Item * const itemsDisplay[] =
 uint8 ciPageDisplay = 0;
 
 
-static const Page pageDisplay
-(
+static const DPage pageDisplay =
+{
+    TypeItem::Page,
     "ДИСПЛЕЙ",
     PageMain::self,
     itemsDisplay,
     &ciPageDisplay
-);
+};
 
 
-const Page * const PageDisplay::self = &pageDisplay;
-const Page * const PageDisplay::PageMeasures::self = &pageMeasures;
+const Page * const PageDisplay::self = (const Page *)&pageDisplay;
+const Page * const PageDisplay::PageMeasures::self = (const Page *)&pageMeasures;
