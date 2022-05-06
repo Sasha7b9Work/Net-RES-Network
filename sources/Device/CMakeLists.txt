@@ -19,17 +19,11 @@ add_definitions(-DSTM32F103xB)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
-add_compile_options(/wd4255)
 add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
-add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted
-add_compile_options(/wd4626)
-add_compile_options(/wd4668)    # 'xxx' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
 add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
-add_compile_options(/wd5027)
-add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
+add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-add_compile_options(/wd5219)    # implicit conversion from 'xxx' to 'float', possible loss of data
 add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
 add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
