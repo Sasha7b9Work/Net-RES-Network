@@ -48,12 +48,7 @@ void Menu::Draw()
 {
     Display::BeginScene(Color::BLACK);
 
-    const Page *page = Menu::OpenedPage();
-
-    DPage *dpage = (DPage *)page;
-    dpage = dpage;
-
-    page->Draw(0, 0);
+    Menu::OpenedPage()->Draw(0, 0);
 
     Display::EndScene();
 }

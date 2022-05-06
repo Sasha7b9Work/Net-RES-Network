@@ -64,6 +64,36 @@ void Item::Draw(int x, int y) const
 }
 
 
+void Item::DrawOpened(int x, int y) const
+{
+    if (IsPage())
+    {
+        ReinterpetToPage()->DrawOpened(x, y);
+    }
+    else if (IsChoice())
+    {
+        ReinterpretToChoice()->DrawOpened(x, y);
+    }
+}
+
+
+void Item::DrawClosed(int x, int y) const
+{
+    if (IsPage())
+    {
+        ReinterpetToPage()->DrawClosed(x, y);
+    }
+    else if (IsChoice())
+    {
+        ReinterpretToChoice()->DrawClosed(x, y);
+    }
+    else if (IsButton())
+    {
+        ReinterpretToButton()->DrawClosed(x, y);
+    }
+}
+
+
 void Page::DrawOpened(int x, int y) const
 {
     DrawTitle(x, y);

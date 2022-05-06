@@ -36,15 +36,12 @@ struct Item
     static const int WIDTH = Display::WIDTH - 1;
     static const int HEIGHT = 20;
 
-    virtual ~Item() {}
-
     pchar Title() const { return ReinterpretToDItem()->title; }
 
-    virtual void Draw(int x, int y) const;
+    void Draw(int x, int y) const;
 
-    virtual void DrawOpened(int, int) const {}
-
-    virtual void DrawClosed(int, int) const {}
+    void DrawOpened(int x, int y) const;
+    void DrawClosed(int x, int y) const;
 
     bool Opened() const;
 
@@ -73,7 +70,9 @@ struct Page : public Item
 {
     static const int NUM_ITEMS_ON_SCREEN = 5;
 
-    virtual void DrawOpened(int x, int y) const;
+    void DrawOpened(int x, int y) const;
+
+    void DrawClosed(int x, int y) const;
 
     // Выделить следующий итем
     void SelectNextItem() const;
@@ -94,8 +93,6 @@ private:
     void DrawTitle(int x, int y) const;
 
     void DrawItems(int x, int y) const;
-
-    virtual void DrawClosed(int x, int y) const;
 
     // Первый выводимый итем на текущей странице
     int FirstItemOnScreen() const;
@@ -119,7 +116,7 @@ struct DChoice
 
 struct Choice : public Item
 {
-    virtual void DrawClosed(int x, int y) const;
+    void DrawClosed(int x, int y) const;
 
     void Change() const;
 
@@ -143,7 +140,7 @@ struct Button : public Item
 {
     void FuncOnPress() const { ReinterpretToDButton()->funcPress(); }
 
-    virtual void DrawClosed(int x, int y) const;
+    void DrawClosed(int x, int y) const;
 
     const DButton *ReinterpretToDButton() const { return (DButton *)this; }
 };
