@@ -32,7 +32,7 @@ static const Item * const items[] =
 static uint8 ciPageHC12 = 0;
 
 
-static const DPage pageHC12 =
+const DPage pageHC12 =
 {
     TypeItem::Page,
     "HC12",

@@ -4,6 +4,7 @@
 
 
 extern const DPage pageMain;
+extern const DPage pageHC12;
 
 
 static void CloseMainPage()
@@ -24,7 +25,7 @@ static const DButton bCloseMainPage =
 static const Item *items[] =
 {
     PageDisplay::self,
-    PageHC12::self,
+    (const Page *)&pageHC12,
     (Item *)&bCloseMainPage,
     nullptr
 };
