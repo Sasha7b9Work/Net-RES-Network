@@ -81,7 +81,7 @@ static const Item * const itemsMeasures[] =
 
 static uint8 ciPageMeasures = 0;
 
-static const DPage pageMeasures =
+const DPage pageMeasures =
 {
     TypeItem::Page,
     "ÈÇÌÅĞÅÍÈß",

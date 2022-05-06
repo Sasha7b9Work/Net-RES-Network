@@ -12,32 +12,18 @@ void ClosePageHC12()
     PageHC12::self->Close();
 }
 
+DEF_BUTTN(bClosePageHC12, "Закрыть", pageHC12, ClosePageHC12);
 
-static const DButton bClosePageHC12 =
-{
-    TypeItem::Button,
-    "Закрыть",
-    (const Page *)&pageHC12,
-    ClosePageHC12
-};
-
-
-static const Item * const items[] =
-{
-    (Item *)&bClosePageHC12,
-    nullptr
-};
-
+DEF_ITEMS_1(itemsHC12, bClosePageHC12);
 
 static uint8 ciPageHC12 = 0;
-
 
 const DPage pageHC12 =
 {
     TypeItem::Page,
     "HC12",
     (const Page *)&pageMain,
-    items,
+    itemsHC12,
     &ciPageHC12
 };
 
