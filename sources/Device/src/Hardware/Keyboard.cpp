@@ -12,7 +12,10 @@ namespace Keyboard
 
     TimeMeterMS meter;
 
-    bool pressed = false;
+    bool pressed = false;               // Если true, клавиша нажата
+    bool taboo_long = false;            // Если true, запрещено длинное срабатывание
+
+#define KEY_PRESSED (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET)
 }
 
 
@@ -39,16 +42,17 @@ void Keyboard::Update()
 
     if (pressed)
     {
-        if (meter.ElapsedTime() > TIME_LONG_PRESS)
+        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long)
         {
             Menu::LongPress();
-            pressed = false;
+            taboo_long = true;
         }
         else
         {
-            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_SET)
+            if (!KEY_PRESSED)
             {
                 pressed = false;
+                taboo_long = false;
                 meter.Reset();
                 Menu::ShortPress();
             }
@@ -56,7 +60,7 @@ void Keyboard::Update()
     }
     else
     {
-        if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET)
+        if (KEY_PRESSED)
         {
             pressed = true;
             meter.Reset();
