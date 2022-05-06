@@ -9,15 +9,18 @@ void ClosePageHC12()
 }
 
 
-static const Button bClosePageHC12
-(
-    "Закрыть", PageHC12::self, ClosePageHC12
-);
+static const DButton bClosePageHC12 =
+{
+    TypeItem::Button,
+    "Закрыть",
+    PageHC12::self,
+    ClosePageHC12
+};
 
 
 static const Item *items[] =
 {
-    &bClosePageHC12,
+    (Item *)&bClosePageHC12,
     nullptr
 };
 
@@ -25,13 +28,14 @@ static const Item *items[] =
 static uint8 ciPageHC12 = 0;
 
 
-static const Page pageHC12
-(
+static const DPage pageHC12 =
+{
+    TypeItem::Page,
     "HC12",
     PageMain::self,
     items,
     &ciPageHC12
-);
+};
 
 
-const Page * const PageHC12::self = &pageHC12;
+const Page *const PageHC12::self = (const Page *)&pageHC12;

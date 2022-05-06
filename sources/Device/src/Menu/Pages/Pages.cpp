@@ -9,17 +9,20 @@ static void CloseMainPage()
 }
 
 
-static const Button bCloseMainPage
-(
-    "Закрыть", PageMain::self, CloseMainPage
-);
+static const DButton bCloseMainPage =
+{
+    TypeItem::Button,
+    "Закрыть",
+    PageMain::self,
+    CloseMainPage
+};
 
 
 static const Item *items[] =
 {
     PageDisplay::self,
     PageHC12::self,
-    &bCloseMainPage,
+    (Item *)&bCloseMainPage,
     nullptr
 };
 
@@ -27,13 +30,14 @@ static const Item *items[] =
 static uint8 ciPageMain = 0;
 
 
-static const Page pageMain
-(
+static const DPage pageMain =
+{
+    TypeItem::Page,
     "МЕНЮ",
     nullptr,
     items,
     &ciPageMain
-);
+};
 
 
-const Page * const PageMain::self = &pageMain;
+const Page * const PageMain::self = (const Page *)&pageMain;

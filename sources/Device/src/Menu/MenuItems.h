@@ -27,7 +27,7 @@ struct Button;
 
 struct DItem
 {
-    COMMON_PART_ITEM;
+    COMMON_PART_ITEM
 };
 
 
@@ -62,7 +62,7 @@ struct Item
 
 struct DPage
 {
-    COMMON_PART_ITEM;
+    COMMON_PART_ITEM
 
     const Item *const *items;
     uint8 *currentItem;
@@ -109,7 +109,7 @@ private:
 
 struct DChoice
 {
-    COMMON_PART_ITEM;
+    COMMON_PART_ITEM
 
     uint8 *const cell;
     const uint8 count;
@@ -133,7 +133,7 @@ struct DButton
 {
     typedef void (*funcPressButton)();
 
-    COMMON_PART_ITEM;
+    COMMON_PART_ITEM
 
     const funcPressButton funcPress;
 };
