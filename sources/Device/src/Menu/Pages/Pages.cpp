@@ -23,7 +23,7 @@ static const DButton bCloseMainPage =
 };
 
 
-static const Item *items[] =
+static const Item * const items[] =
 {
     (const Page *)&pageDisplay,
     (const Page *)&pageHC12,
