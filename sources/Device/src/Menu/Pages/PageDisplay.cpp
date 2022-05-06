@@ -9,14 +9,23 @@ extern const DPage pageDisplay;
 extern const DPage pageMeasures;
 
 
-static const DChoice chPressure =
-{
-    TypeItem::Choice,
+//static const DChoice chPressure =
+//{
+//    TypeItem::Choice,
+//    "Давление",
+//    (const Page *)&pageMeasures,
+//    &gset.display.show_measure[TypeMeasure::Pressure], 2,
+//    "Откл", "Вкл"
+//};
+
+
+DEF_CHOICE_2( chPressure,
     "Давление",
-    (const Page *)&pageMeasures,
-    &gset.display.show_measure[TypeMeasure::Pressure], 2,
+    pageMeasures,
+    gset.display.show_measure[TypeMeasure::Pressure],
     "Откл", "Вкл"
-};
+)
+
 
 static const DChoice chIllumination =
 {
