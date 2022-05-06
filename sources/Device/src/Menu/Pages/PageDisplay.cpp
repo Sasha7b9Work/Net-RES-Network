@@ -6,14 +6,14 @@
 
 extern const DPage pageMain;
 extern const DPage pageDisplay;
-extern const DPage PageMeasures;
+extern const DPage pageMeasures;
 
 
 static const DChoice chPressure =
 {
     TypeItem::Choice,
     "Давление",
-    PageDisplay::PageMeasures::self,
+    (const Page *)&pageMeasures,
     &gset.display.show_measure[TypeMeasure::Pressure], 2,
     "Откл", "Вкл"
 };
@@ -22,7 +22,7 @@ static const DChoice chIllumination =
 {
     TypeItem::Choice,
     "Освещённость",
-    PageDisplay::PageMeasures::self,
+    (const Page *)&pageMeasures,
     &gset.display.show_measure[TypeMeasure::Illumination], 2,
     "Откл", "Вкл"
 };
@@ -31,7 +31,7 @@ static const DChoice chVelocity =
 {
     TypeItem::Choice,
     "Скорость",
-    PageDisplay::PageMeasures::self,
+    (const Page *)&pageMeasures,
     &gset.display.show_measure[TypeMeasure::Velocity], 2,
     "Откл", "Вкл"
 };
@@ -40,7 +40,7 @@ static const DChoice chTemperature =
 {
     TypeItem::Choice,
     "Температура",
-    PageDisplay::PageMeasures::self,
+    (const Page *)&pageMeasures,
     &gset.display.show_measure[TypeMeasure::Temperature], 2,
     "Откл", "Вкл"
 };
@@ -49,7 +49,7 @@ static const DChoice chHumidity =
 {
     TypeItem::Choice,
     "Влажность",
-    PageDisplay::PageMeasures::self,
+    (const Page *)&pageMeasures,
     &gset.display.show_measure[TypeMeasure::Humidity], 2,
     "Откл", "Вкл"
 };
@@ -63,7 +63,7 @@ static void CloseMeasures()
 static const DButton bCloseMeasures =
 {
     TypeItem::Button,
-    "Закрыть", PageDisplay::PageMeasures::self, CloseMeasures
+    "Закрыть", (const Page *)&pageMeasures, CloseMeasures
 };
 
 
