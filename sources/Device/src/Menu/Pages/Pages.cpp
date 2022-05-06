@@ -3,6 +3,9 @@
 #include "Menu/Pages/Pages.h"
 
 
+extern const DPage pageMain;
+
+
 static void CloseMainPage()
 {
     PageMain::self->Close();
@@ -13,7 +16,7 @@ static const DButton bCloseMainPage =
 {
     TypeItem::Button,
     "Закрыть",
-    PageMain::self,
+    (const Page *)&pageMain,
     CloseMainPage
 };
 
