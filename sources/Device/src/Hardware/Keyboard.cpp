@@ -37,31 +37,29 @@ void Keyboard::Update()
         return;
     }
 
-    if (pressed && meter.ElapsedTime() > TIME_LONG_PRESS)
+    if (pressed)
     {
-        Menu::LongPress();
-        pressed = false;
-        return;
+        if (meter.ElapsedTime() > TIME_LONG_PRESS)
+        {
+            Menu::LongPress();
+            pressed = false;
+        }
+        else
+        {
+            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_SET)
+            {
+                pressed = false;
+                meter.Reset();
+                Menu::ShortPress();
+            }
+        }
     }
-
-    if (!pressed)
+    else
     {
         if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET)
         {
             pressed = true;
             meter.Reset();
-            return;
-        }
-    }
-
-    if (pressed)
-    {
-        if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_SET)
-        {
-            pressed = false;
-            meter.Reset();
-            Menu::ShortPress();
-            return;
         }
     }
 }
