@@ -4,6 +4,11 @@
 #include "Settings/Settings.h"
 
 
+extern const DPage pageMain;
+extern const DPage pageDisplay;
+extern const DPage PageMeasures;
+
+
 static const DChoice chPressure =
 {
     TypeItem::Choice,
@@ -80,7 +85,7 @@ static const DPage pageMeasures =
 {
     TypeItem::Page,
     "»«Ã≈–≈Õ»ﬂ",
-    PageDisplay::self,
+    (const Page *)&pageDisplay,
     itemsMeasures,
     &ciPageMeasures
 };
@@ -101,20 +106,20 @@ static const DButton bClosePageDisplay =
 
 static const Item * const itemsDisplay[] =
 {
-    PageDisplay::PageMeasures::self,
+    (Item *)&pageMeasures,
     (Item *)&bClosePageDisplay,
     nullptr
 };
 
 
-uint8 ciPageDisplay = 0;
+static uint8 ciPageDisplay = 0;
 
 
-static const DPage pageDisplay =
+const DPage pageDisplay =
 {
     TypeItem::Page,
     "ƒ»—œÀ≈…",
-    PageMain::self,
+    (const Page *)&pageMain,
     itemsDisplay,
     &ciPageDisplay
 };
