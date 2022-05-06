@@ -171,7 +171,7 @@ int Page::NumItems() const
 
 void Page::SelectNextItem() const
 {
-    *currentItem = *currentItem + 1;
+    *currentItem = (uint8)(*currentItem + 1);
 
     if (*currentItem == NumItems())
     {
@@ -201,7 +201,7 @@ void Page::ChangeCurrentItem() const
 
 void Choice::Change() const
 {
-    *cell = *cell + 1;
+    *cell = (uint8)(*cell + 1);
 
     if (*cell == count)
     {
