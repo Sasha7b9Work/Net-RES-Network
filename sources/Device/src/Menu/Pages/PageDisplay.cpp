@@ -49,13 +49,13 @@ static void CloseMeasures()
     PageDisplay::PageMeasures::self->Close();
 };
 
-DEF_BUTTN(bCloseMeasures,
+DEF_BUTTN( bCloseMeasures,
     "Çàêğûòü",
     pageMeasures,
     CloseMeasures
 )
 
-DEF_PAGE_6(pageMeasures,
+DEF_PAGE_6( pageMeasures,
     "ÈÇÌÅĞÅÍÈß",
     pageDisplay,
     chPressure,
@@ -72,34 +72,18 @@ void ClosePageDisplay()
     PageDisplay::self->Close();
 }
 
+DEF_BUTTN( bClosePageDisplay,
+    "Çàêğûòü",
+    pageDisplay,
+    ClosePageDisplay
+)
 
-static const DButton bClosePageDisplay =
-{
-    TypeItem::Button,
-    "Çàêğûòü", (const Page *)&pageDisplay, ClosePageDisplay
-};
-
-
-static const Item * const itemsDisplay[] =
-{
-    (Item *)&pageMeasures,
-    (Item *)&bClosePageDisplay,
-    nullptr
-};
-
-
-static uint8 ciPageDisplay = 0;
-
-
-const DPage pageDisplay =
-{
-    TypeItem::Page,
+DEF_PAGE_2(pageDisplay,
     "ÄÈÑÏËÅÉ",
-    (const Page *)&pageMain,
-    itemsDisplay,
-    &ciPageDisplay
-};
-
+    pageMain,
+    pageMeasures,
+    bClosePageDisplay
+)
 
 const Page * const PageDisplay::self = (const Page *)&pageDisplay;
 const Page * const PageDisplay::PageMeasures::self = (const Page *)&pageMeasures;
