@@ -8,7 +8,7 @@
 
 namespace Menu
 {
-    const Page *opened = nullptr;
+    const Page *opened = &Page::Empty;
 }
 
 
@@ -40,7 +40,7 @@ void Menu::LongPress()
 
 bool Menu::Opened()
 {
-    return (opened != nullptr);
+    return (opened != &Page::Empty);
 }
 
 

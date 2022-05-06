@@ -13,36 +13,20 @@ static void CloseMainPage()
     PageMain::self->Close();
 }
 
-
-static const DButton bCloseMainPage =
-{
-    TypeItem::Button,
+DEF_BUTTN(bCloseMainPage,
     "Закрыть",
-    (const Page *)&pageMain,
+    pageMain,
     CloseMainPage
-};
+)
 
-
-static const Item * const items[] =
-{
-    (const Page *)&pageDisplay,
-    (const Page *)&pageHC12,
-    (Item *)&bCloseMainPage,
-    nullptr
-};
-
-
-static uint8 ciPageMain = 0;
-
-
-const DPage pageMain =
-{
-    TypeItem::Page,
+DEF_PAGE_3(pageMain,
     "МЕНЮ",
-    nullptr,
-    items,
-    &ciPageMain
-};
+    Page::Empty,
+    pageDisplay,
+    pageHC12,
+    bCloseMainPage
+)
+
 
 
 const Page * const PageMain::self = (const Page *)&pageMain;

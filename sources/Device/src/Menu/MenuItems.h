@@ -88,6 +88,8 @@ struct Page : public Item
 
     const Item *CurrentItem() const;
 
+    static Page Empty;
+
 private:
 
     void DrawTitle(int x, int y) const;

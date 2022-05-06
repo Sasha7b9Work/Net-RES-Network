@@ -7,6 +7,8 @@
 #include "Menu/Menu.h"
 
 
+Page Page::Empty;
+
 namespace Menu
 {
     extern const Page *opened;
@@ -36,7 +38,7 @@ void Page::Close() const
 {
     if (this == PageMain::self)
     {
-        Menu::opened = nullptr;
+        Menu::opened = &Page::Empty;
     }
     else
     {
