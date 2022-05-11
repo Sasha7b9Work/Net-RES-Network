@@ -193,7 +193,7 @@ int Text::DrawCharHard(int eX, int eY, char s)
 }
 
 
-int Char::Draw(int x, int y, Color::E color)
+int Char::Draw(int x, int y, int size, Color::E color)
 {
     Color::SetCurrent(color);
 
@@ -203,7 +203,16 @@ int Char::Draw(int x, int y, Color::E color)
     }
     else if (Font::GetSize() == 8)
     {
-        Text::DrawCharHard(x, y, symbol);
+        if (size == 1)
+        {
+            Text::DrawCharHard(x, y, symbol);
+        }
+        else
+        {
+            char buffer[2] = { symbol, 0 };
+            Text::DrawBig(x, y, size, buffer);
+            return x + size * Font::GetLengthSymbol((uint8)symbol);
+        }
     }
     else
     {

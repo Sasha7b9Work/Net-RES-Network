@@ -200,7 +200,14 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
 
     if (position >= current.Size())
     {
-        current.Draw(x0, y0);
+        if (size == 1)
+        {
+            current.Draw(x0, y0);
+        }
+        else
+        {
+            Text::DrawBig(x0, y0, size, current.c_str());
+        }
     }
     else
     {
@@ -208,14 +215,14 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
 
         for (int i = 0; i < position; i++)
         {
-            x = Char(current[i]).Draw(x, y0) + 1;
+            x = Char(current[i]).Draw(x, y0, size) + size;
         }
 
-        Rectangle(5, 7).Fill(x, y0 + 1, Color::WHITE);
+        Rectangle(5 * size, 7 * size).Fill(x, y0 + 1, Color::WHITE);
 
         for (int i = position; i < old.Size(); i++)
         {
-            x = Char(old[i]).Draw(x, y0, Color::GREEN) + 1;
+            x = Char(old[i]).Draw(x, y0, size, Color::GREEN) + 1;
         }
 
         if (TIME_MS > time + 25)
@@ -337,9 +344,20 @@ void Display::DrawBigMeasure()
 
     TypeMeasure::E measure = (TypeMeasure::E)gset.display.typeDisplaydInfo.value;
 
-    Text::DrawBig(10, 30, 2, TypeMeasure::Name(measure));
+    static const int x[TypeMeasure::Count] =
+    {
+        35,
+        10,
+        40,
+        15,
+        30
+    };
 
-    measures[measure].Draw(100, 100);
+    Text::DrawBig(x[measure], 25, 2, TypeMeasure::Name(measure));
+
+    measures[measure].Draw(10, 75, 3);
+
+    Text::DrawBig(100, 75, 3, TypeMeasure::Units(measure));
 
     EndScene();
 }
@@ -367,7 +385,7 @@ pchar TypeMeasure::Units(E value)
         "лк",
         "м/с",
         "ЁС",
-        "%%"
+        "%"
     };
 
     return units[value];
