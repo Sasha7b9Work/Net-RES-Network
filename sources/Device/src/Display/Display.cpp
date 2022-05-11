@@ -282,31 +282,31 @@ void Display::Update()
 
                 if (gset.display.show_measure[TypeMeasure::Pressure])
                 {
-                    String<>("дюбкемхе :").Draw(x0, y0, Color::_1);
+                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Pressure)).Draw(x0, y0, Color::_1);
                     String<>("лоЮ").Draw(x0 + dX, y0);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Illumination])
                 {
-                    String<>("нябеыеммнярэ :").Draw(x0, y0 + dY);
+                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Illumination)).Draw(x0, y0 + dY);
                     String<>("КЙ").Draw(x0 + dX, y0 + dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Humidity])
                 {
-                    String<>("бкюфмнярэ :").Draw(x0, y0 + 4 * dY);
+                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Humidity)).Draw(x0, y0 + 4 * dY);
                     String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Velocity])
                 {
-                    String<>("яйнпнярэ :").Draw(x0, y0 + 2 * dY);
+                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Velocity)).Draw(x0, y0 + 2 * dY);
                     String<>("Л/Я").Draw(x0 + dX, y0 + 2 * dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Temperature])
                 {
-                    String<>("релоепюрспю :").Draw(x0, y0 + 3 * dY);
+                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Temperature)).Draw(x0, y0 + 3 * dY);
                     String<>("╗я").Draw(x0 + dX, y0 + 3 * dY);
                 }
 
@@ -347,9 +347,9 @@ pchar TypeMeasure::Name(E value)
     {
         "дюбкемхе",
         "нябеыеммнярэ",
-        "бкюфмнярэ",
         "яйнпнярэ",
-        "релоепюрспю"
+        "релоепюрспю",
+        "бкюфмнярэ"
     };
 
     return names[value];
