@@ -25,6 +25,8 @@ struct TypeDisplayedInformation
 
         return *this;
     }
+
+    bool IsAllMeasures() const { return value == AllMeasures; }
 };
 
 

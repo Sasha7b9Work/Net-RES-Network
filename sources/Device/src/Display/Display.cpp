@@ -29,7 +29,7 @@ namespace Display
 
     static void DrawZones();
 
-    struct DMeasure
+    struct Measure
     {
         String<> old;
         String<> current;
@@ -39,7 +39,7 @@ namespace Display
         int position;               // “екуща€ отрисовываема€ позици€
         uint time;                  // ¬рем€ последнего изменени€ текущей отрисовываемой позиции
 
-        DMeasure(TypeMeasure::E t) : type(t), value(0.0f), position(0), time(0) {}
+        Measure(TypeMeasure::E t) : type(t), value(0.0f), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
 
@@ -48,13 +48,13 @@ namespace Display
         String<> Units();
     };
 
-    static DMeasure measures[TypeMeasure::Count] =
+    static Measure measures[TypeMeasure::Count] =
     {
-        DMeasure(TypeMeasure::Pressure),
-        DMeasure(TypeMeasure::Illumination),
-        DMeasure(TypeMeasure::Velocity),
-        DMeasure(TypeMeasure::Temperature),
-        DMeasure(TypeMeasure::Humidity)
+        Measure(TypeMeasure::Pressure),
+        Measure(TypeMeasure::Illumination),
+        Measure(TypeMeasure::Velocity),
+        Measure(TypeMeasure::Temperature),
+        Measure(TypeMeasure::Humidity)
     };
 
     static void DrawMeasures();
@@ -171,7 +171,7 @@ void Rectangle::Draw(int x, int y, Color::E color)
 
 void Display::SetMeasure(TypeMeasure::E type, float value)
 {
-    DMeasure &measure = measures[type];
+    Measure &measure = measures[type];
 
     if (value == measure.value)
     {
@@ -189,7 +189,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 }
 
 
-void Display::DMeasure::Draw(const int x0, const int y0, int size)
+void Display::Measure::Draw(const int x0, const int y0, int size)
 {
     Rectangle(30, 7).Fill(x0, y0 + 1, Color::BLACK);
 
@@ -266,7 +266,7 @@ void Display::Update()
     }
     else
     {
-        if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::AllMeasures)
+        if (gset.display.typeDisplaydInfo.IsAllMeasures())
         {
             if (need_redraw)
             {
@@ -332,7 +332,7 @@ void Display::DrawBigMeasure()
         28
     };
 
-    DMeasure &measure = measures[gset.display.typeDisplaydInfo.value];
+    Measure &measure = measures[gset.display.typeDisplaydInfo.value];
 
     measure.Name().DrawBig(x[measure.type], 15, 2, Color::_1);
 
@@ -344,7 +344,7 @@ void Display::DrawBigMeasure()
 }
 
 
-String<> Display::DMeasure::Name()
+String<> Display::Measure::Name()
 {
     static const pchar names[TypeMeasure::Count] =
     {
@@ -358,7 +358,7 @@ String<> Display::DMeasure::Name()
     return String<>(names[type]);
 }
 
-String<> Display::DMeasure::Units()
+String<> Display::Measure::Units()
 {
     static const pchar units[TypeMeasure::Count] =
     {
