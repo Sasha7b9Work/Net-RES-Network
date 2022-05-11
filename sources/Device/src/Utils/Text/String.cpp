@@ -13,6 +13,7 @@
 
 template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
 template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color::E);
+template void String<(int)DEFAULT_SIZE_STRING>::DrawBig(int, int, int, Color::E);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawInCenterRect(int x, int y, int width, int height, Color::E);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawWithLimitation(int x, int y, Color::E color, int limitX, int limitY, int limitWidth,
@@ -35,6 +36,14 @@ template void String<(int)DEFAULT_SIZE_STRING>::AppendBytes(const void *, int);
 template int  String<(int)1024>::Draw(int, int, Color::E);
 template int  String<(int)1024>::DrawInBoundedRectWithTransfers(int x, int y, int width, Color::E colorBackground,
     Color::E colorFill);
+
+
+namespace Text
+{
+    bool ByteFontNotEmpty(uint eChar, int byte);
+
+    bool BitInFontIsExist(uint eChar, int numByte, int bit);
+}
 
 
 template<int capa>
@@ -69,14 +78,14 @@ int String<capa>::DrawBigChar(int eX, int eY, int size, char symbol)
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty((uint)symbol, b))
+        if (Text::ByteFontNotEmpty((uint)symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist((uint)symbol, b, bit))
+                if (Text::BitInFontIsExist((uint)symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -100,13 +109,13 @@ void String<capacity>::DrawBig(int eX, int eY, int size, Color::E color)
 {
     Color::SetCurrent(color);
 
-    int numSymbols = (int)std::strlen(text);
+    int numSymbols = (int)std::strlen(buffer);
 
     int x = eX;
 
     for (int i = 0; i < numSymbols; i++)
     {
-        x = DrawBigChar(x, eY, size, text[i]);
+        x = DrawBigChar(x, eY, size, buffer[i]);
         x += size;
     }
 }
