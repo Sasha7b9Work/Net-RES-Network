@@ -1161,8 +1161,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\HAL\i2c.cpp</PathWithFileName>
-      <FilenameWithoutPath>i2c.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\HAL\HAL_I2C.cpp</PathWithFileName>
+      <FilenameWithoutPath>HAL_I2C.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

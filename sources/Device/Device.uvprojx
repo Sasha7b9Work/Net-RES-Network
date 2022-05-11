@@ -674,9 +674,9 @@
               <FilePath>.\src\Hardware\HAL\stm32f1xx_it.cpp</FilePath>
             </File>
             <File>
-              <FileName>i2c.cpp</FileName>
+              <FileName>HAL_I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\i2c.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1550,9 +1550,9 @@
               <FilePath>.\src\Hardware\HAL\stm32f1xx_it.cpp</FilePath>
             </File>
             <File>
-              <FileName>i2c.cpp</FileName>
+              <FileName>HAL_I2C.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\i2c.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_I2C.cpp</FilePath>
             </File>
           </Files>
         </Group>
