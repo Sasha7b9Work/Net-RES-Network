@@ -1,5 +1,6 @@
 #include "defines.h"
-#include "stm32f1xx_hal.h"
+#include "Hardware/HAL/HAL.h"
+#include <stm32f1xx_hal.h>
 
 
 static I2C_HandleTypeDef hi2c1;
@@ -12,7 +13,7 @@ namespace HAL_I2C1
 
 
 
-void MX_I2C1_Init(void)
+void HAL_I2C1::Init(void)
 {
 
     hi2c1.Instance = I2C1;
