@@ -177,30 +177,13 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 }
 
 
-void Display::DrawMeasures()
-{
-    int y0 = 15;
-    int dY = 22;
-
-    for (int i = 0; i < TypeMeasure::Count; i++)
-    {
-        if (gset.display.show_measure[i])
-        {
-            measures[i].Draw(100, y0 + i * dY);
-        }
-    }
-}
-
-
 void Display::DMeasure::Draw(const int x0, const int y0, int size)
 {
     Rectangle(30, 7).Fill(x0, y0 + 1, Color::BLACK);
 
-    Color::SetCurrent(Color::GREEN);
-
     if (position >= current.Size())
     {
-        current.DrawBig(x0, y0, size);
+        current.DrawBig(x0, y0, size, Color::GREEN);
     }
     else
     {
@@ -208,10 +191,10 @@ void Display::DMeasure::Draw(const int x0, const int y0, int size)
 
         for (int i = 0; i < position; i++)
         {
-            x = Char(current[i]).Draw(x, y0, size) + size;
+            x = Char(current[i]).Draw(x, y0, size, Color::GREEN) + size;
         }
 
-        Rectangle(5 * size, 7 * size).Fill(x, y0 + 1, Color::WHITE);
+        int x_rect = x;
 
         for (int i = position; i < old.Size(); i++)
         {
@@ -223,6 +206,8 @@ void Display::DMeasure::Draw(const int x0, const int y0, int size)
             position++;
             time = TIME_MS;
         }
+
+        Rectangle(5 * size, 7 * size).Fill(x_rect, y0 + 1, Color::WHITE);
     }
 
     ST7735::WriteBuffer(x0, y0 + 1, 30, 7);
@@ -330,6 +315,21 @@ void Display::Update()
         }
 
         zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+    }
+}
+
+
+void Display::DrawMeasures()
+{
+    int y0 = 15;
+    int dY = 22;
+
+    for (int i = 0; i < TypeMeasure::Count; i++)
+    {
+        if (gset.display.show_measure[i])
+        {
+            measures[i].Draw(100, y0 + i * dY);
+        }
     }
 }
 
