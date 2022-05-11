@@ -345,8 +345,6 @@ void Display::DrawBigMeasure()
 {
     BeginScene(Color::BLACK);
 
-    Color::SetCurrent(Color::_1);
-
     Measure measure((TypeMeasure::E)gset.display.typeDisplaydInfo.value);
 
     static const int x[TypeMeasure::Count] =
@@ -358,13 +356,11 @@ void Display::DrawBigMeasure()
         28
     };
 
-    measure.Name().DrawBig(x[measure.type], 15, 2);
+    measure.Name().DrawBig(x[measure.type], 15, 2, Color::_1);
 
     measures[measure.type].Draw(27, 50, 4);
 
-    Color::SetCurrent(Color::_1);
-
-    measure.Units().DrawBig(68, 95, 2);
+    measure.Units().DrawBig(68, 95, 2, Color::_1);
 
     EndScene();
 }
