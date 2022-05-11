@@ -70,11 +70,11 @@ bool BH1750::GetMeasure(unsigned int dT, float *illumination)
 
 bool BH1750::WriteUINT8(uint8 byte)
 {
-    return user_i2c_write8(0x23, byte) == 0;
+    return HAL_I2C1::Write8(0x23, byte) == 0;
 }
 
 
 bool BH1750::ReadUINT16(uint8 *buffer)
 {
-    return user_i2c_read16(0x23, buffer) == 0;
+    return HAL_I2C1::Read16(0x23, buffer) == 0;
 }
