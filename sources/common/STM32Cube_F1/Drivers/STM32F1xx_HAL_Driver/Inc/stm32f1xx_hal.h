@@ -43,7 +43,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f1xx_hal_conf.h"
+#include "HAL_CONF.h"
 
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
