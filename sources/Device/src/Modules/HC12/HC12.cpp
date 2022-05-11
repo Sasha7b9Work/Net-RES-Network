@@ -37,10 +37,7 @@ void HC12::Init()
     UartHandle.Init.Mode         = UART_MODE_TX_RX;
     UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
 
-    if (HAL_UART_Init(&UartHandle) != HAL_OK)
-    {
-        Error_Handler();
-    }
+    HAL_UART_Init(&UartHandle);
 }
 
 

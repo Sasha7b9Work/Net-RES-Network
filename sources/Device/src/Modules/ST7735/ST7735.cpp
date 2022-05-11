@@ -82,10 +82,7 @@ void ST7735::Init()
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
     handle.Init.CRCPolynomial = 10;
 
-    if (HAL_SPI_Init(&handle) != HAL_OK)
-    {
-        Error_Handler();
-    }
+    HAL_SPI_Init(&handle);
 
     GPIO_InitTypeDef gpio_struct = {0};
 

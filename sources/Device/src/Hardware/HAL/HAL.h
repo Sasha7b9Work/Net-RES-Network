@@ -8,6 +8,3 @@ namespace HAL
 
     void Delay(unsigned int timeMS);
 }
-
-
-void Error_Handler();

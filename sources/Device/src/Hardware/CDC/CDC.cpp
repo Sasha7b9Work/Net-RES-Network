@@ -39,22 +39,13 @@ USBD_CDC_ItfTypeDef USBD_Interface_fops_FS =
 
 void CDC::Init()
 {
-    if (USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS) != USBD_OK)
-    {
-        Error_Handler();
-    }
-    if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
-    {
-        Error_Handler();
-    }
-    if (USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS) != USBD_OK)
-    {
-        Error_Handler();
-    }
-    if (USBD_Start(&hUsbDeviceFS) != USBD_OK)
-    {
-        Error_Handler();
-    }
+    USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
+
+    USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
+
+    USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
+
+    USBD_Start(&hUsbDeviceFS);
 }
 
 
