@@ -200,14 +200,7 @@ void Display::DMeasure::Draw(const int x0, const int y0, int size)
 
     if (position >= current.Size())
     {
-        if (size == 1)
-        {
-            current.Draw(x0, y0);
-        }
-        else
-        {
-            current.DrawBig(x0, y0, size);
-        }
+        current.DrawBig(x0, y0, size);
     }
     else
     {
@@ -222,7 +215,7 @@ void Display::DMeasure::Draw(const int x0, const int y0, int size)
 
         for (int i = position; i < old.Size(); i++)
         {
-            x = Char(old[i]).Draw(x, y0, size, Color::GREEN) + 1;
+            x = Char(old[i]).Draw(x, y0, size, Color::GREEN) + size;
         }
 
         if (TIME_MS > time + 25)
