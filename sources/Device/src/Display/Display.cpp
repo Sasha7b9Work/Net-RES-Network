@@ -29,7 +29,7 @@ namespace Display
 
     static void DrawZones();
 
-    struct Measure
+    struct DMeasure
     {
         String<> old;
         String<> current;
@@ -38,12 +38,12 @@ namespace Display
         int position;               // “екуща€ отрисовываема€ позици€
         uint time;                  // ¬рем€ последнего изменени€ текущей отрисовываемой позиции
 
-        Measure() : value(0.0f), position(0), time(0) {}
+        DMeasure() : value(0.0f), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
     };
 
-    static Measure measures[TypeMeasure::Count];
+    static DMeasure measures[TypeMeasure::Count];
 
     static void DrawMeasures();
 
@@ -159,7 +159,7 @@ void Rectangle::Draw(int x, int y, Color::E color)
 
 void Display::SetMeasure(TypeMeasure::E type, float value)
 {
-    Measure &measure = measures[type];
+    DMeasure &measure = measures[type];
 
     if (value == measure.value)
     {
@@ -192,7 +192,7 @@ void Display::DrawMeasures()
 }
 
 
-void Display::Measure::Draw(const int x0, const int y0, int size)
+void Display::DMeasure::Draw(const int x0, const int y0, int size)
 {
     Rectangle(30, 7).Fill(x0, y0 + 1, Color::BLACK);
 
