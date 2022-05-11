@@ -21,6 +21,7 @@ void HAL::Init()
     __HAL_RCC_GPIOB_CLK_ENABLE();
 
     MX_I2C1_Init();
+
     CDC::Init();
 }
 
