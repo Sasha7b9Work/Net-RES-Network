@@ -260,10 +260,10 @@ void Display::Update()
             {
                 BeginScene(Color::BLACK);
 
-                int x0 = 10;
-                int dX = 125;
-                int y0 = 15;
-                int dY = 22;
+                const int x0 = 10;
+                const int dX = 125;
+                const int y0 = 15;
+                const int dY = 22;
 
                 if (gset.display.show_measure[TypeMeasure::Pressure])
                 {
