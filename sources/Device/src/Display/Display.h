@@ -13,7 +13,9 @@ struct TypeMeasure
         Temperature,        // Температура
         Humidity,           // Влажность
         Count
-    }; 
+    };
+
+    static pchar Name(E);
 };
 
 

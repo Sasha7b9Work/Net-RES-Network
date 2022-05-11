@@ -47,6 +47,8 @@ namespace Display
 
     static void DrawMeasures();
 
+    // Âûâåñòè îäíî èçìåğåíèå íà âåñü ıêğàí
+    static void DrawBigMeasure();
 
     namespace Buffer
     {
@@ -267,54 +269,88 @@ void Display::Update()
     }
     else
     {
-        if (need_redraw)
+        if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::AllMeasures)
         {
-            BeginScene(Color::BLACK);
-
-            int x0 = 10;
-            int dX = 125;
-            int y0 = 15;
-            int dY = 22;
-
-            if (gset.display.show_measure[TypeMeasure::Pressure])
+            if (need_redraw)
             {
-                String<>("ÄÀÂËÅÍÈÅ :").Draw(x0, y0, Color::_1);
-                String<>("ÌÏà").Draw(x0 + dX, y0);
+                BeginScene(Color::BLACK);
+
+                int x0 = 10;
+                int dX = 125;
+                int y0 = 15;
+                int dY = 22;
+
+                if (gset.display.show_measure[TypeMeasure::Pressure])
+                {
+                    String<>("ÄÀÂËÅÍÈÅ :").Draw(x0, y0, Color::_1);
+                    String<>("ÌÏà").Draw(x0 + dX, y0);
+                }
+
+                if (gset.display.show_measure[TypeMeasure::Illumination])
+                {
+                    String<>("ÎÑÂÅÙÅÍÍÎÑÒÜ :").Draw(x0, y0 + dY);
+                    String<>("ëê").Draw(x0 + dX, y0 + dY);
+                }
+
+                if (gset.display.show_measure[TypeMeasure::Humidity])
+                {
+                    String<>("ÂËÀÆÍÎÑÒÜ :").Draw(x0, y0 + 4 * dY);
+                    String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+                }
+
+                if (gset.display.show_measure[TypeMeasure::Velocity])
+                {
+                    String<>("ÑÊÎĞÎÑÒÜ :").Draw(x0, y0 + 2 * dY);
+                    String<>("ì/ñ").Draw(x0 + dX, y0 + 2 * dY);
+                }
+
+                if (gset.display.show_measure[TypeMeasure::Temperature])
+                {
+                    String<>("ÒÅÌÏÅĞÀÒÓĞÀ :").Draw(x0, y0 + 3 * dY);
+                    String<>("¨Ñ").Draw(x0 + dX, y0 + 3 * dY);
+                }
+
+                EndScene();
+
+                need_redraw = false;
             }
 
-            if (gset.display.show_measure[TypeMeasure::Illumination])
-            {
-                String<>("ÎÑÂÅÙÅÍÍÎÑÒÜ :").Draw(x0, y0 + dY);
-                String<>("ëê").Draw(x0 + dX, y0 + dY);
-            }
+            DrawMeasures();
 
-            if (gset.display.show_measure[TypeMeasure::Humidity])
-            {
-                String<>("ÂËÀÆÍÎÑÒÜ :").Draw(x0, y0 + 4 * dY);
-                String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
-            }
-
-            if (gset.display.show_measure[TypeMeasure::Velocity])
-            {
-                String<>("ÑÊÎĞÎÑÒÜ :").Draw(x0, y0 + 2 * dY);
-                String<>("ì/ñ").Draw(x0 + dX, y0 + 2 * dY);
-            }
-
-            if (gset.display.show_measure[TypeMeasure::Temperature])
-            {
-                String<>("ÒÅÌÏÅĞÀÒÓĞÀ :").Draw(x0, y0 + 3 * dY);
-                String<>("¨Ñ").Draw(x0 + dX, y0 + 3 * dY);
-            }
-
-            EndScene();
-
-            need_redraw = false;
+            DrawZones();
         }
-
-        DrawMeasures();
-
-        DrawZones();
+        else
+        {
+            DrawBigMeasure();
+        }
 
         zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
     }
+}
+
+
+void Display::DrawBigMeasure()
+{
+    BeginScene(Color::BLACK);
+
+    Color::SetCurrent(Color::_1);
+
+    Text::DrawBig(10, 10, 2, TypeMeasure::Name((TypeMeasure::E)gset.display.typeDisplaydInfo.value));
+
+    EndScene();
+}
+
+
+pchar TypeMeasure::Name(E value)
+{
+    static const pchar names[Count] =
+    {
+        "ÄÀÂËÅÍÈÅ",
+        "ÎÑÂÅÙÅÍÍÎÑÒÜ",
+        "ÂËÀÆÍÎÑÒÜ",
+        "ÑÊÎĞÎÑÒÜ",
+        "ÒÅÌÏÅĞÀÒÓĞÀ"
+    };
+
+    return names[value];
 }

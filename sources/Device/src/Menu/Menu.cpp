@@ -30,6 +30,8 @@ void Menu::ShortPress()
     {
         Menu::OpenedPage()->SelectNextItem();
     }
+
+    Display::need_redraw = true;
 }
 
 
@@ -43,6 +45,8 @@ void Menu::LongPress()
     {
         Menu::OpenedPage()->ChangeCurrentItem();
     }
+
+    Display::need_redraw = true;
 }
 
 
