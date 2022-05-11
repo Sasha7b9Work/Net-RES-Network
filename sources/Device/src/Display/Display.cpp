@@ -259,53 +259,16 @@ void Display::Update()
             if (need_redraw)
             {
                 BeginScene(Color::BLACK);
+            }
 
-                const int x0 = 10;
-                const int dX = 125;
-                const int y0 = 15;
-                const int dY = 22;
+            DrawMeasures();
 
-                if (gset.display.show_measure[TypeMeasure::Pressure])
-                {
-                    Measure measure(TypeMeasure::Pressure);
-                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0, Color::_1);
-                    measure.Units().Draw(x0 + dX, y0);
-                }
-
-                if (gset.display.show_measure[TypeMeasure::Illumination])
-                {
-                    Measure measure(TypeMeasure::Illumination);
-                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + dY);
-                    measure.Units().Draw(x0 + dX, y0 + dY);
-                }
-
-                if (gset.display.show_measure[TypeMeasure::Humidity])
-                {
-                    Measure measure(TypeMeasure::Humidity);
-                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + 4 * dY);
-                    measure.Units().Draw(x0 + dX, y0 + 4 * dY);
-                }
-
-                if (gset.display.show_measure[TypeMeasure::Velocity])
-                {
-                    Measure measure(TypeMeasure::Velocity);
-                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + 2 * dY);
-                    Measure(TypeMeasure::Velocity).Units().Draw(x0 + dX, y0 + 2 * dY);
-                }
-
-                if (gset.display.show_measure[TypeMeasure::Temperature])
-                {
-                    Measure measure(TypeMeasure::Temperature);
-                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + 3 * dY);
-                    measure.Units().Draw(x0 + dX, y0 + 3 * dY);
-                }
-
+            if (need_redraw)
+            {
                 EndScene();
 
                 need_redraw = false;
             }
-
-            DrawMeasures();
 
             DrawZones();
         }
@@ -321,11 +284,20 @@ void Display::Update()
 
 void Display::DrawMeasures()
 {
-    int y0 = 15;
-    int dY = 22;
+    const int x0 = 10;
+    const int dX = 125;
+    const int y0 = 15;
+    const int dY = 22;
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
+        if (need_redraw)
+        {
+            Measure measure((TypeMeasure::E)i);
+            String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + i * dY, Color::_1);
+            measure.Units().Draw(x0 + dX, y0 + i * dY);
+        }
+
         if (gset.display.show_measure[i])
         {
             measures[i].Draw(100, y0 + i * dY);
