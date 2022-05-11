@@ -11,9 +11,11 @@ namespace HAL
 }
 
 
-extern I2C_HandleTypeDef hi2c1;
+namespace HAL_I2C1
+{
+    extern void *handle;     // I2C_HandleTypeDef
+}
 
-extern void _Error_Handler(char *, int);
 
 void MX_I2C1_Init(void);
 
