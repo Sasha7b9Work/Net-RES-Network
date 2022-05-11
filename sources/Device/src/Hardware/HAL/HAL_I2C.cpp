@@ -47,13 +47,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
 }
 
 
-void user_delay_ms(uint32_t period)
-{
-    HAL_Delay(period);
-}
-
-
-int8_t HAL_I2C1::Read(uint8_t dev_id, uint8_t reg_addr, uint8_t* reg_data, uint16_t len)
+int8 HAL_I2C1::Read(uint8 dev_id, uint8 reg_addr, uint8* reg_data, uint16 len)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
@@ -75,7 +69,7 @@ int8_t HAL_I2C1::Read(uint8_t dev_id, uint8_t reg_addr, uint8_t* reg_data, uint1
 }
 
 
-int8_t HAL_I2C1::Read16(uint8_t dev_id, uint8_t* data)
+int8 HAL_I2C1::Read16(uint8 dev_id, uint8* data)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
@@ -91,7 +85,7 @@ int8_t HAL_I2C1::Read16(uint8_t dev_id, uint8_t* data)
 }
 
 
-int8_t HAL_I2C1::Write(uint8_t dev_id, uint8_t reg_addr, uint8_t* reg_data, uint16_t len)
+int8 HAL_I2C1::Write(uint8 dev_id, uint8 reg_addr, uint8* reg_data, uint16 len)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
@@ -113,7 +107,8 @@ int8_t HAL_I2C1::Write(uint8_t dev_id, uint8_t reg_addr, uint8_t* reg_data, uint
     return rslt;
 }
 
-int8_t HAL_I2C1::Write8(uint8_t dev_id, uint8_t data)
+
+int8 HAL_I2C1::Write8(uint8 dev_id, uint8 data)
 {
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
