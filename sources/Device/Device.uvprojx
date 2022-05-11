@@ -654,11 +654,6 @@
               <FilePath>.\src\Hardware\HAL\stm32f1xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f1xx_it.h</FilePath>
-            </File>
-            <File>
               <FileName>HAL.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
@@ -669,14 +664,14 @@
               <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_it.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f1xx_it.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1530,11 +1525,6 @@
               <FilePath>.\src\Hardware\HAL\stm32f1xx_hal_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f1xx_it.h</FilePath>
-            </File>
-            <File>
               <FileName>HAL.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
@@ -1545,14 +1535,14 @@
               <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_it.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\stm32f1xx_it.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_I2C.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_I2C.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
           </Files>
         </Group>
