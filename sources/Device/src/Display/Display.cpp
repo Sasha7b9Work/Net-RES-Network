@@ -346,18 +346,18 @@ void Display::DrawBigMeasure()
 
     static const int x[TypeMeasure::Count] =
     {
-        35,
+        30,
         10,
-        40,
-        15,
-        30
+        35,
+        12,
+        28
     };
 
     Text::DrawBig(x[measure], 25, 2, TypeMeasure::Name(measure));
 
     measures[measure].Draw(10, 75, 3);
 
-    Text::DrawBig(100, 75, 3, TypeMeasure::Units(measure));
+    Text::DrawBig(110, 75, 3, TypeMeasure::Units(measure));
 
     EndScene();
 }
@@ -385,7 +385,7 @@ pchar TypeMeasure::Units(E value)
         "лк",
         "м/с",
         "ЁС",
-        "%"
+        "%%"
     };
 
     return units[value];
