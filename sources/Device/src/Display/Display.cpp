@@ -40,7 +40,7 @@ namespace Display
 
         Measure() : value(0.0f), position(0), time(0) {}
 
-        void Draw(const int x, const int y);
+        void Draw(const int x, const int y, int size = 1);
     };
 
     static Measure measures[TypeMeasure::Count];
@@ -192,7 +192,7 @@ void Display::DrawMeasures()
 }
 
 
-void Display::Measure::Draw(const int x0, const int y0)
+void Display::Measure::Draw(const int x0, const int y0, int size)
 {
     Rectangle(30, 7).Fill(x0, y0 + 1, Color::BLACK);
 
