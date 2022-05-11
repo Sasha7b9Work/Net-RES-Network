@@ -7,6 +7,6 @@ Settings gset =
 {
     {
         {1, 1, 1, 1, 1},
-        TypeDisplayedInformation::AllMeasures
+        { TypeDisplayedInformation::AllMeasures }
     },
 };

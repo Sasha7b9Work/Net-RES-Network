@@ -16,6 +16,15 @@ struct TypeDisplayedInformation
         Menu,
         Count
     };
+
+    E value;
+
+    TypeDisplayedInformation &operator++(int)
+    {
+        value = (E)(value + 1);
+
+        return *this;
+    }
 };
 
 
@@ -23,7 +32,7 @@ struct TypeDisplayedInformation
 struct SettingsDisplay
 {
     uint8                       show_measure[TypeMeasure::Count];
-    TypeDisplayedInformation::E typeDisplaydInfo;
+    TypeDisplayedInformation    typeDisplaydInfo;
 };
 
 

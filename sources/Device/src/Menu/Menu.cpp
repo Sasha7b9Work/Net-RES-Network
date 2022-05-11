@@ -4,6 +4,8 @@
 #include "Display/Display.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
+
 
 
 namespace Menu
@@ -16,7 +18,13 @@ void Menu::ShortPress()
 {
     if (!Opened())
     {
-        opened = PageMain::self;
+        gset.display.typeDisplaydInfo++;
+
+        if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
+        {
+            gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasurePressure;
+        }
+
     }
     else
     {
