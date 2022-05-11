@@ -28,13 +28,13 @@ namespace InterCom
 
         uint8 buffer[5];
         buffer[0] = (uint8)type;
-        memcpy(&buffer[1], &value, 4);
+        std::memcpy(&buffer[1], &value, 4);
 
         uint hash = Math::CalculateHash(buffer, 5);
 
-        memcpy(&message[3], &hash, 4);
+        std::memcpy(&message[3], &hash, 4);
 
-        memcpy(&message[7], buffer, 5);
+        std::memcpy(&message[7], buffer, 5);
 
         return message;
     }

@@ -1,6 +1,7 @@
 // 2022/04/20 08:53:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Display/Colors.h"
+#include "Utils/Text/String.h"
 
 
 struct TypeMeasure
@@ -16,8 +17,16 @@ struct TypeMeasure
     };
 
     static pchar Name(E);
+};
 
-    static pchar Units(E);
+
+struct Measure
+{
+    TypeMeasure::E type;
+
+    Measure(TypeMeasure::E t) : type(t) {}
+
+    String<> Units();
 };
 
 
