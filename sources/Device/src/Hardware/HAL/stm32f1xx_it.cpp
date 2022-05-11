@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "stm32f1xx_it.h"
-#include "stm32f1xx_hal.h"
 #include "Hardware/CDC/CDC.h"
+#include "Hardware/HAL/HAL.h"
+#include <stm32f1xx_hal.h>
 
 
 void NMI_Handler(void)
