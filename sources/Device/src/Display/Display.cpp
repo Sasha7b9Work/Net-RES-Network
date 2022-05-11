@@ -206,7 +206,7 @@ void Display::DMeasure::Draw(const int x0, const int y0, int size)
         }
         else
         {
-            Text::DrawBig(x0, y0, size, current.c_str());
+            current.DrawBig(x0, y0, size);
         }
     }
     else
@@ -358,13 +358,13 @@ void Display::DrawBigMeasure()
         28
     };
 
-    Text::DrawBig(x[measure.type], 15, 2, measure.Name().c_str());
+    measure.Name().DrawBig(x[measure.type], 15, 2);
 
     measures[measure.type].Draw(27, 50, 4);
 
     Color::SetCurrent(Color::_1);
 
-    Text::DrawBig(68, 95, 2, measure.Units().c_str());
+    measure.Units().DrawBig(68, 95, 2);
 
     EndScene();
 }

@@ -61,6 +61,57 @@ int String<capa>::Draw(int x, int y, Color::E color)
 }
 
 
+template<int capa>
+int String<capa>::DrawBigChar(int eX, int eY, int size, char symbol)
+{
+    int8 width = (int8)Font::font->symbol[symbol].width;
+    int8 height = (int8)Font::font->height;
+
+    for (int b = 0; b < height; b++)
+    {
+        if (ByteFontNotEmpty((uint)symbol, b))
+        {
+            int x = eX;
+            int y = eY + b * size + 9 - height;
+            int endBit = 8 - width;
+            for (int bit = 7; bit >= endBit; bit--)
+            {
+                if (BitInFontIsExist((uint)symbol, b, bit))
+                {
+                    for (int i = 0; i < size; i++)
+                    {
+                        for (int j = 0; j < size; j++)
+                        {
+                            Point().Set(x + i, y + j);
+                        }
+                    }
+                }
+                x += size;
+            }
+        }
+    }
+
+    return eX + width * size;
+}
+
+
+template<int capacity>
+void String<capacity>::DrawBig(int eX, int eY, int size, Color::E color)
+{
+    Color::SetCurrent(color);
+
+    int numSymbols = (int)std::strlen(text);
+
+    int x = eX;
+
+    for (int i = 0; i < numSymbols; i++)
+    {
+        x = DrawBigChar(x, eY, size, text[i]);
+        x += size;
+    }
+}
+
+
 template<int capacity>
 void String<capacity>::SetFormat(pchar format, ...)
 {

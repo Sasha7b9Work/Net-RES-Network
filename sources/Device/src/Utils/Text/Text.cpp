@@ -44,8 +44,6 @@ namespace Text
 
     void DrawCharInColorDisplay(int eX, int eY, uchar symbol);
 
-    int DrawBigChar(int eX, int eY, int size, char symbol);
-
     bool IsLetter(char symbol);
 
     bool IsConsonant(char symbol);
@@ -131,39 +129,6 @@ void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
 }
 
 
-int Text::DrawBigChar(int eX, int eY, int size, char symbol)
-{
-    int8 width = (int8)Font::font->symbol[symbol].width;
-    int8 height = (int8)Font::font->height;
-
-    for (int b = 0; b < height; b++)
-    {
-        if (ByteFontNotEmpty((uint)symbol, b))
-        {
-            int x = eX;
-            int y = eY + b * size + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (BitInFontIsExist((uint)symbol, b, bit))
-                {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            Point().Set(x + i, y + j);
-                        }
-                    }
-                }
-                x += size;
-            }
-        }
-    }
-
-    return eX + width * size;
-}
-
-
 int Text::DrawCharHard(int eX, int eY, char s)
 {
     uint8 symbol = (uint8)s;
@@ -210,7 +175,7 @@ int Char::Draw(int x, int y, int size, Color::E color)
         else
         {
             char buffer[2] = { symbol, 0 };
-            Text::DrawBig(x, y, size, buffer);
+            String<>(buffer).DrawBig(x, y, size);
             return x + size * Font::GetLengthSymbol((uint8)symbol);
         }
     }
@@ -562,21 +527,6 @@ void Text::Draw10SymbolsInRect(int x, int y, char eChar)
         Char((char)(eChar + i + 16)).Draw(x + 8 * i, y + 8);
     }
 }
-
-
-void Text::DrawBig(int eX, int eY, int size, pchar text)
-{
-    int numSymbols = (int)std::strlen(text);
-
-    int x = eX;
-
-    for (int i = 0; i < numSymbols; i++)
-    {
-        x = DrawBigChar(x, eY, size, text[i]);
-        x += size;
-    }
-}
-
 
 
 static int SU::NumDigitsInIntPart(float value)

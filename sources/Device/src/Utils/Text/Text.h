@@ -28,8 +28,6 @@ namespace Text
 
     void Draw10SymbolsInRect(int x, int y, char eChar);
 
-    void DrawBig(int x, int y, int size, pchar text);
-
     String<> GetWord(pchar firstSymbol, int *length);
 
     // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений

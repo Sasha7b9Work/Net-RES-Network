@@ -34,6 +34,8 @@ public:
 
     int Draw(int x, int y, Color::E = Color::Count);
 
+    void DrawBig(int x, int y, int size = 1, Color::E = Color::Count);
+
     void DrawInRect(int x, int y, int width, int height, int dy = 0);
 
     int DrawInCenterRect(int x, int y, int width, int height, Color::E = Color::Count);
@@ -80,6 +82,8 @@ private:
     int DrawSubString(int x, int y, char *text);
 
     int DrawSpaces(int x, int y, char *text, int *numSymbols);
+
+    int DrawBigChar(int eX, int eY, int size, char symbol);
 };
 
 
