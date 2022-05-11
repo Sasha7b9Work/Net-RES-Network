@@ -358,11 +358,13 @@ void Display::DrawBigMeasure()
         28
     };
 
-    Text::DrawBig(x[measure.type], 25, 2, measure.Name().c_str());
+    Text::DrawBig(x[measure.type], 15, 2, measure.Name().c_str());
 
-    measures[measure.type].Draw(10, 75, 3);
+    measures[measure.type].Draw(27, 50, 4);
 
-    Text::DrawBig(110, 75, 3, measure.Units().c_str());
+    Color::SetCurrent(Color::_1);
+
+    Text::DrawBig(68, 95, 2, measure.Units().c_str());
 
     EndScene();
 }
