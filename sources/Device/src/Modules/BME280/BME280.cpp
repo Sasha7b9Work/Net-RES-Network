@@ -4,7 +4,7 @@
 #include "Modules/BME280/bme280_driver.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f1xx_hal.h>
-#include <string.h>
+#include <cstring>
 
 
 static bme280_dev dev;
@@ -18,7 +18,7 @@ void BME280::Init()
     dev.intf = BME280_I2C_INTF;
     dev.read = user_i2c_read;
     dev.write = user_i2c_write;
-    dev.delay_ms = user_delay_ms;
+    dev.delay_ms = HAL_Delay;
 
     bme280_init(&dev);
 
