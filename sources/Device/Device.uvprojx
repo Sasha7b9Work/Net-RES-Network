@@ -678,11 +678,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\i2c.cpp</FilePath>
             </File>
-            <File>
-              <FileName>i2c.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\i2c.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1558,11 +1553,6 @@
               <FileName>i2c.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\i2c.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\i2c.h</FilePath>
             </File>
           </Files>
         </Group>
