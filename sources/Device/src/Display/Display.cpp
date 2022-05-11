@@ -34,16 +34,28 @@ namespace Display
         String<> old;
         String<> current;
 
+        TypeMeasure::E type;
         float value;                // ѕоследнее установленное значение
         int position;               // “екуща€ отрисовываема€ позици€
         uint time;                  // ¬рем€ последнего изменени€ текущей отрисовываемой позиции
 
-        DMeasure() : value(0.0f), position(0), time(0) {}
+        DMeasure(TypeMeasure::E t) : type(t), value(0.0f), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
+
+        String<> Name();
+
+        String<> Units();
     };
 
-    static DMeasure measures[TypeMeasure::Count];
+    static DMeasure measures[TypeMeasure::Count] =
+    {
+        DMeasure(TypeMeasure::Pressure),
+        DMeasure(TypeMeasure::Illumination),
+        DMeasure(TypeMeasure::Velocity),
+        DMeasure(TypeMeasure::Temperature),
+        DMeasure(TypeMeasure::Humidity)
+    };
 
     static void DrawMeasures();
 
@@ -297,9 +309,8 @@ void Display::DrawMeasures()
 
             if (need_redraw)
             {
-                Measure measure((TypeMeasure::E)i);
-                String<>("%s :", measure.Name().c_str()).Draw(x0, y, Color::_1);
-                measure.Units().Draw(x0 + dX, y);
+                String<>("%s :", measures[i].Name().c_str()).Draw(x0, y, Color::_1);
+                measures[i].Units().Draw(x0 + dX, y);
             }
 
             measures[i].Draw(100, y);
@@ -312,8 +323,6 @@ void Display::DrawBigMeasure()
 {
     BeginScene(Color::BLACK);
 
-    Measure measure((TypeMeasure::E)gset.display.typeDisplaydInfo.value);
-
     static const int x[TypeMeasure::Count] =
     {
         30,
@@ -322,6 +331,8 @@ void Display::DrawBigMeasure()
         12,
         28
     };
+
+    DMeasure &measure = measures[gset.display.typeDisplaydInfo.value];
 
     measure.Name().DrawBig(x[measure.type], 15, 2, Color::_1);
 
@@ -333,7 +344,7 @@ void Display::DrawBigMeasure()
 }
 
 
-String<> Measure::Name()
+String<> Display::DMeasure::Name()
 {
     static const pchar names[TypeMeasure::Count] =
     {
@@ -347,7 +358,7 @@ String<> Measure::Name()
     return String<>(names[type]);
 }
 
-String<> Measure::Units()
+String<> Display::DMeasure::Units()
 {
     static const pchar units[TypeMeasure::Count] =
     {

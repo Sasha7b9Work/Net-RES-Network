@@ -18,18 +18,6 @@ struct TypeMeasure
 };
 
 
-struct Measure
-{
-    TypeMeasure::E type;
-
-    Measure(TypeMeasure::E t) : type(t) {}
-
-    String<> Name();
-
-    String<> Units();
-};
-
-
 namespace Display
 {
     static const int WIDTH = 160;
