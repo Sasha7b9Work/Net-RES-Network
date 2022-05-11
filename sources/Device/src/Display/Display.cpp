@@ -335,7 +335,11 @@ void Display::DrawBigMeasure()
 
     Color::SetCurrent(Color::_1);
 
-    Text::DrawBig(10, 10, 2, TypeMeasure::Name((TypeMeasure::E)gset.display.typeDisplaydInfo.value));
+    TypeMeasure::E measure = (TypeMeasure::E)gset.display.typeDisplaydInfo.value;
+
+    Text::DrawBig(10, 30, 2, TypeMeasure::Name(measure));
+
+    measures[measure].Draw(100, 100);
 
     EndScene();
 }
