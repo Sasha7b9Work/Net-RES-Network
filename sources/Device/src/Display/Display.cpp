@@ -291,16 +291,18 @@ void Display::DrawMeasures()
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
-        if (need_redraw)
-        {
-            Measure measure((TypeMeasure::E)i);
-            String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + i * dY, Color::_1);
-            measure.Units().Draw(x0 + dX, y0 + i * dY);
-        }
-
         if (gset.display.show_measure[i])
         {
-            measures[i].Draw(100, y0 + i * dY);
+            int y = y0 + i * dY;
+
+            if (need_redraw)
+            {
+                Measure measure((TypeMeasure::E)i);
+                String<>("%s :", measure.Name().c_str()).Draw(x0, y, Color::_1);
+                measure.Units().Draw(x0 + dX, y);
+            }
+
+            measures[i].Draw(100, y);
         }
     }
 }
