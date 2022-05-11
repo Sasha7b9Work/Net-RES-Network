@@ -16,6 +16,8 @@ struct TypeMeasure
     };
 
     static pchar Name(E);
+
+    static pchar Units(E);
 };
 
 

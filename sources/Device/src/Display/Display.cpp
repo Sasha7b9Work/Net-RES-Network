@@ -283,31 +283,31 @@ void Display::Update()
                 if (gset.display.show_measure[TypeMeasure::Pressure])
                 {
                     String<>("%s :", TypeMeasure::Name(TypeMeasure::Pressure)).Draw(x0, y0, Color::_1);
-                    String<>("ּֿא").Draw(x0 + dX, y0);
+                    String<>(TypeMeasure::Units(TypeMeasure::Pressure)).Draw(x0 + dX, y0);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Illumination])
                 {
                     String<>("%s :", TypeMeasure::Name(TypeMeasure::Illumination)).Draw(x0, y0 + dY);
-                    String<>("כך").Draw(x0 + dX, y0 + dY);
+                    String<>(TypeMeasure::Units(TypeMeasure::Illumination)).Draw(x0 + dX, y0 + dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Humidity])
                 {
                     String<>("%s :", TypeMeasure::Name(TypeMeasure::Humidity)).Draw(x0, y0 + 4 * dY);
-                    String<>("%%").Draw(x0 + dX, y0 + 4 * dY);
+                    String<>(TypeMeasure::Units(TypeMeasure::Humidity)).Draw(x0 + dX, y0 + 4 * dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Velocity])
                 {
                     String<>("%s :", TypeMeasure::Name(TypeMeasure::Velocity)).Draw(x0, y0 + 2 * dY);
-                    String<>("ל/ס").Draw(x0 + dX, y0 + 2 * dY);
+                    String<>(TypeMeasure::Units(TypeMeasure::Velocity)).Draw(x0 + dX, y0 + 2 * dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Temperature])
                 {
                     String<>("%s :", TypeMeasure::Name(TypeMeasure::Temperature)).Draw(x0, y0 + 3 * dY);
-                    String<>("¨ׁ").Draw(x0 + dX, y0 + 3 * dY);
+                    String<>(TypeMeasure::Units(TypeMeasure::Temperature)).Draw(x0 + dX, y0 + 3 * dY);
                 }
 
                 EndScene();
@@ -357,4 +357,18 @@ pchar TypeMeasure::Name(E value)
     };
 
     return names[value];
+}
+
+pchar TypeMeasure::Units(E value)
+{
+    static const pchar units[Count] =
+    {
+        "ּֿא",
+        "כך",
+        "ל/ס",
+        "¨ׁ",
+        "%%"
+    };
+
+    return units[value];
 }
