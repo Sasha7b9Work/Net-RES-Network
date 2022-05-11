@@ -1,4 +1,5 @@
 // 2022/04/27 11:48:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "Device.h"
 #include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"

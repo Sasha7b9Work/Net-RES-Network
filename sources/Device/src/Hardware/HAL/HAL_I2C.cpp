@@ -12,7 +12,6 @@ namespace HAL_I2C1
 }
 
 
-
 void HAL_I2C1::Init(void)
 {
 

@@ -1,6 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include <stm32f1xx_hal.h>
 
 
 namespace HAL
@@ -19,9 +18,9 @@ namespace HAL_I2C1
 }
 
 
-void user_delay_ms(uint32_t period);
-int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
-int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
+void user_delay_ms(uint period);
+int8 user_i2c_read(uint8 dev_id, uint8 reg_addr, uint8 *reg_data, uint16 len);
+int8 user_i2c_write(uint8 dev_id, uint8 reg_addr, uint8 *reg_data, uint16 len);
 
-int8_t user_i2c_write8(uint8_t dev_id, uint8_t data);
-int8_t user_i2c_read16(uint8_t dev_id, uint8_t *data);
+int8 user_i2c_write8(uint8 dev_id, uint8 data);
+int8 user_i2c_read16(uint8 dev_id, uint8 *data);
