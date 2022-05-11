@@ -38,7 +38,6 @@ file(GLOB HARDWARE            src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS      src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_CDC        src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL        src/Hardware/HAL/*.*)
-file(GLOB HARDWARE_I2C        src/Hardware/I2C/*.*)
 file(GLOB MENU                src/Menu/*.*)
 file(GLOB MENU_PAGES          src/Menu/Pages/*.*)
 file(GLOB MODULES_BH1750      src/Modules/BH1750/*.*)
@@ -58,7 +57,6 @@ source_group(Hardware            FILES ${HARDWARE})
 source_group(Hardware/CMSIS      FILES ${HARDWARE_CMSIS})
 source_group(Hardware/CDC        FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL        FILES ${HARDWARE_HAL})
-source_group(Hardware/I2C        FILES ${HARDWARE_I2C})
 source_group(Menu                FILES ${MENU})
 source_group(Menu/Pages          FILES ${MENU_PAGES})
 source_group(Modules/BH1750      FILES ${MODULES_BH1750})
@@ -86,7 +84,6 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_CMSIS}
             ${HARDWARE_CDC}
             ${HARDWARE_HAL}
-            ${HARDWARE_I2C}
             ${MENU}
             ${MENU_PAGES}
             ${MODULES_BH1750}

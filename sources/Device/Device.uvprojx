@@ -673,20 +673,15 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\stm32f1xx_it.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/I2C</GroupName>
-          <Files>
             <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\I2C\i2c.c</FilePath>
+              <FileName>i2c.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\i2c.cpp</FilePath>
             </File>
             <File>
               <FileName>i2c.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\I2C\i2c.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\i2c.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1559,20 +1554,15 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\stm32f1xx_it.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/I2C</GroupName>
-          <Files>
             <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\I2C\i2c.c</FilePath>
+              <FileName>i2c.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\i2c.cpp</FilePath>
             </File>
             <File>
               <FileName>i2c.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\I2C\i2c.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\i2c.h</FilePath>
             </File>
           </Files>
         </Group>

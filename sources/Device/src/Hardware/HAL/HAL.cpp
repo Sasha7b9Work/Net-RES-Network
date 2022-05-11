@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/I2C/i2c.h"
 #include "Hardware/CDC/CDC.h"
 #include <stm32f1xx_hal.h>
 

@@ -1,7 +1,6 @@
 // 2022/02/14 11:59:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Modules/CG-Anem/CG-Anem.h"
-#include "Hardware/I2C/i2c.h"
 #include <stm32f1xx_hal.h>
 #include <cstdlib>
 #include <cstring>

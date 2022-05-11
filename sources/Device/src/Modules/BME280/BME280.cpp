@@ -1,8 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Modules/BME280/BME280.h"
-#include "Hardware/I2C/i2c.h"
 #include "Modules/BME280/bme280_driver.h"
+#include "Hardware/HAL/HAL.h"
 #include <string.h>
 
 

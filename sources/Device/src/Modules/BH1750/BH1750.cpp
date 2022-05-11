@@ -1,7 +1,7 @@
 // 2022/02/21 15:41:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Modules/BH1750/BH1750.h"
-#include "Hardware/I2C/i2c.h"
+#include "Hardware/HAL/HAL.h"
 #include <stm32f1xx_hal.h>
 
 
