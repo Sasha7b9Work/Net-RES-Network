@@ -3,10 +3,27 @@
 #include "Display/Display.h"
 
 
+struct TypeDisplayedInformation
+{
+    enum E
+    {
+        MeasurePressure,
+        MeasureIllumination,
+        MeasureVelocity,
+        MeasureTemperature,
+        MeasureHumidity,
+        AllMeasures,
+        Menu,
+        Count
+    };
+};
+
+
 
 struct SettingsDisplay
 {
-    uint8 show_measure[TypeMeasure::Count];
+    uint8                       show_measure[TypeMeasure::Count];
+    TypeDisplayedInformation::E typeDisplaydInfo;
 };
 
 
