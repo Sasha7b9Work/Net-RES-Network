@@ -15,8 +15,6 @@ struct TypeMeasure
         Humidity,           // Влажность
         Count
     };
-
-    static pchar Name(E);
 };
 
 
@@ -25,6 +23,8 @@ struct Measure
     TypeMeasure::E type;
 
     Measure(TypeMeasure::E t) : type(t) {}
+
+    String<> Name();
 
     String<> Units();
 };

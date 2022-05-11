@@ -289,32 +289,37 @@ void Display::Update()
 
                 if (gset.display.show_measure[TypeMeasure::Pressure])
                 {
-                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Pressure)).Draw(x0, y0, Color::_1);
-                    Measure(TypeMeasure::Pressure).Units().Draw(x0 + dX, y0);
+                    Measure measure(TypeMeasure::Pressure);
+                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0, Color::_1);
+                    measure.Units().Draw(x0 + dX, y0);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Illumination])
                 {
-                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Illumination)).Draw(x0, y0 + dY);
-                    Measure(TypeMeasure::Illumination).Units().Draw(x0 + dX, y0 + dY);
+                    Measure measure(TypeMeasure::Illumination);
+                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + dY);
+                    measure.Units().Draw(x0 + dX, y0 + dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Humidity])
                 {
-                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Humidity)).Draw(x0, y0 + 4 * dY);
-                    Measure(TypeMeasure::Humidity).Units().Draw(x0 + dX, y0 + 4 * dY);
+                    Measure measure(TypeMeasure::Humidity);
+                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + 4 * dY);
+                    measure.Units().Draw(x0 + dX, y0 + 4 * dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Velocity])
                 {
-                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Velocity)).Draw(x0, y0 + 2 * dY);
+                    Measure measure(TypeMeasure::Velocity);
+                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + 2 * dY);
                     Measure(TypeMeasure::Velocity).Units().Draw(x0 + dX, y0 + 2 * dY);
                 }
 
                 if (gset.display.show_measure[TypeMeasure::Temperature])
                 {
-                    String<>("%s :", TypeMeasure::Name(TypeMeasure::Temperature)).Draw(x0, y0 + 3 * dY);
-                    Measure(TypeMeasure::Temperature).Units().Draw(x0 + dX, y0 + 3 * dY);
+                    Measure measure(TypeMeasure::Temperature);
+                    String<>("%s :", measure.Name().c_str()).Draw(x0, y0 + 3 * dY);
+                    measure.Units().Draw(x0 + dX, y0 + 3 * dY);
                 }
 
                 EndScene();
@@ -353,7 +358,7 @@ void Display::DrawBigMeasure()
         28
     };
 
-    Text::DrawBig(x[measure.type], 25, 2, TypeMeasure::Name(measure.type));
+    Text::DrawBig(x[measure.type], 25, 2, measure.Name().c_str());
 
     measures[measure.type].Draw(10, 75, 3);
 
@@ -363,9 +368,9 @@ void Display::DrawBigMeasure()
 }
 
 
-pchar TypeMeasure::Name(E value)
+String<> Measure::Name()
 {
-    static const pchar names[Count] =
+    static const pchar names[TypeMeasure::Count] =
     {
         "ÄÀÂËÅÍÈÅ",
         "ÎÑÂÅÙÅÍÍÎÑÒÜ",
@@ -374,7 +379,7 @@ pchar TypeMeasure::Name(E value)
         "ÂËÀÆÍÎÑÒÜ"
     };
 
-    return names[value];
+    return String<>(names[type]);
 }
 
 String<> Measure::Units()
