@@ -17,7 +17,7 @@ void BME280::Init()
     dev.dev_id = BME280_I2C_ADDR_SEC;
     dev.intf = BME280_I2C_INTF;
     dev.read = HAL_I2C1::Read;
-    dev.write = user_i2c_write;
+    dev.write = HAL_I2C1::Write;
     dev.delay_ms = HAL_Delay;
 
     bme280_init(&dev);
