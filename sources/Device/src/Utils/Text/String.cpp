@@ -71,21 +71,23 @@ int String<capa>::Draw(int x, int y, Color::E color)
 
 
 template<int capa>
-int String<capa>::DrawBigChar(int eX, int eY, int size, char symbol)
+int String<capa>::DrawBigChar(int eX, int eY, int size, char s)
 {
+    uint8 symbol = (uint8)s;
+
     int8 width = (int8)Font::font->symbol[symbol].width;
     int8 height = (int8)Font::font->height;
 
     for (int b = 0; b < height; b++)
     {
-        if (Text::ByteFontNotEmpty((uint)symbol, b))
+        if (Text::ByteFontNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Text::BitInFontIsExist((uint)symbol, b, bit))
+                if (Text::BitInFontIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {
