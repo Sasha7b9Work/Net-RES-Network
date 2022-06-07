@@ -14,7 +14,6 @@ namespace HAL_I2C1
 
 void HAL_I2C1::Init(void)
 {
-
     hi2c1.Instance = I2C1;
     hi2c1.Init.ClockSpeed = 100000;
     hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
