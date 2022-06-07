@@ -14,7 +14,7 @@ typedef unsigned char uchar;
 #endif
 
 
-#define IN_MODE_TEST
+//#define IN_MODE_TEST
 
 
 union BitSet32
