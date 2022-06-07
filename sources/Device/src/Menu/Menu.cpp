@@ -18,7 +18,7 @@ void Menu::ShortPress()
 {
     if (!Opened())
     {
-        gset.display.typeDisplaydInfo++;
+        ++gset.display.typeDisplaydInfo;
 
         if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
         {

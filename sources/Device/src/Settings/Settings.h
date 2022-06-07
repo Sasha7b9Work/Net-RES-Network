@@ -19,7 +19,7 @@ struct TypeDisplayedInformation
 
     E value;
 
-    TypeDisplayedInformation &operator++(int)
+    TypeDisplayedInformation &operator++()
     {
         value = (E)(value + 1);
 
