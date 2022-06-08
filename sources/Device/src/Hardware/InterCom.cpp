@@ -65,7 +65,7 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     static const pchar units[TypeMeasure::Count] =
     {
-        "MPa",
+        "hPa",
         "lk",
         "m/s",
         "degress Celsius",

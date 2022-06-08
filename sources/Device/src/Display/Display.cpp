@@ -362,7 +362,7 @@ String<> Display::Measure::Units()
 {
     static const pchar units[TypeMeasure::Count] =
     {
-        "ּֿא",
+        "דֿא",
         "כך",
         "ל/ס",
         "¨ׁ",
