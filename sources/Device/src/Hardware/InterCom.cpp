@@ -58,9 +58,18 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 //        "Температура",
         "Pressure",
         "Luminance",
-        "Humidity",
         "Velocity",
-        "Temperature"
+        "Temperature",
+        "Humidity"
+    };
+
+    static const pchar units[TypeMeasure::Count] =
+    {
+        "MPa",
+        "lk",
+        "m/s",
+        "degress Celsius",
+        "%%"
     };
 
     if (direction & Direction::Display)
@@ -70,7 +79,7 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     Buffer<uint8, 12> data = CreateMessage(type, measure);
 
-    String<> message("%s : %f", names[type], measure);
+    String<> message("%s : %f %s", names[type], measure, units[type]);
 
     if (direction & Direction::CDC)
     {
