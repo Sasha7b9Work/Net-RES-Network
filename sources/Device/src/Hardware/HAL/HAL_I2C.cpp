@@ -54,7 +54,7 @@ int8 HAL_I2C1::Read(uint8 dev_id, uint8 reg_addr, uint8* reg_data, uint16 len)
 
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
 
-    HAL_StatusTypeDef status = HAL_I2C_Mem_Read(&hi2c1, (uint16)(dev_id << 1), reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 1);
+    HAL_StatusTypeDef status = HAL_I2C_Mem_Read(&hi2c1, (uint16)(dev_id << 1), reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, len, 5);
 
     if (status == HAL_OK)
     {
@@ -74,7 +74,7 @@ int8 HAL_I2C1::Read16(uint8 dev_id, uint8* data)
     {
     }
 
-    HAL_StatusTypeDef status = HAL_I2C_Master_Receive(&hi2c1, (uint16)((dev_id << 1) + 1), data, 2, 1);
+    HAL_StatusTypeDef status = HAL_I2C_Master_Receive(&hi2c1, (uint16)((dev_id << 1) + 1), data, 2, 10);
 
     while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
     {
