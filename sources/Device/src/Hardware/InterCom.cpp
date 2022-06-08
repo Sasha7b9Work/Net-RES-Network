@@ -63,14 +63,14 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         "Temperature"
     };
 
-    String<> message("%s : %f", names[type], measure);
-
     if (direction & Direction::Display)
     {
         Display::SetMeasure(type, measure);
     }
 
     Buffer<uint8, 12> data = CreateMessage(type, measure);
+
+    String<> message("%s : %f", names[type], measure);
 
     if (direction & Direction::CDC)
     {
