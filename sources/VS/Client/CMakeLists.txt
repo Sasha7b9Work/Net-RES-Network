@@ -2,7 +2,7 @@
 
 project (Client)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(.
                     ../../VS/ThirdParty/wxWidgets/include
