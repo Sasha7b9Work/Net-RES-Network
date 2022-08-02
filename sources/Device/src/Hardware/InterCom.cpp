@@ -51,11 +51,6 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 {
     static const pchar names[TypeMeasure::Count] =
     {
-//        "Давление",
-//        "Освещённость",
-//        "Влажность",
-//        "Скорость",
-//        "Температура",
         "Pressure",
         "Luminance",
         "Velocity",
@@ -83,15 +78,11 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     if (direction & Direction::CDC)
     {
-//        CDC::Transmit(data.Data(), 12);
-
         CDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
     if (direction & Direction::HC12)
     {
-//        HC12::Transmit(data.Data(), 12);
-
         HC12::Transmit(message.c_str(), message.Size() + 1);
     }
 

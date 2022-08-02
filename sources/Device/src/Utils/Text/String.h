@@ -4,7 +4,7 @@
 #include <cstring>
 
 
-#define DEFAULT_SIZE_STRING 32
+#define DEFAULT_SIZE_STRING 64
 
 template<int capacity = DEFAULT_SIZE_STRING>
 class String

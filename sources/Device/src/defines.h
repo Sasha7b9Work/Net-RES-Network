@@ -8,13 +8,12 @@ typedef unsigned int uint;
 typedef const char *pchar;
 typedef unsigned char uchar;
 
-#ifndef WIN32
+#ifdef WIN32
+    #define IN_MODE_TEST
+#else
     #define nullptr 0
     #pragma diag_suppress 2748
 #endif
-
-
-//#define IN_MODE_TEST
 
 
 union BitSet32
