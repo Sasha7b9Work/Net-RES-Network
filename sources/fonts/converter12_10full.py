@@ -3,8 +3,9 @@
 import os
 from struct import *
 
-def WriteByte(num_byte, file):
-    value = int(symbols[num_byte])
+# Записать в файл значение "слова" - двойного байта, находящегося по адресу num_word
+def WriteWord(num_word, file):
+    value = int(symbols[num_word])
     if value < 0:
         value += 256
     file.write(str(value))
@@ -58,9 +59,9 @@ for num_symbol in range(256):
     
     output.write("\t\t{ " + str(CalculateWidth(num_symbol)) + ", { ")   # Width symbol
 
-    for num_byte in range(8):
-        WriteByte(num_symbol * 8 + num_byte, output)
-        if num_byte != 7:
+    for two_bytes in range(12):                                         # Считаем по "двойным байтам" - символы имеют ширину 2 байта, высоту 12
+        WriteWord(num_symbol * 12 * 2 + two_bytes, output)              # 12 - высота символа в точках, 2 - ширина символа в байтах
+        if two_bytes != 7:
            output.write(",") 
         output.write("\t")
 
