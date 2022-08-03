@@ -11,7 +11,10 @@
 const Font8 *Font8::fonts[TypeFont::Count] = {&font5, &font8};
 const Font8 *Font8::font = &font8;
 
-TypeFont::E Font8::current = TypeFont::Count;
+namespace Font
+{
+    TypeFont::E current = TypeFont::Count;
+}
 
 
 int Font8::GetSize()
@@ -52,7 +55,7 @@ int Font::GetSpacing()
 
 void Font8::Set(TypeFont::E typeFont)
 {
-    if (typeFont == current)
+    if (typeFont == Font::current)
     {
         return;
     }

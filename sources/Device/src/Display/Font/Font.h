@@ -15,9 +15,9 @@ struct TypeFont
 };
 
 
-struct Font
+namespace Font
 {
-    static int GetSpacing();
+    int GetSpacing();
 };
 
 
@@ -35,8 +35,6 @@ struct Font8
 
     static const Font8 *font;
     static const Font8 *fonts[TypeFont::Count];
-
-    static TypeFont::E current;
 
     static int GetSize();
 
