@@ -53,46 +53,22 @@ symbols = unpack("6144b", data)
 output = open("font12_10.inc", "w")
 output.write("#include \"font.h\"\nconst Font22 font12_10 = {\n\t12, \t10, {\n")
 
-outTmpTable = open("table.tmp", "w")    # Temp file for table of symbols
-outTmpMap = open("map.tmp", "w")        # Temp file for bit map
-
 for num_symbol in range(256):
     output.write("/*" + str(num_symbol) + "*/")                         # Number of symbol
-    outTmpTable.write("\n/* " + str(num_symbol) + " */\t    ")
     
     output.write("\t\t{ " + str(CalculateWidth(num_symbol)) + ", { ")   # Width symbol
-    outTmpTable.write(str(CalculateWidth(num_symbol)) + ", ")
-    offset = 8 + 4 * 256 + num_symbol * 8
-    outTmpTable.write(str(offset & 0xff) + ", " + str((offset >> 8) & 0xff) + ", " + str((offset >> 16) & 0xff) + ",")
 
-    outTmpMap.write("/* " + str(num_symbol) + " */\t        ")
-    
     for num_byte in range(8):
         WriteByte(num_symbol * 8 + num_byte, output)
-        WriteReverseByte(num_symbol * 8 + num_byte, outTmpMap)
-        if not(num_byte == 7 and num_symbol == 255):
-            outTmpMap.write(",")
         if num_byte != 7:
            output.write(",") 
         output.write("\t")
 
-    outTmpMap.write("\n")
-        
     output.write("} " + "}")
     if num_symbol != 255:
         output.write(",")
     output.write("\t\n")
 output.write("} };\n")
-
-outTmpMap.write("};\n")
-
-outTmpTable.close()
-outTmpTable = open("table.tmp")
-lines = outTmpTable.readlines()
-
-outTmpMap.close();
-outTmpMap = open("map.tmp")
-lines = outTmpMap.readlines()
 
 output.close()
 
