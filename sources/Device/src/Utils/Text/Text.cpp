@@ -29,9 +29,6 @@ namespace SU
 
 namespace Text
 {
-    // Отрисовка непосредственно символа
-    int DrawCharHard(int x, int y, char symbol);
-
     int DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если
@@ -82,48 +79,15 @@ void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
 }
 
 
-int Text::DrawCharHard(int eX, int eY, char s)
-{
-    uint8 symbol = (uint8)s;
-
-    int8 width = Font::Symbol::Width(symbol);
-    int8 height = Font::Height();
-
-    for (int b = 0; b < height; b++)
-    {
-        if (Font::Symbol::LineNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
-                {
-                    Point().Set(x, y);
-                }
-                x++;
-            }
-        }
-    }
-
-    return eX + width;
-}
-
-
 int Char::Draw(int x, int y, int size, Color::E color)
 {
     Color::SetCurrent(color);
 
-    if (Font::Height() == 5)
-    {
-        Text::DrawCharHard(x, y + 3, symbol);
-    }
-    else if (Font::Height() == 8)
+    if (Font::Height() == 8)
     {
         if (size == 1)
         {
-            Text::DrawCharHard(x, y, symbol);
+            Font::Symbol::Draw(x, y, symbol);
         }
         else
         {

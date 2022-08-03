@@ -1,6 +1,7 @@
 // 2022/02/11 15:58:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Font.h"
+#include "Display/Display.h"
 
 #include "font8.inc"
 #include "font12_10.inc"
@@ -92,4 +93,33 @@ bool Font::Symbol::BitInLineIsExist(uint eChar, int numByte, int bit)
     }
 
     return prevByte & (1 << bit);
+}
+
+
+int Font::Symbol::Draw(int eX, int eY, char s)
+{
+    uint8 symbol = (uint8)s;
+
+    int8 width = Font::Symbol::Width(symbol);
+    int8 height = Font::Height();
+
+    for (int b = 0; b < height; b++)
+    {
+        if (Font::Symbol::LineNotEmpty(symbol, b))
+        {
+            int x = eX;
+            int y = eY + b + 9 - height;
+            int endBit = 8 - width;
+            for (int bit = 7; bit >= endBit; bit--)
+            {
+                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
+                {
+                    Point().Set(x, y);
+                }
+                x++;
+            }
+        }
+    }
+
+    return eX + width;
 }

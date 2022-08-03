@@ -26,6 +26,8 @@ namespace Font
         int Height(char symbol);
         bool LineNotEmpty(uint symbol, int line);
         bool BitInLineIsExist(uint symbol, int line, int bit);
+
+        int Draw(int x, int y, char symbol);
     }
 
     namespace Text
