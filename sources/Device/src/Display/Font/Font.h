@@ -7,7 +7,6 @@ struct TypeFont
 {
     enum E
     {
-        _5,
         _8,
         _12_10,
         Count
@@ -28,6 +27,11 @@ namespace Font
         bool LineNotEmpty(uint symbol, int line);
         bool BitInLineIsExist(uint symbol, int line, int bit);
     }
+
+    namespace Text
+    {
+        int Length(pchar);
+    }
 };
 
 
@@ -42,8 +46,6 @@ struct Font8
 {
     int height;
     Symbol8 symbol[256];
-
-    static int GetLengthText(pchar text);
 };
 
 

@@ -379,7 +379,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
         char *subString = PartWordForTransfer(word, lengthSyllables, numSyllabels, i, buffer);
-        int length = Font8::GetLengthText(subString);
+        int length = Font::Text::Length(subString);
         if (xRight - x > length - 5)
         {
             if (draw)
@@ -427,7 +427,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font8::GetLengthText(word.c_str());
+                int lengthString = Font::Text::Length(word.c_str());
                 if (x + lengthString > right + 5)
                 {
                     int numSymbols = DrawPartWord(word.c_str(), x, y, right, false);
@@ -438,7 +438,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
                 else
                 {
                     curSymbol += length;
-                    x += Font8::GetLengthText(word.c_str());
+                    x += Font::Text::Length(word.c_str());
                 }
             }
         }

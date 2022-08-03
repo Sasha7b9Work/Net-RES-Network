@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Font.h"
 
-#include "font5.inc"
 #include "font8.inc"
 #include "font12_10.inc"
 
@@ -12,12 +11,12 @@ namespace Font
 {
     TypeFont::E current = TypeFont::Count;
 
-    const Font8 *fonts[TypeFont::Count] = { &font5, &font8 };
+    const Font8 *fonts[TypeFont::Count] = { &font8 };
     const Font8 *font = &font8;
 }
 
 
-int Font8::GetLengthText(pchar text)
+int Font::Text::Length(pchar text)
 {
     int retValue = 0;
     while (*text)
