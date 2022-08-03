@@ -64,7 +64,7 @@ int8 Font::Height()
 }
 
 
-bool Font::LineSymbolNotEmpty(uint eChar, int byte)
+bool Font::Symbol::LineNotEmpty(uint eChar, int line)
 {
     static const uint8 *bytes = 0;
     static uint prevChar = (uint)(-1);
@@ -75,7 +75,7 @@ bool Font::LineSymbolNotEmpty(uint eChar, int byte)
         bytes = font->symbol[prevChar].bytes;
     }
 
-    return bytes[byte] != 0;
+    return bytes[line] != 0;
 }
 
 

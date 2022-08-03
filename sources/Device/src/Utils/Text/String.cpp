@@ -72,7 +72,7 @@ int String<capa>::DrawBigChar(int eX, int eY, int size, char s)
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::LineSymbolNotEmpty(symbol, b))
+        if (Font::Symbol::LineNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;

@@ -19,7 +19,6 @@ namespace Font
 {
     int GetSpacing();
     int8 Height();
-    bool LineSymbolNotEmpty(uint symbol, int byte);
     bool BitInSymbolIsExist(uint symbol, int byte, int bit);
     void Set(TypeFont::E);
 
@@ -27,6 +26,7 @@ namespace Font
     {
         int8 Width(uint8);
         int Height(char symbol);
+        bool LineNotEmpty(uint symbol, int line);
     }
 };
 

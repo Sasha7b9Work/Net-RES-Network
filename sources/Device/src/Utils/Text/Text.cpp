@@ -64,7 +64,7 @@ void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::LineSymbolNotEmpty(symbol, b))
+        if (Font::Symbol::LineNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
@@ -91,7 +91,7 @@ int Text::DrawCharHard(int eX, int eY, char s)
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::LineSymbolNotEmpty(symbol, b))
+        if (Font::Symbol::LineNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
@@ -148,7 +148,7 @@ int Text::DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int l
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::LineSymbolNotEmpty(symbol, b))
+        if (Font::Symbol::LineNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
