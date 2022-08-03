@@ -79,7 +79,7 @@ int String<capa>::DrawBigChar(int eX, int eY, int size, char s)
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitInSymbolIsExist(symbol, b, bit))
+                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

@@ -71,7 +71,7 @@ void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitInSymbolIsExist(symbol, b, bit))
+                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
                 {
                     Point().Set(x, y);
                 }
@@ -98,7 +98,7 @@ int Text::DrawCharHard(int eX, int eY, char s)
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitInSymbolIsExist(symbol, b, bit))
+                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
                 {
                     Point().Set(x, y);
                 }
@@ -155,7 +155,7 @@ int Text::DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int l
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitInSymbolIsExist(symbol, b, bit))
+                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {

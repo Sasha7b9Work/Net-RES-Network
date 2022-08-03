@@ -79,7 +79,7 @@ bool Font::Symbol::LineNotEmpty(uint eChar, int line)
 }
 
 
-bool Font::BitInSymbolIsExist(uint eChar, int numByte, int bit)
+bool Font::Symbol::BitInLineIsExist(uint eChar, int numByte, int bit)
 {
     static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
     static uint prevChar = (uint)(-1);
