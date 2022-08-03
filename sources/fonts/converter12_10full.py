@@ -28,12 +28,8 @@ def GetBit(byte, bit):
 
 # Возвращает ширину "двухбайтового полуслова". Т.е. 0-е полуслово находится по адресу 0,
 # 1-е полуслово - по адресу 2, 3-е полуслово - по адресу 3 и т.д.
-def GetWidth2Bytes(two_bytes, log):
-    if log == True:
-        print("two_bytes = ", two_bytes)
+def GetWidth2Bytes(two_bytes):
     for bit in range(15, -1, -1):
-        if log == True:
-            print(bit)
         if GetBit(two_bytes, bit) == 1:
             return bit + 1;
     return 0
@@ -41,10 +37,10 @@ def GetWidth2Bytes(two_bytes, log):
 def CalculateWidth(num_symbol):
     # num_word - порядковый номер "полуслова" в символе. Полуслово состоит из двух байт
     result = 0;
-    for num_word in range(0, 12, 1):
-        two_bytes = symbols[num_symbol * 12 * 2 + num_word] | (symbols[num_symbol * 12 * 2 + num_word + 1] << 8)
-        if GetWidth2Bytes(two_bytes, num_symbol == 0) > result:
-            result = GetWidth2Bytes(two_bytes, num_symbol == 0)
+    for num_word in range(0, 24, 2):
+        two_bytes = symbols[num_symbol * 12 * 2 + num_word] + (symbols[num_symbol * 12 * 2 + num_word + 1] << 8)
+        if GetWidth2Bytes(two_bytes) > result:
+            result = GetWidth2Bytes(two_bytes)
     return result
 
 ###### Start here ######
