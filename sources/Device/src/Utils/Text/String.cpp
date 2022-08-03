@@ -231,7 +231,7 @@ int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limit
     while (*text)
     {
         x = Text::DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font8::GetLengthSymbol((uint8)*text);
+        retValue += Font::GetLengthSymbol((uint8)*text);
         text++;
     }
 
@@ -299,7 +299,7 @@ int String<capacity>::GetLenghtSubString(char *text)
 
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        result += Font8::GetLengthSymbol((uint8)*text);
+        result += Font::GetLengthSymbol((uint8)*text);
         text++;
         result++;
     }

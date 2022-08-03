@@ -129,7 +129,7 @@ int Char::Draw(int x, int y, int size, Color::E color)
         {
             char buffer[2] = { symbol, 0 };
             String<>(buffer).DrawBig(x, y, size);
-            return x + size * Font8::GetLengthSymbol((uint8)symbol);
+            return x + size * Font::GetLengthSymbol((uint8)symbol);
         }
     }
     else
@@ -137,7 +137,7 @@ int Char::Draw(int x, int y, int size, Color::E color)
         Text::DrawCharInColorDisplay(x, y, (uint8)symbol);
     }
 
-    return x + Font8::GetLengthSymbol((uint8)symbol);
+    return x + Font::GetLengthSymbol((uint8)symbol);
 }
 
 
@@ -423,7 +423,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
                 {
                     continue;
                 }
-                x += Font8::GetLengthSymbol((uint8)symbol);
+                x += Font::GetLengthSymbol((uint8)symbol);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {

@@ -23,6 +23,7 @@ namespace Font
     bool LineSymbolNotEmpty(uint symbol, int byte);
     bool BitInSymbolIsExist(uint symbol, int byte, int bit);
     void Set(TypeFont::E);
+    int GetLengthSymbol(uchar symbol);
 };
 
 
@@ -41,8 +42,6 @@ struct Font8
     static int GetLengthText(pchar text);
 
     static int GetHeightSymbol(char symbol);
-
-    static int GetLengthSymbol(uchar symbol);
 };
 
 
