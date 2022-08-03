@@ -4,6 +4,7 @@
 
 #include "font5.inc"
 #include "font8.inc"
+#include "font12_10.inc"
 
 
 

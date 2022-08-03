@@ -9,7 +9,7 @@ include_directories(.
                     ../../Device/src
                     ../../Device/src/Hardware/CDC
                     ../../Device/src/Hardware/HAL
-                    ../../VS/ThirdParty/wxWidgets/include 
+                    ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_KEIL/CMSIS
                     ../../common/_VS_LIBS/STM32F1

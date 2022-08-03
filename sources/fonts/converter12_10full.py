@@ -52,7 +52,7 @@ input.close()
 symbols = unpack("6144b", data)
 
 output = open("font12_10.inc", "w")
-output.write("#include \"Font22.h\"\nconst Font22 font12_10 = {\n\t12, \t10, {\n")
+output.write("#include \"Font.h\"\nconst Font22 font12_10 = {\n\t12, \t10, {\n")
 
 for num_symbol in range(256):
     output.write("/*" + str(num_symbol) + "*/")                         # Number of symbol

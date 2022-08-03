@@ -43,3 +43,20 @@ struct Font
 
     static int GetSpacing();
 };
+
+
+struct Symbol22
+{
+    uint8 width;
+    int16 words[12];
+};
+
+
+// Ўрифт макимальными размерам 2х2 байта
+struct Font22
+{
+    int height;
+    int width;
+
+    Symbol22 symbol[256];
+};
