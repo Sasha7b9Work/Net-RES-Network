@@ -9,6 +9,7 @@ struct TypeFont
     {
         _5,
         _8,
+        _12_10,
         Count
     };
 };
