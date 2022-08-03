@@ -123,3 +123,38 @@ int Font::Symbol::Draw(int eX, int eY, char s)
 
     return eX + width;
 }
+
+
+int Font::Symbol::DrawBig(int eX, int eY, int size, char s)
+{
+    uint8 symbol = (uint8)s;
+
+    int8 width = Font::Symbol::Width(symbol);
+    int8 height = Font::Height();
+
+    for (int b = 0; b < height; b++)
+    {
+        if (Font::Symbol::LineNotEmpty(symbol, b))
+        {
+            int x = eX;
+            int y = eY + b * size + 9 - height;
+            int endBit = 8 - width;
+            for (int bit = 7; bit >= endBit; bit--)
+            {
+                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
+                {
+                    for (int i = 0; i < size; i++)
+                    {
+                        for (int j = 0; j < size; j++)
+                        {
+                            Point().Set(x + i, y + j);
+                        }
+                    }
+                }
+                x += size;
+            }
+        }
+    }
+
+    return eX + width * size;
+}

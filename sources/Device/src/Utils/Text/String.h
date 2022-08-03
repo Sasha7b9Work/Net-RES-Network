@@ -82,8 +82,6 @@ private:
     int DrawSubString(int x, int y, char *text);
 
     int DrawSpaces(int x, int y, char *text, int *numSymbols);
-
-    int DrawBigChar(int eX, int eY, int size, char symbol);
 };
 
 

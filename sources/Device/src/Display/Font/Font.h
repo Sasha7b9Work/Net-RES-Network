@@ -28,6 +28,7 @@ namespace Font
         bool BitInLineIsExist(uint symbol, int line, int bit);
 
         int Draw(int x, int y, char symbol);
+        int DrawBig(int eX, int eY, int size, char s);
     }
 
     namespace Text
