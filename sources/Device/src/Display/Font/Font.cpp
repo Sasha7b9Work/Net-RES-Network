@@ -43,12 +43,14 @@ int Font::GetSpacing()
 
 void Font::Set(TypeFont::E typeFont)
 {
-    if (typeFont == Font::current)
+    if (typeFont == current)
     {
         return;
     }
 
-    Font::font = Font::fonts[typeFont];
+    current = typeFont;
+
+    font = fonts[typeFont];
 }
 
 
