@@ -18,11 +18,11 @@ struct TypeFont
 namespace Font
 {
     int GetSpacing();
-
     int8 WidthSymbol(uint8);
     int8 Height();
     bool LineSymbolNotEmpty(uint symbol, int byte);
     bool BitInSymbolIsExist(uint symbol, int byte, int bit);
+    void Set(TypeFont::E);
 };
 
 
@@ -43,8 +43,6 @@ struct Font8
     static int GetHeightSymbol(char symbol);
 
     static int GetLengthSymbol(uchar symbol);
-
-    static void Set(TypeFont::E);
 };
 
 
