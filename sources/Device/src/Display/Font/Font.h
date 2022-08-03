@@ -24,6 +24,7 @@ namespace Font
     bool BitInSymbolIsExist(uint symbol, int byte, int bit);
     void Set(TypeFont::E);
     int GetLengthSymbol(uchar symbol);
+    int GetHeightSymbol(char symbol);
 };
 
 
@@ -40,8 +41,6 @@ struct Font8
     Symbol8 symbol[256];
 
     static int GetLengthText(pchar text);
-
-    static int GetHeightSymbol(char symbol);
 };
 
 
