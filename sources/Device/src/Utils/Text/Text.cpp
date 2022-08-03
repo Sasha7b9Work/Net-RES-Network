@@ -61,14 +61,14 @@ namespace Text
 }
 
 
-void Font::Set(TypeFont::E typeFont)
+void Font8::Set(TypeFont::E typeFont)
 {
     if (typeFont == current)
     {
         return;
     }
 
-    Font::font = Font::fonts[typeFont];
+    Font8::font = Font8::fonts[typeFont];
 }
 
 
@@ -80,7 +80,7 @@ bool Text::ByteFontNotEmpty(uint eChar, int byte)
     if (eChar != prevChar)
     {
         prevChar = eChar;
-        bytes = Font::font->symbol[prevChar].bytes;
+        bytes = Font8::font->symbol[prevChar].bytes;
     }
 
     return bytes[byte] != 0;
@@ -95,7 +95,7 @@ bool Text::BitInFontIsExist(uint eChar, int numByte, int bit)
 
     if (prevNumByte != numByte || prevChar != eChar)
     {
-        prevByte = Font::font->symbol[eChar].bytes[numByte];
+        prevByte = Font8::font->symbol[eChar].bytes[numByte];
         prevChar = eChar;
         prevNumByte = numByte;
     }
@@ -106,8 +106,8 @@ bool Text::BitInFontIsExist(uint eChar, int numByte, int bit)
 
 void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
 {
-    int8 width = (int8)Font::font->symbol[symbol].width;
-    int8 height = (int8)Font::font->height;
+    int8 width = (int8)Font8::font->symbol[symbol].width;
+    int8 height = (int8)Font8::font->height;
 
     for (int b = 0; b < height; b++)
     {
@@ -133,8 +133,8 @@ int Text::DrawCharHard(int eX, int eY, char s)
 {
     uint8 symbol = (uint8)s;
 
-    int8 width = (int8)Font::font->symbol[symbol].width;
-    int8 height = (int8)Font::font->height;
+    int8 width = (int8)Font8::font->symbol[symbol].width;
+    int8 height = (int8)Font8::font->height;
 
     for (int b = 0; b < height; b++)
     {
@@ -162,11 +162,11 @@ int Char::Draw(int x, int y, int size, Color::E color)
 {
     Color::SetCurrent(color);
 
-    if (Font::GetSize() == 5)
+    if (Font8::GetSize() == 5)
     {
         Text::DrawCharHard(x, y + 3, symbol);
     }
-    else if (Font::GetSize() == 8)
+    else if (Font8::GetSize() == 8)
     {
         if (size == 1)
         {
@@ -176,7 +176,7 @@ int Char::Draw(int x, int y, int size, Color::E color)
         {
             char buffer[2] = { symbol, 0 };
             String<>(buffer).DrawBig(x, y, size);
-            return x + size * Font::GetLengthSymbol((uint8)symbol);
+            return x + size * Font8::GetLengthSymbol((uint8)symbol);
         }
     }
     else
@@ -184,14 +184,14 @@ int Char::Draw(int x, int y, int size, Color::E color)
         Text::DrawCharInColorDisplay(x, y, (uint8)symbol);
     }
 
-    return x + Font::GetLengthSymbol((uint8)symbol);
+    return x + Font8::GetLengthSymbol((uint8)symbol);
 }
 
 
 int Text::DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = (int8)Font::font->symbol[symbol].width;
-    int8 height = (int8)Font::font->height;
+    int8 width = (int8)Font8::font->symbol[symbol].width;
+    int8 height = (int8)Font8::font->height;
 
     for (int b = 0; b < height; b++)
     {
@@ -426,7 +426,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
         char *subString = PartWordForTransfer(word, lengthSyllables, numSyllabels, i, buffer);
-        int length = Font::GetLengthText(subString);
+        int length = Font8::GetLengthText(subString);
         if (xRight - x > length - 5)
         {
             if (draw)
@@ -470,11 +470,11 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
                 {
                     continue;
                 }
-                x += Font::GetLengthSymbol((uint8)symbol);
+                x += Font8::GetLengthSymbol((uint8)symbol);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word.c_str());
+                int lengthString = Font8::GetLengthText(word.c_str());
                 if (x + lengthString > right + 5)
                 {
                     int numSymbols = DrawPartWord(word.c_str(), x, y, right, false);
@@ -485,7 +485,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
                 else
                 {
                     curSymbol += length;
-                    x += Font::GetLengthText(word.c_str());
+                    x += Font8::GetLengthText(word.c_str());
                 }
             }
         }

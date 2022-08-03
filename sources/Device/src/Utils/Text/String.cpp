@@ -56,7 +56,7 @@ int String<capa>::Draw(int x, int y, Color::E color)
         return x;
     }
 
-    y += (8 - Font::GetSize());
+    y += (8 - Font8::GetSize());
 
     pchar text = c_str();
 
@@ -75,8 +75,8 @@ int String<capa>::DrawBigChar(int eX, int eY, int size, char s)
 {
     uint8 symbol = (uint8)s;
 
-    int8 width = (int8)Font::font->symbol[symbol].width;
-    int8 height = (int8)Font::font->height;
+    int8 width = (int8)Font8::font->symbol[symbol].width;
+    int8 height = (int8)Font8::font->height;
 
     for (int b = 0; b < height; b++)
     {
@@ -219,8 +219,8 @@ int String<capacity>::DrawInCenterRect(int eX, int eY, int width, int eHeight, C
 {
     Color::SetCurrent(color);
 
-    int lenght = Font::GetLengthText(buffer);
-    int height = Font::GetHeightSymbol(buffer[0]);
+    int lenght = Font8::GetLengthText(buffer);
+    int height = Font8::GetHeightSymbol(buffer[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
@@ -239,7 +239,7 @@ int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limit
     while (*text)
     {
         x = Text::DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::GetLengthSymbol((uint8)*text);
+        retValue += Font8::GetLengthSymbol((uint8)*text);
         text++;
     }
 
@@ -252,7 +252,7 @@ void String<capacity>::DrawRelativelyRight(int xRight, int y, Color::E color)
 {
     Color::SetCurrent(color);
 
-    int lenght = Font::GetLengthText(buffer);
+    int lenght = Font8::GetLengthText(buffer);
     Draw(xRight - lenght, y);
 }
 
@@ -260,8 +260,8 @@ void String<capacity>::DrawRelativelyRight(int xRight, int y, Color::E color)
 template<int capacity>
 int String<capacity>::DrawOnBackground(int x, int y, Color::E colorBackground)
 {
-    int width = Font::GetLengthText(buffer);
-    int height = Font::GetSize();
+    int width = Font8::GetLengthText(buffer);
+    int height = Font8::GetSize();
 
     Color::E colorText = Color::GetCurrent();
     Rectangle(width, height).Fill(x - 1, y, colorBackground);
@@ -286,7 +286,7 @@ void String<capacity>::DrawInRect(int x, int y, int width, int, int dy)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeightSymbol(*text);
+            y += Font8::GetHeightSymbol(*text);
             y += dy;
         }
 
@@ -307,7 +307,7 @@ int String<capacity>::GetLenghtSubString(char *text)
 
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        result += Font::GetLengthSymbol((uint8)*text);
+        result += Font8::GetLengthSymbol((uint8)*text);
         text++;
         result++;
     }
@@ -416,7 +416,7 @@ int String<capacity>::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eH
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word.c_str());
+                int lengthString = Font8::GetLengthText(word.c_str());
                 if (x + lengthString > right + 5)
                 {
                     int numSymbols = Text::DrawPartWord(word.c_str(), x, y, right, true);
@@ -443,7 +443,7 @@ template<int capacity>
 void String<capacity>::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color::E colorText,
     int widthBorder, Color::E colorBackground)
 {
-    int lenght = Font::GetLengthText(buffer);
+    int lenght = Font8::GetLengthText(buffer);
     int eX = DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;

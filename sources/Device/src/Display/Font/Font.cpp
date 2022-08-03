@@ -8,43 +8,43 @@
 
 
 
-const Font *Font::fonts[TypeFont::Count] = {&font5, &font8};
-const Font *Font::font = &font8;
+const Font8 *Font8::fonts[TypeFont::Count] = {&font5, &font8};
+const Font8 *Font8::font = &font8;
 
-TypeFont::E Font::current = TypeFont::Count;
+TypeFont::E Font8::current = TypeFont::Count;
 
 
-int Font::GetSize()
+int Font8::GetSize()
 {
-    return Font::font->height;
+    return Font8::font->height;
 }
 
 
-int Font::GetLengthText(pchar text)
+int Font8::GetLengthText(pchar text)
 {
     int retValue = 0;
     while (*text)
     {
-        retValue += Font::GetLengthSymbol((uint8)*text) + GetSpacing();
+        retValue += Font8::GetLengthSymbol((uint8)*text) + GetSpacing();
         text++;
     }
     return retValue;
 }
 
 
-int Font::GetHeightSymbol(char)
+int Font8::GetHeightSymbol(char)
 {
     return 9;
 }
 
 
-int Font::GetLengthSymbol(uchar symbol)
+int Font8::GetLengthSymbol(uchar symbol)
 {
-    return Font::font->symbol[symbol].width;
+    return Font8::font->symbol[symbol].width;
 }
 
 
-int Font::GetSpacing()
+int Font8::GetSpacing()
 {
     return 1;
 }

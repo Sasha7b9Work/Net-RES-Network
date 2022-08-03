@@ -1,5 +1,5 @@
 #include "font.h"
-const Font font5 = {
+const Font8 font5 = {
 	5, {
 /*0*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	
 /*1*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	

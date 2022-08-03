@@ -21,13 +21,13 @@ struct Symbol
 };
 
 
-struct Font
+struct Font8
 {
     int height;
     Symbol symbol[256];
 
-    static const Font *font;
-    static const Font *fonts[TypeFont::Count];
+    static const Font8 *font;
+    static const Font8 *fonts[TypeFont::Count];
 
     static TypeFont::E current;
 
