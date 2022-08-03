@@ -14,6 +14,12 @@ struct TypeFont
 };
 
 
+struct Font
+{
+    static int GetSpacing();
+};
+
+
 struct Symbol8
 {
     uchar width;
@@ -40,8 +46,6 @@ struct Font8
     static int GetLengthSymbol(uchar symbol);
 
     static void Set(TypeFont::E);
-
-    static int GetSpacing();
 };
 
 
