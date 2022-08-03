@@ -38,14 +38,6 @@ template int  String<(int)1024>::DrawInBoundedRectWithTransfers(int x, int y, in
     Color::E colorFill);
 
 
-namespace Text
-{
-    bool ByteFontNotEmpty(uint eChar, int byte);
-
-    bool BitInFontIsExist(uint eChar, int numByte, int bit);
-}
-
-
 template<int capa>
 int String<capa>::Draw(int x, int y, Color::E color)
 {
@@ -56,7 +48,7 @@ int String<capa>::Draw(int x, int y, Color::E color)
         return x;
     }
 
-    y += (8 - Font8::GetSize());
+    y += (8 - Font::Height());
 
     pchar text = c_str();
 
@@ -75,19 +67,19 @@ int String<capa>::DrawBigChar(int eX, int eY, int size, char s)
 {
     uint8 symbol = (uint8)s;
 
-    int8 width = (int8)Font8::font->symbol[symbol].width;
-    int8 height = (int8)Font8::font->height;
+    int8 width = Font::WidthSymbol(symbol);
+    int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
-        if (Text::ByteFontNotEmpty(symbol, b))
+        if (Font::LineSymbolNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Text::BitInFontIsExist(symbol, b, bit))
+                if (Font::BitInSymbolIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -261,7 +253,7 @@ template<int capacity>
 int String<capacity>::DrawOnBackground(int x, int y, Color::E colorBackground)
 {
     int width = Font8::GetLengthText(buffer);
-    int height = Font8::GetSize();
+    int height = Font::Height();
 
     Color::E colorText = Color::GetCurrent();
     Rectangle(width, height).Fill(x - 1, y, colorBackground);

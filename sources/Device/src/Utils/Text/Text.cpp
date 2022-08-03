@@ -38,10 +38,6 @@ namespace Text
     // bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, pchar text, int *height);
 
-    bool ByteFontNotEmpty(uint eChar, int byte);
-
-    bool BitInFontIsExist(uint eChar, int numByte, int bit);
-
     void DrawCharInColorDisplay(int eX, int eY, uchar symbol);
 
     bool IsLetter(char symbol);
@@ -61,53 +57,21 @@ namespace Text
 }
 
 
-bool Text::ByteFontNotEmpty(uint eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static uint prevChar = (uint)(-1);
-
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = Font8::font->symbol[prevChar].bytes;
-    }
-
-    return bytes[byte] != 0;
-}
-
-
-bool Text::BitInFontIsExist(uint eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
-    static uint prevChar = (uint)(-1);
-    static int prevNumByte = -1;
-
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = Font8::font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-
-    return prevByte & (1 << bit);
-}
-
-
 void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
 {
-    int8 width = (int8)Font8::font->symbol[symbol].width;
-    int8 height = (int8)Font8::font->height;
+    int8 width = Font::WidthSymbol(symbol);
+    int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::LineSymbolNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitInSymbolIsExist(symbol, b, bit))
                 {
                     Point().Set(x, y);
                 }
@@ -122,19 +86,19 @@ int Text::DrawCharHard(int eX, int eY, char s)
 {
     uint8 symbol = (uint8)s;
 
-    int8 width = (int8)Font8::font->symbol[symbol].width;
-    int8 height = (int8)Font8::font->height;
+    int8 width = Font::WidthSymbol(symbol);
+    int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::LineSymbolNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitInSymbolIsExist(symbol, b, bit))
                 {
                     Point().Set(x, y);
                 }
@@ -151,11 +115,11 @@ int Char::Draw(int x, int y, int size, Color::E color)
 {
     Color::SetCurrent(color);
 
-    if (Font8::GetSize() == 5)
+    if (Font::Height() == 5)
     {
         Text::DrawCharHard(x, y + 3, symbol);
     }
-    else if (Font8::GetSize() == 8)
+    else if (Font::Height() == 8)
     {
         if (size == 1)
         {
@@ -179,19 +143,19 @@ int Char::Draw(int x, int y, int size, Color::E color)
 
 int Text::DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = (int8)Font8::font->symbol[symbol].width;
-    int8 height = (int8)Font8::font->height;
+    int8 width = Font::WidthSymbol(symbol);
+    int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::LineSymbolNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitInSymbolIsExist(symbol, b, bit))
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {

@@ -8,18 +8,12 @@
 
 
 
-const Font8 *Font8::fonts[TypeFont::Count] = {&font5, &font8};
-const Font8 *Font8::font = &font8;
-
 namespace Font
 {
     TypeFont::E current = TypeFont::Count;
-}
 
-
-int Font8::GetSize()
-{
-    return Font8::font->height;
+    const Font8 *fonts[TypeFont::Count] = { &font5, &font8 };
+    const Font8 *font = &font8;
 }
 
 
@@ -43,7 +37,7 @@ int Font8::GetHeightSymbol(char)
 
 int Font8::GetLengthSymbol(uchar symbol)
 {
-    return Font8::font->symbol[symbol].width;
+    return Font::font->symbol[symbol].width;
 }
 
 
@@ -60,5 +54,49 @@ void Font8::Set(TypeFont::E typeFont)
         return;
     }
 
-    Font8::font = Font8::fonts[typeFont];
+    Font::font = Font::fonts[typeFont];
+}
+
+
+int8 Font::WidthSymbol(uint8 symbol)
+{
+    return (int8)font->symbol[symbol].width;
+}
+
+
+int8 Font::Height()
+{
+    return (int8)font->height;
+}
+
+
+bool Font::LineSymbolNotEmpty(uint eChar, int byte)
+{
+    static const uint8 *bytes = 0;
+    static uint prevChar = (uint)(-1);
+
+    if (eChar != prevChar)
+    {
+        prevChar = eChar;
+        bytes = font->symbol[prevChar].bytes;
+    }
+
+    return bytes[byte] != 0;
+}
+
+
+bool Font::BitInSymbolIsExist(uint eChar, int numByte, int bit)
+{
+    static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
+    static uint prevChar = (uint)(-1);
+    static int prevNumByte = -1;
+
+    if (prevNumByte != numByte || prevChar != eChar)
+    {
+        prevByte = font->symbol[eChar].bytes[numByte];
+        prevChar = eChar;
+        prevNumByte = numByte;
+    }
+
+    return prevByte & (1 << bit);
 }
