@@ -158,3 +158,19 @@ int Font::Symbol::DrawBig(int eX, int eY, int size, char s)
 
     return eX + width * size;
 }
+
+
+void Font::Text::DrawBig(int eX, int eY, int size, pchar buffer, Color::E color)
+{
+    Color::SetCurrent(color);
+
+    int numSymbols = (int)std::strlen(buffer);
+
+    int x = eX;
+
+    for (int i = 0; i < numSymbols; i++)
+    {
+        x = Font::Symbol::DrawBig(x, eY, size, buffer[i]);
+        x += size;
+    }
+}

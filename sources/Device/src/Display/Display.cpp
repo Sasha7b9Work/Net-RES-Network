@@ -195,7 +195,7 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
 
     if (position >= current.Size())
     {
-        current.DrawBig(x0, y0, size, Color::GREEN);
+        Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::GREEN);
     }
     else
     {
@@ -334,11 +334,11 @@ void Display::DrawBigMeasure()
 
     Measure &measure = measures[gset.display.typeDisplaydInfo.value];
 
-    measure.Name().DrawBig(x[measure.type], 15, 2, Color::_1);
+    Font::Text::DrawBig(x[measure.type], 15, 2, measure.Name().c_str(), Color::_1);
 
     measures[measure.type].Draw(27, 50, 4);
 
-    measure.Units().DrawBig(68, 95, 2, Color::_1);
+    Font::Text::DrawBig(68, 95, 2, measure.Units().c_str(), Color::_1);
 
     EndScene();
 }

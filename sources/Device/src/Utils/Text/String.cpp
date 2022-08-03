@@ -13,7 +13,6 @@
 
 template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
 template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color::E);
-template void String<(int)DEFAULT_SIZE_STRING>::DrawBig(int, int, int, Color::E);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawInCenterRect(int x, int y, int width, int height, Color::E);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawWithLimitation(int x, int y, Color::E color, int limitX, int limitY, int limitWidth,
@@ -59,23 +58,6 @@ int String<capa>::Draw(int x, int y, Color::E color)
     }
 
     return x;
-}
-
-
-template<int capacity>
-void String<capacity>::DrawBig(int eX, int eY, int size, Color::E color)
-{
-    Color::SetCurrent(color);
-
-    int numSymbols = (int)std::strlen(buffer);
-
-    int x = eX;
-
-    for (int i = 0; i < numSymbols; i++)
-    {
-        x = Font::Symbol::DrawBig(x, eY, size, buffer[i]);
-        x += size;
-    }
 }
 
 

@@ -34,8 +34,6 @@ public:
 
     int Draw(int x, int y, Color::E = Color::Count);
 
-    void DrawBig(int x, int y, int size = 1, Color::E = Color::Count);
-
     void DrawInRect(int x, int y, int width, int height, int dy = 0);
 
     int DrawInCenterRect(int x, int y, int width, int height, Color::E = Color::Count);

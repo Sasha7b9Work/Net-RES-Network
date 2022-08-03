@@ -1,6 +1,6 @@
 // 2022/02/11 15:58:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "defines.h"
+#include "Display/Colors.h"
 
 
 struct TypeFont
@@ -34,6 +34,7 @@ namespace Font
     namespace Text
     {
         int Length(pchar);
+        void DrawBig(int eX, int eY, int size, pchar, Color::E = Color::Count);
     }
 };
 

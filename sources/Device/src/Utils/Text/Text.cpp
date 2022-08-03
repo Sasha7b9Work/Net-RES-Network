@@ -65,7 +65,9 @@ int Char::Draw(int x, int y, int size, Color::E color)
         else
         {
             char buffer[2] = { symbol, 0 };
-            String<>(buffer).DrawBig(x, y, size);
+
+            Font::Text::DrawBig(x, y, size, buffer);
+
             return x + size * Font::Symbol::Width((uint8)symbol);
         }
     }
