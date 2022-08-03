@@ -5,9 +5,9 @@ from struct import *
 
 # Записать в файл значение "слова" - двойного байта, находящегося по адресу num_word
 def WriteWord(num_word, file):
-    value = int(symbols[num_word])
-    if value < 0:
-        value += 256
+    value = (symbols[num_word] + (symbols[num_word + 1] << 8))
+#    if value < 0:
+#        value += 256
     file.write(str(value))
 
 def WriteReverseByte(num_byte, file):
@@ -52,7 +52,7 @@ input.close()
 symbols = unpack("6144b", data)
 
 output = open("font12_10.inc", "w")
-output.write("#include \"font.h\"\nconst Font22 font12_10 = {\n\t12, \t10, {\n")
+output.write("#include \"Font22.h\"\nconst Font22 font12_10 = {\n\t12, \t10, {\n")
 
 for num_symbol in range(256):
     output.write("/*" + str(num_symbol) + "*/")                         # Number of symbol
@@ -60,8 +60,8 @@ for num_symbol in range(256):
     output.write("\t\t{ " + str(CalculateWidth(num_symbol)) + ", { ")   # Width symbol
 
     for two_bytes in range(12):                                         # Считаем по "двойным байтам" - символы имеют ширину 2 байта, высоту 12
-        WriteWord(num_symbol * 12 * 2 + two_bytes, output)              # 12 - высота символа в точках, 2 - ширина символа в байтах
-        if two_bytes != 7:
+        WriteWord(num_symbol * 12 * 2 + two_bytes * 2, output)              # 12 - высота символа в точках, 2 - ширина символа в байтах
+        if two_bytes != 11:
            output.write(",") 
         output.write("\t")
 
