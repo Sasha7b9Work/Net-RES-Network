@@ -67,7 +67,7 @@ int String<capa>::DrawBigChar(int eX, int eY, int size, char s)
 {
     uint8 symbol = (uint8)s;
 
-    int8 width = Font::WidthSymbol(symbol);
+    int8 width = Font::Symbol::Width(symbol);
     int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
@@ -231,7 +231,7 @@ int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limit
     while (*text)
     {
         x = Text::DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::WidthSymbol((uint8)*text);
+        retValue += Font::Symbol::Width((uint8)*text);
         text++;
     }
 
@@ -299,7 +299,7 @@ int String<capacity>::GetLenghtSubString(char *text)
 
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        result += Font::WidthSymbol((uint8)*text);
+        result += Font::Symbol::Width((uint8)*text);
         text++;
         result++;
     }

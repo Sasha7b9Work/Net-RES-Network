@@ -22,7 +22,7 @@ int Font8::GetLengthText(pchar text)
     int retValue = 0;
     while (*text)
     {
-        retValue += Font::WidthSymbol((uint8)*text) + Font::GetSpacing();
+        retValue += Font::Symbol::Width((uint8)*text) + Font::GetSpacing();
         text++;
     }
     return retValue;
@@ -52,7 +52,7 @@ void Font::Set(TypeFont::E typeFont)
 }
 
 
-int8 Font::WidthSymbol(uint8 symbol)
+int8 Font::Symbol::Width(uint8 symbol)
 {
     return (int8)font->symbol[symbol].width;
 }

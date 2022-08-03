@@ -59,7 +59,7 @@ namespace Text
 
 void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
 {
-    int8 width = Font::WidthSymbol(symbol);
+    int8 width = Font::Symbol::Width(symbol);
     int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
@@ -86,7 +86,7 @@ int Text::DrawCharHard(int eX, int eY, char s)
 {
     uint8 symbol = (uint8)s;
 
-    int8 width = Font::WidthSymbol(symbol);
+    int8 width = Font::Symbol::Width(symbol);
     int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
@@ -129,7 +129,7 @@ int Char::Draw(int x, int y, int size, Color::E color)
         {
             char buffer[2] = { symbol, 0 };
             String<>(buffer).DrawBig(x, y, size);
-            return x + size * Font::WidthSymbol((uint8)symbol);
+            return x + size * Font::Symbol::Width((uint8)symbol);
         }
     }
     else
@@ -137,13 +137,13 @@ int Char::Draw(int x, int y, int size, Color::E color)
         Text::DrawCharInColorDisplay(x, y, (uint8)symbol);
     }
 
-    return x + Font::WidthSymbol((uint8)symbol);
+    return x + Font::Symbol::Width((uint8)symbol);
 }
 
 
 int Text::DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = Font::WidthSymbol(symbol);
+    int8 width = Font::Symbol::Width(symbol);
     int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
@@ -423,7 +423,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
                 {
                     continue;
                 }
-                x += Font::WidthSymbol((uint8)symbol);
+                x += Font::Symbol::Width((uint8)symbol);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
