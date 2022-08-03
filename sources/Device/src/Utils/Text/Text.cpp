@@ -61,17 +61,6 @@ namespace Text
 }
 
 
-void Font8::Set(TypeFont::E typeFont)
-{
-    if (typeFont == current)
-    {
-        return;
-    }
-
-    Font8::font = Font8::fonts[typeFont];
-}
-
-
 bool Text::ByteFontNotEmpty(uint eChar, int byte)
 {
     static const uint8 *bytes = 0;

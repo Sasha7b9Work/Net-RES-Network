@@ -48,3 +48,14 @@ int Font::GetSpacing()
 {
     return 1;
 }
+
+
+void Font8::Set(TypeFont::E typeFont)
+{
+    if (typeFont == current)
+    {
+        return;
+    }
+
+    Font8::font = Font8::fonts[typeFont];
+}
