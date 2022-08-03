@@ -35,8 +35,6 @@ namespace Text
     // bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, pchar text, int *height);
 
-    void DrawCharInColorDisplay(int eX, int eY, uchar symbol);
-
     bool IsLetter(char symbol);
 
     bool IsConsonant(char symbol);
@@ -51,31 +49,6 @@ namespace Text
 
     // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
     char *PartWordForTransfer(char *word, int8 *lengthSyllables, int numSyllables, int numSyllable, char buffer[30]);
-}
-
-
-void Text::DrawCharInColorDisplay(int eX, int eY, uchar symbol)
-{
-    int8 width = Font::Symbol::Width(symbol);
-    int8 height = Font::Height();
-
-    for (int b = 0; b < height; b++)
-    {
-        if (Font::Symbol::LineNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
-                {
-                    Point().Set(x, y);
-                }
-                x++;
-            }
-        }
-    }
 }
 
 
@@ -95,10 +68,6 @@ int Char::Draw(int x, int y, int size, Color::E color)
             String<>(buffer).DrawBig(x, y, size);
             return x + size * Font::Symbol::Width((uint8)symbol);
         }
-    }
-    else
-    {
-        Text::DrawCharInColorDisplay(x, y, (uint8)symbol);
     }
 
     return x + Font::Symbol::Width((uint8)symbol);
