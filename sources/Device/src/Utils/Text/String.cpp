@@ -212,7 +212,7 @@ int String<capacity>::DrawInCenterRect(int eX, int eY, int width, int eHeight, C
     Color::SetCurrent(color);
 
     int lenght = Font8::GetLengthText(buffer);
-    int height = Font::GetHeightSymbol(buffer[0]);
+    int height = Font::Symbol::Height(buffer[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
@@ -278,7 +278,7 @@ void String<capacity>::DrawInRect(int x, int y, int width, int, int dy)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeightSymbol(*text);
+            y += Font::Symbol::Height(*text);
             y += dy;
         }
 

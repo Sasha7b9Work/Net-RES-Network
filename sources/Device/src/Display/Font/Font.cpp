@@ -29,7 +29,7 @@ int Font8::GetLengthText(pchar text)
 }
 
 
-int Font::GetHeightSymbol(char)
+int Font::Symbol::Height(char)
 {
     return 9;
 }

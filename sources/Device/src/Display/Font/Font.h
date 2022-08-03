@@ -22,11 +22,11 @@ namespace Font
     bool LineSymbolNotEmpty(uint symbol, int byte);
     bool BitInSymbolIsExist(uint symbol, int byte, int bit);
     void Set(TypeFont::E);
-    int GetHeightSymbol(char symbol);
 
     namespace Symbol
     {
         int8 Width(uint8);
+        int Height(char symbol);
     }
 };
 
