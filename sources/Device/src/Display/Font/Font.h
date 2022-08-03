@@ -14,7 +14,7 @@ struct TypeFont
 };
 
 
-struct Symbol
+struct Symbol8
 {
     uchar width;
     uchar bytes[8];
@@ -24,7 +24,7 @@ struct Symbol
 struct Font8
 {
     int height;
-    Symbol symbol[256];
+    Symbol8 symbol[256];
 
     static const Font8 *font;
     static const Font8 *fonts[TypeFont::Count];
