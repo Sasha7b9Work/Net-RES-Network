@@ -9,10 +9,7 @@ struct TypeFont
     {
         _5,
         _8,
-        UGO,
-        UGO2,
-        Count,
-        None
+        Count
     };
 };
 
