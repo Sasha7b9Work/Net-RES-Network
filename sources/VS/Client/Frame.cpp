@@ -69,7 +69,7 @@ Frame::Frame(const wxString &title)
     menuHelp->Append(wxID_ABOUT);
     menuBar->Append(menuHelp, _("Помощь"));
 
-    SetMenuBar(menuBar);
+    wxFrameBase::SetMenuBar(menuBar);
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &Frame::OnQuit, this, wxID_EXIT);
@@ -90,8 +90,8 @@ Frame::Frame(const wxString &title)
 
     SetClientSize(Display::WIDTH, Display::HEIGHT);
 
-    SetMinSize(GetSize());
-    SetMaxSize(GetSize());
+    wxTopLevelWindowBase::SetMinSize(GetSize());
+    wxTopLevelWindowBase::SetMaxSize(GetSize());
 }
 
 
