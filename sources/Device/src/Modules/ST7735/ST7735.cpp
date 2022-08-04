@@ -133,8 +133,6 @@ void ST7735::Init()
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
-    TimeMeterMS meter;                                  // ¬ведено, чтобы избавитьс€ от зависаний в release
-    
     SetWindow(x0, y0, width, height);
 
     SendCommand(0x2C);
@@ -184,23 +182,11 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                while ((SPI2->SR & SPI_SR_BSY))
-                {
-                    if(meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                }
+                while ((SPI2->SR & SPI_SR_BSY)) {}
 
                 SPI2->DR = Color::colors[value & 0x0F];
 
-                while ((SPI2->SR & SPI_SR_BSY))
-                {
-                    if(meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                }
+                while ((SPI2->SR & SPI_SR_BSY)) {}
 
                 SPI2->DR = Color::colors[value >> 4];
 

@@ -296,7 +296,7 @@ void Display::Update()
                 need_redraw = false;
             }
 
-            DrawZones();
+//            DrawZones();
         }
         else
         {
