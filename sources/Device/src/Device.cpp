@@ -24,7 +24,9 @@ void Device::Init()
 
     HC12::Init();
 
+#ifdef TYPE_1
     CG_Anem::Init();
+#endif
 
     BH1750::Init();
 
@@ -47,12 +49,15 @@ void Device::Update()
         InterCom::Send(TypeMeasure::Humidity, humidity);
     }
 
+#ifdef TYPE_1
+
     float velocity = 0.0f;
 
     if (CG_Anem::GetMeasure(1000, &velocity))
     {
         InterCom::Send(TypeMeasure::Velocity, velocity);
     }
+#endif
 
     float illumination = 0.0f;
 

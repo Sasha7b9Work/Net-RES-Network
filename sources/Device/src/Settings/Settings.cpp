@@ -6,7 +6,11 @@
 Settings gset =
 {
     {
-        {1, 1, 1, 1, 1},
+        {1, 1, 1, 1
+#ifdef TYPE_1
+        , 1
+#endif
+        },
         { TypeDisplayedInformation::AllMeasures }
     },
 };

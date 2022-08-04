@@ -17,6 +17,10 @@
 #define DEF_ITEMS_3(name, item1, item2, item3)                                              \
     static const Item * const name[] = { (Item *)&item1,(Item *)&item2, (Item *)&item3, nullptr };
 
+#define DEF_ITEMS_5(name, item1, item2, item3, item4, item5)                                \
+    static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
+        (Item *)&item4, (Item *)&item5, nullptr };
+
 #define DEF_ITEMS_6(name, item1, item2, item3, item4, item5, item6)                         \
     static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
         (Item *)&item4, (Item *)&item5, (Item *)&item6, nullptr };
@@ -35,6 +39,10 @@
 
 #define DEF_PAGE_3(name, title, keeper, item1, item2, item3)  \
     DEF_ITEMS_3(items##name, item1, item2, item3)             \
+    DEF_PAGE(name, title, keeper, items##name)
+
+#define DEF_PAGE_5(name, title, keeper, item1, item2, item3, item4, item5)  \
+    DEF_ITEMS_5(items##name, item1, item2, item3, item4, item5)             \
     DEF_PAGE(name, title, keeper, items##name)
 
 #define DEF_PAGE_6(name, title, keeper, item1, item2, item3, item4, item5, item6)  \

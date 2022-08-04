@@ -46,15 +46,28 @@ namespace Display
         String<> Name();
 
         String<> Units();
+
+        // Âîçâğàùàåò êîëè÷åñòâî äîñòóïíûõ èçìåğåíèé
+        static int Count()
+        {
+#ifdef TYPE_1
+            return 5;
+#endif
+#ifdef TYPE_2
+            return 4;
+#endif
+        }
     };
 
     static Measure measures[TypeMeasure::Count] =
     {
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Illumination),
-        Measure(TypeMeasure::Velocity),
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Humidity)
+#ifdef TYPE_1
+        ,Measure(TypeMeasure::Velocity)
+#endif
     };
 
     static void DrawMeasures();
@@ -343,9 +356,11 @@ void Display::DrawBigMeasure()
     {
         30,
         10,
-        35,
         12,
         28
+#ifdef TYPE_1
+        , 35
+#endif
     };
 
     Measure &measure = measures[gset.display.typeDisplaydInfo.value];
@@ -366,9 +381,11 @@ String<> Display::Measure::Name()
     {
         "ÄÀÂËÅÍÈÅ",
         "ÎÑÂÅÙÅÍÍÎÑÒÜ",
-        "ÑÊÎĞÎÑÒÜ",
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÂËÀÆÍÎÑÒÜ"
+#ifdef TYPE_1
+        , "ÑÊÎĞÎÑÒÜ"
+#endif
     };
 
     return String<>(names[type]);
@@ -380,9 +397,11 @@ String<> Display::Measure::Units()
     {
         "ãÏà",
         "ëê",
-        "ì/ñ",
         "¨Ñ",
         "%%"
+#ifdef TYPE_1
+        , "ì/ñ"
+#endif
     };
 
     return String<>(units[type]);

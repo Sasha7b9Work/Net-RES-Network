@@ -10,9 +10,11 @@ struct TypeMeasure
     {
         Pressure,           // Давление
         Illumination,       // Освещённость
-        Velocity,           // Скорость
         Temperature,        // Температура
         Humidity,           // Влажность
+#ifdef TYPE_1
+        Velocity,           // Скорость
+#endif
         Count
     };
 };
