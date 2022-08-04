@@ -9,9 +9,11 @@ struct TypeDisplayedInformation
     {
         MeasurePressure,
         MeasureIllumination,
-        MeasureVelocity,
         MeasureTemperature,
         MeasureHumidity,
+#ifdef TYPE_1
+        MeasureVelocity,
+#endif
         AllMeasures,
         Menu,
         Count

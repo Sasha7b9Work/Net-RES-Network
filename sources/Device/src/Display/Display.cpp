@@ -46,17 +46,6 @@ namespace Display
         String<> Name();
 
         String<> Units();
-
-        // ¬озвращает количество доступных измерений
-        static int Count()
-        {
-#ifdef TYPE_1
-            return 5;
-#endif
-#ifdef TYPE_2
-            return 4;
-#endif
-        }
     };
 
     static Measure measures[TypeMeasure::Count] =
