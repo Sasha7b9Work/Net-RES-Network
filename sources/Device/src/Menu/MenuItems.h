@@ -19,6 +19,7 @@ struct TypeItem
 struct Page;
 struct Choice;
 struct Button;
+struct Governor;
 
 
 #define COMMON_PART_ITEM     TypeItem::E type;      \
@@ -46,15 +47,17 @@ struct Item
 
     bool Opened() const;
 
-    bool IsPage() const   { return (ReinterpretToDItem()->type == TypeItem::Page);   }
-    bool IsChoice() const { return (ReinterpretToDItem()->type == TypeItem::Choice); }
-    bool IsButton() const { return (ReinterpretToDItem()->type == TypeItem::Button); }
+    bool IsPage() const     { return (ReinterpretToDItem()->type == TypeItem::Page);   }
+    bool IsChoice() const   { return (ReinterpretToDItem()->type == TypeItem::Choice); }
+    bool IsButton() const   { return (ReinterpretToDItem()->type == TypeItem::Button); }
+    bool IsGovernor() const { return (ReinterpretToDItem()->type == TypeItem::Governor); }
 
     const DItem *ReinterpretToDItem() const { return (DItem *)this; }
 
     const Page *ReinterpetToPage() const { return (const Page *)this; }
     const Choice *ReinterpretToChoice() const { return (const Choice *)this; }
     const Button *ReinterpretToButton() const { return (const Button *)this; }
+    const Governor *ReinterpretToGovernor() const { return (const Governor *)this; }
 };
 
 

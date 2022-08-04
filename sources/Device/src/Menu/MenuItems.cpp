@@ -81,6 +81,16 @@ void Item::DrawOpened(int x, int y) const
 
 void Item::DrawClosed(int x, int y) const
 {
+    Color::E fill = Color::BLACK;
+    Color::E draw = Color::WHITE;
+
+    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
+    {
+        fill = Color::GREEN_50;
+    }
+
+    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+
     if (IsPage())
     {
         ReinterpetToPage()->DrawClosed(x, y);
@@ -92,6 +102,10 @@ void Item::DrawClosed(int x, int y) const
     else if (IsButton())
     {
         ReinterpretToButton()->DrawClosed(x, y);
+    }
+    else if (IsGovernor())
+    {
+        ReinterpretToGovernor()->DrawClosed(x, y);
     }
 }
 
@@ -126,6 +140,9 @@ const Item *Page::CurrentItem() const
 {
     const Item *const *items = ReinterpretToDPage()->items;
 
+    int num_items = NumItems();
+    num_items = num_items;
+
     uint8 *currentItem = ReinterpretToDPage()->currentItem;
 
     return items[*currentItem];
@@ -134,17 +151,7 @@ const Item *Page::CurrentItem() const
 
 void Page::DrawClosed(int x, int y) const
 {
-    Color::E fill = Color::BLACK;
-    Color::E draw = Color::WHITE;
-
-    if (ReinterpretToDPage()->keeper->CurrentItem() == this)
-    {
-        fill = Color::GREEN_50;
-    }
-
-    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
-
-    String<>(Title()).Draw(x + 10, y + 5, draw);
+    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
 }
 
 
@@ -158,35 +165,21 @@ pchar Choice::CurrentName() const
 
 void Choice::DrawClosed(int x, int y) const
 {
-    Color::E fill = Color::BLACK;
-    Color::E draw = Color::WHITE;
+    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
 
-    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
-    {
-        fill = Color::GREEN_50;
-    }
-
-    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
-
-    String<>(Title()).Draw(x + 10, y + 5, draw);
-
-    String<>(CurrentName()).Draw(x + 130, y + 5, draw);
+    String<>(CurrentName()).Draw(x + 130, y + 5);
 }
 
 
 void Button::DrawClosed(int x, int y) const
 {
-    Color::E fill = Color::BLACK;
-    Color::E draw = Color::WHITE;
+    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
+}
 
-    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
-    {
-        fill = Color::GREEN_50;
-    }
 
-    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+void Governor::DrawClosed(int x, int y) const
+{
 
-    String<>(Title()).Draw(x + 10, y + 5, draw);
 }
 
 
