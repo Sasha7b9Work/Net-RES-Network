@@ -69,7 +69,7 @@ Frame::Frame(const wxString &title)
     wxMenuBar *menuBar = new wxMenuBar;
     menuBar->Append(menuFile, _("&File"));
 
-    SetMenuBar(menuBar);
+    wxFrameBase::SetMenuBar(menuBar);
 
     self = this;
 
@@ -88,8 +88,8 @@ Frame::Frame(const wxString &title)
 
     SetClientSize(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
 
-    SetMinSize(GetSize());
-    SetMaxSize(GetSize());
+    wxTopLevelWindowBase::SetMinSize(GetSize());
+    wxTopLevelWindowBase::SetMaxSize(GetSize());
 
     const int maxWidth = wxSystemSettings::GetMetric(wxSYS_SCREEN_X);
     const int maxHeight = wxSystemSettings::GetMetric(wxSYS_SCREEN_Y);
