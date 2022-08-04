@@ -31,43 +31,40 @@ if(WIN32)
     add_compile_options(/wd26812)
 endif()
 
-file(GLOB RESOURCES           resources/*.*)
-file(GLOB SRC                 *.h *.cpp)
-file(GLOB COMMUNICATOR        Communicator/*.*)
-file(GLOB COMMUNICATOR_HC12   Communicator/HC12/*.*)
-file(GLOB COMMUNICATOR_RS232  Communicator/RS232/*.*)
-file(GLOB DATA                Data/*.*)
-file(GLOB DISPLAY             Display/*.*)
-file(GLOB HARDWARE            Hardware/*.*)
-file(GLOB HARDWARE_LAN        Hardware/LAN/*.*)
-file(GLOB HARDWARE_LAN_LIBNET Hardware/LAN/libnet/*.*)
-file(GLOB UTILS               Utils/*.*)
-file(GLOB UTILS_TEXT          Utils/Text/*.*)
+file(GLOB RESOURCES               resources/*.*)
+file(GLOB SRC                     *.h *.cpp)
+file(GLOB COMMUNICATOR            Communicator/*.*)
+file(GLOB COMMUNICATOR_HC12       Communicator/HC12/*.*)
+file(GLOB COMMUNICATOR_LAN        Communicator/LAN/*.*)
+file(GLOB COMMUNICATOR_LAN_LIBNET Communicator/LAN/libnet/*.*)
+file(GLOB COMMUNICATOR_RS232      Communicator/RS232/*.*)
+file(GLOB DATA                    Data/*.*)
+file(GLOB DISPLAY                 Display/*.*)
+file(GLOB UTILS                   Utils/*.*)
+file(GLOB UTILS_TEXT              Utils/Text/*.*)
 
-source_group(resources           FILES ${RESOURCES})
-source_group(src                 FILES ${SRC})
-source_group(Communicator        FILES ${COMMUNICATOR})
-source_group(Communicator/HC12   FILES ${COMMUNICATOR_HC12})
-source_group(Communicator/RS232  FILES ${COMMUNICATOR_RS232})
-source_group(Data                FILES ${DATA})
-source_group(Display             FILES ${DISPLAY})
-source_group(Hardware            FILES ${HARDWARE})
-source_group(Hardware/LAN        FILES ${HARDWARE_LAN})
-source_group(Hardware/LAN/libnet FILES ${HARDWARE_LAN_LIBNET})
-source_group(Utils               FILES ${UTILS})
-source_group(Utils/Text          FILES ${UTILS_TEXT})
+source_group(resources               FILES ${RESOURCES})
+source_group(src                     FILES ${SRC})
+source_group(Communicator            FILES ${COMMUNICATOR})
+source_group(Communicator/HC12       FILES ${COMMUNICATOR_HC12})
+source_group(Communicator/LAN        FILES ${COMMUNICATOR_LAN})
+source_group(Communicator/LAN/libnet FILES ${COMMUNICATOR_LAN_LIBNET})
+source_group(Communicator/RS232      FILES ${COMMUNICATOR_RS232})
+source_group(Data                    FILES ${DATA})
+source_group(Display                 FILES ${DISPLAY})
+source_group(Utils                   FILES ${UTILS})
+source_group(Utils/Text              FILES ${UTILS_TEXT})
 
 add_executable( ${PROJECT_NAME}
                 ${RESOURCES}
                 ${SRC}
                 ${COMMUNICATOR}
                 ${COMMUNICATOR_HC12}
+                ${COMMUNICATOR_LAN}
+                ${COMMUNICATOR_LAN_LIBNET}
                 ${COMMUNICATOR_RS232}
                 ${DATA}
                 ${DISPLAY}
-                ${HARDWARE}
-                ${HARDWARE_LAN}
-                ${HARDWARE_LAN_LIBNET}
                 ${UTILS}
                 ${UTILS_TEXT}
                 )

@@ -1,12 +1,12 @@
 // 2022/05/04 14:41:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Hardware/LAN/ServerTCP.h"
-#include "Hardware/LAN/libnet/netserver.h"
-#include "Hardware/LAN/libnet/netpacket.h"
+#include "Communicator/LAN/ServerTCP.h"
+#include "Communicator/LAN/libnet/netserver.h"
+#include "Communicator/LAN/libnet/netpacket.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
 #include "Display/Display.h"
-#include "Hardware/Timer.h"
+#include "Utils/Timer.h"
 
 
 namespace ServerTCP

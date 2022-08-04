@@ -1,5 +1,6 @@
+// 2022/8/4 13:37:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Hardware/Timer.h"
+#include "Utils/Timer.h"
 #include <ctime>
 
 

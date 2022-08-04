@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "Communicator/Communicator.h"
 #include "Display/Display.h"
-#include "Hardware/LAN/ServerTCP.h"
+#include "Communicator/LAN/ServerTCP.h"
 #include "Frame.h"
 
 
