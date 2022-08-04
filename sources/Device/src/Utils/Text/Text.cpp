@@ -78,7 +78,7 @@ int Char::Draw(int x, int y, int size, Color::E color)
 
 int Text::DrawCharWithLimitation(int eX, int eY, uchar symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = Font::Symbol::Width(symbol);
+    int width = Font::Symbol::Width(symbol);
     int height = Font::Height();
 
     for (int b = 0; b < height; b++)

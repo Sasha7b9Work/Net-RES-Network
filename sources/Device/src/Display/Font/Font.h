@@ -22,8 +22,8 @@ namespace Font
 
     namespace Symbol
     {
-        int8 Width(uint8);
-        int Height(char symbol);
+        int  Width(uint8);
+        int  Height(char symbol);
         bool LineNotEmpty(uint symbol, int line);
         bool BitInLineIsExist(uint symbol, int line, int bit);
 
