@@ -175,7 +175,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 {
     Measure &measure = measures[type];
 
-    if (value == measure.value)
+    if (value == measure.value) //-V550
     {
         return;
     };

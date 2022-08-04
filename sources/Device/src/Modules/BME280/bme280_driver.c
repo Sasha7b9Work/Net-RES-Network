@@ -927,7 +927,7 @@ static double compensate_pressure(const struct bme280_uncomp_data *uncomp_data,
 	var1 = (var3 + ((double)calib_data->dig_P2) * var1) / 524288.0;
 	var1 = (1.0 + var1 / 32768.0) * ((double)calib_data->dig_P1);
 	/* avoid exception caused by division by zero */
-	if (var1) {
+	if (var1) { //-V550
 		pressure = 1048576.0 - (double) uncomp_data->pressure;
 		pressure = (pressure - (var2 / 4096.0)) * 6250.0 / var1;
 		var1 = ((double)calib_data->dig_P9) * pressure * pressure / 2147483648.0;
