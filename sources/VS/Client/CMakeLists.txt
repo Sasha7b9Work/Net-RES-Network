@@ -35,6 +35,7 @@ file(GLOB RESOURCES               resources/*.*)
 file(GLOB SRC                     *.h *.cpp)
 file(GLOB COMMUNICATOR            Communicator/*.*)
 file(GLOB COMMUNICATOR_HC12       Communicator/HC12/*.*)
+file(GLOB COMMUNICATOR_HC12_RS232 Communicator/HC12/RS232/*.*)
 file(GLOB COMMUNICATOR_LAN        Communicator/LAN/*.*)
 file(GLOB COMMUNICATOR_LAN_LIBNET Communicator/LAN/libnet/*.*)
 file(GLOB COMMUNICATOR_RS232      Communicator/RS232/*.*)
@@ -47,6 +48,7 @@ source_group(resources               FILES ${RESOURCES})
 source_group(src                     FILES ${SRC})
 source_group(Communicator            FILES ${COMMUNICATOR})
 source_group(Communicator/HC12       FILES ${COMMUNICATOR_HC12})
+source_group(Communicator/HC12/RS232 FILES ${COMMUNICATOR_HC12_RS232})
 source_group(Communicator/LAN        FILES ${COMMUNICATOR_LAN})
 source_group(Communicator/LAN/libnet FILES ${COMMUNICATOR_LAN_LIBNET})
 source_group(Communicator/RS232      FILES ${COMMUNICATOR_RS232})
@@ -60,6 +62,7 @@ add_executable( ${PROJECT_NAME}
                 ${SRC}
                 ${COMMUNICATOR}
                 ${COMMUNICATOR_HC12}
+                ${COMMUNICATOR_HC12_RS232}
                 ${COMMUNICATOR_LAN}
                 ${COMMUNICATOR_LAN_LIBNET}
                 ${COMMUNICATOR_RS232}

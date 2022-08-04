@@ -20,6 +20,7 @@ void Application::Update()
     Communicator::Update();
     Display::Update();
     ServerTCP::Update();
+
 }
 
 
