@@ -191,7 +191,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 
 void Display::Measure::Draw(const int x0, const int y0, int size)
 {
-    int width_zone = 41;
+    int width_zone = 42;
     int height_zone = 12;
     int y_zone = y0 - 4;
 
@@ -323,7 +323,7 @@ void Display::DrawMeasures()
 
             if (need_redraw)
             {
-                String<>("%s :", measures[i].Name().c_str()).Draw(x0, y, Color::_1);
+                String<>("%s", measures[i].Name().c_str()).Draw(x0, y, Color::_1);
                 measures[i].Units().Draw(x0 + dX, y);
             }
 
