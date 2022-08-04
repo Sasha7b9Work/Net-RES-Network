@@ -257,13 +257,13 @@ void ST7735::SendData8(uint8 data)
     SET_DC;
     RESET_CS;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if(meter.ElapsedTime())
-        {
-            break;
-        }
-    }
+    while (!(SPI2->SR & SPI_SR_TXE)) {}
+//    {
+//        if(meter.ElapsedTime())
+//        {
+//            break;
+//        }
+//    }
     
     SPI2->DR = data;
 
