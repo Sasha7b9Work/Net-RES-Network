@@ -11,9 +11,9 @@ struct TypeMeasure
     {
         Pressure,           // Давление
         Illumination,       // Освещённость
-        Velocity,           // Скорость
         Temperature,        // Температура
         Humidity,           // Влажность
+        Velocity,           // Скорость
         Count
     };
 

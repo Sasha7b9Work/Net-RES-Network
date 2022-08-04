@@ -12,18 +12,14 @@ void Application::Init()
 {
 //    AllocConsole();
 
-    ServerTCP::Init(777);
-
-    HC12::Init();
+    Communicator::Init();
 }
 
 
 void Application::Update()
 {
-    HC12::Update();
     Communicator::Update();
     Display::Update();
-    ServerTCP::Update();
 }
 
 
