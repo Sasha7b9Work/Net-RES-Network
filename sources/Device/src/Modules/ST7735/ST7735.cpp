@@ -133,6 +133,8 @@ void ST7735::Init()
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
+    TimeMeterMS meter;                                  // ¬ведено, чтобы избавитьс€ от зависаний в release
+    
     SetWindow(x0, y0, width, height);
 
     SendCommand(0x2C);
@@ -182,11 +184,23 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                while ((SPI2->SR & SPI_SR_BSY));
+                while ((SPI2->SR & SPI_SR_BSY))
+                {
+                    if(meter.ElapsedTime() > 100)
+                    {
+                        break;
+                    }
+                }
 
                 SPI2->DR = Color::colors[value & 0x0F];
 
-                while ((SPI2->SR & SPI_SR_BSY));
+                while ((SPI2->SR & SPI_SR_BSY))
+                {
+                    if(meter.ElapsedTime() > 100)
+                    {
+                        break;
+                    }
+                }
 
                 SPI2->DR = Color::colors[value >> 4];
 
@@ -238,14 +252,38 @@ void ST7735::SendData16(uint16 data)
 
 void ST7735::SendData8(uint8 data)
 {
+    static TimeMeterMS meter;       // ¬ведено, чтобы избавитьс€ от зависаний в release
+    meter.Reset();
     SET_DC;
     RESET_CS;
 
-    while ((SPI2->SR & SPI_SR_TXE) == RESET);
+    SPI2->CR1 |= SPI_CR1_DFF;
+
+    while ((SPI2->SR & SPI_SR_TXE) == RESET)
+    {
+        if(meter.ElapsedTime())
+        {
+            break;
+        }
+    }
+    
     SPI2->DR = data;
 
-    while ((SPI2->SR & SPI_SR_TXE) == RESET);
-    while ((SPI2->SR & SPI_SR_BSY) != RESET);
+    while ((SPI2->SR & SPI_SR_TXE) == RESET && !meter.ElapsedTime())
+    {
+        if(meter.ElapsedTime())
+        {
+            break;
+        }
+    }
+    
+    while ((SPI2->SR & SPI_SR_BSY) != RESET && !meter.ElapsedTime())
+    {
+        if(meter.ElapsedTime())
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
@@ -253,16 +291,39 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
+    static TimeMeterMS meter;           // ¬ведено, чтобы избавитьс€ от зависаний в release
+    meter.Reset();
+    
     RESET_DC;
     RESET_CS;
 
-    SPI2->CR1 &= ~SPI_CR1_DFF;
+    SPI2->CR1 |= SPI_CR1_DFF;
 
-    while (!(SPI2->SR & SPI_SR_TXE));
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if(meter.ElapsedTime())
+        {
+            break;
+        }
+    }
+
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE));
-    while ((SPI2->SR & SPI_SR_BSY));
+    while (!(SPI2->SR & SPI_SR_TXE) && !meter.ElapsedTime())
+    {
+        if(meter.ElapsedTime())
+        {
+            break;
+        }
+    }
+    
+    while ((SPI2->SR & SPI_SR_BSY) && !meter.ElapsedTime())
+    {
+        if(meter.ElapsedTime())
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
