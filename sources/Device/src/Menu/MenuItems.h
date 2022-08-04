@@ -156,3 +156,24 @@ struct Button : public Item
 
     const DButton *ReinterpretToDButton() const { return (DButton *)this; }
 };
+
+
+//-------------------------------------------------------------------------------------------------
+
+
+struct DGovernor
+{
+    COMMON_PART_ITEM
+
+    int min;
+    int max;
+    int *value;
+};
+
+
+struct Governor : public Item
+{
+    void DrawClosed(int x, int y) const;
+
+    const DGovernor *RetinterpretToDGovernor() const { return (DGovernor *)this; }
+};
