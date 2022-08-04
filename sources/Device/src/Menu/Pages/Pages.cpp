@@ -4,9 +4,6 @@
 
 
 extern const DPage pageMain;
-extern const DPage pageDisplay;
-extern const DPage pageHC12;
-extern const DPage pageSystem;
 
 
 static void CloseMainPage()
@@ -28,7 +25,5 @@ DEF_PAGE_4(pageMain,
     *PageSystem::self,
     bCloseMainPage
 )
-
-
 
 const Page * const PageMain::self = (const Page *)&pageMain;
