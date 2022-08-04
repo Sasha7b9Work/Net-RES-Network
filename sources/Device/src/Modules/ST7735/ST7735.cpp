@@ -252,36 +252,16 @@ void ST7735::SendData16(uint16 data)
 
 void ST7735::SendData8(uint8 data)
 {
-    static TimeMeterMS meter;       // ¬ведено, чтобы избавитьс€ от зависаний в release
-    meter.Reset();
     SET_DC;
     RESET_CS;
 
     while (!(SPI2->SR & SPI_SR_TXE)) {}
-//    {
-//        if(meter.ElapsedTime())
-//        {
-//            break;
-//        }
-//    }
     
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if(meter.ElapsedTime())
-        {
-            break;
-        }
-    }
+    while (!(SPI2->SR & SPI_SR_TXE)) {}
     
-    while (SPI2->SR & SPI_SR_BSY)
-    {
-        if(meter.ElapsedTime())
-        {
-            break;
-        }
-    }
+    while (SPI2->SR & SPI_SR_BSY) {}
 
     SET_CS;
 }
@@ -289,39 +269,18 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
-    static TimeMeterMS meter;           // ¬ведено, чтобы избавитьс€ от зависаний в release
-    meter.Reset();
-    
     RESET_DC;
     RESET_CS;
 
     SPI2->CR1 &= ~SPI_CR1_DFF;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if(meter.ElapsedTime())
-        {
-            break;
-        }
-    }
+    while (!(SPI2->SR & SPI_SR_TXE)) {}
 
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if(meter.ElapsedTime())
-        {
-            break;
-        }
-    }
+    while (!(SPI2->SR & SPI_SR_TXE)) {}
     
-    while ((SPI2->SR & SPI_SR_BSY))
-    {
-        if(meter.ElapsedTime())
-        {
-            break;
-        }
-    }
+    while ((SPI2->SR & SPI_SR_BSY)) {}
 
     SET_CS;
 }
