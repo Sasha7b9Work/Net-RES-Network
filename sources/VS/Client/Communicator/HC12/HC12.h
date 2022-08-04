@@ -4,5 +4,7 @@
 
 namespace HC12
 {
+    void Init();
+
     void Update();
 }

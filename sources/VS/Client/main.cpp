@@ -4,6 +4,7 @@
 #include "Communicator/Communicator.h"
 #include "Display/Display.h"
 #include "Communicator/LAN/ServerTCP.h"
+#include "Communicator/HC12/HC12.h"
 #include "Frame.h"
 
 
@@ -12,15 +13,17 @@ void Application::Init()
 //    AllocConsole();
 
     ServerTCP::Init(777);
+
+    HC12::Init();
 }
 
 
 void Application::Update()
 {
+    HC12::Update();
     Communicator::Update();
     Display::Update();
     ServerTCP::Update();
-
 }
 
 

@@ -2,6 +2,12 @@
 #include "Communicator/HC12/HC12.h"
 
 
+void HC12::Init()
+{
+
+}
+
+
 void HC12::Update()
 {
 
