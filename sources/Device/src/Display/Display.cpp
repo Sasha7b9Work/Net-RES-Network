@@ -193,9 +193,9 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 
 void Display::Measure::Draw(const int x0, const int y0, int size)
 {
-    int width_zone = 42;
+    int width_zone = 38;
     int height_zone = 12;
-    int y_zone = y0 - 4;
+    int y_zone = y0;
 
     Rectangle(width_zone, height_zone).Fill(x0, y_zone, Color::BLACK);
 
@@ -314,8 +314,11 @@ void Display::DrawMeasures()
 
     const int x0 = 3;
 
-    const int y0 = 15;
-    const int dY = 22;
+    // Пустое место между строками
+    const int d_lines = (Display::HEIGHT - TypeMeasure::Count * Font::Height()) / (TypeMeasure::Count + 1);
+
+    const int y0 = d_lines;
+    const int dY = d_lines + Font::Height();
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {

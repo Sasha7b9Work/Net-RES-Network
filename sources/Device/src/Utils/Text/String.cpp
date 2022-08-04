@@ -47,8 +47,6 @@ int String<capa>::Draw(int x, int y, Color::E color)
         return x;
     }
 
-    y += (8 - Font::Height());
-
     pchar text = c_str();
 
     while (*text != '\0')

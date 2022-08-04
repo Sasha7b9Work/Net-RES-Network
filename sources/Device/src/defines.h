@@ -17,8 +17,8 @@ typedef unsigned char uchar;
 #endif
 
 
-#define TYPE_1          // Присутствуют все датчики
-//#define TYPE_2          // Отсутствует датчик скорости воздуха
+//#define TYPE_1          // Присутствуют все датчики
+#define TYPE_2          // Отсутствует датчик скорости воздуха
 
 #ifdef TYPE_1
     #ifdef TYPE_2

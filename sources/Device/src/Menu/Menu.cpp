@@ -5,7 +5,7 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
-
+#include "Display/Font/Font.h"
 
 
 namespace Menu
@@ -59,6 +59,8 @@ bool Menu::Opened()
 void Menu::Draw()
 {
     Display::BeginScene(Color::BLACK);
+
+    Font::Set(TypeFont::_8);
 
     Menu::OpenedPage()->Draw(0, 0);
 
