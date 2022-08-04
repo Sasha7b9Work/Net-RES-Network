@@ -273,11 +273,7 @@ void Display::Update()
                 BeginScene(Color::BLACK);
             }
 
-            //DrawMeasures();
-
-            Font::Set(TypeFont::_12_10);
-
-            String<>("0123456789").Draw(10, 10, Color::_1);
+            DrawMeasures();
 
             if (need_redraw)
             {
