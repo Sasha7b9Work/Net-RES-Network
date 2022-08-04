@@ -10,7 +10,7 @@
 
 namespace Font
 {
-    static TypeFont::E current = TypeFont::Count;
+    static TypeFont::E current = TypeFont::_8;
 }
 
 
