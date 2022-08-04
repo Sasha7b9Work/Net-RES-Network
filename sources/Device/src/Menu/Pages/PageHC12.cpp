@@ -3,7 +3,6 @@
 #include "Menu/Pages/Pages.h"
 
 
-extern const DPage pageHC12;
 extern const DPage pageMain;
 
 
@@ -14,7 +13,7 @@ void ClosePageHC12()
 
 DEF_BUTTN( bClosePageHC12,
     "Закрыть",
-    pageHC12,
+    *PageHC12::self,
     ClosePageHC12
 );
 
