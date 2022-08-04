@@ -10,10 +10,7 @@
 
 namespace Font
 {
-    TypeFont::E current = TypeFont::Count;
-
-    const Font8 *fonts[TypeFont::Count] = { &font8 };
-    const Font8 *font = nullptr;
+    static TypeFont::E current = TypeFont::Count;
 }
 
 
@@ -49,8 +46,6 @@ void Font::Set(TypeFont::E typeFont)
     }
 
     current = typeFont;
-
-    font = fonts[typeFont];
 }
 
 
@@ -86,33 +81,43 @@ int Font::Height()
 
 bool Font::Symbol::LineNotEmpty(uint eChar, int line)
 {
-    static const uint8 *bytes = 0;
-    static uint prevChar = (uint)(-1);
-
-    if (eChar != prevChar)
+    if (current == TypeFont::_8)
     {
-        prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
+        static const uint8 *bytes = 0;
+        static uint prevChar = (uint)(-1);
+
+        if (eChar != prevChar)
+        {
+            prevChar = eChar;
+            bytes = font8.symbol[prevChar].bytes;
+        }
+
+        return bytes[line] != 0;
     }
 
-    return bytes[line] != 0;
+    return false;
 }
 
 
 bool Font::Symbol::BitInLineIsExist(uint eChar, int numByte, int bit)
 {
-    static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
-    static uint prevChar = (uint)(-1);
-    static int prevNumByte = -1;
-
-    if (prevNumByte != numByte || prevChar != eChar)
+    if (current == TypeFont::_8)
     {
-        prevByte = font->symbol[eChar].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
+        static uint8 prevByte = 0;      // WARN здесь точно статики нужны?
+        static uint prevChar = (uint)(-1);
+        static int prevNumByte = -1;
+
+        if (prevNumByte != numByte || prevChar != eChar)
+        {
+            prevByte = font8.symbol[eChar].bytes[numByte];
+            prevChar = eChar;
+            prevNumByte = numByte;
+        }
+
+        return prevByte & (1 << bit);
     }
 
-    return prevByte & (1 << bit);
+    return false;
 }
 
 
