@@ -273,7 +273,11 @@ void Display::Update()
                 BeginScene(Color::BLACK);
             }
 
-            DrawMeasures();
+            //DrawMeasures();
+
+            Font::Set(TypeFont::_12_10);
+
+            String<>("Ä").Draw(10, 10, Color::_1);
 
             if (need_redraw)
             {

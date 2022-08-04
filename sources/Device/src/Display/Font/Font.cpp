@@ -137,7 +137,7 @@ bool Font::Symbol::BitInLineIsExist(uint eChar, int line, int bit)
     }
     else if (current == TypeFont::_12_10)
     {
-        return (font12_10.symbol[eChar].words[line] & (1 << (10 - bit))) != 0;
+        return (font12_10.symbol[eChar].words[line] & (1 << (9 - bit))) != 0;
     }
 
     return false;
@@ -157,17 +157,19 @@ int Font::Symbol::Draw(int eX, int eY, char s)
         if (Font::Symbol::LineNotEmpty(symbol, line))
         {
             int x = eX;
-            int y = eY + line + width_font + 1 - height;
             int endBit = width_font - width;
+
             for (int bit = width_font - 1; bit >= endBit; bit--)
             {
                 if (Font::Symbol::BitInLineIsExist(symbol, line, bit))
                 {
-                    Point().Set(x, y);
+                    Point().Set(x, eY);
                 }
                 x++;
             }
         }
+
+        eY++;
     }
 
     return eX + width;
