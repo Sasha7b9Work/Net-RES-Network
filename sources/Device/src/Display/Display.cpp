@@ -191,11 +191,22 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 
 void Display::Measure::Draw(const int x0, const int y0, int size)
 {
-    Rectangle(30, 7).Fill(x0, y0 + 1, Color::BLACK);
+    int width_zone = 41;
+    int height_zone = 12;
+    int y_zone = y0 - 4;
 
+    Rectangle(width_zone, height_zone).Fill(x0, y_zone, Color::BLACK);
+
+    /*
     if (position >= current.Size())
     {
-        Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::GREEN);
+    */
+
+//    Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::GREEN);
+
+    current.Draw(x0, y0, Color::GREEN);
+
+    /*
     }
     else
     {
@@ -221,8 +232,9 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
 
         Rectangle(5 * size, 7 * size).Fill(x_rect, y0 + 1, Color::WHITE);
     }
+    */
 
-    ST7735::WriteBuffer(x0, y0 + 1, 30, 7);
+    ST7735::WriteBuffer(x0, y_zone, width_zone, height_zone);
 }
 
 
@@ -315,7 +327,7 @@ void Display::DrawMeasures()
                 measures[i].Units().Draw(x0 + dX, y);
             }
 
-            measures[i].Draw(100, y);
+            measures[i].Draw(93, y);
         }
     }
 }
