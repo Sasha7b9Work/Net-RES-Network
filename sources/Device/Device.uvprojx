@@ -723,6 +723,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
+            <File>
+              <FileName>PageSystem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1593,6 +1598,11 @@
               <FileName>Pages.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageSystem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
             </File>
           </Files>
         </Group>

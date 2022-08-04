@@ -7,9 +7,10 @@ struct TypeItem
 {
     enum E
     {
-        Page,
-        Choice,
-        Button,
+        Page,           // Страница содержит другие элементы управления
+        Choice,         // Выбор из нескольких значений
+        Button,         // Кнопка - по нажатию что-то происходит
+        Governor,       // Можно изменять значение в некоторых пределах
         Count
     };
 };
@@ -55,6 +56,9 @@ struct Item
     const Choice *ReinterpretToChoice() const { return (const Choice *)this; }
     const Button *ReinterpretToButton() const { return (const Button *)this; }
 };
+
+
+//-------------------------------------------------------------------------------------------------
 
 
 struct DPage
@@ -106,6 +110,9 @@ private:
 };
 
 
+//-------------------------------------------------------------------------------------------------
+
+
 struct DChoice
 {
     COMMON_PART_ITEM
@@ -126,6 +133,9 @@ struct Choice : public Item
 
     const DChoice *ReinterpretToDChoice() const { return (DChoice *)this; }
 };
+
+
+//-------------------------------------------------------------------------------------------------
 
 
 struct DButton
