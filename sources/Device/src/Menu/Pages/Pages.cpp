@@ -6,6 +6,7 @@
 extern const DPage pageMain;
 extern const DPage pageDisplay;
 extern const DPage pageHC12;
+extern const DPage pageSystem;
 
 
 static void CloseMainPage()
@@ -19,11 +20,12 @@ DEF_BUTTN(bCloseMainPage,
     CloseMainPage
 )
 
-DEF_PAGE_3(pageMain,
+DEF_PAGE_4(pageMain,
     "лемч",
     Page::Empty,
     pageDisplay,
     pageHC12,
+    pageSystem,
     bCloseMainPage
 )
 

@@ -1,6 +1,10 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Device.h"
 
+/*
+*    аждое изделие обладает уникальным ID, который вводитс€ после прошивки через меню
+*/
+
 
 int main(void)
 {

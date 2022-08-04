@@ -25,3 +25,9 @@ struct PageHC12
 {
     static const Page * const self;
 };
+
+
+struct PageSystem
+{
+    static const Page * const self;
+};
