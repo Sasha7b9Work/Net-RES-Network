@@ -13,7 +13,7 @@ namespace Font
     TypeFont::E current = TypeFont::Count;
 
     const Font8 *fonts[TypeFont::Count] = { &font8 };
-    const Font8 *font = &font8;
+    const Font8 *font = nullptr;
 }
 
 
@@ -60,9 +60,18 @@ int8 Font::Symbol::Width(uint8 symbol)
 }
 
 
-int8 Font::Height()
+int Font::Height()
 {
-    return (int8)font->height;
+    int result = 0;
+
+    switch (current)
+    {
+    case TypeFont::_8:      result = font8.height;        break;
+    case TypeFont::_12_10:  result = font12_10.height;    break;
+    case TypeFont::Count:   break;
+    }
+
+    return result;
 }
 
 
@@ -103,7 +112,7 @@ int Font::Symbol::Draw(int eX, int eY, char s)
     uint8 symbol = (uint8)s;
 
     int8 width = Font::Symbol::Width(symbol);
-    int8 height = Font::Height();
+    int height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
@@ -132,7 +141,7 @@ int Font::Symbol::DrawBig(int eX, int eY, int size, char s)
     uint8 symbol = (uint8)s;
 
     int8 width = Font::Symbol::Width(symbol);
-    int8 height = Font::Height();
+    int height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {

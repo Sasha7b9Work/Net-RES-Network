@@ -296,6 +296,8 @@ void Display::Update()
 
 void Display::DrawMeasures()
 {
+//    Font::Set(TypeFont::_12_10);
+
     const int x0 = 10;
     const int dX = 125;
     const int y0 = 15;

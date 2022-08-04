@@ -17,7 +17,7 @@ struct TypeFont
 namespace Font
 {
     int GetSpacing();
-    int8 Height();
+    int Height();
     void Set(TypeFont::E);
 
     namespace Symbol
