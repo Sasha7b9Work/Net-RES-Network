@@ -250,6 +250,10 @@ void Page::LongPressureCurrentItem() const
     {
         item->ReinterpretToButton()->FuncOnPress();
     }
+    else if (item->IsGovernor())
+    {
+        item->ReinterpretToGovernor()->Open();
+    }
 }
 
 
@@ -263,4 +267,10 @@ void Choice::Change() const
     {
         *cell = 0;
     }
+}
+
+
+void Governor::Open() const
+{
+
 }

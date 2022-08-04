@@ -178,5 +178,7 @@ struct Governor : public Item
 {
     void DrawClosed(int x, int y) const;
 
+    void Open() const;
+
     const DGovernor *RetinterpretToDGovernor() const { return (DGovernor *)this; }
 };
