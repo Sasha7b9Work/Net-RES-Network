@@ -234,7 +234,7 @@ void Page::SelectNextItem() const
 }
 
 
-void Page::ChangeCurrentItem() const
+void Page::LongPressureCurrentItem() const
 {
     const Item *item = CurrentItem();
 

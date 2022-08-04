@@ -85,7 +85,7 @@ struct Page : public Item
     void SelectNextItem() const;
 
     // Изменить состояние текущего итема
-    void ChangeCurrentItem() const;
+    void LongPressureCurrentItem() const;
 
     void Open() const;
 

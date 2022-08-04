@@ -43,7 +43,7 @@ void Menu::LongPress()
     }
     else
     {
-        Menu::OpenedPage()->ChangeCurrentItem();
+        Menu::OpenedPage()->LongPressureCurrentItem();
     }
 
     Display::need_redraw = true;
