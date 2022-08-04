@@ -8,20 +8,6 @@
 #include "Utils/Text/String.h"
 
 
-Page Page::Empty;
-
-namespace Menu
-{
-    extern const Page *opened;
-}
-
-
-const Page *Menu::OpenedPage()
-{
-    return opened;
-}
-
-
 void Page::Open() const
 {
     Menu::opened = this;
@@ -48,15 +34,9 @@ void Page::Close() const
 }
 
 
-bool Item::Opened() const
-{
-    return true;
-}
-
-
 void Item::Draw(int x, int y) const
 {
-    if (Opened())
+    if (IsOpened())
     {
         DrawOpened(x, y);
     }
@@ -252,7 +232,16 @@ void Page::LongPressure() const
     }
     else if (item->IsGovernor())
     {
-        item->ReinterpretToGovernor()->Open();
+        const Governor *governor = item->ReinterpretToGovernor();
+
+        if (governor->IsOpened())
+        {
+            governor->LongPress();
+        }
+        else
+        {
+            governor->Open();
+        }
     }
 }
 

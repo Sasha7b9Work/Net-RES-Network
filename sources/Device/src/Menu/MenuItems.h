@@ -22,9 +22,10 @@ struct Button;
 struct Governor;
 
 
-#define COMMON_PART_ITEM     TypeItem::E type;      \
-                             pchar       title;     \
-                             const Page *keeper;    \
+#define COMMON_PART_ITEM    TypeItem::E type;      \
+                            pchar       title;     \
+                            const Page *keeper;    \
+                            bool       *opened;
 
 
 struct DItem
@@ -45,7 +46,9 @@ struct Item
     void DrawOpened(int x, int y) const;
     void DrawClosed(int x, int y) const;
 
-    bool Opened() const;
+    virtual bool IsOpened() const { return false; }
+
+    static Item *Opened();
 
     bool IsPage() const     { return (ReinterpretToDItem()->type == TypeItem::Page);   }
     bool IsChoice() const   { return (ReinterpretToDItem()->type == TypeItem::Choice); }
@@ -58,6 +61,13 @@ struct Item
     const Choice *ReinterpretToChoice() const { return (const Choice *)this; }
     const Button *ReinterpretToButton() const { return (const Button *)this; }
     const Governor *ReinterpretToGovernor() const { return (const Governor *)this; }
+
+    static Item Empty;
+
+protected:
+    virtual ~Item() { }
+
+    static Item *opened_item;
 };
 
 
@@ -95,8 +105,6 @@ struct Page : public Item
 
     const Item *CurrentItem() const;
 
-    static Page Empty;
-
 private:
 
     void DrawTitle(int x, int y) const;
@@ -110,6 +118,8 @@ private:
     int LastItemOnScreen() const;
 
     int NumItems() const;
+
+    virtual ~Page() { }
 };
 
 

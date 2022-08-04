@@ -12,6 +12,4 @@ namespace Menu
     void Draw();
 
     bool Opened();
-
-    const Page *OpenedPage();
 }

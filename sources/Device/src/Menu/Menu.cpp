@@ -8,12 +8,6 @@
 #include "Display/Font/Font.h"
 
 
-namespace Menu
-{
-    const Page *opened = &Page::Empty;
-}
-
-
 void Menu::ShortPress()
 {
     if (!Opened())
