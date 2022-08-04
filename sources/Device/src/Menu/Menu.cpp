@@ -28,7 +28,7 @@ void Menu::ShortPress()
     }
     else
     {
-        Menu::OpenedPage()->SelectNextItem();
+        Menu::OpenedPage()->ShortPressure();
     }
 
     Display::need_redraw = true;
@@ -43,7 +43,7 @@ void Menu::LongPress()
     }
     else
     {
-        Menu::OpenedPage()->LongPressureCurrentItem();
+        Menu::OpenedPage()->LongPressure();
     }
 
     Display::need_redraw = true;

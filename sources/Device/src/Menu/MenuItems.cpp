@@ -221,7 +221,7 @@ int Page::NumItems() const
 }
 
 
-void Page::SelectNextItem() const
+void Page::ShortPressure() const
 {
     uint8 *currentItem = ReinterpretToDPage()->currentItem;
 
@@ -234,7 +234,7 @@ void Page::SelectNextItem() const
 }
 
 
-void Page::LongPressureCurrentItem() const
+void Page::LongPressure() const
 {
     const Item *item = CurrentItem();
 

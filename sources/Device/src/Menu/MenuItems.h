@@ -81,11 +81,11 @@ struct Page : public Item
 
     void DrawClosed(int x, int y) const;
 
-    // Выделить следующий итем
-    void SelectNextItem() const;
+    // Короткое нажатие кнопки
+    void ShortPressure() const;
 
-    // Изменить состояние текущего итема
-    void LongPressureCurrentItem() const;
+    // Длинное нажатие кнопки
+    void LongPressure() const;
 
     void Open() const;
 
