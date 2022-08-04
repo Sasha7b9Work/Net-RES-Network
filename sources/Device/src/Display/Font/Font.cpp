@@ -214,6 +214,9 @@ int Font::Symbol::DrawBig(int eX, int eY, int size, char s)
 
 void Font::Text::DrawBig(int eX, int eY, int size, pchar buffer, Color::E color)
 {
+    eX++;
+    eY -= 3;
+
     Color::SetCurrent(color);
 
     int numSymbols = (int)std::strlen(buffer);

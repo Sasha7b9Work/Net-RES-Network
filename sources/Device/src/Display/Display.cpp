@@ -202,9 +202,9 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
     {
     */
 
-//    Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::GREEN);
+    Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::GREEN);
 
-    current.Draw(x0, y0, Color::GREEN);
+//    current.Draw(x0, y0, Color::GREEN);
 
     /*
     }
