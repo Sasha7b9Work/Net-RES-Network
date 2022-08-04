@@ -313,7 +313,7 @@ void Display::DrawMeasures()
     Font::Set(TypeFont::_12_10);
 
     const int x0 = 3;
-    const int dX = 134;
+
     const int y0 = 15;
     const int dY = 22;
 
@@ -326,7 +326,7 @@ void Display::DrawMeasures()
             if (need_redraw)
             {
                 String<>("%s", measures[i].Name().c_str()).Draw(x0, y, Color::_1);
-                measures[i].Units().Draw(x0 + dX, y);
+                measures[i].Units().Draw(x0 + 134, y);
             }
 
             measures[i].Draw(93, y);
