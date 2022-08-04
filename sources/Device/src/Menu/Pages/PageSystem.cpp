@@ -3,10 +3,6 @@
 #include "Menu/Pages/Pages.h"
 
 
-extern const DPage pageSystem;
-extern const DPage pageMain;
-
-
 void ClosePageSystem()
 {
     PageSystem::self->Close();
@@ -15,14 +11,14 @@ void ClosePageSystem()
 
 DEF_BUTTN(bClosePageSystem,
     "Закрыть",
-    pageSystem,
+    *PageSystem::self,
     ClosePageSystem
 );
 
 
 DEF_PAGE_1(pageSystem,
     "Система",
-    pageMain,
+    *PageMain::self,
     bClosePageSystem
 )
 
