@@ -277,7 +277,7 @@ void Display::Update()
 
             Font::Set(TypeFont::_12_10);
 
-            String<>("Ä").Draw(10, 10, Color::_1);
+            String<>("0123456789").Draw(10, 10, Color::_1);
 
             if (need_redraw)
             {
@@ -302,8 +302,8 @@ void Display::DrawMeasures()
 {
     Font::Set(TypeFont::_12_10);
 
-    const int x0 = 10;
-    const int dX = 125;
+    const int x0 = 3;
+    const int dX = 134;
     const int y0 = 15;
     const int dY = 22;
 
