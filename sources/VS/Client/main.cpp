@@ -11,7 +11,7 @@ void Application::Init()
 {
 //    AllocConsole();
 
-    ServerTCP::Open(777);
+    ServerTCP::Init(777);
 }
 
 

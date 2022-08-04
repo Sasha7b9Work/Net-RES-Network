@@ -4,7 +4,7 @@
 
 namespace ServerTCP
 {
-    void Open(uint16 port);
+    void Init(uint16 port);
 
     bool Opened();
 

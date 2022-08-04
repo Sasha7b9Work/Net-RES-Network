@@ -11,21 +11,21 @@
 
 namespace ServerTCP
 {
-    net__::netserver server(2);
+    static net__::netserver server(2);
 
-    sock_t socket = -1;
+    static sock_t socket = -1;
 
-    TimeMeterMS meter;
+    static TimeMeterMS meter;
 
-    size_t OnReceiveData(net__::netpacket *, void *);
+    static size_t OnReceiveData(net__::netpacket *, void *);
 
-    size_t OnConnection(sock_t, void *);
+    static size_t OnConnection(sock_t, void *);
 
-    void ProcessData(Buffer<uint8, 1024> &);
+    static void ProcessData(Buffer<uint8, 1024> &);
 }
 
 
-void ServerTCP::Open(uint16 port)
+void ServerTCP::Init(uint16 port)
 {
     Close();
 
