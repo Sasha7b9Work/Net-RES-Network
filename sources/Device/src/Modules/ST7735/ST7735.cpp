@@ -257,9 +257,7 @@ void ST7735::SendData8(uint8 data)
     SET_DC;
     RESET_CS;
 
-    SPI2->CR1 |= SPI_CR1_DFF;
-
-    while ((SPI2->SR & SPI_SR_TXE) == RESET)
+    while (!(SPI2->SR & SPI_SR_TXE))
     {
         if(meter.ElapsedTime())
         {
@@ -269,7 +267,7 @@ void ST7735::SendData8(uint8 data)
     
     SPI2->DR = data;
 
-    while ((SPI2->SR & SPI_SR_TXE) == RESET && !meter.ElapsedTime())
+    while (!(SPI2->SR & SPI_SR_TXE))
     {
         if(meter.ElapsedTime())
         {
@@ -277,7 +275,7 @@ void ST7735::SendData8(uint8 data)
         }
     }
     
-    while ((SPI2->SR & SPI_SR_BSY) != RESET && !meter.ElapsedTime())
+    while (SPI2->SR & SPI_SR_BSY)
     {
         if(meter.ElapsedTime())
         {
@@ -297,7 +295,7 @@ void ST7735::SendCommand(uint8 data)
     RESET_DC;
     RESET_CS;
 
-    SPI2->CR1 |= SPI_CR1_DFF;
+    SPI2->CR1 &= ~SPI_CR1_DFF;
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {
@@ -309,7 +307,7 @@ void ST7735::SendCommand(uint8 data)
 
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE) && !meter.ElapsedTime())
+    while (!(SPI2->SR & SPI_SR_TXE))
     {
         if(meter.ElapsedTime())
         {
@@ -317,7 +315,7 @@ void ST7735::SendCommand(uint8 data)
         }
     }
     
-    while ((SPI2->SR & SPI_SR_BSY) && !meter.ElapsedTime())
+    while ((SPI2->SR & SPI_SR_BSY))
     {
         if(meter.ElapsedTime())
         {
