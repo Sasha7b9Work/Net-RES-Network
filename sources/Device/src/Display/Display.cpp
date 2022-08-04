@@ -27,7 +27,7 @@ namespace Display
         nullptr
     };
 
-    static void DrawZones();
+    void DrawZones();
 
     struct Measure
     {
@@ -296,7 +296,7 @@ void Display::Update()
                 need_redraw = false;
             }
 
-            DrawZones();
+//            DrawZones();
         }
         else
         {

@@ -123,6 +123,9 @@ void ST7735::Init()
     SendData16(0x000F);
 
     SendCommand(0x29);      // DISPON Display on
+
+    Display::BeginScene(Color::BLACK);
+    Display::EndScene();
 }
 
 
