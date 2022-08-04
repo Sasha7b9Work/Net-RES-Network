@@ -5,13 +5,12 @@
 
 static int serialNumber = 0;
 
-extern const DPage pageSystem;
 extern const DPage pageMain;
 
 
 DEF_GOVERNOR(gSerialNumber,
     "С/Н",
-    PageSystem::self,
+    *PageSystem::self,
     0, (int)0xFFFFFFFF,
     serialNumber
 )
@@ -25,7 +24,7 @@ void ClosePageSystem()
 
 DEF_BUTTN(bClosePageSystem,
     "Закрыть",
-    pageSystem,
+    *PageSystem::self,
     ClosePageSystem
 );
 

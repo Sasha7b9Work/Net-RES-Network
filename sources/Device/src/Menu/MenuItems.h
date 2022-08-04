@@ -38,7 +38,7 @@ struct Item
     static const int WIDTH = Display::WIDTH - 1;
     static const int HEIGHT = 20;
 
-    pchar Title() const { return ReinterpretToDItem()->title; }
+    String<> Title() const;
 
     void Draw(int x, int y) const;
 

@@ -5,20 +5,18 @@
 
 
 extern const DPage pageMain;
-extern const DPage pageDisplay;
-extern const DPage pageMeasures;
 
 
 DEF_CHOICE_2( chPressure,
     "Давление",
-    pageMeasures,
+    *PageDisplay::PageMeasures::self,
     gset.display.show_measure[TypeMeasure::Pressure],
     "Откл", "Вкл"
 )
 
 DEF_CHOICE_2(chIllumination,
     "Освещённость",
-    pageMeasures,
+    *PageDisplay::PageMeasures::self,
     gset.display.show_measure[TypeMeasure::Illumination],
     "Откл", "Вкл"
 )
@@ -26,7 +24,7 @@ DEF_CHOICE_2(chIllumination,
 #ifdef TYPE_1
 DEF_CHOICE_2(chVelocity,
     "Скорость",
-    pageMeasures,
+    *PageDisplay::PageMeasures::self,
     gset.display.show_measure[TypeMeasure::Velocity],
     "Откл", "Вкл"
 )
@@ -34,14 +32,14 @@ DEF_CHOICE_2(chVelocity,
 
 DEF_CHOICE_2(chTemperature,
     "Температура",
-    pageMeasures,
+    *PageDisplay::PageMeasures::self,
     gset.display.show_measure[TypeMeasure::Temperature],
     "Откл", "Вкл"
 )
 
 DEF_CHOICE_2(chHumidity,
     "Влажность",
-    pageMeasures,
+    *PageDisplay::PageMeasures::self,
     gset.display.show_measure[TypeMeasure::Humidity],
     "Откл", "Вкл"
 )
@@ -53,14 +51,14 @@ static void CloseMeasures()
 
 DEF_BUTTN( bCloseMeasures,
     "Закрыть",
-    pageMeasures,
+    *PageDisplay::PageMeasures::self,
     CloseMeasures
 )
 
 #ifdef TYPE_1
 DEF_PAGE_6( pageMeasures,
     "ИЗМЕРЕНИЯ",
-    pageDisplay,
+    *PageDisplay::self,
     chPressure,
     chIllumination,
     chTemperature,
@@ -73,7 +71,7 @@ DEF_PAGE_6( pageMeasures,
 #ifdef TYPE_2
 DEF_PAGE_5(pageMeasures,
     "ИЗМЕРЕНИЯ",
-    pageDisplay,
+    *PageDisplay::self,
     chPressure,
     chIllumination,
     chTemperature,
@@ -90,7 +88,7 @@ void ClosePageDisplay()
 
 DEF_BUTTN( bClosePageDisplay,
     "Закрыть",
-    pageDisplay,
+    *PageDisplay::self,
     ClosePageDisplay
 )
 

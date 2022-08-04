@@ -5,6 +5,7 @@
 #include "Display/Display.h"
 #include "Utils/Text/String.h"
 #include "Menu/Menu.h"
+#include "Utils/Text/String.h"
 
 
 Page Page::Empty;
@@ -110,6 +111,12 @@ void Item::DrawClosed(int x, int y) const
 }
 
 
+String<> Item::Title() const
+{
+    return String<>(ReinterpretToDItem()->title);
+}
+
+
 void Page::DrawOpened(int x, int y) const
 {
     DrawTitle(x, y);
@@ -122,7 +129,7 @@ void Page::DrawTitle(int x, int y) const
 {
     Rectangle(Item::WIDTH, 27).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
-    String<>(Title()).Draw(x + 10, y + 10, Color::GRAY_50);
+    Title().Draw(x + 10, y + 10, Color::GRAY_50);
 }
 
 
@@ -151,7 +158,7 @@ const Item *Page::CurrentItem() const
 
 void Page::DrawClosed(int x, int y) const
 {
-    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::WHITE);
 }
 
 
@@ -165,7 +172,7 @@ pchar Choice::CurrentName() const
 
 void Choice::DrawClosed(int x, int y) const
 {
-    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::WHITE);
 
     String<>(CurrentName()).Draw(x + 130, y + 5);
 }
@@ -173,13 +180,13 @@ void Choice::DrawClosed(int x, int y) const
 
 void Button::DrawClosed(int x, int y) const
 {
-    String<>(Title()).Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::WHITE);
 }
 
 
 void Governor::DrawClosed(int x, int y) const
 {
-
+    Title().Draw(x + 10, y + 5, Color::WHITE);
 }
 
 
