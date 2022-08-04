@@ -3,6 +3,16 @@
 #include "Menu/Pages/Pages.h"
 
 
+static int serialNumber = 0;
+
+DEF_GOVERNOR(gSerialNumber,
+    "С/Н",
+    PageSystem::self,
+    0, (int)0xFFFFFFFF,
+    serialNumber
+)
+
+
 void ClosePageSystem()
 {
     PageSystem::self->Close();
@@ -16,9 +26,10 @@ DEF_BUTTN(bClosePageSystem,
 );
 
 
-DEF_PAGE_1(pageSystem,
-    "Система",
+DEF_PAGE_2(pageSystem,
+    "СИСТЕМА",
     *PageMain::self,
+    gSerialNumber,
     bClosePageSystem
 )
 

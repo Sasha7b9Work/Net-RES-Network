@@ -6,7 +6,7 @@
     static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function };
 
 #define DEF_GOVERNOR(name, title, keeper, min, max, value)                                                  \
-    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, min, max, &value }
+    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, min, max, &value };
 
 #define DEF_CHOICE_2(name, title, keeper, cell, name1, name2)                                               \
     static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, &cell, 2, {name1, name2}};
