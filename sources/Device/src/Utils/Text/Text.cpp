@@ -56,20 +56,17 @@ int Char::Draw(int x, int y, int size, Color::E color)
 {
     Color::SetCurrent(color);
 
-    if (Font::Height() == 8)
+    if (size == 1)
     {
-        if (size == 1)
-        {
-            Font::Symbol::Draw(x, y, symbol);
-        }
-        else
-        {
-            char buffer[2] = { symbol, 0 };
+        Font::Symbol::Draw(x, y, symbol);
+    }
+    else
+    {
+        char buffer[2] = { symbol, 0 };
 
-            Font::Text::DrawBig(x, y, size, buffer);
+        Font::Text::DrawBig(x, y, size, buffer);
 
-            return x + size * Font::Symbol::Width((uint8)symbol);
-        }
+        return x + size * Font::Symbol::Width((uint8)symbol);
     }
 
     return x + Font::Symbol::Width((uint8)symbol);

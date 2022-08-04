@@ -79,6 +79,21 @@ int Font::Height()
 }
 
 
+int Font::Width()
+{
+    int result = 0;
+
+    switch (current)
+    {
+    case TypeFont::_8:      result = 8;                 break;
+    case TypeFont::_12_10:  result = font12_10.width;   break;
+    case TypeFont::Count:   break;
+    }
+
+    return result;
+}
+
+
 bool Font::Symbol::LineNotEmpty(uint eChar, int line)
 {
     if (current == TypeFont::_8)
@@ -94,12 +109,16 @@ bool Font::Symbol::LineNotEmpty(uint eChar, int line)
 
         return bytes[line] != 0;
     }
+    else if (current == TypeFont::_12_10)
+    {
+        return font12_10.symbol[eChar].words[line] != 0;
+    }
 
     return false;
 }
 
 
-bool Font::Symbol::BitInLineIsExist(uint eChar, int numByte, int bit)
+bool Font::Symbol::BitInLineIsExist(uint eChar, int line, int bit)
 {
     if (current == TypeFont::_8)
     {
@@ -107,14 +126,18 @@ bool Font::Symbol::BitInLineIsExist(uint eChar, int numByte, int bit)
         static uint prevChar = (uint)(-1);
         static int prevNumByte = -1;
 
-        if (prevNumByte != numByte || prevChar != eChar)
+        if (prevNumByte != line || prevChar != eChar)
         {
-            prevByte = font8.symbol[eChar].bytes[numByte];
+            prevByte = font8.symbol[eChar].bytes[line];
             prevChar = eChar;
-            prevNumByte = numByte;
+            prevNumByte = line;
         }
 
         return prevByte & (1 << bit);
+    }
+    else if (current == TypeFont::_12_10)
+    {
+        return (font12_10.symbol[eChar].words[line] & (1 << (10 - bit))) != 0;
     }
 
     return false;
@@ -127,17 +150,18 @@ int Font::Symbol::Draw(int eX, int eY, char s)
 
     int width = Font::Symbol::Width(symbol);
     int height = Font::Height();
+    int width_font = Font::Width();
 
-    for (int b = 0; b < height; b++)
+    for (int line = 0; line < height; line++)
     {
-        if (Font::Symbol::LineNotEmpty(symbol, b))
+        if (Font::Symbol::LineNotEmpty(symbol, line))
         {
             int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
+            int y = eY + line + width_font + 1 - height;
+            int endBit = width_font - width;
+            for (int bit = width_font - 1; bit >= endBit; bit--)
             {
-                if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
+                if (Font::Symbol::BitInLineIsExist(symbol, line, bit))
                 {
                     Point().Set(x, y);
                 }
@@ -156,15 +180,16 @@ int Font::Symbol::DrawBig(int eX, int eY, int size, char s)
 
     int width = Font::Symbol::Width(symbol);
     int height = Font::Height();
+    int width_font = Font::Width();
 
     for (int b = 0; b < height; b++)
     {
         if (Font::Symbol::LineNotEmpty(symbol, b))
         {
             int x = eX;
-            int y = eY + b * size + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
+            int y = eY + b * size + width_font + 1 - height;
+            int endBit = width_font - width;
+            for (int bit = width_font - 1; bit >= endBit; bit--)
             {
                 if (Font::Symbol::BitInLineIsExist(symbol, b, bit))
                 {

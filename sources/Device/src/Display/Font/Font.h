@@ -18,6 +18,7 @@ namespace Font
 {
     int GetSpacing();
     int Height();
+    int Width();
     void Set(TypeFont::E);
 
     namespace Symbol

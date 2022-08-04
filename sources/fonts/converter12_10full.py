@@ -6,14 +6,14 @@ from struct import *
 # Записать в файл значение "слова" - двойного байта, находящегося по адресу num_word
 def WriteWord(num_word, file):
     value = (symbols[num_word] + (symbols[num_word + 1] << 8))
-#    if value < 0:
-#        value += 256
+    if value < 0:
+        value += 1024
     file.write(str(value))
 
 def WriteReverseByte(num_byte, file):
     value = int(symbols[num_byte])
     if value < 0:
-        value += 256
+        value += 1024
     revValue = 0
     base = 256
     while value != 0:
@@ -30,6 +30,9 @@ def GetBit(byte, bit):
 # Возвращает ширину "двухбайтового полуслова". Т.е. 0-е полуслово находится по адресу 0,
 # 1-е полуслово - по адресу 2, 3-е полуслово - по адресу 3 и т.д.
 def GetWidth2Bytes(two_bytes):
+    if two_bytes < 0:
+        two_bytes += 1024;
+
     for bit in range(15, -1, -1):
         if GetBit(two_bytes, bit) == 1:
             return bit + 1;
@@ -38,10 +41,22 @@ def GetWidth2Bytes(two_bytes):
 def CalculateWidth(num_symbol):
     # num_word - порядковый номер "полуслова" в символе. Полуслово состоит из двух байт
     result = 0;
+    
+    if num_symbol == 196:
+        print("num_symbol ", num_symbol)
+
     for num_word in range(0, 24, 2):
         two_bytes = symbols[num_symbol * 12 * 2 + num_word] + (symbols[num_symbol * 12 * 2 + num_word + 1] << 8)
+        
+        if num_symbol == 196:
+            print("two_bytes =", two_bytes, " width = ", GetWidth2Bytes(two_bytes));
+        
         if GetWidth2Bytes(two_bytes) > result:
             result = GetWidth2Bytes(two_bytes)
+
+    if num_symbol == 196:
+        print("width ", result)
+
     return result
 
 ###### Start here ######

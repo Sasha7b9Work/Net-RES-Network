@@ -296,7 +296,7 @@ void Display::Update()
 
 void Display::DrawMeasures()
 {
-//    Font::Set(TypeFont::_12_10);
+    Font::Set(TypeFont::_12_10);
 
     const int x0 = 10;
     const int dX = 125;
@@ -323,6 +323,8 @@ void Display::DrawMeasures()
 
 void Display::DrawBigMeasure()
 {
+    Font::Set(TypeFont::_8);
+
     BeginScene(Color::BLACK);
 
     static const int x[TypeMeasure::Count] =
