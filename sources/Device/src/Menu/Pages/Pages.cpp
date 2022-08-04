@@ -23,9 +23,9 @@ DEF_BUTTN(bCloseMainPage,
 DEF_PAGE_4(pageMain,
     "лемч",
     Page::Empty,
-    pageDisplay,
-    pageHC12,
-    pageSystem,
+    *PageDisplay::self,
+    *PageHC12::self,
+    *PageSystem::self,
     bCloseMainPage
 )
 
