@@ -5,11 +5,6 @@
 
 namespace Menu
 {
-    namespace Title
-    {
-        static const int HEIGHT = 27;
-    }
-
     void ShortPress();
 
     void LongPress();
@@ -19,4 +14,9 @@ namespace Menu
     void Draw();
 
     bool Opened();
+
+    namespace Title
+    {
+        static const int HEIGHT = 27;
+    }
 }
