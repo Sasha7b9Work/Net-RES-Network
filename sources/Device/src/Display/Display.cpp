@@ -117,7 +117,7 @@ void HLine::Draw(int x0, int y, Color::E color)
 {
     Color::SetCurrent(color);
 
-    for (int x = x0; x < x0 + width; x++)
+    for (int x = x0; x < x0 + width + 1; x++)
     {
         Display::Buffer::SetPoint(x, y);
     }

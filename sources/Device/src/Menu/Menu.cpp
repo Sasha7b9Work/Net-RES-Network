@@ -65,7 +65,7 @@ void Menu::Draw()
 {
     Display::BeginScene(Color::BLACK);
 
-    Font::Set(TypeFont::_8);
+    Font::Set(TypeFont::_12_10);
 
     if (Item::Opened()->IsPage())
     {

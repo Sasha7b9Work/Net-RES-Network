@@ -6,6 +6,7 @@
 #include "Utils/Text/String.h"
 #include "Menu/Menu.h"
 #include "Utils/Text/String.h"
+#include "Utils/Values.h"
 
 
 Item Item::Empty;
@@ -136,7 +137,7 @@ void Page::DrawTitle(int x, int y) const
 {
     Rectangle(Item::WIDTH, 27).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
-    Title().Draw(x + 10, y + 10, Color::GRAY_50);
+    Title().Draw(x + 10, y + 10, Color::BLUE);
 }
 
 
@@ -196,12 +197,28 @@ void Button::DrawClosed(int x, int y, bool active) const
 void Governor::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
+
+    Int(*RetinterpretToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
 }
 
 
 void Governor::DrawOpened(int x, int y, bool active) const
 {
+    Color::E fill = Color::BLACK;
+    Color::E draw = Color::WHITE;
 
+    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
+    {
+        fill = Color::GREEN_50;
+    }
+
+    if (!active && (Item::Opened() != Keeper()))
+    {
+        draw = Color::GRAY_25;
+        fill = Color::GRAY_10;
+    }
+
+    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
 }
 
 
