@@ -54,7 +54,7 @@ struct Item
     void Open() const;
     void Close() const;
 
-    bool IsOpened() const { return this == opened_item; }
+    bool IsOpened() const;
 
     static const Item *Opened() { return opened_item; };
 
@@ -97,7 +97,6 @@ struct Page : public Item
     static const int NUM_ITEMS_ON_SCREEN = 5;
 
     void DrawOpened(int x, int y) const;
-
     void DrawClosed(int x, int y) const;
 
     void ShortPressure() const;

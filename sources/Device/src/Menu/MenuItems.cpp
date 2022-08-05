@@ -57,6 +57,17 @@ void Item::Draw(int x, int y) const
 }
 
 
+bool Item::IsOpened() const
+{
+    if (IsPage())
+    {
+        return (this == opened_item) || (Item::Opened()->Keeper() == this);
+    }
+
+    return (this == opened_item);
+}
+
+
 void Item::DrawOpened(int x, int y) const
 {
     if (IsPage())
