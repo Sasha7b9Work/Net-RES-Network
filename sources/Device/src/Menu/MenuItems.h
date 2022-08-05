@@ -194,6 +194,7 @@ struct DGovernor
 struct Governor : public Item
 {
     void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
 
     void ShortPressure() const;
     void LongPressure() const;

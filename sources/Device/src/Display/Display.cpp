@@ -147,9 +147,9 @@ void Rectangle::Fill(int x0, int y0, Color::E color)
 {
     Color::SetCurrent(color);
 
-    for (int x = x0; x < x0 + width; x++)
+    for (int x = x0; x < x0 + width + 1; x++)
     {
-        VLine(height).Draw(x, y0);
+        VLine(height + 1).Draw(x, y0);
     }
 }
 

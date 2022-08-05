@@ -74,9 +74,9 @@ void Item::DrawOpened(int x, int y, bool active) const
     {
         ReinterpetToPage()->DrawOpened(x, y, active);
     }
-    else if (IsChoice())
+    else if (IsGovernor())
     {
-        ReinterpretToChoice()->DrawOpened(x, y, active);
+        ReinterpretToGovernor()->DrawOpened(x, y, active);
     }
 }
 
@@ -93,8 +93,8 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     if (Item::Opened() != Keeper())
     {
-        fill = Color::GRAY_25;
-        draw = Color::GRAY_10;
+        draw = Color::GRAY_25;
+        fill = Color::GRAY_10;
     }
 
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
@@ -196,6 +196,12 @@ void Button::DrawClosed(int x, int y, bool active) const
 void Governor::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
+}
+
+
+void Governor::DrawOpened(int x, int y, bool active) const
+{
+
 }
 
 
