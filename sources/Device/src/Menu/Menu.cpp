@@ -44,6 +44,17 @@ void Menu::LongPress()
 }
 
 
+void Menu::DoubleClick()
+{
+    if (Opened())
+    {
+        Item::Opened()->DoubleClick();
+    }
+
+    Display::need_redraw = true;
+}
+
+
 bool Menu::Opened()
 {
     return (Item::Opened() != &Page::Empty);

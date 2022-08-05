@@ -9,6 +9,8 @@ namespace Menu
 
     void LongPress();
 
+    void DoubleClick();
+
     void Draw();
 
     bool Opened();

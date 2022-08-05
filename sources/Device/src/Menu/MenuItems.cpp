@@ -252,6 +252,18 @@ void Page::LongPressure() const
 }
 
 
+void Page::DoubleClick() const
+{
+
+}
+
+
+void Choice::ShortPressure() const
+{
+
+}
+
+
 void Choice::LongPressure() const
 {
     uint8 *cell = ReinterpretToDChoice()->cell;
@@ -262,6 +274,12 @@ void Choice::LongPressure() const
     {
         *cell = 0;
     }
+}
+
+
+void Choice::DoubleClick() const
+{
+
 }
 
 
@@ -294,16 +312,41 @@ void Item::LongPressure() const
 {
     switch (ReinterpretToDItem()->type)
     {
-    case TypeItem::Page:        ReinterpetToPage()->LongPressure();        break;
-    case TypeItem::Choice:      ReinterpretToChoice()->LongPressure();     break;
-    case TypeItem::Button:      ReinterpretToChoice()->LongPressure();     break;
-    case TypeItem::Governor:    ReinterpretToGovernor()->LongPressure();   break;
-    case TypeItem::Count:                                                   break;
+    case TypeItem::Page:        ReinterpetToPage()->LongPressure();     break;
+    case TypeItem::Choice:      ReinterpretToChoice()->LongPressure();  break;
+    case TypeItem::Button:      ReinterpretToChoice()->LongPressure();  break;
+    case TypeItem::Governor:    ReinterpretToGovernor()->LongPressure();break;
+    case TypeItem::Count:                                               break;
     }
 }
 
 
+void Item::DoubleClick() const
+{
+    switch (ReinterpretToDItem()->type)
+    {
+    case TypeItem::Page:        ReinterpetToPage()->DoubleClick();      break;
+    case TypeItem::Choice:      ReinterpretToChoice()->DoubleClick();   break;
+    case TypeItem::Button:      ReinterpretToChoice()->DoubleClick();   break;
+    case TypeItem::Governor:    ReinterpretToGovernor()->DoubleClick(); break;
+    case TypeItem::Count:                                               break;
+    }
+}
+
+
+void Governor::ShortPressure() const
+{
+
+}
+
+
 void Governor::LongPressure() const
+{
+
+}
+
+
+void Governor::DoubleClick() const
 {
 
 }

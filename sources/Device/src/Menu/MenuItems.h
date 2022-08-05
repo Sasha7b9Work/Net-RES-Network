@@ -47,6 +47,7 @@ struct Item
 
     void ShortPressure() const;
     void LongPressure() const;
+    void DoubleClick() const;
 
     const Page *Keeper() const { return ReinterpretToDItem()->keeper; }
 
@@ -96,11 +97,9 @@ struct Page : public Item
 
     void DrawClosed(int x, int y) const;
 
-    // Короткое нажатие кнопки
     void ShortPressure() const;
-
-    // Длинное нажатие кнопки
     void LongPressure() const;
+    void DoubleClick() const;
 
     void Open() const;
 
@@ -145,7 +144,9 @@ struct Choice : public Item
 {
     void DrawClosed(int x, int y) const;
 
+    void ShortPressure() const;
     void LongPressure() const;
+    void DoubleClick() const;
 
     pchar CurrentName() const;
 
@@ -168,7 +169,9 @@ struct DButton
 
 struct Button : public Item
 {
+    void ShortPressure() const;
     void LongPressure() const { ReinterpretToDButton()->funcPress(); }
+    void DoubleClick() const;
 
     void DrawClosed(int x, int y) const;
 
@@ -195,7 +198,9 @@ struct Governor : public Item
 
     void Open() const;
 
+    void ShortPressure() const;
     void LongPressure() const;
+    void DoubleClick() const;
 
     const DGovernor *RetinterpretToDGovernor() const { return (DGovernor *)this; }
 };
