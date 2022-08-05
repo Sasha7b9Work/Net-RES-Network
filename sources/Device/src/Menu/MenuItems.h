@@ -39,7 +39,6 @@ struct Item
 
     String<> Title() const;
 
-    void Draw() const;
     void Draw(int x, int y, bool active) const;
 
     void DrawOpened(int x, int y, bool active) const;

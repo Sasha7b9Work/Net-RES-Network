@@ -79,7 +79,7 @@ void Menu::Draw()
 
         keeper->Draw(0, 0, false);
 
-        Item::Opened()->Draw();
+        Item::Opened()->DrawOpened(0, Menu::Title::HEIGHT, true);
     }
 
     Display::EndScene();

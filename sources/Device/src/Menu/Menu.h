@@ -5,6 +5,11 @@
 
 namespace Menu
 {
+    namespace Title
+    {
+        static const int HEIGHT = 27;
+    }
+
     void ShortPress();
 
     void LongPress();

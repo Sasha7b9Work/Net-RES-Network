@@ -128,7 +128,7 @@ void Page::DrawOpened(int x, int y, bool active) const
 {
     DrawTitle(x, y);
 
-    DrawItems(x, y + 27, active);
+    DrawItems(x, y + Menu::Title::HEIGHT, active);
 }
 
 
@@ -292,12 +292,6 @@ void Choice::LongPressure() const
 
 
 void Choice::DoubleClick() const
-{
-
-}
-
-
-void Item::Draw() const
 {
 
 }
