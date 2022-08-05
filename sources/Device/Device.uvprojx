@@ -838,6 +838,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Values.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Values.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Values.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Values.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1713,6 +1723,16 @@
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Values.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Values.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Values.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Values.h</FilePath>
             </File>
           </Files>
         </Group>
