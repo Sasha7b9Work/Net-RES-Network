@@ -19,3 +19,9 @@ Color::E Color::GetCurrent()
 {
     return current;
 }
+
+
+Color::E Color::MenuLetters(bool active)
+{
+    return active ? Color::WHITE : Color::GRAY_50;
+}

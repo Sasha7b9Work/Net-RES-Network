@@ -40,10 +40,10 @@ struct Item
     String<> Title() const;
 
     void Draw() const;
-    void Draw(int x, int y) const;
+    void Draw(int x, int y, bool active) const;
 
-    void DrawOpened(int x, int y) const;
-    void DrawClosed(int x, int y) const;
+    void DrawOpened(int x, int y, bool active) const;
+    void DrawClosed(int x, int y, bool active) const;
 
     void ShortPressure() const;
     void LongPressure() const;
@@ -96,8 +96,8 @@ struct Page : public Item
 {
     static const int NUM_ITEMS_ON_SCREEN = 5;
 
-    void DrawOpened(int x, int y) const;
-    void DrawClosed(int x, int y) const;
+    void DrawOpened(int x, int y, bool acitve) const;
+    void DrawClosed(int x, int y, bool active) const;
 
     void ShortPressure() const;
     void LongPressure() const;
@@ -113,7 +113,7 @@ private:
 
     void DrawTitle(int x, int y) const;
 
-    void DrawItems(int x, int y) const;
+    void DrawItems(int x, int y, bool active) const;
 
     // Первый выводимый итем на текущей странице
     int FirstItemOnScreen() const;

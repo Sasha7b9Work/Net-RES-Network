@@ -29,6 +29,9 @@ struct Color
 
     static const uint16 colors[Count];
 
+    // Цвет надписей
+    static Color::E MenuLetters(bool active);
+
 private:
 
     static Color::E current;

@@ -69,7 +69,7 @@ void Menu::Draw()
 
     if (Item::Opened()->IsPage())
     {
-        Item::Opened()->Draw(0, 0);
+        Item::Opened()->Draw(0, 0, true);
     }
     else
     {
@@ -77,7 +77,7 @@ void Menu::Draw()
 
         const Page *keeper = opened->Keeper();
 
-        keeper->Draw(0, 0);
+        keeper->Draw(0, 0, false);
 
         Item::Opened()->Draw();
     }

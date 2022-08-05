@@ -44,15 +44,15 @@ void Page::Close() const
 }
 
 
-void Item::Draw(int x, int y) const
+void Item::Draw(int x, int y, bool active) const
 {
     if (IsOpened())
     {
-        DrawOpened(x, y);
+        DrawOpened(x, y, true);
     }
     else
     {
-        DrawClosed(x, y);
+        DrawClosed(x, y, active);
     }
 }
 
@@ -68,20 +68,20 @@ bool Item::IsOpened() const
 }
 
 
-void Item::DrawOpened(int x, int y) const
+void Item::DrawOpened(int x, int y, bool active) const
 {
     if (IsPage())
     {
-        ReinterpetToPage()->DrawOpened(x, y);
+        ReinterpetToPage()->DrawOpened(x, y, active);
     }
     else if (IsChoice())
     {
-        ReinterpretToChoice()->DrawOpened(x, y);
+        ReinterpretToChoice()->DrawOpened(x, y, active);
     }
 }
 
 
-void Item::DrawClosed(int x, int y) const
+void Item::DrawClosed(int x, int y, bool active) const
 {
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
@@ -101,7 +101,7 @@ void Item::DrawClosed(int x, int y) const
 
     if (IsPage())
     {
-        ReinterpetToPage()->DrawClosed(x, y);
+        ReinterpetToPage()->DrawClosed(x, y, active);
     }
     else if (IsChoice())
     {
@@ -124,11 +124,11 @@ String<> Item::Title() const
 }
 
 
-void Page::DrawOpened(int x, int y) const
+void Page::DrawOpened(int x, int y, bool active) const
 {
     DrawTitle(x, y);
 
-    DrawItems(x, y + 27);
+    DrawItems(x, y + 27, active);
 }
 
 
@@ -140,11 +140,11 @@ void Page::DrawTitle(int x, int y) const
 }
 
 
-void Page::DrawItems(int x, int y) const
+void Page::DrawItems(int x, int y, bool active) const
 {
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
-        ReinterpretToDPage()->items[i]->DrawClosed(x, y);
+        ReinterpretToDPage()->items[i]->DrawClosed(x, y, active);
         y += Item::HEIGHT;
     }
 }
@@ -165,9 +165,9 @@ const Item *Page::CurrentItem() const
 }
 
 
-void Page::DrawClosed(int x, int y) const
+void Page::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 }
 
 
