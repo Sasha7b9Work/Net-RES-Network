@@ -18,7 +18,7 @@ void Item::Open() const
 }
 
 
-void Page::Close() const
+void Item::Close() const
 {
     if (this == PageMain::self)
     {
@@ -26,8 +26,14 @@ void Page::Close() const
     }
     else
     {
-        opened_item = ReinterpretToDPage()->keeper;
+        opened_item = ReinterpretToDItem()->keeper;
     }
+}
+
+
+void Page::Close() const
+{
+    Item::Close();
 
     uint8 *currentItem = ReinterpretToDPage()->currentItem;
 
@@ -72,6 +78,12 @@ void Item::DrawClosed(int x, int y) const
     if (ReinterpretToDItem()->keeper->CurrentItem() == this)
     {
         fill = Color::GREEN_50;
+    }
+
+    if (Item::Opened() != Keeper())
+    {
+        fill = Color::GRAY_25;
+        draw = Color::GRAY_10;
     }
 
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
@@ -274,12 +286,6 @@ void Choice::DoubleClick() const
 }
 
 
-void Governor::Open() const
-{
-
-}
-
-
 void Item::Draw() const
 {
 
@@ -333,7 +339,14 @@ void Governor::ShortPressure() const
 
 void Governor::LongPressure() const
 {
-
+    if (Item::Opened() != this)
+    {
+        Open();
+    }
+    else
+    {
+        Close();
+    }
 }
 
 

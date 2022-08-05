@@ -52,6 +52,7 @@ struct Item
     const Page *Keeper() const { return ReinterpretToDItem()->keeper; }
 
     void Open() const;
+    void Close() const;
 
     bool IsOpened() const { return this == opened_item; }
 
@@ -195,8 +196,6 @@ struct DGovernor
 struct Governor : public Item
 {
     void DrawClosed(int x, int y) const;
-
-    void Open() const;
 
     void ShortPressure() const;
     void LongPressure() const;
