@@ -238,16 +238,7 @@ void Page::LongPressure() const
     }
     else if (item->IsGovernor())
     {
-        const Governor *governor = item->ReinterpretToGovernor();
-
-        if (governor->IsOpened())
-        {
-            governor->LongPressure();
-        }
-        else
-        {
-            governor->Open();
-        }
+        item->ReinterpretToGovernor()->LongPressure();
     }
 }
 
