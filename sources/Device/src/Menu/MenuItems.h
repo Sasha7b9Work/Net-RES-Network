@@ -51,6 +51,8 @@ struct Item
 
     const Page *Keeper() const { return ReinterpretToDItem()->keeper; }
 
+    void Open() const;
+
     bool IsOpened() const { return this == opened_item; }
 
     static const Item *Opened() { return opened_item; };
@@ -100,8 +102,6 @@ struct Page : public Item
     void ShortPressure() const;
     void LongPressure() const;
     void DoubleClick() const;
-
-    void Open() const;
 
     void Close() const;
 

@@ -12,16 +12,9 @@ Item Item::Empty;
 const Item *Item::opened_item = &Item::Empty;
 
 
-void Page::Open() const
+void Item::Open() const
 {
     opened_item = this;
-
-    uint8 *currentItem = ReinterpretToDPage()->currentItem;
-
-    if (*currentItem == NumItems() - 1)
-    {
-        *currentItem = 0;
-    }
 }
 
 
@@ -34,6 +27,13 @@ void Page::Close() const
     else
     {
         opened_item = ReinterpretToDPage()->keeper;
+    }
+
+    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+
+    if (*currentItem == NumItems() - 1)
+    {
+        *currentItem = 0;
     }
 }
 
