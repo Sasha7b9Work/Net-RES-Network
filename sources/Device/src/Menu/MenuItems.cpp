@@ -131,7 +131,9 @@ const Item *Page::CurrentItem() const
 {
     const Item *const *items = ReinterpretToDPage()->items;
 
-    int num_items = NumItems();
+    const Page *page = this;
+
+    int num_items = page->NumItems();
     num_items = num_items;
 
     uint8 *currentItem = ReinterpretToDPage()->currentItem;

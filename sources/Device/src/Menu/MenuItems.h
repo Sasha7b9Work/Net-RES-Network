@@ -50,7 +50,7 @@ struct Item
 
     const Page *Keeper() const { return ReinterpretToDItem()->keeper; }
 
-    bool IsOpened() const { return false; }
+    bool IsOpened() const { return this == opened_item; }
 
     static const Item *Opened() { return opened_item; };
 
