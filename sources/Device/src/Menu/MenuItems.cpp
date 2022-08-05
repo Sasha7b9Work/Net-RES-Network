@@ -8,9 +8,13 @@
 #include "Utils/Text/String.h"
 
 
+Item Item::Empty;
+const Item *Item::opened_item = &Item::Empty;
+
+
 void Page::Open() const
 {
-    Menu::opened = this;
+    opened_item = this;
 
     uint8 *currentItem = ReinterpretToDPage()->currentItem;
 
@@ -25,11 +29,11 @@ void Page::Close() const
 {
     if (this == PageMain::self)
     {
-        Menu::opened = &Page::Empty;
+        opened_item = &Page::Empty;
     }
     else
     {
-        Menu::opened = ReinterpretToDPage()->keeper;
+        opened_item = ReinterpretToDPage()->keeper;
     }
 }
 
@@ -224,11 +228,11 @@ void Page::LongPressure() const
     }
     else if (item->IsChoice())
     {
-        item->ReinterpretToChoice()->Change();
+        item->ReinterpretToChoice()->LongPressure();
     }
     else if (item->IsButton())
     {
-        item->ReinterpretToButton()->FuncOnPress();
+        item->ReinterpretToButton()->LongPressure();
     }
     else if (item->IsGovernor())
     {
@@ -236,7 +240,7 @@ void Page::LongPressure() const
 
         if (governor->IsOpened())
         {
-            governor->LongPress();
+            governor->LongPressure();
         }
         else
         {
@@ -246,7 +250,7 @@ void Page::LongPressure() const
 }
 
 
-void Choice::Change() const
+void Choice::LongPressure() const
 {
     uint8 *cell = ReinterpretToDChoice()->cell;
 
@@ -260,6 +264,30 @@ void Choice::Change() const
 
 
 void Governor::Open() const
+{
+
+}
+
+
+void Item::Draw() const
+{
+
+}
+
+
+void Item::ShortPressure() const
+{
+
+}
+
+
+void Item::LongPressure() const
+{
+
+}
+
+
+void Governor::LongPressure() const
 {
 
 }

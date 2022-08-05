@@ -24,9 +24,7 @@ struct Governor;
 
 #define COMMON_PART_ITEM    TypeItem::E type;      \
                             pchar       title;     \
-                            const Page *keeper;    \
-                            bool       *opened;
-
+                            const Page *keeper;
 
 struct DItem
 {
@@ -41,14 +39,20 @@ struct Item
 
     String<> Title() const;
 
+    void Draw() const;
     void Draw(int x, int y) const;
 
     void DrawOpened(int x, int y) const;
     void DrawClosed(int x, int y) const;
 
-    virtual bool IsOpened() const { return false; }
+    void ShortPressure() const;
+    void LongPressure() const;
 
-    static Item *Opened();
+    const Page *Keeper() const { return ReinterpretToDItem()->keeper; }
+
+    bool IsOpened() const { return false; }
+
+    static const Item *Opened() { return opened_item; };
 
     bool IsPage() const     { return (ReinterpretToDItem()->type == TypeItem::Page);   }
     bool IsChoice() const   { return (ReinterpretToDItem()->type == TypeItem::Choice); }
@@ -65,9 +69,10 @@ struct Item
     static Item Empty;
 
 protected:
+
     virtual ~Item() { }
 
-    static Item *opened_item;
+    static const Item *opened_item;
 };
 
 
@@ -140,7 +145,7 @@ struct Choice : public Item
 {
     void DrawClosed(int x, int y) const;
 
-    void Change() const;
+    void LongPressure() const;
 
     pchar CurrentName() const;
 
@@ -163,7 +168,7 @@ struct DButton
 
 struct Button : public Item
 {
-    void FuncOnPress() const { ReinterpretToDButton()->funcPress(); }
+    void LongPressure() const { ReinterpretToDButton()->funcPress(); }
 
     void DrawClosed(int x, int y) const;
 
@@ -189,6 +194,8 @@ struct Governor : public Item
     void DrawClosed(int x, int y) const;
 
     void Open() const;
+
+    void LongPressure() const;
 
     const DGovernor *RetinterpretToDGovernor() const { return (DGovernor *)this; }
 };

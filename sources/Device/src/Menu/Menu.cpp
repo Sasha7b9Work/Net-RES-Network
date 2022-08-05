@@ -22,7 +22,7 @@ void Menu::ShortPress()
     }
     else
     {
-        Menu::OpenedPage()->ShortPressure();
+        Item::Opened()->ShortPressure();
     }
 
     Display::need_redraw = true;
@@ -33,11 +33,11 @@ void Menu::LongPress()
 {
     if (!Opened())
     {
-        opened = PageMain::self;
+        PageMain::self->Open();
     }
     else
     {
-        Menu::OpenedPage()->LongPressure();
+        Item::Opened()->LongPressure();
     }
 
     Display::need_redraw = true;
@@ -46,7 +46,7 @@ void Menu::LongPress()
 
 bool Menu::Opened()
 {
-    return (opened != &Page::Empty);
+    return (Item::Opened() != &Page::Empty);
 }
 
 
@@ -56,7 +56,20 @@ void Menu::Draw()
 
     Font::Set(TypeFont::_8);
 
-    Menu::OpenedPage()->Draw(0, 0);
+    if (Item::Opened()->IsPage())
+    {
+        Item::Opened()->Draw(0, 0);
+    }
+    else
+    {
+        const Item *opened = Item::Opened();
+
+        const Page *keeper = opened->Keeper();
+
+        keeper->Draw(0, 0);
+
+        Item::Opened()->Draw();
+    }
 
     Display::EndScene();
 }
