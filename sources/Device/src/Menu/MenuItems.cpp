@@ -279,7 +279,14 @@ void Item::Draw() const
 
 void Item::ShortPressure() const
 {
-
+    switch (ReinterpretToDItem()->type)
+    {
+    case TypeItem::Page:        ReinterpetToPage()->ShortPressure();        break;
+    case TypeItem::Choice:      ReinterpretToChoice()->ShortPressure();     break;
+    case TypeItem::Button:      ReinterpretToChoice()->ShortPressure();     break;
+    case TypeItem::Governor:    ReinterpretToGovernor()->ShortPressure();   break;
+    case TypeItem::Count:                                                   break;
+    }
 }
 
 
