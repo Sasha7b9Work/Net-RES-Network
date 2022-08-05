@@ -292,7 +292,14 @@ void Item::ShortPressure() const
 
 void Item::LongPressure() const
 {
-
+    switch (ReinterpretToDItem()->type)
+    {
+    case TypeItem::Page:        ReinterpetToPage()->LongPressure();        break;
+    case TypeItem::Choice:      ReinterpretToChoice()->LongPressure();     break;
+    case TypeItem::Button:      ReinterpretToChoice()->LongPressure();     break;
+    case TypeItem::Governor:    ReinterpretToGovernor()->LongPressure();   break;
+    case TypeItem::Count:                                                   break;
+    }
 }
 
 
