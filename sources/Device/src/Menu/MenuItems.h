@@ -142,7 +142,7 @@ struct DChoice
 
 struct Choice : public Item
 {
-    void DrawClosed(int x, int y) const;
+    void DrawClosed(int x, int y, bool active) const;
 
     void ShortPressure() const;
     void LongPressure() const;
@@ -173,7 +173,7 @@ struct Button : public Item
     void LongPressure() const { ReinterpretToDButton()->funcPress(); }
     void DoubleClick() const;
 
-    void DrawClosed(int x, int y) const;
+    void DrawClosed(int x, int y, bool active) const;
 
     const DButton *ReinterpretToDButton() const { return (DButton *)this; }
 };
@@ -194,7 +194,7 @@ struct DGovernor
 
 struct Governor : public Item
 {
-    void DrawClosed(int x, int y) const;
+    void DrawClosed(int x, int y, bool active) const;
 
     void ShortPressure() const;
     void LongPressure() const;

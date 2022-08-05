@@ -48,7 +48,7 @@ void Item::Draw(int x, int y, bool active) const
 {
     if (IsOpened())
     {
-        DrawOpened(x, y, true);
+        DrawOpened(x, y, active);
     }
     else
     {
@@ -105,15 +105,15 @@ void Item::DrawClosed(int x, int y, bool active) const
     }
     else if (IsChoice())
     {
-        ReinterpretToChoice()->DrawClosed(x, y);
+        ReinterpretToChoice()->DrawClosed(x, y, active);
     }
     else if (IsButton())
     {
-        ReinterpretToButton()->DrawClosed(x, y);
+        ReinterpretToButton()->DrawClosed(x, y, active);
     }
     else if (IsGovernor())
     {
-        ReinterpretToGovernor()->DrawClosed(x, y);
+        ReinterpretToGovernor()->DrawClosed(x, y, active);
     }
 }
 
@@ -179,23 +179,23 @@ pchar Choice::CurrentName() const
 }
 
 
-void Choice::DrawClosed(int x, int y) const
+void Choice::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 
     String<>(CurrentName()).Draw(x + 130, y + 5);
 }
 
 
-void Button::DrawClosed(int x, int y) const
+void Button::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 }
 
 
-void Governor::DrawClosed(int x, int y) const
+void Governor::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::WHITE);
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 }
 
 
