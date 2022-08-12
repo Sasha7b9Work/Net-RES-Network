@@ -48,7 +48,7 @@ struct Item
     void LongPressure() const;
     void DoubleClick() const;
 
-    const Page *Keeper() const { return ReinterpretToDItem()->keeper; }
+    const Page *Keeper() const { return ToDItem()->keeper; }
 
     void Open() const;
     void Close() const;
@@ -57,17 +57,17 @@ struct Item
 
     static const Item *Opened() { return opened_item; };
 
-    bool IsPage() const     { return (ReinterpretToDItem()->type == TypeItem::Page);   }
-    bool IsChoice() const   { return (ReinterpretToDItem()->type == TypeItem::Choice); }
-    bool IsButton() const   { return (ReinterpretToDItem()->type == TypeItem::Button); }
-    bool IsGovernor() const { return (ReinterpretToDItem()->type == TypeItem::Governor); }
+    bool IsPage() const     { return (ToDItem()->type == TypeItem::Page);   }
+    bool IsChoice() const   { return (ToDItem()->type == TypeItem::Choice); }
+    bool IsButton() const   { return (ToDItem()->type == TypeItem::Button); }
+    bool IsGovernor() const { return (ToDItem()->type == TypeItem::Governor); }
 
-    const DItem *ReinterpretToDItem() const { return (DItem *)this; }
+    const DItem *ToDItem() const { return (DItem *)this; }
 
     const Page *ToPage() const { return (const Page *)this; }
-    const Choice *ReinterpretToChoice() const { return (const Choice *)this; }
-    const Button *ReinterpretToButton() const { return (const Button *)this; }
-    const Governor *ReinterpretToGovernor() const { return (const Governor *)this; }
+    const Choice *ToChoice() const { return (const Choice *)this; }
+    const Button *ToButton() const { return (const Button *)this; }
+    const Governor *ToGovernor() const { return (const Governor *)this; }
 
     static Item Empty;
 
@@ -201,4 +201,14 @@ struct Governor : public Item
     void DoubleClick() const;
 
     const DGovernor *ToDGovernor() const { return (DGovernor *)this; }
+
+    struct ActiveControl
+    {
+        enum E
+        {
+            Increase,       // ѕри коротком нажатии увеличение значени€
+            Decrease,       // ѕри коротком нажатии уменьшение значени€
+            Close           // ѕри коротком нажатии закрываетс€
+        };
+    };
 };

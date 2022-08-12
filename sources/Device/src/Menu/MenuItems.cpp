@@ -27,7 +27,7 @@ void Item::Close() const
     }
     else
     {
-        opened_item = ReinterpretToDItem()->keeper;
+        opened_item = ToDItem()->keeper;
     }
 }
 
@@ -77,7 +77,7 @@ void Item::DrawOpened(int x, int y, bool active) const
     }
     else if (IsGovernor())
     {
-        ReinterpretToGovernor()->DrawOpened(x, y, active);
+        ToGovernor()->DrawOpened(x, y, active);
     }
 }
 
@@ -87,7 +87,7 @@ void Item::DrawClosed(int x, int y, bool active) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
+    if (ToDItem()->keeper->CurrentItem() == this)
     {
         fill = Color::GREEN_50;
     }
@@ -106,22 +106,22 @@ void Item::DrawClosed(int x, int y, bool active) const
     }
     else if (IsChoice())
     {
-        ReinterpretToChoice()->DrawClosed(x, y, active);
+        ToChoice()->DrawClosed(x, y, active);
     }
     else if (IsButton())
     {
-        ReinterpretToButton()->DrawClosed(x, y, active);
+        ToButton()->DrawClosed(x, y, active);
     }
     else if (IsGovernor())
     {
-        ReinterpretToGovernor()->DrawClosed(x, y, active);
+        ToGovernor()->DrawClosed(x, y, active);
     }
 }
 
 
 String<> Item::Title() const
 {
-    return String<>(ReinterpretToDItem()->title);
+    return String<>(ToDItem()->title);
 }
 
 
@@ -193,7 +193,7 @@ void Governor::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 
-    Int(*ToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
+    Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
 }
 
 
@@ -202,7 +202,7 @@ void Governor::DrawOpened(int x, int y, bool active) const
     Color::E fill = Color::BLACK;
     Color::E draw = Color::WHITE;
 
-    if (ReinterpretToDItem()->keeper->CurrentItem() == this)
+    if (ToDItem()->keeper->CurrentItem() == this)
     {
         fill = Color::GREEN_50;
     }
@@ -217,11 +217,13 @@ void Governor::DrawOpened(int x, int y, bool active) const
 
     Title().Draw(x + 10, y + 5, Color::MenuLetters(true));
 
-    String<>("\x95").Draw(x, y + 3, Color::MenuLetters(true));
+    String<>("\x95").Draw(x + 40, y + 3, Color::MenuLetters(true));
 
-    String<>("\x85").Draw(x, y + 12, Color::MenuLetters(true));
+    String<>("\x85").Draw(x + 40, y + 12, Color::MenuLetters(true));
 
-    Int(*ToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
+    String<>("\x88").Draw(x + 60, y + 5, Color::MenuLetters(true));
+
+    Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
 }
 
 
@@ -279,15 +281,15 @@ void Page::LongPressure() const
     }
     else if (item->IsChoice())
     {
-        item->ReinterpretToChoice()->LongPressure();
+        item->ToChoice()->LongPressure();
     }
     else if (item->IsButton())
     {
-        item->ReinterpretToButton()->LongPressure();
+        item->ToButton()->LongPressure();
     }
     else if (item->IsGovernor())
     {
-        item->ReinterpretToGovernor()->LongPressure();
+        item->ToGovernor()->LongPressure();
     }
 }
 
@@ -337,12 +339,12 @@ void Button::DoubleClick() const
 
 void Item::ShortPressure() const
 {
-    switch (ReinterpretToDItem()->type)
+    switch (ToDItem()->type)
     {
     case TypeItem::Page:        ToPage()->ShortPressure();        break;
-    case TypeItem::Choice:      ReinterpretToChoice()->ShortPressure();     break;
-    case TypeItem::Button:      ReinterpretToButton()->ShortPressure();     break;
-    case TypeItem::Governor:    ReinterpretToGovernor()->ShortPressure();   break;
+    case TypeItem::Choice:      ToChoice()->ShortPressure();     break;
+    case TypeItem::Button:      ToButton()->ShortPressure();     break;
+    case TypeItem::Governor:    ToGovernor()->ShortPressure();   break;
     case TypeItem::Count:                                                   break;
     }
 }
@@ -350,12 +352,12 @@ void Item::ShortPressure() const
 
 void Item::LongPressure() const
 {
-    switch (ReinterpretToDItem()->type)
+    switch (ToDItem()->type)
     {
     case TypeItem::Page:        ToPage()->LongPressure();     break;
-    case TypeItem::Choice:      ReinterpretToChoice()->LongPressure();  break;
-    case TypeItem::Button:      ReinterpretToButton()->LongPressure();  break;
-    case TypeItem::Governor:    ReinterpretToGovernor()->LongPressure();break;
+    case TypeItem::Choice:      ToChoice()->LongPressure();  break;
+    case TypeItem::Button:      ToButton()->LongPressure();  break;
+    case TypeItem::Governor:    ToGovernor()->LongPressure();break;
     case TypeItem::Count:                                               break;
     }
 }
@@ -363,12 +365,12 @@ void Item::LongPressure() const
 
 void Item::DoubleClick() const
 {
-    switch (ReinterpretToDItem()->type)
+    switch (ToDItem()->type)
     {
     case TypeItem::Page:        ToPage()->DoubleClick();      break;
-    case TypeItem::Choice:      ReinterpretToChoice()->DoubleClick();   break;
-    case TypeItem::Button:      ReinterpretToButton()->DoubleClick();   break;
-    case TypeItem::Governor:    ReinterpretToGovernor()->DoubleClick(); break;
+    case TypeItem::Choice:      ToChoice()->DoubleClick();   break;
+    case TypeItem::Button:      ToButton()->DoubleClick();   break;
+    case TypeItem::Governor:    ToGovernor()->DoubleClick(); break;
     case TypeItem::Count:                                               break;
     }
 }
