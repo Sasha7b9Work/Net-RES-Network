@@ -36,7 +36,7 @@ void Page::Close() const
 {
     Item::Close();
 
-    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+    uint8 *currentItem = ToDPage()->currentItem;
 
     if (*currentItem == NumItems() - 1)
     {
@@ -145,7 +145,7 @@ void Page::DrawItems(int x, int y, bool active) const
 {
     for (int i = FirstItemOnScreen(); i < LastItemOnScreen(); i++)
     {
-        ReinterpretToDPage()->items[i]->DrawClosed(x, y, active);
+        ToDPage()->items[i]->DrawClosed(x, y, active);
         y += Item::HEIGHT;
     }
 }
@@ -153,9 +153,9 @@ void Page::DrawItems(int x, int y, bool active) const
 
 const Item *Page::CurrentItem() const
 {
-    const Item *const *items = ReinterpretToDPage()->items;
+    const Item *const *items = ToDPage()->items;
 
-    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+    uint8 *currentItem = ToDPage()->currentItem;
 
     return items[*currentItem];
 }
@@ -169,7 +169,7 @@ void Page::DrawClosed(int x, int y, bool active) const
 
 pchar Choice::CurrentName() const
 {
-    const DChoice *choice = ReinterpretToDChoice();
+    const DChoice *choice = ToDChoice();
 
     return choice->names[*choice->cell];
 }
@@ -193,7 +193,7 @@ void Governor::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 
-    Int(*RetinterpretToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
+    Int(*ToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
 }
 
 
@@ -221,13 +221,13 @@ void Governor::DrawOpened(int x, int y, bool active) const
 
     String<>("\x85").Draw(x, y + 12, Color::MenuLetters(true));
 
-    Int(*RetinterpretToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
+    Int(*ToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
 }
 
 
 int Page::FirstItemOnScreen() const
 {
-    return (*ReinterpretToDPage()->currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
+    return (*ToDPage()->currentItem / Page::NUM_ITEMS_ON_SCREEN) * Page::NUM_ITEMS_ON_SCREEN;
 }
 
 
@@ -248,7 +248,7 @@ int Page::NumItems() const
 {
     for (int i = 0; ; i++)
     {
-        if (ReinterpretToDPage()->items[i] == nullptr)
+        if (ToDPage()->items[i] == nullptr)
         {
             return i;
         }
@@ -258,7 +258,7 @@ int Page::NumItems() const
 
 void Page::ShortPressure() const
 {
-    uint8 *currentItem = ReinterpretToDPage()->currentItem;
+    uint8 *currentItem = ToDPage()->currentItem;
 
     *currentItem = (uint8)(*currentItem + 1);
 
@@ -312,11 +312,11 @@ void Button::ShortPressure() const
 
 void Choice::LongPressure() const
 {
-    uint8 *cell = ReinterpretToDChoice()->cell;
+    uint8 *cell = ToDChoice()->cell;
 
     *cell = (uint8)(*cell + 1);
 
-    if (*cell == ReinterpretToDChoice()->count)
+    if (*cell == ToDChoice()->count)
     {
         *cell = 0;
     }

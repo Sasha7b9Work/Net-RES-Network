@@ -104,7 +104,7 @@ struct Page : public Item
 
     void Close() const;
 
-    const DPage *ReinterpretToDPage() const { return (DPage *)this; }
+    const DPage *ToDPage() const { return (DPage *)this; }
 
     const Item *CurrentItem() const;
 
@@ -149,7 +149,7 @@ struct Choice : public Item
 
     pchar CurrentName() const;
 
-    const DChoice *ReinterpretToDChoice() const { return (DChoice *)this; }
+    const DChoice *ToDChoice() const { return (DChoice *)this; }
 };
 
 
@@ -169,12 +169,12 @@ struct DButton
 struct Button : public Item
 {
     void ShortPressure() const;
-    void LongPressure() const { ReinterpretToDButton()->funcPress(); }
+    void LongPressure() const { ToDButton()->funcPress(); }
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;
 
-    const DButton *ReinterpretToDButton() const { return (DButton *)this; }
+    const DButton *ToDButton() const { return (DButton *)this; }
 };
 
 
@@ -200,5 +200,5 @@ struct Governor : public Item
     void LongPressure() const;
     void DoubleClick() const;
 
-    const DGovernor *RetinterpretToDGovernor() const { return (DGovernor *)this; }
+    const DGovernor *ToDGovernor() const { return (DGovernor *)this; }
 };
