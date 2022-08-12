@@ -237,14 +237,8 @@ uint8_t *USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
   */
 uint8_t *USBD_FS_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
-    if (speed == USBD_SPEED_HIGH)
-    {
-        USBD_GetString((uint8_t *)USBD_CONFIGURATION_STRING_FS, USBD_StrDesc, length);
-    }
-    else
-    {
-        USBD_GetString((uint8_t *)USBD_CONFIGURATION_STRING_FS, USBD_StrDesc, length);
-    }
+    USBD_GetString((uint8_t *)USBD_CONFIGURATION_STRING_FS, USBD_StrDesc, length);
+
     return USBD_StrDesc;
 }
 
@@ -256,14 +250,8 @@ uint8_t *USBD_FS_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
   */
 uint8_t *USBD_FS_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
-    if (speed == 0)
-    {
-        USBD_GetString((uint8_t *)USBD_INTERFACE_STRING_FS, USBD_StrDesc, length);
-    }
-    else
-    {
-        USBD_GetString((uint8_t *)USBD_INTERFACE_STRING_FS, USBD_StrDesc, length);
-    }
+    USBD_GetString((uint8_t *)USBD_INTERFACE_STRING_FS, USBD_StrDesc, length);
+
     return USBD_StrDesc;
 }
 
@@ -276,9 +264,9 @@ static void Get_SerialNum(void)
 {
     uint32_t deviceserial0, deviceserial1, deviceserial2;
 
-    deviceserial0 = *(uint32_t *)DEVICE_ID1;
-    deviceserial1 = *(uint32_t *)DEVICE_ID2;
-    deviceserial2 = *(uint32_t *)DEVICE_ID3;
+    deviceserial0 = *(uint32_t *)DEVICE_ID1; //-V566
+    deviceserial1 = *(uint32_t *)DEVICE_ID2; //-V566
+    deviceserial2 = *(uint32_t *)DEVICE_ID3; //-V566
 
     deviceserial0 += deviceserial2;
 

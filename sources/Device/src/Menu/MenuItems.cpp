@@ -73,7 +73,7 @@ void Item::DrawOpened(int x, int y, bool active) const
 {
     if (IsPage())
     {
-        ReinterpetToPage()->DrawOpened(x, y, active);
+        ToPage()->DrawOpened(x, y, active);
     }
     else if (IsGovernor())
     {
@@ -102,7 +102,7 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     if (IsPage())
     {
-        ReinterpetToPage()->DrawClosed(x, y, active);
+        ToPage()->DrawClosed(x, y, active);
     }
     else if (IsChoice())
     {
@@ -154,11 +154,6 @@ void Page::DrawItems(int x, int y, bool active) const
 const Item *Page::CurrentItem() const
 {
     const Item *const *items = ReinterpretToDPage()->items;
-
-    const Page *page = this;
-
-    int num_items = page->NumItems();
-    num_items = num_items;
 
     uint8 *currentItem = ReinterpretToDPage()->currentItem;
 
@@ -272,7 +267,7 @@ void Page::LongPressure() const
 
     if (item->IsPage())
     {
-        item->ReinterpetToPage()->Open();
+        item->ToPage()->Open();
     }
     else if (item->IsChoice())
     {
@@ -301,6 +296,12 @@ void Choice::ShortPressure() const
 }
 
 
+void Button::ShortPressure() const
+{
+
+}
+
+
 void Choice::LongPressure() const
 {
     uint8 *cell = ReinterpretToDChoice()->cell;
@@ -324,9 +325,9 @@ void Item::ShortPressure() const
 {
     switch (ReinterpretToDItem()->type)
     {
-    case TypeItem::Page:        ReinterpetToPage()->ShortPressure();        break;
+    case TypeItem::Page:        ToPage()->ShortPressure();        break;
     case TypeItem::Choice:      ReinterpretToChoice()->ShortPressure();     break;
-    case TypeItem::Button:      ReinterpretToChoice()->ShortPressure();     break;
+    case TypeItem::Button:      ReinterpretToButton()->ShortPressure();     break;
     case TypeItem::Governor:    ReinterpretToGovernor()->ShortPressure();   break;
     case TypeItem::Count:                                                   break;
     }
@@ -337,7 +338,7 @@ void Item::LongPressure() const
 {
     switch (ReinterpretToDItem()->type)
     {
-    case TypeItem::Page:        ReinterpetToPage()->LongPressure();     break;
+    case TypeItem::Page:        ToPage()->LongPressure();     break;
     case TypeItem::Choice:      ReinterpretToChoice()->LongPressure();  break;
     case TypeItem::Button:      ReinterpretToChoice()->LongPressure();  break;
     case TypeItem::Governor:    ReinterpretToGovernor()->LongPressure();break;
@@ -350,7 +351,7 @@ void Item::DoubleClick() const
 {
     switch (ReinterpretToDItem()->type)
     {
-    case TypeItem::Page:        ReinterpetToPage()->DoubleClick();      break;
+    case TypeItem::Page:        ToPage()->DoubleClick();      break;
     case TypeItem::Choice:      ReinterpretToChoice()->DoubleClick();   break;
     case TypeItem::Button:      ReinterpretToChoice()->DoubleClick();   break;
     case TypeItem::Governor:    ReinterpretToGovernor()->DoubleClick(); break;

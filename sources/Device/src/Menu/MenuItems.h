@@ -64,7 +64,7 @@ struct Item
 
     const DItem *ReinterpretToDItem() const { return (DItem *)this; }
 
-    const Page *ReinterpetToPage() const { return (const Page *)this; }
+    const Page *ToPage() const { return (const Page *)this; }
     const Choice *ReinterpretToChoice() const { return (const Choice *)this; }
     const Button *ReinterpretToButton() const { return (const Button *)this; }
     const Governor *ReinterpretToGovernor() const { return (const Governor *)this; }
