@@ -6,6 +6,7 @@
 #include "Utils/Text/String.h"
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <stm32f1xx_hal.h>
 #include <cstring>
 
@@ -133,6 +134,8 @@ void ST7735::Init()
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
+    TimeMeterMS meter;
+
     SetWindow(x0, y0, width, height);
 
     SendCommand(0x2C);
@@ -143,7 +146,13 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
 #define WRITE_NIBBLE(nibble)                    \
             value >>= 4;                        \
-            while ((SPI2->SR & SPI_SR_BSY));    \
+            while ((SPI2->SR & SPI_SR_BSY))     \
+            {                                   \
+                if (meter.ElapsedTime() > 100)  \
+                {                               \
+                    break;                      \
+                }                               \
+            }                                   \
             SPI2->DR = Color::colors[value & 0x0f];
 
     if ((x0 % 8) == 0 && ((width % 8) == 0))
@@ -156,7 +165,13 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                while (SPI2->SR & SPI_SR_BSY) {};
+                while (SPI2->SR & SPI_SR_BSY)
+                {
+                    if (meter.ElapsedTime() > 100)
+                    {
+                        break;
+                    }
+                };
 
                 SPI2->DR = Color::colors[value & 0x0f];            // 0 nibble
 
@@ -182,11 +197,23 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                while ((SPI2->SR & SPI_SR_BSY)) {}
+                while ((SPI2->SR & SPI_SR_BSY))
+                {
+                    if (meter.ElapsedTime() > 100)
+                    {
+                        break;
+                    }
+                }
 
                 SPI2->DR = Color::colors[value & 0x0F];
 
-                while ((SPI2->SR & SPI_SR_BSY)) {}
+                while ((SPI2->SR & SPI_SR_BSY))
+                {
+                    if (meter.ElapsedTime() > 100)
+                    {
+                        break;
+                    }
+                }
 
                 SPI2->DR = Color::colors[value >> 4];
 
@@ -221,16 +248,36 @@ void ST7735::SetWindow(int x, int y, int width, int height)
 
 void ST7735::SendData16(uint16 data)
 {
+    TimeMeterMS meter;
+
     SET_DC;
     RESET_CS;
 
     SPI2->CR1 |= SPI_CR1_DFF;
 
-    while (!(SPI2->SR & SPI_SR_TXE)) {};
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    };
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE)) {};
-    while ((SPI2->SR & SPI_SR_BSY)) {};
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    };
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    };
 
     SET_CS;
 }
@@ -238,16 +285,36 @@ void ST7735::SendData16(uint16 data)
 
 void ST7735::SendData8(uint8 data)
 {
+    TimeMeterMS meter;
+
     SET_DC;
     RESET_CS;
 
-    while (!(SPI2->SR & SPI_SR_TXE)) {}
-    
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE)) {}
-    
-    while (SPI2->SR & SPI_SR_BSY) {}
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while (SPI2->SR & SPI_SR_BSY)
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
@@ -255,18 +322,38 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
+    TimeMeterMS meter;
+
     RESET_DC;
     RESET_CS;
 
     SPI2->CR1 &= ~SPI_CR1_DFF;
 
-    while (!(SPI2->SR & SPI_SR_TXE)) {}
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SPI2->DR = data;
 
-    while (!(SPI2->SR & SPI_SR_TXE)) {}
-    
-    while ((SPI2->SR & SPI_SR_BSY)) {}
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
