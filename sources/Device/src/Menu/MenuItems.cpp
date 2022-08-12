@@ -411,7 +411,7 @@ void Governor::LongPressure() const
     }
     else
     {
-        Close();
+        
     }
 }
 

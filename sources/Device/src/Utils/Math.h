@@ -7,4 +7,7 @@
 namespace Math
 {
     uint CalculateHash(const void *buffer, int size);
+
+    template<class T>
+    void CircleIncrease()
 }
