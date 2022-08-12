@@ -32,7 +32,7 @@ public:
 
     bool Filled() const { return (Size() == capacity - 1); }
 
-    int Draw(int x, int y, Color::E = Color::Count);
+    int Draw(int x, int y, Color::E = Color::Count) const;
 
     void DrawInRect(int x, int y, int width, int height, int dy = 0);
 

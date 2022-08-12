@@ -11,6 +11,7 @@
 
 Item Item::Empty;
 const Item *Item::opened_item = &Item::Empty;
+Governor::ActiveControl::E Governor::active_control = Governor::ActiveControl::Increase;
 
 
 void Item::Open() const
@@ -89,7 +90,7 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     if (ToDItem()->keeper->CurrentItem() == this)
     {
-        fill = Color::GREEN_50;
+        fill = Color::MenuItem();
     }
 
     if (Item::Opened() != Keeper())
@@ -204,7 +205,7 @@ void Governor::DrawOpened(int x, int y, bool active) const
 
     if (ToDItem()->keeper->CurrentItem() == this)
     {
-        fill = Color::GREEN_50;
+        fill = Color::MenuItem();
     }
 
     if (!active && (Item::Opened() != Keeper()))
@@ -217,13 +218,33 @@ void Governor::DrawOpened(int x, int y, bool active) const
 
     Title().Draw(x + 10, y + 5, Color::MenuLetters(true));
 
-    String<>("\x95").Draw(x + 40, y + 3, Color::MenuLetters(true));
-
-    String<>("\x85").Draw(x + 40, y + 12, Color::MenuLetters(true));
-
-    String<>("\x88").Draw(x + 60, y + 5, Color::MenuLetters(true));
+    DrawControls(x, y);
 
     Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
+}
+
+
+void Governor::DrawControls(int x, int y) const
+{
+    DrawControl(x + 50, y + 3, String<>("\x95"), active_control == ActiveControl::Increase);
+
+    DrawControl(x + 50, y + 12, String<>("\x85"), active_control == ActiveControl::Decrease);
+
+    DrawControl(x + 80, y + 5, String<>("\x88"), active_control == ActiveControl::Close);
+}
+
+
+void Governor::DrawControl(int x, int y, const String<> &symbol, bool active) const
+{
+    Color::E color_draw = Color::MenuLetters(true);
+
+    if (active)
+    {
+        Rectangle(10, 6).Fill(x - 1, y - 1, Color::MenuLetters(true));
+        color_draw = Color::MenuItem();
+    }
+
+    symbol.Draw(x, y, color_draw);
 }
 
 

@@ -12,7 +12,7 @@
 
 
 template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
-template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color::E);
+template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color::E) const;
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawInCenterRect(int x, int y, int width, int height, Color::E);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawWithLimitation(int x, int y, Color::E color, int limitX, int limitY, int limitWidth,
@@ -32,13 +32,13 @@ template void String<(int)DEFAULT_SIZE_STRING>::DrawInCenterRectOnBackground(int
 template bool String<(int)DEFAULT_SIZE_STRING>::ToInt(int *);
 template void String<(int)DEFAULT_SIZE_STRING>::AppendBytes(const void *, int);
 
-template int  String<(int)1024>::Draw(int, int, Color::E);
+template int  String<(int)1024>::Draw(int, int, Color::E) const;
 template int  String<(int)1024>::DrawInBoundedRectWithTransfers(int x, int y, int width, Color::E colorBackground,
     Color::E colorFill);
 
 
 template<int capa>
-int String<capa>::Draw(int x, int y, Color::E color)
+int String<capa>::Draw(int x, int y, Color::E color) const
 {
     Color::SetCurrent(color);
 

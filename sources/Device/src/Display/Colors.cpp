@@ -25,3 +25,9 @@ Color::E Color::MenuLetters(bool active)
 {
     return active ? Color::WHITE : Color::GRAY_50;
 }
+
+
+Color::E Color::MenuItem()
+{
+    return Color::GREEN_50;
+}

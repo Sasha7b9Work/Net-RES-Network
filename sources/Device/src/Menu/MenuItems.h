@@ -202,6 +202,12 @@ struct Governor : public Item
 
     const DGovernor *ToDGovernor() const { return (DGovernor *)this; }
 
+private:
+
+    void DrawControls(int x, int y) const;
+
+    void DrawControl(int x, int y, const String<> &, bool active) const;
+
     struct ActiveControl
     {
         enum E
@@ -211,4 +217,6 @@ struct Governor : public Item
             Close           // При коротком нажатии закрывается
         };
     };
+
+    static ActiveControl::E active_control;
 };

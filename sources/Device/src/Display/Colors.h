@@ -31,6 +31,7 @@ struct Color
 
     // Цвет надписей
     static Color::E MenuLetters(bool active);
+    static Color::E MenuItem();
 
 private:
 
