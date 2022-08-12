@@ -594,7 +594,7 @@ String<> SU::Bin2String(uint8 value)
 
 
 String<> SU::Bin2String16(uint16 value)
-{
+{ 
     char buffer[19];
 
     std::strcpy(buffer, Bin2String((uint8)(value >> 8)).c_str());
