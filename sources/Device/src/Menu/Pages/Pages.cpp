@@ -17,7 +17,7 @@ DEF_BUTTN(bCloseMainPage,
     CloseMainPage
 )
 
-DEF_PAGE_4(pageMain,
+DEF_PAGE_4(pageMain, //-V1027
     "лемч",
     Page::Empty,
     *PageDisplay::self,

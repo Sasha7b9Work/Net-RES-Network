@@ -321,6 +321,12 @@ void Choice::DoubleClick() const
 }
 
 
+void Button::DoubleClick() const
+{
+
+}
+
+
 void Item::ShortPressure() const
 {
     switch (ReinterpretToDItem()->type)
@@ -340,7 +346,7 @@ void Item::LongPressure() const
     {
     case TypeItem::Page:        ToPage()->LongPressure();     break;
     case TypeItem::Choice:      ReinterpretToChoice()->LongPressure();  break;
-    case TypeItem::Button:      ReinterpretToChoice()->LongPressure();  break;
+    case TypeItem::Button:      ReinterpretToButton()->LongPressure();  break;
     case TypeItem::Governor:    ReinterpretToGovernor()->LongPressure();break;
     case TypeItem::Count:                                               break;
     }
@@ -353,7 +359,7 @@ void Item::DoubleClick() const
     {
     case TypeItem::Page:        ToPage()->DoubleClick();      break;
     case TypeItem::Choice:      ReinterpretToChoice()->DoubleClick();   break;
-    case TypeItem::Button:      ReinterpretToChoice()->DoubleClick();   break;
+    case TypeItem::Button:      ReinterpretToButton()->DoubleClick();   break;
     case TypeItem::Governor:    ReinterpretToGovernor()->DoubleClick(); break;
     case TypeItem::Count:                                               break;
     }

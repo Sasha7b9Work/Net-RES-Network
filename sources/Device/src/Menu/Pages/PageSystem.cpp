@@ -29,7 +29,7 @@ DEF_BUTTN(bClosePageSystem,
 );
 
 
-DEF_PAGE_2(pageSystem,
+DEF_PAGE_2(pageSystem, //-V1027
     "яхярелю",
     pageMain,
     gSerialNumber,

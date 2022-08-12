@@ -41,14 +41,14 @@ namespace Text
 
     // Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет
     // записано число букв в найденном слоге. Если слово закончилось, функция возвращает false
-    bool FindNextTransfer(char *letters, int8 *lettersInSyllable);
+    bool FindNextTransfer(char *letters, int *lettersInSyllable);
 
-    int8 *BreakWord(char *word);
+    int *BreakWord(char *word);
 
     bool CompareArrays(const bool *array1, const bool *array2, int numElems);
 
     // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-    char *PartWordForTransfer(char *word, int8 *lengthSyllables, int numSyllables, int numSyllable, char buffer[30]);
+    char *PartWordForTransfer(char *word, int *lengthSyllables, int numSyllables, int numSyllable, char buffer[30]);
 }
 
 
@@ -185,13 +185,13 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 }
 
 
-bool Text::FindNextTransfer(char *letters, int8 *lettersInSyllable)
+bool Text::FindNextTransfer(char *letters, int *lettersInSyllable)
 {
 
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    *lettersInSyllable = (int8)std::strlen(letters);
+    *lettersInSyllable = (int)std::strlen(letters);
 
     if (std::strlen(letters) <= 3) //-V1051
     {
@@ -253,11 +253,12 @@ bool Text::FindNextTransfer(char *letters, int8 *lettersInSyllable)
 }
 
 
-int8* Text::BreakWord(char *word)
+int *Text::BreakWord(char *word)
 {
     int num = 0;
-    static int8 lengthSyllables[10];
+    static int lengthSyllables[10];
     char *position = word;
+
     while (FindNextTransfer(position, &(lengthSyllables[num])))
     {
         position += lengthSyllables[num];
@@ -274,11 +275,12 @@ int8* Text::BreakWord(char *word)
         int8 lenghts[] = {4, 3, 4, 5, 3, 0};
         std::memcpy(lengthSyllables, lenghts, 6);
     }
+
     return lengthSyllables;
 }
 
 
-char* Text::PartWordForTransfer(char *word, int8* lengthSyllables, int, int numSyllable, char buffer[30])
+char* Text::PartWordForTransfer(char *word, int* lengthSyllables, int, int numSyllable, char buffer[30])
 {
     int length = 0;
 
@@ -296,9 +298,10 @@ char* Text::PartWordForTransfer(char *word, int8* lengthSyllables, int, int numS
 
 int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
-    int8 *lengthSyllables = BreakWord(word);
+    int *lengthSyllables = BreakWord(word);
     int numSyllabels = 0;
     char buffer[30];
+
     for (int i = 0; i < 10; i++)
     {
         if (lengthSyllables[i] == 0)
@@ -312,6 +315,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     {
         char *subString = PartWordForTransfer(word, lengthSyllables, numSyllabels, i, buffer);
         int length = Font::Text::Length(subString);
+
         if (xRight - x > length - 5)
         {
             if (draw)
@@ -606,7 +610,7 @@ String<> SU::Float2String(float value, bool alwaysSign, int numDigits)
 
     char *buffer = result.c_str();
 
-    if (value == ERROR_VALUE_FLOAT || isnan(value) || isinf(value))
+    if (value == ERROR_VALUE_FLOAT || isnan(value) || isinf(value)) //-V550
     {
         return EmptyString();
     }

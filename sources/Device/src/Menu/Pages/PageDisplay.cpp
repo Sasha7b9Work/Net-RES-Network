@@ -69,7 +69,7 @@ DEF_PAGE_6( pageMeasures,
 #endif
 
 #ifdef TYPE_2
-DEF_PAGE_5(pageMeasures,
+DEF_PAGE_5(pageMeasures, //-V1027
     "»«Ã≈–≈Õ»ﬂ",
     *PageDisplay::self,
     chPressure,
@@ -92,7 +92,7 @@ DEF_BUTTN( bClosePageDisplay,
     ClosePageDisplay
 )
 
-DEF_PAGE_2(pageDisplay,
+DEF_PAGE_2(pageDisplay, //-V1027
     "ƒ»—œÀ≈…",
     pageMain,
     pageMeasures,
