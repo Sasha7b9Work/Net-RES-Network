@@ -1,7 +1,7 @@
 ﻿# (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
 import os
-from struct import *
+import struct
 
 # Записать в файл значение "слова" - двойного байта, находящегося по адресу num_word
 def WriteWord(num_word, file):
@@ -15,7 +15,7 @@ def WriteReverseByte(num_byte, file):
     if value < 0:
         value += 1024
     revValue = 0
-    base = 256
+    base = 1024
     while value != 0:
         revValue += (value & 1) * (base >> 1)
         base = base >> 1
@@ -42,15 +42,17 @@ def CalculateWidth(num_symbol):
     # num_word - порядковый номер "полуслова" в символе. Полуслово состоит из двух байт
     result = 0;
     
-    if num_symbol == 196:
-        print("num_symbol ", num_symbol)
+    if num_symbol == 0xCC:
+        print("num_symbol ", num_symbol, " symbol ")
 
     for num_word in range(0, 24, 2):
-        two_bytes = symbols[num_symbol * 12 * 2 + num_word] + (symbols[num_symbol * 12 * 2 + num_word + 1] << 8)
-        
-        if num_symbol == 196:
-            print("two_bytes =", two_bytes, " width = ", GetWidth2Bytes(two_bytes));
-        
+        two_bytes = symbols[num_symbol * 12 * 2 + num_word]
+        if num_symbol == 0xCC:
+            if num_word == 0:
+                print("two_bytes =", two_bytes, " width = ", GetWidth2Bytes(two_bytes));
+
+        two_bytes += (symbols[num_symbol * 12 * 2 + num_word + 1] << 8)
+               
         if GetWidth2Bytes(two_bytes) > result:
             result = GetWidth2Bytes(two_bytes)
 
@@ -64,7 +66,7 @@ def CalculateWidth(num_symbol):
 input = open("Font12_10.bin", "rb")
 data = input.read()
 input.close()
-symbols = unpack("6144b", data)
+symbols = struct.unpack("6144B", data)
 
 output = open("font12_10.inc", "w")
 output.write("#include \"Font.h\"\nconst Font22 font12_10 = {\n\t12, \t10, {\n")
