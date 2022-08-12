@@ -214,6 +214,14 @@ void Governor::DrawOpened(int x, int y, bool active) const
     }
 
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(true));
+
+    String<>("\x95").Draw(x, y + 3, Color::MenuLetters(true));
+
+    String<>("\x85").Draw(x, y + 12, Color::MenuLetters(true));
+
+    Int(*RetinterpretToDGovernor()->value).ToStirng().Draw(x + 100, y + 5, Color::MenuLetters(active));
 }
 
 
