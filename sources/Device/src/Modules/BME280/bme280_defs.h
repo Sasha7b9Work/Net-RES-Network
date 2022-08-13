@@ -262,7 +262,7 @@ typedef void (*bme280_delay_fptr_t)(uint32_t period);
 /*!
  * @brief Calibration data
  */
-struct bme280_calib_data {
+struct bme280_calib_data { //-V802
  /**
  * @ Trim Variables
  */
@@ -346,7 +346,7 @@ struct bme280_settings {
 /*!
  * @brief bme280 device structure
  */
-struct bme280_dev {
+struct bme280_dev { //-V802
 	/*! Chip Id */
 	uint8_t chip_id;
 	/*! Device Id */

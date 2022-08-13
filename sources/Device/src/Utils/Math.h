@@ -9,5 +9,5 @@ namespace Math
     uint CalculateHash(const void *buffer, int size);
 
     template<class T>
-    void CircleIncrease()
+    void CircleIncrease(T *value, T min, T max);
 }
