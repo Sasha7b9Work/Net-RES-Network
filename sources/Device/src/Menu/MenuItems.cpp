@@ -7,6 +7,7 @@
 #include "Menu/Menu.h"
 #include "Utils/Text/String.h"
 #include "Utils/Values.h"
+#include "Utils/Math.h"
 
 
 Item Item::Empty;
@@ -240,7 +241,16 @@ void Governor::DrawControl(int x, int y, const String<> &symbol, bool active) co
 
     if (active)
     {
-        Rectangle(10, 6).Fill(x - 1, y - 1, Color::MenuLetters(true));
+        int width = 10;
+        int height = 6;
+
+        if (active_control == ActiveControl::Close)
+        {
+            width = 11;
+            height = 11;
+        }
+
+        Rectangle(width, height).Fill(x - 1, y - 1, Color::MenuLetters(true));
         color_draw = Color::MenuItem();
     }
 
@@ -362,11 +372,11 @@ void Item::ShortPressure() const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->ShortPressure();        break;
-    case TypeItem::Choice:      ToChoice()->ShortPressure();     break;
-    case TypeItem::Button:      ToButton()->ShortPressure();     break;
-    case TypeItem::Governor:    ToGovernor()->ShortPressure();   break;
-    case TypeItem::Count:                                                   break;
+    case TypeItem::Page:        ToPage()->ShortPressure();      break;
+    case TypeItem::Choice:      ToChoice()->ShortPressure();    break;
+    case TypeItem::Button:      ToButton()->ShortPressure();    break;
+    case TypeItem::Governor:    ToGovernor()->ShortPressure();  break;
+    case TypeItem::Count:                                       break;
     }
 }
 
@@ -375,11 +385,11 @@ void Item::LongPressure() const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->LongPressure();     break;
-    case TypeItem::Choice:      ToChoice()->LongPressure();  break;
-    case TypeItem::Button:      ToButton()->LongPressure();  break;
-    case TypeItem::Governor:    ToGovernor()->LongPressure();break;
-    case TypeItem::Count:                                               break;
+    case TypeItem::Page:        ToPage()->LongPressure();       break;
+    case TypeItem::Choice:      ToChoice()->LongPressure();     break;
+    case TypeItem::Button:      ToButton()->LongPressure();     break;
+    case TypeItem::Governor:    ToGovernor()->LongPressure();   break;
+    case TypeItem::Count:                                       break;
     }
 }
 
@@ -388,18 +398,40 @@ void Item::DoubleClick() const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->DoubleClick();      break;
-    case TypeItem::Choice:      ToChoice()->DoubleClick();   break;
-    case TypeItem::Button:      ToButton()->DoubleClick();   break;
-    case TypeItem::Governor:    ToGovernor()->DoubleClick(); break;
-    case TypeItem::Count:                                               break;
+    case TypeItem::Page:        ToPage()->DoubleClick();        break;
+    case TypeItem::Choice:      ToChoice()->DoubleClick();      break;
+    case TypeItem::Button:      ToButton()->DoubleClick();      break;
+    case TypeItem::Governor:    ToGovernor()->DoubleClick();    break;
+    case TypeItem::Count:                                       break;
     }
 }
 
 
 void Governor::ShortPressure() const
 {
+    if (Item::Opened())
+    {
+        if (active_control == ActiveControl::Close)
+        {
+            active_control = ActiveControl::Increase;
+            Close();
+        }
+        else
+        {
+            const DGovernor *data = ToDGovernor();
 
+            int *value = data->value;
+
+            if (active_control == ActiveControl::Increase)
+            {
+                *value = *value + 1;
+            }
+            else if (active_control == ActiveControl::Decrease)
+            {
+                *value = *value - 1;
+            }
+        }
+    }
 }
 
 
@@ -411,7 +443,7 @@ void Governor::LongPressure() const
     }
     else
     {
-        
+        Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
     }
 }
 

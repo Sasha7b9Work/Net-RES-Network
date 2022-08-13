@@ -3,6 +3,9 @@
 #include "Utils/Math.h"
 
 
+template void Math::CircleIncrease<int>(int *, int, int);
+
+
 namespace Math
 {
     uint SDBMHash(uint hash, uint8 d)
@@ -24,4 +27,16 @@ uint Math::CalculateHash(const void *buffer, int size)
     }
 
     return hash;
+}
+
+
+template <class T>
+void Math::CircleIncrease(T *value, T min, T max)
+{
+    *value = *value + 1;
+
+    if (*value > max)
+    {
+        *value = min;
+    }
 }
