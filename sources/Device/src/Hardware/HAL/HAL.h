@@ -10,6 +10,12 @@ namespace HAL
 }
 
 
+namespace HAL_FLASH
+{
+
+}
+
+
 namespace HAL_I2C1
 {
     void Init();

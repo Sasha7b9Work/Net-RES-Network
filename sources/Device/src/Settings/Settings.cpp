@@ -5,6 +5,7 @@
 
 Settings gset =
 {
+    // Display
     {
         {1, 1, 1, 1
 #ifdef TYPE_1
@@ -13,4 +14,8 @@ Settings gset =
         },
         { TypeDisplayedInformation::AllMeasures }
     },
+    // System
+    {
+        0                                           // serial_number
+    }
 };

@@ -40,10 +40,19 @@ struct SettingsDisplay
 };
 
 
+struct SettingsSystem
+{
+    int serial_number;
+};
+
 
 struct Settings
 {
     SettingsDisplay display;
+    SettingsSystem  system;
+
+    static void Load();
+    static void Save();
 };
 
 

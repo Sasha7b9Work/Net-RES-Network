@@ -1,9 +1,8 @@
 // 2022/08/04 14:32:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
 
-
-static int serialNumber = 0;
 
 extern const DPage pageMain;
 
@@ -11,8 +10,8 @@ extern const DPage pageMain;
 DEF_GOVERNOR(gSerialNumber,
     "Ñ/Í",
     *PageSystem::self,
-    0, (int)0xFFFFFFFF,
-    serialNumber
+    0, (int)0x7FFFFFFF,
+    gset.system.serial_number
 )
 
 
