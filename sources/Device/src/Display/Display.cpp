@@ -204,7 +204,7 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
     {
     */
 
-    Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::GREEN);
+    Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::WHITE);
 
 //    current.Draw(x0, y0, Color::GREEN);
 
@@ -328,7 +328,7 @@ void Display::DrawMeasures()
 
             if (need_redraw)
             {
-                String<>("%s", measures[i].Name().c_str()).Draw(x0, y, Color::_1);
+                String<>("%s", measures[i].Name().c_str()).Draw(x0, y, Color::WHITE);
                 measures[i].Units().Draw(x0 + 134, y);
             }
 
