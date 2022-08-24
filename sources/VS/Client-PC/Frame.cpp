@@ -65,10 +65,12 @@ Frame::Frame(const wxString &title)
 
     grid->CreateGrid(0, 0);
 
-    grid->AppendRows(10);
-    grid->AppendCols(10);
+    grid->AppendRows(1);
+    grid->AppendCols(6);
 
     grid->EnableEditing(false);
+
+    grid->DisableCellEditControl();
 
     grid->SetRowLabelSize(0);
 
@@ -76,7 +78,8 @@ Frame::Frame(const wxString &title)
 
     for (int meas = 0; meas < TypeMeasure::Count; meas++)
     {
-        grid->SetColLabelValue(meas + 1, TypeMeasure::GetTitle((TypeMeasure::E)meas));
+        grid->SetColLabelValue(meas + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
+        wxString(",\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
     }
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
