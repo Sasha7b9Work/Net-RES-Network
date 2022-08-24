@@ -79,7 +79,7 @@ Frame::Frame(const wxString &title)
     for (int meas = 0; meas < TypeMeasure::Count; meas++)
     {
         grid->SetColLabelValue(meas + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
-        wxString(",\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
+        wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
     }
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
