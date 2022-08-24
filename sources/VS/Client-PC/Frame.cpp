@@ -2,6 +2,7 @@
 #include "Frame.h"
 #include "Display/Display.h"
 #include <wx/statline.h>
+#include <wx/grid.h>
 
 
 Frame *Frame::self = nullptr;
@@ -60,7 +61,27 @@ Frame::Frame(const wxString &title)
 
     CreateFrameToolBar();
 
+    grid = new wxGrid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(400, 400)));
+
+    grid->CreateGrid(0, 0);
+
+    grid->AppendRows(10);
+    grid->AppendCols(10);
+
+    grid->EnableEditing(false);
+
+    grid->SetRowLabelSize(0);
+
+    grid->SetColLabelValue(0, "ID");
+
+    for (int meas = 0; meas < TypeMeasure::Count; meas++)
+    {
+        grid->SetColLabelValue(meas + 1, TypeMeasure::GetTitle((TypeMeasure::E)meas));
+    }
+
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    sizer->Add(grid);
 
     SetSizer(sizer);
 

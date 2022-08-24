@@ -11,11 +11,11 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
     {
-        "ДАВЛЕНИЕ",
-        "ОСВЕЩЕННОСТЬ",
-        "СКОРОСТЬ",
-        "ТЕМПЕРАТУРА",
-        "ВЛАЖНОСТЬ"
+        "Давление",
+        "Освещённость",
+        "Скорость",
+        "Температура",
+        "Влажность"
     };
 
     return titles[type];
