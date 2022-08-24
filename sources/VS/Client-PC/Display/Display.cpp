@@ -7,36 +7,6 @@
 #include "Display/Font.h"
 
 
-namespace Display
-{
-    struct Measure
-    {
-        bool show;
-        bool valid;
-        float value;
-
-        Measure() : show(true), valid(false), value(1.0f) {}
-    };
-
-    Measure measures[TypeMeasure::Count];
-
-    // Здесь нарисованная картинка
-    wxBitmap bitmap(100, 100);
-
-    // Здесь будем рисовать
-    wxMemoryDC memDC;
-
-    wxPen pen = *wxWHITE_PEN;
-    wxBrush brush = *wxWHITE_BRUSH;
-
-    void BeginScene(Color);
-
-    void EndScene();
-
-    void DrawMeasure(TypeMeasure::E);
-}
-
-
 pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
@@ -67,84 +37,11 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
 }
 
 
-void Display::Update()
+void Display::SwitchMeasure(TypeMeasure::E)
 {
-    BeginScene(Color::BLACK);
-
-    for (int i = 0; i < TypeMeasure::Count; i++)
-    {
-        DrawMeasure((TypeMeasure::E)i);
-    }
-
-    EndScene();
-}
-
-
-void Display::DrawMeasure(TypeMeasure::E type)
-{
-    if (!measures[type].show)
-    {
-        return;
-    }
-
-    Font::SetSize(13);
-
-    int x0 = 10;
-    int dX = 250;
-    int y0 = 15;
-    int dY = 30;
-
-    int y = y0 + dY * type;
-
-    String<>(TypeMeasure::GetTitle(type)).Draw(x0, y, COLOR_1);
-
-    String<>(TypeMeasure::GetUnits(type)).Draw(x0 + dX, y);
-
-    if (measures[type].valid)
-    {
-        String<>("%.4f", measures[type].value).Draw(x0 + dX - 90, y, Color::WHITE);
-    }
-}
-
-
-void Display::BeginScene(Color color)
-{
-    memDC.SelectObject(bitmap);
-
-    color.SetAsCurrent();
-
-    memDC.DrawRectangle(0, 0, 100, 100);
-}
-
-
-void Display::EndScene()
-{
-    memDC.SelectObject(wxNullBitmap);
-
-    if (Frame::Self())
-    {
-        Frame::Self()->Refresh();
-    }
-}
-
-
-void Display::SetMeasure(TypeMeasure::E type, float value)
-{
-    measures[type].valid = true;
-    measures[type].value = value;
-}
-
-
-void Display::SwitchMeasure(TypeMeasure::E type)
-{
-    measures[type].show = !measures[type].show;
 }
 
 
 void Display::Reset()
 {
-    for (int i = 0; i < TypeMeasure::Count; i++)
-    {
-        measures[i].valid = false;
-    }
 }

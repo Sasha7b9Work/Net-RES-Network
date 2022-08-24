@@ -91,8 +91,6 @@ void ServerTCP::ProcessData(Buffer<uint8, 1024> &data)
     {
         float value = 0.0f;
         std::memcpy(&value, &data[8], 4);
-
-        Display::SetMeasure((TypeMeasure::E)data[7], value);
     }
 
     data.RemoveFront(12);

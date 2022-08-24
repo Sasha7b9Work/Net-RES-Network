@@ -35,24 +35,14 @@ template int  String<(int)1024>::DrawInBoundedRectWithTransfers(int x, int y, in
     Color colorFill);
 
 
-namespace Display
-{
-    // Здесь будем рисовать
-    extern wxMemoryDC memDC;
-
-    extern wxPen pen;
-    extern wxBrush brush;
-}
-
-
 template<int capa>
-int String<capa>::Draw(int x, int y, Color color)
+int String<capa>::Draw(int x, int, Color color)
 {
     color.SetAsCurrent();
 
-    Display::memDC.SetFont(Font::Get());
+//    Display::memDC.SetFont(Font::Get());
 
-    Display::memDC.DrawText(buffer, x, y);
+//    Display::memDC.DrawText(buffer, x, y);
 
     return x;
 }

@@ -19,7 +19,6 @@ void Application::Init()
 void Application::Update()
 {
     Communicator::Update();
-    Display::Update();
 }
 
 

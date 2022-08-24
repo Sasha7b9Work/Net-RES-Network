@@ -24,12 +24,6 @@ struct TypeMeasure
 
 namespace Display
 {
-    extern wxBitmap bitmap;
-
-    void Update();
-
-    void SetMeasure(TypeMeasure::E, float value);
-
     void SwitchMeasure(TypeMeasure::E);
 
     void Reset();
