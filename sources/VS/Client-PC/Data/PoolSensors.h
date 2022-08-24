@@ -5,7 +5,7 @@
 namespace PoolSensors
 {
     // Добавить принятые данные
-    void AppendReceivedData(uchar *data, int size);
+    void AppendReceivedData(uint8 *data, int size);
 
     void Update();
 }
