@@ -21,7 +21,7 @@ namespace Display
     Measure measures[TypeMeasure::Count];
 
     // Здесь нарисованная картинка
-    wxBitmap bitmap(Display::WIDTH, Display::HEIGHT);
+    wxBitmap bitmap(100, 100);
 
     // Здесь будем рисовать
     wxMemoryDC memDC;
@@ -113,7 +113,7 @@ void Display::BeginScene(Color color)
 
     color.SetAsCurrent();
 
-    memDC.DrawRectangle(0, 0, WIDTH, HEIGHT);
+    memDC.DrawRectangle(0, 0, 100, 100);
 }
 
 

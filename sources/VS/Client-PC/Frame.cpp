@@ -27,28 +27,6 @@ enum
 };
 
 
-class Screen : public wxPanel
-{
-public:
-    Screen(wxWindow *parent) : wxPanel(parent)
-    {
-        SetMinSize({ Display::WIDTH, Display::HEIGHT });
-        SetDoubleBuffered(true);
-        Bind(wxEVT_PAINT, &Screen::OnPaint, this);
-    }
-
-    void OnPaint(wxPaintEvent &)
-    {
-        wxPaintDC dc(this);
-
-        dc.DrawBitmap(wxBitmap(Display::bitmap), 0, 0);
-    }
-};
-
-
-static Screen *screen = nullptr;
-
-
 Frame::Frame(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title)
 {
@@ -82,16 +60,11 @@ Frame::Frame(const wxString &title)
 
     CreateFrameToolBar();
 
-    screen = new Screen(this);
-
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-    sizer->Add(screen);
+
     SetSizer(sizer);
 
-    SetClientSize(Display::WIDTH, Display::HEIGHT);
-
-    wxTopLevelWindowBase::SetMinSize(GetSize());
-    wxTopLevelWindowBase::SetMaxSize(GetSize());
+    SetClientSize(800, 600);
 }
 
 
@@ -217,5 +190,4 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
-    screen->Refresh();
 }
