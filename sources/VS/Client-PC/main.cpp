@@ -6,6 +6,7 @@
 #include "Communicator/LAN/ServerTCP.h"
 #include "Communicator/HC12/HC12.h"
 #include "Frame.h"
+#include "Data/PoolSensors.h"
 
 
 void Application::Init()
@@ -19,6 +20,8 @@ void Application::Init()
 void Application::Update()
 {
     Communicator::Update();
+
+    PoolSensors::Update();
 }
 
 
