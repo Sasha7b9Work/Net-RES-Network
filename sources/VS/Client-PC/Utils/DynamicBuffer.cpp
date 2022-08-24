@@ -6,6 +6,7 @@
 
 template      DynamicBuffer<128>::DynamicBuffer();
 template void DynamicBuffer<128>::Append(uint8 *, int);
+template void DynamicBuffer<128>::RemoveFirst(int);
 
 
 template<int size_chunk>
@@ -23,7 +24,7 @@ void DynamicBuffer<size_chunk>::Append(uint8 *data, int size)
         Realloc(capacity + size_chunk);
     }
 
-    std::memcpy(buffer, data, size);
+    std::memcpy(buffer + last, data, size);
     last += size;
 }
 
@@ -50,12 +51,13 @@ void DynamicBuffer<size_chunk>::Realloc(int size)
             last = 0;
         }
 
-        capacity = size;
-
         delete [] buffer;
 
-        buffer = new_buffer;
     }
+
+    buffer = new_buffer;
+
+    capacity = size;
 }
 
 
@@ -86,10 +88,10 @@ void DynamicBuffer<size_chunk>::Compact()
         return;
     }
 
+    std::memcpy(buffer, buffer + first, last - first);
+
     int num_bytes = first;
 
-    std::memcpy(buffer, buffer + first, first);
-
-    last -= first;
-    first -= first;
+    last -= num_bytes;
+    first -= num_bytes;
 }
