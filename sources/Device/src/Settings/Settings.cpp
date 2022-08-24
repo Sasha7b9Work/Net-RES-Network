@@ -19,3 +19,9 @@ Settings gset =
         0                                           // serial_number
     }
 };
+
+
+uint Settings::GetID()
+{
+    return 111;
+}

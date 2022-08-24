@@ -51,6 +51,8 @@ struct Settings
     SettingsDisplay display;
     SettingsSystem  system;
 
+    static uint GetID();
+
     static void Load();
     static void Save();
 };
