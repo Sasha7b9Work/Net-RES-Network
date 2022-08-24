@@ -16,6 +16,16 @@
 
 namespace InterCom
 {
+    /*
+    *  Формат сообщения.
+    *  0      - 'A'
+    *  1      - 'B'
+    *  2      - 'C'
+    *  3...6  - hash[7...11]
+    *  7      - type
+    *  8...11 - value
+    */
+
     Direction::E direction = Direction::_None;
 
     Buffer<uint8, 12> CreateMessage(TypeMeasure::E type, float value)
@@ -87,7 +97,8 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     if (direction & Direction::HC12)
     {
-        HC12::Transmit(message.c_str(), message.Size() + 1);
+//        HC12::Transmit(message.c_str(), message.Size() + 1);
+        HC12::Transmit(data.Data(), 12);
     }
 
 #ifdef GUI
