@@ -25,7 +25,7 @@ void HC12::Update()
     {
         unsigned char buffer[100];
 
-        int num_bytes = RS232_PollComport(i, buffer, 100);
+        int num_bytes = RS232_PollComport(i, buffer, 16);
 
         if (num_bytes != 0)
         {

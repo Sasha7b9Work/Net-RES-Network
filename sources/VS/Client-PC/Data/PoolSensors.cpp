@@ -26,6 +26,11 @@ void PoolSensors::AppendReceivedData(uint8 *data, int size)
 
 void PoolSensors::Update()
 {
+    if (buffer.Size() < 16)
+    {
+        return;
+    }
+
     if (FindFirstABC() && buffer.Size() >= 16)
     {
         char bytes[16];
@@ -48,15 +53,9 @@ bool PoolSensors::FindFirstABC()
 
     while (buffer.Size() >= 3)
     {
-        if (*buffer.Data() == 'A')
+        if (std::memcmp("ABC", buffer.Data(), 3) == 0)
         {
-            if (*(buffer.Data() + 1) == 'B')
-            {
-                if (*(buffer.Data() + 2) == 'C')
-                {
-                    return true;
-                }
-            }
+            return true;
         }
 
         buffer.RemoveFirst(1);
