@@ -43,6 +43,8 @@ void PoolSensors::Update()
 
 bool PoolSensors::FindFirstABC()
 {
+    int removed_bytes = 0;
+
     while (buffer.Size() >= 3)
     {
         if (*buffer.Data() == 'A')
@@ -57,9 +59,14 @@ bool PoolSensors::FindFirstABC()
         }
 
         buffer.RemoveFirst(1);
+
+        removed_bytes++;
     }
 
-    LOG_WRITE("error command");
+    if (removed_bytes != 0)
+    {
+        LOG_ERROR("error command");
+    }
 
     return false;
 }

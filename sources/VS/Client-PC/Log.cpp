@@ -48,5 +48,17 @@ void Log::Write(char *format, ...)
 
 void Log::Error(char *format, ...)
 {
+    char buffer[SIZE_BUFFER];
+    std::strcpy(buffer, "!!! ERRROR !!!");
+    char *pointer = buffer + std::strlen(buffer);
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(pointer, format, args);
+    va_end(args);
 
+    std::strcat(buffer, "\n");
+
+    DWORD written_bytes = 0;
+
+    WriteConsoleA(handle, buffer, std::strlen(buffer), &written_bytes, nullptr);
 }
