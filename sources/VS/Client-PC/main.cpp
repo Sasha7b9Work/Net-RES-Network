@@ -7,11 +7,12 @@
 #include "Communicator/HC12/HC12.h"
 #include "Frame.h"
 #include "Data/PoolSensors.h"
+#include "Log.h"
 
 
 void Application::Init()
 {
-//    AllocConsole();
+    Log::Init();
 
     Communicator::Init();
 }
@@ -27,5 +28,5 @@ void Application::Update()
 
 void Frame::OnClose()
 {
-//    FreeConsole();
+    Log::DeInit();
 }

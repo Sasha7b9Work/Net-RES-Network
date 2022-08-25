@@ -14,7 +14,7 @@ void HC12::Init()
 {
     for (int i = 0; i < NUM_PORTS; i++)
     {
-        RS232_OpenComport(i, 9600, "8N1", false);
+        RS232_OpenComport(i, 9600, "8N1", 0);
     }
 }
 

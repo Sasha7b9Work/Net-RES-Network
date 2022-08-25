@@ -91,10 +91,10 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     Buffer<uint8, 16> data = CreateMessage(type, measure);
 
-    String<> message("%s : %f %s", names[type], measure, units[type]);
-
     if (direction & Direction::CDC)
     {
+        String<> message("%s : %f %s", names[type], measure, units[type]);
+
         CDC::Transmit(message.c_str(), message.Size() + 1);
     }
 

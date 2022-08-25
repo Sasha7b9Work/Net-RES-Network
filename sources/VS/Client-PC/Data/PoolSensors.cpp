@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Data/PoolSensors.h"
 #include "Utils/DynamicBuffer.h"
+#include "Log.h"
+#include "Utils/Math.h"
 #include <cstring>
 
 
@@ -10,6 +12,8 @@ namespace PoolSensors
     static DynamicBuffer <128>buffer;
 
     static bool FindFirstABC();
+
+    static bool ParseCommand(char bytes[16]);
 }
 
 
@@ -21,12 +25,7 @@ void PoolSensors::AppendReceivedData(uint8 *data, int size)
 
 void PoolSensors::Update()
 {
-    if (!FindFirstABC())
-    {
-        return;
-    }
-
-    if (buffer.Size() >= 16)
+    if (FindFirstABC() && buffer.Size() >= 16)
     {
         char bytes[16];
 
@@ -34,11 +33,10 @@ void PoolSensors::Update()
 
         buffer.RemoveFirst(16);
 
-        float value = 0.0f;
-
-        std::memcpy(&value, bytes + 12, 4);
-
-        value = value;
+        if (!ParseCommand(bytes))
+        {
+            LOG_ERROR("Can not parse command");
+        }
     }
 }
 
@@ -59,6 +57,35 @@ bool PoolSensors::FindFirstABC()
         }
 
         buffer.RemoveFirst(1);
+    }
+
+    LOG_WRITE("error command");
+
+    return false;
+}
+
+
+bool PoolSensors::ParseCommand(char message[16])
+{
+    uint8 type = message[3];
+
+    uint id = 0;
+
+    std::memcpy(&id, &message[4], 4);
+
+    uint hash = 0;
+
+    std::memcpy(&hash, &message[8], 4);
+
+    float value = 0.0f;
+
+    std::memcpy(&value, &message[12], 4);
+
+    if (Math::CalculateHash(&value, 4) == hash)
+    {
+        LOG_WRITE("id = %d, type = %d, value = %f", id, type, value);
+
+        return true;
     }
 
     return false;
