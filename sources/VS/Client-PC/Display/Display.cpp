@@ -13,9 +13,9 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
     {
         "Давление",
         "Освещённость",
-        "Скорость",
         "Температура",
-        "Влажность"
+        "Влажность",
+        "Скорость"
     };
 
     return titles[type];
@@ -26,11 +26,11 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
 {
     static const pchar units[Count] =
     {
-        "МПа",
+        "гПа",
         "лк",
-        "м/с",
-        "Ц",
-        "%%"
+        "С",
+        "%%",
+        "м/с"
     };
 
     return units[type];

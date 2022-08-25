@@ -22,6 +22,10 @@ public:
 
     void OnCloseWindow(wxCloseEvent &);
 
+    void SetID(uint id);
+
+    void SetParameter(uint8 type, float value);
+
 private:
 
     static Frame *self;

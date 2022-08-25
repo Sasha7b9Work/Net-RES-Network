@@ -4,6 +4,7 @@
 #include "Utils/DynamicBuffer.h"
 #include "Log.h"
 #include "Utils/Math.h"
+#include "Frame.h"
 #include <cstring>
 
 
@@ -91,6 +92,10 @@ bool PoolSensors::ParseCommand(char message[16])
     if (Math::CalculateHash(&value, 4) == hash)
     {
         LOG_WRITE("id = %d, type = %d, value = %f", id, type, value);
+
+        Frame::Self()->SetID(id);
+
+        Frame::Self()->SetParameter(type, value);
 
         return true;
     }
