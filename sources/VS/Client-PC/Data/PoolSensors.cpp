@@ -10,7 +10,7 @@
 
 namespace PoolSensors
 {
-    static DynamicBuffer <128>buffer;
+    static DynamicBuffer <16>buffer;
 
     static bool FindFirstABC();
 
@@ -26,12 +26,7 @@ void PoolSensors::AppendReceivedData(uint8 *data, int size)
 
 void PoolSensors::Update()
 {
-    if (buffer.Size() < 16)
-    {
-        return;
-    }
-
-    if (FindFirstABC() && buffer.Size() >= 16)
+    while (buffer.Size() >= 16 && FindFirstABC())
     {
         char bytes[16];
 

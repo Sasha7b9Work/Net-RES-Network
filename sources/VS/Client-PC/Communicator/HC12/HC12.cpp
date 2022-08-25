@@ -7,6 +7,11 @@
 namespace HC12
 {
     static const int NUM_PORTS = 32;
+
+    static bool opened[NUM_PORTS];
+
+    // „итает байты из всех возможных портов. ¬озвращает количество считанных байт
+    static int ReadBytes();
 }
 
 
@@ -14,22 +19,39 @@ void HC12::Init()
 {
     for (int i = 0; i < NUM_PORTS; i++)
     {
-        RS232_OpenComport(i, 9600, "8N1", 0);
+        opened[i] = (RS232_OpenComport(i, 9600, "8N1", 0) == 0);
     }
 }
 
 
 void HC12::Update()
 {
+    while (ReadBytes() != 0)
+    {
+    }
+}
+
+
+int HC12::ReadBytes()
+{
+    int readed_bytes = 0;
+
     for (int i = 0; i < NUM_PORTS; i++)
     {
-        unsigned char buffer[100];
-
-        int num_bytes = RS232_PollComport(i, buffer, 16);
-
-        if (num_bytes != 0)
+        if (opened[i])
         {
-            PoolSensors::AppendReceivedData(buffer, num_bytes);
+            unsigned char buffer[100];
+
+            int num_bytes = RS232_PollComport(i, buffer, 16);
+
+            if (num_bytes != 0)
+            {
+                PoolSensors::AppendReceivedData(buffer, num_bytes);
+
+                readed_bytes += num_bytes;
+            }
         }
     }
+
+    return readed_bytes;
 }
