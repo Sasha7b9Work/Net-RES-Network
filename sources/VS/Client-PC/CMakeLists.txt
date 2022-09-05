@@ -41,6 +41,7 @@ file(GLOB COMMUNICATOR_LAN_LIBNET Communicator/LAN/libnet/*.*)
 file(GLOB COMMUNICATOR_RS232      Communicator/RS232/*.*)
 file(GLOB DATA                    Data/*.*)
 file(GLOB DISPLAY                 Display/*.*)
+file(GLOB DISPLAY_DIAGRAM         Display/Diagram/*.*)
 file(GLOB UTILS                   Utils/*.*)
 file(GLOB UTILS_TEXT              Utils/Text/*.*)
 
@@ -54,6 +55,7 @@ source_group(Communicator/LAN/libnet FILES ${COMMUNICATOR_LAN_LIBNET})
 source_group(Communicator/RS232      FILES ${COMMUNICATOR_RS232})
 source_group(Data                    FILES ${DATA})
 source_group(Display                 FILES ${DISPLAY})
+source_group(Display/Diagram         FILES ${DISPLAY_DIAGRAM})
 source_group(Utils                   FILES ${UTILS})
 source_group(Utils/Text              FILES ${UTILS_TEXT})
 
@@ -68,6 +70,7 @@ add_executable( ${PROJECT_NAME}
                 ${COMMUNICATOR_RS232}
                 ${DATA}
                 ${DISPLAY}
+                ${DISPLAY_DIAGRAM}
                 ${UTILS}
                 ${UTILS_TEXT}
                 )
