@@ -13,21 +13,20 @@
 
 class Diagram : public wxPanel
 {
-public:
-
-    static Diagram *Create(wxWindow *parent);
-
 private:
 
     Diagram(wxWindow *parant);
 
 public:
+
+    struct Pool
+    {
+        static Diagram *Create(wxWindow *parent);
+
+        static Diagram *GetFirst() { return first; };
+
+    private:
+
+        static Diagram *first;
+    };
 };
-
-
-namespace PoolDiagram
-{
-    Diagram *Create(wxWindow *parent);
-
-    Diagram *GetFirst();
-}

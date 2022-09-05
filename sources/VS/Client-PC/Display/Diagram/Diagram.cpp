@@ -3,31 +3,18 @@
 #include "Display/Diagram/Diagram.h"
 
 
-Diagram *Diagram::Create(wxWindow *parent)
+Diagram *Diagram::Pool::first = nullptr;
+
+
+Diagram *Diagram::Pool::Create(wxWindow *parent)
 {
-    return new Diagram(parent);
+    first = new Diagram(parent);
+
+    return first;
 }
 
 
 Diagram::Diagram(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
 
-}
-
-
-namespace PoolDiagram
-{
-    static Diagram *first = nullptr;
-
-    Diagram *Create(wxWindow *parent)
-    {
-        first = Diagram::Create(parent);
-
-        return first;
-    }
-
-    Diagram *GetFirst()
-    {
-        return first;
-    }
 }
