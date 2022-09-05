@@ -14,5 +14,10 @@
 class Diagram : public wxPanel
 {
 public:
+
+    static Diagram *Create(wxWindow *parent);
+
 private:
+
+    Diagram(wxWindow *parant);
 };

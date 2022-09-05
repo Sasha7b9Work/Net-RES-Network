@@ -2,3 +2,14 @@
 #include "defines.h"
 #include "Display/Diagram/Diagram.h"
 
+
+Diagram *Diagram::Create(wxWindow *parent)
+{
+    return new Diagram(parent);
+}
+
+
+Diagram::Diagram(wxWindow *parent) : wxPanel(parent, wxID_ANY)
+{
+
+}

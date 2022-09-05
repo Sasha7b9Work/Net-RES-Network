@@ -7,7 +7,6 @@
 #include "Communicator/HC12/HC12.h"
 #include "Frame.h"
 #include "Data/PoolSensors.h"
-#include "Log.h"
 
 
 void Application::Init()

@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Display/Display.h"
+#include "Display/Diagram/Diagram.h"
 #pragma warning(push, 0)
 #include <wx/statline.h>
 #include <wx/grid.h>
@@ -88,6 +89,12 @@ Frame::Frame(const wxString &title)
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
     sizer->Add(grid);
+
+    Diagram *diagram = Diagram::Create(this);
+
+    sizer->Add(diagram);
+
+    LOG_WRITE("size = %d %d", diagram->GetSize().x, diagram->GetSize().y);
 
     SetSizer(sizer);
 

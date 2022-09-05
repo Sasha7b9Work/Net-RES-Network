@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Utils/Text/String.h"
 #include "Display/Display.h"
-#include "Log.h"
 #include "Display/Font.h"
 #include <cstdarg>
 #include <cstring>
