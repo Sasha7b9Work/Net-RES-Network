@@ -9,7 +9,7 @@
 
 namespace Log
 {
-    static HANDLE handle;
+    static HANDLE handle = nullptr;
 
     static const int SIZE_BUFFER = 1024;
 }
@@ -17,7 +17,7 @@ namespace Log
 
 void Log::Init()
 {
-    AllocConsole();
+//    AllocConsole();
 
     handle = GetStdHandle(STD_OUTPUT_HANDLE);
 }
