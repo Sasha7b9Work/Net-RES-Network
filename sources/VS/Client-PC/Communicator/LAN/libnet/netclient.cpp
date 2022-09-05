@@ -1,3 +1,5 @@
+#pragma warning(push, 0)
+
 #include "netclient.h"
 
 //STL namespace
@@ -192,3 +194,5 @@ int netclient::run()
 
     return rv;
 }
+
+#pragma warning(pop)

@@ -9,6 +9,8 @@
 #include "netpacket.h"
 
 
+#pragma warning(push, 0)
+
 //Platform support
 #ifdef _WIN32
     #include <winsock2.h>
@@ -19,6 +21,8 @@
 #ifndef _MSC_VER
     #include <sys/time.h>
 #endif
+
+#pragma warning(pop)
 
 //STL classes
 #include <set>

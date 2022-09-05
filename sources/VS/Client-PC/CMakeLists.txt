@@ -16,19 +16,17 @@ if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
-    add_compile_options(/wd4365)
-    add_compile_options(/wd4548)
-    add_compile_options(/wd4625)
-    add_compile_options(/wd4626)
-    add_compile_options(/wd4774)
-    add_compile_options(/wd4820)
-    add_compile_options(/wd4996)
-    add_compile_options(/wd5026)
-    add_compile_options(/wd5027)
+    add_compile_options(/wd4365)    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
+    add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
+    add_compile_options(/wd4625)    # 'derived class' : copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
+    add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+    add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
+    add_compile_options(/wd4996)    # Your code uses a function, class member, variable, or typedef that's marked deprecated
+    add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
+    add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
                                     # function under -EHc.
-    add_compile_options(/wd5045)
-    add_compile_options(/wd26812)
+    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 endif()
 
 file(GLOB RESOURCES               resources/*.*)

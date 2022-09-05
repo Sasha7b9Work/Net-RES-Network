@@ -1,8 +1,8 @@
 // 2022/04/29 13:56:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#define WIN32_LEAN_AND_MEAN
-#include "defines.h"
+#pragma warning(push, 0)
 #include <wx/wx.h>
+#pragma warning(pop)
 
 
 class wxGrid;

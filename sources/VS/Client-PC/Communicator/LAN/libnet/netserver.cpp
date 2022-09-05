@@ -2,6 +2,8 @@
 //netServer: listens for incoming connections, handles incoming data.
 //  Derived your class from this, and override handleIncoming( netpacket *pkt)
 
+#pragma warning(push, 0)
+
 //Header
 #include "netserver.h"
 
@@ -278,3 +280,5 @@ sock_t netserver::acceptConnection()
 
     return sd;
 }
+
+#pragma warning(pop)

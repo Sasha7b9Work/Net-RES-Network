@@ -1,8 +1,11 @@
 // 2022/04/29 13:56:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "Frame.h"
 #include "Display/Display.h"
+#pragma warning(push, 0)
 #include <wx/statline.h>
 #include <wx/grid.h>
+#pragma warning(pop)
 
 
 Frame *Frame::self = nullptr;

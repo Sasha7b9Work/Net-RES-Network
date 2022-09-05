@@ -1,6 +1,8 @@
 // netbase: Create connections, send and receive data through them
 //      Assign callbacks for netpackets that return true for specified function
 
+#pragma warning(push, 0)
+
 #define WIN32_LEAN_AND_MEAN
 
 //net__
@@ -962,3 +964,5 @@ size_t netbase::debugPacket(const netpacket *pkt) const
     //Did not consume any bytes :)
     return 0;
 }
+
+#pragma warning(pop)
