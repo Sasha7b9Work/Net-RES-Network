@@ -7,6 +7,7 @@
 #include "Communicator/HC12/HC12.h"
 #include "Frame.h"
 #include "Data/PoolSensors.h"
+#include "Display/Diagram/Diagram.h"
 
 
 void Application::Init()
@@ -14,6 +15,8 @@ void Application::Init()
     Log::Init();
 
     Communicator::Init();
+
+    LOG_WRITE("size %d %d", PoolDiagram::GetFirst()->GetSize().x, PoolDiagram::GetFirst()->GetSize().y);
 }
 
 

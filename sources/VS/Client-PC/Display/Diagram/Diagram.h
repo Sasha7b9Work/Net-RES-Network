@@ -20,4 +20,14 @@ public:
 private:
 
     Diagram(wxWindow *parant);
+
+public:
 };
+
+
+namespace PoolDiagram
+{
+    Diagram *Create(wxWindow *parent);
+
+    Diagram *GetFirst();
+}

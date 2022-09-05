@@ -90,11 +90,7 @@ Frame::Frame(const wxString &title)
 
     sizer->Add(grid);
 
-    Diagram *diagram = Diagram::Create(this);
-
-    sizer->Add(diagram);
-
-    LOG_WRITE("size = %d %d", diagram->GetSize().x, diagram->GetSize().y);
+    sizer->Add(PoolDiagram::Create(this));
 
     SetSizer(sizer);
 

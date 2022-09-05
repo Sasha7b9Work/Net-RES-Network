@@ -13,3 +13,21 @@ Diagram::Diagram(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
 
 }
+
+
+namespace PoolDiagram
+{
+    static Diagram *first = nullptr;
+
+    Diagram *Create(wxWindow *parent)
+    {
+        first = Diagram::Create(parent);
+
+        return first;
+    }
+
+    Diagram *GetFirst()
+    {
+        return first;
+    }
+}
