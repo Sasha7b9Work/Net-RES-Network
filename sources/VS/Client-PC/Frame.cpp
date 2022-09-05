@@ -3,10 +3,7 @@
 #include "Frame.h"
 #include "Display/Display.h"
 #include "Display/Diagram/Diagram.h"
-#pragma warning(push, 0)
-#include <wx/statline.h>
-#include <wx/grid.h>
-#pragma warning(pop)
+#include "Display/Grid/Grid.h"
 
 
 Frame *Frame::self = nullptr;
@@ -65,32 +62,17 @@ Frame::Frame(const wxString &title)
 
     CreateFrameToolBar();
 
-    grid = new wxGrid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(400, 400)));
-
-    grid->CreateGrid(0, 0);
-
-    grid->AppendRows(1);
-    grid->AppendCols(6);
-
-    grid->EnableEditing(false);
-
-    grid->DisableCellEditControl();
-
-    grid->SetRowLabelSize(0);
-
-    grid->SetColLabelValue(0, "ID");
-
-    for (int meas = 0; meas < TypeMeasure::Count; meas++)
-    {
-        grid->SetColLabelValue(meas + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
-        wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
-    }
+    grid = new Grid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(400, 400)));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
     sizer->Add(grid);
 
-    sizer->Add(Diagram::Pool::Create(this));
+    Diagram::Pool::Create(this);
+
+    Diagram::Pool::GetFirst()->SetSize(10, 10);
+
+    sizer->Add(Diagram::Pool::GetFirst());
 
     SetSizer(sizer);
 

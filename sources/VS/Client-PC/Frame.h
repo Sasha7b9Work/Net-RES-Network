@@ -6,6 +6,7 @@
 
 
 class wxGrid;
+class Grid;
 
 
 class Frame : public wxFrame
@@ -30,7 +31,7 @@ private:
 
     static Frame *self;
     wxToolBar    *toolBar = nullptr;
-    wxGrid       *grid;
+    Grid         *grid;
 
     void OnViewBrief(wxCommandEvent &);
     void OnViewFull(wxCommandEvent &);
