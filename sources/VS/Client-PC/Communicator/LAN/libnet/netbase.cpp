@@ -914,7 +914,7 @@ size_t netbase::debugPacket(const netpacket *pkt) const
     //Only in debug mode!
 #ifndef DEBUG
     return 0;
-#endif
+#else
     if (pkt == NULL) {
         debugLog << "Null packet" << endl;
         return 0;
@@ -963,6 +963,7 @@ size_t netbase::debugPacket(const netpacket *pkt) const
     
     //Did not consume any bytes :)
     return 0;
+#endif
 }
 
 #pragma warning(pop)
