@@ -52,7 +52,7 @@ void ServerTCP::Close()
 }
 
 
-size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *)
+size_t ServerTCP::OnReceiveData(net__::netpacket *packet, void *) //-V2009
 {
     static Buffer<uint8, 1024> buffer;
 
