@@ -17,7 +17,7 @@ namespace Log
 
 void Log::Init()
 {
-    AllocConsole();
+//    AllocConsole();
 
     handle = GetStdHandle(STD_OUTPUT_HANDLE);
 }

@@ -68,7 +68,7 @@ Frame::Frame(const wxString &title)
 
     sizer->Add(grid);
 
-    sizer->Add(new Grid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(400, 400))));
+//    sizer->Add(new Grid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(400, 400))));
 
     Diagram::Pool::Create(this);
 

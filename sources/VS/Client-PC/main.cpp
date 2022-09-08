@@ -16,7 +16,7 @@ void Application::Init()
 
     Communicator::Init();
 
-    LOG_WRITE("size %d %d", Diagram::Pool::GetFirst()->GetSize().x, Diagram::Pool::GetFirst()->GetSize().y);
+//    LOG_WRITE("size %d %d", Diagram::Pool::GetFirst()->GetSize().x, Diagram::Pool::GetFirst()->GetSize().y);
 }
 
 
