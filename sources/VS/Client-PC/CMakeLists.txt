@@ -22,8 +22,8 @@ if(WIN32)
     endmacro()
     
     if(BUILD_USE_STATIC_RUNTIME)
-        set(MSVC_LIB_USE "/MTd")
-        set(MSVC_LIB_REPLACE "/MDd")
+        set(MSVC_LIB_USE "/MT")
+        set(MSVC_LIB_REPLACE "/MD")
         
         # Set MSVC runtime flags for all configurations
         foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
