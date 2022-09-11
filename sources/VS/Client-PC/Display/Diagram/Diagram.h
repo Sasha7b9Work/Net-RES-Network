@@ -32,13 +32,11 @@ public:
 
     static DiagramPool *Create(wxWindow *);
 
-    static DiagramPool *Self() { return self; }
+    static DiagramPool *self;
 
     void SetSizeArea(int width, int height);
 
 private:
-
-    static DiagramPool *self;
 
     DiagramPool(wxWindow *parent);
 

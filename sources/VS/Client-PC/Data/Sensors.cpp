@@ -36,16 +36,10 @@ void PoolSensors::AppendMeasure(uint id, uint8 type, float value)
 
     if (sensor == pool.end())
     {
-
-    }
-    else
-    {
-
+        pool.insert(pair<uint, Sensor>(id, Sensor(id)));
     }
 
-    Grid::Self()->SetID(id);
-
-    Grid::Self()->SetParameter(type, value);
+    pool.find(id)->second.AppendMeasure(type, value);
 }
 
 

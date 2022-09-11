@@ -51,3 +51,9 @@ void Grid::SetParameter(uint8 type, float value)
 {
     SetCellValue(0, type + 1, wxString::Format("%10.2f", value));
 }
+
+
+void Grid::UpdateArea()
+{
+
+}

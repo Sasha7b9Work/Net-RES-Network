@@ -25,6 +25,8 @@ void Application::Update()
     Communicator::Update();
 
     ReceivedData::Update();
+
+    Grid::self->UpdateArea();
 }
 
 

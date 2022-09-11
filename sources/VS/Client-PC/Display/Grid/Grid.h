@@ -8,15 +8,16 @@ public:
 
     static Grid *Create(wxWindow *, const wxSize &);
 
-    static Grid *Self() { return self; };
+    static Grid *self;
 
     void SetID(uint);
 
     void SetParameter(uint8, float);
 
+    // Периодическое задание
+    void UpdateArea();
+
 private:
 
     Grid(wxWindow *, const wxSize &);
-
-    static Grid *self;
 };

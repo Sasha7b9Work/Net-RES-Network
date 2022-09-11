@@ -205,13 +205,13 @@ void Frame::OnPaint(wxPaintEvent &event)
 
 void Frame::OnSize(wxSizeEvent &event)
 {
-    DiagramPool::Self()->SetSizeArea(GetClientRect().width - Grid::Self()->GetSize().x, GetClientRect().height);
+    DiagramPool::self->SetSizeArea(GetClientRect().width - Grid::self->GetSize().x, GetClientRect().height);
 
-    wxSize size = { Grid::Self()->GetSize().GetWidth(), GetClientRect().height };
+    wxSize size = { Grid::self->GetSize().GetWidth(), GetClientRect().height };
 
-    Grid::Self()->SetMinClientSize(size);
-    Grid::Self()->SetClientSize(size);
-    Grid::Self()->SetSize(size);
+    Grid::self->SetMinClientSize(size);
+    Grid::self->SetClientSize(size);
+    Grid::self->SetSize(size);
 
     event.Skip();
 }
