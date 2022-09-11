@@ -22,5 +22,6 @@ private:
 
     void OnPaint(wxPaintEvent &);
 
-    void DrawMeasures(wxClientDC &);
+    // Нарисовать измерения со всех датчиков
+    void DrawAllSensors(wxClientDC &);
 };

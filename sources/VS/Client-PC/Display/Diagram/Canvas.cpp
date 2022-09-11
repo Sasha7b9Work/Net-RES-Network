@@ -1,6 +1,11 @@
 // 2022/09/05 08:47:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Diagram/Canvas.h"
+#include "Data/Sensors.h"
+#include <map>
+
+
+using namespace std;
 
 
 Canvas::Canvas(wxWindow *parent, TypeMeasure::E _type) : wxPanel(parent, wxID_ANY),
@@ -35,7 +40,7 @@ void Canvas::OnPaint(wxPaintEvent &)
 
     dc.DrawText(labels[type], 1, 0);
 
-    DrawMeasures(dc);
+    DrawAllSensors(dc);
 }
 
 
@@ -46,7 +51,24 @@ void Canvas::SetSizeArea(int width, int height)
 }
 
 
-void Canvas::DrawMeasures(wxClientDC &)
+void Canvas::DrawAllSensors(wxClientDC &)
 {
+    const map<uint, Sensor> &pool = Sensor::Pool::GetPool();
 
+    if (pool.empty())
+    {
+        return;
+    }
+
+    for (auto element : pool)
+    {
+        const Sensor &sensor = element.second;
+
+        const std::vector<float> &measures = sensor.GetMeasures(type);
+
+        if (measures.size())
+        {
+
+        }
+    }
 }

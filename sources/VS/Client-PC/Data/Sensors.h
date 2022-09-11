@@ -28,6 +28,8 @@ public:
 
     void AppendMeasure(uint8 type, float value);
 
+    const std::vector<float> &GetMeasures(TypeMeasure::E type) const { return measures[type]; }
+
 private:
 
     const uint id;
@@ -41,6 +43,8 @@ public:
         static void AppendMeasure(uint id, uint8 type, float value);
 
         static const std::map<uint, Sensor> &GetPool() { return pool; };
+
+        static int CountSensors() { return pool.size(); };
 
     private:
 
