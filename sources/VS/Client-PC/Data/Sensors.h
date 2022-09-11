@@ -19,6 +19,22 @@ struct TypeMeasure
 };
 
 
+class Sensor
+{
+public:
+
+    Sensor(uint _id) : id(_id) {};
+
+    void AppendMeasure(uint8 type, float value);
+
+private:
+
+    const uint id;
+
+    std::vector<float> measures[TypeMeasure::Count];
+};
+
+
 namespace PoolSensors
 {
     void AppendMeasure(uint id, uint8 type, float value);

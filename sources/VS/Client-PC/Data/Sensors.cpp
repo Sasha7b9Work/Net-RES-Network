@@ -11,21 +11,6 @@ using namespace std;
 
 namespace PoolSensors
 {
-    class Sensor
-    {
-    public:
-
-        Sensor(uint _id) : id(_id) {};
-
-        void AppendMeasure(uint8 type, float value);
-
-    private:
-
-        const uint id;
-
-        vector<float> measures[TypeMeasure::Count];
-    };
-
     static map<uint, Sensor> pool;
 }
 
@@ -45,7 +30,7 @@ void PoolSensors::AppendMeasure(uint id, uint8 type, float value)
 }
 
 
-void PoolSensors::Sensor::AppendMeasure(uint8 type, float value)
+void Sensor::AppendMeasure(uint8 type, float value)
 {
     if (type < TypeMeasure::Count)
     {
