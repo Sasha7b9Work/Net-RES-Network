@@ -1,5 +1,6 @@
 // 2022/08/24 14:56:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include <map>
 
 
 struct TypeMeasure
@@ -32,10 +33,15 @@ private:
     const uint id;
 
     std::vector<float> measures[TypeMeasure::Count];
-};
 
+public:
 
-namespace PoolSensors
-{
-    void AppendMeasure(uint id, uint8 type, float value);
+    struct Pool
+    {
+        static void AppendMeasure(uint id, uint8 type, float value);
+
+    private:
+
+        static std::map<uint, Sensor> pool;
+    };
 };

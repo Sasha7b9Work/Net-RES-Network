@@ -9,13 +9,10 @@
 using namespace std;
 
 
-namespace PoolSensors
-{
-    static map<uint, Sensor> pool;
-}
+map<uint, Sensor> Sensor::Pool::pool;
 
 
-void PoolSensors::AppendMeasure(uint id, uint8 type, float value)
+void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
 {
     auto sensor = pool.find(id);
 

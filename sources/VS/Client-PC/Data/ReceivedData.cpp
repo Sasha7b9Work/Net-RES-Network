@@ -85,7 +85,7 @@ bool ReceivedData::ParseCommand(char message[16])
 
     if (Math::CalculateHash(&value, 4) == hash)
     {
-        PoolSensors::AppendMeasure(id, type, value);
+        Sensor::Pool::AppendMeasure(id, type, value);
 
         return true;
     }
