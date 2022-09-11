@@ -208,7 +208,7 @@ void Frame::OnPaint(wxPaintEvent &event)
 
 void Frame::OnSize(wxSizeEvent &event)
 {
-    diagrams->SetSizeArea(GetClientRect().width - grid->GetSize().x, 1);
+    diagrams->SetSizeArea(GetClientRect().width - grid->GetSize().x, GetClientRect().height);
 
     event.Skip();
 }

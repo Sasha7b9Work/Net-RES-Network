@@ -37,12 +37,8 @@ void Canvas::OnPaint(wxPaintEvent &)
 }
 
 
-void Canvas::SetWidthArea(int width)
+void Canvas::SetSizeArea(int width, int height)
 {
-    wxSize size = GetClientSize();
-
-    size.SetWidth(width);
-
-    SetMinClientSize(size);
-    SetClientSize(size);
+    SetMinClientSize({ width, height } );
+    SetClientSize({ width, height });
 }

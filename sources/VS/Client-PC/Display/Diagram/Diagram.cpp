@@ -16,9 +16,9 @@ Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_A
 }
 
 
-void Diagram::SetWidthArea(int width)
+void Diagram::SetSizeArea(int width, int height)
 {
-    canvas->SetWidthArea(width);
+    canvas->SetSizeArea(width, height);
 }
 
 
@@ -37,10 +37,12 @@ DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 }
 
 
-void DiagramPool::SetSizeArea(int width, int)
+void DiagramPool::SetSizeArea(int width, int height)
 {
+    int dy = height / TypeMeasure::Count;
+
     for (Diagram *diagram : pool)
     {
-        diagram->SetWidthArea(width);
+        diagram->SetSizeArea(width, dy);
     }
 }

@@ -18,7 +18,7 @@ public:
 
     Diagram(wxWindow *parant, TypeMeasure::E);
 
-    void SetWidthArea(int);
+    void SetSizeArea(int, int);
 
 private:
 
