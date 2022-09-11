@@ -3,7 +3,8 @@
 #include "Display/Diagram/Canvas.h"
 
 
-Canvas::Canvas(wxWindow *parent) : wxPanel(parent, wxID_ANY)
+Canvas::Canvas(wxWindow *parent, TypeMeasure::E _type) : wxPanel(parent, wxID_ANY),
+    type(_type)
 {
 //    SetDoubleBuffered(true);
 

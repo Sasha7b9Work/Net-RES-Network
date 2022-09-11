@@ -6,15 +6,24 @@
 
 DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
+    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
+    for (int i = 0; i < TypeMeasure::Count; i++)
+    {
+        pool[i] = new Diagram(this, (TypeMeasure::E)i);
+
+        sizer->Add(pool[i]);
+    }
+
+    SetSizer(sizer);
 }
 
 
-Diagram::Diagram(wxWindow *parent) : wxPanel(parent, wxID_ANY)
+Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_ANY)
 {
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(new Canvas(this));
+    sizer->Add(new Canvas(this, type));
 
     SetSizer(sizer);
 }

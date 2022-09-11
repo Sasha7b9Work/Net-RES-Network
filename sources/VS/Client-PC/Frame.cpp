@@ -69,7 +69,7 @@ Frame::Frame(const wxString &title)
 
     sizer->Add(grid);
 
-    sizer->Add(new Diagram(this));
+    sizer->Add(new DiagramPool(this));
 
     SetSizer(sizer);
 

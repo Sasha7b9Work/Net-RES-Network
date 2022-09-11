@@ -15,7 +15,7 @@ class Diagram : public wxPanel
 {
 public:
 
-    Diagram(wxWindow *parant);
+    Diagram(wxWindow *parant, TypeMeasure::E);
 };
 
 
