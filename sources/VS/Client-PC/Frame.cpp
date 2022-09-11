@@ -212,15 +212,3 @@ void Frame::OnSize(wxSizeEvent &event)
 
     event.Skip();
 }
-
-
-void Frame::SetID(uint id)
-{
-    grid->SetCellValue(0, 0, wxString::Format("%d", id));
-}
-
-
-void Frame::SetParameter(uint8 type, float value)
-{
-    grid->SetCellValue(0, type + 1, wxString::Format("%10.2f", value));
-}

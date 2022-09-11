@@ -28,3 +28,15 @@ Grid::Grid(wxWindow *parent, wxWindowID id, const wxPoint &position, const wxSiz
 
     wxScrollHelperBase::SetScrollbars(20, 20, 5, 5);
 }
+
+
+void Grid::SetID(uint id)
+{
+    SetCellValue(0, 0, wxString::Format("%d", id));
+}
+
+
+void Grid::SetParameter(uint8 type, float value)
+{
+    SetCellValue(0, type + 1, wxString::Format("%10.2f", value));
+}

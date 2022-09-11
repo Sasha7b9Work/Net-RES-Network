@@ -5,6 +5,12 @@
 class Grid : public wxGrid
 {
 public:
+
     Grid(wxWindow *, wxWindowID, const wxPoint &, const wxSize &);
+
+    void SetID(uint);
+
+    void SetParameter(uint8, float);
+
 private:
 };

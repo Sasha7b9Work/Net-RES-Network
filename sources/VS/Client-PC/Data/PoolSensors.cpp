@@ -86,9 +86,9 @@ bool PoolSensors::ParseCommand(char message[16])
     {
         LOG_WRITE("id = %d, type = %d, value = %f", id, type, value);
 
-        Frame::Self()->SetID(id);
+        Frame::Self()->grid->SetID(id);
 
-        Frame::Self()->SetParameter(type, value);
+        Frame::Self()->grid->SetParameter(type, value);
 
         return true;
     }
