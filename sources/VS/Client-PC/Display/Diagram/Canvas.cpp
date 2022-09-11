@@ -51,7 +51,7 @@ void Canvas::SetSizeArea(int width, int height)
 }
 
 
-void Canvas::DrawAllSensors(wxClientDC &)
+void Canvas::DrawAllSensors(wxClientDC &dc)
 {
     const map<uint, Sensor> &pool = Sensor::Pool::GetPool();
 
@@ -68,7 +68,13 @@ void Canvas::DrawAllSensors(wxClientDC &)
 
         if (measures.size())
         {
-
+            DrawSensor(dc, measures);
         }
     }
+}
+
+
+void Canvas::DrawSensor(wxClientDC &, const std::vector<float> &)
+{
+
 }

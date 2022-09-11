@@ -24,4 +24,7 @@ private:
 
     // Нарисовать измерения со всех датчиков
     void DrawAllSensors(wxClientDC &);
+
+    // Нарисовать измерения от одного датчика
+    void DrawSensor(wxClientDC &, const std::vector<float> &);
 };
