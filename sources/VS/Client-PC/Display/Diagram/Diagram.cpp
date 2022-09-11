@@ -4,6 +4,24 @@
 #include "Display/Diagram/Canvas.h"
 
 
+Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_ANY)
+{
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    canvas = new Canvas(this, type);
+
+    sizer->Add(canvas);
+
+    SetSizer(sizer);
+}
+
+
+void Diagram::SetWidthArea(int width)
+{
+    canvas->SetWidthArea(width);
+}
+
+
 DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
@@ -19,11 +37,10 @@ DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 }
 
 
-Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_ANY)
+void DiagramPool::SetSizeArea(int width, int)
 {
-    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-
-    sizer->Add(new Canvas(this, type));
-
-    SetSizer(sizer);
+    for (Diagram *diagram : pool)
+    {
+        diagram->SetWidthArea(width);
+    }
 }

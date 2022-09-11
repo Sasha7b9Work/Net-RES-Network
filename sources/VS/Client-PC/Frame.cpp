@@ -200,14 +200,17 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 }
 
 
-void Frame::OnPaint(wxPaintEvent &)
+void Frame::OnPaint(wxPaintEvent &event)
 {
+    event.Skip();
 }
 
 
-void Frame::OnSize(wxSizeEvent &)
+void Frame::OnSize(wxSizeEvent &event)
 {
+    diagrams->SetSizeArea(GetClientRect().width - grid->GetSize().x, 1);
 
+    event.Skip();
 }
 
 

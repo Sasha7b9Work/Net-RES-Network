@@ -35,3 +35,14 @@ void Canvas::OnPaint(wxPaintEvent &)
 
     dc.DrawText(labels[type], 1, 0);
 }
+
+
+void Canvas::SetWidthArea(int width)
+{
+    wxSize size = GetClientSize();
+
+    size.SetWidth(width);
+
+    SetMinClientSize(size);
+    SetClientSize(size);
+}
