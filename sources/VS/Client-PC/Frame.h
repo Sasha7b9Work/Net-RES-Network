@@ -7,6 +7,7 @@
 
 class wxGrid;
 class Grid;
+class DiagramPool;
 
 
 class Frame : public wxFrame
@@ -20,6 +21,7 @@ public:
     static Frame *Self() { return self; }
 
     void OnPaint(wxPaintEvent &);
+    void OnSize(wxSizeEvent &);
 
     void OnCloseWindow(wxCloseEvent &);
 
@@ -31,7 +33,8 @@ private:
 
     static Frame *self;
     wxToolBar    *toolBar = nullptr;
-    Grid         *grid;
+    Grid         *grid = nullptr;
+    DiagramPool  *diagrams = nullptr;
 
     void OnViewBrief(wxCommandEvent &);
     void OnViewFull(wxCommandEvent &);

@@ -60,8 +60,9 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU, &Frame::OnViewFull, this, TOOL_VIEW_FULL);
 
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
+    Bind(wxEVT_SIZE, &Frame::OnSize, this);
 
-    CreateFrameToolBar();
+//    CreateFrameToolBar();
 
     grid = new Grid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(500, 400)));
 
@@ -69,7 +70,9 @@ Frame::Frame(const wxString &title)
 
     sizer->Add(grid);
 
-    sizer->Add(new DiagramPool(this));
+    diagrams = new DiagramPool(this);
+
+    sizer->Add(diagrams);
 
     SetSizer(sizer);
 
@@ -199,6 +202,12 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void Frame::OnPaint(wxPaintEvent &)
 {
+}
+
+
+void Frame::OnSize(wxSizeEvent &)
+{
+
 }
 
 
