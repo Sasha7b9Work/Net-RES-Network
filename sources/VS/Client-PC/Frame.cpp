@@ -73,6 +73,7 @@ Frame::Frame(const wxString &title)
     SetSizer(sizer);
 
     SetClientSize(1024, 600);
+    SetMinClientSize({ 800, 300 });
 }
 
 

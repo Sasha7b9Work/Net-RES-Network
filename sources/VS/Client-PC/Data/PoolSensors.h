@@ -19,6 +19,7 @@ struct TypeMeasure
 };
 
 
+// Хранилище нативных принятых байтов
 namespace PoolSensors
 {
     // Добавить принятые данные
