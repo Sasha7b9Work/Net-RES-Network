@@ -23,4 +23,15 @@ void Canvas::OnPaint(wxPaintEvent &)
     dc.SetPen(wxPen(wxColor(0, 0, 0)));
 
     dc.DrawRectangle(GetClientRect());
+
+    static const wxString labels[TypeMeasure::Count] =
+    {
+        "Давление",
+        "Освещённость",
+        "Температура",
+        "Влажность",
+        "Скорость"
+    };
+
+    dc.DrawText(labels[type], 1, 0);
 }
