@@ -8,7 +8,7 @@ public:
 
     static Grid *Create(wxWindow *, const wxSize &);
 
-    static Grid *Self();
+    static Grid *Self() { return self; };
 
     void SetID(uint);
 

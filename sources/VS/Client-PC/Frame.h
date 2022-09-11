@@ -24,8 +24,6 @@ public:
 
     void OnCloseWindow(wxCloseEvent &);
 
-    Grid *grid = nullptr;
-
 private:
 
     static Frame *self;

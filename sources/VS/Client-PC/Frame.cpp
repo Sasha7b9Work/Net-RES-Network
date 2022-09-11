@@ -64,11 +64,9 @@ Frame::Frame(const wxString &title)
 
 //    CreateFrameToolBar();
 
-    grid = Grid::Create(this, FromDIP(wxSize(500, 400)));
-
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(grid);
+    sizer->Add(Grid::Create(this, FromDIP(wxSize(500, 400))));
 
     diagrams = new DiagramPool(this);
 
@@ -208,7 +206,12 @@ void Frame::OnPaint(wxPaintEvent &event)
 
 void Frame::OnSize(wxSizeEvent &event)
 {
-    diagrams->SetSizeArea(GetClientRect().width - grid->GetSize().x, GetClientRect().height);
+    diagrams->SetSizeArea(GetClientRect().width - Grid::Self()->GetSize().x, GetClientRect().height);
+
+    wxSize size = { Grid::Self()->GetSize().GetWidth(), GetClientRect().height };
+
+    Grid::Self()->SetClientSize(size);
+    Grid::Self()->SetSize(size);
 
     event.Skip();
 }
