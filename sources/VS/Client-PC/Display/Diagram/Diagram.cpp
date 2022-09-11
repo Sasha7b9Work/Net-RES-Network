@@ -59,7 +59,7 @@ void DiagramPool::SetSizeArea(int width, int height)
 }
 
 
-void DiagramPool::NeedRefresh(TypeMeasure::E)
+void DiagramPool::NeedRefresh(TypeMeasure::E type)
 {
-
+    pool[type]->Refresh();
 }
