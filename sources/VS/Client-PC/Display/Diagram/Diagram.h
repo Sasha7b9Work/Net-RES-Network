@@ -11,7 +11,7 @@
 */
 
 
-class Diagram : public wxPanel
+class Diagram
 {
 private:
 

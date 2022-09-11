@@ -23,7 +23,7 @@ bool Application::OnInit()
     // create and show the main application window
     Frame *frame = new Frame(_("Метеостанция"));
 
-    frame->Show();
+    frame->Hide();
 
     Init();
 
@@ -32,6 +32,8 @@ bool Application::OnInit()
     timer.SetOwner(this, TIMER_ID);
 
     timer.Start();
+
+    frame->Show();
 
     return true;
 }

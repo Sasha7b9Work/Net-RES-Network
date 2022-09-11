@@ -16,5 +16,4 @@ Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY)
 
 void Canvas::OnPaint(wxPaintEvent &)
 {
-    LOG_WRITE("size - %d %d", GetClientSize().x, GetClientSize().y);
 }

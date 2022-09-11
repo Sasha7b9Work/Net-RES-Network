@@ -14,7 +14,7 @@ Diagram *Diagram::Pool::Create(wxWindow *parent)
 }
 
 
-Diagram::Diagram(wxWindow *parent) : wxPanel(parent, wxID_ANY)
+Diagram::Diagram(wxWindow *)
 {
 
 }
