@@ -29,11 +29,18 @@ private:
 class DiagramPool : public wxPanel
 {
 public:
-    DiagramPool(wxWindow *parent);
+
+    static DiagramPool *Create(wxWindow *);
+
+    static DiagramPool *Self() { return self; }
 
     void SetSizeArea(int width, int height);
 
 private:
+
+    static DiagramPool *self;
+
+    DiagramPool(wxWindow *parent);
 
     Diagram *pool[TypeMeasure::Count];
 };

@@ -4,6 +4,9 @@
 #include "Display/Diagram/Canvas.h"
 
 
+DiagramPool *DiagramPool::self = nullptr;
+
+
 Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_ANY)
 {
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -34,6 +37,14 @@ DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
     }
 
     SetSizer(sizer);
+}
+
+
+DiagramPool *DiagramPool::Create(wxWindow *parent)
+{
+    self = new DiagramPool(parent);
+
+    return self;
 }
 
 

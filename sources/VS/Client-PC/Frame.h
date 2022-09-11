@@ -28,7 +28,6 @@ private:
 
     static Frame *self;
     wxToolBar    *toolBar = nullptr;
-    DiagramPool  *diagrams = nullptr;
 
     void OnViewBrief(wxCommandEvent &);
     void OnViewFull(wxCommandEvent &);
