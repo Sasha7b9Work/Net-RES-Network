@@ -5,7 +5,7 @@
 
 Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY)
 {
-    SetDoubleBuffered(true);
+//    SetDoubleBuffered(true);
 
     Bind(wxEVT_PAINT, &Canvas::OnPaint, this);
 
@@ -16,4 +16,10 @@ Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY)
 
 void Canvas::OnPaint(wxPaintEvent &)
 {
+    wxClientDC dc(this);
+
+    dc.SetBrush(*wxWHITE_BRUSH);
+    dc.SetPen(wxPen(wxColor(0, 0, 0)));
+
+    dc.DrawRectangle(GetClientRect());
 }
