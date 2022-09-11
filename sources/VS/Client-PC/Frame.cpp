@@ -64,7 +64,7 @@ Frame::Frame(const wxString &title)
 
 //    CreateFrameToolBar();
 
-    grid = new Grid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(500, 400)));
+    grid = new Grid(this, wxPoint(0, 0), FromDIP(wxSize(500, 400)));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 

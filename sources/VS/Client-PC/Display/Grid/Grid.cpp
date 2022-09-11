@@ -4,8 +4,8 @@
 #include "Display/Display.h"
 
 
-Grid::Grid(wxWindow *parent, wxWindowID id, const wxPoint &position, const wxSize &size) :
-    wxGrid(parent, id, position, size)
+Grid::Grid(wxWindow *parent, const wxPoint &position, const wxSize &size) :
+    wxGrid(parent, wxID_ANY, position, size)
 {
     CreateGrid(0, 0);
 
