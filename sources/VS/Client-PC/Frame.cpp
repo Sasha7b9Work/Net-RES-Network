@@ -69,15 +69,7 @@ Frame::Frame(const wxString &title)
 
     sizer->Add(grid);
 
-    sizer->Add(new Canvas(this));
-
-//    sizer->Add(new Grid(this, wxID_ANY, wxPoint(0, 0), FromDIP(wxSize(400, 400))));
-
-//    Diagram::Pool::Create(this);
-
-//    Diagram::Pool::GetFirst()->SetSize(10, 10);
-
-//    sizer->Add(Diagram::Pool::GetFirst());
+    sizer->Add(new Diagram(this));
 
     SetSizer(sizer);
 
