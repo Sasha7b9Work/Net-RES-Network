@@ -58,9 +58,3 @@ void Grid::SetMeasure(uint id, uint8 type, float value)
 
     SetCellValue(row->second, type + 1, wxString::Format("%10.2f", value));
 }
-
-
-void Grid::UpdateArea()
-{
-
-}

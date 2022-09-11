@@ -13,9 +13,6 @@ public:
 
     void SetMeasure(uint id, uint8 type, float value);
 
-    // Периодическое задание
-    void UpdateArea();
-
 private:
 
     Grid(wxWindow *, const wxSize &);

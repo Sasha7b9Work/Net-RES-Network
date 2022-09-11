@@ -40,6 +40,8 @@ public:
     {
         static void AppendMeasure(uint id, uint8 type, float value);
 
+        static const std::map<uint, Sensor> &GetPool() { return pool; };
+
     private:
 
         static std::map<uint, Sensor> pool;
