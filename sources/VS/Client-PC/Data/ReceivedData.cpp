@@ -7,7 +7,7 @@
 #include <cstring>
 
 
-namespace PoolSensors
+namespace ReceivedData
 {
     static DynamicBuffer <16>buffer;
 
@@ -17,13 +17,13 @@ namespace PoolSensors
 }
 
 
-void PoolSensors::AppendReceivedData(uint8 *data, int size)
+void ReceivedData::AppendReceivedData(uint8 *data, int size)
 {
     buffer.Append(data, size);
 }
 
 
-void PoolSensors::Update()
+void ReceivedData::Update()
 {
     while (buffer.Size() >= 16 && FindFirstABC())
     {
@@ -41,7 +41,7 @@ void PoolSensors::Update()
 }
 
 
-bool PoolSensors::FindFirstABC()
+bool ReceivedData::FindFirstABC()
 {
     int removed_bytes = 0;
 
@@ -66,7 +66,7 @@ bool PoolSensors::FindFirstABC()
 }
 
 
-bool PoolSensors::ParseCommand(char message[16])
+bool ReceivedData::ParseCommand(char message[16])
 {
     uint8 type = message[3];
 

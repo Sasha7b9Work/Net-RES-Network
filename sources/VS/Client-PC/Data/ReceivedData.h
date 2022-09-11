@@ -3,7 +3,7 @@
 
 
 // Хранилище нативных принятых байтов
-namespace PoolSensors
+namespace ReceivedData
 {
     // Добавить принятые данные
     void AppendReceivedData(uint8 *data, int size);

@@ -24,7 +24,7 @@ void Application::Update()
 {
     Communicator::Update();
 
-    PoolSensors::Update();
+    ReceivedData::Update();
 }
 
 

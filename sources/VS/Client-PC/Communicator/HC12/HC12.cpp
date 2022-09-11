@@ -47,7 +47,7 @@ int HC12::ReadBytes()
 
             if (num_bytes != 0)
             {
-                PoolSensors::AppendReceivedData(buffer, num_bytes);
+                ReceivedData::AppendReceivedData(buffer, num_bytes);
 
                 readed_bytes += num_bytes;
             }
