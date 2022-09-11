@@ -57,3 +57,9 @@ void DiagramPool::SetSizeArea(int width, int height)
         diagram->SetSizeArea(width, dy);
     }
 }
+
+
+void DiagramPool::NeedRefresh(TypeMeasure::E)
+{
+
+}

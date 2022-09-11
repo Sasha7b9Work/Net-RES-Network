@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Data/Sensors.h"
 #include "Display/Grid/Grid.h"
+#include "Display/Diagram/Diagram.h"
 #include <map>
 #include <vector>
 
@@ -24,6 +25,8 @@ void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
     pool.find(id)->second.AppendMeasure(type, value);
 
     Grid::self->SetMeasure(id, type, value);
+
+    DiagramPool::self->NeedRefresh((TypeMeasure::E)type);
 }
 
 
