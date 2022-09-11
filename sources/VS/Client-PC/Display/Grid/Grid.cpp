@@ -4,6 +4,9 @@
 #include "Display/Display.h"
 
 
+using namespace std;
+
+
 Grid *Grid::self = nullptr;
 
 
@@ -20,7 +23,6 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 {
     CreateGrid(0, 0);
 
-    AppendRows(1);
     AppendCols(6);
 
     EnableEditing(false);
@@ -41,15 +43,20 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 }
 
 
-void Grid::SetID(uint id)
+void Grid::SetMeasure(uint id, uint8 type, float value)
 {
-    SetCellValue(0, 0, wxString::Format("%d", id));
-}
+    auto row = rows.find(id);
 
+    if (row == rows.end())
+    {
+        AppendRows(1);
 
-void Grid::SetParameter(uint8 type, float value)
-{
-    SetCellValue(0, type + 1, wxString::Format("%10.2f", value));
+        rows.insert(pair<uint, int>(id, GetNumberRows() - 1));
+    }
+
+    row = rows.find(id);
+
+    SetCellValue(row->second, type + 1, wxString::Format("%10.2f", value));
 }
 
 
