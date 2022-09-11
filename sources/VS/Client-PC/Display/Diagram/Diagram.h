@@ -23,26 +23,26 @@ public:
 private:
 
     Canvas *canvas = nullptr;
-};
 
-
-class DiagramPool : public wxPanel
-{
 public:
 
-    static DiagramPool *Create(wxWindow *);
+    class Pool : public wxPanel
+    {
+    public:
 
-    static DiagramPool *self;
+        static Pool *Create(wxWindow *);
 
-    void SetSizeArea(int width, int height);
+        static Pool *self;
 
-    // ƒанные изменились и нужно перерисовать
-    void NeedRefresh(TypeMeasure::E);
+        void SetSizeArea(int width, int height);
 
-private:
+        // ƒанные изменились и нужно перерисовать
+        void NeedRefresh(TypeMeasure::E);
 
-    DiagramPool(wxWindow *parent);
+    private:
 
-    Diagram *pool[TypeMeasure::Count];
+        Pool(wxWindow *parent);
+
+        Diagram *pool[TypeMeasure::Count];
+    };
 };
-

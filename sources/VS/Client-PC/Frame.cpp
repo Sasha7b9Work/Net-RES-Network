@@ -68,7 +68,7 @@ Frame::Frame(const wxString &title)
 
     sizer->Add(Grid::Create(this, FromDIP(wxSize(480, 400))));
 
-    sizer->Add(DiagramPool::Create(this));
+    sizer->Add(Diagram::Pool::Create(this));
 
     SetSizer(sizer);
 
@@ -205,7 +205,7 @@ void Frame::OnPaint(wxPaintEvent &event)
 
 void Frame::OnSize(wxSizeEvent &event)
 {
-    DiagramPool::self->SetSizeArea(GetClientRect().width - Grid::self->GetSize().x, GetClientRect().height);
+    Diagram::Pool::self->SetSizeArea(GetClientRect().width - Grid::self->GetSize().x, GetClientRect().height);
 
     wxSize size = { Grid::self->GetSize().GetWidth(), GetClientRect().height };
 

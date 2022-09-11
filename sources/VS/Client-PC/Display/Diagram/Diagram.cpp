@@ -4,7 +4,7 @@
 #include "Display/Diagram/Canvas.h"
 
 
-DiagramPool *DiagramPool::self = nullptr;
+Diagram::Pool *Diagram::Pool::self = nullptr;
 
 
 Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_ANY)
@@ -25,7 +25,7 @@ void Diagram::SetSizeArea(int width, int height)
 }
 
 
-DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
+Diagram::Pool::Pool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -40,15 +40,15 @@ DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 }
 
 
-DiagramPool *DiagramPool::Create(wxWindow *parent)
+Diagram::Pool *Diagram::Pool::Create(wxWindow *parent)
 {
-    self = new DiagramPool(parent);
+    self = new Pool(parent);
 
     return self;
 }
 
 
-void DiagramPool::SetSizeArea(int width, int height)
+void Diagram::Pool::SetSizeArea(int width, int height)
 {
     int dy = height / TypeMeasure::Count;
 
@@ -59,7 +59,7 @@ void DiagramPool::SetSizeArea(int width, int height)
 }
 
 
-void DiagramPool::NeedRefresh(TypeMeasure::E type)
+void Diagram::Pool::NeedRefresh(TypeMeasure::E type)
 {
     pool[type]->Refresh();
 }
