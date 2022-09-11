@@ -6,11 +6,17 @@ class Grid : public wxGrid
 {
 public:
 
-    Grid(wxWindow *, const wxSize &);
+    static Grid *Create(wxWindow *, const wxSize &);
+
+    static Grid *Self();
 
     void SetID(uint);
 
     void SetParameter(uint8, float);
 
 private:
+
+    Grid(wxWindow *, const wxSize &);
+
+    static Grid *self;
 };

@@ -4,6 +4,17 @@
 #include "Display/Display.h"
 
 
+Grid *Grid::self = nullptr;
+
+
+Grid *Grid::Create(wxWindow *parent, const wxSize &size)
+{
+    self = new Grid(parent, size);
+
+    return self;
+}
+
+
 Grid::Grid(wxWindow *parent, const wxSize &size) :
     wxGrid(parent, wxID_ANY, { 0, 0 }, size)
 {
