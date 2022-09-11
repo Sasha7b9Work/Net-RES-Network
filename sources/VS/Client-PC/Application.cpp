@@ -23,8 +23,6 @@ bool Application::OnInit()
     // create and show the main application window
     Frame *frame = new Frame(_("Метеостанция"));
 
-    frame->Hide();
-
     Init();
 
     Bind(wxEVT_TIMER, &Application::OnTimer, this, TIMER_ID);

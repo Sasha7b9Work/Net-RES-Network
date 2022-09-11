@@ -2,11 +2,61 @@
 #include "defines.h"
 #include "Data/Sensors.h"
 #include "Display/Grid/Grid.h"
+#include <map>
+#include <vector>
+
+
+using namespace std;
+
+
+namespace PoolSensors
+{
+    class Sensor
+    {
+    public:
+
+        Sensor(uint _id) : id(_id) {};
+
+        void AppendMeasure(uint8 type, float value);
+
+    private:
+
+        const uint id;
+
+        vector<float> measures[TypeMeasure::Count];
+    };
+
+    static map<uint, Sensor> pool;
+}
 
 
 void PoolSensors::AppendMeasure(uint id, uint8 type, float value)
 {
+    auto sensor = pool.find(id);
+
+    if (sensor == pool.end())
+    {
+
+    }
+    else
+    {
+
+    }
+
     Grid::Self()->SetID(id);
 
     Grid::Self()->SetParameter(type, value);
+}
+
+
+void PoolSensors::Sensor::AppendMeasure(uint8 type, float value)
+{
+    if (type < TypeMeasure::Count)
+    {
+        measures[type].push_back(value);
+    }
+    else
+    {
+        LOG_ERROR_TRACE("Bad type measure %d", type);
+    }
 }
