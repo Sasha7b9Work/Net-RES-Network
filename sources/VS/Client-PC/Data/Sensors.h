@@ -1,4 +1,4 @@
-// 2022/08/24 14:56:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2022/08/24 14:56:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -19,11 +19,7 @@ struct TypeMeasure
 };
 
 
-// Хранилище нативных принятых байтов
-namespace PoolSensors
+struct Sensor
 {
-    // Добавить принятые данные
-    void AppendReceivedData(uint8 *data, int size);
 
-    void Update();
-}
+};

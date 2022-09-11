@@ -6,7 +6,7 @@
 #include "Communicator/LAN/ServerTCP.h"
 #include "Communicator/HC12/HC12.h"
 #include "Frame.h"
-#include "Data/PoolSensors.h"
+#include "Data/ReceivedData.h"
 #include "Display/Diagram/Diagram.h"
 
 

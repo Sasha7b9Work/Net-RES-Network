@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Communicator/HC12/HC12.h"
 #include "Communicator/HC12/RS232/rs232.h"
-#include "Data/PoolSensors.h"
+#include "Data/ReceivedData.h"
 
 
 namespace HC12
