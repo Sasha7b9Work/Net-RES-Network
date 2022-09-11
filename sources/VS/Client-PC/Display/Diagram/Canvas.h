@@ -21,4 +21,6 @@ private:
     TypeMeasure::E type;
 
     void OnPaint(wxPaintEvent &);
+
+    void DrawMeasures(wxClientDC &);
 };

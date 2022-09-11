@@ -34,6 +34,8 @@ void Canvas::OnPaint(wxPaintEvent &)
     };
 
     dc.DrawText(labels[type], 1, 0);
+
+    DrawMeasures(dc);
 }
 
 
@@ -41,4 +43,10 @@ void Canvas::SetSizeArea(int width, int height)
 {
     SetMinClientSize({ width, height } );
     SetClientSize({ width, height });
+}
+
+
+void Canvas::DrawMeasures(wxClientDC &)
+{
+
 }
