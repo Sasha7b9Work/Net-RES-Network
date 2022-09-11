@@ -6,7 +6,7 @@
 namespace ReceivedData
 {
     // Добавить принятые данные
-    void AppendReceivedData(uint8 *data, int size);
+    void Append(uint8 *data, int size);
 
     void Update();
 }

@@ -17,7 +17,7 @@ namespace ReceivedData
 }
 
 
-void ReceivedData::AppendReceivedData(uint8 *data, int size)
+void ReceivedData::Append(uint8 *data, int size)
 {
     buffer.Append(data, size);
 }
