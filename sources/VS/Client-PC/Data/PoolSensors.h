@@ -2,6 +2,23 @@
 #pragma once
 
 
+struct TypeMeasure
+{
+    enum E
+    {
+        Pressure,           // Давление
+        Illumination,       // Освещённость
+        Temperature,        // Температура
+        Humidity,           // Влажность
+        Velocity,           // Скорость
+        Count
+    };
+
+    static pchar GetTitle(TypeMeasure::E);
+    static pchar GetUnits(TypeMeasure::E);
+};
+
+
 namespace PoolSensors
 {
     // Добавить принятые данные
