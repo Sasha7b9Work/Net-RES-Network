@@ -19,7 +19,7 @@ struct TypeMeasure
 };
 
 
-struct Sensor
+namespace PoolSensors
 {
-
+    void AppendMeasure(uint id, uint8 type, float value);
 };

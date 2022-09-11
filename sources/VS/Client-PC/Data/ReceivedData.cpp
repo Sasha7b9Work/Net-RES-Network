@@ -1,6 +1,7 @@
 // 2022/08/24 14:57:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Data/ReceivedData.h"
+#include "Data/Sensors.h"
 #include "Utils/DynamicBuffer.h"
 #include "Utils/Math.h"
 #include "Frame.h"
@@ -84,11 +85,7 @@ bool ReceivedData::ParseCommand(char message[16])
 
     if (Math::CalculateHash(&value, 4) == hash)
     {
-        LOG_WRITE("id = %d, type = %d, value = %f", id, type, value);
-
-        Grid::Self()->SetID(id);
-
-        Grid::Self()->SetParameter(type, value);
+        PoolSensors::AppendMeasure(id, type, value);
 
         return true;
     }
