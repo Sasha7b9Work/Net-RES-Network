@@ -4,14 +4,9 @@
 #include "Display/Diagram/Canvas.h"
 
 
-Diagram *Diagram::Pool::first = nullptr;
-
-
-Diagram *Diagram::Pool::Create(wxWindow *parent)
+DiagramPool::DiagramPool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
-    first = new Diagram(parent);
 
-    return first;
 }
 
 
