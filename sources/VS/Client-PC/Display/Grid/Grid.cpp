@@ -25,4 +25,6 @@ Grid::Grid(wxWindow *parent, wxWindowID id, const wxPoint &position, const wxSiz
         SetColLabelValue(meas + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
             wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
     }
+
+    SetScrollbars(20, 20, 5, 5);
 }

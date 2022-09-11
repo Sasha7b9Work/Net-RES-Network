@@ -7,8 +7,10 @@
 */
 
 
-class Canvas
+class Canvas : public wxPanel
 {
 public:
+    Canvas(wxWindow *parent);
 private:
+    void OnPaint(wxPaintEvent &);
 };
