@@ -33,7 +33,7 @@ Time &Clock::CurrentTime()
 
 String<> Time::ToString() const
 {
-    return String<>("%d:%d", hour, min);
+    return String<>("%d:%02d", hour, min);
 }
 
 

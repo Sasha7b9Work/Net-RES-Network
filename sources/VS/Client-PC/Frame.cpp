@@ -64,7 +64,7 @@ Frame::Frame(const wxString &title)
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(Grid::Create(this, FromDIP(wxSize(480, 400))));
+    sizer->Add(Grid::Create(this, FromDIP(wxSize(360, 400))));
 
     sizer->Add(Diagram::Pool::Create(this));
 

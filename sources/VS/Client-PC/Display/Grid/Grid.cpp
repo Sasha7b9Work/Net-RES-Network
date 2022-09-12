@@ -39,7 +39,14 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
             wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
     }
 
-    wxScrollHelperBase::SetScrollbars(20, 20, 5, 5);
+    SetColSize(0, FromDIP(40));
+
+    for (int i = 1; i < 5; i++)
+    {
+        SetColSize(i, FromDIP(60));
+    }
+
+//    wxScrollHelperBase::SetScrollbars(20, 20, 5, 5);
 }
 
 
