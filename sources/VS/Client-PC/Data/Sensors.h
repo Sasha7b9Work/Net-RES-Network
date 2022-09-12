@@ -20,6 +20,13 @@ struct TypeMeasure
 };
 
 
+struct DataPoint
+{
+    DataPoint(float _value) : value(_value) {}
+    float value;
+};
+
+
 class Sensor
 {
 public:
@@ -28,13 +35,13 @@ public:
 
     void AppendMeasure(uint8 type, float value);
 
-    const std::vector<float> &GetMeasures(TypeMeasure::E type) const { return measures[type]; }
+    const std::vector<DataPoint> &GetMeasures(TypeMeasure::E type) const { return measures[type]; }
 
 private:
 
     const uint id;
 
-    std::vector<float> measures[TypeMeasure::Count];
+    std::vector<DataPoint> measures[TypeMeasure::Count];
 
 public:
 

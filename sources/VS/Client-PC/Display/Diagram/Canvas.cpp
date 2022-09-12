@@ -11,8 +11,6 @@ using namespace std;
 Canvas::Canvas(wxWindow *parent, TypeMeasure::E _type) : wxPanel(parent, wxID_ANY),
     type(_type)
 {
-//    SetDoubleBuffered(true);
-
     Bind(wxEVT_PAINT, &Canvas::OnPaint, this);
 
     SetMinClientSize({ 100, 100 });
@@ -68,7 +66,7 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
     {
         const Sensor &sensor = element.second;
 
-        const std::vector<float> &measures = sensor.GetMeasures(type);
+        const std::vector<DataPoint> &measures = sensor.GetMeasures(type);
 
         if (measures.size())
         {
@@ -78,7 +76,7 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
 }
 
 
-void Canvas::DrawSensor(wxClientDC &, const std::vector<float> &)
+void Canvas::DrawSensor(wxClientDC &, const std::vector<DataPoint> &)
 {
 
 }
