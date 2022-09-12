@@ -206,5 +206,7 @@ void Frame::OnSize(wxSizeEvent &event)
     Grid::self->SetClientSize(size);
     Grid::self->SetSize(size);
 
+    Diagram::Pool::self->Refresh();
+
     event.Skip();
 }

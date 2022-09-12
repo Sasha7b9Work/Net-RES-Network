@@ -21,10 +21,6 @@ Canvas::Canvas(wxWindow *parent, TypeMeasure::E _type) : wxPanel(parent, wxID_AN
 
 void Canvas::OnPaint(wxPaintEvent &)
 {
-    static int counter = 1;
-
-    LOG_WRITE("Paint event %d", counter++);
-
     wxClientDC dc(this);
 
     dc.SetBrush(*wxWHITE_BRUSH);
@@ -60,6 +56,8 @@ void Canvas::OnPaint(wxPaintEvent &)
     }
 
     DrawAllSensors(dc);
+
+    Update();
 }
 
 

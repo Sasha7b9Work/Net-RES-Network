@@ -59,9 +59,3 @@ void Diagram::Pool::SetSizeArea(int width, int height)
         diagram->SetSizeArea(width, dy);
     }
 }
-
-
-void Diagram::Pool::Update()
-{
-    pool[0]->canvas->Refresh();
-}
