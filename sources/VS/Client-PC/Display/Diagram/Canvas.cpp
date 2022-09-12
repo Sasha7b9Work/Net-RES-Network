@@ -28,20 +28,7 @@ void Canvas::OnPaint(wxPaintEvent &)
 
     dc.DrawRectangle(GetClientRect());
 
-    int dx = 60;
-
-    int x = GetClientSize().GetWidth() - Clock::CurrentTime().sec % dx;
-
-    int y = GetClientSize().GetHeight();
-
-    dc.SetPen(wxPen(wxColor(200, 200, 200)));
-
-    while (x > 0)
-    {
-        dc.DrawLine(x, 0, x, y);
-
-        x -= dx;
-    }
+    DrawTimeScale(dc);
 
     DrawAllSensors(dc);
 
@@ -59,6 +46,25 @@ void Canvas::OnPaint(wxPaintEvent &)
     dc.DrawText(labels[type], 1, 0);
 
     Update();
+}
+
+
+void Canvas::DrawTimeScale(wxClientDC &dc)
+{
+    int dx = 60;
+
+    int x = GetClientSize().GetWidth() - Clock::CurrentTime().sec % dx;
+
+    int y = GetClientSize().GetHeight();
+
+    dc.SetPen(wxPen(wxColor(200, 200, 200)));
+
+    while (x > 0)
+    {
+        dc.DrawLine(x, 0, x, y);
+
+        x -= dx;
+    }
 }
 
 

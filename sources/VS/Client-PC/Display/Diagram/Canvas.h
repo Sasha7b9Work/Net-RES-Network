@@ -27,4 +27,6 @@ private:
 
     // Нарисовать измерения от одного датчика
     void DrawSensor(wxClientDC &, const DataArray &);
+
+    void DrawTimeScale(wxClientDC &);
 };
