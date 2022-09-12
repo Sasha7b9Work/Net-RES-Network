@@ -17,16 +17,14 @@ public:
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
 
-    static Frame *Self() { return self; }
+    static Frame *self;
 
-    void OnPaint(wxPaintEvent &);
     void OnSize(wxSizeEvent &);
 
     void OnCloseWindow(wxCloseEvent &);
 
 private:
 
-    static Frame *self;
     wxToolBar    *toolBar = nullptr;
 
     void OnViewBrief(wxCommandEvent &);

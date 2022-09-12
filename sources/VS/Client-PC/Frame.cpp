@@ -59,7 +59,6 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU, &Frame::OnViewBrief, this, TOOL_VIEW_BRIEF);
     Bind(wxEVT_MENU, &Frame::OnViewFull, this, TOOL_VIEW_FULL);
 
-    Bind(wxEVT_PAINT, &Frame::OnPaint, this);
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
 
 //    CreateFrameToolBar();
@@ -194,12 +193,6 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Fit(&dlg);
 
     dlg.ShowModal();
-}
-
-
-void Frame::OnPaint(wxPaintEvent &event)
-{
-    event.Skip();
 }
 
 

@@ -36,8 +36,7 @@ public:
 
         void SetSizeArea(int width, int height);
 
-        // ƒанные изменились и нужно перерисовать
-        void NeedRefresh(TypeMeasure::E);
+        void Update();
 
     private:
 
