@@ -35,3 +35,16 @@ String<> Time::ToString() const
 {
     return String<>("%d:%d", hour, min);
 }
+
+
+void Time::SubMin(int value)
+{
+    min -= value;
+
+    if (min < 0)
+    {
+        min = 60 + min;
+
+        hour--;
+    }
+}

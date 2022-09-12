@@ -69,6 +69,8 @@ void Canvas::DrawTimeScale(wxClientDC &dc)
 
         dc.DrawText(time.ToString().c_str(), { x + 1, y - 15 });
 
+        time.SubMin(1);
+
         x -= dx;
     }
 }
