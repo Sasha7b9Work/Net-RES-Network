@@ -60,7 +60,7 @@ float DataArray::Min(int from_end) const
         index = 0;
     }
 
-    for (uint i = 0; i < array.size(); i++)
+    for (uint i = index; i < array.size(); i++)
     {
         if (array[i].value < result)
         {
@@ -83,7 +83,7 @@ float DataArray::Max(int from_end) const
         index = 0;
     }
 
-    for (uint i = 0; i < array.size(); i++)
+    for (uint i = index; i < array.size(); i++)
     {
         if (array[i].value > result)
         {
