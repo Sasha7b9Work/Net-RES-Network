@@ -29,3 +29,9 @@ Time &Clock::CurrentTime()
 {
     return current;
 }
+
+
+String<> Time::ToString() const
+{
+    return String<>("%d:%d", hour, min);
+}

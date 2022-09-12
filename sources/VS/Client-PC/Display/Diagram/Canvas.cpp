@@ -53,7 +53,11 @@ void Canvas::DrawTimeScale(wxClientDC &dc)
 {
     int dx = 60;
 
-    int x = GetClientSize().GetWidth() - Clock::CurrentTime().sec % dx;
+    Time time = Clock::CurrentTime();
+
+    int x = GetClientSize().GetWidth() - time.sec % dx;
+
+    time.sec = 0;
 
     int y = GetClientSize().GetHeight();
 
@@ -62,6 +66,8 @@ void Canvas::DrawTimeScale(wxClientDC &dc)
     while (x > 0)
     {
         dc.DrawLine(x, 0, x, y);
+
+        dc.DrawText(time.ToString().c_str(), { x + 1, y - 15 });
 
         x -= dx;
     }
