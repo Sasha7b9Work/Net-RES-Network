@@ -3,6 +3,7 @@
 #include "Display/Diagram/Canvas.h"
 #include "Data/Sensors.h"
 #include <map>
+#include <ctime>
 
 
 using namespace std;
@@ -76,7 +77,21 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
 }
 
 
-void Canvas::DrawSensor(wxClientDC &, const DataArray &)
+void Canvas::DrawSensor(wxClientDC &dc, const DataArray &)
 {
+    time_t now = ::time(0);
 
+    tm time = *localtime(&now);
+
+    int x = GetClientSize().GetWidth() - time.tm_sec % 10;
+    int y = GetClientSize().GetHeight();
+
+    dc.SetPen(wxPen(wxColor(200, 200, 200)));
+
+    while (x > 0)
+    {
+        dc.DrawLine(x, 0, x, y);
+
+        x -= 20;
+    }
 }
