@@ -125,7 +125,7 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
         }
         else
         {
-            dc.DrawLine(x, y, x, prev_y);
+            dc.DrawLine(x, y, x, prev_y - 1);
         }
 
         prev_y = y;
