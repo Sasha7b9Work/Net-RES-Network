@@ -7,5 +7,5 @@ namespace BME280
 {
     void Init();
 
-    bool GetMeasures(unsigned int dT, float *temp, float *pressure, float *humidity);
+    bool GetMeasures(float *temp, float *pressure, float *humidity);
 }

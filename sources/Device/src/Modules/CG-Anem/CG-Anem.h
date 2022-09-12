@@ -7,5 +7,5 @@ namespace CG_Anem
 {
     void Init();
 
-    bool GetMeasure(unsigned int dT, float *velocity);
+    bool GetMeasure(float *velocity);
 }

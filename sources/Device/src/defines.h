@@ -9,6 +9,11 @@ typedef unsigned int uint;
 typedef const char *pchar;
 typedef unsigned char uchar;
 
+
+// Промежуток между измерениями
+#define TIME_MEASURE  900
+
+
 #ifdef WIN32
     #define IN_MODE_TEST
 #else

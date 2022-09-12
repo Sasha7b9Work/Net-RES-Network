@@ -19,14 +19,14 @@ void CG_Anem::Init()
 }
 
 
-bool CG_Anem::GetMeasure(unsigned int dT, float *velocity_out)
+bool CG_Anem::GetMeasure(float *velocity_out)
 {
     if (HAL_GetTick() < timeNext)
     {
         return false;
     }
 
-    timeNext += dT;
+    timeNext += TIME_MEASURE + (std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 

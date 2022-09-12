@@ -5,6 +5,7 @@
 #include "Hardware/HAL/HAL.h"
 #include <stm32f1xx_hal.h>
 #include <cstring>
+#include <cstdlib>
 
 
 static bme280_dev dev;
@@ -45,14 +46,14 @@ void BME280::Init()
 }
 
 
-bool BME280::GetMeasures(unsigned int dT, float* temp, float* pressure, float* humidity)
+bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
 {
     if(HAL_GetTick() < timeNext)
     {
         return false;
     }
 
-    timeNext += dT;
+    timeNext += TIME_MEASURE + (std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 

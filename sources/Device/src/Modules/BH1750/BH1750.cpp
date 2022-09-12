@@ -3,6 +3,7 @@
 #include "Modules/BH1750/BH1750.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f1xx_hal.h>
+#include <cstdlib>
 
 
 namespace BH1750
@@ -27,14 +28,14 @@ void BH1750::Init()
 }
 
 
-bool BH1750::GetMeasure(unsigned int dT, float *illumination)
+bool BH1750::GetMeasure(float *illumination)
 {
     if (HAL_GetTick() < timeNext)
     {
         return false;
     }
 
-    timeNext += dT;
+    timeNext += TIME_MEASURE + (std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 

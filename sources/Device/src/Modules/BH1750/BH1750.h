@@ -9,5 +9,5 @@ namespace BH1750
 {
     void Init();
 
-    bool GetMeasure(unsigned int dT, float *illumination);
+    bool GetMeasure(float *illumination);
 }
