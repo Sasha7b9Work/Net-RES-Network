@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Application.h"
 #include "Communicator/Communicator.h"
-#include "Display/Display.h"
 #include "Communicator/LAN/ServerTCP.h"
 #include "Communicator/HC12/HC12.h"
 #include "Frame.h"

@@ -13,6 +13,36 @@ using namespace std;
 map<uint, Sensor> Sensor::Pool::pool;
 
 
+pchar TypeMeasure::GetTitle(TypeMeasure::E type)
+{
+    static const pchar titles[Count] =
+    {
+        "Давление",
+        "Освещённость",
+        "Температура",
+        "Влажность",
+        "Скорость"
+    };
+
+    return titles[type];
+}
+
+
+pchar TypeMeasure::GetUnits(TypeMeasure::E type)
+{
+    static const pchar units[Count] =
+    {
+        "гПа",
+        "лк",
+        "С",
+        "%%",
+        "м/с"
+    };
+
+    return units[type];
+}
+
+
 void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
 {
     auto sensor = pool.find(id);

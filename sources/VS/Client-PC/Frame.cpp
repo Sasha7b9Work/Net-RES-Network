@@ -1,7 +1,6 @@
 // 2022/04/29 13:56:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Frame.h"
-#include "Display/Display.h"
 #include "Display/Diagram/Diagram.h"
 #include "Display/Grid/Grid.h"
 #include "Display/Diagram/Canvas.h"
@@ -125,31 +124,31 @@ void Frame::OnViewFull(wxCommandEvent &)
 
 void Frame::OnMeasurePressure(wxCommandEvent &)
 {
-    Display::SwitchMeasure(TypeMeasure::Pressure);
+
 }
 
 
 void Frame::OnMeasureIllumination(wxCommandEvent &)
 {
-    Display::SwitchMeasure(TypeMeasure::Illumination);
+
 }
 
 
 void Frame::OnMeasureHumidity(wxCommandEvent &)
 {
-    Display::SwitchMeasure(TypeMeasure::Humidity);
+
 }
 
 
 void Frame::OnMeasureVelocity(wxCommandEvent &)
 {
-    Display::SwitchMeasure(TypeMeasure::Velocity);
+
 }
 
 
 void Frame::OnMeasureTemperature(wxCommandEvent &)
 {
-    Display::SwitchMeasure(TypeMeasure::Temperature);
+
 }
 
 

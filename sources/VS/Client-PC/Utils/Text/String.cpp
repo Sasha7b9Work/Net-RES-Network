@@ -1,7 +1,6 @@
 // 2022/03/30 08:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/Text/String.h"
-#include "Display/Display.h"
 #include "Display/Font.h"
 #include <cstdarg>
 #include <cstring>

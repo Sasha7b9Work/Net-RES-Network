@@ -5,7 +5,6 @@
 #include "Communicator/LAN/libnet/netpacket.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
-#include "Display/Display.h"
 #include "Utils/Timer.h"
 
 
@@ -108,9 +107,4 @@ size_t ServerTCP::OnConnection(sock_t sock, void *)
 void ServerTCP::Update()
 {
     server.run();
-
-    if (meter.ElapsedTime() > 4000)
-    {
-        Display::Reset();
-    }
 }
