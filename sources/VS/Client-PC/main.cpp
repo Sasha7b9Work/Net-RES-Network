@@ -32,16 +32,7 @@ void Application::Update()
 
     ReceivedData::Update();
 
-    Time time = Clock::CurrentTime();
-
-    static int prev = time.sec;
-
-    if (prev != time.sec)
-    {
-        prev = time.sec;
-
-        Frame::self->Refresh();
-    }
+    Diagram::Pool::self->UpdateArea();
 }
 
 

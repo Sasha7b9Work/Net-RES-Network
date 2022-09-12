@@ -36,6 +36,8 @@ public:
 
         void SetSizeArea(int width, int height);
 
+        void UpdateArea();
+
     private:
 
         Pool(wxWindow *parent);

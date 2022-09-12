@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Diagram/Diagram.h"
 #include "Display/Diagram/Canvas.h"
+#include "Utils/Clock.h"
 
 
 Diagram::Pool *Diagram::Pool::self = nullptr;
@@ -57,5 +58,20 @@ void Diagram::Pool::SetSizeArea(int width, int height)
     for (Diagram *diagram : pool)
     {
         diagram->SetSizeArea(width, dy);
+    }
+}
+
+
+void Diagram::Pool::UpdateArea()
+{
+    Time time = Clock::CurrentTime();
+
+    static int prev = time.sec;
+
+    if (prev != time.sec)
+    {
+        prev = time.sec;
+
+        Refresh();
     }
 }
