@@ -49,7 +49,7 @@ DataPoint::DataPoint(float _value) : value(_value)
 }
 
 
-float DataArray::Min(int from_end)
+float DataArray::Min(int from_end) const
 {
     float result = 1e10f;
 
@@ -72,7 +72,7 @@ float DataArray::Min(int from_end)
 }
 
 
-float DataArray::Max(int from_end)
+float DataArray::Max(int from_end) const
 {
     float result = -1e10f;
 

@@ -92,7 +92,35 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
 }
 
 
-void Canvas::DrawSensor(wxClientDC &, const DataArray &)
+void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
 {
+    dc.SetPen(wxPen(wxColor(0, 0, 255)));
 
+    auto point = array.array.end() - 1;
+
+    int width = GetClientSize().GetWidth();
+    int height = GetClientSize().GetHeight();
+
+    float min = array.Min(width);
+    float max = array.Max(width);
+
+    if (fabsf(min - max) < 0.0001f)
+    {
+        return;
+    }
+
+    float scale = ((float)height - 20.0f) / (max - min);
+
+    int x = width;
+
+    do
+    {
+        int y = (int)((point->value - min) * scale + 10.0f);
+
+        dc.DrawPoint({ x, y });
+
+        point--;
+        x--;
+
+    } while (point > array.array.begin());
 }
