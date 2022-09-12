@@ -47,3 +47,49 @@ DataPoint::DataPoint(float _value) : value(_value)
 
     time = *localtime(&now);
 }
+
+
+float DataArray::Min(int from_end)
+{
+    float result = 1e10f;
+
+    int index = (int)array.size() - from_end;
+
+    if (index < 0)
+    {
+        index = 0;
+    }
+
+    for (uint i = 0; i < array.size(); i++)
+    {
+        if (array[i].value < result)
+        {
+            result = array[i].value;
+        }
+    }
+
+    return result;
+}
+
+
+float DataArray::Max(int from_end)
+{
+    float result = -1e10f;
+
+    int index = (int)array.size() - from_end;
+
+    if (index < 0)
+    {
+        index = 0;
+    }
+
+    for (uint i = 0; i < array.size(); i++)
+    {
+        if (array[i].value > result)
+        {
+            result = array[i].value;
+        }
+    }
+
+    return result;
+}

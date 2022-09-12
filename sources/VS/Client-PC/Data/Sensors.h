@@ -34,6 +34,10 @@ struct DataArray
 
     void PushBack(const DataPoint &point) { array.push_back(point); }
 
+    // Рассчитывает мин/макс на from_end элементах с конца
+    float Min(int from_end);
+    float Max(int from_end);
+
     std::vector<DataPoint> array;
 };
 
