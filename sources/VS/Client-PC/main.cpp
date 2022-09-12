@@ -8,7 +8,7 @@
 #include "Frame.h"
 #include "Data/ReceivedData.h"
 #include "Display/Diagram/Diagram.h"
-#include <ctime>
+#include "Utils/Clock.h"
 
 
 using namespace std;
@@ -26,19 +26,19 @@ void Application::Init()
 
 void Application::Update()
 {
+    Clock::Update();
+
     Communicator::Update();
 
     ReceivedData::Update();
 
-    time_t now = time(0);
+    Time time = Clock::CurrentTime();
 
-    tm time = *localtime(&now);
+    static int prev = time.sec;
 
-    static int prev = time.tm_sec;
-
-    if (prev != time.tm_sec)
+    if (prev != time.sec)
     {
-        prev = time.tm_sec;
+        prev = time.sec;
 
         Frame::self->Refresh();
     }
