@@ -131,7 +131,7 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
 
     do
     {
-        int y = height - 10 + (int)((point->value - min) * scale);
+        int y = height - 10 - (int)((point->value - min) * scale);
 
         if (prev_y == -100)
         {
@@ -151,6 +151,13 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
 
     dc.SetPen(wxPen(wxColor(0, 0, 0)));
 
-    dc.DrawText(wxString::Format("%10.2f", max), { width - 25, 0 });
-    dc.DrawText(wxString::Format("%10.2f", min), { width - 25, height - 15 });
+    DrawTextOnBackground(dc, wxString::Format("%10.2f", max).c_str(), width - 50, 0, 50, 15);
+    DrawTextOnBackground(dc, wxString::Format("%10.2f", min).c_str(), width - 50, height - 30, 50, 15);
+}
+
+
+void Canvas::DrawTextOnBackground(wxClientDC &dc, pchar text, int x, int y, int width, int height)
+{
+    dc.DrawRectangle({ x, y }, { width, height });
+    dc.DrawText(text, { x + 1, y + 1 });
 }

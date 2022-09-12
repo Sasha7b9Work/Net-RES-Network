@@ -29,4 +29,6 @@ private:
     void DrawSensor(wxClientDC &, const DataArray &);
 
     void DrawTimeScale(wxClientDC &);
+
+    void DrawTextOnBackground(wxClientDC &, pchar, int x, int y, int width, int height);
 };
