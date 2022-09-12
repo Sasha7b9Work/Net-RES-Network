@@ -28,22 +28,11 @@ void Canvas::OnPaint(wxPaintEvent &)
 
     dc.DrawRectangle(GetClientRect());
 
-    static const wxString labels[TypeMeasure::Count] =
-    {
-        "Давление",
-        "Освещённость",
-        "Температура",
-        "Влажность",
-        "Скорость"
-    };
-
-    dc.DrawText(labels[type], 1, 0);
-
     time_t now = ::time(0);
 
     tm time = *localtime(&now);
 
-    int x = GetClientSize().GetWidth() - time.tm_sec % 10;
+    int x = GetClientSize().GetWidth() - time.tm_sec % 60;
     int y = GetClientSize().GetHeight();
 
     dc.SetPen(wxPen(wxColor(200, 200, 200)));
@@ -56,6 +45,19 @@ void Canvas::OnPaint(wxPaintEvent &)
     }
 
     DrawAllSensors(dc);
+
+    dc.SetPen(wxPen(wxColor(0, 0, 0)));
+
+    static const wxString labels[TypeMeasure::Count] =
+    {
+        "Давление",
+        "Освещённость",
+        "Температура",
+        "Влажность",
+        "Скорость"
+    };
+
+    dc.DrawText(labels[type], 1, 0);
 
     Update();
 }

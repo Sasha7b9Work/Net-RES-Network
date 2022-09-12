@@ -8,6 +8,10 @@
 #include "Frame.h"
 #include "Data/ReceivedData.h"
 #include "Display/Diagram/Diagram.h"
+#include <ctime>
+
+
+using namespace std;
 
 
 void Application::Init()
@@ -25,6 +29,19 @@ void Application::Update()
     Communicator::Update();
 
     ReceivedData::Update();
+
+    time_t now = time(0);
+
+    tm time = *localtime(&now);
+
+    static int prev = time.tm_sec;
+
+    if (prev != time.tm_sec)
+    {
+        prev = time.tm_sec;
+
+        Frame::self->Refresh();
+    }
 }
 
 
