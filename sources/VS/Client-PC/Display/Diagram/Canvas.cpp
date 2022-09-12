@@ -98,7 +98,7 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
 
         const DataArray &measures = sensor.GetMeasures(type);
 
-        if (measures.Size())
+        if (measures.Size() > 1)
         {
             DrawSensor(dc, measures);
         }
@@ -131,7 +131,7 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
 
     do
     {
-        int y = (int)((point->value - min) * scale + 10.0f);
+        int y = height - 10 + (int)((point->value - min) * scale);
 
         if (prev_y == -100)
         {
@@ -148,4 +148,9 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
         x--;
 
     } while (point > array.array.begin());
+
+    dc.SetPen(wxPen(wxColor(0, 0, 0)));
+
+    dc.DrawText(wxString::Format("%10.2f", max), { width - 25, 0 });
+    dc.DrawText(wxString::Format("%10.2f", min), { width - 25, height - 15 });
 }
