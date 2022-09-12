@@ -34,10 +34,18 @@ void Sensor::AppendMeasure(uint8 type, float value)
 {
     if (type < TypeMeasure::Count)
     {
-        measures[type].push_back(value);
+        measures[type].PushBack(DataPoint(value));
     }
     else
     {
         LOG_ERROR_TRACE("Bad type measure %d", type);
     }
+}
+
+
+DataPoint::DataPoint(float _value) : value(_value)
+{
+    time_t now = ::time(0);
+
+    time = *localtime(&now);
 }

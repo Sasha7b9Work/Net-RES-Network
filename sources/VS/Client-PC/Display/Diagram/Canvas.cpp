@@ -66,9 +66,9 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
     {
         const Sensor &sensor = element.second;
 
-        const std::vector<DataPoint> &measures = sensor.GetMeasures(type);
+        const DataArray &measures = sensor.GetMeasures(type);
 
-        if (measures.size())
+        if (measures.Size())
         {
             DrawSensor(dc, measures);
         }
@@ -76,7 +76,7 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
 }
 
 
-void Canvas::DrawSensor(wxClientDC &, const std::vector<DataPoint> &)
+void Canvas::DrawSensor(wxClientDC &, const DataArray &)
 {
 
 }

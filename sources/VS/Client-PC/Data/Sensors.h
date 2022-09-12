@@ -1,6 +1,7 @@
 // 2022/08/24 14:56:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include <map>
+#include <ctime>
 
 
 struct TypeMeasure
@@ -22,8 +23,19 @@ struct TypeMeasure
 
 struct DataPoint
 {
-    DataPoint(float _value) : value(_value) {}
+    DataPoint(float);
     float value;
+    std::tm time;
+};
+
+
+struct DataArray
+{
+    int Size() const { return (int)array.size(); }
+
+    void PushBack(const DataPoint &point) { array.push_back(point); }
+
+    std::vector<DataPoint> array;
 };
 
 
@@ -35,13 +47,13 @@ public:
 
     void AppendMeasure(uint8 type, float value);
 
-    const std::vector<DataPoint> &GetMeasures(TypeMeasure::E type) const { return measures[type]; }
+    const DataArray &GetMeasures(TypeMeasure::E type) const { return measures[type]; }
 
 private:
 
     const uint id;
 
-    std::vector<DataPoint> measures[TypeMeasure::Count];
+    DataArray measures[TypeMeasure::Count];
 
 public:
 
