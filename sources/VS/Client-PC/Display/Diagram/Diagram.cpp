@@ -16,6 +16,8 @@ Diagram::Diagram(wxWindow *parent, TypeMeasure::E type) : wxPanel(parent, wxID_A
     sizer->Add(canvas);
 
     SetSizer(sizer);
+
+    Bind(wxEVT_PAINT, &Diagram::OnPaint, this);
 }
 
 
@@ -61,5 +63,5 @@ void Diagram::Pool::SetSizeArea(int width, int height)
 
 void Diagram::Pool::NeedRefresh(TypeMeasure::E type)
 {
-    pool[type]->Refresh();
+    pool[type]->canvas->Refresh();
 }

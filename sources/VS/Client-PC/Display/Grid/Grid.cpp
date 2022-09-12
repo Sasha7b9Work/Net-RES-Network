@@ -47,11 +47,13 @@ void Grid::SetMeasure(uint id, uint8 type, float value)
 {
     auto row = rows.find(id);
 
-    if (row == rows.end())
+    if (row == rows.end()) 
     {
         AppendRows(1);
 
         rows.insert(pair<uint, int>(id, GetNumberRows() - 1));
+
+        SetCellValue(GetNumberRows() - 1, 0, wxString::Format("%d", id));
     }
 
     row = rows.find(id);
