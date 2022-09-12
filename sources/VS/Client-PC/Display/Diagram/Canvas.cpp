@@ -113,11 +113,22 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
 
     int x = width;
 
+    int prev_y = -100;
+
     do
     {
         int y = (int)((point->value - min) * scale + 10.0f);
 
-        dc.DrawPoint({ x, y });
+        if (prev_y == -100)
+        {
+            dc.DrawPoint({ x, y });
+        }
+        else
+        {
+            dc.DrawLine(x, y, x, prev_y);
+        }
+
+        prev_y = y;
 
         point--;
         x--;
