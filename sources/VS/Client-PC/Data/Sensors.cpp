@@ -67,7 +67,16 @@ void Sensor::AppendMeasure(uint8 type, float value)
 {
     if (type < TypeMeasure::Count)
     {
-        measures[type].PushBack(DataPoint(value));
+        DataPoint point(value);
+
+        if (measures[type].Size() && measures[type].Last().time == point.time)
+        {
+            LOG_WRITE("Same time");
+        }
+        else
+        {
+            measures[type].PushBack(point);
+        }
     }
     else
     {

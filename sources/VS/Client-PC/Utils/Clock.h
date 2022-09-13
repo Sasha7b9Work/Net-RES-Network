@@ -13,6 +13,8 @@ struct Time
     void SubMin(int);
 
     String<> ToString() const;
+
+    bool operator==(const Time &rhs) { return (rhs.sec == sec) && (rhs.min == min) && (rhs.hour == hour); }
 };
 
 
