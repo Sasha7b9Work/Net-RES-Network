@@ -62,7 +62,7 @@ const Time Time::operator-(const Time &rhs)
         result.min -= 1;
     }
 
-    result.min -= rhs.sec;
+    result.min -= rhs.min;
 
     if (result.min < 0)
     {

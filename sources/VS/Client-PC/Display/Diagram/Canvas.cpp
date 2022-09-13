@@ -91,7 +91,13 @@ int Canvas::TimeToX(const Time &time)
 
     Time current_time = Clock::CurrentTime();
 
-    return width - (current_time - time).ToSec();
+    Time difference = current_time - time;
+
+    int secs = difference.ToSec();
+
+    int result = width - secs;
+
+    return result;
 }
 
 
@@ -153,6 +159,8 @@ void Canvas::DrawSensor(wxMemoryDC &dc, const DataArray &array)
         int y_start = height - 10 - (int)(((point - 1)->value - min) * scale);
 
         dc.DrawLine({ x_start, y_start }, { x_end, y_end });
+
+        point--;
 
     } while (point > array.array.begin());
 
