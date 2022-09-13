@@ -85,6 +85,16 @@ void Canvas::DrawTimeScale(wxMemoryDC &dc)
 }
 
 
+int Canvas::TimeToX(const Time &time)
+{
+    int width = GetClientSize().GetWidth();
+
+    Time current_time = Clock::CurrentTime();
+
+    return width - (current_time - time).ToSec();
+}
+
+
 void Canvas::SetSizeArea(int width, int height)
 {
     SetMinClientSize({ width, height } );

@@ -48,3 +48,35 @@ void Time::SubMin(int value)
         hour--;
     }
 }
+
+
+const Time Time::operator-(const Time &rhs)
+{
+    Time result = *this;
+
+    result.sec -= rhs.sec;
+
+    if (result.sec < 0)
+    {
+        result.sec += 60;
+        result.min -= 1;
+    }
+
+    result.min -= rhs.sec;
+
+    if (result.min < 0)
+    {
+        result.min += 60;
+        result.hour -= 1;
+    }
+
+    result.hour -= rhs.hour;
+
+    return result;
+}
+
+
+int Time::ToSec() const
+{
+    return sec + min * 60 + hour * 60 * 60;
+}

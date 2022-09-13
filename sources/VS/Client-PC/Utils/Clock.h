@@ -14,7 +14,11 @@ struct Time
 
     String<> ToString() const;
 
+    int ToSec() const;
+
     bool operator==(const Time &rhs) { return (rhs.sec == sec) && (rhs.min == min) && (rhs.hour == hour); }
+
+    const Time operator-(const Time &rhs);
 };
 
 
