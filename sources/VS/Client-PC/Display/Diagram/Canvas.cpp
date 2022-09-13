@@ -144,27 +144,15 @@ void Canvas::DrawSensor(wxMemoryDC &dc, const DataArray &array)
 
     float scale = ((float)height - 20.0f) / (max - min);
 
-    int x = width;
-
-    int prev_y = -100;
-
     do
     {
-        int y = height - 10 - (int)((point->value - min) * scale);
+        int x_end = TimeToX(point->time);
+        int x_start = TimeToX((point - 1)->time);
 
-        if (prev_y == -100)
-        {
-            dc.DrawPoint({ x, y });
-        }
-        else
-        {
-            dc.DrawLine(x, y, x, prev_y - 1);
-        }
+        int y_end = height - 10 - (int)((point->value - min) * scale);
+        int y_start = height - 10 - (int)(((point - 1)->value - min) * scale);
 
-        prev_y = y;
-
-        point--;
-        x--;
+        dc.DrawLine({ x_start, y_start }, { x_end, y_end });
 
     } while (point > array.array.begin());
 
