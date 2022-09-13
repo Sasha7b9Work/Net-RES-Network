@@ -11,7 +11,7 @@ typedef unsigned char uchar;
 
 
 // Промежуток между измерениями
-#define TIME_MEASURE  900
+#define TIME_MEASURE  500
 
 
 #ifdef WIN32
