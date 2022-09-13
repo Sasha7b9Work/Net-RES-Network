@@ -24,8 +24,10 @@ struct TypeMeasure
 struct DataPoint
 {
     DataPoint(float);
+    DataPoint(float, const Time &);
     float value;
     Time time;
+    static DataPoint null;
 };
 
 
@@ -35,7 +37,7 @@ struct DataArray
 
     void PushBack(const DataPoint &point) { array.push_back(point); }
 
-    DataPoint &Last() { static DataPoint null(0.0f); return Size() ? *(array.end() - 1) : null; }
+    DataPoint &Last() { return Size() ? *(array.end() - 1) : DataPoint::null; }
 
     // Рассчитывает мин/макс на from_end элементах с конца
     float Min(int from_end) const;

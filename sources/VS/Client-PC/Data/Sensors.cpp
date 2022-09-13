@@ -13,6 +13,9 @@ using namespace std;
 map<uint, Sensor> Sensor::Pool::pool;
 
 
+DataPoint DataPoint::null{ 0.0f, {0, 0, 0} };
+
+
 pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
@@ -88,6 +91,11 @@ void Sensor::AppendMeasure(uint8 type, float value)
 
 
 DataPoint::DataPoint(float _value) : value(_value), time(Clock::CurrentTime())
+{
+}
+
+
+DataPoint::DataPoint(float _value, const Time &_time) : value(_value), time(_time)
 {
 }
 
