@@ -76,11 +76,8 @@ void Sensor::AppendMeasure(uint8 type, float value)
 }
 
 
-DataPoint::DataPoint(float _value) : value(_value)
+DataPoint::DataPoint(float _value) : value(_value), time(Clock::CurrentTime())
 {
-    time_t now = ::time(0);
-
-    time = *localtime(&now);
 }
 
 

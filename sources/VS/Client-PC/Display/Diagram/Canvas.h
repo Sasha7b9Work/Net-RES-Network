@@ -23,12 +23,12 @@ private:
     void OnPaint(wxPaintEvent &);
 
     // Нарисовать измерения со всех датчиков
-    void DrawAllSensors(wxClientDC &);
+    void DrawAllSensors(wxMemoryDC &);
 
     // Нарисовать измерения от одного датчика
-    void DrawSensor(wxClientDC &, const DataArray &);
+    void DrawSensor(wxMemoryDC &, const DataArray &);
 
-    void DrawTimeScale(wxClientDC &);
+    void DrawTimeScale(wxMemoryDC &);
 
-    void DrawTextOnBackground(wxClientDC &, pchar, int x, int y, int width, int height);
+    void DrawTextOnBackground(wxMemoryDC &, pchar, int x, int y, int width, int height);
 };

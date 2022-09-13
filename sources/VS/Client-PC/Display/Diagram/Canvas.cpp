@@ -21,18 +21,21 @@ Canvas::Canvas(wxWindow *parent, TypeMeasure::E _type) : wxPanel(parent, wxID_AN
 
 void Canvas::OnPaint(wxPaintEvent &)
 {
-    wxClientDC dc(this);
+    wxBitmap bitmap(GetClientSize());
+    wxMemoryDC memDC;
 
-    dc.SetBrush(*wxWHITE_BRUSH);
-    dc.SetPen(wxPen(wxColor(0, 0, 0)));
+    memDC.SelectObject(bitmap);
 
-    dc.DrawRectangle(GetClientRect());
+    memDC.SetBrush(*wxWHITE_BRUSH);
+    memDC.SetPen(wxPen(wxColor(0, 0, 0)));
 
-    DrawTimeScale(dc);
+    memDC.DrawRectangle(GetClientRect());
 
-    DrawAllSensors(dc);
+    DrawTimeScale(memDC);
 
-    dc.SetPen(wxPen(wxColor(0, 0, 0)));
+    DrawAllSensors(memDC);
+
+    memDC.SetPen(wxPen(wxColor(0, 0, 0)));
 
     static const wxString labels[TypeMeasure::Count] =
     {
@@ -43,13 +46,19 @@ void Canvas::OnPaint(wxPaintEvent &)
         "Скорость"
     };
 
-    dc.DrawText(labels[type], 1, 0);
+    memDC.DrawText(labels[type], 1, 0);
+
+    memDC.SelectObject(wxNullBitmap);
+
+    wxPaintDC dc(this);
+
+    dc.DrawBitmap(bitmap, 0, 0);
 
     Update();
 }
 
 
-void Canvas::DrawTimeScale(wxClientDC &dc)
+void Canvas::DrawTimeScale(wxMemoryDC &dc)
 {
     int dx = 60;
 
@@ -83,7 +92,7 @@ void Canvas::SetSizeArea(int width, int height)
 }
 
 
-void Canvas::DrawAllSensors(wxClientDC &dc)
+void Canvas::DrawAllSensors(wxMemoryDC &dc)
 {
     const map<uint, Sensor> &pool = Sensor::Pool::GetPool();
 
@@ -106,7 +115,7 @@ void Canvas::DrawAllSensors(wxClientDC &dc)
 }
 
 
-void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
+void Canvas::DrawSensor(wxMemoryDC &dc, const DataArray &array)
 {
     dc.SetPen(wxPen(wxColor(0, 0, 255)));
 
@@ -156,7 +165,7 @@ void Canvas::DrawSensor(wxClientDC &dc, const DataArray &array)
 }
 
 
-void Canvas::DrawTextOnBackground(wxClientDC &dc, pchar text, int x, int y, int width, int height)
+void Canvas::DrawTextOnBackground(wxMemoryDC &dc, pchar text, int x, int y, int width, int height)
 {
     dc.DrawRectangle({ x, y }, { width, height });
     dc.DrawText(text, { x + 1, y + 1 });
