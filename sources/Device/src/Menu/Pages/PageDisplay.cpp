@@ -56,7 +56,7 @@ DEF_BUTTN( bCloseMeasures,
 )
 
 #ifdef TYPE_1
-DEF_PAGE_6( pageMeasures,
+DEF_PAGE_6( pageMeasures, //-V1027
     "»«Ã≈–≈Õ»ﬂ",
     *PageDisplay::self,
     chPressure,
