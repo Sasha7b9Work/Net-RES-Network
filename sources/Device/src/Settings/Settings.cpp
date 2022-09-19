@@ -23,5 +23,9 @@ Settings gset =
 
 uint Settings::GetID()
 {
-    return 111;
+    uint address = 0x8000000 + 0x10000 - 1;
+
+    uint *pointer = (uint *)address;
+
+    return *pointer;
 }
