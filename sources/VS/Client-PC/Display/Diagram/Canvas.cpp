@@ -117,6 +117,10 @@ void Canvas::DrawAllSensors(wxMemoryDC &dc)
         return;
     }
 
+    float min = 1e20f;
+    float max = -1e20f;
+    float scale = 0.0f;
+
     for (auto element : pool)
     {
         const Sensor &sensor = element.second;
@@ -125,30 +129,58 @@ void Canvas::DrawAllSensors(wxMemoryDC &dc)
 
         if (measures.Size() > 1)
         {
-            DrawSensor(dc, measures);
+            int width = GetClientSize().GetWidth();
+            int height = GetClientSize().GetHeight();
+
+            float min_value = measures.Min(width);
+            float max_value = measures.Max(width);
+
+            if (fabsf(min_value - max_value) < 0.0001f)
+            {
+                continue;
+            }
+
+            if (min_value < min)
+            {
+                min = min_value;
+            }
+
+            if (max_value > max)
+            {
+                max = max_value;
+            }
+
+            scale = ((float)height - 20.0f) / (max - min);
+        }
+    }
+
+    for (auto element : pool)
+    {
+        const Sensor &sensor = element.second;
+
+        const DataArray &measures = sensor.GetMeasures(type);
+
+        if (measures.Size() > 1)
+        {
+            DrawSensor(dc, measures, min, max, scale);
         }
     }
 }
 
 
-void Canvas::DrawSensor(wxMemoryDC &dc, const DataArray &array)
+void Canvas::DrawSensor(wxMemoryDC &dc, const DataArray &array, float min, float max, float scale)
 {
     dc.SetPen(wxPen(wxColor(0, 0, 255)));
 
     auto point = array.array.end() - 1;
-
-    int width = GetClientSize().GetWidth();
-    int height = GetClientSize().GetHeight();
-
-    float min = array.Min(width);
-    float max = array.Max(width);
 
     if (fabsf(min - max) < 0.0001f)
     {
         return;
     }
 
-    float scale = ((float)height - 20.0f) / (max - min);
+    int width = GetClientSize().GetWidth();
+    int height = GetClientSize().GetHeight();
 
     do
     {

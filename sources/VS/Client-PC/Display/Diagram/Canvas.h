@@ -26,7 +26,7 @@ private:
     void DrawAllSensors(wxMemoryDC &);
 
     // Нарисовать измерения от одного датчика
-    void DrawSensor(wxMemoryDC &, const DataArray &);
+    void DrawSensor(wxMemoryDC &, const DataArray &, float min, float max, float scale);
 
     void DrawTimeScale(wxMemoryDC &);
 
