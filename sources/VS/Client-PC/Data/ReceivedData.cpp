@@ -36,7 +36,8 @@ void ReceivedData::Update()
 
         if (!ParseCommand(bytes))
         {
-            LOG_ERROR("Can not parse command");
+            static int counter = 0;
+            LOG_ERROR("Can not parse command %d", counter++);
         }
     }
 }
@@ -60,7 +61,8 @@ bool ReceivedData::FindFirstABC()
 
     if (removed_bytes != 0)
     {
-        LOG_ERROR("error command");
+        static int counter = 0;
+        LOG_ERROR("error command %d", counter++);
     }
 
     return false;

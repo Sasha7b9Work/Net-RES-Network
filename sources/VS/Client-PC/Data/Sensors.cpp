@@ -75,8 +75,6 @@ void Sensor::AppendMeasure(uint8 type, float value)
         if (measures[type].Size() && (measures[type].Last().time == point.time))
         {
             // В это время измерение уже получено - отбрасываем
-            static int counter = 0;
-            LOG_WRITE("Same time %d", counter++);
         }
         else
         {
