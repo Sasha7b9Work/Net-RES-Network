@@ -96,16 +96,16 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         CDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
+    Buffer<uint8, 16> data = CreateMessage(type, measure);
+
     if (direction & Direction::HC12)
     {
-        Buffer<uint8, 16> data = CreateMessage(type, measure);
-
         HC12::Transmit(data.Data(), data.Size());
     }
 
 #ifdef GUI
 
-    ClientTCP::Transmit(data.Data(), data.Size());
+    ClientTCP::Transmit(data.Data(), data.Size()); 
 
 #endif
 }

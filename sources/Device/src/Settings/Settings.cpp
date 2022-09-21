@@ -23,7 +23,7 @@ Settings gset =
 
 uint Settings::GetID()
 {
-    uint address = 0x8000000 + 0x10000 - 1;
+    uint address = 0x8000000 + 0x10000 - 4;
 
     uint *pointer = (uint *)address;
 
