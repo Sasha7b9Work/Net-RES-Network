@@ -25,7 +25,13 @@ enum
     MEAS_ILLUMINATION,      // Освещённость
     MEAS_HUMIDITY,          // Влажность
     MEAS_VELOCITY,          // Скорость
-    MEAS_TEMPERATURE        // Температура
+    MEAS_TEMPERATURE,       // Температура
+
+    ID_SPEED_1,
+    ID_SPEED_2,
+    ID_SPEED_5,
+    ID_SPEED_30,
+    ID_SPEED_60
 };
 
 
@@ -45,11 +51,11 @@ Frame::Frame(const wxString &title)
     wxMenu *menuSettings = new wxMenu();
     wxMenu *menuSpeed = new wxMenu();
 
-    miSpeed1 = new wxMenuItem(menuSpeed, wxID_ANY, "1 сек", wxEmptyString, wxITEM_DROPDOWN);
-    miSpeed2 = new wxMenuItem(menuSpeed, wxID_ANY, "2 сек", wxEmptyString, wxITEM_DROPDOWN);
-    miSpeed5 = new wxMenuItem(menuSpeed, wxID_ANY, "5 сек", wxEmptyString, wxITEM_DROPDOWN);
-    miSpeed30 = new wxMenuItem(menuSpeed, wxID_ANY, "30 сек", wxEmptyString, wxITEM_DROPDOWN);
-    miSpeed60 = new wxMenuItem(menuSpeed, wxID_ANY, "60 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed1 = new wxMenuItem(menuSpeed, ID_SPEED_1, "1 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed2 = new wxMenuItem(menuSpeed, ID_SPEED_2, "2 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed5 = new wxMenuItem(menuSpeed, ID_SPEED_5, "5 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed30 = new wxMenuItem(menuSpeed, ID_SPEED_30, "30 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed60 = new wxMenuItem(menuSpeed, ID_SPEED_60, "60 сек", wxEmptyString, wxITEM_DROPDOWN);
 
     menuSpeed->Append(miSpeed1);
     menuSpeed->Append(miSpeed2);
@@ -59,11 +65,11 @@ Frame::Frame(const wxString &title)
 
     menuSettings->AppendSubMenu(menuSpeed, "Скорость обновления");
 
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed1);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed2);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed5);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed30);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed60);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_1);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_2);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_5);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_30);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_60);
 
     menuBar->Append(menuSettings, _("Настройки"));
 
@@ -130,7 +136,12 @@ void Frame::AddTool(int id, const wxString &label, pchar nameResource, pchar nam
 
 void Frame::OnTimeScaleEvent(wxCommandEvent &event)
 {
-    int i = 0;
+    int id = event.GetId();
+
+    if (id == ID_SPEED_1)
+    {
+        int i = 0;
+    }
 }
 
 
