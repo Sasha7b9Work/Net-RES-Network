@@ -11,7 +11,7 @@ public:
 
     static Grid *self;
 
-    void SetMeasure(uint id, uint8 type, float value);
+    void SetMeasure(uint id, const wxColour color, uint8 type, float value);
 
 private:
 
@@ -19,4 +19,7 @@ private:
 
     //     <id, num_row>
     std::map<uint, int> rows;
+
+    void SetCellValue(int row, int col, float, wxColor color);
+    void SetCellValue(int row, int col, int, wxColor color);
 };

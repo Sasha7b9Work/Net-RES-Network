@@ -50,8 +50,13 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 }
 
 
-void Grid::SetMeasure(uint id, uint8 type, float value)
+void Grid::SetMeasure(uint id, const wxColour color, uint8 type, float value)
 {
+    if (id == 0)
+    {
+        return;
+    }
+
     auto row = rows.find(id);
 
     if (row == rows.end()) 
@@ -60,10 +65,27 @@ void Grid::SetMeasure(uint id, uint8 type, float value)
 
         rows.emplace(pair<uint, int>(id, GetNumberRows() - 1));
 
-        SetCellValue(GetNumberRows() - 1, 0, wxString::Format("%d", id));
+        SetCellValue(GetNumberRows() - 1, 0, (int)id, color);
     }
 
     row = rows.find(id);
 
-    SetCellValue(row->second, type + 1, wxString::Format("%10.2f", value));
+    SetCellValue(row->second, type + 1, (float)value, color);
+
+}
+
+
+void Grid::SetCellValue(int row, int col, float value, wxColor color)
+{
+    SetCellTextColour(row, col, color);
+
+    wxGrid::SetCellValue(row, col, wxString::Format("%10.2f", value));
+}
+
+
+void Grid::SetCellValue(int row, int col, int value, wxColor color)
+{
+    SetCellTextColour(row, col, color);
+
+    wxGrid::SetCellValue(row, col, wxString::Format("%d", value));
 }
