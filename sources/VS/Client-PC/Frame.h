@@ -27,8 +27,15 @@ private:
 
     wxToolBar    *toolBar = nullptr;
 
+    wxMenuItem *miSpeed1  = nullptr;
+    wxMenuItem *miSpeed2  = nullptr;
+    wxMenuItem *miSpeed5  = nullptr;
+    wxMenuItem *miSpeed30 = nullptr;
+    wxMenuItem *miSpeed60 = nullptr;
+
     void OnViewBrief(wxCommandEvent &);
     void OnViewFull(wxCommandEvent &);
+    void OnTimeScaleEvent(wxCommandEvent &);
 
     void OnMeasurePressure(wxCommandEvent &);
     void OnMeasureIllumination(wxCommandEvent &);

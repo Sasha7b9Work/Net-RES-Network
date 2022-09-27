@@ -45,11 +45,11 @@ Frame::Frame(const wxString &title)
     wxMenu *menuSettings = new wxMenu();
     wxMenu *menuSpeed = new wxMenu();
 
-    wxMenuItem *miSpeed1 = new wxMenuItem(menuSpeed, wxID_ANY, "1 сек", wxEmptyString, wxITEM_DROPDOWN);
-    wxMenuItem *miSpeed2 = new wxMenuItem(menuSpeed, wxID_ANY, "2 сек", wxEmptyString, wxITEM_DROPDOWN);
-    wxMenuItem *miSpeed5 = new wxMenuItem(menuSpeed, wxID_ANY, "5 сек", wxEmptyString, wxITEM_DROPDOWN);
-    wxMenuItem *miSpeed30 = new wxMenuItem(menuSpeed, wxID_ANY, "30 сек", wxEmptyString, wxITEM_DROPDOWN);
-    wxMenuItem *miSpeed60 = new wxMenuItem(menuSpeed, wxID_ANY, "60 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed1 = new wxMenuItem(menuSpeed, wxID_ANY, "1 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed2 = new wxMenuItem(menuSpeed, wxID_ANY, "2 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed5 = new wxMenuItem(menuSpeed, wxID_ANY, "5 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed30 = new wxMenuItem(menuSpeed, wxID_ANY, "30 сек", wxEmptyString, wxITEM_DROPDOWN);
+    miSpeed60 = new wxMenuItem(menuSpeed, wxID_ANY, "60 сек", wxEmptyString, wxITEM_DROPDOWN);
 
     menuSpeed->Append(miSpeed1);
     menuSpeed->Append(miSpeed2);
@@ -58,6 +58,12 @@ Frame::Frame(const wxString &title)
     menuSpeed->Append(miSpeed60);
 
     menuSettings->AppendSubMenu(menuSpeed, "Скорость обновления");
+
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed1);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed2);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed5);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed30);
+    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, wxID_ANY, wxID_ANY, (wxObject *)miSpeed60);
 
     menuBar->Append(menuSettings, _("Настройки"));
 
@@ -122,9 +128,14 @@ void Frame::AddTool(int id, const wxString &label, pchar nameResource, pchar nam
 }
 
 
+void Frame::OnTimeScaleEvent(wxCommandEvent &event)
+{
+    int i = 0;
+}
+
+
 void Frame::OnViewBrief(wxCommandEvent &)
 {
-
 }
 
 
