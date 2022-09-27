@@ -51,15 +51,19 @@ class Sensor
 {
 public:
 
-    Sensor(uint _id) : id(_id) {};
+    Sensor(uint _id, wxColour _color) : id(_id), color(_color) {};
 
     void AppendMeasure(uint8 type, float value);
 
     const DataArray &GetMeasures(TypeMeasure::E type) const { return measures[type]; }
 
+    wxColour GetColor() const { return color; }
+
 private:
 
     const uint id;
+
+    const wxColour color;
 
     DataArray measures[TypeMeasure::Count];
 
@@ -76,5 +80,7 @@ public:
     private:
 
         static std::map<uint, Sensor> pool;
+
+        static wxColour ColorForSensor();
     };
 };

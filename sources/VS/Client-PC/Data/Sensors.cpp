@@ -52,7 +52,7 @@ void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
 
     if (sensor == pool.end())
     {
-        pool.emplace(pair<uint, Sensor>(id, Sensor(id)));
+        pool.emplace(pair<uint, Sensor>(id, Sensor(id, ColorForSensor())));
     }
 
     sensor = pool.find(id);
@@ -63,6 +63,19 @@ void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
 
         Grid::self->SetMeasure(id, type, value);
     }
+}
+
+
+wxColour Sensor::Pool::ColorForSensor()
+{
+    static const wxColour colors[3] =
+    {
+        wxColour(0, 0, 255),
+        wxColour(255, 0, 0),
+        wxColour(0, 255, 0)
+    };
+
+    return colors[pool.size() % 3];
 }
 
 
