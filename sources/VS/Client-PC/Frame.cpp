@@ -42,12 +42,24 @@ Frame::Frame(const wxString &title)
     menuFile->Append(wxID_EXIT);
     menuBar->Append(menuFile, _("Файл"));
 
-    wxMenu *menuSettings = new wxMenu;
-    menuBar->Append(menuSettings, _("Настройки"));
+    wxMenu *menuSettings = new wxMenu();
+    wxMenu *menuSpeed = new wxMenu();
 
-    wxMenu *menuHelp = new wxMenu;
-    menuHelp->Append(wxID_ABOUT);
-    menuBar->Append(menuHelp, _("Помощь"));
+    wxMenuItem *miSpeed1 = new wxMenuItem(menuSpeed, wxID_ANY, "1 сек", wxEmptyString, wxITEM_DROPDOWN);
+    wxMenuItem *miSpeed2 = new wxMenuItem(menuSpeed, wxID_ANY, "2 сек", wxEmptyString, wxITEM_DROPDOWN);
+    wxMenuItem *miSpeed5 = new wxMenuItem(menuSpeed, wxID_ANY, "5 сек", wxEmptyString, wxITEM_DROPDOWN);
+    wxMenuItem *miSpeed30 = new wxMenuItem(menuSpeed, wxID_ANY, "30 сек", wxEmptyString, wxITEM_DROPDOWN);
+    wxMenuItem *miSpeed60 = new wxMenuItem(menuSpeed, wxID_ANY, "60 сек", wxEmptyString, wxITEM_DROPDOWN);
+
+    menuSpeed->Append(miSpeed1);
+    menuSpeed->Append(miSpeed2);
+    menuSpeed->Append(miSpeed5);
+    menuSpeed->Append(miSpeed30);
+    menuSpeed->Append(miSpeed60);
+
+    menuSettings->AppendSubMenu(menuSpeed, "Скорость обновления");
+
+    menuBar->Append(menuSettings, _("Настройки"));
 
     wxFrameBase::SetMenuBar(menuBar);
 
