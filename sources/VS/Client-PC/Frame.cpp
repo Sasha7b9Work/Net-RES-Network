@@ -51,11 +51,11 @@ Frame::Frame(const wxString &title)
     wxMenu *menuSettings = new wxMenu();
     wxMenu *menuSpeed = new wxMenu();
 
-    miSpeed1 = new wxMenuItem(menuSpeed, ID_SPEED_1, "1 сек", wxEmptyString, wxITEM_RADIO);
-    miSpeed2 = new wxMenuItem(menuSpeed, ID_SPEED_2, "2 сек", wxEmptyString, wxITEM_RADIO);
-    miSpeed5 = new wxMenuItem(menuSpeed, ID_SPEED_5, "5 сек", wxEmptyString, wxITEM_RADIO);
-    miSpeed30 = new wxMenuItem(menuSpeed, ID_SPEED_30, "30 сек", wxEmptyString, wxITEM_RADIO);
-    miSpeed60 = new wxMenuItem(menuSpeed, ID_SPEED_60, "60 сек", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed1 = new wxMenuItem(menuSpeed, ID_SPEED_1, "1 сек", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed2 = new wxMenuItem(menuSpeed, ID_SPEED_2, "2 сек", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed5 = new wxMenuItem(menuSpeed, ID_SPEED_5, "5 сек", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed30 = new wxMenuItem(menuSpeed, ID_SPEED_30, "30 сек", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed60 = new wxMenuItem(menuSpeed, ID_SPEED_60, "60 сек", wxEmptyString, wxITEM_RADIO);
 
     menuSpeed->Append(miSpeed1);
     menuSpeed->Append(miSpeed2);
