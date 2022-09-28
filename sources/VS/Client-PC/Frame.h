@@ -19,27 +19,15 @@ public:
 
     static Frame *self;
 
-    void OnSize(wxSizeEvent &);
-
-    void OnCloseWindow(wxCloseEvent &);
-
 private:
 
     wxToolBar    *toolBar = nullptr;
 
-    void OnViewBrief(wxCommandEvent &);
-    void OnViewFull(wxCommandEvent &);
     void OnTimeScaleEvent(wxCommandEvent &);
 
-    void OnMeasurePressure(wxCommandEvent &);
-    void OnMeasureIllumination(wxCommandEvent &);
-    void OnMeasureHumidity(wxCommandEvent &);
-    void OnMeasureVelocity(wxCommandEvent &);
-    void OnMeasureTemperature(wxCommandEvent &);
+    void OnSize(wxSizeEvent &);
 
-    void CreateFrameToolBar();
-
-    void AddTool(int id, const wxString &label, pchar nameResource, pchar nameResourceDisabled = nullptr);
+    void OnCloseWindow(wxCloseEvent &);
 
     void OnClose();
 };
