@@ -4,6 +4,7 @@
 #include "Display/Diagram/Diagram.h"
 #include "Display/Grid/Grid.h"
 #include "Display/Diagram/Canvas.h"
+#include "Settings.h"
 
 
 Frame *Frame::self = nullptr;
@@ -96,12 +97,9 @@ Frame::Frame(const wxString &title)
 
 void Frame::OnTimeScaleEvent(wxCommandEvent &event)
 {
-    int id = event.GetId();
+    static const int scales[] = { 1, 2, 5, 30, 60 };
 
-    if (id == ID_SPEED_1)
-    {
-        int i = 0;
-    }
+    Set::TimeScale::Set(scales[event.GetId() - ID_SPEED_1]);
 }
 
 

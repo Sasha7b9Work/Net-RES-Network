@@ -3,6 +3,7 @@
 #include "Display/Diagram/Canvas.h"
 #include "Data/Sensors.h"
 #include "Utils/Clock.h"
+#include "Settings.h"
 #include <map>
 
 
@@ -64,7 +65,7 @@ void Canvas::DrawTimeScale(wxMemoryDC &dc)
 
     Time time = Clock::CurrentTime();
 
-    int x = GetClientSize().GetWidth() - time.sec % dx;
+    int x = GetClientSize().GetWidth() - time.sec;
 
     time.sec = 0;
 
@@ -93,11 +94,7 @@ int Canvas::TimeToX(const Time &time)
 
     Time difference = current_time - time;
 
-    int secs = difference.ToSec();
-
-    int result = width - secs;
-
-    return result;
+    return width - (difference.ToSec() / Set::TimeScale::Get());
 }
 
 

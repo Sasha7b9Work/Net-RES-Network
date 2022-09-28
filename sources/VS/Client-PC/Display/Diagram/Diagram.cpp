@@ -59,6 +59,8 @@ void Diagram::Pool::SetSizeArea(int width, int height)
     {
         diagram->SetSizeArea(width, dy);
     }
+
+    Refresh();
 }
 
 
