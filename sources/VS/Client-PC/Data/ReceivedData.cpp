@@ -45,6 +45,8 @@ void ReceivedData::Update()
 
 bool ReceivedData::FindFirstABC()
 {
+    DynamicBuffer <16>removed;
+
     int removed_bytes = 0;
 
     while (buffer.Size() >= 3)
@@ -54,6 +56,10 @@ bool ReceivedData::FindFirstABC()
             return true;
         }
 
+        uint8 byte = buffer.Data()[0];
+
+        removed.Append(&byte, 1);
+
         buffer.RemoveFirst(1);
 
         removed_bytes++;
@@ -61,8 +67,19 @@ bool ReceivedData::FindFirstABC()
 
     if (removed_bytes != 0)
     {
+        char data[128] = { 0 };
+
+        int i = 0;
+
+        for (; i < removed.Size(); i++)
+        {
+            data[i] = removed.Data()[i];
+        }
+
+        data[i] = 0;
+
         static int counter = 0;
-        LOG_ERROR("error command %d", counter++);
+        LOG_ERROR("error command %d %s", counter++, data);
     }
 
     return false;
