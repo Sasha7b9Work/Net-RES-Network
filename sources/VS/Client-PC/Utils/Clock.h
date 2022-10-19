@@ -16,7 +16,7 @@ struct Time
 
     int ToSec() const;
 
-    static Time Get
+//    static Time Get
 
     bool operator==(const Time &rhs) { return (rhs.sec == sec) && (rhs.min == min) && (rhs.hour == hour); }
 
