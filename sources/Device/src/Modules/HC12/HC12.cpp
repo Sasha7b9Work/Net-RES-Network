@@ -3,6 +3,7 @@
 #include "Modules/HC12/HC12.h"
 #include "stm32f1xx_hal.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <cstring>
 
 
@@ -13,6 +14,8 @@
 namespace HC12
 {
     static UART_HandleTypeDef handle;
+
+    char recv_buffer = 0;
 }
 
 
@@ -52,6 +55,13 @@ void HC12::Init()
     handle.Init.OverSampling = UART_OVERSAMPLING_16;
 
     HAL_UART_Init(&handle);
+
+    HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
+
+    HAL_UART_Receive_IT(&handle, (uint8 *)&recv_buffer, 1);
+
+    Command("AT");
 }
 
 
@@ -70,11 +80,17 @@ void HC12::Command(pchar command)
 {
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_RESET);
 
-    Transmit(command, (int)std::strlen(command));
+    TimeMeterMS().WaitMS(40);
 
-    char buffer[10];
-
-    HAL_UART_Receive(&handle, (uint8*)buffer, 2, 100);
+    Transmit(command, (int)std::strlen(command) + 1);
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
+
+    TimeMeterMS().WaitMS(80);
+}
+
+
+void HC12::ReceiveCallback()
+{
+
 }

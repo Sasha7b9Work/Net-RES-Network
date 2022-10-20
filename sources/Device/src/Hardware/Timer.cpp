@@ -38,3 +38,14 @@ uint TimeMeterMS::ElapsedTime()
 {
     return TIME_MS - time_reset;
 }
+
+
+void TimeMeterMS::WaitMS(uint dT)
+{
+    uint time_enter = ElapsedTime();
+
+    while (ElapsedTime() - time_enter < dT)
+    {
+
+    }
+}

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
+#include "Modules/HC12/HC12.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -68,4 +69,9 @@ void SysTick_Handler(void)
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
     CDC::OnIRQHandler();
+}
+
+void USART1_IRQHandler(void)
+{
+    HC12::ReceiveCallback();
 }

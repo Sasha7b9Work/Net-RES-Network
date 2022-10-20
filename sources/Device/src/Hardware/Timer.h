@@ -27,6 +27,8 @@ struct TimeMeterMS
     // Столько миллисекунд прошло с момента вызова Reset()
     uint ElapsedTime();
 
+    void WaitMS(uint);
+
 private:
 
     uint time_reset;        // От этого времени отсчитывается ElapsedTime()
