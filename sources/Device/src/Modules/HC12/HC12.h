@@ -2,15 +2,12 @@
 #pragma once
 
 
-/*
-*  ‘ормат передачи измерений
-*  
-*/
-
-
 namespace HC12
 {
     void Init();
 
     void Transmit(const void *buffer, int size);
+
+    // ”правл€юща€ команда
+    void Command(pchar);
 }
