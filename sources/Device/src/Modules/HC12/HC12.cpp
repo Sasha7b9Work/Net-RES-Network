@@ -13,11 +13,34 @@
 
 namespace HC12
 {
+    struct RecvBuffer
+    {
+        static const int SIZE = 128;
+
+        RecvBuffer() : pointer(0) { }
+
+        void Push(char symbol)
+        {
+            if (pointer < SIZE)
+            {
+                data[pointer++] = symbol;
+            }
+        }
+
+        char *Data()        { return &data[0]; }
+        int NumSymbols()    { return pointer;  }
+        void Clear()        { pointer = 0;     }
+
+    private:
+        char data[SIZE];
+        int pointer;
+    } recv_buffer;
+
+    char recv_byte = 0;
+
     static UART_HandleTypeDef handleUART;
 
     void *handle = (void *)&handleUART;
-
-    char recv_buffer = 0;
 }
 
 
@@ -61,9 +84,9 @@ void HC12::Init()
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
 
-    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_buffer, 1);
+    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
 
-    Command("AT");
+    Command("AT+DEFAULT");
 }
 
 
@@ -84,25 +107,26 @@ void HC12::Command(pchar command)
 
     TimeMeterMS().WaitMS(40);
 
+    recv_buffer.Clear();
+
     Transmit(command, (int)std::strlen(command));
     Transmit("\r", 1);
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
 
     TimeMeterMS().WaitMS(80);
+
+    char *answer = recv_buffer.Data();
+    answer = answer;
+    
+    int num = recv_buffer.NumSymbols();
+    num = num;
 }
 
 
 void HC12::ReceiveCallback()
 {
-    static int counter = 0;
+    recv_buffer.Push(recv_byte);
 
-    recv_buffer = recv_buffer;
-
-    if (counter++ == 4)
-    {
-        counter = counter;
-    }
-
-    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_buffer, 1);
+    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
 }
