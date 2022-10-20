@@ -15,7 +15,7 @@ namespace HC12
 {
     static UART_HandleTypeDef handle;
 
-    char recv_buffer = 0;
+    char recv_buffer = 255;
 }
 
 
@@ -61,7 +61,7 @@ void HC12::Init()
 
     HAL_UART_Receive_IT(&handle, (uint8 *)&recv_buffer, 1);
 
-    Command("AT");
+//    Command("AT");
 }
 
 
@@ -82,7 +82,8 @@ void HC12::Command(pchar command)
 
     TimeMeterMS().WaitMS(40);
 
-    Transmit(command, (int)std::strlen(command) + 1);
+    Transmit(command, (int)std::strlen(command));
+    Transmit("\r", 1);
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
 
@@ -92,5 +93,14 @@ void HC12::Command(pchar command)
 
 void HC12::ReceiveCallback()
 {
+    static int counter = 0;
 
+    recv_buffer = recv_buffer;
+
+    if (counter++ == 100)
+    {
+        counter = counter;
+    }
+
+    HAL_UART_Receive_IT(&handle, (uint8 *)&recv_buffer, 1);
 }
