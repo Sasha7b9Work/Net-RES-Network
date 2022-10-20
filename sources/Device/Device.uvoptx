@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>102</LineNumber>
+          <LineNumber>104</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134248222</Address>
+          <Address>134249106</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,7 +163,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;1&gt;.\src\Modules\HC12\HC12.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Modules/HC12/HC12.cpp\102</Expression>
+          <Expression>\\Device\src/Modules/HC12/HC12.cpp\104</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

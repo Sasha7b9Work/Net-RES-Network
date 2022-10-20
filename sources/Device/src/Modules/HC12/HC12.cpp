@@ -13,9 +13,11 @@
 
 namespace HC12
 {
-    static UART_HandleTypeDef handle;
+    static UART_HandleTypeDef handleUART;
 
-    char recv_buffer = 255;
+    void *handle = (void *)&handleUART;
+
+    char recv_buffer = 0;
 }
 
 
@@ -45,23 +47,23 @@ void HC12::Init()
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
 
-    handle.Instance          = USART1;
-    handle.Init.BaudRate     = 9600;
-    handle.Init.WordLength   = UART_WORDLENGTH_8B;
-    handle.Init.StopBits     = UART_STOPBITS_1;
-    handle.Init.Parity       = UART_PARITY_NONE;
-    handle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
-    handle.Init.Mode         = UART_MODE_TX_RX;
-    handle.Init.OverSampling = UART_OVERSAMPLING_16;
+    handleUART.Instance          = USART1;
+    handleUART.Init.BaudRate     = 9600;
+    handleUART.Init.WordLength   = UART_WORDLENGTH_8B;
+    handleUART.Init.StopBits     = UART_STOPBITS_1;
+    handleUART.Init.Parity       = UART_PARITY_NONE;
+    handleUART.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+    handleUART.Init.Mode         = UART_MODE_TX_RX;
+    handleUART.Init.OverSampling = UART_OVERSAMPLING_16;
 
-    HAL_UART_Init(&handle);
+    HAL_UART_Init(&handleUART);
 
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
 
-    HAL_UART_Receive_IT(&handle, (uint8 *)&recv_buffer, 1);
+    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_buffer, 1);
 
-//    Command("AT");
+    Command("AT");
 }
 
 
@@ -72,7 +74,7 @@ void HC12::Transmit(const void *buffer, int size)
         return;
     }
 
-    HAL_UART_Transmit(&handle, (uint8_t *)buffer, (uint16_t)size, 0xFFFF);
+    HAL_UART_Transmit(&handleUART, (uint8_t *)buffer, (uint16_t)size, 0xFFFF);
 }
 
 
@@ -97,10 +99,10 @@ void HC12::ReceiveCallback()
 
     recv_buffer = recv_buffer;
 
-    if (counter++ == 100)
+    if (counter++ == 4)
     {
         counter = counter;
     }
 
-    HAL_UART_Receive_IT(&handle, (uint8 *)&recv_buffer, 1);
+    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_buffer, 1);
 }
