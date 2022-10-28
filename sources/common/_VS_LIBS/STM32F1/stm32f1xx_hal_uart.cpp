@@ -12,3 +12,27 @@ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef * /*huart*/, uint8_t * /*
 {
     return HAL_OK;
 }
+
+
+void HAL_UART_IRQHandler(UART_HandleTypeDef *)
+{
+
+}
+
+
+void HAL_NVIC_SetPriority(IRQn_Type, uint32_t, uint32_t )
+{
+
+}
+
+
+void HAL_NVIC_EnableIRQ(IRQn_Type)
+{
+
+}
+
+
+HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *, uint8_t *, uint16_t)
+{
+    return HAL_OK;
+}

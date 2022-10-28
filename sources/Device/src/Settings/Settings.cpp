@@ -21,6 +21,12 @@ Settings gset =
 };
 
 
+#ifdef WIN32
+uint Settings::GetID()
+{
+    return 112;
+}
+#else
 uint Settings::GetID()
 {
     uint address = 0x8000000 + 0x10000 - 4;
@@ -29,3 +35,4 @@ uint Settings::GetID()
 
     return *pointer;
 }
+#endif
