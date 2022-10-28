@@ -1582,6 +1582,12 @@
 // Set to 1 for TIFF format support (requires libtiff)
 #define wxUSE_LIBTIFF       1
 
+// Set to 1 for SVG rasterizing support using nanosvg
+#define wxUSE_NANOSVG       1
+
+// Set to 1 to use external nanosvg library when wxUSE_NANOSVG is enabled
+#define wxUSE_NANOSVG_EXTERNAL 0
+
 // Set to 1 for TGA format support (loading only)
 #define wxUSE_TGA           1
 
@@ -1711,7 +1717,7 @@
 // Set this to 1 to enable wxDIB class used internally for manipulating
 // wxBitmap data.
 //
-// Default is 1, set it to 0 only if you don't use wxImage neither
+// Default is 1, set it to 0 only if you don't use wxImage either
 //
 // Recommended setting: 1 (without it conversion to/from wxImage won't work)
 #define wxUSE_WXDIB 1
