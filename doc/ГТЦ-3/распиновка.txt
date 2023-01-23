@@ -1,0 +1,37 @@
+1 - VBAT
+3 - PC14 осциллятор 1
+4 - PC15 осциллятор 1
+5 - OSC_IN
+6 - OSC_OUT
+10 - PA0 - 17:5
+11 - PA1 - XP2:5
+14 - PA4 - DD2:CS
+15 - PA5 - DD2:CLK
+16 - PA6 - DD2:DO
+17 - PA7 - DD2:DI
+18 - PB0 - DD2:WP
+19 - PB1 - :18
+22 - PB11 - TFT:RST
+25 - PB12 - TFT:CS
+26 - PB13 - TFT:SCL
+27 - PB14 - TFT:DC
+28 - PB15 - TFT:SDA
+30 - PA9 - XP2:3
+31 - PA10 - XP2:4
+32 - PA11 - D-
+33 - PA12 - D+
+34 - PA13 - SWDIO
+37 - PA14 - SWCLK
+40 - PB4 - DD1:40
+42 - PB6 - SCL
+43 - PB7 - SDA
+45 - PB8 - Кнопка 1
+46 - PB9 - Кнопка 2
+
+
+10 - PA0 - 17:5
+11 - PA1 - XP2:5
+19 - PB1 - :18
+30 - PA9 - XP2:3
+31 - PA10 - XP2:4
+40 - PB4 - DD1:40
