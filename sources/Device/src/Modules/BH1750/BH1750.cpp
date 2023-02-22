@@ -12,10 +12,13 @@ namespace BH1750
     static const uint8 CMD_RESET      = 0x03;
     static const uint8 CMD_H_RES_MODE = 0x10;
     static const uint8 CMD_L_RES_MODE = 0x13;
+    static const uint8 CMD_H2_RES_MODE = 0x11;
 
     uint timeNext = 1;
 
     bool WriteUINT8(uint8);
+
+    bool WriteHI2(uint8);
 
     bool ReadModeHI(uint8 *);
 }
@@ -25,7 +28,7 @@ void BH1750::Init()
 {
     WriteUINT8(CMD_POWER_ON);
     WriteUINT8(CMD_RESET);
-    WriteUINT8(CMD_H_RES_MODE);
+    WriteHI2(CMD_H2_RES_MODE);
 }
 
 
@@ -36,7 +39,7 @@ bool BH1750::GetMeasure(float *illumination)
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 100);
+    timeNext += TIME_MEASURE + (std::rand() % 1000);
 
 #ifdef IN_MODE_TEST
 
@@ -74,6 +77,12 @@ bool BH1750::GetMeasure(float *illumination)
 bool BH1750::WriteUINT8(uint8 byte)
 {
     return HAL_I2C1::Write8(0x23, byte) == 0;
+}
+
+
+bool BH1750::WriteHI2(uint8 byte)
+{
+    return HAL_I2C1::Write8(0x)
 }
 
 
