@@ -11,12 +11,13 @@ namespace BH1750
     static const uint8 CMD_POWER_ON   = 0x01;
     static const uint8 CMD_RESET      = 0x03;
     static const uint8 CMD_H_RES_MODE = 0x10;
+    static const uint8 CMD_L_RES_MODE = 0x13;
 
     uint timeNext = 1;
 
     bool WriteUINT8(uint8);
 
-    bool ReadUINT16(uint8 *);
+    bool ReadModeHI(uint8 *);
 }
 
 
@@ -56,9 +57,10 @@ bool BH1750::GetMeasure(float *illumination)
 
     BitSet32 result;
 
-    if (ReadUINT16(&result.byte[0]))
+    if (ReadModeHI(&result.byte[0]))
     {
-        *illumination = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
+        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
+        *illumination = value;
 
         return true;
     }
@@ -75,7 +77,7 @@ bool BH1750::WriteUINT8(uint8 byte)
 }
 
 
-bool BH1750::ReadUINT16(uint8 *buffer)
+bool BH1750::ReadModeHI(uint8 *buffer)
 {
     return HAL_I2C1::Read16(0x23, buffer) == 0;
 }
