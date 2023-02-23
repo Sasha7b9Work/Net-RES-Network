@@ -10,25 +10,34 @@ namespace BH1750
 {
     static const uint8 CMD_POWER_ON   = 0x01;
     static const uint8 CMD_RESET      = 0x03;
-    static const uint8 CMD_H_RES_MODE = 0x10;
-    static const uint8 CMD_L_RES_MODE = 0x13;
-    static const uint8 CMD_H2_RES_MODE = 0x11;
+    static const uint8 CMD_MEASURE    = 0x10;
 
     uint timeNext = 1;
 
-    bool WriteUINT8(uint8);
+    bool WriteAddrL(uint8);
 
-    bool WriteHI2(uint8);
+    bool WriteAddrH(uint8);
 
-    bool ReadModeHI(uint8 *);
+    bool ReadAddrL(uint8 *);
+
+    bool ReadAddrH(uint8 *);
 }
 
 
 void BH1750::Init()
 {
-    WriteUINT8(CMD_POWER_ON);
-    WriteUINT8(CMD_RESET);
-    WriteHI2(CMD_H2_RES_MODE);
+    WriteAddrL(CMD_POWER_ON);
+    WriteAddrL(CMD_RESET);
+
+    WriteAddrL(0x40);   // Чувствительность 0.45
+    WriteAddrL(0x7f);   // Чувствительность 0.45
+    WriteAddrL(0x10);   // Чувствительность 0.45
+
+//    WriteAddrL(0x44);   // Чувствительноть 2
+//    WriteAddrL(0x6a);   // Чувствительноть 2
+//    WriteAddrL(0x10);   // Чувствительноть 2
+
+    WriteAddrL(CMD_MEASURE);
 }
 
 
@@ -39,7 +48,7 @@ bool BH1750::GetMeasure(float *illumination)
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 1000);
+    timeNext += TIME_MEASURE + (std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 
@@ -60,9 +69,12 @@ bool BH1750::GetMeasure(float *illumination)
 
     BitSet32 result;
 
-    if (ReadModeHI(&result.byte[0]))
+    if (ReadAddrL(&result.byte[0]))
     {
-        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
+        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f * (69.0f / 31.0f);
+
+//        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
+
         *illumination = value;
 
         return true;
@@ -74,19 +86,25 @@ bool BH1750::GetMeasure(float *illumination)
 }
 
 
-bool BH1750::WriteUINT8(uint8 byte)
+bool BH1750::WriteAddrL(uint8 byte)
 {
     return HAL_I2C1::Write8(0x23, byte) == 0;
 }
 
 
-bool BH1750::WriteHI2(uint8 byte)
+bool BH1750::WriteAddrH(uint8 byte)
 {
-    return HAL_I2C1::Write8(0x)
+    return HAL_I2C1::Write8(0x5c, byte) == 0;
 }
 
 
-bool BH1750::ReadModeHI(uint8 *buffer)
+bool BH1750::ReadAddrL(uint8 *buffer)
 {
     return HAL_I2C1::Read16(0x23, buffer) == 0;
+}
+
+
+bool BH1750::ReadAddrH(uint8 *buffer)
+{
+    return HAL_I2C1::Read16(0x5c, buffer) == 0;
 }
