@@ -37,7 +37,7 @@ void HAL_USART2::Init()
     HAL_GPIO_Init(GPIOA, &is);
 
     handleUART.Instance = USART2;
-    handleUART.Init.BaudRate = 115200;
+    handleUART.Init.BaudRate = 9600;
     handleUART.Init.WordLength = UART_WORDLENGTH_8B;
     handleUART.Init.StopBits = UART_STOPBITS_1;
     handleUART.Init.Parity = UART_PARITY_NONE;
