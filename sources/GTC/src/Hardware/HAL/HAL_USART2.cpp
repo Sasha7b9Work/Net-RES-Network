@@ -11,6 +11,8 @@ namespace HAL_USART2
     void *handle = (void *)&handleUART;
 
     static uint8 buffer;
+
+    static void Parse(char *data);
 }
 
 
@@ -54,24 +56,49 @@ void HAL_USART2::Init()
 }
 
 
+void HAL_USART2::Parse(char *)
+{
+
+}
+
+
 void HAL_USART2::ReceiveCallback()
 {
-    static const char *request = "$GPGGA";
+    static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных
 
-    static int pointer = 0;
+    char symbol = (char)buffer;
 
-    if (buffer != 0)
+    if (in_mode_receive)
     {
-        int i = 0;
-    }
+        static char data[256];
+        static int pointer = 0;
 
-    if (buffer == (uint8)request[pointer])
-    {
-        pointer++;
-
-        if (pointer == (int)std::strlen(request))
+        if (symbol == 0x0a)
         {
+            Parse(data);
+            in_mode_receive = false;
             pointer = 0;
+        }
+        else
+        {
+            data[pointer++] = symbol;
+        }
+    }
+    else
+    {
+        static const char *request = "$GPGGA";
+
+        static int pointer = 0;
+
+        if (symbol == request[pointer])
+        {
+            pointer++;
+
+            if (pointer == (int)std::strlen(request))
+            {
+                pointer = 0;
+                in_mode_receive = true;
+            }
         }
     }
 
