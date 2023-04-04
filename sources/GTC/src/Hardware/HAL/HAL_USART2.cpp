@@ -6,7 +6,11 @@
 
 namespace HAL_USART2
 {
-    static UART_HandleTypeDef handle;
+    static UART_HandleTypeDef handleUART;
+
+    void *handle = (void *)&handleUART;
+
+    static uint8 buffer;
 }
 
 
@@ -32,14 +36,25 @@ void HAL_USART2::Init()
     is.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &is);
 
-    handle.Instance = USART2;
-    handle.Init.BaudRate = 115200;
-    handle.Init.WordLength = UART_WORDLENGTH_8B;
-    handle.Init.StopBits = UART_STOPBITS_1;
-    handle.Init.Parity = UART_PARITY_NONE;
-    handle.Init.Mode = UART_MODE_TX_RX;
-    handle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    handle.Init.OverSampling = UART_OVERSAMPLING_16;
+    handleUART.Instance = USART2;
+    handleUART.Init.BaudRate = 115200;
+    handleUART.Init.WordLength = UART_WORDLENGTH_8B;
+    handleUART.Init.StopBits = UART_STOPBITS_1;
+    handleUART.Init.Parity = UART_PARITY_NONE;
+    handleUART.Init.Mode = UART_MODE_TX_RX;
+    handleUART.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    handleUART.Init.OverSampling = UART_OVERSAMPLING_16;
 
-    HAL_UART_Init(&handle);
+    HAL_UART_Init(&handleUART);
+
+    HAL_NVIC_SetPriority(USART2_IRQn, 0, 1);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
+
+    HAL_UART_Receive_IT(&handleUART, &buffer, 1);
+}
+
+
+void HAL_USART2::ReceiveCallback()
+{
+    HAL_UART_Receive_IT(&handleUART, &buffer, 1);
 }

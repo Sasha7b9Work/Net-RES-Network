@@ -79,6 +79,10 @@ namespace HAL_RTC
 namespace HAL_USART2
 {
     void Init();
+
+    void ReceiveCallback();
+
+    extern void *handle;       // UART_HandleTypeDef
 }
 
 
