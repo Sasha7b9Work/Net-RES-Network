@@ -8,6 +8,7 @@
 #include "Modules/BH1750/BH1750.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Modules/GY511/GY511.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
@@ -42,6 +43,8 @@ void Device::Init()
     GY511::Init();
 
     Keyboard::Init();
+
+    NEO_M8N::Init();
 
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 }
