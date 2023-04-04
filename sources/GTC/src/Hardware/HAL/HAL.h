@@ -76,6 +76,12 @@ namespace HAL_RTC
 }
 
 
+namespace HAL_USART2
+{
+    void Init();
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif 
