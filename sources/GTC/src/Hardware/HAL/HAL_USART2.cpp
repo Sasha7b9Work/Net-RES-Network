@@ -56,5 +56,24 @@ void HAL_USART2::Init()
 
 void HAL_USART2::ReceiveCallback()
 {
+    static const char *request = "$GPGGA";
+
+    static int pointer = 0;
+
+    if (buffer != 0)
+    {
+        int i = 0;
+    }
+
+    if (buffer == (uint8)request[pointer])
+    {
+        pointer++;
+
+        if (pointer == (int)std::strlen(request))
+        {
+            pointer = 0;
+        }
+    }
+
     HAL_UART_Receive_IT(&handleUART, &buffer, 1);
 }
