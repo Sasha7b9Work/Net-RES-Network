@@ -371,6 +371,8 @@ void Display::DrawTime()
     int height = 32;
     int y = 85;
 
+    Font::Set(TypeFont::_8);
+    
     Rectangle(width, height).Fill(10, y - 1, Color::BLACK);
 
     PackedTime time = HAL_RTC::GetPackedTime();
@@ -389,7 +391,9 @@ void Display::DrawGPRS()
 
     Rectangle(width, height).Fill(0, y, Color::BLACK);
 
-    String<>(NEO_M8N::GetData()).Draw(1, 10, Color::WHITE);
+    String<>(NEO_M8N::GetData()).Draw(1, 1, Color::WHITE);
+    
+    String<>("%d", std::strlen(NEO_M8N::GetData())).Draw(1, 11);
 }
 
 

@@ -8,7 +8,7 @@ namespace NEO_M8N
 {
     static void Parse(char *);
 
-    static char buffer[10] = { '\0' };
+    static char buffer[100] = { '\0' };
 
     char *GetData() { return buffer; }
 }
@@ -45,17 +45,21 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
     {
         static const char *request = "$GPGGA";
 
-        static int pointer = 0;
+        static int ptr = 0;
 
-        if (symbol == request[pointer])
+        if (symbol == request[ptr])
         {
-            pointer++;
-
-            if (pointer == (int)std::strlen(request))
+            ptr++;
+            
+            if (ptr == (int)std::strlen(request))
             {
-                pointer = 0;
+                ptr = 0;
                 in_mode_receive = true;
             }
+        }
+        else
+        {
+            ptr = 0;
         }
     }
 }
@@ -63,12 +67,14 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
 
 void NEO_M8N::Parse(char *data)
 {
+#define MAX_LENGTH 20
+
     uint length = std::strlen(data);
 
-    if (length > 9)
+    if (length > MAX_LENGTH)
     {
-        data += (length - 9);
+        data += (length - MAX_LENGTH);
     }
 
-    std::strcpy(buffer, data);
+    std::strcpy(buffer, (length == 0) ? "NONE" : data);
 }
