@@ -57,10 +57,6 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
                 in_mode_receive = true;
             }
         }
-        else
-        {
-            ptr = 0;
-        }
     }
 }
 
