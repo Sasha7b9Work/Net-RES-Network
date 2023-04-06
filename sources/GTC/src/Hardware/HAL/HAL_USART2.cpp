@@ -1,6 +1,7 @@
 // 2023/04/04 09:57:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
+#include "Modules/NEO-M8N/NEO-M8N.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -11,8 +12,6 @@ namespace HAL_USART2
     void *handle = (void *)&handleUART;
 
     static uint8 buffer;
-
-    static void Parse(char *data);
 }
 
 
@@ -56,51 +55,9 @@ void HAL_USART2::Init()
 }
 
 
-void HAL_USART2::Parse(char *)
-{
-
-}
-
-
 void HAL_USART2::ReceiveCallback()
 {
-    static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных
-
-    char symbol = (char)buffer;
-
-    if (in_mode_receive)
-    {
-        static char data[256];
-        static int pointer = 0;
-
-        if (symbol == 0x0a)
-        {
-            Parse(data);
-            in_mode_receive = false;
-            pointer = 0;
-        }
-        else
-        {
-            data[pointer++] = symbol;
-        }
-    }
-    else
-    {
-        static const char *request = "$GPGGA";
-
-        static int pointer = 0;
-
-        if (symbol == request[pointer])
-        {
-            pointer++;
-
-            if (pointer == (int)std::strlen(request))
-            {
-                pointer = 0;
-                in_mode_receive = true;
-            }
-        }
-    }
+    NEO_M8N::ReceiveNewSymbolHandler((char)buffer);
 
     HAL_UART_Receive_IT(&handleUART, &buffer, 1);
 }
