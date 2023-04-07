@@ -392,9 +392,21 @@ void Display::DrawGPRS()
 
     Rectangle(width, height).Fill(0, y, Color::BLACK);
 
-    pchar message = NEO_M8N::GetData();
+    char message[128];
+    std::strcpy(message, NEO_M8N::GetData());
 
-    String<>(message).Draw(1, y, Color::WHITE);
+#define MAX_LENGTH 33
+
+    uint length = std::strlen(NEO_M8N::GetData());
+
+    int delta = 0;
+
+    if (length > MAX_LENGTH)
+    {
+        delta = (int)length - MAX_LENGTH;
+    }
+
+    String<>(message + delta).Draw(1, y, Color::WHITE);
 
     y += dY;
     

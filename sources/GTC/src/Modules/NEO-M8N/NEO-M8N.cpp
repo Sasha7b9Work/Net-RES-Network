@@ -69,11 +69,7 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
 
 void NEO_M8N::Parse(char *data)
 {
-#define MAX_LENGTH 30
-
-    data[MAX_LENGTH] = '\0';
-
-    std::strcpy(message, (std::strlen(data) == 0) ? "NONE" : data);
+    std::strcpy(message, data);
 }
 
 
