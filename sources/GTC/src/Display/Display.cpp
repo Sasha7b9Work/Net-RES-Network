@@ -361,7 +361,7 @@ void Display::DrawMeasures()
 
     DrawAcceleration();
 
-    DrawGPRS();
+//    DrawGPRS();
 }
 
 
@@ -386,14 +386,29 @@ void Display::DrawTime()
 void Display::DrawGPRS()
 {
     int width = 160;
-    int height = 32;
+    int height = 80;
     int y = 0;
+    int dY = 12;
 
     Rectangle(width, height).Fill(0, y, Color::BLACK);
 
-    String<>(NEO_M8N::GetData()).Draw(1, 1, Color::WHITE);
+    String<>(NEO_M8N::GetData()).Draw(1, y, Color::WHITE);
+
+    y += dY;
     
-    String<>("%d", std::strlen(NEO_M8N::GetData())).Draw(1, 11);
+    String<>("%d", std::strlen(NEO_M8N::GetData())).Draw(1, y);
+
+    y += dY;
+
+    String<>("%f", NEO_M8N::GetLongitude()).Draw(1, y);
+
+    y += dY;
+
+    String<>("%f", NEO_M8N::GetLatitude()).Draw(1, y);
+
+    y += dY;
+
+    String<>("%f", NEO_M8N::GetAltitude()).Draw(1, y);
 }
 
 
