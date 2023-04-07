@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>36</LineNumber>
+          <LineNumber>82</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134260786</Address>
+          <Address>134260584</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,23 +163,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Modules\NEO-M8N\NEO-M8N.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Modules/NEO-M8N/NEO-M8N.cpp\36</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>397</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134259848</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Display\Display.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Display/Display.cpp\397</Expression>
+          <Expression>\\Device\src/Modules/NEO-M8N/NEO-M8N.cpp\82</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -192,7 +176,7 @@
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>256</SubType>
+          <SubType>264</SubType>
           <ItemText>message</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>

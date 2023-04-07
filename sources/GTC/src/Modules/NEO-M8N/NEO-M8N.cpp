@@ -93,10 +93,7 @@ char *NEO_M8N::ExtractField(int num_filed, char buffer[32])
             {
                 num_filed--;
             }
-            else
-            {
-                pos++;
-            }
+            pos++;
         }
 
         if (message[pos] == '\0')
