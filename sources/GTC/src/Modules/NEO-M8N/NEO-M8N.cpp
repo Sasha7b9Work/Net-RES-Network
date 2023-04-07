@@ -92,37 +92,28 @@ char *NEO_M8N::ExtractField(int num_filed, char buffer[32])
             pos++;
         }
 
-        if (message[pos] == '\0')
+        if (message[pos] == ',' || message[pos] == '\0')
         {
             buffer[0] = 0;
         }
         else
         {
-            if (message[pos + 1] == ',' || message[pos + 1] == '\0')
-            {
-                buffer[0] = 0;
-            }
-            else
+            int pos_start = pos;
+
+            while (message[pos] != ',' && message[pos] != '\0')
             {
                 pos++;
-
-                int pos_start = pos;
-
-                while (message[pos] != ',' && message[pos] != '\0')
-                {
-                    pos++;
-                }
-
-                int pos_end = pos;
-                int iterator = 0;
-
-                for (pos = pos_start; pos < pos_end; pos++)
-                {
-                    buffer[iterator++] = message[pos];
-                }
-
-                buffer[iterator] = '\0';
             }
+
+            int pos_end = pos;
+            int iterator = 0;
+
+            for (pos = pos_start; pos < pos_end; pos++)
+            {
+                buffer[iterator++] = message[pos];
+            }
+
+            buffer[iterator] = '\0';
         }
     }
 
