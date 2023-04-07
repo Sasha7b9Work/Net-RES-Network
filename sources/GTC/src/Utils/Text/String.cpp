@@ -47,7 +47,7 @@ int String<capa>::Draw(int x, int y, Color::E color) const
         return x;
     }
 
-    pchar text = c_str();
+    pchar text = buffer;
 
     while (*text != '\0')
     {

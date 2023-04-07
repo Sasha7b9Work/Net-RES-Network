@@ -361,7 +361,7 @@ void Display::DrawMeasures()
 
     DrawAcceleration();
 
-//    DrawGPRS();
+    DrawGPRS();
 }
 
 
@@ -392,7 +392,9 @@ void Display::DrawGPRS()
 
     Rectangle(width, height).Fill(0, y, Color::BLACK);
 
-    String<>(NEO_M8N::GetData()).Draw(1, y, Color::WHITE);
+    pchar message = NEO_M8N::GetData();
+
+    String<>(message).Draw(1, y, Color::WHITE);
 
     y += dY;
     
@@ -409,6 +411,8 @@ void Display::DrawGPRS()
     y += dY;
 
     String<>("%f", NEO_M8N::GetAltitude()).Draw(1, y);
+
+    ST7735::WriteBuffer(0, 0, width, height);
 }
 
 
