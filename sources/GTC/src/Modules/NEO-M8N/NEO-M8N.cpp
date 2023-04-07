@@ -43,7 +43,7 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
     }
     else
     {
-        static const char *request = "$GPGGA";
+        static const char *request = "$GNGGA";
 
         static int ptr = 0;
 
@@ -56,6 +56,10 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
                 ptr = 0;
                 in_mode_receive = true;
             }
+        }
+        else
+        {
+            ptr = 0;
         }
     }
 }
