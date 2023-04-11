@@ -1,29 +1,41 @@
-1 - VBAT
-3 - PC14 осциллятор 1
-4 - PC15 осциллятор 1
-5 - OSC_IN
-6 - OSC_OUT
-10 - PA0 - 17:5             В запас
-11 - PA1 - XP4:5
-14 - PA4 - DD2:CS
-15 - PA5 - DD2:CLK
-16 - PA6 - DD2:DO
-17 - PA7 - DD2:DI
-18 - PB0 - DD2:WP
-19 - PB1 - :18              В запас
-22 - PB11 - TFT:RST
-25 - PB12 - TFT:CS
-26 - PB13 - TFT:SCL
-27 - PB14 - TFT:DC
-28 - PB15 - TFT:SDA
-30 - PA9 - XP4:3
-31 - PA10 - XP4:4
-32 - PA11 - D-
-33 - PA12 - D+
-34 - PA13 - SWDIO
-37 - PA14 - SWCLK
-40 - PB4 - динамик
-42 - PB6 - SCL
-43 - PB7 - SDA
-45 - PB8 - Кнопка 1
-46 - PB9 - Кнопка 2
+Кнопка S2 - 45 - PB8
+Кнопка S3 - 46 - PB9
+Динамик   - 40 - PB4
+I2C SCL   - 42 - PB6
+I2C SDA   - 43 - PB7
+DD2:CS    - 14 - PA4
+DD2:DO    - 16 - PA6
+DD2:WP    - 18 - PB0
+DD2:DI    - 17 - PA7
+DD2:CLK   - 15 - PA5
+DD2:HOLD                           ?
+TFT:RST   - 22 - PB11
+TFT:CS    - 25 - PB12
+TFT:SCL   - 26 - PB13
+TFT:DC    - 27 - PB14
+TFT:SDA   - 28 - PB15
+HC-12:SET - 11 - PA1
+HC-12:TX  - 31 - PA10
+HC-12:RX  - 30 - PA9
+D+        - 33 - PA12
+D-        - 32 - PA11
+VBAT      - 1
+
+34 - SWDIO
+37 - SWCLK
+7  - NRST
+3  - PC14 осциллятор 1
+4  - PC15 осциллятор 1
+5  - OSC_IN
+6  - OSC_OUT
+
+9  - 3.3V
+24 - 3.3V
+36 - 3.3V
+48 - 3.3V
+
+8  - GND
+23 - GND
+35 - GND
+44 - GND
+47 - GND
