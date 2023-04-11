@@ -12,6 +12,4 @@ namespace HC12
     void Command(pchar);
 
     void ReceiveCallback();
-
-    extern void *handle;               // UART_HandleTypeDef
 }

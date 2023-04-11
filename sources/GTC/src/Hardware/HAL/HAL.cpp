@@ -25,6 +25,8 @@ void HAL::Init()
     CDC::Init();
 
     HAL_RTC::Init();
+
+    HAL_USART_HC12::Init();
 }
 
 

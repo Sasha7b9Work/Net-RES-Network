@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>D:\Projects\RES-Network\sources\GTC\src\Hardware\Modules\ST7735</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\RES-Network\sources\GTC\src\Hardware\HAL</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -15,7 +15,7 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 114</TableColWidths>
+      <TableColWidths>182 182</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>

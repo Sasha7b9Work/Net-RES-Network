@@ -74,6 +74,16 @@ namespace HAL_RTC
 }
 
 
+namespace HAL_USART_HC12
+{
+    void Init();
+
+    void Transmit(const void *buffer, int size);
+
+    extern void *handle;               // UART_HandleTypeDef
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif 

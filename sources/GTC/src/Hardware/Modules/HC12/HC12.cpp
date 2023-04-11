@@ -7,12 +7,17 @@
 #include <cstring>
 
 
-#define PORT_SET GPIOA
-#define PIN_SET  GPIO_PIN_6
+namespace HAL_USART_HC12
+{
+    extern char recv_byte;
+}
 
 
 namespace HC12
 {
+#define PORT_SET GPIOA
+#define PIN_SET  GPIO_PIN_6
+
     struct RecvBuffer
     {
         static const int SIZE = 128;
@@ -35,69 +40,24 @@ namespace HC12
         char data[SIZE];
         int pointer;
     } recv_buffer;
-
-    char recv_byte = 0;
-
-    static UART_HandleTypeDef handleUART;
-
-    void *handle = (void *)&handleUART;
 }
 
 
 void HC12::Init()
 {
-    GPIO_InitTypeDef  is;
-
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_USART1_CLK_ENABLE();
-
-    is.Pin       = GPIO_PIN_9;
-    is.Mode      = GPIO_MODE_AF_PP;
-    is.Speed     = GPIO_SPEED_FREQ_HIGH;
-
-    HAL_GPIO_Init(GPIOA, &is);
-    
-    is.Pin  = GPIO_PIN_10;              // TX
-    is.Pull = GPIO_NOPULL;
-    is.Mode = GPIO_MODE_INPUT;
-    
-    HAL_GPIO_Init(GPIOA, &is);
-
-    is.Pin = PIN_SET;                // SET Для АТ команд
+    GPIO_InitTypeDef is;
+    is.Pin = PIN_SET;
     is.Mode = GPIO_MODE_OUTPUT_PP;
-
+    is.Speed = GPIO_SPEED_FREQ_HIGH;
     HAL_GPIO_Init(PORT_SET, &is);
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
-
-    handleUART.Instance          = USART1;
-    handleUART.Init.BaudRate     = 9600;
-    handleUART.Init.WordLength   = UART_WORDLENGTH_8B;
-    handleUART.Init.StopBits     = UART_STOPBITS_1;
-    handleUART.Init.Parity       = UART_PARITY_NONE;
-    handleUART.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
-    handleUART.Init.Mode         = UART_MODE_TX_RX;
-    handleUART.Init.OverSampling = UART_OVERSAMPLING_16;
-
-    HAL_UART_Init(&handleUART);
-
-    HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
-    HAL_NVIC_EnableIRQ(USART1_IRQn);
-
-    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
-
-    Command("AT+DEFAULT");
 }
 
 
 void HC12::Transmit(const void *buffer, int size)
 {
-    if (!buffer)
-    {
-        return;
-    }
-
-    HAL_UART_Transmit(&handleUART, (uint8_t *)buffer, (uint16_t)size, 0xFFFF);
+    HAL_USART_HC12::Transmit(buffer, size);
 }
 
 
@@ -126,7 +86,7 @@ void HC12::Command(pchar command)
 
 void HC12::ReceiveCallback()
 {
-    recv_buffer.Push(recv_byte);
+    recv_buffer.Push(HAL_USART_HC12::recv_byte);
 
-    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART_HC12::handle, (uint8 *)&HAL_USART_HC12::recv_byte, 1);
 }
