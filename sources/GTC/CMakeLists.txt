@@ -31,41 +31,40 @@ add_compile_options(/wd5264)
 add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 
-file(GLOB STM32F1             ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/*.c
-                              ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.h)
-file(GLOB SRC                 src/*.*)
-file(GLOB DISPLAY             src/Display/*.*)
-file(GLOB DISPLAY_FONT        src/Display/Font/*.*)
-file(GLOB HARDWARE            src/Hardware/*.*)
-file(GLOB HARDWARE_CMSIS      src/Hardware/CMSIS/*.*)
-file(GLOB HARDWARE_CDC        src/Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL        src/Hardware/HAL/*.*)
-file(GLOB MENU                src/Menu/*.*)
-file(GLOB MENU_PAGES          src/Menu/Pages/*.*)
-file(GLOB MODULES_BME280      src/Modules/BME280/*.*)
-file(GLOB MODULES_HC12        src/Modules/HC12/*.*)
-file(GLOB MODULES_ST7735      src/Modules/ST7735/*.*)
-file(GLOB SETTINGS            src/Settings/*.*)
-file(GLOB UTILS               src/Utils/*.*)
-file(GLOB UTILS_TEXT          src/Utils/Text/*.*)
+file(GLOB STM32F1                       ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/*.c
+                                        ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.h)
+file(GLOB SRC                           src/*.*)
+file(GLOB DISPLAY                       src/Display/*.*)
+file(GLOB DISPLAY_FONT                  src/Display/Font/*.*)
+file(GLOB HARDWARE                      src/Hardware/*.*)
+file(GLOB HARDWARE_CMSIS                src/Hardware/CMSIS/*.*)
+file(GLOB HARDWARE_CDC                  src/Hardware/CDC/*.*)
+file(GLOB HARDWARE_HAL                  src/Hardware/HAL/*.*)
+file(GLOB MENU                          src/Menu/*.*)
+file(GLOB MENU_PAGES                    src/Menu/Pages/*.*)
+file(GLOB HARDWARE_MODULES_BME280       src/Hardware/Modules/BME280/*.*)
+file(GLOB HARDWARE_MODULES_HC12         src/Hardware/Modules/HC12/*.*)
+file(GLOB HARDWARE_MODULES_ST7735       src/Hardware/Modules/ST7735/*.*)
+file(GLOB SETTINGS                      src/Settings/*.*)
+file(GLOB UTILS                         src/Utils/*.*)
+file(GLOB UTILS_TEXT                    src/Utils/Text/*.*)
 
-source_group(STM32F1             FILES ${STM32F1})
-source_group(src                 FILES ${SRC})
-source_group(Display             FILES ${DISPLAY})
-source_group(Display/Font        FILES ${DISPLAY_FONT})
-source_group(Hardware            FILES ${HARDWARE})
-source_group(Hardware/CMSIS      FILES ${HARDWARE_CMSIS})
-source_group(Hardware/CDC        FILES ${HARDWARE_CDC})
-source_group(Hardware/HAL        FILES ${HARDWARE_HAL})
-source_group(Menu                FILES ${MENU})
-source_group(Menu/Pages          FILES ${MENU_PAGES})
-source_group(Modules/BME280      FILES ${MODULES_BME280})
-source_group(Modules/HC12        FILES ${MODULES_HC12})
-source_group(Modules/ST7735      FILES ${MODULES_ST7735})
-source_group(Modules/ST7735/Font FILES ${MODULES_ST7735_FONT})
-source_group(Settings            FILES ${SETTINGS})
-source_group(Utils               FILES ${UTILS})
-source_group(Utils/Text          FILES ${UTILS_TEXT})
+source_group(STM32F1                    FILES ${STM32F1})
+source_group(src                        FILES ${SRC})
+source_group(Display                    FILES ${DISPLAY})
+source_group(Display/Font               FILES ${DISPLAY_FONT})
+source_group(Hardware                   FILES ${HARDWARE})
+source_group(Hardware/CMSIS             FILES ${HARDWARE_CMSIS})
+source_group(Hardware/CDC               FILES ${HARDWARE_CDC})
+source_group(Hardware/HAL               FILES ${HARDWARE_HAL})
+source_group(Menu                       FILES ${MENU})
+source_group(Menu/Pages                 FILES ${MENU_PAGES})
+source_group(Hardware/Modules/BME280    FILES ${HARDWARE_MODULES_BME280})
+source_group(Hardware/Modules/HC12      FILES ${HARDWARE_MODULES_HC12})
+source_group(Hardware/Modules/ST7735    FILES ${HARDWARE_MODULES_ST7735})
+source_group(Settings                   FILES ${SETTINGS})
+source_group(Utils                      FILES ${UTILS})
+source_group(Utils/Text                 FILES ${UTILS_TEXT})
 
 set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
                             src/Hardware/CDC/usbd_desc.c
@@ -84,10 +83,9 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_HAL}
             ${MENU}
             ${MENU_PAGES}
-            ${MODULES_BME280}
-            ${MODULES_HC12}
-            ${MODULES_ST7735}
-            ${MODULES_ST7735_FONT}
+            ${HARDWARE_MODULES_BME280}
+            ${HARDWARE_MODULES_HC12}
+            ${HARDWARE_MODULES_ST7735}
             ${SETTINGS} 
             ${UTILS}
             ${UTILS_TEXT}

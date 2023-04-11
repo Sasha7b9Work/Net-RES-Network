@@ -686,6 +686,66 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware/Modules/BME280</GroupName>
+          <Files>
+            <File>
+              <FileName>BME280.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\BME280.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BME280.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\BME280.h</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_defs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\bme280_defs.h</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\bme280_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\bme280_driver.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Modules/HC12</GroupName>
+          <Files>
+            <File>
+              <FileName>HC12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\HC12\HC12.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HC12.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Modules/ST7735</GroupName>
+          <Files>
+            <File>
+              <FileName>ST7735.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\ST7735\ST7735.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7735.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\ST7735\ST7735.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Menu</GroupName>
           <Files>
             <File>
@@ -737,66 +797,6 @@
               <FileName>PageSystem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/BME280</GroupName>
-          <Files>
-            <File>
-              <FileName>BME280.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\BME280.h</FilePath>
-            </File>
-            <File>
-              <FileName>BME280.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\BME280\BME280.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_defs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_defs.h</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_driver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_driver.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/HC12</GroupName>
-          <Files>
-            <File>
-              <FileName>HC12.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
-            </File>
-            <File>
-              <FileName>HC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/ST7735</GroupName>
-          <Files>
-            <File>
-              <FileName>ST7735.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\ST7735\ST7735.h</FilePath>
-            </File>
-            <File>
-              <FileName>ST7735.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\ST7735\ST7735.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1552,6 +1552,66 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware/Modules/BME280</GroupName>
+          <Files>
+            <File>
+              <FileName>BME280.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\BME280.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BME280.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\BME280.h</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_defs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\bme280_defs.h</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\bme280_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\BME280\bme280_driver.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Modules/HC12</GroupName>
+          <Files>
+            <File>
+              <FileName>HC12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\HC12\HC12.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HC12.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Modules/ST7735</GroupName>
+          <Files>
+            <File>
+              <FileName>ST7735.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\ST7735\ST7735.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ST7735.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\ST7735\ST7735.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Menu</GroupName>
           <Files>
             <File>
@@ -1603,66 +1663,6 @@
               <FileName>PageSystem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/BME280</GroupName>
-          <Files>
-            <File>
-              <FileName>BME280.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\BME280.h</FilePath>
-            </File>
-            <File>
-              <FileName>BME280.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\BME280\BME280.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_defs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_defs.h</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>bme280_driver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BME280\bme280_driver.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/HC12</GroupName>
-          <Files>
-            <File>
-              <FileName>HC12.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
-            </File>
-            <File>
-              <FileName>HC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/ST7735</GroupName>
-          <Files>
-            <File>
-              <FileName>ST7735.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\ST7735\ST7735.h</FilePath>
-            </File>
-            <File>
-              <FileName>ST7735.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\ST7735\ST7735.cpp</FilePath>
             </File>
           </Files>
         </Group>
