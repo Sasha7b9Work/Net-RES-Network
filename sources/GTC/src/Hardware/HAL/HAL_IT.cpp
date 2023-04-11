@@ -77,20 +77,10 @@ void USART1_IRQHandler(void)
 }
 
 
-void USART2_IRQHandler(void)
-{
-    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
-}
-
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
     if (handle == HC12::handle)
     {
         HC12::ReceiveCallback();
-    }
-    else if (handle == HAL_USART2::handle)
-    {
-        HAL_USART2::ReceiveCallback();
     }
 }

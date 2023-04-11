@@ -8,7 +8,6 @@
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
 #include "Display/Zones.h"
-#include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
@@ -71,8 +70,6 @@ namespace Display
     static void DrawBigMeasure();
 
     static void DrawTime();
-
-    static void DrawGPRS();
 
     static void DrawAcceleration();
 
@@ -360,8 +357,6 @@ void Display::DrawMeasures()
     DrawTime();
 
     DrawAcceleration();
-
-    DrawGPRS();
 }
 
 
@@ -380,51 +375,6 @@ void Display::DrawTime()
     String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(5, 85, Color::WHITE);
 
     String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105);
-}
-
-
-void Display::DrawGPRS()
-{
-    int width = 160;
-    int height = 80;
-    int y = 0;
-    int dY = 12;
-
-    Rectangle(width, height).Fill(0, y, Color::BLACK);
-
-    char message[128];
-    std::strcpy(message, NEO_M8N::GetData());
-
-#define MAX_LENGTH 33
-
-    uint length = std::strlen(NEO_M8N::GetData());
-
-    int delta = 0;
-
-    if (length > MAX_LENGTH)
-    {
-        delta = (int)length - MAX_LENGTH;
-    }
-
-    String<>(message + delta).Draw(1, y, Color::WHITE);
-
-    y += dY;
-    
-    String<>("%d", std::strlen(NEO_M8N::GetData())).Draw(1, y);
-
-    y += dY;
-
-    String<>("%f", NEO_M8N::GetLongitude()).Draw(1, y);
-
-    y += dY;
-
-    String<>("%f", NEO_M8N::GetLatitude()).Draw(1, y);
-
-    y += dY;
-
-    String<>("%f", NEO_M8N::GetAltitude()).Draw(1, y);
-
-    ST7735::WriteBuffer(0, 0, width, height);
 }
 
 

@@ -71,18 +71,6 @@ namespace HAL_RTC
     void Init();
 
     PackedTime GetPackedTime();
-
-    bool SetPackedTime(const PackedTime &time);
-}
-
-
-namespace HAL_USART2
-{
-    void Init();
-
-    void ReceiveCallback();
-
-    extern void *handle;       // UART_HandleTypeDef
 }
 
 
@@ -101,7 +89,6 @@ extern "C" {
     void SysTick_Handler(void);
     void USB_LP_CAN1_RX0_IRQHandler(void);
     void USART1_IRQHandler(void);
-    void USART2_IRQHandler(void);
 
 #ifdef __cplusplus
 }

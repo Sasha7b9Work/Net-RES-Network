@@ -683,11 +683,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
-            <File>
-              <FileName>HAL_USART2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -746,21 +741,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Modules/BH1750</GroupName>
-          <Files>
-            <File>
-              <FileName>BH1750.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BH1750.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Modules/BME280</GroupName>
           <Files>
             <File>
@@ -787,51 +767,6 @@
               <FileName>bme280_driver.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\BME280\bme280_driver.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/CG-Anem</GroupName>
-          <Files>
-            <File>
-              <FileName>CG-Anem.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\CG-Anem\CG-Anem.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CG-Anem.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\CG-Anem\CG-Anem.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/GY511</GroupName>
-          <Files>
-            <File>
-              <FileName>GY511.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\GY511\GY511.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GY511.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\GY511\GY511.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/NEO-M8N</GroupName>
-          <Files>
-            <File>
-              <FileName>NEO-M8N.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NEO-M8N.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1614,11 +1549,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
-            <File>
-              <FileName>HAL_USART2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1677,21 +1607,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Modules/BH1750</GroupName>
-          <Files>
-            <File>
-              <FileName>BH1750.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BH1750.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Modules/BME280</GroupName>
           <Files>
             <File>
@@ -1718,51 +1633,6 @@
               <FileName>bme280_driver.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\BME280\bme280_driver.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/CG-Anem</GroupName>
-          <Files>
-            <File>
-              <FileName>CG-Anem.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\CG-Anem\CG-Anem.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CG-Anem.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\CG-Anem\CG-Anem.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/GY511</GroupName>
-          <Files>
-            <File>
-              <FileName>GY511.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\GY511\GY511.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GY511.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\GY511\GY511.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/NEO-M8N</GroupName>
-          <Files>
-            <File>
-              <FileName>NEO-M8N.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NEO-M8N.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,7 +1,6 @@
 // 2023/04/04 09:57:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include "Modules/NEO-M8N/NEO-M8N.h"
 #include <stm32f1xx_hal.h>
 
 

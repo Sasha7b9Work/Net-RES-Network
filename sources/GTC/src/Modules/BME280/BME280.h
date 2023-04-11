@@ -3,6 +3,9 @@
 #include "defines.h"
 
 
+/*
+* Измерение температуры, влжаности, давления
+*/
 namespace BME280
 {
     void Init();
