@@ -5,10 +5,9 @@ project (GTC)
 set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(.
-                    Device
-                    ../../Device/src
-                    ../../Device/src/Hardware/CDC
-                    ../../Device/src/Hardware/HAL
+                    ../../GTC/src
+                    ../../GTC/src/Hardware/CDC
+                    ../../GTC/src/Hardware/HAL
                     ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_KEIL/CMSIS
@@ -51,28 +50,28 @@ endif()
 file(GLOB LIBS_STM32F1          ../../common/_VS_LIBS/STM32f1/*.*)
 file(GLOB LIBS_USBD             ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                   *.h *.cpp
-                                ../../Device/src/defines.h
-                                ../../Device/src/Device.*)
-file(GLOB DISPLAY               ../../Device/src/Display/*.*)
-file(GLOB DISPLAY_FONT          ../../Device/src/Display/Font/*.*)
-file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_CDC          ../../Device/src/Hardware/CDC/*.*
-                                                 Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL          ../../Device/src/Hardware/HAL/*.*
-                                                 Hardware/HAL/*.*)
-file(GLOB HARDWARE_I2C          ../../Device/src/Hardware/I2C/*.*)
-file(GLOB HARDWARE_LAN                           Hardware/LAN/*.*)
-file(GLOB HARDWARE_LAN_LIBNET                    Hardware/LAN/libnet/*.*)
-file(GLOB MENU                  ../../Device/src/Menu/*.*)
-file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
-file(GLOB MODULES_BH1750        ../../Device/src/Modules/BH1750/*.*)
-file(GLOB MODULES_BME280        ../../Device/src/Modules/BME280/*.*)
-file(GLOB MODULES_CG_ANEM       ../../Device/src/Modules/CG-Anem/*.*)
-file(GLOB MODULES_HC12          ../../Device/src/Modules/HC12/*.*)
-file(GLOB MODULES_ST7735        ../../Device/src/Modules/ST7735/*.*)
-file(GLOB SETTINGS              ../../Device/src/Settings/*.*)
-file(GLOB UTILS                 ../../Device/src/Utils/*.*)
-file(GLOB UTILS_TEXT            ../../Device/src/Utils/Text/*.*)
+                                ../../GTC/src/defines.h
+                                ../../GTC/src/Device.*)
+file(GLOB DISPLAY               ../../GTC/src/Display/*.*)
+file(GLOB DISPLAY_FONT          ../../GTC/src/Display/Font/*.*)
+file(GLOB HARDWARE              ../../GTC/src/Hardware/*.*)
+file(GLOB HARDWARE_CDC          ../../GTC/src/Hardware/CDC/*.*
+                                              Hardware/CDC/*.*)
+file(GLOB HARDWARE_HAL          ../../GTC/src/Hardware/HAL/*.*
+                                              Hardware/HAL/*.*)
+file(GLOB HARDWARE_I2C          ../../GTC/src/Hardware/I2C/*.*)
+file(GLOB HARDWARE_LAN                        Hardware/LAN/*.*)
+file(GLOB HARDWARE_LAN_LIBNET                 Hardware/LAN/libnet/*.*)
+file(GLOB MENU                  ../../GTC/src/Menu/*.*)
+file(GLOB MENU_PAGES            ../../GTC/src/Menu/Pages/*.*)
+file(GLOB MODULES_BH1750        ../../GTC/src/Modules/BH1750/*.*)
+file(GLOB MODULES_BME280        ../../GTC/src/Modules/BME280/*.*)
+file(GLOB MODULES_CG_ANEM       ../../GTC/src/Modules/CG-Anem/*.*)
+file(GLOB MODULES_HC12          ../../GTC/src/Modules/HC12/*.*)
+file(GLOB MODULES_ST7735        ../../GTC/src/Modules/ST7735/*.*)
+file(GLOB SETTINGS              ../../GTC/src/Settings/*.*)
+file(GLOB UTILS                 ../../GTC/src/Utils/*.*)
+file(GLOB UTILS_TEXT            ../../GTC/src/Utils/Text/*.*)
 
 source_group(libs/STM32F1        FILES ${LIBS_STM32F1})
 source_group(libs/USBD           FILES ${LIBS_USBD})
@@ -97,7 +96,7 @@ source_group(Utils               FILES ${UTILS})
 source_group(Utils/Text          FILES ${UTILS_TEXT})
 
 
-set_source_files_properties(../../Device/src/Hardware/CDC/usbd_conf.c
+set_source_files_properties(../../GTC/src/Hardware/CDC/usbd_conf.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}
