@@ -15,7 +15,7 @@ namespace Keyboard
     bool pressed = false;               // Если true, клавиша нажата
     bool taboo_long = false;            // Если true, запрещено длинное срабатывание
 
-#define KEY_PRESSED (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET)
+    static bool KeyPressed();
 }
 
 
@@ -49,7 +49,7 @@ void Keyboard::Update()
         }
         else
         {
-            if (!KEY_PRESSED)
+            if (!KeyPressed())
             {
                 pressed = false;
                 meter.Reset();
@@ -63,10 +63,16 @@ void Keyboard::Update()
     }
     else
     {
-        if (KEY_PRESSED)
+        if (KeyPressed())
         {
             pressed = true;
             meter.Reset();
         }
     }
+}
+
+
+bool Keyboard::KeyPressed()
+{
+    return (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET);
 }
