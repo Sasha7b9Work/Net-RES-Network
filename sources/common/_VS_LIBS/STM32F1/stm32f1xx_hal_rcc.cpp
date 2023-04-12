@@ -18,3 +18,9 @@ HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef * /*PeriphC
 {
     return HAL_OK;
 }
+
+
+void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef * /*RCC_OscInitStruct*/)
+{
+
+}
