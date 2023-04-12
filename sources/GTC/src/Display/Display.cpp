@@ -329,7 +329,7 @@ void Display::DrawMeasures()
     const int y0 = d_lines;
     const int dY = d_lines + Font::Height();
 
-    static const int NUM_MEASURES = 3;
+    const int NUM_MEASURES = 3;
 
     static const TypeMeasure::E types[NUM_MEASURES] =
     {

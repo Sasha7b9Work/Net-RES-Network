@@ -4,6 +4,12 @@
 #include <stm32f1xx_hal.h>
 
 
+#ifdef GUI
+#undef __HAL_RCC_RTC_ENABLE
+#define __HAL_RCC_RTC_ENABLE()
+#endif
+
+
 namespace HAL_RTC
 {
 #define WAKEUP_TIMER_ENABLE 0x32F2
