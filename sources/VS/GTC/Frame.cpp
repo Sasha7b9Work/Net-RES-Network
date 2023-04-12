@@ -21,7 +21,8 @@ static const int IMAGE_SCALE = 2;
 enum
 {
     TIMER_ID = 111,
-    TIMER_BUTTON_ID
+    TIMER_BUTTON_ID_1,
+    TIMER_BUTTON_ID_2
 };
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
@@ -38,8 +39,10 @@ public:
         SetMinSize({ Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE });
         SetDoubleBuffered(true);
         Bind(wxEVT_PAINT, &Screen::OnPaint, this);
-        Bind(wxEVT_LEFT_DOWN, &Frame::OnMouseDown, Frame::Self());
-        Bind(wxEVT_LEFT_UP, &Frame::OnMouseUp, Frame::Self());
+        Bind(wxEVT_LEFT_DOWN, &Frame::OnMouseLeftDown, Frame::Self());
+        Bind(wxEVT_LEFT_UP, &Frame::OnMouseLeftUp, Frame::Self());
+        Bind(wxEVT_RIGHT_DOWN, &Frame::OnMouseRightDown, Frame::Self());
+        Bind(wxEVT_RIGHT_UP, &Frame::OnMouseRightUp, Frame::Self());
     }
 
     void OnPaint(wxPaintEvent &)
@@ -81,9 +84,11 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_PAINT, &Frame::OnPaint, this);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
-    Bind(wxEVT_TIMER, &Frame::OnTimerButton, this, TIMER_BUTTON_ID);
+    Bind(wxEVT_TIMER, &Frame::OnTimerButton1, this, TIMER_BUTTON_ID_1);
+    Bind(wxEVT_TIMER, &Frame::OnTimerButton2, this, TIMER_BUTTON_ID_2);
 
-    timerButton.SetOwner(this, TIMER_BUTTON_ID);
+    timerButton1.SetOwner(this, TIMER_BUTTON_ID_1);
+    timerButton2.SetOwner(this, TIMER_BUTTON_ID_2);
     timer.SetOwner(this, TIMER_ID);
 
     SetClientSize(Display::WIDTH * IMAGE_SCALE, Display::HEIGHT * IMAGE_SCALE);
@@ -152,26 +157,49 @@ void Frame::EndScene()
 }
 
 
-void Frame::OnMouseDown(wxMouseEvent &)
+void Frame::OnMouseLeftDown(wxMouseEvent &)
 {
-    meterButton.Reset();
-    timerButton.StartOnce(500);
+    meterButton1.Reset();
+    timerButton1.StartOnce(500);
 }
 
 
-void Frame::OnMouseUp(wxMouseEvent &)
+void Frame::OnMouseRightDown(wxMouseEvent &)
 {
-    if (meterButton.ElapsedTime() < 500)
+    meterButton2.Reset();
+    timerButton2.StartOnce(500);
+}
+
+
+void Frame::OnMouseLeftUp(wxMouseEvent &)
+{
+    if (meterButton1.ElapsedTime() < 500)
     {
-        Menu::ShortPress();
-        timerButton.Stop();
+        Menu::ShortPress(Key::_1);
+        timerButton1.Stop();
     }
 }
 
 
-void Frame::OnTimerButton(wxTimerEvent &)
+void Frame::OnMouseRightUp(wxMouseEvent &)
 {
-    Menu::LongPress();
+    if (meterButton2.ElapsedTime() < 500)
+    {
+        Menu::ShortPress(Key::_2);
+        timerButton2.Stop();
+    }
+}
+
+
+void Frame::OnTimerButton1(wxTimerEvent &)
+{
+    Menu::LongPress(Key::_1);
+}
+
+
+void Frame::OnTimerButton2(wxTimerEvent &)
+{
+    Menu::LongPress(Key::_2);
 }
 
 

@@ -12,10 +12,11 @@ namespace Keyboard
 
     TimeMeterMS meter;
 
-    bool pressed = false;               // Если true, клавиша нажата
-    bool taboo_long = false;            // Если true, запрещено длинное срабатывание
+    bool pressed[Key::Count] = { false, false };        // Если true, клавиша нажата
+    bool taboo_long[Key::Count] = { false, false };     // Если true, запрещено длинное срабатывание
 
-    static bool KeyPressed();
+    static bool KeyPressed(Key::E);
+    static void UpdateKey(Key::E);
 }
 
 
@@ -35,44 +36,55 @@ void Keyboard::Init()
 
 void Keyboard::Update()
 {
+    for (int i = 0; i < Key::Count; i++)
+    {
+        UpdateKey((Key::E)i);
+    }
+}
+
+
+void Keyboard::UpdateKey(Key::E key)
+{
     if (meter.ElapsedTime() < 100)
     {
         return;
     }
 
-    if (pressed)
+    if (pressed[key])
     {
-        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long)
+        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long[key])
         {
-            Menu::LongPress();
-            taboo_long = true;
+            Menu::LongPress(key);
+            taboo_long[key] = true;
         }
         else
         {
-            if (!KeyPressed())
+            if (!KeyPressed(key))
             {
-                pressed = false;
+                pressed[key] = false;
                 meter.Reset();
-                if (!taboo_long)
+                if (!taboo_long[key])
                 {
-                    Menu::ShortPress();
+                    Menu::ShortPress(key);
                 }
-                taboo_long = false;
+                taboo_long[key] = false;
             }
         }
     }
     else
     {
-        if (KeyPressed())
+        if (KeyPressed(key))
         {
-            pressed = true;
+            pressed[key] = true;
             meter.Reset();
         }
     }
 }
 
 
-bool Keyboard::KeyPressed()
+bool Keyboard::KeyPressed(Key::E key)
 {
-    return (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET);
+    static const uint16 pins[Key::Count] = { GPIO_PIN_8, GPIO_PIN_9 };
+
+    return HAL_GPIO_ReadPin(GPIOB, pins[key]) == GPIO_PIN_RESET;
 }

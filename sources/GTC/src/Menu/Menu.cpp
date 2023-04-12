@@ -8,7 +8,7 @@
 #include "Display/Font/Font.h"
 
 
-void Menu::ShortPress()
+void Menu::ShortPress(Key::E)
 {
     if (!Opened())
     {
@@ -29,7 +29,7 @@ void Menu::ShortPress()
 }
 
 
-void Menu::LongPress()
+void Menu::LongPress(Key::E)
 {
     if (!Opened())
     {
@@ -44,7 +44,7 @@ void Menu::LongPress()
 }
 
 
-void Menu::DoubleClick()
+void Menu::DoubleClick(Key::E)
 {
     if (Opened())
     {

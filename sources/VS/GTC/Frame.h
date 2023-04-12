@@ -15,10 +15,13 @@ public:
     void OnQuit(wxCommandEvent &);
     void OnAbout(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
-    void OnTimerButton(wxTimerEvent &);
+    void OnTimerButton1(wxTimerEvent &);
+    void OnTimerButton2(wxTimerEvent &);
 
-    void OnMouseDown(wxMouseEvent &);
-    void OnMouseUp(wxMouseEvent &);
+    void OnMouseLeftDown(wxMouseEvent &);
+    void OnMouseLeftUp(wxMouseEvent &);
+    void OnMouseRightDown(wxMouseEvent &);
+    void OnMouseRightUp(wxMouseEvent &);
 
     void BeginScene();
 
@@ -30,6 +33,8 @@ private:
     wxTimer timer;
     static Frame *self;
 
-    TimeMeterMS meterButton;        // Для кнопки
-    wxTimer timerButton;
+    TimeMeterMS meterButton1;       // Для кнопки 1
+    TimeMeterMS meterButton2;       // Для кнопки 2
+    wxTimer timerButton1;
+    wxTimer timerButton2;
 };

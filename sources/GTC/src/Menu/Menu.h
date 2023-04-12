@@ -1,15 +1,16 @@
 // 2022/05/05 12:28:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Menu/MenuItems.h"
+#include "Hardware/Keyboard.h"
 
 
 namespace Menu
 {
-    void ShortPress();
+    void ShortPress(Key::E);
 
-    void LongPress();
+    void LongPress(Key::E);
 
-    void DoubleClick();
+    void DoubleClick(Key::E);
 
     void Draw();
 

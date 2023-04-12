@@ -10,6 +10,9 @@
 #undef __HAL_RCC_GPIOB_CLK_ENABLE
 #define __HAL_RCC_GPIOB_CLK_ENABLE()
 
+#undef __HAL_RCC_GPIOC_CLK_ENABLE
+#define __HAL_RCC_GPIOC_CLK_ENABLE()
+
 #undef __HAL_RCC_SPI2_CLK_ENABLE
 #define __HAL_RCC_SPI2_CLK_ENABLE()
 
@@ -21,6 +24,9 @@
 
 #undef __HAL_RCC_PWR_CLK_ENABLE
 #define __HAL_RCC_PWR_CLK_ENABLE()
+
+#undef __HAL_RCC_RTC_ENABLE
+#define __HAL_RCC_RTC_ENABLE()
 
 #undef SPI2
 extern SPI_TypeDef typeDefSPI2;

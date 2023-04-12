@@ -2,6 +2,16 @@
 #pragma once
 
 
+struct Key
+{
+    enum E
+    {
+        _1,
+        _2,
+        Count
+    };
+};
+
 namespace Keyboard
 {
     void Init();
