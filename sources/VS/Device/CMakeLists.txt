@@ -48,53 +48,53 @@ if(WIN32)
     add_compile_options(/wd26812)
 endif()
 
-file(GLOB LIBS_STM32F1          ../../common/_VS_LIBS/STM32f1/*.*)
-file(GLOB LIBS_STM32F1_INC      ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
-file(GLOB LIBS_USBD             ../../common/_VS_LIBS/USBD/*.*)
-file(GLOB SRC                   *.h *.cpp
-                                ../../Device/src/defines.h
-                                ../../Device/src/Device.*)
-file(GLOB DISPLAY               ../../Device/src/Display/*.*)
-file(GLOB DISPLAY_FONT          ../../Device/src/Display/Font/*.*)
-file(GLOB HARDWARE              ../../Device/src/Hardware/*.*)
-file(GLOB HARDWARE_CDC          ../../Device/src/Hardware/CDC/*.*
-                                                 Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL          ../../Device/src/Hardware/HAL/*.*
-                                                 Hardware/HAL/*.*)
-file(GLOB HARDWARE_LAN                           Hardware/LAN/*.*)
-file(GLOB HARDWARE_LAN_LIBNET                    Hardware/LAN/libnet/*.*)
-file(GLOB MENU                  ../../Device/src/Menu/*.*)
-file(GLOB MENU_PAGES            ../../Device/src/Menu/Pages/*.*)
-file(GLOB MODULES_BH1750        ../../Device/src/Modules/BH1750/*.*)
-file(GLOB MODULES_BME280        ../../Device/src/Modules/BME280/*.*)
-file(GLOB MODULES_CG_ANEM       ../../Device/src/Modules/CG-Anem/*.*)
-file(GLOB MODULES_HC12          ../../Device/src/Modules/HC12/*.*)
-file(GLOB MODULES_ST7735        ../../Device/src/Modules/ST7735/*.*)
-file(GLOB SETTINGS              ../../Device/src/Settings/*.*)
-file(GLOB UTILS                 ../../Device/src/Utils/*.*)
-file(GLOB UTILS_TEXT            ../../Device/src/Utils/Text/*.*)
+file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
+file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
+file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
+file(GLOB SRC                       *.h *.cpp
+                                    ../../Device/src/defines.h
+                                    ../../Device/src/Device.*)
+file(GLOB DISPLAY                   ../../Device/src/Display/*.*)
+file(GLOB DISPLAY_FONT              ../../Device/src/Display/Font/*.*)
+file(GLOB HARDWARE                  ../../Device/src/Hardware/*.*)
+file(GLOB HARDWARE_CDC              ../../Device/src/Hardware/CDC/*.*
+                                                     Hardware/CDC/*.*)
+file(GLOB HARDWARE_HAL              ../../Device/src/Hardware/HAL/*.*
+                                                     Hardware/HAL/*.*)
+file(GLOB HARDWARE_LAN                               Hardware/LAN/*.*)
+file(GLOB HARDWARE_LAN_LIBNET                        Hardware/LAN/libnet/*.*)
+file(GLOB HARDWARE_MODULES_BH1750   ../../Device/src/Hardware/Modules/BH1750/*.*)
+file(GLOB HARDWARE_MODULES_BME280   ../../Device/src/Hardware/Modules/BME280/*.*)
+file(GLOB HARDWARE_MODULES_CG_ANEM  ../../Device/src/Hardware/Modules/CG-Anem/*.*)
+file(GLOB HARDWARE_MODULES_HC12     ../../Device/src/Hardware/Modules/HC12/*.*)
+file(GLOB HARDWARE_MODULES_ST7735   ../../Device/src/Hardware/Modules/ST7735/*.*)
+file(GLOB MENU                      ../../Device/src/Menu/*.*)
+file(GLOB MENU_PAGES                ../../Device/src/Menu/Pages/*.*)
+file(GLOB SETTINGS                  ../../Device/src/Settings/*.*)
+file(GLOB UTILS                     ../../Device/src/Utils/*.*)
+file(GLOB UTILS_TEXT                ../../Device/src/Utils/Text/*.*)
 
-source_group(libs/STM32F1        FILES ${LIBS_STM32F1})
-source_group(libs/STM32F1/Inc    FILES ${LIBS_STM32F1_INC})
-source_group(libs/USBD           FILES ${LIBS_USBD})
-source_group(src                 FILES ${SRC})
-source_group(Display             FILES ${DISPLAY})
-source_group(Display/Font        FILES ${DISPLAY_FONT})
-source_group(Hardware            FILES ${HARDWARE})
-source_group(Hardware/CDC        FILES ${HARDWARE_CDC})
-source_group(Hardware/HAL        FILES ${HARDWARE_HAL})
-source_group(Hardware/LAN        FILES ${HARDWARE_LAN})
-source_group(Hardware/LAN/libnet FILES ${HARDWARE_LAN_LIBNET})
-source_group(Menu                FILES ${MENU})
-source_group(Menu/Pages          FILES ${MENU_PAGES})
-source_group(Modules/BH1750      FILES ${MODULES_BH1750})
-source_group(Modules/BME280      FILES ${MODULES_BME280})
-source_group(Modules/CG-Anem     FILES ${MODULES_CG_ANEM})
-source_group(Modules/HC12        FILES ${MODULES_HC12})
-source_group(Modules/ST7735      FILES ${MODULES_ST7735})
-source_group(Settings            FILES ${SETTINGS})
-source_group(Utils               FILES ${UTILS})
-source_group(Utils/Text          FILES ${UTILS_TEXT})
+source_group(libs/STM32F1               FILES ${LIBS_STM32F1})
+source_group(libs/STM32F1/Inc           FILES ${LIBS_STM32F1_INC})
+source_group(libs/USBD                  FILES ${LIBS_USBD})
+source_group(src                        FILES ${SRC})
+source_group(Display                    FILES ${DISPLAY})
+source_group(Display/Font               FILES ${DISPLAY_FONT})
+source_group(Hardware                   FILES ${HARDWARE})
+source_group(Hardware/CDC               FILES ${HARDWARE_CDC})
+source_group(Hardware/HAL               FILES ${HARDWARE_HAL})
+source_group(Hardware/LAN               FILES ${HARDWARE_LAN})
+source_group(Hardware/LAN/libnet        FILES ${HARDWARE_LAN_LIBNET})
+source_group(Hardware/Modules/BH1750    FILES ${HARDWARE_MODULES_BH1750})
+source_group(Hardware/Modules/BME280    FILES ${HARDWARE_MODULES_BME280})
+source_group(Hardware/Modules/CG-Anem   FILES ${HARDWARE_MODULES_CG_ANEM})
+source_group(Hardware/Modules/HC12      FILES ${HARDWARE_MODULES_HC12})
+source_group(Hardware/Modules/ST7735    FILES ${HARDWARE_MODULES_ST7735})
+source_group(Menu                       FILES ${MENU})
+source_group(Menu/Pages                 FILES ${MENU_PAGES})
+source_group(Settings                   FILES ${SETTINGS})
+source_group(Utils                      FILES ${UTILS})
+source_group(Utils/Text                 FILES ${UTILS_TEXT})
 
 
 set_source_files_properties(../../Device/src/Hardware/CDC/usbd_conf.c
@@ -112,13 +112,13 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE_HAL}
                 ${HARDWARE_LAN}
                 ${HARDWARE_LAN_LIBNET}
+                ${HARDWARE_MODULES_BH1750}
+                ${HARDWARE_MODULES_BME280}
+                ${HARDWARE_MODULES_CG_ANEM}
+                ${HARDWARE_MODULES_HC12}
+                ${HARDWARE_MODULES_ST7735}
                 ${MENU}
                 ${MENU_PAGES}
-                ${MODULES_BH1750}
-                ${MODULES_BME280}
-                ${MODULES_CG_ANEM}
-                ${MODULES_HC12}
-                ${MODULES_ST7735}
                 ${SETTINGS}
                 ${UTILS}
                 ${UTILS_TEXT}

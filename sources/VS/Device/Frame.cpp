@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Display/Display.h"
-#include "Modules/ST7735/ST7735.h"
+#include "Hardware/Modules/ST7735/ST7735.h"
 #include "Application.h"
 #include "Menu/Menu.h"
 #include "wx/statline.h"

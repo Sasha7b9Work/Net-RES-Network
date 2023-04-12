@@ -1,6 +1,6 @@
 // 2022/03/12 09:24:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Modules/ST7735/ST7735.h"
+#include "Hardware/Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"

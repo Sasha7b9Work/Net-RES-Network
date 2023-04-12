@@ -70,7 +70,7 @@
       <WinId>466</WinId>
       <ViewName>Source Browser - *** Not Enabled ***</ViewName>
       <UserString>500</UserString>
-      <TableColWidths>166</TableColWidths>
+      <TableColWidths>300</TableColWidths>
     </View>
   </TreeListPane>
 
@@ -101,10 +101,10 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>123</Top>
-        <Left>445</Left>
-        <Right>1651</Right>
-        <Bottom>1051</Bottom>
+        <Top>305</Top>
+        <Left>1056</Left>
+        <Right>2262</Right>
+        <Bottom>1233</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
