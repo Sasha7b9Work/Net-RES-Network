@@ -168,18 +168,18 @@ template<int capacity>
 int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     Color::SetCurrent(color);
-    int retValue = x;
+    uint result = x;
 
     char *text = buffer;
 
     while (*text)
     {
         x = Text::DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::Symbol::Width((uint8)*text);
+        result += Font::Symbol::Width((uint8)*text);
         text++;
     }
 
-    return retValue + 1;
+    return result + 1;
 }
 
 

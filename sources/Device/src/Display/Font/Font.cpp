@@ -16,13 +16,15 @@ namespace Font
 
 int Font::Text::Length(pchar text)
 {
-    int retValue = 0;
+    uint result = 0;
+
     while (*text)
     {
-        retValue += Font::Symbol::Width((uint8)*text) + Font::GetSpacing();
+        result += (uint)Font::Symbol::Width((uint8)*text) + Font::GetSpacing();
         text++;
     }
-    return retValue;
+
+    return (int)result;
 }
 
 

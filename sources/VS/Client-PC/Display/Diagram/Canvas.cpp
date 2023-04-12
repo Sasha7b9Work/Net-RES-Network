@@ -165,11 +165,9 @@ void Canvas::DrawAllSensors(wxMemoryDC &dc)
 }
 
 
-void Canvas::DrawSensor(wxMemoryDC &dc, const wxColour color, const DataArray &array, float min, float max, float scale)
+void Canvas::DrawSensor(wxMemoryDC &dc, const wxColour &color, const DataArray &array, float min, float max, float scale)
 {
     dc.SetPen(wxPen(color));
-
-    auto point = array.array.end() - 1;
 
     if (fabsf(min - max) < 0.0001f)
     {
@@ -178,6 +176,8 @@ void Canvas::DrawSensor(wxMemoryDC &dc, const wxColour color, const DataArray &a
 
     int width = GetClientSize().GetWidth();
     int height = GetClientSize().GetHeight();
+
+    auto point = array.array.end() - 1;
 
     do
     {
@@ -189,7 +189,7 @@ void Canvas::DrawSensor(wxMemoryDC &dc, const wxColour color, const DataArray &a
 
         dc.DrawLine({ x_start, y_start }, { x_end, y_end });
 
-        point--;
+        --point;
 
     } while (point > array.array.begin());
 

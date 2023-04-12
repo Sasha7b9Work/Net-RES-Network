@@ -50,7 +50,7 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 }
 
 
-void Grid::SetMeasure(uint id, const wxColour color, uint8 type, float value)
+void Grid::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 {
     if (id == 0)
     {
@@ -75,7 +75,7 @@ void Grid::SetMeasure(uint id, const wxColour color, uint8 type, float value)
 }
 
 
-void Grid::SetCellValue(int row, int col, float value, wxColor color)
+void Grid::SetCellValue(int row, int col, float value, const wxColour &color)
 {
     SetCellTextColour(row, col, color);
 
@@ -83,7 +83,7 @@ void Grid::SetCellValue(int row, int col, float value, wxColor color)
 }
 
 
-void Grid::SetCellValue(int row, int col, int value, wxColor color)
+void Grid::SetCellValue(int row, int col, int value, const wxColour &color)
 {
     SetCellTextColour(row, col, color);
 
