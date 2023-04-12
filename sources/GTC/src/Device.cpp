@@ -10,6 +10,7 @@
 #include "Hardware/InterCom.h"
 #include "Display/Display.h"
 #include "Hardware/Keyboard.h"
+#include "Hardware/Beeper.h"
 #include <cmath>
 
 
@@ -31,6 +32,8 @@ void Device::Init()
     HC12::Init();
 
     Keyboard::Init();
+
+    Beeper::Init();
 
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 }

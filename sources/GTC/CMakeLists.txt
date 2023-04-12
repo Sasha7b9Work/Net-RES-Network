@@ -40,11 +40,11 @@ file(GLOB HARDWARE                      src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS                src/Hardware/CMSIS/*.*)
 file(GLOB HARDWARE_CDC                  src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL                  src/Hardware/HAL/*.*)
-file(GLOB MENU                          src/Menu/*.*)
-file(GLOB MENU_PAGES                    src/Menu/Pages/*.*)
 file(GLOB HARDWARE_MODULES_BME280       src/Hardware/Modules/BME280/*.*)
 file(GLOB HARDWARE_MODULES_HC12         src/Hardware/Modules/HC12/*.*)
 file(GLOB HARDWARE_MODULES_ST7735       src/Hardware/Modules/ST7735/*.*)
+file(GLOB MENU                          src/Menu/*.*)
+file(GLOB MENU_PAGES                    src/Menu/Pages/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB UTILS_TEXT                    src/Utils/Text/*.*)
@@ -57,11 +57,11 @@ source_group(Hardware                   FILES ${HARDWARE})
 source_group(Hardware/CMSIS             FILES ${HARDWARE_CMSIS})
 source_group(Hardware/CDC               FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL               FILES ${HARDWARE_HAL})
-source_group(Menu                       FILES ${MENU})
-source_group(Menu/Pages                 FILES ${MENU_PAGES})
 source_group(Hardware/Modules/BME280    FILES ${HARDWARE_MODULES_BME280})
 source_group(Hardware/Modules/HC12      FILES ${HARDWARE_MODULES_HC12})
 source_group(Hardware/Modules/ST7735    FILES ${HARDWARE_MODULES_ST7735})
+source_group(Menu                       FILES ${MENU})
+source_group(Menu/Pages                 FILES ${MENU_PAGES})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Utils/Text                 FILES ${UTILS_TEXT})
@@ -81,11 +81,11 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_CMSIS}
             ${HARDWARE_CDC}
             ${HARDWARE_HAL}
-            ${MENU}
-            ${MENU_PAGES}
             ${HARDWARE_MODULES_BME280}
             ${HARDWARE_MODULES_HC12}
             ${HARDWARE_MODULES_ST7735}
+            ${MENU}
+            ${MENU_PAGES}
             ${SETTINGS} 
             ${UTILS}
             ${UTILS_TEXT}

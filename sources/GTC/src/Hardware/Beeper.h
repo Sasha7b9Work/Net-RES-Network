@@ -4,5 +4,5 @@
 
 namespace Beeper
 {
-
+    void Init();
 }
