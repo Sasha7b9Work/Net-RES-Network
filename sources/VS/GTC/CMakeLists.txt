@@ -25,26 +25,25 @@ if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
-    add_compile_options(/wd4005)
-    add_compile_options(/wd4100)
-    add_compile_options(/wd4255)
-    add_compile_options(/wd4365)
-    add_compile_options(/wd4464)
-    add_compile_options(/wd4548)
-    add_compile_options(/wd4514)
-    add_compile_options(/wd4623)
-    add_compile_options(/wd4625)
-    add_compile_options(/wd4626)
-    add_compile_options(/wd4774)
-    add_compile_options(/wd4820)
-    add_compile_options(/wd4996)
-    add_compile_options(/wd5026)
-    add_compile_options(/wd5027)
+    add_compile_options(/wd4100)    # 'xxx' : unreferenced formal parameter
+    add_compile_options(/wd4365)    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
+    add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
+    add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted
+    add_compile_options(/wd4625)    # 'derived class' : copy constructor was implicitly defined as deleted because
+                                    # a base class copy constructor is inaccessible or deleted
+    add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because
+                                    # a base class assignment operator is inaccessible or deleted
+    add_compile_options(/wd4774)    # 'string' : format string expected in argument number is not a string literal
+    add_compile_options(/wd4820)    # 'xxx' bytes padding added after construct 'member_name'
+    add_compile_options(/wd4996)    # deprecated
+    add_compile_options(/wd5026)    # 'type': move constructor was implicitly defined as deleted
+    add_compile_options(/wd5027)    # "type": оператор присваивания перемещения неявно определен как удаленный
     add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
                                     # function under -EHc.
-    add_compile_options(/wd5045)
-    add_compile_options(/wd5220)
-    add_compile_options(/wd26812)
+    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+    add_compile_options(/wd5220)    # 'xxx': a non-static data member with a volatile qualified type no longer implies that
+                                    # compiler generated copy/move constructors and copy/move assignment operators are not trivial
+                                    # add_compile_options(/wd26812)
 endif()
 
 file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
