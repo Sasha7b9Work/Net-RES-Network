@@ -168,7 +168,7 @@ template<int capacity>
 int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     Color::SetCurrent(color);
-    uint result = x;
+    uint result = (uint)x;
 
     char *text = buffer;
 
@@ -179,7 +179,7 @@ int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limit
         text++;
     }
 
-    return result + 1;
+    return (int)(result + 1);
 }
 
 

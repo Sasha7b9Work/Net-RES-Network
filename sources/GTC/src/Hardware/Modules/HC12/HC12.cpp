@@ -74,13 +74,13 @@ void HC12::Command(pchar command)
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
 
-    TimeMeterMS().WaitMS(80);
-
-    char *answer = recv_buffer.Data();
-    answer = answer;
-    
-    int num = recv_buffer.NumSymbols();
-    num = num;
+//    TimeMeterMS().WaitMS(80);
+//
+//    char *answer = recv_buffer.Data();
+//    answer = answer;
+//    
+//    int num = recv_buffer.NumSymbols();
+//    num = num;
 }
 
 
