@@ -23,13 +23,13 @@ void Keyboard::Init()
 {
     GPIO_InitTypeDef is =
     {
-        GPIO_PIN_1,
+        GPIO_PIN_8 | GPIO_PIN_9,
         GPIO_MODE_INPUT,
         GPIO_PULLUP,
         GPIO_SPEED_FREQ_MEDIUM
     };
 
-    HAL_GPIO_Init(GPIOA, &is);
+    HAL_GPIO_Init(GPIOB, &is);
 }
 
 

@@ -4,30 +4,30 @@
 #include "Menu/MenuItemsDefs.h"
 
 
-struct PageMain
+namespace PageMain
 {
-    static const Page * const self;
+    extern const Page * const self;
 };
 
 
-struct PageDisplay
+namespace PageDisplay
 {
-    static const Page * const self;
+    extern const Page * const self;
 
-    struct PageMeasures
+    namespace PageMeasures
     {
-        static const Page * const self;
+        extern const Page * const self;
     };
 };
 
 
-struct PageHC12
+namespace PageHC12
 {
-    static const Page * const self;
+    extern const Page * const self;
 };
 
 
-struct PageSystem
+namespace PageSystem
 {
-    static const Page * const self;
+    extern const Page * const self;
 };
