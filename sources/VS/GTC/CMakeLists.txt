@@ -48,6 +48,7 @@ if(WIN32)
 endif()
 
 file(GLOB LIBS_STM32F1          ../../common/_VS_LIBS/STM32f1/*.*)
+file(GLOB LIBS_STM32F1_INC      ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD             ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                   *.h *.cpp
                                 ../../GTC/src/defines.h
@@ -59,7 +60,6 @@ file(GLOB HARDWARE_CDC          ../../GTC/src/Hardware/CDC/*.*
                                               Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL          ../../GTC/src/Hardware/HAL/*.*
                                               Hardware/HAL/*.*)
-file(GLOB HARDWARE_I2C          ../../GTC/src/Hardware/I2C/*.*)
 file(GLOB HARDWARE_LAN                        Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                 Hardware/LAN/libnet/*.*)
 file(GLOB MENU                  ../../GTC/src/Menu/*.*)
@@ -74,6 +74,7 @@ file(GLOB UTILS                 ../../GTC/src/Utils/*.*)
 file(GLOB UTILS_TEXT            ../../GTC/src/Utils/Text/*.*)
 
 source_group(libs/STM32F1        FILES ${LIBS_STM32F1})
+source_group(libs/STM32F1/Inc    FILES ${LIBS_STM32F1_INC})
 source_group(libs/USBD           FILES ${LIBS_USBD})
 source_group(src                 FILES ${SRC})
 source_group(Display             FILES ${DISPLAY})
@@ -81,7 +82,6 @@ source_group(Display/Font        FILES ${DISPLAY_FONT})
 source_group(Hardware            FILES ${HARDWARE})
 source_group(Hardware/CDC        FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL        FILES ${HARDWARE_HAL})
-source_group(Hardware/I2C        FILES ${HARDWARE_I2C})
 source_group(Hardware/LAN        FILES ${HARDWARE_LAN})
 source_group(Hardware/LAN/libnet FILES ${HARDWARE_LAN_LIBNET})
 source_group(Menu                FILES ${MENU})
@@ -101,6 +101,7 @@ set_source_files_properties(../../GTC/src/Hardware/CDC/usbd_conf.c
 
 add_executable( ${PROJECT_NAME}
                 ${LIBS_STM32F1}
+                ${LIBS_STM32F1_INC}
                 ${LIBS_USBD}
                 ${SRC}
                 ${DISPLAY}
@@ -108,7 +109,6 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE}
                 ${HARDWARE_CDC}
                 ${HARDWARE_HAL}
-                ${HARDWARE_I2C}
                 ${HARDWARE_LAN}
                 ${HARDWARE_LAN_LIBNET}
                 ${MENU}
