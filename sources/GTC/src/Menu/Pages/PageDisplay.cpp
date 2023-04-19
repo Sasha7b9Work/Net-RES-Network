@@ -21,14 +21,12 @@ DEF_CHOICE_2(chIllumination,
     "Откл", "Вкл"
 )
 
-#ifdef TYPE_1
 DEF_CHOICE_2(chVelocity,
     "Скорость",
     *PageDisplay::PageMeasures::self,
     gset.display.show_measure[TypeMeasure::Velocity],
     "Откл", "Вкл"
 )
-#endif
 
 DEF_CHOICE_2(chTemperature,
     "Температура",
@@ -55,7 +53,6 @@ DEF_BUTTN( bCloseMeasures,
     CloseMeasures
 )
 
-#ifdef TYPE_1
 DEF_PAGE_6( pageMeasures, //-V1027
     "ИЗМЕРЕНИЯ",
     *PageDisplay::self,
@@ -66,19 +63,16 @@ DEF_PAGE_6( pageMeasures, //-V1027
     chVelocity,
     bCloseMeasures
 )
-#endif
 
-#ifdef TYPE_2
-DEF_PAGE_5(pageMeasures, //-V1027
-    "ИЗМЕРЕНИЯ",
-    *PageDisplay::self,
-    chPressure,
-    chIllumination,
-    chTemperature,
-    chHumidity,
-    bCloseMeasures
-)
-#endif
+//DEF_PAGE_5(pageMeasures, //-V1027
+//    "ИЗМЕРЕНИЯ",
+//    *PageDisplay::self,
+//    chPressure,
+//    chIllumination,
+//    chTemperature,
+//    chHumidity,
+//    bCloseMeasures
+//)
 
 
 void ClosePageDisplay()

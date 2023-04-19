@@ -22,22 +22,6 @@ typedef unsigned char uchar;
 #endif
 
 
-#define TYPE_1          // Присутствуют все датчики
-//#define TYPE_2          // Отсутствует датчик скорости воздуха
-
-#ifdef TYPE_1
-    #ifdef TYPE_2
-        static_assert(0, "Нельзя оба типа определять");
-    #endif
-#endif
-
-#ifndef TYPE_1
-    #ifndef TYPE_2
-        static_assert(0, "Определите тип - 1 или 2");
-    #endif
-#endif
-
-
 union BitSet32
 {
     uint   word;

@@ -54,14 +54,9 @@ namespace Display
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Illumination),
         Measure(TypeMeasure::Temperature),
-        Measure(TypeMeasure::Humidity)
-#ifdef TYPE_1
-        ,Measure(TypeMeasure::Velocity),
-#endif
-        Measure(TypeMeasure::DewPoint),
-        Measure(TypeMeasure::AccelerateX),
-        Measure(TypeMeasure::AccelerateY),
-        Measure(TypeMeasure::AccelerateZ)
+        Measure(TypeMeasure::Humidity),
+        Measure(TypeMeasure::Velocity),
+        Measure(TypeMeasure::DewPoint)
     };
 
     static void DrawMeasures();
@@ -70,8 +65,6 @@ namespace Display
     static void DrawBigMeasure();
 
     static void DrawTime();
-
-    static void DrawAcceleration();
 
     namespace Buffer
     {
@@ -355,8 +348,6 @@ void Display::DrawMeasures()
     }
 
     DrawTime();
-
-    DrawAcceleration();
 }
 
 
@@ -378,23 +369,6 @@ void Display::DrawTime()
 }
 
 
-void Display::DrawAcceleration()
-{
-    int x = 65;
-    int dX = 33;
-
-    String<>("%3.2f", measures[TypeMeasure::AccelerateX].value).Draw(x, 105);
-    x += dX;
-
-    String<>("%3.2f", measures[TypeMeasure::AccelerateY].value).Draw(x, 105);
-    x += dX;
-
-    String<>("%3.2f", measures[TypeMeasure::AccelerateZ].value).Draw(x, 105);
-
-    ST7735::WriteBuffer(0, 85, 160, 32);
-}
-
-
 void Display::DrawBigMeasure()
 {
     Font::Set(TypeFont::_8);
@@ -406,10 +380,8 @@ void Display::DrawBigMeasure()
         30,
         10,
         12,
-        28
-#ifdef TYPE_1
-        , 35
-#endif
+        28,
+        35
     };
 
     Measure &measure = measures[gset.display.typeDisplaydInfo.value];
@@ -431,10 +403,8 @@ String<> Display::Measure::Name()
         "ÄÀÂËÅÍÈÅ",
         "ÎÑÂÅÙÅÍÍÎÑÒÜ",
         "ÒÅÌÏÅĞÀÒÓĞÀ",
-        "ÂËÀÆÍÎÑÒÜ"
-#ifdef TYPE_1
-        , "ÑÊÎĞÎÑÒÜ",
-#endif
+        "ÂËÀÆÍÎÑÒÜ",
+        "ÑÊÎĞÎÑÒÜ",
         "ÒÎ×ÊÀ     ĞÎÑÛ"
     };
 
@@ -448,10 +418,8 @@ String<> Display::Measure::Units()
         "ãÏà",
         "ëê",
         "¨Ñ",
-        "%%"
-#ifdef TYPE_1
-        , "ì/ñ",
-#endif
+        "%%",
+        "ì/ñ",
         "¨Ñ"
     };
 

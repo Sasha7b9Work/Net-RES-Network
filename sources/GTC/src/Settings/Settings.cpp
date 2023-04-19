@@ -7,11 +7,7 @@ Settings gset =
 {
     // Display
     {
-        {1, 1, 1, 1
-#ifdef TYPE_1
-        , 1
-#endif
-        },
+        {1, 1, 1, 1, 1},
         { TypeDisplayedInformation::AllMeasures }
     },
     // System

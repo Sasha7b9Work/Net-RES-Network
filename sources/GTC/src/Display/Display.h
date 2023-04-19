@@ -12,13 +12,8 @@ struct TypeMeasure
         Illumination,       // Освещённость
         Temperature,        // Температура
         Humidity,           // Влажность
-#ifdef TYPE_1
         Velocity,           // Скорость
-#endif
         DewPoint,           // Точка росы
-        AccelerateX,
-        AccelerateY,
-        AccelerateZ,
         Count
     };
 };

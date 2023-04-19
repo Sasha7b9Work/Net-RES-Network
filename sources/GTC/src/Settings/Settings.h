@@ -11,9 +11,7 @@ struct TypeDisplayedInformation
         MeasureIllumination,
         MeasureTemperature,
         MeasureHumidity,
-#ifdef TYPE_1
         MeasureVelocity,
-#endif
         AllMeasures,
         Menu,
         Count
