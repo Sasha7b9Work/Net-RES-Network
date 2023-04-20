@@ -7,7 +7,7 @@ Settings gset =
 {
     // Display
     {
-        {1, 1, 1, 1, 1},
+        {1, 1, 1, 1},
         { TypeDisplayedInformation::AllMeasures }
     },
     // System

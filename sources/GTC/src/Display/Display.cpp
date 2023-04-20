@@ -52,7 +52,6 @@ namespace Display
     static Measure measures[TypeMeasure::Count] =
     {
         Measure(TypeMeasure::Pressure),
-        Measure(TypeMeasure::Illumination),
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Humidity),
         Measure(TypeMeasure::DewPoint)
@@ -377,7 +376,6 @@ void Display::DrawBigMeasure()
     static const int x[TypeMeasure::Count] =
     {
         30,
-        10,
         12,
         28,
         35
@@ -400,7 +398,6 @@ String<> Display::Measure::Name()
     static const pchar names[TypeMeasure::Count] =
     {
         "ÄÀÂËÅÍÈÅ",
-        "ÎÑÂÅÙÅÍÍÎÑÒÜ",
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÂËÀÆÍÎÑÒÜ",
         "ÒÎ×ÊÀ     ĞÎÑÛ"
@@ -414,7 +411,6 @@ String<> Display::Measure::Units()
     static const pchar units[TypeMeasure::Count] =
     {
         "ãÏà",
-        "ëê",
         "¨Ñ",
         "%%",
         "¨Ñ"

@@ -14,13 +14,6 @@ DEF_CHOICE_2( chPressure,
     "Откл", "Вкл"
 )
 
-DEF_CHOICE_2(chIllumination,
-    "Освещённость",
-    *PageDisplay::PageMeasures::self,
-    gset.display.show_measure[TypeMeasure::Illumination],
-    "Откл", "Вкл"
-)
-
 DEF_CHOICE_2(chTemperature,
     "Температура",
     *PageDisplay::PageMeasures::self,
@@ -46,11 +39,10 @@ DEF_BUTTN( bCloseMeasures,
     CloseMeasures
 )
 
-DEF_PAGE_5(pageMeasures, //-V1027
+DEF_PAGE_4(pageMeasures, //-V1027
     "ИЗМЕРЕНИЯ",
     *PageDisplay::self,
     chPressure,
-    chIllumination,
     chTemperature,
     chHumidity,
     bCloseMeasures

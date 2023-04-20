@@ -9,7 +9,6 @@ struct TypeMeasure
     enum E
     {
         Pressure,           // Давление
-        Illumination,       // Освещённость
         Temperature,        // Температура
         Humidity,           // Влажность
         DewPoint,           // Точка росы
