@@ -152,66 +152,66 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>604</LineNumber>
+          <LineNumber>35</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134258134</Address>
+          <Address>134254080</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Modules\BME280\bme280_driver.c</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_RTC.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Hardware/Modules/BME280/bme280_driver.c\604</Expression>
+          <Expression>\\Device\src/Hardware/HAL/HAL_RTC.cpp\35</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>82</LineNumber>
+          <LineNumber>42</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134250708</Address>
+          <Address>134254102</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Modules\BME280\BME280.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_RTC.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Hardware/Modules/BME280/BME280.cpp\82</Expression>
+          <Expression>\\Device\src/Hardware/HAL/HAL_RTC.cpp\42</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>600</LineNumber>
+          <LineNumber>63</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134258118</Address>
+          <Address>134254144</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Modules\BME280\bme280_driver.c</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_RTC.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Hardware/Modules/BME280/bme280_driver.c\600</Expression>
+          <Expression>\\Device\src/Hardware/HAL/HAL_RTC.cpp\63</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>51</LineNumber>
+          <LineNumber>52</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134254304</Address>
+          <Address>134254122</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_I2C.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_RTC.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Hardware/HAL/HAL_I2C.cpp\51</Expression>
+          <Expression>\\Device\src/Hardware/HAL/HAL_RTC.cpp\52</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1115,7 +1115,7 @@
 
   <Group>
     <GroupName>Hardware/HAL</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -26,10 +26,10 @@ void HAL_RTC::Init()
     /*##-1- Configue LSI as RTC clock soucre ###################################*/
     HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
 
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
     RCC_OscInitStruct.LSEState = RCC_LSE_OFF;
+    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
         HAL::Delay(100);

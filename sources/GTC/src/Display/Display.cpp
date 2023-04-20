@@ -364,6 +364,8 @@ void Display::DrawTime()
     String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(5, 85, Color::WHITE);
 
     String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105);
+
+    ST7735::WriteBuffer(0, y, width, height);
 }
 
 
