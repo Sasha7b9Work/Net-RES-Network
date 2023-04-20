@@ -55,7 +55,6 @@ namespace Display
         Measure(TypeMeasure::Illumination),
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Humidity),
-        Measure(TypeMeasure::Velocity),
         Measure(TypeMeasure::DewPoint)
     };
 
@@ -404,7 +403,6 @@ String<> Display::Measure::Name()
         "ÎÑÂÅÙÅÍÍÎÑÒÜ",
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÂËÀÆÍÎÑÒÜ",
-        "ÑÊÎĞÎÑÒÜ",
         "ÒÎ×ÊÀ     ĞÎÑÛ"
     };
 
@@ -419,7 +417,6 @@ String<> Display::Measure::Units()
         "ëê",
         "¨Ñ",
         "%%",
-        "ì/ñ",
         "¨Ñ"
     };
 

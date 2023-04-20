@@ -12,7 +12,6 @@ struct TypeMeasure
         Illumination,       // Освещённость
         Temperature,        // Температура
         Humidity,           // Влажность
-        Velocity,           // Скорость
         DewPoint,           // Точка росы
         Count
     };
