@@ -29,14 +29,14 @@ void HAL_RTC::Init()
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
     RCC_OscInitStruct.LSEState = RCC_LSE_ON;
-    RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
+    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
         HAL::Delay(100);
     }
 
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
-    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
         HAL::Delay(100);
@@ -70,19 +70,19 @@ void HAL_RTC::Init()
     /*##-4- Write 'wakeup timer enabled' tag in RTC Backup data Register 1 #######*/
     HAL_RTCEx_BKUPWrite(&handleRTC, RTC_BKP_DR1, WAKEUP_TIMER_ENABLE);
 
-    RTC_TimeTypeDef time;
-    time.Hours = 8;
-    time.Minutes = 15;
-    time.Seconds = 0;
-
-    RTC_DateTypeDef date;
-    date.Date = 1;
-    date.Month = 2;
-    date.Year = 23;
-
-    HAL_RTC_SetTime(&handleRTC, &time, RTC_FORMAT_BIN);
-
-    HAL_RTC_SetDate(&handleRTC, &date, RTC_FORMAT_BIN);
+//    RTC_TimeTypeDef time;
+//    time.Hours = 8;
+//    time.Minutes = 15;
+//    time.Seconds = 0;
+//
+//    RTC_DateTypeDef date;
+//    date.Date = 1;
+//    date.Month = 2;
+//    date.Year = 23;
+//
+//    HAL_RTC_SetTime(&handleRTC, &time, RTC_FORMAT_BIN);
+//
+//    HAL_RTC_SetDate(&handleRTC, &date, RTC_FORMAT_BIN);
 }
 
 
