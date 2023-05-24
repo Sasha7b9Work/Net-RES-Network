@@ -186,7 +186,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     measure.time = TIME_MS;
     measure.value = value;
 
-    measure.current.SetFormat("%f", value);
+    measure.current.SetFormat("%.1f", value);
     measure.current[6] = '\0';
 }
 
