@@ -289,6 +289,8 @@ void Display::Update()
 
             DrawMeasures();
 
+            DrawTime();
+
             if (need_redraw)
             {
                 EndScene();
@@ -320,12 +322,13 @@ void Display::DrawMeasures()
     const int y0 = d_lines;
     const int dY = d_lines + Font::Height();
 
-    const int NUM_MEASURES = 3;
+    const int NUM_MEASURES = 4;
 
     static const TypeMeasure::E types[NUM_MEASURES] =
     {
         TypeMeasure::Temperature,
         TypeMeasure::Humidity,
+        TypeMeasure::Pressure,
         TypeMeasure::DewPoint
     };
 
@@ -344,26 +347,24 @@ void Display::DrawMeasures()
             measures[types[i]].Draw(93, y);
         }
     }
-
-    DrawTime();
 }
 
 
 void Display::DrawTime()
 {
     int width = 160;
-    int height = 32;
-    int y = 85;
+    int height = 16;
+    int y = 105;
 
-    Font::Set(TypeFont::_8);
+    Font::Set(TypeFont::_12_10);
     
-    Rectangle(width, height).Fill(10, y - 1, Color::BLACK);
+    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
 
     PackedTime time = HAL_RTC::GetPackedTime();
 
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(5, 85, Color::WHITE);
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
 
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105);
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(80, 105);
 
     ST7735::WriteBuffer(0, y, width, height);
 }
