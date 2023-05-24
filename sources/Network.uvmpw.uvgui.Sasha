@@ -1784,9 +1784,9 @@
       <ActiveTab>0</ActiveTab>
       <Doc>
         <Name>&lt;2&gt;.\src\Hardware\HAL\HAL_RTC.cpp</Name>
-        <ColumnNumber>2</ColumnNumber>
+        <ColumnNumber>1</ColumnNumber>
         <TopLine>13</TopLine>
-        <CurrentLine>66</CurrentLine>
+        <CurrentLine>45</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>

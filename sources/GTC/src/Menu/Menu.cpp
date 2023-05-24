@@ -16,7 +16,7 @@ void Menu::ShortPress(Key::E)
 
         if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
         {
-            gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasurePressure;
+            gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasureTemperature;
         }
 
     }
