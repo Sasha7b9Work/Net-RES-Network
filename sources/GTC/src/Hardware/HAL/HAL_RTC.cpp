@@ -30,63 +30,22 @@ void HAL_RTC::Init()
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
     RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-    {
-        HAL::Delay(100);
-    }
+    HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
     PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-    {
-        HAL::Delay(100);
-    }
+    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+
 
     /*##-2- Enable RTC peripheral Clocks #######################################*/
     /* Enable RTC Clock */
     __HAL_RCC_RTC_ENABLE();
 
-    if (HAL_RTC_Init(&handleRTC) != HAL_OK)
-    {
-        /* Initialization Error */
-        HAL::Delay(100);
-    }
-
-    /*##-2- Check if data stored in BackUp register1: Wakeup timer enable #######*/
-    /* Read the Back Up Register 1 Data */
-    if (HAL_RTCEx_BKUPRead(&handleRTC, RTC_BKP_DR1) == WAKEUP_TIMER_ENABLE)
-    {
-        /* if the wakeup timer is enabled then desable it to disable the wakeup timer interrupt */
-//        if (HAL_RTCEx_DeactivateSecond(&handleRTC) != HAL_OK)
-        {
-            /* Initialization Error */
-            HAL::Delay(100);
-        }
-    }
-
-    /*##-3- Configure the RTC Wakeup peripheral #################################*/
-//    HAL_RTCEx_SetSecond_IT(&handleRTC);
-
-    /*##-4- Write 'wakeup timer enabled' tag in RTC Backup data Register 1 #######*/
-    HAL_RTCEx_BKUPWrite(&handleRTC, RTC_BKP_DR1, WAKEUP_TIMER_ENABLE);
-
-//    RTC_TimeTypeDef time;
-//    time.Hours = 8;
-//    time.Minutes = 15;
-//    time.Seconds = 0;
-//
-//    RTC_DateTypeDef date;
-//    date.Date = 1;
-//    date.Month = 2;
-//    date.Year = 23;
-//
-//    HAL_RTC_SetTime(&handleRTC, &time, RTC_FORMAT_BIN);
-//
-//    HAL_RTC_SetDate(&handleRTC, &date, RTC_FORMAT_BIN);
+    HAL_RTC_Init(&handleRTC);
 }
 
 
-PackedTime HAL_RTC::GetPackedTime()
+PackedTime HAL_RTC::GetTime()
 {
     RTC_TimeTypeDef time;
 
@@ -99,6 +58,26 @@ PackedTime HAL_RTC::GetPackedTime()
     PackedTime result(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, (uint)(2000 + date.Year));
 
     return result;
+}
+
+
+void HAL_RTC::SetTime(const PackedTime &_time)
+{
+    RTC_TimeTypeDef time;
+
+    time.Hours = _time.hours;
+    time.Minutes = _time.minutes;
+    time.Seconds = _time.seconds;
+
+    HAL_RTC_SetTime(&handleRTC, &time, RTC_FORMAT_BIN);
+
+    RTC_DateTypeDef date;
+
+    date.Year = (uint8)(_time.year - 2000);
+    date.Month = _time.month;
+    date.Date = _time.day;
+
+    HAL_RTC_SetDate(&handleRTC, &date, RTC_FORMAT_BIN);
 }
 
 

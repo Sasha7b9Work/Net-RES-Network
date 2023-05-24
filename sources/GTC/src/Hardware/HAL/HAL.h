@@ -48,12 +48,6 @@ namespace HAL
 }
 
 
-namespace HAL_FLASH
-{
-
-}
-
-
 namespace HAL_I2C1
 {
     void Init();
@@ -70,7 +64,9 @@ namespace HAL_RTC
 {
     void Init();
 
-    PackedTime GetPackedTime();
+    PackedTime GetTime();
+
+    void SetTime(const PackedTime &);
 }
 
 

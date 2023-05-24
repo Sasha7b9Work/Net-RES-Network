@@ -360,7 +360,7 @@ void Display::DrawTime()
     
     Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
 
-    PackedTime time = HAL_RTC::GetPackedTime();
+    PackedTime time = HAL_RTC::GetTime();
 
     String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
 
