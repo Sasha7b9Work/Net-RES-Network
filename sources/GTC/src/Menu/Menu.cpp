@@ -44,6 +44,15 @@ void Menu::ShortPress(Key::E key)
 
 void Menu::LongPress(Key::E)
 {
+    if (!Opened())
+    {
+
+    }
+    else
+    {
+        Item::Opened()->LongPressure();
+    }
+
     Display::need_redraw = true;
 }
 
