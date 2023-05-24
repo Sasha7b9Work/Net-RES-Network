@@ -116,7 +116,7 @@ void ST7735::Init()
     SendData8(0x05);        // 16 bit / pixel
 
     SendCommand(0x36);      // MADCTL Memory Data Access Control
-    SendData8(0xA0);
+    SendData8(BINARY_U8(01100000));
 
     SendCommand(0xB1);      // FRMCTR1 Frame rate
     SendData16(0x000F);
