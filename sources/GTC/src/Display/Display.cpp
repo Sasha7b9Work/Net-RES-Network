@@ -199,44 +199,9 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
 
     Rectangle(width_zone, height_zone).Fill(x0, y_zone, Color::BLACK);
 
-    /*
-    if (position >= current.Size())
-    {
-    */
-
     Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::WHITE);
 
-//    current.Draw(x0, y0, Color::GREEN);
-
-    /*
-    }
-    else
-    {
-        int x = x0;
-
-        for (int i = 0; i < position; i++)
-        {
-            x = Char(current[i]).Draw(x, y0, size, Color::GREEN) + size;
-        }
-
-        int x_rect = x;
-
-        for (int i = position; i < old.Size(); i++)
-        {
-            x = Char(old[i]).Draw(x, y0, size, Color::GREEN) + size;
-        }
-
-        if (TIME_MS > time + 25)
-        {
-            position++;
-            time = TIME_MS;
-        }
-
-        Rectangle(5 * size, 7 * size).Fill(x_rect, y0 + 1, Color::WHITE);
-    }
-    */
-
-    ST7735::WriteBuffer(x0, y_zone, width_zone, height_zone);
+//    ST7735::WriteBuffer(x0, y_zone, width_zone, height_zone);
 }
 
 
