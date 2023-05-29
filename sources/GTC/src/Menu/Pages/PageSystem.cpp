@@ -7,7 +7,9 @@
 extern const DPage pageMain;
 
 
-DEF_TIMEITEM(tTime, *PageSystem::self)
+static int cur_field = 0;
+
+DEF_TIMEITEM(tTime, *PageSystem::self, cur_field)
 
 
 DEF_GOVERNOR(gSerialNumber,

@@ -8,8 +8,8 @@
 #define DEF_GOVERNOR(name, title, keeper, min, max, value)                                                  \
     static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, min, max, &(value) };
 
-#define DEF_TIMEITEM(name, keeper)                                                                          \
-    static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, 0};
+#define DEF_TIMEITEM(name, keeper, value)                                                                   \
+    static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, &(value)};
 
 #define DEF_CHOICE_2(name, title, keeper, cell, name1, name2)                                               \
     static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, &cell, 2, {name1, name2}};

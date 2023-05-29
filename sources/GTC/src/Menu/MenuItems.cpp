@@ -10,6 +10,7 @@
 #include "Utils/Math.h"
 #include "Hardware/HAL/HAL.h"
 #include "Display/Font/Font.h"
+#include "Utils/Math.h"
 
 
 Item Item::Empty;
@@ -251,6 +252,8 @@ void TimeItem::DrawOpened(int, int, bool) const
 {
     Display::BeginScene(Color::BLACK);
 
+    const DTimeItem *data = ToDTimeItem();
+
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
 
     int x0 = 20;
@@ -264,7 +267,18 @@ void TimeItem::DrawOpened(int, int, bool) const
 
     for (int i = 0; i < 6; i++)
     {
-        Font::Text::DrawBig(x0 + dX * (i % 3), y0 + (i < 3 ? 0 : dY), 2, String<>("%02d", values[i]).c_str());
+        Color::E color = Color::WHITE;
+
+        int x = x0 + dX * (i % 3);
+        int y = y0 + (i < 3 ? 0 : dY);
+
+        if (i == *data->cur_field)
+        {
+            Rectangle(29, 27).Fill(x - 2, y - 2, Color::WHITE);
+            color = Color::BLACK;
+        }
+
+        Font::Text::DrawBig(x, y, 2, String<>("%02d", values[i]).c_str(), color);
     }
 
     int x = 105;
@@ -531,5 +545,10 @@ void TimeItem::LongPressure() const
 
 void TimeItem::ShortPressure() const
 {
+    if (IsOpened())
+    {
+        const DTimeItem *data = ToDTimeItem();
 
+        Math::CircleIncrease<int>(data->cur_field, 0, 6);
+    }
 }
