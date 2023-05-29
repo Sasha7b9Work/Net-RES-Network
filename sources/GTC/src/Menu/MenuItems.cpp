@@ -8,6 +8,7 @@
 #include "Utils/Text/String.h"
 #include "Utils/Values.h"
 #include "Utils/Math.h"
+#include "Hardware/HAL/HAL.h"
 
 
 Item Item::Empty;
@@ -185,9 +186,17 @@ void Choice::DrawClosed(int x, int y, bool active) const
 }
 
 
-void TimeItem::DrawClosed(int x, int y, bool active) const
+void TimeItem::DrawClosed(int x, int y, bool) const
 {
+    PackedTime time = HAL_RTC::GetTime();
 
+    y += 4;
+
+    x += 15;
+
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
+
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(x + 70, y);
 }
 
 
