@@ -8,9 +8,9 @@ struct TypeMeasure
 {
     enum E
     {
-        Pressure,           // Давление
         Temperature,        // Температура
         Humidity,           // Влажность
+        Pressure,           // Давление
         DewPoint,           // Точка росы
         Count
     };
