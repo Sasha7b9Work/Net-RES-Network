@@ -288,12 +288,21 @@ void TimeItem::DrawOpened(int, int, bool) const
 
     Rectangle rect(size, size);
     rect.Draw(x, y);
-    String<>("П").Draw(x + dT + 3, y + dT);
+    String<>("П").Draw(x + dT + 3, y + dT, Color::WHITE);
     x += 27;
     rect.Draw(x, y);
     String<>("В").Draw(x + dT + 3, y + dT);
 
-    String<>("Выход").Draw(25, y + dT);
+
+    Color::E color = Color::WHITE;
+
+    if (*data->cur_field == 6)
+    {
+        Rectangle(38, 18).Fill(23, y + dT - 2, Color::WHITE);
+        color = Color::BLACK;
+    }
+
+    String<>("Выход").Draw(25, y + dT, color);
 }
 
 
