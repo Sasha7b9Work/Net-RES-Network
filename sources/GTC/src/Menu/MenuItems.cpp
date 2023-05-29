@@ -489,7 +489,7 @@ void TimeItem::DoubleClick() const
 
 void TimeItem::LongPressure() const
 {
-    if (Item::Opened() == this)
+    if (IsOpened())
     {
 
     }

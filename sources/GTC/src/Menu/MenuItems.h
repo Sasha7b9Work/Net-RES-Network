@@ -235,6 +235,9 @@ private:
 struct DTimeItem
 {
     COMMON_PART_ITEM
+
+    int cur_field;          // Область, в которой находится курсор
+                            // [0...5] <-> [часы ... год]
 };
 
 
