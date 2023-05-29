@@ -11,6 +11,7 @@ struct TypeItem
         Choice,         // Выбор из нескольких значений
         Button,         // Кнопка - по нажатию что-то происходит
         Governor,       // Можно изменять значение в некоторых пределах
+        Time,
         Count
     };
 };
@@ -20,6 +21,7 @@ struct Page;
 struct Choice;
 struct Button;
 struct Governor;
+struct TimeItem;
 
 
 #define COMMON_PART_ITEM    TypeItem::E type;      \
@@ -61,6 +63,7 @@ struct Item
     bool IsChoice() const   { return (ToDItem()->type == TypeItem::Choice); }
     bool IsButton() const   { return (ToDItem()->type == TypeItem::Button); }
     bool IsGovernor() const { return (ToDItem()->type == TypeItem::Governor); }
+    bool IsTimeItem() const { return (ToDItem()->type == TypeItem::Time); }
 
     const DItem *ToDItem() const { return (DItem *)this; }
 
@@ -68,6 +71,7 @@ struct Item
     const Choice *ToChoice() const { return (const Choice *)this; }
     const Button *ToButton() const { return (const Button *)this; }
     const Governor *ToGovernor() const { return (const Governor *)this; }
+    const TimeItem *ToTimeItem() const { return (const TimeItem *)this; }
 
     static Item Empty;
 
@@ -142,6 +146,7 @@ struct DChoice
 struct Choice : public Item
 {
     void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
 
     void ShortPressure() const;
     void LongPressure() const;
@@ -173,6 +178,7 @@ struct Button : public Item
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
 
     const DButton *ToDButton() const { return (DButton *)this; }
 };
@@ -220,4 +226,28 @@ private:
     };
 
     static ActiveControl::E active_control;
+};
+
+
+//-------------------------------------------------------------------------------------------------
+
+
+struct DTimeItem
+{
+    COMMON_PART_ITEM
+};
+
+
+struct TimeItem : public Item
+{
+    void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
+
+    void ShortPressure() const;
+    void LongPressure() const;
+    void DoubleClick() const;
+
+    const DTimeItem *ToDTimeItem() const { return (DTimeItem *)this; }
+
+private:
 };

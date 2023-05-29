@@ -73,13 +73,14 @@ bool Item::IsOpened() const
 
 void Item::DrawOpened(int x, int y, bool active) const
 {
-    if (IsPage())
+    switch (ToDItem()->type)
     {
-        ToPage()->DrawOpened(x, y, active);
-    }
-    else if (IsGovernor())
-    {
-        ToGovernor()->DrawOpened(x, y, active);
+    case TypeItem::Page:        ToPage()->DrawOpened(x, y, active);     break;
+    case TypeItem::Choice:      ToChoice()->DrawOpened(x, y, active);   break;
+    case TypeItem::Button:      ToButton()->DrawOpened(x, y, active);   break;
+    case TypeItem::Governor:    ToGovernor()->DrawOpened(x, y, active); break;
+    case TypeItem::Time:        ToTimeItem()->DrawOpened(x, y, active); break;
+    case TypeItem::Count:   break;
     }
 }
 
@@ -102,21 +103,14 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
 
-    if (IsPage())
+    switch (ToDItem()->type)
     {
-        ToPage()->DrawClosed(x, y, active);
-    }
-    else if (IsChoice())
-    {
-        ToChoice()->DrawClosed(x, y, active);
-    }
-    else if (IsButton())
-    {
-        ToButton()->DrawClosed(x, y, active);
-    }
-    else if (IsGovernor())
-    {
-        ToGovernor()->DrawClosed(x, y, active);
+    case TypeItem::Page:        ToPage()->DrawClosed(x, y, active);     break;
+    case TypeItem::Choice:      ToChoice()->DrawClosed(x, y, active);   break;
+    case TypeItem::Button:      ToButton()->DrawClosed(x, y, active);   break;
+    case TypeItem::Governor:    ToGovernor()->DrawClosed(x, y, active); break;
+    case TypeItem::Time:        ToTimeItem()->DrawClosed(x, y, active); break;
+    case TypeItem::Count:               break;
     }
 }
 
@@ -177,6 +171,12 @@ pchar Choice::CurrentName() const
 }
 
 
+void Choice::DrawOpened(int, int, bool) const
+{
+
+}
+
+
 void Choice::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
@@ -185,9 +185,21 @@ void Choice::DrawClosed(int x, int y, bool active) const
 }
 
 
+void TimeItem::DrawClosed(int x, int y, bool active) const
+{
+
+}
+
+
 void Button::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
+}
+
+
+void Button::DrawOpened(int, int, bool) const
+{
+
 }
 
 
@@ -222,6 +234,14 @@ void Governor::DrawOpened(int x, int y, bool active) const
     DrawControls(x, y);
 
     Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
+}
+
+
+void TimeItem::DrawOpened(int, int, bool) const
+{
+    Display::BeginScene(Color::BLACK);
+
+    Rectangle(Display::WIDTH, Display::HEIGHT).Draw(0, 0, Color::WHITE);
 }
 
 
@@ -376,6 +396,7 @@ void Item::ShortPressure() const
     case TypeItem::Choice:      ToChoice()->ShortPressure();    break;
     case TypeItem::Button:      ToButton()->ShortPressure();    break;
     case TypeItem::Governor:    ToGovernor()->ShortPressure();  break;
+    case TypeItem::Time:        ToTimeItem()->ShortPressure();  break;
     case TypeItem::Count:                                       break;
     }
 }
@@ -389,6 +410,7 @@ void Item::LongPressure() const
     case TypeItem::Choice:      ToChoice()->LongPressure();     break;
     case TypeItem::Button:      ToButton()->LongPressure();     break;
     case TypeItem::Governor:    ToGovernor()->LongPressure();   break;
+    case TypeItem::Time:        ToTimeItem()->LongPressure();   break;
     case TypeItem::Count:                                       break;
     }
 }
@@ -402,6 +424,7 @@ void Item::DoubleClick() const
     case TypeItem::Choice:      ToChoice()->DoubleClick();      break;
     case TypeItem::Button:      ToButton()->DoubleClick();      break;
     case TypeItem::Governor:    ToGovernor()->DoubleClick();    break;
+    case TypeItem::Time:        ToTimeItem()->DoubleClick();    break;
     case TypeItem::Count:                                       break;
     }
 }
@@ -449,6 +472,24 @@ void Governor::LongPressure() const
 
 
 void Governor::DoubleClick() const
+{
+
+}
+
+
+void TimeItem::DoubleClick() const
+{
+
+}
+
+
+void TimeItem::LongPressure() const
+{
+
+}
+
+
+void TimeItem::ShortPressure() const
 {
 
 }
