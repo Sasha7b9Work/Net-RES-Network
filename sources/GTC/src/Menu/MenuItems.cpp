@@ -5,10 +5,11 @@
 #include "Display/Display.h"
 #include "Utils/Text/String.h"
 #include "Menu/Menu.h"
-#include "Utils/Text/String.h"
+#include "Utils/Text/Text.h"
 #include "Utils/Values.h"
 #include "Utils/Math.h"
 #include "Hardware/HAL/HAL.h"
+#include "Display/Font/Font.h"
 
 
 Item Item::Empty;
@@ -186,20 +187,6 @@ void Choice::DrawClosed(int x, int y, bool active) const
 }
 
 
-void TimeItem::DrawClosed(int x, int y, bool) const
-{
-    PackedTime time = HAL_RTC::GetTime();
-
-    y += 4;
-
-    x += 15;
-
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
-
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(x + 70, y);
-}
-
-
 void Button::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
@@ -246,11 +233,53 @@ void Governor::DrawOpened(int x, int y, bool active) const
 }
 
 
+void TimeItem::DrawClosed(int x, int y, bool) const
+{
+    PackedTime time = HAL_RTC::GetTime();
+
+    y += 4;
+
+    x += 15;
+
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
+
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(x + 70, y);
+}
+
+
 void TimeItem::DrawOpened(int, int, bool) const
 {
     Display::BeginScene(Color::BLACK);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
+
+    int x0 = 20;
+    int y0 = 20;
+    int dX = 48;
+    int dY = 40;
+
+    PackedTime time = HAL_RTC::GetTime();
+
+    uint values[6] = { time.hours, time.minutes, time.seconds, time.day, time.month, time.year - 2000 };
+
+    for (int i = 0; i < 6; i++)
+    {
+        Font::Text::DrawBig(x0 + dX * (i % 3), y0 + (i < 3 ? 0 : dY), 2, String<>("%02d", values[i]).c_str());
+    }
+
+    int x = 105;
+    int y = 101;
+    int size = 18;
+    int dT = 3;
+
+    Rectangle rect(size, size);
+    rect.Draw(x, y);
+    String<>("П").Draw(x + dT + 3, y + dT);
+    x += 27;
+    rect.Draw(x, y);
+    String<>("В").Draw(x + dT + 3, y + dT);
+
+    String<>("Выход").Draw(25, y + dT);
 }
 
 
