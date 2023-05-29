@@ -7,6 +7,9 @@
 extern const DPage pageMain;
 
 
+DEF_TIMEITEM(tTime, *PageSystem::self)
+
+
 DEF_GOVERNOR(gSerialNumber,
     "я/м",
     *PageSystem::self,
@@ -28,9 +31,10 @@ DEF_BUTTN(bClosePageSystem,
 );
 
 
-DEF_PAGE_2(pageSystem, //-V1027
+DEF_PAGE_3(pageSystem, //-V1027
     "яхярелю",
     pageMain,
+    tTime,
     gSerialNumber,
     bClosePageSystem
 )
