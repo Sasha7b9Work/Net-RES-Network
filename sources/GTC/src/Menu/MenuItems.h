@@ -1,6 +1,7 @@
 // 2022/05/05 12:27:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Display/Display.h"
+#include "Hardware/Keyboard.h"
 
 
 struct TypeItem
@@ -46,7 +47,7 @@ struct Item
     void DrawOpened(int x, int y, bool active) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -102,7 +103,7 @@ struct Page : public Item
     void DrawOpened(int x, int y, bool acitve) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -148,7 +149,7 @@ struct Choice : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -173,7 +174,7 @@ struct DButton
 
 struct Button : public Item
 {
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const { ToDButton()->funcPress(); }
     void DoubleClick() const;
 
@@ -202,7 +203,7 @@ struct Governor : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -246,7 +247,7 @@ struct TimeItem : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 

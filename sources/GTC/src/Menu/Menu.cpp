@@ -30,7 +30,7 @@ void Menu::ShortPress(Key::E key)
     {
         if (key == Key::_1)
         {
-            Item::Opened()->ShortPressure();
+            Item::Opened()->ShortPressure(key);
         }
         else if (key == Key::_2)
         {

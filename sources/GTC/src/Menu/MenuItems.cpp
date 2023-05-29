@@ -370,7 +370,7 @@ int Page::NumItems() const
 }
 
 
-void Page::ShortPressure() const
+void Page::ShortPressure(Key::E) const
 {
     uint8 *currentItem = ToDPage()->currentItem;
 
@@ -407,13 +407,13 @@ void Page::DoubleClick() const
 }
 
 
-void Choice::ShortPressure() const
+void Choice::ShortPressure(Key::E) const
 {
 
 }
 
 
-void Button::ShortPressure() const
+void Button::ShortPressure(Key::E) const
 {
 
 }
@@ -444,16 +444,16 @@ void Button::DoubleClick() const
 }
 
 
-void Item::ShortPressure() const
+void Item::ShortPressure(Key::E key) const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->ShortPressure();      break;
-    case TypeItem::Choice:      ToChoice()->ShortPressure();    break;
-    case TypeItem::Button:      ToButton()->ShortPressure();    break;
-    case TypeItem::Governor:    ToGovernor()->ShortPressure();  break;
-    case TypeItem::Time:        ToTimeItem()->ShortPressure();  break;
-    case TypeItem::Count:                                       break;
+    case TypeItem::Page:        ToPage()->ShortPressure(key);      break;
+    case TypeItem::Choice:      ToChoice()->ShortPressure(key);    break;
+    case TypeItem::Button:      ToButton()->ShortPressure(key);    break;
+    case TypeItem::Governor:    ToGovernor()->ShortPressure(key);  break;
+    case TypeItem::Time:        ToTimeItem()->ShortPressure(key);  break;
+    case TypeItem::Count:                                          break;
     }
 }
 
@@ -486,7 +486,7 @@ void Item::DoubleClick() const
 }
 
 
-void Governor::ShortPressure() const
+void Governor::ShortPressure(Key::E) const
 {
     if (Item::Opened())
     {
@@ -552,7 +552,7 @@ void TimeItem::LongPressure() const
 }
 
 
-void TimeItem::ShortPressure() const
+void TimeItem::ShortPressure(Key::E key) const
 {
     if (IsOpened())
     {
