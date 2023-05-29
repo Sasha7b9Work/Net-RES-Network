@@ -250,7 +250,7 @@ void TimeItem::DrawOpened(int, int, bool) const
 {
     Display::BeginScene(Color::BLACK);
 
-    Rectangle(Display::WIDTH, Display::HEIGHT).Draw(0, 0, Color::WHITE);
+    Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
 }
 
 
@@ -335,21 +335,16 @@ void Page::LongPressure() const
 {
     const Item *item = CurrentItem();
 
-    if (item->IsPage())
+    const DItem *data = item->ToDItem();
+
+    switch (data->type)
     {
-        item->ToPage()->Open();
-    }
-    else if (item->IsChoice())
-    {
-        item->ToChoice()->LongPressure();
-    }
-    else if (item->IsButton())
-    {
-        item->ToButton()->LongPressure();
-    }
-    else if (item->IsGovernor())
-    {
-        item->ToGovernor()->LongPressure();
+    case TypeItem::Page:        item->ToPage()->Open();             break;
+    case TypeItem::Choice:      item->ToChoice()->LongPressure();   break;
+    case TypeItem::Button:      item->ToButton()->LongPressure();   break;
+    case TypeItem::Governor:    item->ToGovernor()->LongPressure(); break;
+    case TypeItem::Time:        item->ToTimeItem()->LongPressure(); break;
+    case TypeItem::Count:                                           break;
     }
 }
 
