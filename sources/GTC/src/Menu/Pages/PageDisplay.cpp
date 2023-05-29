@@ -7,13 +7,6 @@
 extern const DPage pageMain;
 
 
-DEF_CHOICE_2( chPressure,
-    "Давление",
-    *PageDisplay::PageMeasures::self,
-    gset.display.show_measure[TypeMeasure::Pressure],
-    "Откл", "Вкл"
-)
-
 DEF_CHOICE_2(chTemperature,
     "Температура",
     *PageDisplay::PageMeasures::self,
@@ -28,6 +21,20 @@ DEF_CHOICE_2(chHumidity,
     "Откл", "Вкл"
 )
 
+DEF_CHOICE_2(chPressure,
+    "Давление",
+    *PageDisplay::PageMeasures::self,
+    gset.display.show_measure[TypeMeasure::Pressure],
+    "Откл", "Вкл"
+)
+
+DEF_CHOICE_2(chDewPoint,
+    "Точка росы",
+    *PageDisplay::PageMeasures::self,
+    gset.display.show_measure[TypeMeasure::DewPoint],
+    "Откл", "Вкл"
+)
+
 static void CloseMeasures()
 {
     PageDisplay::PageMeasures::self->Close();
@@ -39,12 +46,13 @@ DEF_BUTTN( bCloseMeasures,
     CloseMeasures
 )
 
-DEF_PAGE_4(pageMeasures, //-V1027
+DEF_PAGE_5(pageMeasures, //-V1027
     "ИЗМЕРЕНИЯ",
     *PageDisplay::self,
-    chPressure,
     chTemperature,
+    chPressure,
     chHumidity,
+    chDewPoint,
     bCloseMeasures
 )
 

@@ -51,8 +51,8 @@ namespace Display
 
     static Measure measures[TypeMeasure::Count] =
     {
-        Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Temperature),
+        Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
         Measure(TypeMeasure::DewPoint)
     };
@@ -287,19 +287,17 @@ void Display::DrawMeasures()
     const int y0 = d_lines;
     const int dY = d_lines + Font::Height();
 
-    const int NUM_MEASURES = 4;
-
-    static const TypeMeasure::E types[NUM_MEASURES] =
+    static const TypeMeasure::E types[TypeMeasure::Count] =
     {
         TypeMeasure::Temperature,
-        TypeMeasure::Humidity,
         TypeMeasure::Pressure,
+        TypeMeasure::Humidity,
         TypeMeasure::DewPoint
     };
 
-    for (int i = 0; i < NUM_MEASURES; i++)
+    for (int i = 0; i < TypeMeasure::Count; i++)
     {
-//        if (gset.display.show_measure[types[i]])
+        if (gset.display.show_measure[types[i]])
         {
             int y = y0 + i * dY;
 
@@ -365,10 +363,10 @@ String<> Display::Measure::Name()
 {
     static const pchar names[TypeMeasure::Count] =
     {
-        "ÄÀÂËÅÍÈÅ",
         "ÒÅÌÏÅĞÀÒÓĞÀ",
+        "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
-        "ÒÎ×ÊÀ     ĞÎÑÛ"
+        "ÒÎ×ÊÀ ĞÎÑÛ"
     };
 
     return String<>(names[type]);
@@ -378,8 +376,8 @@ String<> Display::Measure::Units()
 {
     static const pchar units[TypeMeasure::Count] =
     {
-        "ãÏà",
         "¨Ñ",
+        "ãÏà",
         "%%",
         "¨Ñ"
     };
