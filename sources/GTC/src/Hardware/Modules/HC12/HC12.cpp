@@ -65,7 +65,7 @@ void HC12::Command(pchar command)
 {
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_RESET);
 
-    TimeMeterMS().WaitMS(40);
+    TimeMeterMS().PauseOnMS(40);
 
     recv_buffer.Clear();
 

@@ -18,20 +18,7 @@ TimeMeterMS::TimeMeterMS()
 void TimeMeterMS::Reset()
 {
     time_reset = TIME_MS;
-    time_pause = 0;
     time_finished = TIME_MS;
-}
-
-
-void TimeMeterMS::Pause()
-{
-    time_pause = TIME_MS;
-}
-
-
-void TimeMeterMS::Continue()
-{
-    time_reset += (TIME_MS - time_pause);
 }
 
 
@@ -53,7 +40,7 @@ bool TimeMeterMS::IsFinished() const
 }
 
 
-void TimeMeterMS::WaitMS(uint dT)
+void TimeMeterMS::PauseOnMS(uint dT)
 {
     uint time_enter = ElapsedTime();
 
