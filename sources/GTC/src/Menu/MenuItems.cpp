@@ -378,15 +378,22 @@ int Page::NumItems() const
 }
 
 
-void Page::ShortPressure(Key::E) const
+void Page::ShortPressure(Key::E key) const
 {
-    uint8 *currentItem = ToDPage()->currentItem;
-
-    *currentItem = (uint8)(*currentItem + 1);
-
-    if (*currentItem == NumItems())
+    if (key == Key::_1)
     {
-        *currentItem = 0;
+        uint8 *currentItem = ToDPage()->currentItem;
+
+        *currentItem = (uint8)(*currentItem + 1);
+
+        if (*currentItem == NumItems())
+        {
+            *currentItem = 0;
+        }
+    }
+    else if (key == Key::_2)
+    {
+        LongPressure();
     }
 }
 
