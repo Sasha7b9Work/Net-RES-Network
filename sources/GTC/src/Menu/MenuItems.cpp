@@ -253,17 +253,11 @@ void TimeItem::DrawClosed(int x, int y, bool) const
 }
 
 
-void TimeItem::LongPressure(Key::E key) const
+void TimeItem::LongPressure(Key::E) const
 {
     if (IsOpened())
     {
-        const DTimeItem *data = ToDTimeItem();
-
-        if (*data->state == 1)
-        {
-            ChangeCurrentField(key);
-            data->meter->Reset();
-        }
+        *ToDTimeItem()->state = 0;
     }
     else
     {
@@ -288,12 +282,10 @@ void TimeItem::ChangeCurrentField(Key::E key) const
         if (key == Key::_1)
         {
             Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
-            data->meter->Reset();
         }
         else if (key == Key::_2)
         {
             Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
-            data->meter->Reset();
         }
     }
 }
@@ -327,20 +319,6 @@ void TimeItem::ShortPressure(Key::E key) const
 void TimeItem::DrawOpened(int, int, bool) const
 {
     const DTimeItem *data = ToDTimeItem();
-
-    if (data->meter->ElapsedTime() > 350)
-    {
-        data->meter->Reset();
-
-        if (key1.IsPressed())
-        {
-            ChangeCurrentField(Key::_1);
-        }
-        if (key2.IsPressed())
-        {
-            ChangeCurrentField(Key::_2);
-        }
-    }
 
     Display::BeginScene(Color::BLACK);
 

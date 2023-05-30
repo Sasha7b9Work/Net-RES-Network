@@ -244,8 +244,6 @@ struct DTimeItem
     int *state;         // 0 - выбор поля для изменения
                         // 1 - изменение
     PackedTime *time;
-
-    TimeMeterMS *meter;
 };
 
 
