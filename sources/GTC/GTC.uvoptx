@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>497</LineNumber>
+          <LineNumber>569</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134257104</Address>
+          <Address>134257568</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,14 +163,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Menu\MenuItems.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Menu/MenuItems.cpp\497</Expression>
+          <Expression>\\Device\src/Menu/MenuItems.cpp\569</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>53</LineNumber>
+          <LineNumber>40</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134249914</Address>
+          <Address>134249888</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -179,23 +179,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Menu\Menu.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Device\src/Menu/Menu.cpp\53</Expression>
+          <Expression>\\Device\src/Menu/Menu.cpp\40</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>153</LineNumber>
+          <LineNumber>261</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134257054</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Modules\ST7735\ST7735.cpp</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Menu\MenuItems.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Device\src/Menu/MenuItems.cpp\261</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

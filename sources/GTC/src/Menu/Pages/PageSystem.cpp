@@ -10,8 +10,9 @@ extern const DPage pageMain;
 static int cur_field = 0;
 static int state = 0;
 static bool prev_opened = false;
+static PackedTime time;
 
-DEF_TIMEITEM(tTime, *PageSystem::self, cur_field, state, prev_opened)
+DEF_TIMEITEM(tTime, *PageSystem::self, cur_field, state, prev_opened, time)
 
 
 DEF_GOVERNOR(gSerialNumber,
