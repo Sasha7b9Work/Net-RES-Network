@@ -2,6 +2,7 @@
 #pragma once
 #include "Display/Display.h"
 #include "Hardware/Keyboard.h"
+#include "Hardware/HAL/HAL.h"
 
 
 struct TypeItem
@@ -237,8 +238,13 @@ struct DTimeItem
 {
     COMMON_PART_ITEM
 
-    int *cur_field;         // Область, в которой находится курсор
-                            // [0...5] <-> [часы ... год], 6 - выход
+    int *cur_field;     // Область, в которой находится курсор
+                        // [0...5] <-> [часы ... год], 6 - выход
+    int *state;         // 0 - выбор поля для изменения
+                        // 1 - изменение
+    bool *prev_opened;  // Если true, то в прошлый раз было отрисовано открытым
+
+    PackedTime *time;
 };
 
 

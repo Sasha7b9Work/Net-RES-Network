@@ -28,14 +28,7 @@ void Menu::ShortPress(Key::E key)
     }
     else
     {
-        if (key == Key::_1)
-        {
-            Item::Opened()->ShortPressure(key);
-        }
-        else if (key == Key::_2)
-        {
-            Item::Opened()->LongPressure();
-        }
+        Item::Opened()->ShortPressure(key);
     }
 
     Display::need_redraw = true;

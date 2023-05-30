@@ -8,8 +8,10 @@ extern const DPage pageMain;
 
 
 static int cur_field = 0;
+static int state = 0;
+static bool prev_opened = false;
 
-DEF_TIMEITEM(tTime, *PageSystem::self, cur_field)
+DEF_TIMEITEM(tTime, *PageSystem::self, cur_field, state, prev_opened)
 
 
 DEF_GOVERNOR(gSerialNumber,

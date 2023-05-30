@@ -245,6 +245,8 @@ void TimeItem::DrawClosed(int x, int y, bool) const
     String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
 
     String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(x + 70, y);
+
+    *ToDTimeItem()->prev_opened = false;
 }
 
 
@@ -254,6 +256,11 @@ void TimeItem::DrawOpened(int, int, bool) const
 
     const DTimeItem *data = ToDTimeItem();
 
+    if (!*data->prev_opened)
+    {
+        *data->time = HAL_RTC::GetTime();
+    }
+
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
 
     int x0 = 20;
@@ -261,9 +268,8 @@ void TimeItem::DrawOpened(int, int, bool) const
     int dX = 48;
     int dY = 40;
 
-    PackedTime time = HAL_RTC::GetTime();
-
-    uint values[6] = { time.hours, time.minutes, time.seconds, time.day, time.month, time.year - 2000 };
+    uint values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
+        data->time->day, data->time->month, data->time->year - 2000 };
 
     for (int i = 0; i < 6; i++)
     {
@@ -287,11 +293,11 @@ void TimeItem::DrawOpened(int, int, bool) const
     int dT = 3;
 
     Rectangle rect(size, size);
-    rect.Draw(x, y);
-    String<>("П").Draw(x + dT + 3, y + dT, Color::WHITE);
+    rect.Draw(x, y, Color::WHITE);
+    String<>(*data->state == 0 ? "П" : "\x80").Draw(x + dT + 3, y + dT);
     x += 27;
     rect.Draw(x, y);
-    String<>("В").Draw(x + dT + 3, y + dT);
+    String<>(*data->state == 0 ? "В" : "\x81").Draw(x + dT + 3, y + dT);
 
 
     Color::E color = Color::WHITE;
@@ -303,6 +309,8 @@ void TimeItem::DrawOpened(int, int, bool) const
     }
 
     String<>("Выход").Draw(25, y + dT, color);
+
+    *data->prev_opened = true;
 }
 
 
@@ -558,6 +566,20 @@ void TimeItem::ShortPressure(Key::E key) const
     {
         const DTimeItem *data = ToDTimeItem();
 
-        Math::CircleIncrease<int>(data->cur_field, 0, 6);
+        if (*data->state == 0)
+        {
+            if (key == Key::_1)
+            {
+                Math::CircleIncrease<int>(data->cur_field, 0, 6);
+            }
+            else if (key == Key::_2)
+            {
+                *data->state = 1;
+            }
+        }
+        else if (*data->state == 1)
+        {
+
+        }
     }
 }
