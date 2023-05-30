@@ -51,7 +51,7 @@ struct Item
     void DrawClosed(int x, int y, bool active) const;
 
     void ShortPressure(Key::E) const;
-    void LongPressure() const;
+    void LongPressure(Key::E) const;
     void DoubleClick() const;
 
     const Page *Keeper() const { return ToDItem()->keeper; }
@@ -107,7 +107,7 @@ struct Page : public Item
     void DrawClosed(int x, int y, bool active) const;
 
     void ShortPressure(Key::E) const;
-    void LongPressure() const;
+    void LongPressure(Key::E) const;
     void DoubleClick() const;
 
     void Close() const;
@@ -255,9 +255,11 @@ struct TimeItem : public Item
     void DrawOpened(int x, int y, bool active) const;
 
     void ShortPressure(Key::E) const;
-    void LongPressure() const;
+    void LongPressure(Key::E) const;
     void DoubleClick() const;
 
     const DTimeItem *ToDTimeItem() const { return (DTimeItem *)this; }
 private:
+
+    void ChangeCurrentField(Key::E) const;
 };

@@ -253,6 +253,52 @@ void TimeItem::DrawClosed(int x, int y, bool) const
 }
 
 
+void TimeItem::LongPressure(Key::E key) const
+{
+    if (IsOpened())
+    {
+        const DTimeItem *data = ToDTimeItem();
+
+        if (*data->state == 1)
+        {
+            ChangeCurrentField(key);
+            data->meter->Reset();
+        }
+    }
+    else
+    {
+        Open();
+    }
+}
+
+
+void TimeItem::ChangeCurrentField(Key::E key) const
+{
+    const DTimeItem *data = ToDTimeItem();
+
+    if (*data->cur_field < 6)
+    {
+        int max[6] = { 23, 59, 59, 31, 12, 99 };
+
+        PackedTime &time = *data->time;
+
+        int *values[6] = { &time.hours, &time.minutes, &time.seconds,
+                            &time.day, &time.month, &time.year };
+
+        if (key == Key::_1)
+        {
+            Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
+            data->meter->Reset();
+        }
+        else if (key == Key::_2)
+        {
+            Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
+            data->meter->Reset();
+        }
+    }
+}
+
+
 void TimeItem::ShortPressure(Key::E key) const
 {
     if (IsOpened())
@@ -272,26 +318,7 @@ void TimeItem::ShortPressure(Key::E key) const
         }
         else if (*data->state == 1)
         {
-            if (*data->cur_field < 6)
-            {
-                int max[6] = { 23, 59, 59, 31, 12, 99 };
-
-                PackedTime &time = *data->time;
-
-                int *values[6] = {  &time.hours, &time.minutes, &time.seconds,
-                                    &time.day, &time.month, &time.year };
-
-                if (key == Key::_1)
-                {
-                    Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
-                    data->meter->Reset();
-                }
-                else if (key == Key::_2)
-                {
-                    Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
-                    data->meter->Reset();
-                }
-            }
+            ChangeCurrentField(key);
         }
     }
 }
@@ -299,9 +326,23 @@ void TimeItem::ShortPressure(Key::E key) const
 
 void TimeItem::DrawOpened(int, int, bool) const
 {
-    Display::BeginScene(Color::BLACK);
-
     const DTimeItem *data = ToDTimeItem();
+
+    if (data->meter->ElapsedTime() > 350)
+    {
+        data->meter->Reset();
+
+        if (key1.IsPressed())
+        {
+            ChangeCurrentField(Key::_1);
+        }
+        if (key2.IsPressed())
+        {
+            ChangeCurrentField(Key::_2);
+        }
+    }
+
+    Display::BeginScene(Color::BLACK);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
 
@@ -433,12 +474,12 @@ void Page::ShortPressure(Key::E key) const
     }
     else if (key == Key::_2)
     {
-        LongPressure();
+        LongPressure(key);
     }
 }
 
 
-void Page::LongPressure() const
+void Page::LongPressure(Key::E key) const
 {
     const Item *item = CurrentItem();
 
@@ -446,12 +487,12 @@ void Page::LongPressure() const
 
     switch (data->type)
     {
-    case TypeItem::Page:        item->ToPage()->Open();             break;
-    case TypeItem::Choice:      item->ToChoice()->LongPressure();   break;
-    case TypeItem::Button:      item->ToButton()->LongPressure();   break;
-    case TypeItem::Governor:    item->ToGovernor()->LongPressure(); break;
-    case TypeItem::Time:        item->ToTimeItem()->LongPressure(); break;
-    case TypeItem::Count:                                           break;
+    case TypeItem::Page:        item->ToPage()->Open();                break;
+    case TypeItem::Choice:      item->ToChoice()->LongPressure();      break;
+    case TypeItem::Button:      item->ToButton()->LongPressure();      break;
+    case TypeItem::Governor:    item->ToGovernor()->LongPressure();    break;
+    case TypeItem::Time:        item->ToTimeItem()->LongPressure(key); break;
+    case TypeItem::Count:                                              break;
     }
 }
 
@@ -513,16 +554,16 @@ void Item::ShortPressure(Key::E key) const
 }
 
 
-void Item::LongPressure() const
+void Item::LongPressure(Key::E key) const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->LongPressure();       break;
-    case TypeItem::Choice:      ToChoice()->LongPressure();     break;
-    case TypeItem::Button:      ToButton()->LongPressure();     break;
-    case TypeItem::Governor:    ToGovernor()->LongPressure();   break;
-    case TypeItem::Time:        ToTimeItem()->LongPressure();   break;
-    case TypeItem::Count:                                       break;
+    case TypeItem::Page:        ToPage()->LongPressure(key);        break;
+    case TypeItem::Choice:      ToChoice()->LongPressure();         break;
+    case TypeItem::Button:      ToButton()->LongPressure();         break;
+    case TypeItem::Governor:    ToGovernor()->LongPressure();       break;
+    case TypeItem::Time:        ToTimeItem()->LongPressure(key);    break;
+    case TypeItem::Count:                                           break;
     }
 }
 
@@ -591,17 +632,4 @@ void Governor::DoubleClick() const
 void TimeItem::DoubleClick() const
 {
 
-}
-
-
-void TimeItem::LongPressure() const
-{
-    if (IsOpened())
-    {
-
-    }
-    else
-    {
-        Open();
-    }
 }

@@ -35,7 +35,7 @@ void Menu::ShortPress(Key::E key)
 }
 
 
-void Menu::LongPress(Key::E)
+void Menu::LongPress(Key::E key)
 {
     if (!Opened())
     {
@@ -43,7 +43,7 @@ void Menu::LongPress(Key::E)
     }
     else
     {
-        Item::Opened()->LongPressure();
+        Item::Opened()->LongPressure(key);
     }
 
     Display::need_redraw = true;
