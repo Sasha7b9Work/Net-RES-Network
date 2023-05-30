@@ -2,17 +2,17 @@
 #pragma once
 
 
-#define DEF_BUTTN(name, title, keeper, function)                                                            \
-    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function };
+#define DEF_BUTTN(name, title, keeper, beforeOpen, function)                                                            \
+    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, beforeOpen, function };
 
-#define DEF_GOVERNOR(name, title, keeper, min, max, value)                                                  \
-    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, min, max, &(value) };
+#define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                  \
+    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, min, max, &(value) };
 
-#define DEF_TIMEITEM(name, keeper, value, state, prev_opened, time)                                                                   \
-    static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, &(value), &(state), &(prev_opened), &(time)};
+#define DEF_TIMEITEM(name, keeper, beforeOpen, value, state, time)                                                      \
+    static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, beforeOpen, &(value), &(state), &(time)};
 
-#define DEF_CHOICE_2(name, title, keeper, cell, name1, name2)                                               \
-    static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, &cell, 2, {name1, name2}};
+#define DEF_CHOICE_2(name, title, keeper, beforeOpen, cell, name1, name2)                                               \
+    static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, beforeOpen, &cell, 2, {name1, name2}};
 
 #define DEF_ITEMS_1(name, item)                                                             \
     static const Item * const name[] = { (Item *)&item, nullptr };
@@ -35,29 +35,29 @@
     static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
         (Item *)&item4, (Item *)&item5, (Item *)&item6, nullptr };
 
-#define DEF_PAGE(name, title, keeper, items)                                                \
+#define DEF_PAGE(name, title, keeper, beforeOpen, items)                                    \
     static uint8 ci##name = 0;                                                              \
-    const DPage name = { TypeItem::Page, title, (const Page *)&keeper, items, &ci##name };
+    const DPage name = { TypeItem::Page, title, (const Page *)&keeper, beforeOpen, items, &ci##name };
 
-#define DEF_PAGE_1(name, title, keeper, item1)                                              \
+#define DEF_PAGE_1(name, title, keeper, beforeOpen, item1)                                  \
     DEF_ITEMS_1(items##name, item1)                                                         \
-    DEF_PAGE(name, title, keeper, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
-#define DEF_PAGE_2(name, title, keeper, item1, item2)                                       \
+#define DEF_PAGE_2(name, title, keeper, beforeOpen, item1, item2)                           \
     DEF_ITEMS_2(items##name, item1, item2)                                                  \
-    DEF_PAGE(name, title, keeper, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
-#define DEF_PAGE_3(name, title, keeper, item1, item2, item3)                                \
+#define DEF_PAGE_3(name, title, keeper, beforeOpen, item1, item2, item3)                    \
     DEF_ITEMS_3(items##name, item1, item2, item3)                                           \
-    DEF_PAGE(name, title, keeper, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
-#define DEF_PAGE_4(name, title, keeper, item1, item2, item3, item4)                         \
+#define DEF_PAGE_4(name, title, keeper, beforeOpen, item1, item2, item3, item4)             \
     DEF_ITEMS_4(items##name, item1, item2, item3, item4)                                    \
-    DEF_PAGE(name, title, keeper, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
-#define DEF_PAGE_5(name, title, keeper, item1, item2, item3, item4, item5)                  \
+#define DEF_PAGE_5(name, title, keeper, beforeOpen, item1, item2, item3, item4, item5)      \
     DEF_ITEMS_5(items##name, item1, item2, item3, item4, item5)                             \
-    DEF_PAGE(name, title, keeper, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
 #define DEF_PAGE_6(name, title, keeper, item1, item2, item3, item4, item5, item6)           \
     DEF_ITEMS_6(items##name, item1, item2, item3, item4, item5, item6)                      \

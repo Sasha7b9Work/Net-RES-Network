@@ -26,9 +26,10 @@ struct Governor;
 struct TimeItem;
 
 
-#define COMMON_PART_ITEM    TypeItem::E type;      \
-                            pchar       title;     \
-                            const Page *keeper;
+#define COMMON_PART_ITEM    TypeItem::E type;       \
+                            pchar       title;      \
+                            const Page *keeper;     \
+                            pFuncVV    funcBeforeOpen;     // Выполняется перед открытием контрола
 
 struct DItem
 {
@@ -211,8 +212,7 @@ struct Governor : public Item
     const DGovernor *ToDGovernor() const { return (DGovernor *)this; }
 
 private:
-
-    void DrawControls(int x, int y) const;
+        void DrawControls(int x, int y) const;
 
     void DrawControl(int x, int y, const String<> &, bool active) const;
 
@@ -242,8 +242,6 @@ struct DTimeItem
                         // [0...5] <-> [часы ... год], 6 - выход
     int *state;         // 0 - выбор поля для изменения
                         // 1 - изменение
-    bool *prev_opened;  // Если true, то в прошлый раз было отрисовано открытым
-
     PackedTime *time;
 };
 
@@ -258,6 +256,5 @@ struct TimeItem : public Item
     void DoubleClick() const;
 
     const DTimeItem *ToDTimeItem() const { return (DTimeItem *)this; }
-
 private:
 };

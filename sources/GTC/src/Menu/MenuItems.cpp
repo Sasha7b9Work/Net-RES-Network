@@ -20,6 +20,11 @@ Governor::ActiveControl::E Governor::active_control = Governor::ActiveControl::I
 
 void Item::Open() const
 {
+    if (ToDItem()->funcBeforeOpen)
+    {
+        ToDItem()->funcBeforeOpen();
+    }
+
     opened_item = this;
 }
 
@@ -245,8 +250,6 @@ void TimeItem::DrawClosed(int x, int y, bool) const
     String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
 
     String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(x + 70, y);
-
-    *ToDTimeItem()->prev_opened = false;
 }
 
 
@@ -255,11 +258,6 @@ void TimeItem::DrawOpened(int, int, bool) const
     Display::BeginScene(Color::BLACK);
 
     const DTimeItem *data = ToDTimeItem();
-
-    if (!*data->prev_opened)
-    {
-        *data->time = HAL_RTC::GetTime();
-    }
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
 
@@ -309,8 +307,6 @@ void TimeItem::DrawOpened(int, int, bool) const
     }
 
     String<>("Выход").Draw(25, y + dT, color);
-
-    *data->prev_opened = true;
 }
 
 

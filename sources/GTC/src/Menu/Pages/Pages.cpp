@@ -14,12 +14,14 @@ static void CloseMainPage()
 DEF_BUTTN(bCloseMainPage,
     "Закрыть",
     pageMain,
+    EmptyVV,
     CloseMainPage
 )
 
 DEF_PAGE_4(pageMain, //-V1027
     "МЕНЮ",
     Page::Empty,
+    EmptyVV,
     *PageDisplay::self,
     *PageHC12::self,
     *PageSystem::self,
