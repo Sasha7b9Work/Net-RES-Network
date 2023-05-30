@@ -29,8 +29,14 @@ struct TimeMeterMS
 
     void WaitMS(uint);
 
+    // Через ms миллисекунд IsFinished() становится равным true
+    void FinishAfter(uint ms);
+
+    bool IsFinished() const;
+
 private:
 
     uint time_reset;        // От этого времени отсчитывается ElapsedTime()
     uint time_pause;        // В этот момент поставили на паузу
+    uint time_finished;     // В это время IsFinished() становится равным true
 };

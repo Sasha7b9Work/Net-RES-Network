@@ -6,6 +6,10 @@
 #include <stm32f1xx_hal.h>
 
 
+Key key1(Key::_1);
+Key key2(Key::_2);
+
+
 namespace Keyboard
 {
     static const int TIME_LONG_PRESS = 500;
@@ -87,4 +91,10 @@ bool Keyboard::KeyPressed(Key::E key)
     static const uint16 pins[Key::Count] = { GPIO_PIN_8, GPIO_PIN_9 };
 
     return HAL_GPIO_ReadPin(GPIOB, pins[key]) == GPIO_PIN_RESET;
+}
+
+
+bool Key::IsPressed() const
+{
+    return Keyboard::pressed[value];
 }

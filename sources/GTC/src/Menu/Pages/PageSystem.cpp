@@ -11,13 +11,14 @@ extern const DPage pageMain;
 static int cur_field = 0;
 static int state = 0;
 static PackedTime time;
+static TimeMeterMS meter;
 
 static void Before_OpenTime()
 {
     time = HAL_RTC::GetTime();
 }
 
-DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
+DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time, meter)
 
 
 DEF_GOVERNOR(gSerialNumber,

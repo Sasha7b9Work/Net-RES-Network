@@ -3,6 +3,7 @@
 #include "Display/Display.h"
 #include "Hardware/Keyboard.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 
 
 struct TypeItem
@@ -243,6 +244,8 @@ struct DTimeItem
     int *state;         // 0 - выбор поля для изменения
                         // 1 - изменение
     PackedTime *time;
+
+    TimeMeterMS *meter;
 };
 
 

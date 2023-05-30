@@ -284,10 +284,12 @@ void TimeItem::ShortPressure(Key::E key) const
                 if (key == Key::_1)
                 {
                     Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
+                    data->meter->Reset();
                 }
                 else if (key == Key::_2)
                 {
                     Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
+                    data->meter->Reset();
                 }
             }
         }
