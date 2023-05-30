@@ -253,6 +253,48 @@ void TimeItem::DrawClosed(int x, int y, bool) const
 }
 
 
+void TimeItem::ShortPressure(Key::E key) const
+{
+    if (IsOpened())
+    {
+        const DTimeItem *data = ToDTimeItem();
+
+        if (*data->state == 0)
+        {
+            if (key == Key::_1)
+            {
+                Math::CircleIncrease<int>(data->cur_field, 0, 7);
+            }
+            else if (key == Key::_2)
+            {
+                *data->state = 1;
+            }
+        }
+        else if (*data->state == 1)
+        {
+            if (*data->cur_field < 6)
+            {
+                int max[6] = { 23, 59, 59, 31, 12, 99 };
+
+                PackedTime &time = *data->time;
+
+                int *values[6] = {  &time.hours, &time.minutes, &time.seconds,
+                                    &time.day, &time.month, &time.year };
+
+                if (key == Key::_1)
+                {
+                    Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
+                }
+                else if (key == Key::_2)
+                {
+                    Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
+                }
+            }
+        }
+    }
+}
+
+
 void TimeItem::DrawOpened(int, int, bool) const
 {
     Display::BeginScene(Color::BLACK);
@@ -266,7 +308,7 @@ void TimeItem::DrawOpened(int, int, bool) const
     int dX = 48;
     int dY = 40;
 
-    uint values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
+    int values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
         data->time->day, data->time->month, data->time->year - 2000 };
 
     for (int i = 0; i < 6; i++)
@@ -559,30 +601,5 @@ void TimeItem::LongPressure() const
     else
     {
         Open();
-    }
-}
-
-
-void TimeItem::ShortPressure(Key::E key) const
-{
-    if (IsOpened())
-    {
-        const DTimeItem *data = ToDTimeItem();
-
-        if (*data->state == 0)
-        {
-            if (key == Key::_1)
-            {
-                Math::CircleIncrease<int>(data->cur_field, 0, 6);
-            }
-            else if (key == Key::_2)
-            {
-                *data->state = 1;
-            }
-        }
-        else if (*data->state == 1)
-        {
-
-        }
     }
 }

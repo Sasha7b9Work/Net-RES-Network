@@ -5,16 +5,15 @@
 
 struct PackedTime
 {
-    unsigned hours : 5;
-    unsigned minutes : 6;
-    unsigned seconds : 6;
-    unsigned year : 16;
-    unsigned month : 4;
-    unsigned notUsed0 : 4;
-    unsigned day : 5;
-    unsigned ms : 27;
-    PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
-        hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), ms(0) {};
+    int hours;
+    int minutes;
+    int seconds;
+    int year;
+    int month;
+    int day;
+    int ms;
+    PackedTime(int h = 11, int m = 11, int s = 11, int d = 11, int mo = 11, int y = 11) :
+        hours(h), minutes(m), seconds(s), year(y), month(mo), day(d), ms(0) {};
     // Изменение значения поля на +/- 1
     void ChangeHours(int delta);
     void ChangeMinutes(int delta);
