@@ -55,7 +55,7 @@ PackedTime HAL_RTC::GetTime()
 
     HAL_RTC_GetDate(&handleRTC, &date, RTC_FORMAT_BIN);
 
-    PackedTime result(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, 2000 + date.Year);
+    PackedTime result(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
 
     return result;
 }
@@ -73,7 +73,7 @@ void HAL_RTC::SetTime(const PackedTime &_time)
 
     RTC_DateTypeDef date;
 
-    date.Year = (uint8)(_time.year - 2000);
+    date.Year = (uint8)(_time.year);
     date.Month = _time.month;
     date.Date = _time.day;
 

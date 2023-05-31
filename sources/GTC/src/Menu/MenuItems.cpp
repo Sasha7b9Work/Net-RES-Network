@@ -249,7 +249,7 @@ void TimeItem::DrawClosed(int x, int y, bool) const
 
     String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
 
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(x + 70, y);
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(x + 70, y);
 }
 
 
@@ -305,7 +305,19 @@ void TimeItem::ShortPressure(Key::E key) const
             }
             else if (key == Key::_2)
             {
-                *data->state = 1;
+                if (*data->cur_field == 6)
+                {
+                    HAL_RTC::SetTime(*data->time);
+                    Close();
+                }
+                else if (*data->cur_field == 7)
+                {
+                    Close();
+                }
+                else
+                {
+                    *data->state = 1;
+                }
             }
         }
         else if (*data->state == 1)
@@ -330,7 +342,7 @@ void TimeItem::DrawOpened(int, int, bool) const
     int dY = 40;
 
     int values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
-        data->time->day, data->time->month, data->time->year - 2000 };
+        data->time->day, data->time->month, data->time->year };
 
     for (int i = 0; i < 6; i++)
     {
@@ -365,11 +377,21 @@ void TimeItem::DrawOpened(int, int, bool) const
 
     if (*data->cur_field == 6)
     {
-        Rectangle(38, 18).Fill(23, y + dT - 2, Color::WHITE);
+        Rectangle(56, 15).Fill(23, y + dT - 15, Color::WHITE);
         color = Color::BLACK;
     }
 
-    String<>("Выход").Draw(25, y + dT, color);
+    String<>("Применить").Draw(25, y + dT - 13, color);
+
+    color = Color::WHITE;
+
+    if (*data->cur_field == 7)
+    {
+        Rectangle(56, 15).Fill(23, y + dT + 5, Color::WHITE);
+        color = Color::BLACK;
+    }
+
+    String<>("Выход").Draw(25, y + dT + 7, color);
 }
 
 
