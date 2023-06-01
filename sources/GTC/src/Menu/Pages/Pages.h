@@ -34,6 +34,11 @@ namespace PageMeasures
     {
         extern const Page *const self;
     }
+
+    namespace DewPoint
+    {
+        extern const Page *const self;
+    }
 };
 
 

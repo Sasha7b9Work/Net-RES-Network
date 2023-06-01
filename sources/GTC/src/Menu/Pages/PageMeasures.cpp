@@ -13,14 +13,12 @@ void ClosePageTemperature()
     PageMeasures::Temperature::self->Close();
 }
 
-
 DEF_BUTTN(bClosePageTemperature,
     "Закрыть",
     *PageMeasures::Temperature::self,
     EmptyVV,
     ClosePageTemperature
 )
-
 
 DEF_CHOICE_2(chTemperature,
     "Показывать",
@@ -29,7 +27,6 @@ DEF_CHOICE_2(chTemperature,
     gset.display.show_measure[TypeMeasure::Temperature],
     "Нет", "Да"
 )
-
 
 DEF_PAGE_2(pageTemperature,
     "ТЕМПЕРАТУРА",
@@ -46,14 +43,12 @@ void ClosePagePressure()
     PageMeasures::Pressure::self->Close();
 }
 
-
 DEF_BUTTN(bClosePagePressure,
     "Закрыть",
     *PageMeasures::Pressure::self,
     EmptyVV,
     ClosePagePressure
 )
-
 
 DEF_CHOICE_2(chPressure,
     "Давление",
@@ -62,7 +57,6 @@ DEF_CHOICE_2(chPressure,
     gset.display.show_measure[TypeMeasure::Pressure],
     "Откл", "Вкл"
 )
-
 
 DEF_PAGE_2(pagePressure,
     "ДАВЛЕНИЕ",
@@ -79,14 +73,12 @@ void ClosePageHumidity()
     PageMeasures::Humidity::self->Close();
 }
 
-
 DEF_BUTTN(bClosePageHumidity,
     "Закрыть",
     *PageMeasures::Humidity::self,
     EmptyVV,
     ClosePageHumidity
 )
-
 
 DEF_CHOICE_2(chHumidity,
     "Влажность",
@@ -95,7 +87,6 @@ DEF_CHOICE_2(chHumidity,
     gset.display.show_measure[TypeMeasure::Humidity],
     "Нет", "Да"
 )
-
 
 DEF_PAGE_2(pageHumidity,
     "ВЛАЖНОСТЬ",
@@ -107,13 +98,34 @@ DEF_PAGE_2(pageHumidity,
 
 
 //------------------------------------------------------------------------------------
+void ClosePageDewPoint()
+{
+    PageMeasures::DewPoint::self->Close();
+}
+
+DEF_BUTTN(bClosePageDewPoint,
+    "Закрыть",
+    *PageMeasures::DewPoint::self,
+    EmptyVV,
+    ClosePageDewPoint
+)
+
 DEF_CHOICE_2(chDewPoint,
     "Точка росы",
-    *PageMeasures::self,
+    *PageMeasures::DewPoint::self,
     EmptyVV,
     gset.display.show_measure[TypeMeasure::DewPoint],
     "Откл", "Вкл"
 )
+
+DEF_PAGE_2(pageDewPoint,
+    "ТОЧКА РОСЫ",
+    *PageMeasures::self,
+    EmptyVV,
+    chDewPoint,
+    bClosePageDewPoint
+)
+
 
 static void CloseMeasures()
 {
@@ -134,7 +146,7 @@ DEF_PAGE_5(pageMeasures, //-V1027
     pageTemperature,
     pagePressure,
     pageHumidity,
-    chDewPoint,
+    pageDewPoint,
     bCloseMeasures
 )
 
@@ -142,4 +154,4 @@ const Page *const PageMeasures::self = (const Page *)&pageMeasures;
 const Page *const PageMeasures::Temperature::self = (const Page *)&pageTemperature;
 const Page *const PageMeasures::Pressure::self = (const Page *)&pagePressure;
 const Page *const PageMeasures::Humidity::self = (const Page *)&pageHumidity;
-
+const Page *const PageMeasures::DewPoint::self = (const Page *)&pageDewPoint;
