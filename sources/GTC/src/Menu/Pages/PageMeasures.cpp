@@ -40,6 +40,39 @@ DEF_PAGE_2(pageTemperature,
 )
 
 
+//------------------------------------------------------------------------------------
+void ClosePagePressure()
+{
+    PageMeasures::Pressure::self->Close();
+}
+
+
+DEF_BUTTN(bClosePagePressure,
+    "Закрыть",
+    *PageMeasures::Pressure::self,
+    EmptyVV,
+    ClosePagePressure
+)
+
+
+DEF_CHOICE_2(chPressure,
+    "Давление",
+    *PageMeasures::Pressure::self,
+    EmptyVV,
+    gset.display.show_measure[TypeMeasure::Pressure],
+    "Откл", "Вкл"
+)
+
+
+DEF_PAGE_2(pagePressure,
+    "ДАВЛЕНИЕ",
+    *PageMeasures::self,
+    EmptyVV,
+    chPressure,
+    bClosePagePressure
+)
+
+
 //-------------------------------------------------------------------------------------
 void ClosePageHumidity()
 {
@@ -74,14 +107,6 @@ DEF_PAGE_2(pageHumidity,
 
 
 //------------------------------------------------------------------------------------
-DEF_CHOICE_2(chPressure,
-    "Давление",
-    *PageMeasures::self,
-    EmptyVV,
-    gset.display.show_measure[TypeMeasure::Pressure],
-    "Откл", "Вкл"
-)
-
 DEF_CHOICE_2(chDewPoint,
     "Точка росы",
     *PageMeasures::self,
@@ -107,7 +132,7 @@ DEF_PAGE_5(pageMeasures, //-V1027
     pageMain,
     EmptyVV,
     pageTemperature,
-    chPressure,
+    pagePressure,
     pageHumidity,
     chDewPoint,
     bCloseMeasures
@@ -115,5 +140,6 @@ DEF_PAGE_5(pageMeasures, //-V1027
 
 const Page *const PageMeasures::self = (const Page *)&pageMeasures;
 const Page *const PageMeasures::Temperature::self = (const Page *)&pageTemperature;
+const Page *const PageMeasures::Pressure::self = (const Page *)&pagePressure;
 const Page *const PageMeasures::Humidity::self = (const Page *)&pageHumidity;
 
