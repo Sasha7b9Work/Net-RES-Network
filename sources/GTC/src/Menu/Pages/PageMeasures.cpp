@@ -4,6 +4,25 @@
 #include "Settings/Settings.h"
 
 
+#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)    \
+DEF_GOVERNOR(_name,                                             \
+    "Предел мин",                                               \
+    *page_self,                                                 \
+    EmptyVV,                                                    \
+    _min, _max,                                                 \
+    gset.measures.min[type]                                     \
+)
+
+#define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
+DEF_GOVERNOR(_name,                                             \
+    "Предел макс",                                               \
+    *page_self,                                                 \
+    EmptyVV,                                                    \
+    _min, _max,                                                 \
+    gset.measures.max[type]                                     \
+)
+
+
 extern const DPage pageMain;
 
 
@@ -28,23 +47,6 @@ DEF_CHOICE_2(chTemperature,
     "Нет", "Да"
 )
 
-#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)    \
-DEF_GOVERNOR(_name,                                             \
-    "Предел мин",                                               \
-    *page_self,                                                 \
-    EmptyVV,                                                    \
-    _min, _max,                                                 \
-    gset.measures.min[type]                                     \
-)
-
-#define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
-DEF_GOVERNOR(_name,                                             \
-    "Предел макс",                                               \
-    *page_self,                                                 \
-    EmptyVV,                                                    \
-    _min, _max,                                                 \
-    gset.measures.max[type]                                     \
-)
 
 DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, 0, 100, TypeMeasure::Temperature)
 
