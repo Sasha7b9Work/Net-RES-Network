@@ -18,10 +18,11 @@ DEF_BUTTN(bCloseMainPage,
     CloseMainPage
 )
 
-DEF_PAGE_4(pageMain, //-V1027
+DEF_PAGE_5(pageMain, //-V1027
     "лемч",
     Page::Empty,
     EmptyVV,
+    *PageMeasures::self,
     *PageDisplay::self,
     *PageHC12::self,
     *PageSystem::self,

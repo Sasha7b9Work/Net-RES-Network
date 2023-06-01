@@ -6,7 +6,7 @@
 extern const DPage pageMain;
 
 
-void ClosePageHC12()
+static void ClosePageHC12()
 {
     PageHC12::self->Close();
 }

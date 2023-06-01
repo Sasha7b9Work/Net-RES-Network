@@ -813,6 +813,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1693,6 +1698,11 @@
               <FileName>PageSystem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
             </File>
           </Files>
         </Group>
