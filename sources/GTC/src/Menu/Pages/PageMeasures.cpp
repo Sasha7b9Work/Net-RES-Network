@@ -4,23 +4,11 @@
 #include "Settings/Settings.h"
 
 
-#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)    \
-DEF_GOVERNOR(_name,                                             \
-    "Предел мин",                                               \
-    *page_self,                                                 \
-    EmptyVV,                                                    \
-    _min, _max,                                                 \
-    gset.measures.min[type]                                     \
-)
+#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type) \
+DEF_GOVERNOR(_name, "Предел мин", *page_self, EmptyVV, _min, _max, gset.measures.min[type])
 
 #define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
-DEF_GOVERNOR(_name,                                             \
-    "Предел макс",                                               \
-    *page_self,                                                 \
-    EmptyVV,                                                    \
-    _min, _max,                                                 \
-    gset.measures.max[type]                                     \
-)
+DEF_GOVERNOR(_name, "Предел макс", *page_self, EmptyVV, _min, _max, gset.measures.max[type])
 
 
 extern const DPage pageMain;
@@ -85,11 +73,17 @@ DEF_CHOICE_2(chPressure,
     "Откл", "Вкл"
 )
 
-DEF_PAGE_2(pagePressure,
+DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 0, 100, TypeMeasure::Pressure);
+
+DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 0, 100, TypeMeasure::Pressure);
+
+DEF_PAGE_4(pagePressure,
     "ДАВЛЕНИЕ",
     *PageMeasures::self,
     EmptyVV,
     chPressure,
+    gPressureMin,
+    gPressureMax,
     bClosePagePressure
 )
 
@@ -115,11 +109,17 @@ DEF_CHOICE_2(chHumidity,
     "Нет", "Да"
 )
 
-DEF_PAGE_2(pageHumidity,
+DEF_GOVERNOR_MIN(gHumidityMin, PageMeasures::Humidity::self, 0, 100, TypeMeasure::Humidity);
+
+DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 0, 100, TypeMeasure::Humidity);
+
+DEF_PAGE_4(pageHumidity,
     "ВЛАЖНОСТЬ",
     *PageMeasures::self,
     EmptyVV,
     chHumidity,
+    gHumidityMin,
+    gHumidityMax,
     bClosePageHumidity
 )
 
@@ -145,11 +145,17 @@ DEF_CHOICE_2(chDewPoint,
     "Откл", "Вкл"
 )
 
-DEF_PAGE_2(pageDewPoint,
+DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, 0, 100, TypeMeasure::DewPoint);
+
+DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, 0, 100, TypeMeasure::DewPoint);
+
+DEF_PAGE_4(pageDewPoint,
     "ТОЧКА РОСЫ",
     *PageMeasures::self,
     EmptyVV,
     chDewPoint,
+    gDewPointMin,
+    gDewPointMax,
     bClosePageDewPoint
 )
 
