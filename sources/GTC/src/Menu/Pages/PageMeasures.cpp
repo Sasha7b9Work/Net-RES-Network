@@ -28,24 +28,28 @@ DEF_CHOICE_2(chTemperature,
     "Нет", "Да"
 )
 
-int s_n;
-
-
-DEF_GOVERNOR(gTemperatureMin,
-    "Предел мин",
-    *PageMeasures::Temperature::self,
-    EmptyVV,
-    0, 100,
-    gset.measures.min[TypeMeasure::Temperature]
+#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)    \
+DEF_GOVERNOR(_name,                                             \
+    "Предел мин",                                               \
+    *page_self,                                                 \
+    EmptyVV,                                                    \
+    _min, _max,                                                 \
+    gset.measures.min[type]                                     \
 )
 
-DEF_GOVERNOR(gTemperatureMax,
-    "Предел макс",
-    *PageMeasures::Temperature::self,
-    EmptyVV,
-    0, 100,
-    gset.measures.min[TypeMeasure::Temperature]
+#define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
+DEF_GOVERNOR(_name,                                             \
+    "Предел макс",                                               \
+    *page_self,                                                 \
+    EmptyVV,                                                    \
+    _min, _max,                                                 \
+    gset.measures.max[type]                                     \
 )
+
+DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, 0, 100, TypeMeasure::Temperature)
+
+DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, 0, 100, TypeMeasure::Temperature);
+
 
 DEF_PAGE_4(pageTemperature,
     "ТЕМПЕРАТУРА",
