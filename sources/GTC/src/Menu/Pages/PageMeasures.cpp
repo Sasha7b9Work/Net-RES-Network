@@ -7,6 +7,7 @@
 extern const DPage pageMain;
 
 
+//-------------------------------------------------------------------------------------
 void ClosePageTemperature()
 {
     PageMeasures::Temperature::self->Close();
@@ -38,14 +39,41 @@ DEF_PAGE_2(pageTemperature,
     bClosePageTemperature
 )
 
-DEF_CHOICE_2(chHumidity,
-    "Влажность",
-    *PageMeasures::self,
+
+//-------------------------------------------------------------------------------------
+void ClosePageHumidity()
+{
+    PageMeasures::Humidity::self->Close();
+}
+
+
+DEF_BUTTN(bClosePageHumidity,
+    "Закрыть",
+    *PageMeasures::Humidity::self,
     EmptyVV,
-    gset.display.show_measure[TypeMeasure::Humidity],
-    "Откл", "Вкл"
+    ClosePageHumidity
 )
 
+
+DEF_CHOICE_2(chHumidity,
+    "Влажность",
+    *PageMeasures::Humidity::self,
+    EmptyVV,
+    gset.display.show_measure[TypeMeasure::Humidity],
+    "Нет", "Да"
+)
+
+
+DEF_PAGE_2(pageHumidity,
+    "ВЛАЖНОСТЬ",
+    *PageMeasures::self,
+    EmptyVV,
+    chHumidity,
+    bClosePageHumidity
+)
+
+
+//------------------------------------------------------------------------------------
 DEF_CHOICE_2(chPressure,
     "Давление",
     *PageMeasures::self,
@@ -80,11 +108,12 @@ DEF_PAGE_5(pageMeasures, //-V1027
     EmptyVV,
     pageTemperature,
     chPressure,
-    chHumidity,
+    pageHumidity,
     chDewPoint,
     bCloseMeasures
 )
 
 const Page *const PageMeasures::self = (const Page *)&pageMeasures;
 const Page *const PageMeasures::Temperature::self = (const Page *)&pageTemperature;
+const Page *const PageMeasures::Humidity::self = (const Page *)&pageHumidity;
 

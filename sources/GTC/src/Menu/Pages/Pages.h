@@ -24,6 +24,11 @@ namespace PageMeasures
     {
         extern const Page *const self;
     }
+
+    namespace Humidity
+    {
+        extern const Page *const self;
+    }
 };
 
 
