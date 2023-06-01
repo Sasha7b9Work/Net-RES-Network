@@ -28,11 +28,32 @@ DEF_CHOICE_2(chTemperature,
     "Нет", "Да"
 )
 
-DEF_PAGE_2(pageTemperature,
+int s_n;
+
+
+DEF_GOVERNOR(gTemperatureMin,
+    "Предел мин",
+    *PageMeasures::Temperature::self,
+    EmptyVV,
+    0, 100,
+    gset.measures.min[TypeMeasure::Temperature]
+)
+
+DEF_GOVERNOR(gTemperatureMax,
+    "Предел макс",
+    *PageMeasures::Temperature::self,
+    EmptyVV,
+    0, 100,
+    gset.measures.min[TypeMeasure::Temperature]
+)
+
+DEF_PAGE_4(pageTemperature,
     "ТЕМПЕРАТУРА",
     *PageMeasures::self,
     EmptyVV,
     chTemperature,
+    gTemperatureMin,
+    gTemperatureMax,
     bClosePageTemperature
 )
 

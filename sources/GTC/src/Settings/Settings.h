@@ -37,6 +37,13 @@ struct SettingsDisplay
 };
 
 
+struct SettingsMeasures
+{
+    int min[TypeMeasure::Count];
+    int max[TypeMeasure::Count];
+};
+
+
 struct SettingsSystem
 {
     int serial_number;
@@ -45,8 +52,9 @@ struct SettingsSystem
 
 struct Settings
 {
-    SettingsDisplay display;
-    SettingsSystem  system;
+    SettingsDisplay  display;
+    SettingsSystem   system;
+    SettingsMeasures measures;
 
     static uint GetID();
 
