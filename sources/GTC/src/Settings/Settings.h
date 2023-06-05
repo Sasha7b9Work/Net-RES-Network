@@ -58,8 +58,9 @@ struct Settings
 
     static uint GetID();
 
-    static void Load();
-    static void Save();
+    void Load();
+
+    void Update();
 };
 
 

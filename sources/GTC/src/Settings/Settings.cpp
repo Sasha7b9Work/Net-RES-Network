@@ -1,9 +1,10 @@
 // 2022/05/05 15:23:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Settings/Settings.h"
+#include "Hardware/HAL/HAL.h"
 
 
-Settings gset =
+static const Settings default =
 {
     // Display
     {
@@ -22,6 +23,9 @@ Settings gset =
 };
 
 
+Settings gset = default;
+
+
 #ifdef WIN32
 uint Settings::GetID()
 {
@@ -37,3 +41,17 @@ uint Settings::GetID()
     return *pointer;
 }
 #endif
+
+
+void Settings::Load()
+{
+    Settings settings;
+
+    if(HAL)
+}
+
+
+void Settings::Update()
+{
+
+}

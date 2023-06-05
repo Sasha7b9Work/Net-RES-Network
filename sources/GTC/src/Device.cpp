@@ -25,6 +25,8 @@ void Device::Init()
 {
     HAL::Init();
 
+    gset.Load();
+
     ST7735::Init();
 
     BME280::Init();
@@ -56,6 +58,8 @@ void Device::Update()
     Keyboard::Update();
 
     Display::Update();
+
+    gset.Update();
 }
 
 
