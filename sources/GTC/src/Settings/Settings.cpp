@@ -14,6 +14,7 @@ Settings gset =
     {
         0                                           // serial_number
     },
+    // Measures
     {
         {-100, 0, 0, -100},
         {100, 1000, 100, 100}
