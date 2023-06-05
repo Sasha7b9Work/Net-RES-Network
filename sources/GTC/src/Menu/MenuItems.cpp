@@ -582,29 +582,43 @@ void Item::DoubleClick() const
 }
 
 
-void Governor::ShortPressure(Key::E) const
+void Governor::ShortPressure(Key::E key) const
 {
     if (Item::Opened())
     {
-        if (active_control == ActiveControl::Close)
+        if (key == Key::_1)
         {
-            active_control = ActiveControl::Increase;
-            Close();
+            Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
         }
-        else
+        else if (key == Key::_2)
         {
-            const DGovernor *data = ToDGovernor();
-
-            int *value = data->value;
-
-            if (active_control == ActiveControl::Increase && *value < data->max)
+            if (active_control == ActiveControl::Close)
             {
-                *value = *value + 1;
+                active_control = ActiveControl::Increase;
+                Close();
             }
-            else if (active_control == ActiveControl::Decrease && *value > data->min)
+            else
             {
-                *value = *value - 1;
+                const DGovernor *data = ToDGovernor();
+
+                int *value = data->value;
+
+                if (active_control == ActiveControl::Increase && *value < data->max)
+                {
+                    *value = *value + 1;
+                }
+                else if (active_control == ActiveControl::Decrease && *value > data->min)
+                {
+                    *value = *value - 1;
+                }
             }
+        }
+    }
+    else
+    {
+        if (key == Key::_2)
+        {
+            Open();
         }
     }
 }
@@ -616,10 +630,10 @@ void Governor::LongPressure() const
     {
         Open();
     }
-    else
-    {
-        Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
-    }
+//    else
+//    {
+//        Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
+//    }
 }
 
 

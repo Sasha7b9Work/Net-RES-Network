@@ -13,6 +13,10 @@ Settings gset =
     // System
     {
         0                                           // serial_number
+    },
+    {
+        {-100, 0, 0, -100},
+        {100, 1000, 100, 100}
     }
 };
 

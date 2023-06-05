@@ -36,9 +36,9 @@ DEF_CHOICE_2(chTemperature,
 )
 
 
-DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, 0, 100, TypeMeasure::Temperature)
+DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, -100, 100, TypeMeasure::Temperature)
 
-DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, 0, 100, TypeMeasure::Temperature);
+DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, -100, 100, TypeMeasure::Temperature);
 
 
 DEF_PAGE_4(pageTemperature,
@@ -73,9 +73,9 @@ DEF_CHOICE_2(chPressure,
     "Îòêë", "Âêë"
 )
 
-DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 0, 100, TypeMeasure::Pressure);
+DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 0, 1000, TypeMeasure::Pressure);
 
-DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 0, 100, TypeMeasure::Pressure);
+DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 0, 1000, TypeMeasure::Pressure);
 
 DEF_PAGE_4(pagePressure,
     "ÄÀÂËÅÍÈÅ",
@@ -145,9 +145,9 @@ DEF_CHOICE_2(chDewPoint,
     "Îòêë", "Âêë"
 )
 
-DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, 0, 100, TypeMeasure::DewPoint);
+DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, -100, 100, TypeMeasure::DewPoint);
 
-DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, 0, 100, TypeMeasure::DewPoint);
+DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeasure::DewPoint);
 
 DEF_PAGE_4(pageDewPoint,
     "ÒÎ×ÊÀ ĞÎÑÛ",
