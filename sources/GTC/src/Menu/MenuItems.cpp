@@ -397,11 +397,11 @@ void TimeItem::DrawOpened(int, int, bool) const
 
 void Governor::DrawControls(int x, int y) const
 {
-    DrawControl(x + 50, y + 3, String<>("\x95"), active_control == ActiveControl::Increase);
+    DrawControl(x + 90, y + 3, String<>("\x83"), active_control == ActiveControl::Increase);
 
-    DrawControl(x + 50, y + 12, String<>("\x85"), active_control == ActiveControl::Decrease);
+    DrawControl(x + 90, y + 12, String<>("\x82"), active_control == ActiveControl::Decrease);
 
-    DrawControl(x + 80, y + 5, String<>("\x88"), active_control == ActiveControl::Close);
+    DrawControl(x + 105, y + 5, String<>("\x84"), active_control == ActiveControl::Close);
 }
 
 

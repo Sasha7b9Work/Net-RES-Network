@@ -65,17 +65,17 @@ void HAL_RTC::SetTime(const PackedTime &_time)
 {
     RTC_TimeTypeDef time;
 
-    time.Hours = _time.hours;
-    time.Minutes = _time.minutes;
-    time.Seconds = _time.seconds;
+    time.Hours = (uint8)_time.hours;
+    time.Minutes = (uint8)_time.minutes;
+    time.Seconds = (uint8)_time.seconds;
 
     HAL_RTC_SetTime(&handleRTC, &time, RTC_FORMAT_BIN);
 
     RTC_DateTypeDef date;
 
-    date.Year = (uint8)(_time.year);
-    date.Month = _time.month;
-    date.Date = _time.day;
+    date.Year = (uint8)_time.year;
+    date.Month = (uint8)_time.month;
+    date.Date = (uint8)_time.day;
 
     HAL_RTC_SetDate(&handleRTC, &date, RTC_FORMAT_BIN);
 }
