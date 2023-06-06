@@ -5,7 +5,7 @@
 #include "Hardware/Timer.h"
 
 
-static const Settings default =
+static const Settings def_set =
 {
     // Display
     {
@@ -24,7 +24,7 @@ static const Settings default =
 };
 
 
-Settings gset = default;
+Settings gset = def_set;
 
 
 void Settings::Load()
@@ -37,7 +37,7 @@ void Settings::Load()
     }
     else
     {
-        gset = default;
+        gset = def_set;
     }
 }
 
