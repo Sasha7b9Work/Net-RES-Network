@@ -56,11 +56,11 @@ struct Settings
     SettingsSystem   system;
     SettingsMeasures measures;
 
-    static uint GetID();
+    bool operator!=(const Settings &);
 
-    void Load();
+    static void Load();
 
-    void Update();
+    static void Update();
 };
 
 

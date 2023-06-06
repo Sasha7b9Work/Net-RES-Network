@@ -2,7 +2,9 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/CDC/CDC.h"
+#include "Utils/Math.h"
 #include <stm32f1xx_hal.h>
+#include <cstring>
 
 
 static void SystemClock_Config();
@@ -67,6 +69,16 @@ static void SystemClock_Config()
     PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
 
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
+}
+
+
+String<> HAL::GetUID()
+{
+    uint8 bytes[12];
+
+    std::memcpy(bytes, (void *)0x1FFFF7E8, 12);
+
+    return String<>("%X", Math::CalculateCRC(bytes, 12));
 }
 
 

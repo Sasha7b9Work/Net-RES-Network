@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 
 
 static const Settings default =
@@ -26,32 +27,47 @@ static const Settings default =
 Settings gset = default;
 
 
-#ifdef WIN32
-uint Settings::GetID()
-{
-    return 112;
-}
-#else
-uint Settings::GetID()
-{
-    uint address = 0x8000000 + 0x10000 - 4;
-
-    uint *pointer = (uint *)address;
-
-    return *pointer;
-}
-#endif
-
-
 void Settings::Load()
 {
     Settings settings;
 
-    if(HAL)
+    if (HAL_ROM::LoadSettings(settings))
+    {
+        gset = settings;
+    }
+    else
+    {
+        gset = default;
+    }
 }
 
 
 void Settings::Update()
 {
+    static TimeMeterMS meter;
 
+    if (meter.ElapsedTime() > 10000)
+    {
+        meter.Reset();
+
+        Settings settings;
+
+        if (HAL_ROM::LoadSettings(settings))
+        {
+            if (gset != settings)
+            {
+                HAL_ROM::SaveSettings(gset);
+            }
+        }
+        else
+        {
+            HAL_ROM::SaveSettings(gset);
+        }
+    }
+}
+
+
+bool Settings::operator!=(const Settings &rhs)
+{
+    return std::memcmp(this, &rhs, sizeof(Settings)) != 0;
 }

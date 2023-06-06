@@ -6,7 +6,7 @@
 
 namespace Math
 {
-    uint CalculateHash(const void *buffer, int size);
+    uint CalculateCRC(const void *buffer, int size);
 
     template<class T>
     void CircleIncrease(T *value, T min, T max);
