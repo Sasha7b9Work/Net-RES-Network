@@ -52,11 +52,13 @@ struct SettingsSystem
 
 struct Settings
 {
+    uint crc;
     SettingsDisplay  display;
     SettingsSystem   system;
     SettingsMeasures measures;
 
     bool operator!=(const Settings &);
+    bool operator==(const Settings &);
 
     static void Load();
 

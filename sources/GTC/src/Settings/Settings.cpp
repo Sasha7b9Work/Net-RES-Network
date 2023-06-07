@@ -7,6 +7,7 @@
 
 static const Settings def_set =
 {
+    0,
     // Display
     {
         {1, 1, 1, 0},
@@ -67,7 +68,15 @@ void Settings::Update()
 }
 
 
+bool Settings::operator==(const Settings &rhs)
+{
+    return  std::memcmp(&display, &rhs.display, sizeof(display)) == 0 &&
+            std::memcmp(&system, &rhs.system, sizeof(system) == 0 &&
+            std::memcmp(&measures, &rhs.measures, sizeof(measures) == 0));
+}
+
+
 bool Settings::operator!=(const Settings &rhs)
 {
-    return std::memcmp(this, &rhs, sizeof(Settings)) != 0;
+    return !(*this == rhs);
 }
