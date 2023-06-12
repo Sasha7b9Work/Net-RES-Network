@@ -171,18 +171,14 @@ struct Choice : public Item
 
 struct DButton
 {
-    typedef void (*funcPressButton)();
-
     COMMON_PART_ITEM
-
-    const funcPressButton funcPress;
 };
 
 
 struct Button : public Item
 {
     void ShortPressure(Key::E) const;
-    void LongPressure() const { ToDButton()->funcPress(); }
+    void LongPressure() const { ToDItem()->funcOnOpenClose(true); }
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;

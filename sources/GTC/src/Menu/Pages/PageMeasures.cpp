@@ -15,7 +15,7 @@ extern const DPage pageMain;
 
 
 //-------------------------------------------------------------------------------------
-void ClosePageTemperature()
+void ClosePageTemperature(bool)
 {
     PageMeasures::Temperature::self->Close();
 }
@@ -23,7 +23,6 @@ void ClosePageTemperature()
 DEF_BUTTN(bClosePageTemperature,
     "Закрыть",
     *PageMeasures::Temperature::self,
-    EmptyFuncOpenClose,
     ClosePageTemperature
 )
 
@@ -53,7 +52,7 @@ DEF_PAGE_4(pageTemperature,
 
 
 //------------------------------------------------------------------------------------
-void ClosePagePressure()
+void ClosePagePressure(bool)
 {
     PageMeasures::Pressure::self->Close();
 }
@@ -61,7 +60,6 @@ void ClosePagePressure()
 DEF_BUTTN(bClosePagePressure,
     "Закрыть",
     *PageMeasures::Pressure::self,
-    EmptyFuncOpenClose,
     ClosePagePressure
 )
 
@@ -89,7 +87,7 @@ DEF_PAGE_4(pagePressure,
 
 
 //-------------------------------------------------------------------------------------
-void ClosePageHumidity()
+void ClosePageHumidity(bool)
 {
     PageMeasures::Humidity::self->Close();
 }
@@ -97,7 +95,6 @@ void ClosePageHumidity()
 DEF_BUTTN(bClosePageHumidity,
     "Закрыть",
     *PageMeasures::Humidity::self,
-    EmptyFuncOpenClose,
     ClosePageHumidity
 )
 
@@ -125,7 +122,7 @@ DEF_PAGE_4(pageHumidity,
 
 
 //------------------------------------------------------------------------------------
-void ClosePageDewPoint()
+void ClosePageDewPoint(bool)
 {
     PageMeasures::DewPoint::self->Close();
 }
@@ -133,7 +130,6 @@ void ClosePageDewPoint()
 DEF_BUTTN(bClosePageDewPoint,
     "Закрыть",
     *PageMeasures::DewPoint::self,
-    EmptyFuncOpenClose,
     ClosePageDewPoint
 )
 
@@ -160,7 +156,7 @@ DEF_PAGE_4(pageDewPoint,
 )
 
 
-static void CloseMeasures()
+static void CloseMeasures(bool)
 {
     PageMeasures::self->Close();
 };
@@ -168,7 +164,6 @@ static void CloseMeasures()
 DEF_BUTTN(bCloseMeasures,
     "Закрыть",
     *PageMeasures::self,
-    EmptyFuncOpenClose,
     CloseMeasures
 )
 

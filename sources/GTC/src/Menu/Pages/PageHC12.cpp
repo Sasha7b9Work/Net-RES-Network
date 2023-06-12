@@ -6,7 +6,7 @@
 extern const DPage pageMain;
 
 
-static void ClosePageHC12()
+static void ClosePageHC12(bool)
 {
     PageHC12::self->Close();
 }
@@ -14,7 +14,6 @@ static void ClosePageHC12()
 DEF_BUTTN( bClosePageHC12,
     "Закрыть",
     *PageHC12::self,
-    EmptyFuncOpenClose,
     ClosePageHC12
 );
 

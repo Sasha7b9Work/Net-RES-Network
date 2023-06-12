@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define DEF_BUTTN(name, title, keeper, beforeOpen, function)                                                            \
-    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, beforeOpen, function };
+#define DEF_BUTTN(name, title, keeper, function)                                                                        \
+    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function };
 
 #define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                  \
     static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, min, max, &(value) };

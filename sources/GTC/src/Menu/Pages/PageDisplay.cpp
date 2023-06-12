@@ -7,7 +7,7 @@
 extern const DPage pageMain;
 
 
-void ClosePageDisplay()
+void ClosePageDisplay(bool)
 {
     PageDisplay::self->Close();
 }
@@ -15,7 +15,6 @@ void ClosePageDisplay()
 DEF_BUTTN( bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
-    EmptyFuncOpenClose,
     ClosePageDisplay
 )
 

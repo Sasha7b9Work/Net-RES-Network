@@ -32,7 +32,7 @@ DEF_GOVERNOR(gSerialNumber,
 )
 
 
-void ClosePageSystem()
+void ClosePageSystem(bool)
 {
     PageSystem::self->Close();
 }
@@ -41,7 +41,6 @@ void ClosePageSystem()
 DEF_BUTTN(bClosePageSystem,
     "Закрыть",
     *PageSystem::self,
-    EmptyFuncOpenClose,
     ClosePageSystem
 );
 

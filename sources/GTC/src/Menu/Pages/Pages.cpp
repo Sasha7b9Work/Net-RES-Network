@@ -7,10 +7,30 @@
 extern const DPage pageMain;
 
 
-static void CloseMainPage()
+static void FixateMeasures(bool)
+{
+
+}
+
+
+DEF_BUTTN(bFixateMeasures,
+    "Фиксация",
+    pageMain,
+    FixateMeasures
+)
+
+
+static void CloseMainPage(bool)
 {
     PageMain::self->Close();
 }
+
+
+DEF_BUTTN(bCloseMainPage,
+    "Закрыть",
+    pageMain,
+    CloseMainPage
+)
 
 
 static void OnOpenClose_MainPage(bool open)
@@ -26,17 +46,11 @@ static void OnOpenClose_MainPage(bool open)
 }
 
 
-DEF_BUTTN(bCloseMainPage,
-    "Закрыть",
-    pageMain,
-    EmptyFuncOpenClose,
-    CloseMainPage
-)
-
 DEF_PAGE_5(pageMain, //-V1027
     "МЕНЮ",
     Page::Empty,
     OnOpenClose_MainPage,
+//    bFixateMeasures,
     *PageMeasures::self,
     *PageDisplay::self,
     *PageHC12::self,
