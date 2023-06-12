@@ -14,14 +14,14 @@ static void ClosePageHC12()
 DEF_BUTTN( bClosePageHC12,
     "Закрыть",
     *PageHC12::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePageHC12
 );
 
 DEF_PAGE_1( pageHC12, //-V1027
     "HC12",
     pageMain,
-    EmptyVV,
+    EmptyFuncOpenClose,
     bClosePageHC12
 )
 

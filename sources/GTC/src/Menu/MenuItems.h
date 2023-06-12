@@ -27,10 +27,14 @@ struct Governor;
 struct TimeItem;
 
 
-#define COMMON_PART_ITEM    TypeItem::E type;       \
-                            pchar       title;      \
-                            const Page *keeper;     \
-                            pFuncVV    funcBeforeOpen;     // ¬ыполн€етс€ перед открытием контрола
+typedef void(*FuncOpenClose)(bool);
+inline void EmptyFuncOpenClose(bool) { }
+
+
+#define COMMON_PART_ITEM    TypeItem::E    type;            \
+                            pchar          title;           \
+                            const Page    *keeper;          \
+                            FuncOpenClose  funcOnOpenClose;     // ¬ыполн€етс€ перед открытием (true) или закрытием (false) итема
 
 struct DItem
 {

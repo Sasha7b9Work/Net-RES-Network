@@ -109,5 +109,15 @@ void HAL_ROM::Save(uint address, const Settings &set)
 
     HAL_FLASHEx_Erase(&is, &error);
 
+    uint *data = (uint *)&set;
+
+    for (int i = 0; i < (sizeof(Settings) / sizeof(uint) + 1); i++)
+    {
+        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, *data);
+
+        address += 4;
+        data++;
+    }
+
     HAL_FLASH_Lock();
 }

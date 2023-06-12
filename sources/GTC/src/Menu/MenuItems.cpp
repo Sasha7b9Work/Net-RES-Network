@@ -20,10 +20,7 @@ Governor::ActiveControl::E Governor::active_control = Governor::ActiveControl::I
 
 void Item::Open() const
 {
-    if (ToDItem()->funcBeforeOpen)
-    {
-        ToDItem()->funcBeforeOpen();
-    }
+    ToDItem()->funcOnOpenClose(true);
 
     opened_item = this;
 }
@@ -31,6 +28,8 @@ void Item::Open() const
 
 void Item::Close() const
 {
+    ToDItem()->funcOnOpenClose(false);
+
     if (this == PageMain::self)
     {
         opened_item = &Page::Empty;

@@ -5,10 +5,10 @@
 
 
 #define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type) \
-DEF_GOVERNOR(_name, "Предел мин", *page_self, EmptyVV, _min, _max, gset.measures.min[type])
+DEF_GOVERNOR(_name, "Предел мин", *page_self, EmptyFuncOpenClose, _min, _max, gset.measures.min[type])
 
 #define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
-DEF_GOVERNOR(_name, "Предел макс", *page_self, EmptyVV, _min, _max, gset.measures.max[type])
+DEF_GOVERNOR(_name, "Предел макс", *page_self, EmptyFuncOpenClose, _min, _max, gset.measures.max[type])
 
 
 extern const DPage pageMain;
@@ -23,14 +23,14 @@ void ClosePageTemperature()
 DEF_BUTTN(bClosePageTemperature,
     "Закрыть",
     *PageMeasures::Temperature::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePageTemperature
 )
 
 DEF_CHOICE_2(chTemperature,
     "Показывать",
     *PageMeasures::Temperature::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     gset.display.show_measure[TypeMeasure::Temperature],
     "Нет", "Да"
 )
@@ -44,7 +44,7 @@ DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, -100, 100, Ty
 DEF_PAGE_4(pageTemperature,
     "ТЕМПЕРАТУРА",
     *PageMeasures::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     chTemperature,
     gTemperatureMin,
     gTemperatureMax,
@@ -61,14 +61,14 @@ void ClosePagePressure()
 DEF_BUTTN(bClosePagePressure,
     "Закрыть",
     *PageMeasures::Pressure::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePagePressure
 )
 
 DEF_CHOICE_2(chPressure,
     "Давление",
     *PageMeasures::Pressure::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     gset.display.show_measure[TypeMeasure::Pressure],
     "Откл", "Вкл"
 )
@@ -80,7 +80,7 @@ DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 0, 1000, TypeMeasur
 DEF_PAGE_4(pagePressure,
     "ДАВЛЕНИЕ",
     *PageMeasures::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     chPressure,
     gPressureMin,
     gPressureMax,
@@ -97,14 +97,14 @@ void ClosePageHumidity()
 DEF_BUTTN(bClosePageHumidity,
     "Закрыть",
     *PageMeasures::Humidity::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePageHumidity
 )
 
 DEF_CHOICE_2(chHumidity,
     "Влажность",
     *PageMeasures::Humidity::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     gset.display.show_measure[TypeMeasure::Humidity],
     "Нет", "Да"
 )
@@ -116,7 +116,7 @@ DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 0, 100, TypeMeasure
 DEF_PAGE_4(pageHumidity,
     "ВЛАЖНОСТЬ",
     *PageMeasures::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     chHumidity,
     gHumidityMin,
     gHumidityMax,
@@ -133,14 +133,14 @@ void ClosePageDewPoint()
 DEF_BUTTN(bClosePageDewPoint,
     "Закрыть",
     *PageMeasures::DewPoint::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePageDewPoint
 )
 
 DEF_CHOICE_2(chDewPoint,
     "Точка росы",
     *PageMeasures::DewPoint::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     gset.display.show_measure[TypeMeasure::DewPoint],
     "Откл", "Вкл"
 )
@@ -152,7 +152,7 @@ DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeas
 DEF_PAGE_4(pageDewPoint,
     "ТОЧКА РОСЫ",
     *PageMeasures::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     chDewPoint,
     gDewPointMin,
     gDewPointMax,
@@ -168,14 +168,14 @@ static void CloseMeasures()
 DEF_BUTTN(bCloseMeasures,
     "Закрыть",
     *PageMeasures::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     CloseMeasures
 )
 
 DEF_PAGE_5(pageMeasures, //-V1027
     "ИЗМЕРЕНИЯ",
     pageMain,
-    EmptyVV,
+    EmptyFuncOpenClose,
     pageTemperature,
     pagePressure,
     pageHumidity,

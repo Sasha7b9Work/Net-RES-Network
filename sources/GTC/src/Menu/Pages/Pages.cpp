@@ -14,7 +14,7 @@ static void CloseMainPage()
 DEF_BUTTN(bCloseMainPage,
     "Закрыть",
     pageMain,
-    EmptyVV,
+    EmptyFuncOpenClose,
     CloseMainPage
 )
 

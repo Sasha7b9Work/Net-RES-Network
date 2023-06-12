@@ -15,14 +15,14 @@ void ClosePageDisplay()
 DEF_BUTTN( bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePageDisplay
 )
 
 DEF_PAGE_1(pageDisplay, //-V1027
     "ДИСПЛЕЙ",
     pageMain,
-    EmptyVV,
+    EmptyFuncOpenClose,
     bClosePageDisplay
 )
 

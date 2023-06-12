@@ -12,9 +12,12 @@ static int cur_field = 0;
 static int state = 0;
 static PackedTime time;
 
-static void Before_OpenTime()
+static void Before_OpenTime(bool open)
 {
-    time = HAL_RTC::GetTime();
+    if (open)
+    {
+        time = HAL_RTC::GetTime();
+    }
 }
 
 DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
@@ -23,7 +26,7 @@ DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
 DEF_GOVERNOR(gSerialNumber,
     "—/Õ",
     *PageSystem::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     0, (int)0x7FFFFFFF,
     gset.system.serial_number
 )
@@ -38,7 +41,7 @@ void ClosePageSystem()
 DEF_BUTTN(bClosePageSystem,
     "«‡Í˚Ú¸",
     *PageSystem::self,
-    EmptyVV,
+    EmptyFuncOpenClose,
     ClosePageSystem
 );
 
@@ -46,7 +49,7 @@ DEF_BUTTN(bClosePageSystem,
 DEF_PAGE_3(pageSystem, //-V1027
     "—»—“≈Ã¿",
     pageMain,
-    EmptyVV,
+    EmptyFuncOpenClose,
     tTime,
     gSerialNumber,
     bClosePageSystem
