@@ -59,6 +59,6 @@
     DEF_ITEMS_5(items##name, item1, item2, item3, item4, item5)                             \
     DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
-#define DEF_PAGE_6(name, title, keeper, item1, item2, item3, item4, item5, item6)           \
-    DEF_ITEMS_6(items##name, item1, item2, item3, item4, item5, item6)                      \
-    DEF_PAGE(name, title, keeper, items##name)
+#define DEF_PAGE_6(name, title, keeper, beforeOpen, item1, item2, item3, item4, item5, item6)   \
+    DEF_ITEMS_6(items##name, item1, item2, item3, item4, item5, item6)                          \
+    DEF_PAGE(name, title, keeper, beforeOpen, items##name)

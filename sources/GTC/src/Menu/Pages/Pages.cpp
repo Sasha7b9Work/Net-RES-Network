@@ -46,11 +46,11 @@ static void OnOpenClose_MainPage(bool open)
 }
 
 
-DEF_PAGE_5(pageMain, //-V1027
+DEF_PAGE_6(pageMain, //-V1027
     "лемч",
     Page::Empty,
     OnOpenClose_MainPage,
-//    bFixateMeasures,
+    bFixateMeasures,
     *PageMeasures::self,
     *PageDisplay::self,
     *PageHC12::self,
