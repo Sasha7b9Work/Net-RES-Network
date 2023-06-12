@@ -1,6 +1,7 @@
 // 2022/05/05 12:26:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
 
 
 extern const DPage pageMain;
@@ -10,6 +11,20 @@ static void CloseMainPage()
 {
     PageMain::self->Close();
 }
+
+
+static void OnOpenClose_MainPage(bool open)
+{
+    if (open)
+    {
+
+    }
+    else
+    {
+        gset.Save();
+    }
+}
+
 
 DEF_BUTTN(bCloseMainPage,
     "Закрыть",
@@ -21,7 +36,7 @@ DEF_BUTTN(bCloseMainPage,
 DEF_PAGE_5(pageMain, //-V1027
     "МЕНЮ",
     Page::Empty,
-    EmptyVV,
+    OnOpenClose_MainPage,
     *PageMeasures::self,
     *PageDisplay::self,
     *PageHC12::self,
