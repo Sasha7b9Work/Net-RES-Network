@@ -204,9 +204,9 @@ void Button::DrawClosed(int x, int y, bool active) const
 }
 
 
-void Button::DrawOpened(int, int, bool) const
+void Button::DrawOpened(int x, int y, bool active) const
 {
-
+    DrawClosed(x, y, active);
 }
 
 
