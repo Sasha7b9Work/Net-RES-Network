@@ -62,8 +62,6 @@ void Device::Update()
     Keyboard::Update();
 
     Display::Update();
-
-    gset.Update();
 }
 
 

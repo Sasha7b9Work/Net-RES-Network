@@ -8,6 +8,7 @@
 static const Settings def_set =
 {
     0,
+    0,
     // Display
     {
         {1, 1, 1, 0},
@@ -43,27 +44,29 @@ void Settings::Load()
 }
 
 
-void Settings::Update()
+void Settings::Save()
 {
-    static TimeMeterMS meter;
+    Settings settings;
 
-    if (meter.ElapsedTime() > 10000)
+    bool need_save = false;
+
+    if (HAL_ROM::LoadSettings(settings))
     {
-        meter.Reset();
-
-        Settings settings;
-
-        if (HAL_ROM::LoadSettings(settings))
+        if (gset != settings)
         {
-            if (gset != settings)
-            {
-                HAL_ROM::SaveSettings(gset);
-            }
+            need_save = true;
         }
-        else
-        {
-            HAL_ROM::SaveSettings(gset);
-        }
+    }
+    else
+    {
+        need_save = true;
+    }
+
+    if (need_save)
+    {
+        gset.number++;
+
+        HAL_ROM::SaveSettings(gset);
     }
 }
 

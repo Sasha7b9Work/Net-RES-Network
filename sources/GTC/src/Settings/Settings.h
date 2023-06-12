@@ -53,6 +53,7 @@ struct SettingsSystem
 struct Settings
 {
     uint crc;
+    uint number;
     SettingsDisplay  display;
     SettingsSystem   system;
     SettingsMeasures measures;
@@ -62,7 +63,7 @@ struct Settings
 
     static void Load();
 
-    static void Update();
+    static void Save();
 };
 
 

@@ -12,114 +12,102 @@
 
 namespace HAL_ROM
 {
-    #define ADDR_FLASH_PAGE_60    ((uint)0x0800F000) /* Base @ of Page 60, 1 Kbytes */
-    #define ADDR_FLASH_PAGE_61    ((uint)0x0800F400) /* Base @ of Page 61, 1 Kbytes */
     #define ADDR_FLASH_PAGE_62    ((uint)0x0800F800) /* Base @ of Page 62, 1 Kbytes */
     #define ADDR_FLASH_PAGE_63    ((uint)0x0800FC00) /* Base @ of Page 63, 1 Kbytes */
 
     #define SIZE_SECTOR 1024
 
-    #define ADDR_BEGIN  ADDR_FLASH_PAGE_60
-    #define ADDR_END    (ADDR_FLASH_PAGE_63 + (SIZE_SECTOR))
+    #define ADDR_SECTOR_0   ADDR_FLASH_PAGE_62
+    #define ADDR_SECTOR_1   ADDR_FLASH_PAGE_63
 
-    #define SIZE_SETTINGS   256
+    static void Save(uint address, const Settings &set);
 
+    static bool Load(uint address, Settings &);
 
-    // Возвращает адрес последних сохранённых настроек. Если настройки не сохранялись, возвращает 0
-    static uint LastRecord();
-
-    static void EraseAll();
-
-    // Возвращает false в случае неудачи (контрольная сумма не совпадает или целевое место не пустое)
-    static bool Save(uint address, const Settings &set);
+    static uint Read(uint address);
 }
 
 
 
 void HAL_ROM::SaveSettings(const Settings &set)
 {
-    uint addr_last = LastRecord();
-
-    uint addr_rec = addr_last + SIZE_SETTINGS;
-
-    if (addr_last == 0)
+    if (Read(ADDR_SECTOR_0) == (uint)(-1))           // Если в нулевой сектор ещё ничего не записано
     {
-        addr_rec = ADDR_BEGIN;
+        Save(ADDR_SECTOR_0, set);
     }
-
-    if (addr_last == ADDR_END - SIZE_SETTINGS)
+    else if (Read(ADDR_SECTOR_1) == (uint)(-1))      // Если в первый сектор ещё ничего не записано
     {
-        EraseAll();
-
-        addr_rec = ADDR_BEGIN;
+        Save(ADDR_SECTOR_1, set);
     }
+    else
+    {
+        uint number0 = Read(ADDR_SECTOR_0 + 4);
+        uint number1 = Read(ADDR_SECTOR_1 + 4);
 
-
+        if (number0 < number1)                              // В нулевом секторе более старые настройки
+        {
+            Save(ADDR_SECTOR_0, set);
+        }
+        else
+        {
+            Save(ADDR_SECTOR_1, set);
+        }
+    }
 }
 
 
 bool HAL_ROM::LoadSettings(Settings &set)
 {
-    uint address = LastRecord();
+    uint number0 = Read(ADDR_SECTOR_0 + 4);
+    uint number1 = Read(ADDR_SECTOR_1 + 4);
 
-    if (address == 0)
+    if (number0 == (uint)(-1))
     {
         return false;
     }
 
-    while (address >= ADDR_BEGIN)
+    if (number1 == (uint)(-1))
     {
-        uint crc = Math::CalculateCRC((const void *)(address + 4), (int)sizeof(set));
-
-        if (crc == *((uint *)address))
-        {
-            std::memcpy(&set, (const void *)address, (int)sizeof(set));
-
-            return true;
-        }
-
-        address -= SIZE_SETTINGS;
+        return Load(ADDR_SECTOR_0, set);
     }
 
-    return false;
+    if (number0 > number1)
+    {
+        return Load(ADDR_SECTOR_0, set);
+    }
+
+    return Load(ADDR_SECTOR_1, set);
 }
 
 
-uint HAL_ROM::LastRecord()
+uint HAL_ROM::Read(uint _address)
 {
-    uint address = ADDR_BEGIN;
+    uint *address = (uint *)_address;
 
-    while (address < ADDR_END)
-    {
-        uint value = *((uint *)address);
-
-        if (value == (uint)(-1))
-        {
-            return (address == ADDR_BEGIN) ? 0 : (address - SIZE_SETTINGS);
-        }
-
-        address += SIZE_SETTINGS;
-    }
-
-    return ADDR_END - SIZE_SETTINGS;
+    return *address;
 }
 
 
-void HAL_ROM::EraseAll()
+bool HAL_ROM::Load(uint address, Settings &set)
 {
+    std::memcpy((void *)&set, (const void *)address, sizeof(Settings));
+
+    return true;
+}
+
+
+void HAL_ROM::Save(uint address, const Settings &set)
+{
+    HAL_FLASH_Unlock();
+
     uint error = 0;
     FLASH_EraseInitTypeDef is;
 
     is.TypeErase = FLASH_TYPEERASE_PAGES;
-    is.PageAddress = ADDR_BEGIN;
-    is.NbPages = 4;
+    is.PageAddress = address;
+    is.NbPages = 1;
 
-    HAL_FLASH_Unlock();
-
-    if (HAL_FLASHEx_Erase(&is, &error) != HAL_OK)
-    {
-        error = error;
-    }
+    HAL_FLASHEx_Erase(&is, &error);
 
     HAL_FLASH_Lock();
 }
