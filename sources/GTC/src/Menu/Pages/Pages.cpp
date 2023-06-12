@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
+#include "Measures.h"
 
 
 extern const DPage pageMain;
@@ -9,7 +10,7 @@ extern const DPage pageMain;
 
 static void FixateMeasures(bool)
 {
-
+    Measures::SetFixed(!Measures::IsFixed());
 }
 
 
