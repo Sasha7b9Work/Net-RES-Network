@@ -41,7 +41,8 @@ void ClosePageSystem(bool)
 DEF_BUTTN(bClosePageSystem,
     "Закрыть",
     *PageSystem::self,
-    ClosePageSystem
+    ClosePageSystem,
+    nullptr
 );
 
 

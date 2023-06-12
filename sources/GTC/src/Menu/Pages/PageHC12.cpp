@@ -14,7 +14,8 @@ static void ClosePageHC12(bool)
 DEF_BUTTN( bClosePageHC12,
     "Закрыть",
     *PageHC12::self,
-    ClosePageHC12
+    ClosePageHC12,
+    nullptr
 );
 
 DEF_PAGE_1( pageHC12, //-V1027

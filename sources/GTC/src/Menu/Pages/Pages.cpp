@@ -8,16 +8,20 @@
 extern const DPage pageMain;
 
 
+static bool fixed_marked = false;
+
 static void FixateMeasures(bool)
 {
     Measures::SetFixed(!Measures::IsFixed());
-}
 
+    fixed_marked = Measures::IsFixed();
+}
 
 DEF_BUTTN(bFixateMeasures,
     "Фиксация",
     pageMain,
-    FixateMeasures
+    FixateMeasures,
+    &fixed_marked
 )
 
 
@@ -30,7 +34,8 @@ static void CloseMainPage(bool)
 DEF_BUTTN(bCloseMainPage,
     "Закрыть",
     pageMain,
-    CloseMainPage
+    CloseMainPage,
+    nullptr
 )
 
 

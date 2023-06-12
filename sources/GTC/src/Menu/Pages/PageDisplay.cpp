@@ -15,7 +15,8 @@ void ClosePageDisplay(bool)
 DEF_BUTTN( bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
-    ClosePageDisplay
+    ClosePageDisplay,
+    nullptr
 )
 
 DEF_PAGE_1(pageDisplay, //-V1027

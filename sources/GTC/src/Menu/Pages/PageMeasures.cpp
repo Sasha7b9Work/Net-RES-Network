@@ -23,7 +23,8 @@ void ClosePageTemperature(bool)
 DEF_BUTTN(bClosePageTemperature,
     "Закрыть",
     *PageMeasures::Temperature::self,
-    ClosePageTemperature
+    ClosePageTemperature,
+    nullptr
 )
 
 DEF_CHOICE_2(chTemperature,
@@ -60,7 +61,8 @@ void ClosePagePressure(bool)
 DEF_BUTTN(bClosePagePressure,
     "Закрыть",
     *PageMeasures::Pressure::self,
-    ClosePagePressure
+    ClosePagePressure,
+    nullptr
 )
 
 DEF_CHOICE_2(chPressure,
@@ -95,7 +97,8 @@ void ClosePageHumidity(bool)
 DEF_BUTTN(bClosePageHumidity,
     "Закрыть",
     *PageMeasures::Humidity::self,
-    ClosePageHumidity
+    ClosePageHumidity,
+    nullptr
 )
 
 DEF_CHOICE_2(chHumidity,
@@ -130,7 +133,8 @@ void ClosePageDewPoint(bool)
 DEF_BUTTN(bClosePageDewPoint,
     "Закрыть",
     *PageMeasures::DewPoint::self,
-    ClosePageDewPoint
+    ClosePageDewPoint,
+    nullptr
 )
 
 DEF_CHOICE_2(chDewPoint,
@@ -164,7 +168,8 @@ static void CloseMeasures(bool)
 DEF_BUTTN(bCloseMeasures,
     "Закрыть",
     *PageMeasures::self,
-    CloseMeasures
+    CloseMeasures,
+    nullptr
 )
 
 DEF_PAGE_5(pageMeasures, //-V1027

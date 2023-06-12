@@ -34,11 +34,11 @@ inline void EmptyFuncOpenClose(bool) { }
 #define COMMON_PART_ITEM    TypeItem::E    type;            \
                             pchar          title;           \
                             const Page    *keeper;          \
-                            FuncOpenClose  funcOnOpenClose;     // Выполняется перед открытием (true) или закрытием (false) итема
+                            FuncOpenClose  funcOnOpenClose     // Выполняется перед открытием (true) или закрытием (false) итема
 
 struct DItem
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 };
 
 
@@ -96,7 +96,7 @@ protected:
 
 struct DPage
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     const Item *const *items;
     uint8 *currentItem;
@@ -143,7 +143,7 @@ private:
 
 struct DChoice
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     uint8 *const cell;
     const uint8 count;
@@ -171,7 +171,9 @@ struct Choice : public Item
 
 struct DButton
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
+
+    bool *marked;            // Если это значение равно true, то кнопка с галочкой. Типа "выбрано"
 };
 
 
@@ -193,7 +195,7 @@ struct Button : public Item
 
 struct DGovernor
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     int min;
     int max;
@@ -237,7 +239,7 @@ private:
 
 struct DTimeItem
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     int *cur_field;     // Область, в которой находится курсор
                         // [0...5] <-> [часы ... год], 6 - применить, 7 - выход
