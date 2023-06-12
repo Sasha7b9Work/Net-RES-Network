@@ -36,9 +36,9 @@ DEF_CHOICE_2(chTemperature,
 )
 
 
-DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, -100, 100, TypeMeasure::Temperature)
+DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature)
 
-DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, -100, 100, TypeMeasure::Temperature);
+DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
 
 
 DEF_PAGE_4(pageTemperature,
@@ -73,9 +73,9 @@ DEF_CHOICE_2(chPressure,
     "Îòêë", "Âêë"
 )
 
-DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 0, 1000, TypeMeasure::Pressure);
+DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 825, TypeMeasure::Pressure);
 
-DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 0, 1000, TypeMeasure::Pressure);
+DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 825, TypeMeasure::Pressure);
 
 DEF_PAGE_4(pagePressure,
     "ÄÀÂËÅÍÈÅ",
@@ -109,9 +109,9 @@ DEF_CHOICE_2(chHumidity,
     "Íåò", "Äà"
 )
 
-DEF_GOVERNOR_MIN(gHumidityMin, PageMeasures::Humidity::self, 0, 100, TypeMeasure::Humidity);
+DEF_GOVERNOR_MIN(gHumidityMin, PageMeasures::Humidity::self, 10, 98, TypeMeasure::Humidity);
 
-DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 0, 100, TypeMeasure::Humidity);
+DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, TypeMeasure::Humidity);
 
 DEF_PAGE_4(pageHumidity,
     "ÂËÀÆÍÎÑÒÜ",
