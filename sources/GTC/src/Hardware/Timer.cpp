@@ -18,7 +18,7 @@ TimeMeterMS::TimeMeterMS()
 void TimeMeterMS::Reset()
 {
     time_reset = TIME_MS;
-    time_finished = TIME_MS;
+    time_finished = time_reset;
 }
 
 

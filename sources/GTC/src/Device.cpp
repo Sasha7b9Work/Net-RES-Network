@@ -43,10 +43,6 @@ void Device::Init()
 
 void Device::Update()
 {
-    uint size = sizeof(gset);
-
-    size = size;
-
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;

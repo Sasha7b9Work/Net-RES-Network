@@ -24,12 +24,14 @@
     static const Item * const name[] = { (Item *)&item1,(Item *)&item2, (Item *)&item3, nullptr };
 
 #define DEF_ITEMS_4(name, item1, item2, item3, item4)                                       \
-    static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
-        (Item *)&item4, nullptr };
+    static const Item * const name[] = { reinterpret_cast<const Item *>(&item1),            \
+    reinterpret_cast<const Item *>(&item2),                                                 \
+    reinterpret_cast<const Item *>(&item3),                                                 \
+    reinterpret_cast<const Item *>(&item4), nullptr };
 
 #define DEF_ITEMS_5(name, item1, item2, item3, item4, item5)                                \
     static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
-        (Item *)&item4, (Item *)&item5, nullptr };
+        reinterpret_cast<const Item *>(&item4), (Item *)&item5, nullptr };
 
 #define DEF_ITEMS_6(name, item1, item2, item3, item4, item5, item6)                         \
     static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
