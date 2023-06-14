@@ -151,6 +151,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
+#include <time.h>
 
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
@@ -818,11 +819,13 @@ HAL_StatusTypeDef HAL_RTC_GetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDat
     return HAL_ERROR;
   }
 
-  /* Fill the structure fields with the read parameters */
-  sDate->WeekDay  = hrtc->DateToUpdate.WeekDay;
-  sDate->Year     = hrtc->DateToUpdate.Year;
-  sDate->Month    = hrtc->DateToUpdate.Month;
-  sDate->Date     = hrtc->DateToUpdate.Date;
+  time_t time = RTC_ReadAlarmCounter(hrtc);
+
+  struct tm *ptm = gmtime(&time);
+
+  sDate->Year = ptm->tm_year;
+  sDate->Month = ptm->tm_mon;
+  sDate->Date = ptm->tm_mday;
 
   /* Check the input parameters format */
   if(Format != RTC_FORMAT_BIN)
