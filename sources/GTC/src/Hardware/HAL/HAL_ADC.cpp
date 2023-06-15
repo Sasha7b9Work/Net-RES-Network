@@ -62,7 +62,7 @@ float HAL_ADC::GetVoltage()
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-    HAL_ADC::voltage = (float)HAL_ADC_GetValue(hadc) / (1 << 12) * 3.3f * 0.75f;
+    HAL_ADC::voltage = (float)HAL_ADC_GetValue(hadc) / (1 << 12) * 3.3f * 1.25f;
 
     HAL_ADC_Start_IT(&HAL_ADC::handleADC);
 }
