@@ -196,10 +196,11 @@ void Button::DrawClosed(int x, int y, bool active) const
 {
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 
-    if (*ToDButton()->marked)
+    if (ToDButton()->marked && *ToDButton()->marked)
     {
-        String<>("\x85").Draw(x + 50, y + 5);
-        String<>("\x86").Draw(x + 60, y + 5);
+        x += 130;
+        String<>("\x85").Draw(x, y + 5);
+        String<>("\x86").Draw(x + 10, y + 5);
     }
 }
 

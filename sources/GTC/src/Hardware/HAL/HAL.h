@@ -30,6 +30,14 @@ namespace HAL
 }
 
 
+namespace HAL_ADC
+{
+    void Init();
+
+    float GetVoltage();
+}
+
+
 namespace HAL_I2C1
 {
     void Init();
