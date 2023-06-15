@@ -35,6 +35,8 @@ namespace HAL_ADC
     void Init();
 
     float GetVoltage();
+
+    extern void *handle;           // ADC_HandleTypeDef
 }
 
 
@@ -92,6 +94,7 @@ extern "C" {
     void SysTick_Handler(void);
     void USB_LP_CAN1_RX0_IRQHandler(void);
     void USART1_IRQHandler(void);
+    void ADC_IRQHandler(void);
 
 #ifdef __cplusplus
 }
