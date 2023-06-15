@@ -12,16 +12,18 @@ void ClosePageDisplay(bool)
     PageDisplay::self->Close();
 }
 
-DEF_BUTTN( bClosePageDisplay,
+DEF_BUTTN(bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
     ClosePageDisplay,
+    nullptr,
     nullptr
 )
 
 DEF_PAGE_1(pageDisplay, //-V1027
     "ДИСПЛЕЙ",
     pageMain,
+    nullptr,
     nullptr,
     bClosePageDisplay
 )

@@ -42,6 +42,7 @@ DEF_BUTTN(bClosePageSystem,
     "Закрыть",
     *PageSystem::self,
     ClosePageSystem,
+    nullptr,
     nullptr
 );
 
@@ -49,6 +50,7 @@ DEF_BUTTN(bClosePageSystem,
 DEF_PAGE_3(pageSystem, //-V1027
     "СИСТЕМА",
     pageMain,
+    nullptr,
     nullptr,
     tTime,
     gSerialNumber,

@@ -21,6 +21,7 @@ DEF_BUTTN(bFixateMeasures,
     "Фиксация",
     pageMain,
     FixateMeasures,
+    nullptr,
     &fixed_marked
 )
 
@@ -35,6 +36,7 @@ DEF_BUTTN(bCloseMainPage,
     "Закрыть",
     pageMain,
     CloseMainPage,
+    nullptr,
     nullptr
 )
 
@@ -56,6 +58,7 @@ DEF_PAGE_6(pageMain, //-V1027
     "МЕНЮ",
     Page::Empty,
     OnOpenClose_MainPage,
+    nullptr,
     bFixateMeasures,
     *PageMeasures::self,
     *PageDisplay::self,

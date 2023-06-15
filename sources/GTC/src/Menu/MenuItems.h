@@ -28,12 +28,14 @@ struct TimeItem;
 
 
 typedef void(*FuncOpenClose)(bool);
+typedef void(*FuncOnDraw)(int, int);
 
 
-#define COMMON_PART_ITEM    TypeItem::E    type;            \
-                            pchar          title;           \
-                            const Page    *keeper;          \
-                            FuncOpenClose  funcOnOpenClose     // ¬ыполн€етс€ перед открытием (true) или закрытием (false) итема
+#define COMMON_PART_ITEM    TypeItem::E    type;             \
+                            pchar          title;            \
+                            const Page    *keeper;           \
+                            FuncOpenClose  funcOnOpenClose;  \
+                            FuncOpenClose  funcOnDraw
 
 struct DItem
 {

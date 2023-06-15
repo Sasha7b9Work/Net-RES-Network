@@ -24,12 +24,14 @@ DEF_BUTTN(bClosePageTemperature,
     "Закрыть",
     *PageMeasures::Temperature::self,
     ClosePageTemperature,
+    nullptr,
     nullptr
 )
 
 DEF_CHOICE_2(chTemperature,
     "Показывать",
     *PageMeasures::Temperature::self,
+    nullptr,
     nullptr,
     gset.display.show_measure[TypeMeasure::Temperature],
     "Нет", "Да"
@@ -44,6 +46,7 @@ DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, -30, 60, Type
 DEF_PAGE_4(pageTemperature,
     "ТЕМПЕРАТУРА",
     *PageMeasures::self,
+    nullptr,
     nullptr,
     chTemperature,
     gTemperatureMin,
@@ -62,12 +65,14 @@ DEF_BUTTN(bClosePagePressure,
     "Закрыть",
     *PageMeasures::Pressure::self,
     ClosePagePressure,
+    nullptr,
     nullptr
 )
 
 DEF_CHOICE_2(chPressure,
     "Давление",
     *PageMeasures::Pressure::self,
+    nullptr,
     nullptr,
     gset.display.show_measure[TypeMeasure::Pressure],
     "Откл", "Вкл"
@@ -80,6 +85,7 @@ DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 825, TypeMeasu
 DEF_PAGE_4(pagePressure,
     "ДАВЛЕНИЕ",
     *PageMeasures::self,
+    nullptr,
     nullptr,
     chPressure,
     gPressureMin,
@@ -98,12 +104,14 @@ DEF_BUTTN(bClosePageHumidity,
     "Закрыть",
     *PageMeasures::Humidity::self,
     ClosePageHumidity,
+    nullptr,
     nullptr
 )
 
 DEF_CHOICE_2(chHumidity,
     "Влажность",
     *PageMeasures::Humidity::self,
+    nullptr,
     nullptr,
     gset.display.show_measure[TypeMeasure::Humidity],
     "Нет", "Да"
@@ -116,6 +124,7 @@ DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, TypeMeasure
 DEF_PAGE_4(pageHumidity,
     "ВЛАЖНОСТЬ",
     *PageMeasures::self,
+    nullptr,
     nullptr,
     chHumidity,
     gHumidityMin,
@@ -134,12 +143,14 @@ DEF_BUTTN(bClosePageDewPoint,
     "Закрыть",
     *PageMeasures::DewPoint::self,
     ClosePageDewPoint,
+    nullptr,
     nullptr
 )
 
 DEF_CHOICE_2(chDewPoint,
     "Точка росы",
     *PageMeasures::DewPoint::self,
+    nullptr,
     nullptr,
     gset.display.show_measure[TypeMeasure::DewPoint],
     "Откл", "Вкл"
@@ -152,6 +163,7 @@ DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeas
 DEF_PAGE_4(pageDewPoint,
     "ТОЧКА РОСЫ",
     *PageMeasures::self,
+    nullptr,
     nullptr,
     chDewPoint,
     gDewPointMin,
@@ -169,12 +181,14 @@ DEF_BUTTN(bCloseMeasures,
     "Закрыть",
     *PageMeasures::self,
     CloseMeasures,
+    nullptr,
     nullptr
 )
 
 DEF_PAGE_5(pageMeasures, //-V1027
     "ИЗМЕРЕНИЯ",
     pageMain,
+    nullptr,
     nullptr,
     pageTemperature,
     pagePressure,

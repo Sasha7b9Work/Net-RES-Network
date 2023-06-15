@@ -15,12 +15,14 @@ DEF_BUTTN( bClosePageHC12,
     "Закрыть",
     *PageHC12::self,
     ClosePageHC12,
+    nullptr,
     nullptr
 );
 
 DEF_PAGE_1( pageHC12, //-V1027
     "HC12",
     pageMain,
+    nullptr,
     nullptr,
     bClosePageHC12
 )

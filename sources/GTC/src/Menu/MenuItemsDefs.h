@@ -2,17 +2,17 @@
 #pragma once
 
 
-#define DEF_BUTTN(name, title, keeper, function, marked)                                                                \
-    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function, marked };
+#define DEF_BUTTN(name, title, keeper, function, funcOnDraw, marked)                                                    \
+    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function, funcOnDraw,  marked };
 
 #define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                  \
-    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, min, max, &(value) };
+    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, nullptr, min, max, &(value) };
 
 #define DEF_TIMEITEM(name, keeper, beforeOpen, value, state, time)                                                      \
-    static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, beforeOpen, &(value), &(state), &(time)};
+    static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, beforeOpen, nullptr, &(value), &(state), &(time)};
 
-#define DEF_CHOICE_2(name, title, keeper, beforeOpen, cell, name1, name2)                                               \
-    static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, beforeOpen, &cell, 2, {name1, name2}};
+#define DEF_CHOICE_2(name, title, keeper, beforeOpen, onDraw, cell, name1, name2)                                       \
+    static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, beforeOpen, onDraw, &cell, 2, {name1, name2}};
 
 #define DEF_ITEMS_1(name, item)                                                             \
     static const Item * const name[] = { (Item *)&item, nullptr };
@@ -37,30 +37,30 @@
     static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
         (Item *)&item4, (Item *)&item5, (Item *)&item6, nullptr };
 
-#define DEF_PAGE(name, title, keeper, beforeOpen, items)                                    \
+#define DEF_PAGE(name, title, keeper, beforeOpen, onDraw, items)                            \
     static uint8 ci##name = 0;                                                              \
-    const DPage name = { TypeItem::Page, title, (const Page *)&keeper, beforeOpen, items, &ci##name };
+    const DPage name = { TypeItem::Page, title, (const Page *)&keeper, beforeOpen, onDraw, items, &ci##name };
 
-#define DEF_PAGE_1(name, title, keeper, beforeOpen, item1)                                  \
+#define DEF_PAGE_1(name, title, keeper, beforeOpen, onDraw, item1)                          \
     DEF_ITEMS_1(items##name, item1)                                                         \
-    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, onDraw, items##name)
 
 #define DEF_PAGE_2(name, title, keeper, beforeOpen, item1, item2)                           \
     DEF_ITEMS_2(items##name, item1, item2)                                                  \
     DEF_PAGE(name, title, keeper, beforeOpen, items##name)
 
-#define DEF_PAGE_3(name, title, keeper, beforeOpen, item1, item2, item3)                    \
+#define DEF_PAGE_3(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3)                    \
     DEF_ITEMS_3(items##name, item1, item2, item3)                                           \
-    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, funcOnDraw, items##name)
 
-#define DEF_PAGE_4(name, title, keeper, beforeOpen, item1, item2, item3, item4)             \
+#define DEF_PAGE_4(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3, item4)             \
     DEF_ITEMS_4(items##name, item1, item2, item3, item4)                                    \
-    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, funcOnDraw, items##name)
 
-#define DEF_PAGE_5(name, title, keeper, beforeOpen, item1, item2, item3, item4, item5)      \
+#define DEF_PAGE_5(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3, item4, item5)      \
     DEF_ITEMS_5(items##name, item1, item2, item3, item4, item5)                             \
-    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, funcOnDraw, items##name)
 
-#define DEF_PAGE_6(name, title, keeper, beforeOpen, item1, item2, item3, item4, item5, item6)   \
+#define DEF_PAGE_6(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3, item4, item5, item6)   \
     DEF_ITEMS_6(items##name, item1, item2, item3, item4, item5, item6)                          \
-    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, funcOnDraw, items##name)
