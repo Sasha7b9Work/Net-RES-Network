@@ -64,7 +64,7 @@ void HAL_ADC::Update()
 {
     static TimeMeterMS meter;
 
-    if (meter.ElapsedTime() > 100)
+    if (meter.ElapsedTime() > 250)
     {
         HAL_ADC_Start_IT((ADC_HandleTypeDef *)HAL_ADC::handle);
 
