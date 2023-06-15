@@ -11,6 +11,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Measures.h"
 #include <cstdlib>
 
 
@@ -200,8 +201,6 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
     Rectangle(width_zone, height_zone).Fill(x0, y_zone, Color::BLACK);
 
     Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::WHITE);
-
-//    ST7735::WriteBuffer(x0, y_zone, width_zone, height_zone);
 }
 
 
@@ -236,6 +235,8 @@ void Display::EndScene()
 void Display::Update()
 {
     TimeMeterMS meter_fps;
+
+    need_redraw = true;
 
     if (Menu::Opened())
     {
@@ -302,20 +303,18 @@ void Display::DrawMeasures()
         int width = 30;
         int height = 15;
 
-//        Rectangle(width, height).Fill(x, y, Color::BLUE);
-
         if (gset.display.show_measure[types[i]])
         {
             if (need_redraw)
             {
-                String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
+                String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Measures::InRange((TypeMeasure::E)i, measures[i].value) ? Color::WHITE : Color::FLASH_10);
                 measures[types[i]].Units().Draw(x + 41, y);
             }
 
             measures[types[i]].Draw(x, y);
         }
 
-        ST7735::WriteBuffer(x, y, width, height);
+        ST7735::WriteBuffer(x - 1, y, width, height);
     }
 }
 

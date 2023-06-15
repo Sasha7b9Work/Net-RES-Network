@@ -34,6 +34,8 @@ namespace HAL_ADC
 {
     void Init();
 
+    void Update();
+
     float GetVoltage();
 
     extern void *handle;           // ADC_HandleTypeDef

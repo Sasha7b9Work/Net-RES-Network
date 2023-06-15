@@ -42,7 +42,7 @@ void HAL_ADC::Init()
 
     sConfig.Channel = ADC_CHANNEL_3;
     sConfig.Rank = ADC_REGULAR_RANK_1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+    sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
 
     HAL_ADC_ConfigChannel(&handleADC, &sConfig);
 
@@ -60,9 +60,20 @@ float HAL_ADC::GetVoltage()
 }
 
 
+void HAL_ADC::Update()
+{
+    static TimeMeterMS meter;
+
+    if (meter.ElapsedTime() > 100)
+    {
+        HAL_ADC_Start_IT((ADC_HandleTypeDef *)HAL_ADC::handle);
+
+        meter.Reset();
+    }
+}
+
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     HAL_ADC::voltage = (float)HAL_ADC_GetValue(hadc) / (1 << 12) * 3.3f * 1.25f;
-
-    HAL_ADC_Start_IT(&HAL_ADC::handleADC);
 }
