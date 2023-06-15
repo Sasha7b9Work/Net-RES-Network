@@ -8,9 +8,6 @@
 
 namespace Beeper
 {
-    static PinOut pinBEEP(Port::B, Pin::_4, PMode::OUTPUT_PP_PULL_DOWN);
-//    static PinOut pinBEEN(Port::B, Pin::_1, PMode::OUTPUT_PP_PULL_DOWN);
-
     static TIM_HandleTypeDef handle =
     {
         TIM3,
@@ -28,18 +25,18 @@ namespace Beeper
 
     static int frequency = 0;          // Частота звучащего в данное время звука
     static bool running = false;       // Если true, то звук звучит
-
-    static bool level = true;
 }
 
 
 void Beeper::Init()
 {
-    pinBEEP.Init();
-//    pinBEEN.Init();
+    __HAL_AFIO_REMAP_SWJ_NONJTRST();
 
-    pinBEEP.Low();
-//    pinBEEN.Low();
+    GPIO_InitTypeDef is;
+    is.Pin = GPIO_PIN_4;
+    is.Mode = GPIO_MODE_OUTPUT_PP;
+    is.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOB, &is);
 }
 
 
@@ -90,9 +87,6 @@ void Beeper::Stop()
     __HAL_RCC_TIM3_CLK_DISABLE();
 
     running = false;
-
-//    pinBEEN.Low();
-    pinBEEP.Low();
 }
 
 
@@ -104,8 +98,19 @@ bool Beeper::Running()
 
 void Beeper::CallbackOnTimer()
 {
-//    pinBEEN.Set(level);
-    pinBEEP.Set(!level);
+    static bool level = true;
 
     level = !level;
+
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, level ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
+{
+    if (htim == Beeper::handleTIM3)
+    {
+        Beeper::CallbackOnTimer();
+    }
+}
+

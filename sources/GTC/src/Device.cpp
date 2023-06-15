@@ -39,9 +39,9 @@ void Device::Init()
 
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 
-//    Beeper::Init();
+    Beeper::Init();
 
-//    Beeper::Beep(2000, 1000);
+    Beeper::Start(2000);
 }
 
 
