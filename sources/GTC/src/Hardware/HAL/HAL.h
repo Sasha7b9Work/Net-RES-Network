@@ -2,6 +2,7 @@
 #pragma once
 #include "Utils/Text/String.h"
 #include "Settings/Settings.h"
+#include "Hardware/HAL/HAL_PINS.h"
 
 
 struct PackedTime
@@ -97,6 +98,7 @@ extern "C" {
     void USB_LP_CAN1_RX0_IRQHandler(void);
     void USART1_IRQHandler(void);
     void ADC1_2_IRQHandler(void);
+    void TIM3_IRQHandler(void);
 
 #ifdef __cplusplus
 }

@@ -44,6 +44,12 @@ void Settings::Load()
 }
 
 
+void Settings::Reset()
+{
+    gset = def_set;
+}
+
+
 void Settings::Save()
 {
     Settings settings;

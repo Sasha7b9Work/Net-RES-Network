@@ -8,6 +8,8 @@
 namespace Timer
 {
     uint CurrentTime();
+
+    void Delay(uint delayMS);
 }
 
 

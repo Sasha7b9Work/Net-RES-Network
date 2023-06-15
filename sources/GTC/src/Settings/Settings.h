@@ -64,6 +64,8 @@ struct Settings
     static void Load();
 
     static void Save();
+
+    static void Reset();
 };
 
 

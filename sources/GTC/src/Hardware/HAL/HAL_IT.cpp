@@ -2,6 +2,7 @@
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Modules/HC12/HC12.h"
+#include "Hardware/Beeper.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -89,4 +90,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 void ADC1_2_IRQHandler(void)
 {
     HAL_ADC_IRQHandler((ADC_HandleTypeDef *)HAL_ADC::handle);
+}
+
+
+void TIM3_IRQHandler(void)
+{
+    HAL_TIM_IRQHandler((TIM_HandleTypeDef *)Beeper::handleTIM3);
 }

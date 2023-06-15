@@ -9,6 +9,16 @@ uint Timer::CurrentTime()
 }
 
 
+void Timer::Delay(uint delayMS)
+{
+    uint end = TIME_MS + delayMS;
+
+    while (TIME_MS < end)
+    {
+    }
+}
+
+
 TimeMeterMS::TimeMeterMS()
 {
     Reset();
