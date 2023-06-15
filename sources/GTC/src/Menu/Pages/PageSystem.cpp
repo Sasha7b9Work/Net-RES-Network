@@ -12,6 +12,28 @@ static int cur_field = 0;
 static int state = 0;
 static PackedTime time;
 
+
+void OnClose_Battery(bool)
+{
+
+}
+
+
+void OnDraw_Battery(int x, int y)
+{
+    Rectangle(10, 10).Fill(x, y, Color::WHITE);
+}
+
+
+DEF_BUTTON(bBattery,
+    "¿ ¡",
+    *PageSystem::self,
+    OnClose_Battery,
+    OnDraw_Battery,
+    nullptr
+)
+
+
 static void Before_OpenTime(bool open)
 {
     if (open)
@@ -38,7 +60,7 @@ void ClosePageSystem(bool)
 }
 
 
-DEF_BUTTN(bClosePageSystem,
+DEF_BUTTON(bClosePageSystem,
     "«‡Í˚Ú¸",
     *PageSystem::self,
     ClosePageSystem,
@@ -47,11 +69,12 @@ DEF_BUTTN(bClosePageSystem,
 );
 
 
-DEF_PAGE_3(pageSystem, //-V1027
+DEF_PAGE_4(pageSystem, //-V1027
     "—»—“≈Ã¿",
     pageMain,
     nullptr,
     nullptr,
+    bBattery,
     tTime,
     gSerialNumber,
     bClosePageSystem

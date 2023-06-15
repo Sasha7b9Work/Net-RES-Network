@@ -17,7 +17,7 @@ static void FixateMeasures(bool)
     fixed_marked = Measures::IsFixed();
 }
 
-DEF_BUTTN(bFixateMeasures,
+DEF_BUTTON(bFixateMeasures,
     "Фиксация",
     pageMain,
     FixateMeasures,
@@ -32,7 +32,7 @@ static void CloseMainPage(bool)
 }
 
 
-DEF_BUTTN(bCloseMainPage,
+DEF_BUTTON(bCloseMainPage,
     "Закрыть",
     pageMain,
     CloseMainPage,

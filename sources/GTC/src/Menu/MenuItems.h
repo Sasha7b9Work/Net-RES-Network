@@ -35,7 +35,7 @@ typedef void(*FuncOnDraw)(int, int);
                             pchar          title;            \
                             const Page    *keeper;           \
                             FuncOpenClose  funcOnOpenClose;  \
-                            FuncOpenClose  funcOnDraw
+                            FuncOnDraw     funcOnDraw
 
 struct DItem
 {

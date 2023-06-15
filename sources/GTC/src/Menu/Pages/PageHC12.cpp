@@ -11,7 +11,7 @@ static void ClosePageHC12(bool)
     PageHC12::self->Close();
 }
 
-DEF_BUTTN( bClosePageHC12,
+DEF_BUTTON( bClosePageHC12,
     "Закрыть",
     *PageHC12::self,
     ClosePageHC12,

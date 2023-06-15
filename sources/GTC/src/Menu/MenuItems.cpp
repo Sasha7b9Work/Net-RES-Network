@@ -95,6 +95,11 @@ void Item::DrawOpened(int x, int y, bool active) const
     case TypeItem::Time:        ToTimeItem()->DrawOpened(x, y, active); break;
     case TypeItem::Count:   break;
     }
+
+    if (ToDItem()->funcOnDraw)
+    {
+        ToDItem()->funcOnDraw(x, y);
+    }
 }
 
 
@@ -124,6 +129,11 @@ void Item::DrawClosed(int x, int y, bool active) const
     case TypeItem::Governor:    ToGovernor()->DrawClosed(x, y, active); break;
     case TypeItem::Time:        ToTimeItem()->DrawClosed(x, y, active); break;
     case TypeItem::Count:               break;
+    }
+
+    if (ToDItem()->funcOnDraw)
+    {
+        ToDItem()->funcOnDraw(x, y);
     }
 }
 

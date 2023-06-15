@@ -49,7 +49,7 @@ static void CloseMeasures()
     PageDisplay::PageMeasures::self->Close();
 };
 
-DEF_BUTTN( bCloseMeasures,
+DEF_BUTTON( bCloseMeasures,
     "Закрыть",
     *PageDisplay::PageMeasures::self,
     CloseMeasures
@@ -86,7 +86,7 @@ void ClosePageDisplay()
     PageDisplay::self->Close();
 }
 
-DEF_BUTTN( bClosePageDisplay,
+DEF_BUTTON( bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
     ClosePageDisplay

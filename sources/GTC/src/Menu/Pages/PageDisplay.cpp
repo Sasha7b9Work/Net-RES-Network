@@ -12,7 +12,7 @@ void ClosePageDisplay(bool)
     PageDisplay::self->Close();
 }
 
-DEF_BUTTN(bClosePageDisplay,
+DEF_BUTTON(bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
     ClosePageDisplay,

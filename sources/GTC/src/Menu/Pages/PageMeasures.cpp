@@ -20,7 +20,7 @@ void ClosePageTemperature(bool)
     PageMeasures::Temperature::self->Close();
 }
 
-DEF_BUTTN(bClosePageTemperature,
+DEF_BUTTON(bClosePageTemperature,
     "Закрыть",
     *PageMeasures::Temperature::self,
     ClosePageTemperature,
@@ -61,7 +61,7 @@ void ClosePagePressure(bool)
     PageMeasures::Pressure::self->Close();
 }
 
-DEF_BUTTN(bClosePagePressure,
+DEF_BUTTON(bClosePagePressure,
     "Закрыть",
     *PageMeasures::Pressure::self,
     ClosePagePressure,
@@ -100,7 +100,7 @@ void ClosePageHumidity(bool)
     PageMeasures::Humidity::self->Close();
 }
 
-DEF_BUTTN(bClosePageHumidity,
+DEF_BUTTON(bClosePageHumidity,
     "Закрыть",
     *PageMeasures::Humidity::self,
     ClosePageHumidity,
@@ -139,7 +139,7 @@ void ClosePageDewPoint(bool)
     PageMeasures::DewPoint::self->Close();
 }
 
-DEF_BUTTN(bClosePageDewPoint,
+DEF_BUTTON(bClosePageDewPoint,
     "Закрыть",
     *PageMeasures::DewPoint::self,
     ClosePageDewPoint,
@@ -177,7 +177,7 @@ static void CloseMeasures(bool)
     PageMeasures::self->Close();
 };
 
-DEF_BUTTN(bCloseMeasures,
+DEF_BUTTON(bCloseMeasures,
     "Закрыть",
     *PageMeasures::self,
     CloseMeasures,
