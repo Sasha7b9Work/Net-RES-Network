@@ -78,7 +78,7 @@ String<> HAL::GetUID()
 {
     uint8 bytes[12];
 
-    std::memcpy(bytes, (void *)0x1FFFF7E8, 12);
+    std::memcpy(bytes, (void *)0x1FFFF7E8, 12); //-V566
 
     return String<>("%X", Math::CalculateCRC(bytes, 12));
 }
