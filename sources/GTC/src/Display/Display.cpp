@@ -297,18 +297,25 @@ void Display::DrawMeasures()
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
+        int x = 93;
+        int y = y0 + i * dY;
+        int width = 30;
+        int height = 15;
+
+//        Rectangle(width, height).Fill(x, y, Color::BLUE);
+
         if (gset.display.show_measure[types[i]])
         {
-            int y = y0 + i * dY;
-
             if (need_redraw)
             {
                 String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
-                measures[types[i]].Units().Draw(x0 + 134, y);
+                measures[types[i]].Units().Draw(x + 41, y);
             }
 
-            measures[types[i]].Draw(93, y);
+            measures[types[i]].Draw(x, y);
         }
+
+        ST7735::WriteBuffer(x, y, width, height);
     }
 }
 
