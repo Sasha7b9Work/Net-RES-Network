@@ -625,13 +625,22 @@ void Governor::ShortPressure(Key::E key) const
 
                 int *value = data->value;
 
-                if (active_control == ActiveControl::Increase && *value < data->max)
+                if (active_control == ActiveControl::Increase)
                 {
-                    *value = *value + 1;
+                    *value += 1;
                 }
-                else if (active_control == ActiveControl::Decrease && *value > data->min)
+                else if (active_control == ActiveControl::Decrease)
                 {
-                    *value = *value - 1;
+                    *value -= 1;
+                }
+
+                if (*value < data->min)
+                {
+                    *value = data->min;
+                }
+                if (*value > data->max)
+                {
+                    *value = data->max;
                 }
             }
         }
