@@ -28,7 +28,6 @@ struct TimeItem;
 
 
 typedef void(*FuncOpenClose)(bool);
-inline void EmptyFuncOpenClose(bool) { }
 
 
 #define COMMON_PART_ITEM    TypeItem::E    type;            \
@@ -180,7 +179,7 @@ struct DButton
 struct Button : public Item
 {
     void ShortPressure(Key::E) const;
-    void LongPressure() const { ToDItem()->funcOnOpenClose(true); }
+    void LongPressure() const { if (ToDItem()->funcOnOpenClose) { ToDItem()->funcOnOpenClose(true); } }
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;

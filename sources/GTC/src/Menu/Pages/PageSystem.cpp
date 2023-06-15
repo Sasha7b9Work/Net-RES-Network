@@ -26,7 +26,7 @@ DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
 DEF_GOVERNOR(gSerialNumber,
     "я/м",
     *PageSystem::self,
-    EmptyFuncOpenClose,
+    nullptr,
     0, (int)0x7FFFFFFF,
     gset.system.serial_number
 )
@@ -49,7 +49,7 @@ DEF_BUTTN(bClosePageSystem,
 DEF_PAGE_3(pageSystem, //-V1027
     "яхярелю",
     pageMain,
-    EmptyFuncOpenClose,
+    nullptr,
     tTime,
     gSerialNumber,
     bClosePageSystem

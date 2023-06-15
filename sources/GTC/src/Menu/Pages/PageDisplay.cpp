@@ -22,7 +22,7 @@ DEF_BUTTN( bClosePageDisplay,
 DEF_PAGE_1(pageDisplay, //-V1027
     "ƒ»—œÀ≈…",
     pageMain,
-    EmptyFuncOpenClose,
+    nullptr,
     bClosePageDisplay
 )
 
