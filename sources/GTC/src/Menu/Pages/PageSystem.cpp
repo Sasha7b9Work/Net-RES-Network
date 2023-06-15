@@ -21,7 +21,9 @@ void OnClose_Battery(bool)
 
 void OnDraw_Battery(int x, int y)
 {
-    Rectangle(10, 10).Fill(x, y, Color::WHITE);
+    Rectangle(10, 10).Fill(x, y, Color::BLACK);
+
+    String<>("%.1f Â", HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, Color::WHITE);
 }
 
 
