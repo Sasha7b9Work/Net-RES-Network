@@ -1,6 +1,7 @@
 // 2023/06/15 08:56:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -31,7 +32,7 @@ void HAL_ADC::Init()
 
     handleADC.Instance = ADC1;
     handleADC.Init.ScanConvMode = ADC_SCAN_DISABLE;
-    handleADC.Init.ContinuousConvMode = ENABLE;
+    handleADC.Init.ContinuousConvMode = DISABLE;
     handleADC.Init.DiscontinuousConvMode = DISABLE;
     handleADC.Init.ExternalTrigConv = ADC_SOFTWARE_START;
     handleADC.Init.DataAlign = ADC_DATAALIGN_RIGHT;
@@ -62,4 +63,6 @@ float HAL_ADC::GetVoltage()
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     HAL_ADC::voltage = (float)HAL_ADC_GetValue(hadc);
+
+    HAL_ADC_Start_IT(&HAL_ADC::handleADC);
 }
