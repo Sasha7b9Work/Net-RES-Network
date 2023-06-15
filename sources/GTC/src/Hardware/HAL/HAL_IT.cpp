@@ -86,7 +86,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 }
 
 
-void ADC_IRQHandler(void)
+void ADC1_2_IRQHandler(void)
 {
     HAL_ADC_IRQHandler((ADC_HandleTypeDef *)HAL_ADC::handle);
 }

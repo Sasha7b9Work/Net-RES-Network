@@ -94,7 +94,7 @@ extern "C" {
     void SysTick_Handler(void);
     void USB_LP_CAN1_RX0_IRQHandler(void);
     void USART1_IRQHandler(void);
-    void ADC_IRQHandler(void);
+    void ADC1_2_IRQHandler(void);
 
 #ifdef __cplusplus
 }
