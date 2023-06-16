@@ -42,7 +42,7 @@ void Device::Init()
 
     Beeper::Init();
 
-    Beeper::Start(2000);
+    Beeper::Start(5000);
 }
 
 
@@ -73,7 +73,7 @@ void Device::Update()
         }
         else
         {
-            Beeper::Start(2000);
+            Beeper::Start(5000);
         }
     }
 
