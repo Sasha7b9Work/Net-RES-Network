@@ -50,8 +50,7 @@ file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
 file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                       *.h *.cpp
-                                    ../../GTC/src/defines.h
-                                    ../../GTC/src/Device.*)
+                                    ../../GTC/src/*.*)
 file(GLOB DISPLAY                   ../../GTC/src/Display/*.*)
 file(GLOB DISPLAY_FONT              ../../GTC/src/Display/Font/*.*)
 file(GLOB HARDWARE                  ../../GTC/src/Hardware/*.*)

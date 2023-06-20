@@ -819,7 +819,7 @@ HAL_StatusTypeDef HAL_RTC_GetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDat
     return HAL_ERROR;
   }
 
-  time_t time = RTC_ReadAlarmCounter(hrtc);
+  time_t time = RTC_ReadTimeCounter(hrtc);
 
   struct tm *ptm = gmtime(&time);
 
