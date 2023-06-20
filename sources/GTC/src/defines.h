@@ -30,8 +30,8 @@ union BitSet32
 };
 
 
-inline void EmptyVV() { }
-typedef void(*pFuncVV)();
+inline void EmptyVV(void) { }
+typedef void(*pFuncVV)(void);
 
 
 #define _GET_BIT(value, bit)   (((value) >> (bit)) & 0x01)
