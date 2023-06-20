@@ -4,17 +4,21 @@
 #include "Settings/Settings.h"
 
 
-#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type) \
+#define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)                                        \
 DEF_GOVERNOR(_name, "Предел мин", *page_self, nullptr, _min, _max, gset.measures.limit_min[type])
 
-#define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
+#define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)                                        \
 DEF_GOVERNOR(_name, "Предел макс", *page_self, nullptr, _min, _max, gset.measures.limit_max[type])
 
-#define DEF_STATE_MIN(_name, page_self, type)   \
+#define DEF_STATE_MIN(_name, page_self, type)                                                       \
 DEF_STATE(_name, "Значение мин", *page_self, nullptr, nullptr, type, true)
 
-#define DEF_STATE_MAX(_name, page_self, type)   \
+#define DEF_STATE_MAX(_name, page_self, type)                                                       \
 DEF_STATE(_name, "Значение макс", *page_self, nullptr, nullptr, type, false)
+
+#define DEF_STATE_MIN_MAX(_name, page_self, type)                                                   \
+DEF_STATE_MIN(_name##ValueMin, page_self, type)                                                     \
+DEF_STATE_MAX(_name##ValueMax, page_self, type)
 
 
 extern const DPage pageMain;
@@ -48,9 +52,7 @@ DEF_GOVERNOR_MIN(gTemperatureLimitMin, PageMeasures::Temperature::self, -30, 60,
 
 DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
 
-DEF_STATE_MIN(sTemperatureValueMin, PageMeasures::Temperature::self, TypeMeasure::Temperature);
-
-DEF_STATE_MAX(sTemperatureValueMax, PageMeasures::Temperature::self, TypeMeasure::Temperature);
+DEF_STATE_MIN_MAX(sTemperature, PageMeasures::Temperature::self, TypeMeasure::Temperature);
 
 
 DEF_PAGE_6(pageTemperature,
@@ -94,7 +96,9 @@ DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 825, TypeMeasu
 
 DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 825, TypeMeasure::Pressure);
 
-DEF_PAGE_4(pagePressure,
+DEF_STATE_MIN_MAX(sPressure, PageMeasures::Pressure::self, TypeMeasure::Pressure);
+
+DEF_PAGE_6(pagePressure,
     "ДАВЛЕНИЕ",
     *PageMeasures::self,
     nullptr,
@@ -102,6 +106,8 @@ DEF_PAGE_4(pagePressure,
     chPressure,
     gPressureMin,
     gPressureMax,
+    sPressureValueMin,
+    sPressureValueMax,
     bClosePagePressure
 )
 
@@ -133,7 +139,9 @@ DEF_GOVERNOR_MIN(gHumidityMin, PageMeasures::Humidity::self, 10, 98, TypeMeasure
 
 DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, TypeMeasure::Humidity);
 
-DEF_PAGE_4(pageHumidity,
+DEF_STATE_MIN_MAX(sHumidity, PageMeasures::Humidity::self, TypeMeasure::Humidity);
+
+DEF_PAGE_6(pageHumidity,
     "ВЛАЖНОСТЬ",
     *PageMeasures::self,
     nullptr,
@@ -141,6 +149,8 @@ DEF_PAGE_4(pageHumidity,
     chHumidity,
     gHumidityMin,
     gHumidityMax,
+    sHumidityValueMin,
+    sHumidityValueMax,
     bClosePageHumidity
 )
 
@@ -172,7 +182,9 @@ DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, -100, 100, TypeMeas
 
 DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeasure::DewPoint);
 
-DEF_PAGE_4(pageDewPoint,
+DEF_STATE_MIN_MAX(sDewPoint, PageMeasures::DewPoint::self, TypeMeasure::DewPoint);
+
+DEF_PAGE_6(pageDewPoint,
     "ТОЧКА РОСЫ",
     *PageMeasures::self,
     nullptr,
@@ -180,6 +192,8 @@ DEF_PAGE_4(pageDewPoint,
     chDewPoint,
     gDewPointMin,
     gDewPointMax,
+    sDewPointValueMin,
+    sDewPointValueMax,
     bClosePageDewPoint
 )
 
