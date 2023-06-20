@@ -13,3 +13,15 @@ String<> Int::ToStirng() const
 {
     return String<>("%d", value);
 }
+
+
+Float::Float(float _value) : value(_value)
+{
+
+}
+
+
+String<> Float::ToString() const
+{
+    return String<>("%.1f", value);
+}

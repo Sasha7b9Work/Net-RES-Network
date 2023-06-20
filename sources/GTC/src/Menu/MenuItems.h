@@ -202,6 +202,8 @@ struct DState
     COMMON_PART_ITEM;
 
     TypeMeasure::E type_meas;
+
+    const bool is_min;          // Если true, то хранит минимальное значение, иначе - максимальное
 };
 
 
@@ -214,7 +216,7 @@ struct StateItem : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    const DState *ToState() const { return (DState *)this; }
+    const DState *ToDState() const { return (DState *)this; }
 };
 
 

@@ -11,3 +11,13 @@ public:
 private:
     int value;
 };
+
+
+class Float
+{
+public:
+    Float(float);
+    String<> ToString() const;
+private:
+    float value;
+};

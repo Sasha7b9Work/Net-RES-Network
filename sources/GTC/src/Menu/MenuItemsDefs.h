@@ -5,8 +5,8 @@
 #define DEF_BUTTON(name, title, keeper, funcOpenClose, funcOnDraw, marked)                                                          \
     static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, funcOpenClose, funcOnDraw,  marked };
 
-#define DEF_STATE(name, title, keeper, funcOpenClose, funcOnDraw, type)                                                             \
-    static const DState name = { TypeItem::State, title, (const Page *)&keeper, funcOpenClose, funcOnDraw, type};
+#define DEF_STATE(name, title, keeper, funcOpenClose, funcOnDraw, type, is_min)                                                     \
+    static const DState name = { TypeItem::State, title, (const Page *)&keeper, funcOpenClose, funcOnDraw, type, is_min};
 
 #define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                              \
     static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, nullptr, min, max, &(value) };

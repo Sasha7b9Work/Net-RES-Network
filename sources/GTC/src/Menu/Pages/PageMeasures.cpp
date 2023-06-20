@@ -42,9 +42,9 @@ DEF_GOVERNOR_MIN(gTemperatureLimitMin, PageMeasures::Temperature::self, -30, 60,
 
 DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
 
-DEF_STATE(sTemperatureValueMin, "Значение мин", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature);
+DEF_STATE(sTemperatureValueMin, "Значение мин", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature, true);
 
-DEF_STATE(sTemperatureValueMax, "Значение макс", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature);
+DEF_STATE(sTemperatureValueMax, "Значение макс", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature, false);
 
 
 DEF_PAGE_6(pageTemperature,

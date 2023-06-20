@@ -234,6 +234,18 @@ void Governor::DrawClosed(int x, int y, bool active) const
 
 void StateItem::DrawClosed(int x, int y, bool active) const
 {
+    float value = ToDState()->is_min ? gset.measures.value_min[ToDState()->type_meas] : gset.measures.value_max[ToDState()->type_meas];
+
+    y += 5;
+
+    if (value == ERROR_VALUE_FLOAT)
+    {
+        String<>("-").Draw(x + 140, y, Color::MenuLetters(active));
+    }
+    else
+    {
+        Float(value).ToString().DrawRelativelyRight(x + 150, y, Color::MenuLetters(active));
+    }
 }
 
 
