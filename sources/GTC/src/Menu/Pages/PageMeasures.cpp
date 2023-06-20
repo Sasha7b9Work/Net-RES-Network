@@ -10,6 +10,12 @@ DEF_GOVERNOR(_name, "Предел мин", *page_self, nullptr, _min, _max, gset.measures
 #define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)    \
 DEF_GOVERNOR(_name, "Предел макс", *page_self, nullptr, _min, _max, gset.measures.limit_max[type])
 
+#define DEF_STATE_MIN(_name, page_self, type)   \
+DEF_STATE(_name, "Значение мин", *page_self, nullptr, nullptr, type, true)
+
+#define DEF_STATE_MAX(_name, page_self, type)   \
+DEF_STATE(_name, "Значение макс", *page_self, nullptr, nullptr, type, false)
+
 
 extern const DPage pageMain;
 
@@ -42,9 +48,9 @@ DEF_GOVERNOR_MIN(gTemperatureLimitMin, PageMeasures::Temperature::self, -30, 60,
 
 DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
 
-DEF_STATE(sTemperatureValueMin, "Значение мин", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature, true);
+DEF_STATE_MIN(sTemperatureValueMin, PageMeasures::Temperature::self, TypeMeasure::Temperature);
 
-DEF_STATE(sTemperatureValueMax, "Значение макс", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature, false);
+DEF_STATE_MAX(sTemperatureValueMax, PageMeasures::Temperature::self, TypeMeasure::Temperature);
 
 
 DEF_PAGE_6(pageTemperature,
