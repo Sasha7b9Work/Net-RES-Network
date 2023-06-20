@@ -30,7 +30,9 @@ namespace Beeper
 
 void Beeper::Init()
 {
+#ifndef WIN32
     __HAL_AFIO_REMAP_SWJ_NONJTRST();
+#endif
 
     GPIO_InitTypeDef is;
     is.Pin = GPIO_PIN_4;
@@ -64,7 +66,9 @@ void Beeper::Start(int _frequency)
 
     frequency = _frequency;
 
+#ifndef WIN32
     __HAL_RCC_TIM3_CLK_ENABLE();
+#endif
 
     handle.Init.Prescaler = (uint)(60000 / frequency - 1);
 

@@ -31,6 +31,8 @@ Settings gset = def_set;
 
 void Settings::Load()
 {
+#ifndef WIN32
+
     Settings settings;
 
     if (HAL_ROM::LoadSettings(settings))
@@ -41,6 +43,8 @@ void Settings::Load()
     {
         gset = def_set;
     }
+
+#endif
 }
 
 
