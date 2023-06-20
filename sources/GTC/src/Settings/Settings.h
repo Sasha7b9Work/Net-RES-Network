@@ -39,8 +39,8 @@ struct SettingsDisplay
 
 struct SettingsMeasures
 {
-    int min[TypeMeasure::Count];
-    int max[TypeMeasure::Count];
+    int limit_min[TypeMeasure::Count];
+    int limit_max[TypeMeasure::Count];
 };
 
 
