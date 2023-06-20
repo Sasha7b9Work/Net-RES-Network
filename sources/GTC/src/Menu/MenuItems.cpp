@@ -122,6 +122,8 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
 
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
+
     switch (ToDItem()->type)
     {
     case TypeItem::Page:        ToPage()->DrawClosed(x, y, active);      break;
@@ -184,7 +186,6 @@ const Item *Page::CurrentItem() const
 
 void Page::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 }
 
 
@@ -204,28 +205,18 @@ void Choice::DrawOpened(int, int, bool) const
 
 void Choice::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
-
     String<>(CurrentName()).Draw(x + 130, y + 5);
 }
 
 
 void Button::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
-
     if (ToDButton()->marked && *ToDButton()->marked)
     {
         x += 130;
         String<>("\x85").Draw(x, y + 5);
         String<>("\x86").Draw(x + 10, y + 5);
     }
-}
-
-
-void StateItem::DrawClosed(int x, int y, bool active) const
-{
-
 }
 
 
@@ -237,9 +228,12 @@ void Button::DrawOpened(int x, int y, bool active) const
 
 void Governor::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
-
     Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
+}
+
+
+void StateItem::DrawClosed(int x, int y, bool active) const
+{
 }
 
 
