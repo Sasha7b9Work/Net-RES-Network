@@ -8,24 +8,6 @@
 extern const DPage pageMain;
 
 
-static bool fixed_marked = false;
-
-static void FixateMeasures(bool)
-{
-    Measures::SetFixed(!Measures::IsFixed());
-
-    fixed_marked = Measures::IsFixed();
-}
-
-DEF_BUTTON(bFixateMeasures,
-    "‘ËÍÒ‡ˆËˇ",
-    pageMain,
-    FixateMeasures,
-    nullptr,
-    &fixed_marked
-)
-
-
 static void CloseMainPage(bool)
 {
     PageMain::self->Close();
@@ -54,12 +36,11 @@ static void OnOpenClose_MainPage(bool open)
 }
 
 
-DEF_PAGE_4(pageMain, //-V1027
+DEF_PAGE_3(pageMain, //-V1027
     "Ã≈Õﬁ",
     Page::Empty,
     OnOpenClose_MainPage,
     nullptr,
-    bFixateMeasures,
     *PageMeasures::self,
 //    *PageDisplay::self,
 //    *PageHC12::self,

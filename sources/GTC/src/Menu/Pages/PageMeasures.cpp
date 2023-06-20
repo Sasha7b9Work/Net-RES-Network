@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
+#include "Measures.h"
 
 
 #define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)                                        \
@@ -198,6 +199,24 @@ DEF_PAGE_6(pageDewPoint,
 )
 
 
+static bool fixed_marked = false;
+
+static void FixateMeasures(bool)
+{
+    Measures::SetFixed(!Measures::IsFixed());
+
+    fixed_marked = Measures::IsFixed();
+}
+
+DEF_BUTTON(bFixateMeasures,
+    "‘ËÍÒ‡ˆËˇ",
+    *PageMeasures::self,
+    FixateMeasures,
+    nullptr,
+    &fixed_marked
+)
+
+
 static void CloseMeasures(bool)
 {
     PageMeasures::self->Close();
@@ -211,11 +230,12 @@ DEF_BUTTON(bCloseMeasures,
     nullptr
 )
 
-DEF_PAGE_5(pageMeasures, //-V1027
+DEF_PAGE_6(pageMeasures, //-V1027
     "»«Ã≈–≈Õ»ﬂ",
     pageMain,
     nullptr,
     nullptr,
+    bFixateMeasures,
     pageTemperature,
     pagePressure,
     pageHumidity,
