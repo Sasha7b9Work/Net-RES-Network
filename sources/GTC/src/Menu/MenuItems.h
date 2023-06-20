@@ -15,6 +15,7 @@ struct TypeItem
         Button,         // Кнопка - по нажатию что-то происходит
         Governor,       // Можно изменять значение в некоторых пределах
         Time,
+        State,          // Отображает состояние измерения - величина, и время сохранения
         Count
     };
 };
@@ -25,6 +26,7 @@ struct Choice;
 struct Button;
 struct Governor;
 struct TimeItem;
+struct StateItem;
 
 
 typedef void(*FuncOpenClose)(bool);
@@ -81,6 +83,7 @@ struct Item
     const Button *ToButton() const { return (const Button *)this; }
     const Governor *ToGovernor() const { return (const Governor *)this; }
     const TimeItem *ToTimeItem() const { return (const TimeItem *)this; }
+    const StateItem *ToStateItem() const { return (const StateItem *)this; }
 
     static Item Empty;
 
@@ -188,6 +191,30 @@ struct Button : public Item
     void DrawOpened(int x, int y, bool active) const;
 
     const DButton *ToDButton() const { return (DButton *)this; }
+};
+
+
+//-------------------------------------------------------------------------------------------------
+
+
+struct DState
+{
+    COMMON_PART_ITEM;
+
+    TypeMeasure::E type_meas;
+};
+
+
+struct StateItem : public Item
+{
+    void ShortPressure(Key::E) const;
+    void LongPressure(Key::E) const;
+    void DoubleClick() const;
+
+    void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
+
+    const DState *ToState() const { return (DState *)this; }
 };
 
 

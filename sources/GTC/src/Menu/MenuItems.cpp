@@ -88,11 +88,12 @@ void Item::DrawOpened(int x, int y, bool active) const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->DrawOpened(x, y, active);     break;
-    case TypeItem::Choice:      ToChoice()->DrawOpened(x, y, active);   break;
-    case TypeItem::Button:      ToButton()->DrawOpened(x, y, active);   break;
-    case TypeItem::Governor:    ToGovernor()->DrawOpened(x, y, active); break;
-    case TypeItem::Time:        ToTimeItem()->DrawOpened(x, y, active); break;
+    case TypeItem::Page:        ToPage()->DrawOpened(x, y, active);      break;
+    case TypeItem::Choice:      ToChoice()->DrawOpened(x, y, active);    break;
+    case TypeItem::Button:      ToButton()->DrawOpened(x, y, active);    break;
+    case TypeItem::Governor:    ToGovernor()->DrawOpened(x, y, active);  break;
+    case TypeItem::Time:        ToTimeItem()->DrawOpened(x, y, active);  break;
+    case TypeItem::State:       ToStateItem()->DrawOpened(x, y, active); break;
     case TypeItem::Count:   break;
     }
 
@@ -123,11 +124,12 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->DrawClosed(x, y, active);     break;
-    case TypeItem::Choice:      ToChoice()->DrawClosed(x, y, active);   break;
-    case TypeItem::Button:      ToButton()->DrawClosed(x, y, active);   break;
-    case TypeItem::Governor:    ToGovernor()->DrawClosed(x, y, active); break;
-    case TypeItem::Time:        ToTimeItem()->DrawClosed(x, y, active); break;
+    case TypeItem::Page:        ToPage()->DrawClosed(x, y, active);      break;
+    case TypeItem::Choice:      ToChoice()->DrawClosed(x, y, active);    break;
+    case TypeItem::Button:      ToButton()->DrawClosed(x, y, active);    break;
+    case TypeItem::Governor:    ToGovernor()->DrawClosed(x, y, active);  break;
+    case TypeItem::Time:        ToTimeItem()->DrawClosed(x, y, active);  break;
+    case TypeItem::State:       ToStateItem()->DrawClosed(x, y, active); break;
     case TypeItem::Count:               break;
     }
 
@@ -221,6 +223,12 @@ void Button::DrawClosed(int x, int y, bool active) const
 }
 
 
+void StateItem::DrawClosed(int x, int y, bool active) const
+{
+
+}
+
+
 void Button::DrawOpened(int x, int y, bool active) const
 {
     DrawClosed(x, y, active);
@@ -258,6 +266,12 @@ void Governor::DrawOpened(int x, int y, bool active) const
     DrawControls(x, y);
 
     Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
+}
+
+
+void StateItem::DrawOpened(int x, int y, bool active) const
+{
+
 }
 
 
@@ -509,12 +523,13 @@ void Page::LongPressure(Key::E key) const
 
     switch (data->type)
     {
-    case TypeItem::Page:        item->ToPage()->Open();                break;
-    case TypeItem::Choice:      item->ToChoice()->LongPressure();      break;
-    case TypeItem::Button:      item->ToButton()->LongPressure();      break;
-    case TypeItem::Governor:    item->ToGovernor()->LongPressure();    break;
-    case TypeItem::Time:        item->ToTimeItem()->LongPressure(key); break;
-    case TypeItem::Count:                                              break;
+    case TypeItem::Page:        item->ToPage()->Open();                 break;
+    case TypeItem::Choice:      item->ToChoice()->LongPressure();       break;
+    case TypeItem::Button:      item->ToButton()->LongPressure();       break;
+    case TypeItem::Governor:    item->ToGovernor()->LongPressure();     break;
+    case TypeItem::Time:        item->ToTimeItem()->LongPressure(key);  break;
+    case TypeItem::State:       item->ToStateItem()->LongPressure(key); break;
+    case TypeItem::Count:                                               break;
     }
 }
 
@@ -537,6 +552,12 @@ void Button::ShortPressure(Key::E) const
 }
 
 
+void StateItem::ShortPressure(Key::E) const
+{
+
+}
+
+
 void Choice::LongPressure() const
 {
     uint8 *cell = ToDChoice()->cell;
@@ -547,6 +568,12 @@ void Choice::LongPressure() const
     {
         *cell = 0;
     }
+}
+
+
+void StateItem::LongPressure(Key::E) const
+{
+
 }
 
 
@@ -562,16 +589,23 @@ void Button::DoubleClick() const
 }
 
 
+void StateItem::DoubleClick() const
+{
+
+}
+
+
 void Item::ShortPressure(Key::E key) const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->ShortPressure(key);      break;
-    case TypeItem::Choice:      ToChoice()->ShortPressure(key);    break;
-    case TypeItem::Button:      ToButton()->ShortPressure(key);    break;
-    case TypeItem::Governor:    ToGovernor()->ShortPressure(key);  break;
-    case TypeItem::Time:        ToTimeItem()->ShortPressure(key);  break;
-    case TypeItem::Count:                                          break;
+    case TypeItem::Page:        ToPage()->ShortPressure(key);       break;
+    case TypeItem::Choice:      ToChoice()->ShortPressure(key);     break;
+    case TypeItem::Button:      ToButton()->ShortPressure(key);     break;
+    case TypeItem::Governor:    ToGovernor()->ShortPressure(key);   break;
+    case TypeItem::Time:        ToTimeItem()->ShortPressure(key);   break;
+    case TypeItem::State:       ToStateItem()->ShortPressure(key);  break;
+    case TypeItem::Count:                                           break;
     }
 }
 
@@ -585,6 +619,7 @@ void Item::LongPressure(Key::E key) const
     case TypeItem::Button:      ToButton()->LongPressure();         break;
     case TypeItem::Governor:    ToGovernor()->LongPressure();       break;
     case TypeItem::Time:        ToTimeItem()->LongPressure(key);    break;
+    case TypeItem::State:       ToStateItem()->LongPressure(key);   break;
     case TypeItem::Count:                                           break;
     }
 }
@@ -599,6 +634,7 @@ void Item::DoubleClick() const
     case TypeItem::Button:      ToButton()->DoubleClick();      break;
     case TypeItem::Governor:    ToGovernor()->DoubleClick();    break;
     case TypeItem::Time:        ToTimeItem()->DoubleClick();    break;
+    case TypeItem::State:       ToStateItem()->DoubleClick();   break;
     case TypeItem::Count:                                       break;
     }
 }

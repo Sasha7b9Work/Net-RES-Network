@@ -56,6 +56,8 @@ void Settings::Reset()
 
 void Settings::Save()
 {
+#ifndef WIN32
+
     Settings settings;
 
     bool need_save = false;
@@ -78,6 +80,8 @@ void Settings::Save()
 
         HAL_ROM::SaveSettings(gset);
     }
+
+#endif
 }
 
 
