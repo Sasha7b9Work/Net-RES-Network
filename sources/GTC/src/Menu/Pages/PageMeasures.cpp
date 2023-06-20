@@ -84,12 +84,12 @@ DEF_BUTTON(bClosePagePressure,
 )
 
 DEF_CHOICE_2(chPressure,
-    "Давление",
+    "Показывать",
     *PageMeasures::Pressure::self,
     nullptr,
     nullptr,
     gset.display.show_measure[TypeMeasure::Pressure],
-    "Откл", "Вкл"
+    "Нет", "Да"
 )
 
 DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 825, TypeMeasure::Pressure);
@@ -127,7 +127,7 @@ DEF_BUTTON(bClosePageHumidity,
 )
 
 DEF_CHOICE_2(chHumidity,
-    "Влажность",
+    "Показывать",
     *PageMeasures::Humidity::self,
     nullptr,
     nullptr,
@@ -170,12 +170,12 @@ DEF_BUTTON(bClosePageDewPoint,
 )
 
 DEF_CHOICE_2(chDewPoint,
-    "Точка росы",
+    "Показывать",
     *PageMeasures::DewPoint::self,
     nullptr,
     nullptr,
     gset.display.show_measure[TypeMeasure::DewPoint],
-    "Откл", "Вкл"
+    "Нет", "Да"
 )
 
 DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, -100, 100, TypeMeasure::DewPoint);

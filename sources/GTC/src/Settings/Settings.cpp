@@ -99,3 +99,28 @@ bool Settings::operator!=(const Settings &rhs)
 {
     return !(*this == rhs);
 }
+
+
+void Settings::SaveMeasure(TypeMeasure::E type, float value)
+{
+    if (gset.measures.value_max[type] == ERROR_VALUE_FLOAT)
+    {
+        gset.measures.value_max[type] = value;
+    }
+
+    if (gset.measures.value_min[type] == ERROR_VALUE_FLOAT)
+    {
+        gset.measures.value_min[type] = value;
+    }
+
+    if (value > gset.measures.value_max[type])
+    {
+        gset.measures.value_max[type] = value;
+    }
+    else if (value < gset.measures.value_min[type])
+    {
+        gset.measures.value_min[type] = value;
+    }
+
+    Save();
+}

@@ -174,6 +174,8 @@ void Rectangle::Draw(int x, int y, Color::E color)
 
 void Display::SetMeasure(TypeMeasure::E type, float value)
 {
+    Settings::SaveMeasure(type, value);
+
     Measure &measure = measures[type];
 
     if (value == measure.value) //-V550

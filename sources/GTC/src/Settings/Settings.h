@@ -68,6 +68,9 @@ struct Settings
     static void Save();
 
     static void Reset();
+
+    // ≈сли value больше или меньше уже сохранЄнного измерени€, то перезаписывает старое
+    static void SaveMeasure(TypeMeasure::E, float value);
 };
 
 
