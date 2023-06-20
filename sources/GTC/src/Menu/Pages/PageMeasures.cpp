@@ -38,19 +38,25 @@ DEF_CHOICE_2(chTemperature,
 )
 
 
-DEF_GOVERNOR_MIN(gTemperatureMin, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature)
+DEF_GOVERNOR_MIN(gTemperatureLimitMin, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
 
-DEF_GOVERNOR_MAX(gTemperatureMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
+DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
+
+DEF_STATE(sTemperatureValueMin, "Çíà÷åíèå ìèí", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature);
+
+DEF_STATE(sTemperatureValueMax, "Çíà÷åíèå ìàêñ", *PageMeasures::Temperature::self, nullptr, nullptr, TypeMeasure::Temperature);
 
 
-DEF_PAGE_4(pageTemperature,
+DEF_PAGE_6(pageTemperature,
     "ÒÅÌÏÅĞÀÒÓĞÀ",
     *PageMeasures::self,
     nullptr,
     nullptr,
     chTemperature,
-    gTemperatureMin,
-    gTemperatureMax,
+    gTemperatureLimitMin,
+    gTemperatureLimitMax,
+    sTemperatureValueMin,
+    sTemperatureValueMax,
     bClosePageTemperature
 )
 

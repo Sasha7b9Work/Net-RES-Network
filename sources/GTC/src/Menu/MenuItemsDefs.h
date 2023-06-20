@@ -2,16 +2,19 @@
 #pragma once
 
 
-#define DEF_BUTTON(name, title, keeper, function, funcOnDraw, marked)                                                    \
-    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function, funcOnDraw,  marked };
+#define DEF_BUTTON(name, title, keeper, funcOpenClose, funcOnDraw, marked)                                                          \
+    static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, funcOpenClose, funcOnDraw,  marked };
 
-#define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                  \
+#define DEF_STATE(name, title, keeper, funcOpenClose, funcOnDraw, type)                                                             \
+    static const DState name = { TypeItem::State, title, (const Page *)&keeper, funcOpenClose, funcOnDraw, type};
+
+#define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                              \
     static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, nullptr, min, max, &(value) };
 
-#define DEF_TIMEITEM(name, keeper, beforeOpen, value, state, time)                                                      \
+#define DEF_TIMEITEM(name, keeper, beforeOpen, value, state, time)                                                                  \
     static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, beforeOpen, nullptr, &(value), &(state), &(time)};
 
-#define DEF_CHOICE_2(name, title, keeper, beforeOpen, onDraw, cell, name1, name2)                                       \
+#define DEF_CHOICE_2(name, title, keeper, beforeOpen, onDraw, cell, name1, name2)                                                   \
     static const DChoice name = { TypeItem::Choice, title, (const Page *)&keeper, beforeOpen, onDraw, &cell, 2, {name1, name2}};
 
 #define DEF_ITEMS_1(name, item)                                                             \
