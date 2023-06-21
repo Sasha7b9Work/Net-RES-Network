@@ -30,10 +30,6 @@ namespace Beeper
 
 void Beeper::Init()
 {
-#ifndef WIN32
-    __HAL_AFIO_REMAP_SWJ_NONJTRST();
-#endif
-
     GPIO_InitTypeDef is;
     is.Pin = GPIO_PIN_4;
     is.Mode = GPIO_MODE_OUTPUT_PP;
@@ -88,7 +84,9 @@ void Beeper::Stop()
     HAL_TIM_Base_DeInit(&handle);
     HAL_NVIC_DisableIRQ(TIM3_IRQn);
 
+#ifndef WIN32
     __HAL_RCC_TIM3_CLK_DISABLE();
+#endif
 
     running = false;
 }

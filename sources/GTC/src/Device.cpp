@@ -71,7 +71,7 @@ void Device::Update()
         }
         else
         {
-            Beeper::Start(10000);
+            Beeper::Start(100);
         }
     }
 
