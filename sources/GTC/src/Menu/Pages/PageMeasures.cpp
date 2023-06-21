@@ -115,7 +115,23 @@ DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 825, TypeMeasu
 
 DEF_STATE_MIN_MAX(sPressure, PageMeasures::Pressure::self, TypeMeasure::Pressure);
 
-DEF_PAGE_6(pagePressure,
+
+void OnPress_ResetPressure(bool)
+{
+    gset.ResetMeasure(TypeMeasure::Pressure);
+}
+
+
+DEF_BUTTON(bResetPressure,
+    "Сброс мин-макс",
+    *PageMeasures::Pressure::self,
+    OnPress_ResetPressure,
+    nullptr,
+    nullptr
+)
+
+
+DEF_PAGE_7(pagePressure,
     "ДАВЛЕНИЕ",
     *PageMeasures::self,
     nullptr,
@@ -125,6 +141,7 @@ DEF_PAGE_6(pagePressure,
     gPressureMax,
     sPressureValueMin,
     sPressureValueMax,
+    bResetPressure,
     bClosePagePressure
 )
 
@@ -158,7 +175,21 @@ DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, TypeMeasure
 
 DEF_STATE_MIN_MAX(sHumidity, PageMeasures::Humidity::self, TypeMeasure::Humidity);
 
-DEF_PAGE_6(pageHumidity,
+void OnPress_ResetHumidity(bool)
+{
+    gset.ResetMeasure(TypeMeasure::Humidity);
+}
+
+
+DEF_BUTTON(bResetHumidity,
+    "Сброс мин-макс",
+    *PageMeasures::Humidity::self,
+    OnPress_ResetHumidity,
+    nullptr,
+    nullptr
+)
+
+DEF_PAGE_7(pageHumidity,
     "ВЛАЖНОСТЬ",
     *PageMeasures::self,
     nullptr,
@@ -168,6 +199,7 @@ DEF_PAGE_6(pageHumidity,
     gHumidityMax,
     sHumidityValueMin,
     sHumidityValueMax,
+    bResetHumidity,
     bClosePageHumidity
 )
 
@@ -201,7 +233,21 @@ DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeas
 
 DEF_STATE_MIN_MAX(sDewPoint, PageMeasures::DewPoint::self, TypeMeasure::DewPoint);
 
-DEF_PAGE_6(pageDewPoint,
+void OnPress_ResetDewPoint(bool)
+{
+    gset.ResetMeasure(TypeMeasure::DewPoint);
+}
+
+
+DEF_BUTTON(bResetDewPoint,
+    "Сброс мин-макс",
+    *PageMeasures::DewPoint::self,
+    OnPress_ResetDewPoint,
+    nullptr,
+    nullptr
+)
+
+DEF_PAGE_7(pageDewPoint,
     "ТОЧКА РОСЫ",
     *PageMeasures::self,
     nullptr,
@@ -211,6 +257,7 @@ DEF_PAGE_6(pageDewPoint,
     gDewPointMax,
     sDewPointValueMin,
     sDewPointValueMax,
+    bResetHumidity,
     bClosePageDewPoint
 )
 
