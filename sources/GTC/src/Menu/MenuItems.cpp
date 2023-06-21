@@ -84,6 +84,24 @@ bool Item::IsOpened() const
 }
 
 
+int Item::NumberOnPage() const
+{
+    const Page *keeper = Keeper();
+
+    const DPage *dpage = keeper->ToDPage();
+
+    for (int i = 0; i < 100 && dpage->items[i] != nullptr; i++)
+    {
+        if (dpage->items[i] == this)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
 void Item::DrawOpened(int x, int y, bool active) const
 {
     switch (ToDItem()->type)
@@ -558,9 +576,8 @@ void Button::ShortPressure(Key::E) const
 }
 
 
-void StateItem::ShortPressure(Key::E) const
+void StateItem::ShortPressure(Key::E key) const
 {
-
 }
 
 
@@ -577,9 +594,19 @@ void Choice::LongPressure() const
 }
 
 
-void StateItem::LongPressure(Key::E) const
+void StateItem::LongPressure(Key::E key) const
 {
+    if (IsOpened())
+    {
 
+    }
+    else
+    {
+        if (key == Key::_2)
+        {
+            Open();
+        }
+    }
 }
 
 
@@ -603,7 +630,9 @@ void StateItem::DoubleClick() const
 
 void Item::ShortPressure(Key::E key) const
 {
-    switch (ToDItem()->type)
+    TypeItem::E _type = ToDItem()->type;
+
+    switch (_type)
     {
     case TypeItem::Page:        ToPage()->ShortPressure(key);       break;
     case TypeItem::Choice:      ToChoice()->ShortPressure(key);     break;

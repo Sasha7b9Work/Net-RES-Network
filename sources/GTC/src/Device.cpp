@@ -41,8 +41,6 @@ void Device::Init()
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 
     Beeper::Init();
-
-    Beeper::Start(5000);
 }
 
 
@@ -69,11 +67,11 @@ void Device::Update()
 
         if (in_range)
         {
-//            Beeper::Stop();
+            Beeper::Stop();
         }
         else
         {
-            Beeper::Start(5000);
+            Beeper::Start(10000);
         }
     }
 

@@ -85,7 +85,7 @@ void Menu::Draw()
 
         keeper->Draw(0, 0, false);
 
-        Item::Opened()->DrawOpened(0, Menu::Title::HEIGHT, true);
+        Item::Opened()->DrawOpened(0, Menu::Title::HEIGHT + Item::Opened()->NumberOnPage() * Item::HEIGHT, true);
     }
 
     Display::EndScene();

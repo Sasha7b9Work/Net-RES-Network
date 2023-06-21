@@ -68,6 +68,9 @@ struct Item
 
     bool IsOpened() const;
 
+    // ¬озвращает пор€дковый номер на странице
+    int NumberOnPage() const;
+
     static const Item *Opened() { return opened_item; };
 
     bool IsPage() const     { return (ToDItem()->type == TypeItem::Page);   }
