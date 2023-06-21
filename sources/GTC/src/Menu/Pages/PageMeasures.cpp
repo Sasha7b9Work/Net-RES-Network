@@ -56,7 +56,22 @@ DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60,
 DEF_STATE_MIN_MAX(sTemperature, PageMeasures::Temperature::self, TypeMeasure::Temperature);
 
 
-DEF_PAGE_6(pageTemperature,
+void OnPress_ResetTemperature(bool)
+{
+    gset.ResetMeasure(TypeMeasure::Temperature);
+}
+
+
+DEF_BUTTON(bResetTemperature,
+    "Ñáğîñ ìèí-ìàêñ",
+    *PageMeasures::Temperature::self,
+    OnPress_ResetTemperature,
+    nullptr,
+    nullptr
+)
+
+
+DEF_PAGE_7(pageTemperature,
     "ÒÅÌÏÅĞÀÒÓĞÀ",
     *PageMeasures::self,
     nullptr,
@@ -66,6 +81,7 @@ DEF_PAGE_6(pageTemperature,
     gTemperatureLimitMax,
     sTemperatureValueMin,
     sTemperatureValueMax,
+    bResetTemperature,
     bClosePageTemperature
 )
 

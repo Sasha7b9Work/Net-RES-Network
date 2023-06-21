@@ -40,6 +40,10 @@
     static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
         (Item *)&item4, (Item *)&item5, (Item *)&item6, nullptr };
 
+#define DEF_ITEMS_7(name, item1, item2, item3, item4, item5, item6, item7)                  \
+    static const Item * const name[] = { (Item *)&item1, (Item *)&item2, (Item *)&item3,    \
+        (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7, nullptr };
+
 #define DEF_PAGE(name, title, keeper, beforeOpen, onDraw, items)                            \
     static uint8 ci##name = 0;                                                              \
     const DPage name = { TypeItem::Page, title, (const Page *)&keeper, beforeOpen, onDraw, items, &ci##name };
@@ -66,4 +70,8 @@
 
 #define DEF_PAGE_6(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3, item4, item5, item6)   \
     DEF_ITEMS_6(items##name, item1, item2, item3, item4, item5, item6)                          \
+    DEF_PAGE(name, title, keeper, beforeOpen, funcOnDraw, items##name)
+
+#define DEF_PAGE_7(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3, item4, item5, item6, item7)   \
+    DEF_ITEMS_7(items##name, item1, item2, item3, item4, item5, item6, item7)                                       \
     DEF_PAGE(name, title, keeper, beforeOpen, funcOnDraw, items##name)

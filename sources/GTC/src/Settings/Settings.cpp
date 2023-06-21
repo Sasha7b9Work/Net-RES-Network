@@ -124,3 +124,11 @@ void Settings::SaveMeasure(TypeMeasure::E type, float value)
 
     Save();
 }
+
+
+void Settings::ResetMeasure(TypeMeasure::E type)
+{
+    gset.measures.value_max[type] = ERROR_VALUE_FLOAT;
+
+    gset.measures.value_min[type] = ERROR_VALUE_FLOAT;
+}
