@@ -202,7 +202,7 @@ const Item *Page::CurrentItem() const
 }
 
 
-void Page::DrawClosed(int x, int y, bool active) const
+void Page::DrawClosed(int, int, bool) const
 {
 }
 
@@ -221,13 +221,13 @@ void Choice::DrawOpened(int, int, bool) const
 }
 
 
-void Choice::DrawClosed(int x, int y, bool active) const
+void Choice::DrawClosed(int x, int y, bool) const
 {
     String<>(CurrentName()).Draw(x + 130, y + 5);
 }
 
 
-void Button::DrawClosed(int x, int y, bool active) const
+void Button::DrawClosed(int x, int y, bool) const
 {
     if (ToDButton()->marked && *ToDButton()->marked)
     {
@@ -293,7 +293,7 @@ void Governor::DrawOpened(int x, int y, bool active) const
 }
 
 
-void StateItem::DrawOpened(int x, int y, bool active) const
+void StateItem::DrawOpened(int, int, bool) const
 {
 
 }
@@ -576,7 +576,7 @@ void Button::ShortPressure(Key::E) const
 }
 
 
-void StateItem::ShortPressure(Key::E key) const
+void StateItem::ShortPressure(Key::E) const
 {
 }
 

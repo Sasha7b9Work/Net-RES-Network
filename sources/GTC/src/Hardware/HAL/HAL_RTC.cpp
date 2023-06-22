@@ -6,6 +6,13 @@
 
 namespace HAL_RTC
 {
+    HAL_StatusTypeDef HAL_RTC_SetDateTime(RTC_HandleTypeDef *, RTC_DateTypeDef *, RTC_TimeTypeDef *);
+    HAL_StatusTypeDef HAL_RTC_GetDateTime(RTC_HandleTypeDef *, RTC_DateTypeDef *, RTC_TimeTypeDef *);
+}
+
+
+namespace HAL_RTC
+{
 #define WAKEUP_TIMER_ENABLE 0x32F2
 
     static RTC_HandleTypeDef handleRTC =
@@ -49,11 +56,9 @@ PackedTime HAL_RTC::GetTime()
 {
     RTC_TimeTypeDef time;
 
-    HAL_RTC_GetTime(&handleRTC, &time, RTC_FORMAT_BIN);
-
     RTC_DateTypeDef date;
 
-    HAL_RTC_GetDate(&handleRTC, &date, RTC_FORMAT_BIN);
+    HAL_RTC_GetDateTime(&handleRTC, &date, &time);
 
     PackedTime result(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
 
@@ -69,19 +74,27 @@ void HAL_RTC::SetTime(const PackedTime &_time)
     time.Minutes = (uint8)_time.minutes;
     time.Seconds = (uint8)_time.seconds;
 
-    HAL_RTC_SetTime(&handleRTC, &time, RTC_FORMAT_BIN);
-
     RTC_DateTypeDef date;
 
     date.Year = (uint8)_time.year;
     date.Month = (uint8)_time.month;
     date.Date = (uint8)_time.day;
 
-    HAL_RTC_SetDate(&handleRTC, &date, RTC_FORMAT_BIN);
+    HAL_RTC_SetDateTime(&handleRTC, &date, &time);
 }
 
 
 String<> PackedTime::ToString() const
 {
     return String<>("%02d:%02d:%02d:%03d", hours, minutes, seconds, ms);
+}
+
+HAL_StatusTypeDef HAL_RTC::HAL_RTC_SetDateTime(RTC_HandleTypeDef *, RTC_DateTypeDef *, RTC_TimeTypeDef *)
+{
+    return HAL_OK;
+}
+
+HAL_StatusTypeDef HAL_RTC::HAL_RTC_GetDateTime(RTC_HandleTypeDef *, RTC_DateTypeDef *, RTC_TimeTypeDef *)
+{
+    return HAL_OK;
 }
