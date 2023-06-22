@@ -61,7 +61,7 @@ namespace HAL_RTC
 
     PackedTime GetTime();
 
-    void SetTime(const PackedTime &);
+    uint SetTime(const PackedTime &);
 }
 
 
