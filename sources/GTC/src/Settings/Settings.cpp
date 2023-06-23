@@ -21,7 +21,7 @@ static const Settings def_set =
     // Measures
     {
         {-30, 225, 10, -30},
-        { 60, 825, 98,  60},
+        { 60, 1000, 98,  60},
         { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
         { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
     }

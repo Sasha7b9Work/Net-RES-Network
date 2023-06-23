@@ -109,9 +109,9 @@ DEF_CHOICE_2(chPressure,
     "Нет", "Да"
 )
 
-DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 825, TypeMeasure::Pressure);
+DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 1000, TypeMeasure::Pressure);
 
-DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 825, TypeMeasure::Pressure);
+DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 1000, TypeMeasure::Pressure);
 
 DEF_STATE_MIN_MAX(sPressure, PageMeasures::Pressure::self, TypeMeasure::Pressure);
 
