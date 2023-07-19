@@ -99,8 +99,7 @@ source_group(Utils                      FILES ${UTILS})
 source_group(Utils/Text                 FILES ${UTILS_TEXT})
 
 
-set_source_files_properties(
-                            Hardware/LAN/libnet/netserver.cpp
+set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
                             Hardware/LAN/libnet/netbase.cpp
                             Hardware/LAN/libnet/netclient.cpp
                             Hardware/LAN/libnet/netpacket.cpp
