@@ -90,6 +90,13 @@ source_group(Display/Grid            FILES ${DISPLAY_GRID})
 source_group(Utils                   FILES ${UTILS})
 source_group(Utils/Text              FILES ${UTILS_TEXT})
 
+
+#set_source_files_properties(*.h *.cpp
+#                            Communicator/*.*
+#                            Communicator/HC12/*.*
+#                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+
+
 add_executable( ${PROJECT_NAME}
                 ${RESOURCES}
                 ${SRC}
