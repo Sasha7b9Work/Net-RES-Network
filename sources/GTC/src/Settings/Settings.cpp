@@ -91,7 +91,7 @@ bool Settings::operator==(const Settings &rhs)
 {
     return  std::memcmp(&display, &rhs.display, sizeof(display)) == 0 &&
             std::memcmp(&system, &rhs.system, sizeof(system)) == 0 &&
-            std::memcmp(&measures, &rhs.measures, sizeof(measures)) == 0;
+            std::memcmp(&measures, &rhs.measures, sizeof(measures)) == 0; //-V1014
 }
 
 

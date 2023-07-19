@@ -71,7 +71,7 @@ DEF_BUTTON(bResetTemperature,
 )
 
 
-DEF_PAGE_7(pageTemperature,
+DEF_PAGE_7(pageTemperature, //-V1027
     "релоепюрспю",
     *PageMeasures::self,
     nullptr,
@@ -131,7 +131,7 @@ DEF_BUTTON(bResetPressure,
 )
 
 
-DEF_PAGE_7(pagePressure,
+DEF_PAGE_7(pagePressure, //-V1027
     "дюбкемхе",
     *PageMeasures::self,
     nullptr,
@@ -189,7 +189,7 @@ DEF_BUTTON(bResetHumidity,
     nullptr
 )
 
-DEF_PAGE_7(pageHumidity,
+DEF_PAGE_7(pageHumidity, //-V1027
     "бкюфмнярэ",
     *PageMeasures::self,
     nullptr,
@@ -247,7 +247,7 @@ DEF_BUTTON(bResetDewPoint,
     nullptr
 )
 
-DEF_PAGE_7(pageDewPoint,
+DEF_PAGE_7(pageDewPoint, //-V1027
     "рнвйю пняш",
     *PageMeasures::self,
     nullptr,

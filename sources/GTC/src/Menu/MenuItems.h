@@ -219,7 +219,7 @@ struct StateItem : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    const DState *ToDState() const { return (DState *)this; }
+    const DState *ToDState() const { return (DState *)this; } //-V1027
 };
 
 
