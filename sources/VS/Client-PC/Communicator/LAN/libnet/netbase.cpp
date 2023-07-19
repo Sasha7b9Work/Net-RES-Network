@@ -114,11 +114,11 @@ bool netbase::setConPktCB( sock_t c, netpacket::netPktCB cbFunc, void* cbData )
     bool result = true;
 
     //Map c -> cbFunc
-    result = packetCB_map.insert(
+    result = packetCB_map.insert( //-V823
         std::map< sock_t, netpacket::netPktCB >::value_type(c, cbFunc)).second;
     
     //Map c -> cbData
-    result = result && packetCBD_map.insert(
+    result = result && packetCBD_map.insert( //-V823
         std::map< sock_t, void* >::value_type( c, cbData)).second;
     
     //Return value: was callback and callback data inserted successfully?
@@ -201,7 +201,7 @@ int netbase::sendPacket( sock_t sd, netpacket &msg) {
     //repeat send while (rv > 0 && totalSent < length)
     for ( readpos=0, rv=0; readpos < length; readpos += rv) {
         rv = send(sd, (const char*)(msg.get_ptr() + readpos), (int)length, 0);
-        if (rv == SOCKET_ERROR || rv==-1) {
+        if (rv == SOCKET_ERROR || rv==-1) { //-V501
             debugLog << "#" << sd << " Error:" << getSocketError() << endl;
             return -1;
         }
@@ -293,7 +293,7 @@ size_t netbase::buildSocketSet()
     std::set<sock_t>::const_iterator iter;
 
     FD_ZERO( &sdSet );
-    for (iter = conSet.begin(); iter != conSet.end(); iter++) {
+    for (iter = conSet.begin(); iter != conSet.end(); iter++) { //-V803
         FD_SET( (unsigned int)(*iter), &sdSet);
     }
 
@@ -445,7 +445,7 @@ vector<netpacket*> netbase::readSockets()
     std::set<sock_t> socketSet = conSet;
 
     //Check all connections in conSet
-    for (con_iter = socketSet.begin(); con_iter!=socketSet.end(); con_iter++) {
+    for (con_iter = socketSet.begin(); con_iter!=socketSet.end(); con_iter++) { //-V803
         con = *con_iter;
         if (FD_ISSET( con, &sdSet)) {
           
@@ -524,7 +524,7 @@ int netbase::fireCallbacks( vector<netpacket*>& packets) {
     sock_t con;
     
     //For each packet on the list
-    for (pkt_iter = packets.begin(); pkt_iter != packets.end(); pkt_iter++) {
+    for (pkt_iter = packets.begin(); pkt_iter != packets.end(); pkt_iter++) { //-V803
 
         //Packet pointer
         netpacket *pkt = *pkt_iter;
@@ -605,7 +605,7 @@ int netbase::fireCallbacks( vector<netpacket*>& packets) {
     set<sock_t> closedSocketCopy( closedSocketSet );
     for (con_iter = closedSocketCopy.begin();
          con_iter != closedSocketCopy.end();
-         con_iter++)
+         con_iter++) //-V803
     {
 
 
@@ -622,7 +622,7 @@ int netbase::fireCallbacks( vector<netpacket*>& packets) {
 
     //Delete packets created by makePacket() in readSockets().
     //  Create list of connections with unread data
-    for (pkt_iter = packets.begin(); pkt_iter != packets.end(); pkt_iter++) {
+    for (pkt_iter = packets.begin(); pkt_iter != packets.end(); pkt_iter++) { //-V803
         delete (*pkt_iter);
     }
       

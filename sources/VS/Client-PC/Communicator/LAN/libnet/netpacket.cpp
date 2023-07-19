@@ -13,7 +13,7 @@ using net__::netpacket;
 //Destructor
 netpacket::~netpacket() {
     if (delete_data) {
-        delete data;
+        delete data; //-V611
         data = NULL;
     }
 }

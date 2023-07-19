@@ -42,7 +42,7 @@ netserver::netserver(unsigned int max): netbase( max), ready(false),
 netserver::~netserver()
 {
     if ( (sdListen != (sock_t)INVALID_SOCKET) || ready)
-        closePort();
+        closePort(); //-V1053
     openLog();
     debugLog << "===Ending server===" << endl << endl;
     closeLog();
