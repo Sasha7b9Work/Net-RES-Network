@@ -57,8 +57,8 @@ file(GLOB DISPLAY_FONT              ../../GTC/src/Display/Font/*.*)
 file(GLOB HARDWARE                  ../../GTC/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC              ../../GTC/src/Hardware/CDC/*.*
                                                   Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL              ../../GTC/src/Hardware/HAL/*.*
-                                                  Hardware/HAL/*.*)
+file(GLOB HARDWARE_HAL              ../../GTC/src/Hardware/HAL/*.h
+7                                                 Hardware/HAL/*.*)
 file(GLOB HARDWARE_LAN                            Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                     Hardware/LAN/libnet/*.*)
 file(GLOB HARDWARE_MODULES_BME280   ../../GTC/src/Hardware/Modules/BME280/*.*)
