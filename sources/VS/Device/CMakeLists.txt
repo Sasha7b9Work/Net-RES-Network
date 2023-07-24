@@ -2,7 +2,9 @@
 
 project (Device)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
+
 
 include_directories(.
                     Device
@@ -95,6 +97,17 @@ source_group(Menu/Pages                 FILES ${MENU_PAGES})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Utils/Text                 FILES ${UTILS_TEXT})
+
+
+set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
+                            Hardware/LAN/libnet/netbase.cpp
+                            Hardware/LAN/libnet/netclient.cpp
+                            Hardware/LAN/libnet/netpacket.cpp
+                            Hardware/LAN/ClientTCP.cpp
+                            Application.cpp
+                            Frame.cpp
+                            main_win.cpp
+                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 
 set_source_files_properties(../../Device/src/Hardware/CDC/usbd_conf.c

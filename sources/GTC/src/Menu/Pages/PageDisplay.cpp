@@ -7,65 +7,25 @@
 extern const DPage pageMain;
 
 
-DEF_CHOICE_2( chPressure,
-    "Давление",
-    *PageDisplay::PageMeasures::self,
-    gset.display.show_measure[TypeMeasure::Pressure],
-    "Откл", "Вкл"
-)
-
-DEF_CHOICE_2(chTemperature,
-    "Температура",
-    *PageDisplay::PageMeasures::self,
-    gset.display.show_measure[TypeMeasure::Temperature],
-    "Откл", "Вкл"
-)
-
-DEF_CHOICE_2(chHumidity,
-    "Влажность",
-    *PageDisplay::PageMeasures::self,
-    gset.display.show_measure[TypeMeasure::Humidity],
-    "Откл", "Вкл"
-)
-
-static void CloseMeasures()
-{
-    PageDisplay::PageMeasures::self->Close();
-};
-
-DEF_BUTTN( bCloseMeasures,
-    "Закрыть",
-    *PageDisplay::PageMeasures::self,
-    CloseMeasures
-)
-
-DEF_PAGE_4(pageMeasures, //-V1027
-    "ИЗМЕРЕНИЯ",
-    *PageDisplay::self,
-    chPressure,
-    chTemperature,
-    chHumidity,
-    bCloseMeasures
-)
-
-
-void ClosePageDisplay()
+void ClosePageDisplay(bool)
 {
     PageDisplay::self->Close();
 }
 
-DEF_BUTTN( bClosePageDisplay,
+DEF_BUTTON(bClosePageDisplay,
     "Закрыть",
     *PageDisplay::self,
-    ClosePageDisplay
+    ClosePageDisplay,
+    nullptr,
+    nullptr
 )
 
-DEF_PAGE_2(pageDisplay, //-V1027
+DEF_PAGE_1(pageDisplay, //-V1027
     "ДИСПЛЕЙ",
     pageMain,
-    pageMeasures,
+    nullptr,
+    nullptr,
     bClosePageDisplay
 )
 
 const Page * const PageDisplay::self = (const Page *)&pageDisplay;
-const Page * const PageDisplay::PageMeasures::self = (const Page *)&pageMeasures;

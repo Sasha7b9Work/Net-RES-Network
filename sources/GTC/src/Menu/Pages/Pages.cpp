@@ -1,27 +1,49 @@
 // 2022/05/05 12:26:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
+#include "Measures.h"
 
 
 extern const DPage pageMain;
 
 
-static void CloseMainPage()
+static void CloseMainPage(bool)
 {
     PageMain::self->Close();
 }
 
-DEF_BUTTN(bCloseMainPage,
+
+DEF_BUTTON(bCloseMainPage,
     "Закрыть",
     pageMain,
-    CloseMainPage
+    CloseMainPage,
+    nullptr,
+    nullptr
 )
 
-DEF_PAGE_4(pageMain, //-V1027
+
+static void OnOpenClose_MainPage(bool open)
+{
+    if (open)
+    {
+
+    }
+    else
+    {
+        gset.Save();
+    }
+}
+
+
+DEF_PAGE_3(pageMain, //-V1027
     "МЕНЮ",
     Page::Empty,
-    *PageDisplay::self,
-    *PageHC12::self,
+    OnOpenClose_MainPage,
+    nullptr,
+    *PageMeasures::self,
+//    *PageDisplay::self,
+//    *PageHC12::self,
     *PageSystem::self,
     bCloseMainPage
 )

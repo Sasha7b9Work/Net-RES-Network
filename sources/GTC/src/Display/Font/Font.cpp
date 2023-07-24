@@ -57,9 +57,9 @@ int Font::Symbol::Width(uint8 symbol)
 
     switch (current)
     {
-    case TypeFont::_8:      result = font8.symbol[symbol].width;        break;
-    case TypeFont::_12_10:  result = font12_10.symbol[symbol].width;    break;
-    case TypeFont::Count:                                               break;
+    case TypeFont::_8:      result = (symbol == ' ') ? 5 : font8.symbol[symbol].width;       break;
+    case TypeFont::_12_10:  result = (symbol == ' ') ? 8 : font12_10.symbol[symbol].width;   break;
+    case TypeFont::Count:                                                                    break;
     }
 
     return result;

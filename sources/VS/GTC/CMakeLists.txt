@@ -2,7 +2,9 @@
 
 project (GTC)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
+
 
 include_directories(.
                     ../../GTC/src
@@ -26,6 +28,7 @@ if(WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
     add_compile_options(/wd4100)    # 'xxx' : unreferenced formal parameter
+    add_compile_options(/wd4310)
     add_compile_options(/wd4365)    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
     add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
     add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted
@@ -50,15 +53,14 @@ file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
 file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                       *.h *.cpp
-                                    ../../GTC/src/defines.h
-                                    ../../GTC/src/Device.*)
+                                    ../../GTC/src/*.*)
 file(GLOB DISPLAY                   ../../GTC/src/Display/*.*)
 file(GLOB DISPLAY_FONT              ../../GTC/src/Display/Font/*.*)
 file(GLOB HARDWARE                  ../../GTC/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC              ../../GTC/src/Hardware/CDC/*.*
                                                   Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL              ../../GTC/src/Hardware/HAL/*.*
-                                                  Hardware/HAL/*.*)
+file(GLOB HARDWARE_HAL              ../../GTC/src/Hardware/HAL/*.h
+7                                                 Hardware/HAL/*.*)
 file(GLOB HARDWARE_LAN                            Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                     Hardware/LAN/libnet/*.*)
 file(GLOB HARDWARE_MODULES_BME280   ../../GTC/src/Hardware/Modules/BME280/*.*)
@@ -89,6 +91,17 @@ source_group(Menu/Pages                 FILES ${MENU_PAGES})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Utils/Text                 FILES ${UTILS_TEXT})
+
+
+set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
+                            Hardware/LAN/libnet/netbase.cpp
+                            Hardware/LAN/libnet/netclient.cpp
+                            Hardware/LAN/libnet/netpacket.cpp
+                            Hardware/LAN/ClientTCP.cpp
+                            Application.cpp
+                            Frame.cpp
+                            main_win.cpp
+                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 
 set_source_files_properties(../../GTC/src/Hardware/CDC/usbd_conf.c

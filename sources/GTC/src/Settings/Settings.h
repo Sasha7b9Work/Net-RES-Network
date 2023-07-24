@@ -7,11 +7,10 @@ struct TypeDisplayedInformation
 {
     enum E
     {
-        MeasurePressure,
-        MeasureIllumination,
         MeasureTemperature,
         MeasureHumidity,
-        MeasureVelocity,
+        MeasurePressure,
+        MeasureDewPoint,
         AllMeasures,
         Menu,
         Count
@@ -38,6 +37,15 @@ struct SettingsDisplay
 };
 
 
+struct SettingsMeasures
+{
+    int limit_min[TypeMeasure::Count];
+    int limit_max[TypeMeasure::Count];
+    float value_min[TypeMeasure::Count];
+    float value_max[TypeMeasure::Count];
+};
+
+
 struct SettingsSystem
 {
     int serial_number;
@@ -46,13 +54,26 @@ struct SettingsSystem
 
 struct Settings
 {
-    SettingsDisplay display;
-    SettingsSystem  system;
+    uint crc;
+    uint number;
+    SettingsDisplay  display;
+    SettingsSystem   system;
+    SettingsMeasures measures;
 
-    static uint GetID();
+    bool operator!=(const Settings &);
+    bool operator==(const Settings &);
 
     static void Load();
+
     static void Save();
+
+    static void Reset();
+
+    // ≈сли value больше или меньше уже сохранЄнного измерени€, то перезаписывает старое
+    static void SaveMeasure(TypeMeasure::E, float value);
+
+    // —брасывает мин и макс значени€ измерени€
+    static void ResetMeasure(TypeMeasure::E);
 };
 
 

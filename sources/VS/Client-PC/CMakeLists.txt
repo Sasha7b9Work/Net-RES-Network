@@ -2,7 +2,8 @@
 
 project (Client-PC)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD_BATCH_SIZE 8)
 
 include_directories(.
                     ../../VS/ThirdParty/wxWidgets/include
@@ -89,6 +90,13 @@ source_group(Display/Diagram         FILES ${DISPLAY_DIAGRAM})
 source_group(Display/Grid            FILES ${DISPLAY_GRID})
 source_group(Utils                   FILES ${UTILS})
 source_group(Utils/Text              FILES ${UTILS_TEXT})
+
+
+set_source_files_properties(Communicator/LAN/libnet/netserver.cpp
+                            Communicator/LAN/libnet/netbase.cpp
+                            Communicator/LAN/libnet/netclient.cpp
+                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+
 
 add_executable( ${PROJECT_NAME}
                 ${RESOURCES}

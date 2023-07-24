@@ -9,6 +9,16 @@ uint Timer::CurrentTime()
 }
 
 
+void Timer::Delay(uint delayMS)
+{
+    uint end = TIME_MS + delayMS;
+
+    while (TIME_MS < end)
+    {
+    }
+}
+
+
 TimeMeterMS::TimeMeterMS()
 {
     Reset();
@@ -18,19 +28,7 @@ TimeMeterMS::TimeMeterMS()
 void TimeMeterMS::Reset()
 {
     time_reset = TIME_MS;
-    time_pause = 0;
-}
-
-
-void TimeMeterMS::Pause()
-{
-    time_pause = TIME_MS;
-}
-
-
-void TimeMeterMS::Continue()
-{
-    time_reset += (TIME_MS - time_pause);
+    time_finished = time_reset;
 }
 
 
@@ -40,7 +38,19 @@ uint TimeMeterMS::ElapsedTime()
 }
 
 
-void TimeMeterMS::WaitMS(uint dT)
+void TimeMeterMS::FinishAfter(uint timeMS)
+{
+    time_finished = TIME_MS + timeMS;
+}
+
+
+bool TimeMeterMS::IsFinished() const
+{
+    return TIME_MS >= time_finished;
+}
+
+
+void TimeMeterMS::PauseOnMS(uint dT)
 {
     uint time_enter = ElapsedTime();
 

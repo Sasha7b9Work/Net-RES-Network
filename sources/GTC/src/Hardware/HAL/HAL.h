@@ -1,42 +1,23 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/Text/String.h"
+#include "Settings/Settings.h"
+#include "Hardware/HAL/HAL_PINS.h"
 
 
 struct PackedTime
 {
-    unsigned hours : 5;
-    unsigned minutes : 6;
-    unsigned seconds : 6;
-    unsigned year : 16;
-    unsigned month : 4;
-    unsigned notUsed0 : 4;
-    unsigned day : 5;
-    unsigned ms : 27;
-    PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
-        hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), ms(0) {};
-    // »зменение значени€ пол€ на +/- 1
-    void ChangeHours(int delta);
-    void ChangeMinutes(int delta);
-    void ChangeSeconds(int delta);
-    void ChangeDay(int delta);
-    void ChangeMonth(int delta);
-    void ChangeYear(int delta);
-
-    // ¬озвращает структура PackedTime, врем€ в которой отстоит в будущее на timeMS миллисекунд
-    void AddTime(uint timeMS);
+    int hours;
+    int minutes;
+    int seconds;
+    int year;
+    int month;
+    int day;
+    int ms;
+    PackedTime(int h = 11, int m = 11, int s = 11, int d = 11, int mo = 11, int y = 11) :
+        hours(h), minutes(m), seconds(s), year(y), month(mo), day(d), ms(0) {};
 
     String<> ToString() const;
-
-private:
-
-    // ƒобавить к дате hours часов
-    void AddHours(uint hours);
-    void AddMinutes(uint minutes);
-    void AddSeconds(uint seconds);
-    void AddMilliseconds(uint ms);
-    void AddDays(uint days);
-    void AddMonths(uint months);
 };
 
 
@@ -45,12 +26,20 @@ namespace HAL
     void Init();
 
     void Delay(unsigned int timeMS);
+
+    String<> GetUID();
 }
 
 
-namespace HAL_FLASH
+namespace HAL_ADC
 {
+    void Init();
 
+    void Update();
+
+    float GetVoltage();
+
+    extern void *handle;           // ADC_HandleTypeDef
 }
 
 
@@ -70,7 +59,9 @@ namespace HAL_RTC
 {
     void Init();
 
-    PackedTime GetPackedTime();
+    PackedTime GetTime();
+
+    uint SetTime(const PackedTime &);
 }
 
 
@@ -81,6 +72,13 @@ namespace HAL_USART_HC12
     void Transmit(const void *buffer, int size);
 
     extern void *handle;               // UART_HandleTypeDef
+}
+
+
+namespace HAL_ROM
+{
+    void SaveSettings(const Settings &);
+    bool LoadSettings(Settings &);
 }
 
 
@@ -99,6 +97,8 @@ extern "C" {
     void SysTick_Handler(void);
     void USB_LP_CAN1_RX0_IRQHandler(void);
     void USART1_IRQHandler(void);
+    void ADC1_2_IRQHandler(void);
+    void TIM3_IRQHandler(void);
 
 #ifdef __cplusplus
 }

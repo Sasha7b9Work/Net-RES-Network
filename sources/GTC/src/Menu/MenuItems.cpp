@@ -5,8 +5,11 @@
 #include "Display/Display.h"
 #include "Utils/Text/String.h"
 #include "Menu/Menu.h"
-#include "Utils/Text/String.h"
+#include "Utils/Text/Text.h"
 #include "Utils/Values.h"
+#include "Utils/Math.h"
+#include "Hardware/HAL/HAL.h"
+#include "Display/Font/Font.h"
 #include "Utils/Math.h"
 
 
@@ -17,12 +20,22 @@ Governor::ActiveControl::E Governor::active_control = Governor::ActiveControl::I
 
 void Item::Open() const
 {
+    if (ToDItem()->funcOnOpenClose)
+    {
+        ToDItem()->funcOnOpenClose(true);
+    }
+
     opened_item = this;
 }
 
 
 void Item::Close() const
 {
+    if (ToDItem()->funcOnOpenClose)
+    {
+        ToDItem()->funcOnOpenClose(false);
+    }
+
     if (this == PageMain::self)
     {
         opened_item = &Page::Empty;
@@ -71,15 +84,40 @@ bool Item::IsOpened() const
 }
 
 
+int Item::NumberOnPage() const
+{
+    const Page *keeper = Keeper();
+
+    const DPage *dpage = keeper->ToDPage();
+
+    for (int i = 0; i < 100 && dpage->items[i] != nullptr; i++)
+    {
+        if (dpage->items[i] == this)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
 void Item::DrawOpened(int x, int y, bool active) const
 {
-    if (IsPage())
+    switch (ToDItem()->type)
     {
-        ToPage()->DrawOpened(x, y, active);
+    case TypeItem::Page:        ToPage()->DrawOpened(x, y, active);      break;
+    case TypeItem::Choice:      ToChoice()->DrawOpened(x, y, active);    break;
+    case TypeItem::Button:      ToButton()->DrawOpened(x, y, active);    break;
+    case TypeItem::Governor:    ToGovernor()->DrawOpened(x, y, active);  break;
+    case TypeItem::Time:        ToTimeItem()->DrawOpened(x, y, active);  break;
+    case TypeItem::State:       ToStateItem()->DrawOpened(x, y, active); break;
+    case TypeItem::Count:   break;
     }
-    else if (IsGovernor())
+
+    if (ToDItem()->funcOnDraw)
     {
-        ToGovernor()->DrawOpened(x, y, active);
+        ToDItem()->funcOnDraw(x, y);
     }
 }
 
@@ -102,21 +140,22 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
 
-    if (IsPage())
+    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
+
+    switch (ToDItem()->type)
     {
-        ToPage()->DrawClosed(x, y, active);
+    case TypeItem::Page:        ToPage()->DrawClosed(x, y, active);      break;
+    case TypeItem::Choice:      ToChoice()->DrawClosed(x, y, active);    break;
+    case TypeItem::Button:      ToButton()->DrawClosed(x, y, active);    break;
+    case TypeItem::Governor:    ToGovernor()->DrawClosed(x, y, active);  break;
+    case TypeItem::Time:        ToTimeItem()->DrawClosed(x, y, active);  break;
+    case TypeItem::State:       ToStateItem()->DrawClosed(x, y, active); break;
+    case TypeItem::Count:               break;
     }
-    else if (IsChoice())
+
+    if (ToDItem()->funcOnDraw)
     {
-        ToChoice()->DrawClosed(x, y, active);
-    }
-    else if (IsButton())
-    {
-        ToButton()->DrawClosed(x, y, active);
-    }
-    else if (IsGovernor())
-    {
-        ToGovernor()->DrawClosed(x, y, active);
+        ToDItem()->funcOnDraw(x, y);
     }
 }
 
@@ -163,9 +202,8 @@ const Item *Page::CurrentItem() const
 }
 
 
-void Page::DrawClosed(int x, int y, bool active) const
+void Page::DrawClosed(int, int, bool) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 }
 
 
@@ -177,25 +215,55 @@ pchar Choice::CurrentName() const
 }
 
 
-void Choice::DrawClosed(int x, int y, bool active) const
+void Choice::DrawOpened(int, int, bool) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 
+}
+
+
+void Choice::DrawClosed(int x, int y, bool) const
+{
     String<>(CurrentName()).Draw(x + 130, y + 5);
 }
 
 
-void Button::DrawClosed(int x, int y, bool active) const
+void Button::DrawClosed(int x, int y, bool) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
+    if (ToDButton()->marked && *ToDButton()->marked)
+    {
+        x += 130;
+        String<>("\x85").Draw(x, y + 5);
+        String<>("\x86").Draw(x + 10, y + 5);
+    }
+}
+
+
+void Button::DrawOpened(int x, int y, bool active) const
+{
+    DrawClosed(x, y, active);
 }
 
 
 void Governor::DrawClosed(int x, int y, bool active) const
 {
-    Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
-
     Int(*ToDGovernor()->value).ToStirng().DrawRelativelyRight(x + 150, y + 5, Color::MenuLetters(active));
+}
+
+
+void StateItem::DrawClosed(int x, int y, bool active) const
+{
+    float value = ToDState()->is_min ? gset.measures.value_min[ToDState()->type_meas] : gset.measures.value_max[ToDState()->type_meas];
+
+    y += 5;
+
+    if (value == ERROR_VALUE_FLOAT)
+    {
+        String<>("-").Draw(x + 140, y, Color::MenuLetters(active));
+    }
+    else
+    {
+        Float(value).ToString().DrawRelativelyRight(x + 150, y, Color::MenuLetters(active));
+    }
 }
 
 
@@ -225,13 +293,175 @@ void Governor::DrawOpened(int x, int y, bool active) const
 }
 
 
+void StateItem::DrawOpened(int, int, bool) const
+{
+
+}
+
+
+void TimeItem::DrawClosed(int x, int y, bool) const
+{
+    PackedTime time = HAL_RTC::GetTime();
+
+    y += 4;
+
+    x += 15;
+
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
+
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(x + 70, y);
+}
+
+
+void TimeItem::LongPressure(Key::E) const
+{
+    if (IsOpened())
+    {
+        *ToDTimeItem()->state = 0;
+    }
+    else
+    {
+        Open();
+    }
+}
+
+
+void TimeItem::ChangeCurrentField(Key::E key) const
+{
+    const DTimeItem *data = ToDTimeItem();
+
+    if (*data->cur_field < 6)
+    {
+        int max[6] = { 23, 59, 59, 31, 12, 99 };
+
+        PackedTime &time = *data->time;
+
+        int *values[6] = { &time.hours, &time.minutes, &time.seconds,
+                            &time.day, &time.month, &time.year };
+
+        if (key == Key::_1)
+        {
+            Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
+        }
+        else if (key == Key::_2)
+        {
+            Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
+        }
+    }
+}
+
+
+void TimeItem::ShortPressure(Key::E key) const
+{
+    if (IsOpened())
+    {
+        const DTimeItem *data = ToDTimeItem();
+
+        if (*data->state == 0)
+        {
+            if (key == Key::_1)
+            {
+                Math::CircleIncrease<int>(data->cur_field, 0, 7);
+            }
+            else if (key == Key::_2)
+            {
+                if (*data->cur_field == 6)
+                {
+                    HAL_RTC::SetTime(*data->time);
+                    Close();
+                }
+                else if (*data->cur_field == 7)
+                {
+                    Close();
+                }
+                else
+                {
+                    *data->state = 1;
+                }
+            }
+        }
+        else if (*data->state == 1)
+        {
+            ChangeCurrentField(key);
+        }
+    }
+}
+
+
+void TimeItem::DrawOpened(int, int, bool) const
+{
+    const DTimeItem *data = ToDTimeItem();
+
+    Display::BeginScene(Color::BLACK);
+
+    Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::WHITE);
+
+    int x0 = 20;
+    int y0 = 20;
+    int dX = 48;
+    int dY = 40;
+
+    int values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
+        data->time->day, data->time->month, data->time->year };
+
+    for (int i = 0; i < 6; i++)
+    {
+        Color::E color = Color::WHITE;
+
+        int x = x0 + dX * (i % 3);
+        int y = y0 + (i < 3 ? 0 : dY);
+
+        if (i == *data->cur_field)
+        {
+            Rectangle(29, 27).Fill(x - 2, y - 2, Color::WHITE);
+            color = Color::BLACK;
+        }
+
+        Font::Text::DrawBig(x, y, 2, String<>("%02d", values[i]).c_str(), color);
+    }
+
+    int x = 105;
+    int y = 101;
+    int size = 18;
+    int dT = 3;
+
+    Rectangle rect(size, size);
+    rect.Draw(x, y, Color::WHITE);
+    String<>(*data->state == 0 ? "П" : "\x80").Draw(x + dT + 3, y + dT);
+    x += 27;
+    rect.Draw(x, y);
+    String<>(*data->state == 0 ? "В" : "\x81").Draw(x + dT + 3, y + dT);
+
+
+    Color::E color = Color::WHITE;
+
+    if (*data->cur_field == 6)
+    {
+        Rectangle(56, 15).Fill(23, y + dT - 15, Color::WHITE);
+        color = Color::BLACK;
+    }
+
+    String<>("Применить").Draw(25, y + dT - 13, color);
+
+    color = Color::WHITE;
+
+    if (*data->cur_field == 7)
+    {
+        Rectangle(56, 15).Fill(23, y + dT + 5, Color::WHITE);
+        color = Color::BLACK;
+    }
+
+    String<>("Выход").Draw(25, y + dT + 7, color);
+}
+
+
 void Governor::DrawControls(int x, int y) const
 {
-    DrawControl(x + 50, y + 3, String<>("\x95"), active_control == ActiveControl::Increase);
+    DrawControl(x + 90, y + 3, String<>("\x83"), active_control == ActiveControl::Increase);
 
-    DrawControl(x + 50, y + 12, String<>("\x85"), active_control == ActiveControl::Decrease);
+    DrawControl(x + 90, y + 12, String<>("\x82"), active_control == ActiveControl::Decrease);
 
-    DrawControl(x + 80, y + 5, String<>("\x88"), active_control == ActiveControl::Close);
+    DrawControl(x + 105, y + 5, String<>("\x84"), active_control == ActiveControl::Close);
 }
 
 
@@ -289,38 +519,41 @@ int Page::NumItems() const
 }
 
 
-void Page::ShortPressure() const
+void Page::ShortPressure(Key::E key) const
 {
-    uint8 *currentItem = ToDPage()->currentItem;
-
-    *currentItem = (uint8)(*currentItem + 1);
-
-    if (*currentItem == NumItems())
+    if (key == Key::_1)
     {
-        *currentItem = 0;
+        uint8 *currentItem = ToDPage()->currentItem;
+
+        *currentItem = (uint8)(*currentItem + 1);
+
+        if (*currentItem == NumItems())
+        {
+            *currentItem = 0;
+        }
+    }
+    else if (key == Key::_2)
+    {
+        LongPressure(key);
     }
 }
 
 
-void Page::LongPressure() const
+void Page::LongPressure(Key::E key) const
 {
     const Item *item = CurrentItem();
 
-    if (item->IsPage())
+    const DItem *data = item->ToDItem();
+
+    switch (data->type)
     {
-        item->ToPage()->Open();
-    }
-    else if (item->IsChoice())
-    {
-        item->ToChoice()->LongPressure();
-    }
-    else if (item->IsButton())
-    {
-        item->ToButton()->LongPressure();
-    }
-    else if (item->IsGovernor())
-    {
-        item->ToGovernor()->LongPressure();
+    case TypeItem::Page:        item->ToPage()->Open();                 break;
+    case TypeItem::Choice:      item->ToChoice()->LongPressure();       break;
+    case TypeItem::Button:      item->ToButton()->LongPressure();       break;
+    case TypeItem::Governor:    item->ToGovernor()->LongPressure();     break;
+    case TypeItem::Time:        item->ToTimeItem()->LongPressure(key);  break;
+    case TypeItem::State:       item->ToStateItem()->LongPressure(key); break;
+    case TypeItem::Count:                                               break;
     }
 }
 
@@ -331,15 +564,20 @@ void Page::DoubleClick() const
 }
 
 
-void Choice::ShortPressure() const
+void Choice::ShortPressure(Key::E) const
 {
 
 }
 
 
-void Button::ShortPressure() const
+void Button::ShortPressure(Key::E) const
 {
 
+}
+
+
+void StateItem::ShortPressure(Key::E) const
+{
 }
 
 
@@ -356,6 +594,22 @@ void Choice::LongPressure() const
 }
 
 
+void StateItem::LongPressure(Key::E key) const
+{
+    if (IsOpened())
+    {
+
+    }
+    else
+    {
+        if (key == Key::_2)
+        {
+            Open();
+        }
+    }
+}
+
+
 void Choice::DoubleClick() const
 {
 
@@ -368,28 +622,40 @@ void Button::DoubleClick() const
 }
 
 
-void Item::ShortPressure() const
+void StateItem::DoubleClick() const
 {
-    switch (ToDItem()->type)
+
+}
+
+
+void Item::ShortPressure(Key::E key) const
+{
+    TypeItem::E _type = ToDItem()->type;
+
+    switch (_type)
     {
-    case TypeItem::Page:        ToPage()->ShortPressure();      break;
-    case TypeItem::Choice:      ToChoice()->ShortPressure();    break;
-    case TypeItem::Button:      ToButton()->ShortPressure();    break;
-    case TypeItem::Governor:    ToGovernor()->ShortPressure();  break;
-    case TypeItem::Count:                                       break;
+    case TypeItem::Page:        ToPage()->ShortPressure(key);       break;
+    case TypeItem::Choice:      ToChoice()->ShortPressure(key);     break;
+    case TypeItem::Button:      ToButton()->ShortPressure(key);     break;
+    case TypeItem::Governor:    ToGovernor()->ShortPressure(key);   break;
+    case TypeItem::Time:        ToTimeItem()->ShortPressure(key);   break;
+    case TypeItem::State:       ToStateItem()->ShortPressure(key);  break;
+    case TypeItem::Count:                                           break;
     }
 }
 
 
-void Item::LongPressure() const
+void Item::LongPressure(Key::E key) const
 {
     switch (ToDItem()->type)
     {
-    case TypeItem::Page:        ToPage()->LongPressure();       break;
-    case TypeItem::Choice:      ToChoice()->LongPressure();     break;
-    case TypeItem::Button:      ToButton()->LongPressure();     break;
-    case TypeItem::Governor:    ToGovernor()->LongPressure();   break;
-    case TypeItem::Count:                                       break;
+    case TypeItem::Page:        ToPage()->LongPressure(key);        break;
+    case TypeItem::Choice:      ToChoice()->LongPressure();         break;
+    case TypeItem::Button:      ToButton()->LongPressure();         break;
+    case TypeItem::Governor:    ToGovernor()->LongPressure();       break;
+    case TypeItem::Time:        ToTimeItem()->LongPressure(key);    break;
+    case TypeItem::State:       ToStateItem()->LongPressure(key);   break;
+    case TypeItem::Count:                                           break;
     }
 }
 
@@ -402,34 +668,59 @@ void Item::DoubleClick() const
     case TypeItem::Choice:      ToChoice()->DoubleClick();      break;
     case TypeItem::Button:      ToButton()->DoubleClick();      break;
     case TypeItem::Governor:    ToGovernor()->DoubleClick();    break;
+    case TypeItem::Time:        ToTimeItem()->DoubleClick();    break;
+    case TypeItem::State:       ToStateItem()->DoubleClick();   break;
     case TypeItem::Count:                                       break;
     }
 }
 
 
-void Governor::ShortPressure() const
+void Governor::ShortPressure(Key::E key) const
 {
     if (Item::Opened())
     {
-        if (active_control == ActiveControl::Close)
+        if (key == Key::_1)
         {
-            active_control = ActiveControl::Increase;
-            Close();
+            Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
         }
-        else
+        else if (key == Key::_2)
         {
-            const DGovernor *data = ToDGovernor();
-
-            int *value = data->value;
-
-            if (active_control == ActiveControl::Increase && *value < data->max)
+            if (active_control == ActiveControl::Close)
             {
-                *value = *value + 1;
+                active_control = ActiveControl::Increase;
+                Close();
             }
-            else if (active_control == ActiveControl::Decrease && *value > data->min)
+            else
             {
-                *value = *value - 1;
+                const DGovernor *data = ToDGovernor();
+
+                int *value = data->value;
+
+                if (active_control == ActiveControl::Increase)
+                {
+                    *value += 1;
+                }
+                else if (active_control == ActiveControl::Decrease)
+                {
+                    *value -= 1;
+                }
+
+                if (*value < data->min)
+                {
+                    *value = data->min;
+                }
+                if (*value > data->max)
+                {
+                    *value = data->max;
+                }
             }
+        }
+    }
+    else
+    {
+        if (key == Key::_2)
+        {
+            Open();
         }
     }
 }
@@ -441,14 +732,20 @@ void Governor::LongPressure() const
     {
         Open();
     }
-    else
-    {
-        Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
-    }
+//    else
+//    {
+//        Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
+//    }
 }
 
 
 void Governor::DoubleClick() const
+{
+
+}
+
+
+void TimeItem::DoubleClick() const
 {
 
 }

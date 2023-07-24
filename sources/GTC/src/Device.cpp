@@ -1,6 +1,7 @@
 // 2022/04/27 11:48:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device.h"
+#include "Measures.h"
 #include "Hardware/Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Modules/BME280/BME280.h"
@@ -25,6 +26,10 @@ void Device::Init()
 {
     HAL::Init();
 
+    gset.Load();
+
+    gset.Reset();
+
     ST7735::Init();
 
     BME280::Init();
@@ -33,9 +38,9 @@ void Device::Init()
 
     Keyboard::Init();
 
-    Beeper::Init();
-
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
+
+    Beeper::Init();
 }
 
 
@@ -50,12 +55,31 @@ void Device::Update()
         InterCom::Send(TypeMeasure::Temperature, temp);
         InterCom::Send(TypeMeasure::Pressure, pressure);
         InterCom::Send(TypeMeasure::Humidity, humidity);
-        InterCom::Send(TypeMeasure::DewPoint, CalculateDewPoint(temp, humidity));
+
+        float dew_point = CalculateDewPoint(temp, humidity);
+
+        InterCom::Send(TypeMeasure::DewPoint, dew_point);
+
+        bool in_range = Measures::InRange(TypeMeasure::Temperature, temp) &&
+            Measures::InRange(TypeMeasure::Pressure, pressure) &&
+            Measures::InRange(TypeMeasure::Humidity, humidity) &&
+            Measures::InRange(TypeMeasure::DewPoint, dew_point);
+
+        if (in_range)
+        {
+            Beeper::Stop();
+        }
+        else
+        {
+            Beeper::Start(100);
+        }
     }
 
     Keyboard::Update();
 
     Display::Update();
+
+    HAL_ADC::Update();
 }
 
 

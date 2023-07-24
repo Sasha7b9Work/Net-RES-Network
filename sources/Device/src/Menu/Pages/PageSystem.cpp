@@ -21,7 +21,7 @@ void ClosePageSystem()
 }
 
 
-DEF_BUTTN(bClosePageSystem,
+DEF_BUTTON(bClosePageSystem,
     "Закрыть",
     *PageSystem::self,
     ClosePageSystem

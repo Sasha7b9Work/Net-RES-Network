@@ -2,9 +2,6 @@
 #pragma once
 #include "Data/Sensors.h"
 #include "Display/Diagram/Canvas.h"
-#pragma warning(push, 0)
-#include <wx/wx.h>
-#pragma warning(pop)
 
 
 /*

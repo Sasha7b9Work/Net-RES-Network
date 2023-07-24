@@ -8,36 +8,42 @@
 #include "Display/Font/Font.h"
 
 
-void Menu::ShortPress(Key::E)
+void Menu::ShortPress(Key::E key)
 {
     if (!Opened())
     {
-        ++gset.display.typeDisplaydInfo;
-
-        if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
+        if (key == Key::_1)
         {
-            gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasurePressure;
-        }
+            ++gset.display.typeDisplaydInfo;
 
+            if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
+            {
+                gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasureTemperature;
+            }
+        }
+        else if (key == Key::_2)
+        {
+            PageMain::self->Open();
+        }
     }
     else
     {
-        Item::Opened()->ShortPressure();
+        Item::Opened()->ShortPressure(key);
     }
 
     Display::need_redraw = true;
 }
 
 
-void Menu::LongPress(Key::E)
+void Menu::LongPress(Key::E key)
 {
     if (!Opened())
     {
-        PageMain::self->Open();
+
     }
     else
     {
-        Item::Opened()->LongPressure();
+        Item::Opened()->LongPressure(key);
     }
 
     Display::need_redraw = true;
@@ -79,7 +85,7 @@ void Menu::Draw()
 
         keeper->Draw(0, 0, false);
 
-        Item::Opened()->DrawOpened(0, Menu::Title::HEIGHT, true);
+        Item::Opened()->DrawOpened(0, Menu::Title::HEIGHT + Item::Opened()->NumberOnPage() * Item::HEIGHT, true);
     }
 
     Display::EndScene();

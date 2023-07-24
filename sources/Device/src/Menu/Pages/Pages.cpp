@@ -11,7 +11,7 @@ static void CloseMainPage()
     PageMain::self->Close();
 }
 
-DEF_BUTTN(bCloseMainPage,
+DEF_BUTTON(bCloseMainPage,
     "Закрыть",
     pageMain,
     CloseMainPage

@@ -13,11 +13,32 @@ namespace PageMain
 namespace PageDisplay
 {
     extern const Page * const self;
+};
 
-    namespace PageMeasures
+
+namespace PageMeasures
+{
+    extern const Page *const self;
+
+    namespace Temperature
     {
-        extern const Page * const self;
-    };
+        extern const Page *const self;
+    }
+
+    namespace Pressure
+    {
+        extern const Page *const self;
+    }
+
+    namespace Humidity
+    {
+        extern const Page *const self;
+    }
+
+    namespace DewPoint
+    {
+        extern const Page *const self;
+    }
 };
 
 

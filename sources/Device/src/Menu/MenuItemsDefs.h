@@ -2,7 +2,7 @@
 #pragma once
 
 
-#define DEF_BUTTN(name, title, keeper, function)                                                            \
+#define DEF_BUTTON(name, title, keeper, function)                                                            \
     static const DButton name = { TypeItem::Button, title, (const Page *)&keeper, function };
 
 #define DEF_GOVERNOR(name, title, keeper, min, max, value)                                                  \

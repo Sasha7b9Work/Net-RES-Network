@@ -10,7 +10,18 @@ struct Key
         _2,
         Count
     };
+
+    E value;
+
+    Key(E v) : value(v) {};
+
+    bool IsPressed() const;
 };
+
+
+extern Key key1;
+extern Key key2;
+
 
 namespace Keyboard
 {

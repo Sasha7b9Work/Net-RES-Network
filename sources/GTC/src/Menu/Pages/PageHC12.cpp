@@ -6,20 +6,24 @@
 extern const DPage pageMain;
 
 
-void ClosePageHC12()
+static void ClosePageHC12(bool)
 {
     PageHC12::self->Close();
 }
 
-DEF_BUTTN( bClosePageHC12,
+DEF_BUTTON( bClosePageHC12,
     "Закрыть",
     *PageHC12::self,
-    ClosePageHC12
+    ClosePageHC12,
+    nullptr,
+    nullptr
 );
 
 DEF_PAGE_1( pageHC12, //-V1027
     "HC12",
     pageMain,
+    nullptr,
+    nullptr,
     bClosePageHC12
 )
 

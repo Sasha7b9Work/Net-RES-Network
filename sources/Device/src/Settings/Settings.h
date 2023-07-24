@@ -39,7 +39,6 @@ struct SettingsDisplay
     TypeDisplayedInformation    typeDisplaydInfo;
 };
 
-
 struct SettingsSystem
 {
     int serial_number;
@@ -48,8 +47,8 @@ struct SettingsSystem
 
 struct Settings
 {
-    SettingsDisplay display;
-    SettingsSystem  system;
+    SettingsDisplay  display;
+    SettingsSystem   system;
 
     static uint GetID();
 

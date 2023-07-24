@@ -2,7 +2,9 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/CDC/CDC.h"
+#include "Utils/Math.h"
 #include <stm32f1xx_hal.h>
+#include <cstring>
 
 
 static void SystemClock_Config();
@@ -21,6 +23,10 @@ void HAL::Init()
     __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOD_CLK_ENABLE();
 
+#ifndef WIN32
+    __HAL_AFIO_REMAP_SWJ_NONJTRST();
+#endif
+
     HAL_I2C1::Init();
 
     CDC::Init();
@@ -28,6 +34,8 @@ void HAL::Init()
     HAL_RTC::Init();
 
     HAL_USART_HC12::Init();
+
+    HAL_ADC::Init();
 }
 
 
@@ -47,7 +55,7 @@ static void SystemClock_Config()
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
     RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+    RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
     RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
@@ -67,6 +75,20 @@ static void SystemClock_Config()
     PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
 
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
+}
+
+
+String<> HAL::GetUID()
+{
+#ifdef WIN32
+    return String<>("123");
+#else
+    uint8 bytes[12];
+
+    std::memcpy(bytes, (void *)0x1FFFF7E8, 12); //-V566
+
+    return String<>("%X", Math::CalculateCRC(bytes, 12));
+#endif
 }
 
 

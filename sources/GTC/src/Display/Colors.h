@@ -16,6 +16,7 @@ struct Color
         GRAY_50,    // 7
         GRAY_25,    // 8
         GRAY_10,    // 9
+        FLASH_10,
         Count
     };
 

@@ -1,7 +1,7 @@
 @echo off
 
 set _COMPILER_=c:\Keil_v5\UV4\UV4
-set _PROJECT_DEVICE_=..\..\Device\Device.uvprojx
+set _PROJECT_DEVICE_=..\..\GTC\GTC.uvprojx
 
 rem 1, если требуется очистка
 set isClean=0
@@ -33,7 +33,7 @@ echo Building Device ...
 %_COMPILER_% -b %_PROJECT_DEVICE_% -j0 -o Device.out
 if %ERRORLEVEL%==0 goto LOADING
 echo ERROR!!! Build failed !!!
-type ..\..\Device\Device.out
+type ..\..\GTC\Device.out
 
 :LOADING
 if %isLoad%==0 goto EXIT
@@ -41,7 +41,7 @@ echo Loading Device ...
 %_COMPILER_% -f %_PROJECT_DEVICE_% -j0 -o Device.out
 if %ERRORLEVEL%==0 goto EXIT
 echo Error loading firmware to Device
-type ..\..\Device\Device.out
+type ..\..\GTC\Device.out
 
 goto EXIT
 

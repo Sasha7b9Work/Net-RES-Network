@@ -4,6 +4,7 @@
 
 
 template void Math::CircleIncrease<int>(int *, int, int);
+template void Math::CircleDecrease<int>(int *, int, int);
 
 
 namespace Math
@@ -15,7 +16,7 @@ namespace Math
 }
 
 
-uint Math::CalculateHash(const void *buffer, int size)
+uint Math::CalculateCRC(const void *buffer, int size)
 {
     uint hash = 0;
 
@@ -38,5 +39,17 @@ void Math::CircleIncrease(T *value, T min, T max)
     if (*value > max)
     {
         *value = min;
+    }
+}
+
+
+template <class T>
+void Math::CircleDecrease(T *value, T min, T max)
+{
+    *value = *value - 1;
+
+    if (*value < min)
+    {
+        *value = max;
     }
 }

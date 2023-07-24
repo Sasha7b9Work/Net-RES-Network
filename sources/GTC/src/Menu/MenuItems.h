@@ -1,6 +1,9 @@
 // 2022/05/05 12:27:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Display/Display.h"
+#include "Hardware/Keyboard.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 
 
 struct TypeItem
@@ -11,6 +14,8 @@ struct TypeItem
         Choice,         // ¬ыбор из нескольких значений
         Button,         //  нопка - по нажатию что-то происходит
         Governor,       // ћожно измен€ть значение в некоторых пределах
+        Time,
+        State,          // ќтображает состо€ние измерени€ - величина, и врем€ сохранени€
         Count
     };
 };
@@ -20,15 +25,23 @@ struct Page;
 struct Choice;
 struct Button;
 struct Governor;
+struct TimeItem;
+struct StateItem;
 
 
-#define COMMON_PART_ITEM    TypeItem::E type;      \
-                            pchar       title;     \
-                            const Page *keeper;
+typedef void(*FuncOpenClose)(bool);
+typedef void(*FuncOnDraw)(int, int);
+
+
+#define COMMON_PART_ITEM    TypeItem::E    type;             \
+                            pchar          title;            \
+                            const Page    *keeper;           \
+                            FuncOpenClose  funcOnOpenClose;  \
+                            FuncOnDraw     funcOnDraw
 
 struct DItem
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 };
 
 
@@ -44,8 +57,8 @@ struct Item
     void DrawOpened(int x, int y, bool active) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure() const;
-    void LongPressure() const;
+    void ShortPressure(Key::E) const;
+    void LongPressure(Key::E) const;
     void DoubleClick() const;
 
     const Page *Keeper() const { return ToDItem()->keeper; }
@@ -55,12 +68,16 @@ struct Item
 
     bool IsOpened() const;
 
+    // ¬озвращает пор€дковый номер на странице
+    int NumberOnPage() const;
+
     static const Item *Opened() { return opened_item; };
 
     bool IsPage() const     { return (ToDItem()->type == TypeItem::Page);   }
     bool IsChoice() const   { return (ToDItem()->type == TypeItem::Choice); }
     bool IsButton() const   { return (ToDItem()->type == TypeItem::Button); }
     bool IsGovernor() const { return (ToDItem()->type == TypeItem::Governor); }
+    bool IsTimeItem() const { return (ToDItem()->type == TypeItem::Time); }
 
     const DItem *ToDItem() const { return (DItem *)this; }
 
@@ -68,6 +85,8 @@ struct Item
     const Choice *ToChoice() const { return (const Choice *)this; }
     const Button *ToButton() const { return (const Button *)this; }
     const Governor *ToGovernor() const { return (const Governor *)this; }
+    const TimeItem *ToTimeItem() const { return (const TimeItem *)this; }
+    const StateItem *ToStateItem() const { return (const StateItem *)this; }
 
     static Item Empty;
 
@@ -84,7 +103,7 @@ protected:
 
 struct DPage
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     const Item *const *items;
     uint8 *currentItem;
@@ -98,8 +117,8 @@ struct Page : public Item
     void DrawOpened(int x, int y, bool acitve) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure() const;
-    void LongPressure() const;
+    void ShortPressure(Key::E) const;
+    void LongPressure(Key::E) const;
     void DoubleClick() const;
 
     void Close() const;
@@ -131,7 +150,7 @@ private:
 
 struct DChoice
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     uint8 *const cell;
     const uint8 count;
@@ -142,8 +161,9 @@ struct DChoice
 struct Choice : public Item
 {
     void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -158,21 +178,20 @@ struct Choice : public Item
 
 struct DButton
 {
-    typedef void (*funcPressButton)();
+    COMMON_PART_ITEM;
 
-    COMMON_PART_ITEM
-
-    const funcPressButton funcPress;
+    bool *marked;            // ≈сли это значение равно true, то кнопка с галочкой. “ипа "выбрано"
 };
 
 
 struct Button : public Item
 {
-    void ShortPressure() const;
-    void LongPressure() const { ToDButton()->funcPress(); }
+    void ShortPressure(Key::E) const;
+    void LongPressure() const { if (ToDItem()->funcOnOpenClose) { ToDItem()->funcOnOpenClose(true); } }
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
 
     const DButton *ToDButton() const { return (DButton *)this; }
 };
@@ -181,9 +200,35 @@ struct Button : public Item
 //-------------------------------------------------------------------------------------------------
 
 
+struct DState
+{
+    COMMON_PART_ITEM;
+
+    TypeMeasure::E type_meas;
+
+    const bool is_min;          // ≈сли true, то хранит минимальное значение, иначе - максимальное
+};
+
+
+struct StateItem : public Item
+{
+    void ShortPressure(Key::E) const;
+    void LongPressure(Key::E) const;
+    void DoubleClick() const;
+
+    void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
+
+    const DState *ToDState() const { return (DState *)this; } //-V1027
+};
+
+
+//-------------------------------------------------------------------------------------------------
+
+
 struct DGovernor
 {
-    COMMON_PART_ITEM
+    COMMON_PART_ITEM;
 
     int min;
     int max;
@@ -196,14 +241,13 @@ struct Governor : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure() const;
+    void ShortPressure(Key::E) const;
     void LongPressure() const;
     void DoubleClick() const;
 
     const DGovernor *ToDGovernor() const { return (DGovernor *)this; }
 
 private:
-
     void DrawControls(int x, int y) const;
 
     void DrawControl(int x, int y, const String<> &, bool active) const;
@@ -220,4 +264,35 @@ private:
     };
 
     static ActiveControl::E active_control;
+};
+
+
+//-------------------------------------------------------------------------------------------------
+
+
+struct DTimeItem
+{
+    COMMON_PART_ITEM;
+
+    int *cur_field;     // ќбласть, в которой находитс€ курсор
+                        // [0...5] <-> [часы ... год], 6 - применить, 7 - выход
+    int *state;         // 0 - выбор пол€ дл€ изменени€
+                        // 1 - изменение
+    PackedTime *time;
+};
+
+
+struct TimeItem : public Item
+{
+    void DrawClosed(int x, int y, bool active) const;
+    void DrawOpened(int x, int y, bool active) const;
+
+    void ShortPressure(Key::E) const;
+    void LongPressure(Key::E) const;
+    void DoubleClick() const;
+
+    const DTimeItem *ToDTimeItem() const { return (DTimeItem *)this; }
+private:
+
+    void ChangeCurrentField(Key::E) const;
 };

@@ -11,6 +11,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Measures.h"
 #include <cstdlib>
 
 
@@ -51,8 +52,8 @@ namespace Display
 
     static Measure measures[TypeMeasure::Count] =
     {
-        Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Temperature),
+        Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
         Measure(TypeMeasure::DewPoint)
     };
@@ -173,6 +174,8 @@ void Rectangle::Draw(int x, int y, Color::E color)
 
 void Display::SetMeasure(TypeMeasure::E type, float value)
 {
+    Settings::SaveMeasure(type, value);
+
     Measure &measure = measures[type];
 
     if (value == measure.value) //-V550
@@ -186,7 +189,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     measure.time = TIME_MS;
     measure.value = value;
 
-    measure.current.SetFormat("%f", value);
+    measure.current.SetFormat("%.1f", value);
     measure.current[6] = '\0';
 }
 
@@ -199,44 +202,7 @@ void Display::Measure::Draw(const int x0, const int y0, int size)
 
     Rectangle(width_zone, height_zone).Fill(x0, y_zone, Color::BLACK);
 
-    /*
-    if (position >= current.Size())
-    {
-    */
-
     Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::WHITE);
-
-//    current.Draw(x0, y0, Color::GREEN);
-
-    /*
-    }
-    else
-    {
-        int x = x0;
-
-        for (int i = 0; i < position; i++)
-        {
-            x = Char(current[i]).Draw(x, y0, size, Color::GREEN) + size;
-        }
-
-        int x_rect = x;
-
-        for (int i = position; i < old.Size(); i++)
-        {
-            x = Char(old[i]).Draw(x, y0, size, Color::GREEN) + size;
-        }
-
-        if (TIME_MS > time + 25)
-        {
-            position++;
-            time = TIME_MS;
-        }
-
-        Rectangle(5 * size, 7 * size).Fill(x_rect, y0 + 1, Color::WHITE);
-    }
-    */
-
-    ST7735::WriteBuffer(x0, y_zone, width_zone, height_zone);
 }
 
 
@@ -272,6 +238,8 @@ void Display::Update()
 {
     TimeMeterMS meter_fps;
 
+    need_redraw = true;
+
     if (Menu::Opened())
     {
         Menu::Draw();
@@ -288,6 +256,8 @@ void Display::Update()
             }
 
             DrawMeasures();
+
+            DrawTime();
 
             if (need_redraw)
             {
@@ -320,50 +290,52 @@ void Display::DrawMeasures()
     const int y0 = d_lines;
     const int dY = d_lines + Font::Height();
 
-    const int NUM_MEASURES = 3;
-
-    static const TypeMeasure::E types[NUM_MEASURES] =
+    static const TypeMeasure::E types[TypeMeasure::Count] =
     {
         TypeMeasure::Temperature,
+        TypeMeasure::Pressure,
         TypeMeasure::Humidity,
         TypeMeasure::DewPoint
     };
 
-    for (int i = 0; i < NUM_MEASURES; i++)
+    for (int i = 0; i < TypeMeasure::Count; i++)
     {
-//        if (gset.display.show_measure[types[i]])
-        {
-            int y = y0 + i * dY;
+        int x = 93;
+        int y = y0 + i * dY;
+        int width = 30;
+        int height = 15;
 
+        if (gset.display.show_measure[types[i]])
+        {
             if (need_redraw)
             {
-                String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
-                measures[types[i]].Units().Draw(x0 + 134, y);
+                String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Measures::InRange((TypeMeasure::E)i, measures[i].value) ? Color::WHITE : Color::FLASH_10);
+                measures[types[i]].Units().Draw(x + 41, y);
             }
 
-            measures[types[i]].Draw(93, y);
+            measures[types[i]].Draw(x, y);
         }
-    }
 
-    DrawTime();
+        ST7735::WriteBuffer(x - 1, y, width, height);
+    }
 }
 
 
 void Display::DrawTime()
 {
     int width = 160;
-    int height = 32;
-    int y = 85;
+    int height = 16;
+    int y = 105;
 
-    Font::Set(TypeFont::_8);
+    Font::Set(TypeFont::_12_10);
     
-    Rectangle(width, height).Fill(10, y - 1, Color::BLACK);
+    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
 
-    PackedTime time = HAL_RTC::GetPackedTime();
+    PackedTime time = HAL_RTC::GetTime();
 
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(5, 85, Color::WHITE);
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
 
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105);
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(80, 105);
 
     ST7735::WriteBuffer(0, y, width, height);
 }
@@ -399,10 +371,10 @@ String<> Display::Measure::Name()
 {
     static const pchar names[TypeMeasure::Count] =
     {
-        "ƒ¿¬À≈Õ»≈",
         "“≈Ãœ≈–¿“”–¿",
+        "ƒ¿¬À≈Õ»≈",
         "¬À¿∆ÕŒ—“‹",
-        "“Œ◊ ¿     –Œ—€"
+        "“Œ◊ ¿ –Œ—€"
     };
 
     return String<>(names[type]);
@@ -412,8 +384,8 @@ String<> Display::Measure::Units()
 {
     static const pchar units[TypeMeasure::Count] =
     {
-        "„œ‡",
         "®—",
+        "„œ‡",
         "%%",
         "®—"
     };

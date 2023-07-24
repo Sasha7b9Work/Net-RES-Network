@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4107</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -453,6 +453,36 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rtc_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f1xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -487,6 +517,16 @@
               <FileName>Device.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Device.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measures.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -698,6 +738,26 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART_HC12.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_ROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_ROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -812,6 +872,11 @@
               <FileName>PageSystem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -933,7 +998,7 @@
           <OutputName>Device</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>0</DebugInformation>
           <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -1334,6 +1399,36 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rtc_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f1xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F1\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1368,6 +1463,16 @@
               <FileName>Device.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Device.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Measures.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1579,6 +1684,26 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART_HC12.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_ROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_ROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_ADC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1693,6 +1818,11 @@
               <FileName>PageSystem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSystem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMeasures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
             </File>
           </Files>
         </Group>

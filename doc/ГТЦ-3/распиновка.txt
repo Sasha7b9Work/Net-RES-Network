@@ -20,6 +20,7 @@ HC-12:RX  - 30 - PA9
 D+        - 33 - PA12
 D-        - 32 - PA11
 VBAT      - 1
+АЦП АКБ   - 13 - PA3
 
 34 - SWDIO
 37 - SWCLK
