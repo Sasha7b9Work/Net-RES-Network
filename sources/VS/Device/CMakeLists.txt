@@ -2,7 +2,6 @@
 
 project (Device)
 
-set(CMAKE_UNITY_BUILD ON)
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
