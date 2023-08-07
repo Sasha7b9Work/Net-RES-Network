@@ -44,6 +44,7 @@ file(GLOB HARDWARE_HAL                  src/Hardware/HAL/*.*)
 file(GLOB HARDWARE_MODULES_BME280       src/Hardware/Modules/BME280/*.*)
 file(GLOB HARDWARE_MODULES_HC12         src/Hardware/Modules/HC12/*.*)
 file(GLOB HARDWARE_MODULES_ST7735       src/Hardware/Modules/ST7735/*.*)
+file(GLOB HARDWARE_MODULES_W25Q80DV     src/Hardware/Modules/W25Q80DV/*.*)
 file(GLOB MENU                          src/Menu/*.*)
 file(GLOB MENU_PAGES                    src/Menu/Pages/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
@@ -61,6 +62,7 @@ source_group(Hardware/HAL               FILES ${HARDWARE_HAL})
 source_group(Hardware/Modules/BME280    FILES ${HARDWARE_MODULES_BME280})
 source_group(Hardware/Modules/HC12      FILES ${HARDWARE_MODULES_HC12})
 source_group(Hardware/Modules/ST7735    FILES ${HARDWARE_MODULES_ST7735})
+source_group(Hardware/Modules/W25Q80DV  FILES ${HARDWARE_MODULES_W25Q80DV})
 source_group(Menu                       FILES ${MENU})
 source_group(Menu/Pages                 FILES ${MENU_PAGES})
 source_group(Settings                   FILES ${SETTINGS})
@@ -85,6 +87,7 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_MODULES_BME280}
             ${HARDWARE_MODULES_HC12}
             ${HARDWARE_MODULES_ST7735}
+            ${HARDWARE_MODULES_W25Q80DV}
             ${MENU}
             ${MENU_PAGES}
             ${SETTINGS} 
