@@ -15,7 +15,7 @@ struct tm
 };
 
 
-typedef uint time_t;
+typedef unsigned long long time_t;
 
 time_t mktime(struct tm *);
 

@@ -83,7 +83,7 @@ uint HAL_RTC::SetTime(const PackedTime &time)
 
     handleRTC.State = HAL_RTC_STATE_BUSY;
 
-    RTC_WriteTimeCounter(&handleRTC, rawtime);
+    RTC_WriteTimeCounter(&handleRTC, (uint)rawtime);
 
     handleRTC.State = HAL_RTC_STATE_READY;
 
@@ -132,7 +132,7 @@ HAL_StatusTypeDef HAL_RTC::RTC_EnterInitMode(RTC_HandleTypeDef *hrtc)
 
     tickstart = HAL_GetTick();
     /* Wait till RTC is in INIT state and if Time out is reached exit */
-    while ((hrtc->Instance->CRL & RTC_CRL_RTOFF) == (uint32_t)RESET)
+    while ((hrtc->Instance->CRL & RTC_CRL_RTOFF) == (uint32_t)RESET) //-V1044
     {
         if ((HAL_GetTick() - tickstart) > RTC_TIMEOUT_VALUE)
         {
@@ -157,7 +157,7 @@ HAL_StatusTypeDef HAL_RTC::RTC_ExitInitMode(RTC_HandleTypeDef *hrtc)
 
     tickstart = HAL_GetTick();
     /* Wait till RTC is in INIT state and if Time out is reached exit */
-    while ((hrtc->Instance->CRL & RTC_CRL_RTOFF) == (uint32_t)RESET)
+    while ((hrtc->Instance->CRL & RTC_CRL_RTOFF) == (uint32_t)RESET) //-V1044
     {
         if ((HAL_GetTick() - tickstart) > RTC_TIMEOUT_VALUE)
         {
