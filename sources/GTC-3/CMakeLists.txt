@@ -1,6 +1,6 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
-project (GTC)
+project (GTC-3)
 
 message("------------------------------------------------------------------------ ${PROJECT_NAME}")
 

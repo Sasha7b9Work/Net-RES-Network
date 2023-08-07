@@ -4,9 +4,11 @@ project (RES-Network)
 
 set (TARGET_NAME )
 
+set(CMAKE_UNITY_BUILD ON)
+
 if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_definitions(-DDEBUG)
 endif()
 
 add_subdirectory(Device)
-add_subdirectory(GTC)
+add_subdirectory(GTC-3)

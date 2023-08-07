@@ -3,6 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include <stm32f1xx_hal.h>
+#include <cstring>
 
 
 /*

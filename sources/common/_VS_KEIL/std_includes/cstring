@@ -2,7 +2,8 @@
 
 namespace std
 {
-
+    void    memcpy(void *dest, const void *src, unsigned int);
+    unsigned int  strlen(const char *);
     #include "string.h"
 
 }
