@@ -1,14 +1,14 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
-project (GTC)
+project (GTC-3)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
 include_directories(.
-                    ../../GTC/src
-                    ../../GTC/src/Hardware/CDC
-                    ../../GTC/src/Hardware/HAL
+                    ../../GTC-3/src
+                    ../../GTC-3/src/Hardware/CDC
+                    ../../GTC-3/src/Hardware/HAL
                     ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_KEIL/CMSIS
@@ -52,24 +52,24 @@ file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
 file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                       *.h *.cpp
-                                    ../../GTC/src/*.*)
-file(GLOB DISPLAY                   ../../GTC/src/Display/*.*)
-file(GLOB DISPLAY_FONT              ../../GTC/src/Display/Font/*.*)
-file(GLOB HARDWARE                  ../../GTC/src/Hardware/*.*)
-file(GLOB HARDWARE_CDC              ../../GTC/src/Hardware/CDC/*.*
-                                                  Hardware/CDC/*.*)
-file(GLOB HARDWARE_HAL              ../../GTC/src/Hardware/HAL/*.h
-7                                                 Hardware/HAL/*.*)
-file(GLOB HARDWARE_LAN                            Hardware/LAN/*.*)
-file(GLOB HARDWARE_LAN_LIBNET                     Hardware/LAN/libnet/*.*)
-file(GLOB HARDWARE_MODULES_BME280   ../../GTC/src/Hardware/Modules/BME280/*.*)
-file(GLOB HARDWARE_MODULES_HC12     ../../GTC/src/Hardware/Modules/HC12/*.*)
-file(GLOB HARDWARE_MODULES_ST7735   ../../GTC/src/Hardware/Modules/ST7735/*.*)
-file(GLOB MENU                      ../../GTC/src/Menu/*.*)
-file(GLOB MENU_PAGES                ../../GTC/src/Menu/Pages/*.*)
-file(GLOB SETTINGS                  ../../GTC/src/Settings/*.*)
-file(GLOB UTILS                     ../../GTC/src/Utils/*.*)
-file(GLOB UTILS_TEXT                ../../GTC/src/Utils/Text/*.*)
+                                    ../../GTC-3/src/*.*)
+file(GLOB DISPLAY                   ../../GTC-3/src/Display/*.*)
+file(GLOB DISPLAY_FONT              ../../GTC-3/src/Display/Font/*.*)
+file(GLOB HARDWARE                  ../../GTC-3/src/Hardware/*.*)
+file(GLOB HARDWARE_CDC              ../../GTC-3/src/Hardware/CDC/*.*
+                                                    Hardware/CDC/*.*)
+file(GLOB HARDWARE_HAL              ../../GTC-3/src/Hardware/HAL/*.h
+7                                                   Hardware/HAL/*.*)
+file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
+file(GLOB HARDWARE_LAN_LIBNET                       Hardware/LAN/libnet/*.*)
+file(GLOB HARDWARE_MODULES_BME280   ../../GTC-3/src/Hardware/Modules/BME280/*.*)
+file(GLOB HARDWARE_MODULES_HC12     ../../GTC-3/src/Hardware/Modules/HC12/*.*)
+file(GLOB HARDWARE_MODULES_ST7735   ../../GTC-3/src/Hardware/Modules/ST7735/*.*)
+file(GLOB MENU                      ../../GTC-3/src/Menu/*.*)
+file(GLOB MENU_PAGES                ../../GTC-3/src/Menu/Pages/*.*)
+file(GLOB SETTINGS                  ../../GTC-3/src/Settings/*.*)
+file(GLOB UTILS                     ../../GTC-3/src/Utils/*.*)
+file(GLOB UTILS_TEXT                ../../GTC-3/src/Utils/Text/*.*)
 
 source_group(libs/STM32F1               FILES ${LIBS_STM32F1})
 source_group(libs/STM32F1/Inc           FILES ${LIBS_STM32F1_INC})
@@ -103,7 +103,7 @@ set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 
-set_source_files_properties(../../GTC/src/Hardware/CDC/usbd_conf.c
+set_source_files_properties(../../GTC-3/src/Hardware/CDC/usbd_conf.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}
