@@ -4,6 +4,7 @@
 #include <stm32f1xx_hal.h>
 #include <time.h>
 
+
 namespace HAL_RTC
 {
 #define WAKEUP_TIMER_ENABLE 0x32F2

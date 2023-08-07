@@ -63,7 +63,7 @@ namespace HAL_SPI1
 
     void Write(const void *, int size);
 
-    void WriteRead(uint8 *out, uint8 *in, int size);
+    void WriteRead(const void *out, uint8 *in, int size);
 }
 
 

@@ -3,6 +3,7 @@
 #include "Hardware/Modules/W25Q80DV/W25Q80DV.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Buffer.h"
+#include "Hardware/Timer.h"
 #include <cstdlib>
 
 
@@ -32,49 +33,65 @@ namespace W25Q80DV
 }
 
 
-void W25Q80DV::Write1024bytes(const uint8 *buffer, int size)
+void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
 {
-    WaitRelease();
-
-    HAL_SPI1::Write(WRITE_ENABLE);                          // Write enable
-
-    Write32bit(SECTOR_ERASE, 0x000000);                     // Sector erase
-
-    HAL_SPI1::Write(WRITE_DISABLE);                         // Write disable
+    EraseSectorForAddress(0x000000);
 
     WaitRelease();
 
-    HAL_SPI1::Write(WRITE_ENABLE);                          // Write enable
+    HAL_SPI1::Write(WRITE_ENABLE);          // Write enable
 
     Buffer<uint8, 1024> data;
 
     data[0] = PROGRAM_PAGE; //-V525
-    data[1] = 0;                // \ 
-    data[2] = 0;                // | Адрес
-    data[3] = 0;                // /
+    data[1] = (uint8)(address >> 16);       // \ 
+    data[2] = (uint8)(address >> 8);        // | Адрес
+    data[3] = (uint8)(address);             // / 
 
     for (int i = 0; i < size; i++)
     {
         data[4 + i] = buffer[i];
     }
 
-    //                                                       команда   адрес
+    //                          команда   адрес
     HAL_SPI1::Write(data.Data(), size + 1 + 3);     // Page program
 
-    HAL_SPI1::Write(WRITE_DISABLE);              // Write disable
+    HAL_SPI1::Write(WRITE_DISABLE);                 // Write disable
 }
 
 
-void W25Q80DV::Read1024bytes(uint8 *buffer, int size)
+void W25Q80DV::Write(uint address, uint8 byte)
+{
+    Write1024bytes(address, &byte, 1);
+}
+
+
+void W25Q80DV::EraseSectorForAddress(uint address)
+{
+    address /= (4 * 1024);      // \ 
+                                // | Рассчитываем адрес первого байта стираемого сектора
+    address *= (4 * 1024);      // / 
+
+    WaitRelease();
+
+    HAL_SPI1::Write(WRITE_ENABLE);
+
+    Write32bit(SECTOR_ERASE, address);
+
+    HAL_SPI1::Write(WRITE_DISABLE);
+}
+
+
+void W25Q80DV::Read1024bytes(uint address, uint8 *buffer, int size)
 {
     WaitRelease();
 
     Buffer<uint8, 1024> out;
 
     out[0] = READ_DATA; //-V525
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
+    out[1] = (uint8)(address >> 16);
+    out[2] = (uint8)(address >> 8);
+    out[3] = (uint8)(address);
 
     Buffer<uint8, 1024> in;
 
@@ -87,36 +104,22 @@ void W25Q80DV::Read1024bytes(uint8 *buffer, int size)
 }
 
 
-void W25Q80DV::ReadID()
-{
-
-}
-
-
-void W25Q80DV::ErasePageForAddress(uint address)
-{
-
-}
-
-
-void W25Q80DV::Write(uint address, uint8 byte)
-{
-
-}
-
-
 uint8 W25Q80DV::Read(uint address)
 {
-    return 0;
+    uint8 result = 0;
+
+    Read1024bytes(address, &result, 1);
+
+    return result;
 }
 
 
 bool W25Q80DV::Test()
 {
-    ErasePageForAddress(0);
-
     for (int i = 0; i < 100; i++)
     {
+        EraseSectorForAddress(0);
+
         uint8 byte = (uint8)std::rand();
 
         Write(0, byte);
@@ -128,4 +131,50 @@ bool W25Q80DV::Test()
     }
 
     return true;
+}
+
+
+void W25Q80DV::Write32bit(uint8 command, uint bits24)
+{
+    uint8 data[4];
+
+    data[0] = command;
+    data[1] = (uint8)(bits24 >> 16);
+    data[2] = (uint8)(bits24 >> 8);
+    data[3] = (uint8)(bits24);
+
+    HAL_SPI1::Write(data, 4);
+}
+
+
+void W25Q80DV::WaitRelease()
+{
+    TimeMeterMS meter;
+
+    while (IsBusy() && (meter.ElapsedTime() < 1000))
+    {
+    }
+}
+
+
+bool W25Q80DV::IsBusy()
+{
+    static const uint8 out[2] = { READ_STATUS_1, 0 };
+    static uint8 in[2] = { 0, 0 };
+
+    HAL_SPI1::WriteRead(out, in, 2);
+
+    return (in[1] & 0x01);
+}
+
+
+void W25Q80DV::ReadID(uint8 id[2])
+{
+    uint8 out[6] = { 0x90, 0, 0, 0, 0, 0 };
+    uint8 in[6] = { 0, 0, 0, 0, 0, 0 };
+
+    HAL_SPI1::WriteRead(out, in, 6);
+
+    id[0] = in[4];
+    id[1] = in[5];
 }
