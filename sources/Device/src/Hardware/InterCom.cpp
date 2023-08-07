@@ -105,6 +105,8 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
 #ifdef GUI
 
+    Buffer<uint8, 16> data = CreateMessage(type, measure);
+
     ClientTCP::Transmit(data.Data(), data.Size()); 
 
 #endif
