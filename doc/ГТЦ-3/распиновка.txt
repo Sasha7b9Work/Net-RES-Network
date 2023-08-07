@@ -3,12 +3,15 @@
 Динамик   - 40 - PB4
 I2C SCL   - 42 - PB6
 I2C SDA   - 43 - PB7
-DD2:CS    - 14 - PA4
-DD2:DO    - 16 - PA6
-DD2:WP    - 18 - PB0
-DD2:DI    - 17 - PA7
-DD2:CLK   - 15 - PA5
-DD2:HOLD                           ?
+
+W25Q80DV
+    DD2:/CS   - 14 - PA4  SPI1_NSS
+    DD2:DO    - 16 - PA6  SPI1_MISO
+    DD2:/WP   - 18 - PB0
+    DD2:DI    - 17 - PA7  SPI1_MOSI
+    DD2:CLK   - 15 - PA5  SPI1_SCK
+    DD2:/HOLD
+
 TFT:RST   - 22 - PB11
 TFT:CS    - 25 - PB12
 TFT:SCL   - 26 - PB13

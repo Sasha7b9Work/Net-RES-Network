@@ -4,5 +4,12 @@
 
 namespace W25Q80DV
 {
+    // —тереть страницу, которой принадлежит address
+    void ErasePageForAddress(uint address);
 
+    void Write(uint address, uint8 byte);
+
+    uint8 Read(uint address);
+
+    bool Test();
 }

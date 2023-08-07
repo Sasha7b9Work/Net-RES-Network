@@ -36,6 +36,8 @@ void HAL::Init()
     HAL_USART_HC12::Init();
 
     HAL_ADC::Init();
+
+    HAL_SPI1::Init();
 }
 
 

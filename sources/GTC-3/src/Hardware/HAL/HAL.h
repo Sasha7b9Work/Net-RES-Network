@@ -55,6 +55,14 @@ namespace HAL_I2C1
 }
 
 
+namespace HAL_SPI1
+{
+    void Init();
+
+    void WriteRead(uint8 *out, uint8 *in, int size);
+}
+
+
 namespace HAL_RTC
 {
     void Init();
