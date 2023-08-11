@@ -64,6 +64,7 @@ file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                       Hardware/LAN/libnet/*.*)
 file(GLOB MENU                      ../../GTC-3/src/Menu/*.*)
 file(GLOB MENU_PAGES                ../../GTC-3/src/Menu/Pages/*.*)
+file(GLOB MODULES_BH1750            ../../GTC-3/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280            ../../GTC-3/src/Modules/BME280/*.*)
 file(GLOB MODULES_HC12              ../../GTC-3/src/Modules/HC12/*.*)
 file(GLOB MODULES_ST7735            ../../GTC-3/src/Modules/ST7735/*.*)
@@ -84,6 +85,7 @@ source_group(Hardware/LAN               FILES ${HARDWARE_LAN})
 source_group(Hardware/LAN/libnet        FILES ${HARDWARE_LAN_LIBNET})
 source_group(Menu                       FILES ${MENU})
 source_group(Menu/Pages                 FILES ${MENU_PAGES})
+source_group(Modules/BH1750             FILES ${MODULES_BH1750})
 source_group(Modules/BME280             FILES ${MODULES_BME280})
 source_group(Modules/HC12               FILES ${MODULES_HC12})
 source_group(Modules/ST7735             FILES ${MODULES_ST7735})
@@ -120,6 +122,7 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE_LAN_LIBNET}
                 ${MENU}
                 ${MENU_PAGES}
+                ${MODULES_BH1750}
                 ${MODULES_BME280}
                 ${MODULES_HC12}
                 ${MODULES_ST7735}
