@@ -59,7 +59,7 @@ file(GLOB HARDWARE                  ../../GTC-3/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC              ../../GTC-3/src/Hardware/CDC/*.*
                                                     Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL              ../../GTC-3/src/Hardware/HAL/*.h
-7                                                   Hardware/HAL/*.*)
+                                                    Hardware/HAL/*.*)
 file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                       Hardware/LAN/libnet/*.*)
 file(GLOB HARDWARE_MODULES_BME280   ../../GTC-3/src/Hardware/Modules/BME280/*.*)

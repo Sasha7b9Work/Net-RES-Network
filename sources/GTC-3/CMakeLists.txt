@@ -45,10 +45,7 @@ file(GLOB MENU                  src/Menu/*.*)
 file(GLOB MENU_PAGES            src/Menu/Pages/*.*)
 file(GLOB MODULES_BH1750        src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280        src/Modules/BME280/*.*)
-file(GLOB MODULES_CG_ANEM       src/Modules/CG-Anem/*.*)
-file(GLOB MODULES_GY511         src/Modules/GY511/*.*)
 file(GLOB MODULES_HC12          src/Modules/HC12/*.*)
-file(GLOB MODULES_NEO_M8N       src/Modules/NEO-M8N/*.*)
 file(GLOB MODULES_ST7735        src/Modules/ST7735/*.*)
 file(GLOB MODULES_W25Q80DV      src/Modules/W25Q80DV/*.*)
 file(GLOB SETTINGS              src/Settings/*.*)
@@ -67,10 +64,7 @@ source_group(Menu               FILES ${MENU})
 source_group(Menu/Pages         FILES ${MENU_PAGES})
 source_group(Modules/BH1750     FILES ${MODULES_BH1750})
 source_group(Modules/BME280     FILES ${MODULES_BME280})
-source_group(Modules/CG-Anem    FILES ${MODULES_CG_ANEM})
-source_group(Modules/GY511      FILES ${MODULES_GY511})
 source_group(Modules/HC12       FILES ${MODULES_HC12})
-source_group(Modules/NEO-M8N    FILES ${MODULES_NEO_M8N})
 source_group(Modules/ST7735     FILES ${MODULES_ST7735})
 source_group(Modules/W25Q80DV   FILES ${MODULES_W25Q80DV})
 source_group(Settings           FILES ${SETTINGS})
@@ -96,13 +90,10 @@ add_library(${PROJECT_NAME}
             ${MENU_PAGES}
             ${MODULES_BH1750}
             ${MODULES_BME280}
-            ${MODULES_CG_ANEM}
-            ${MODULES_GY511}
             ${MODULES_HC12}
-            ${MODULES_NEO_M8N}
             ${MODULES_ST7735}
             ${MODULES_W25Q80DV}
-            ${SETTINGS} 
-            ${UTILS}
+            ${SETTINGS}
+             ${UTILS}
             ${UTILS_TEXT}
             )
