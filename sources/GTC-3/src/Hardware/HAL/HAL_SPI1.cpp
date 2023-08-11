@@ -33,7 +33,7 @@ namespace HAL_SPI1
     {
         void Init()
         {
-            GPIO_InitTypeDef is
+            GPIO_InitTypeDef is =
             {
                 GPIO_PIN_0,
                 GPIO_MODE_OUTPUT_PP,
@@ -61,7 +61,7 @@ void HAL_SPI1::Init()
 {
     WP::Init();
 
-    GPIO_InitTypeDef is
+    GPIO_InitTypeDef is =
     {//      NSS          SCK          MISO         MOSI
         GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7,
         GPIO_MODE_AF_PP,
