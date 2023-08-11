@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Zones.h"
 #include "Display/Display.h"
-#include "Hardware/Modules/ST7735/ST7735.h"
+#include "Modules/ST7735/ST7735.h"
 
 
 void Zone::Clear()

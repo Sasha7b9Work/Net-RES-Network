@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Hardware/Modules/HC12/HC12.h"
+#include "Modules/HC12/HC12.h"
 #include "stm32f1xx_hal.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"

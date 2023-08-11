@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Modules/HC12/HC12.h"
+#include "Modules/HC12/HC12.h"
 #include "Hardware/Beeper.h"
 #include <stm32f1xx_hal.h>
 

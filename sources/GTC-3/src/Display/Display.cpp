@@ -3,7 +3,7 @@
 #include "Display/Display.h"
 #include "Hardware/Timer.h"
 #include "Display/Colors.h"
-#include "Hardware/Modules/ST7735/ST7735.h"
+#include "Modules/ST7735/ST7735.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
