@@ -62,11 +62,11 @@ file(GLOB HARDWARE_HAL              ../../GTC-3/src/Hardware/HAL/*.h
                                                     Hardware/HAL/*.*)
 file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                       Hardware/LAN/libnet/*.*)
-file(GLOB HARDWARE_MODULES_BME280   ../../GTC-3/src/Hardware/Modules/BME280/*.*)
-file(GLOB HARDWARE_MODULES_HC12     ../../GTC-3/src/Hardware/Modules/HC12/*.*)
-file(GLOB HARDWARE_MODULES_ST7735   ../../GTC-3/src/Hardware/Modules/ST7735/*.*)
 file(GLOB MENU                      ../../GTC-3/src/Menu/*.*)
 file(GLOB MENU_PAGES                ../../GTC-3/src/Menu/Pages/*.*)
+file(GLOB MODULES_BME280            ../../GTC-3/src/Modules/BME280/*.*)
+file(GLOB MODULES_HC12              ../../GTC-3/src/Modules/HC12/*.*)
+file(GLOB MODULES_ST7735            ../../GTC-3/src/Modules/ST7735/*.*)
 file(GLOB SETTINGS                  ../../GTC-3/src/Settings/*.*)
 file(GLOB UTILS                     ../../GTC-3/src/Utils/*.*)
 file(GLOB UTILS_TEXT                ../../GTC-3/src/Utils/Text/*.*)
@@ -82,11 +82,11 @@ source_group(Hardware/CDC               FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL               FILES ${HARDWARE_HAL})
 source_group(Hardware/LAN               FILES ${HARDWARE_LAN})
 source_group(Hardware/LAN/libnet        FILES ${HARDWARE_LAN_LIBNET})
-source_group(Hardware/Modules/BME280    FILES ${HARDWARE_MODULES_BME280})
-source_group(Hardware/Modules/HC12      FILES ${HARDWARE_MODULES_HC12})
-source_group(Hardware/Modules/ST7735    FILES ${HARDWARE_MODULES_ST7735})
 source_group(Menu                       FILES ${MENU})
 source_group(Menu/Pages                 FILES ${MENU_PAGES})
+source_group(Modules/BME280             FILES ${MODULES_BME280})
+source_group(Modules/HC12               FILES ${MODULES_HC12})
+source_group(Modules/ST7735             FILES ${MODULES_ST7735})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Utils/Text                 FILES ${UTILS_TEXT})
@@ -118,11 +118,11 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE_HAL}
                 ${HARDWARE_LAN}
                 ${HARDWARE_LAN_LIBNET}
-                ${HARDWARE_MODULES_BME280}
-                ${HARDWARE_MODULES_HC12}
-                ${HARDWARE_MODULES_ST7735}
                 ${MENU}
                 ${MENU_PAGES}
+                ${MODULES_BME280}
+                ${MODULES_HC12}
+                ${MODULES_ST7735}
                 ${SETTINGS}
                 ${UTILS}
                 ${UTILS_TEXT}
