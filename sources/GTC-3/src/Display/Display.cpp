@@ -358,7 +358,7 @@ void Display::DrawTest()
 
     bool result = W25Q80DV::Test::Result();
 
-    String<>(result ? "Test is OK" : "Test FAIL").Draw(5, 105, result ? Color::GREEN : Color::RED);
+    String<>(result ? "рЕЯР опнидем" : "рЕЯР опнбюкем").Draw(5, 105, result ? Color::GREEN : Color::RED);
 }
 
 

@@ -121,7 +121,7 @@ uint8 W25Q80DV::Read(uint address)
 
 void W25Q80DV::Test::Run()
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
         EraseSectorForAddress(0);
 

@@ -6,10 +6,10 @@
 #include "Hardware/HAL/HAL.h"
 
 
-static uint timeStart;
-static uint timePrev;
-static uint timeCounter;
-static uint timeStartCounter;
+//static uint timeStart;
+//static uint timePrev;
+//static uint timeCounter;
+//static uint timeStartCounter;
 
 // Время старта профилировщика
 volatile static uint timeStartMS = 0;
