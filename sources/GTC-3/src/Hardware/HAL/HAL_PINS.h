@@ -2,6 +2,12 @@
 #pragma once
 
 
+namespace HAL_PINS
+{
+    void Init();
+}
+
+
 struct Port
 {
     enum E
@@ -62,8 +68,10 @@ protected:
 struct PinOut : public Pin
 {
     PinOut(Port::E, Pin::E, PMode::E);
-    void Hi();
-    void Low();
+    void ToHi();
+    void ToLow();
     void Set(bool);
 };
 
+
+extern PinOut pinWP;

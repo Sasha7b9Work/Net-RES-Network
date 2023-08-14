@@ -4,6 +4,9 @@
 #include <stm32f1xx_hal.h>
 
 
+PinOut pinWP(Port::B, Pin::_0, PMode::OUTPUT_PP_PULL_UP);
+
+
 namespace HAL_PINS
 {
     static const uint16 pins[Pin::Count] =
@@ -36,7 +39,14 @@ namespace HAL_PINS
 }
 
 
-void PinOut::Low()
+void HAL_PINS::Init()
+{
+    pinWP.Init();
+    pinWP.ToLow();
+}
+
+
+void PinOut::ToLow()
 {
     HAL_PINS::ports[port]->BSRR = (uint)(HAL_PINS::pins[pin] << 16);
 }
@@ -112,16 +122,16 @@ void PinOut::Set(bool state)
 {
     if (state)
     {
-        Hi();
+        ToHi();
     }
     else
     {
-        Low();
+        ToLow();
     }
 }
 
 
-void PinOut::Hi()
+void PinOut::ToHi()
 {
     HAL_PINS::ports[port]->BSRR = HAL_PINS::pins[pin];
 }

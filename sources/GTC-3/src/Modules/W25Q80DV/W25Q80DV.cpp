@@ -1,4 +1,4 @@
-﻿// 2023/08/07 09:57:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2023/08/07 09:57:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Hardware/HAL/HAL.h"
@@ -40,6 +40,8 @@ namespace W25Q80DV
 
 void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
 {
+    pinWP.ToHi();
+
     EraseSectorForAddress(0x000000);
 
     WaitRelease();
@@ -62,17 +64,25 @@ void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
     HAL_SPI1::Write(data.Data(), size + 1 + 3);     // Page program
 
     HAL_SPI1::Write(WRITE_DISABLE);                 // Write disable
+
+    pinWP.ToLow();
 }
 
 
 void W25Q80DV::Write(uint address, uint8 byte)
 {
+    pinWP.ToHi();
+
     Write1024bytes(address, &byte, 1);
+
+    pinWP.ToLow();
 }
 
 
 void W25Q80DV::EraseSectorForAddress(uint address)
 {
+    pinWP.ToHi();
+
     address /= (4 * 1024);      // \ 
                                 // | Рассчитываем адрес первого байта стираемого сектора
     address *= (4 * 1024);      // / 
@@ -84,6 +94,8 @@ void W25Q80DV::EraseSectorForAddress(uint address)
     Write32bit(SECTOR_ERASE, address);
 
     HAL_SPI1::Write(WRITE_DISABLE);
+
+    pinWP.ToLow();
 }
 
 
@@ -148,6 +160,8 @@ bool W25Q80DV::Test::Result()
 
 void W25Q80DV::Write32bit(uint8 command, uint bits24)
 {
+    pinWP.ToHi();
+
     uint8 data[4];
 
     data[0] = command;
@@ -156,6 +170,8 @@ void W25Q80DV::Write32bit(uint8 command, uint bits24)
     data[3] = (uint8)(bits24);
 
     HAL_SPI1::Write(data, 4);
+
+    pinWP.ToLow();
 }
 
 
@@ -163,8 +179,12 @@ void W25Q80DV::WaitRelease()
 {
     TimeMeterMS meter;
 
-    while (IsBusy() && (meter.ElapsedTime() < 1000))
+    while (IsBusy())
     {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
     }
 }
 

@@ -29,6 +29,8 @@ void HAL::Init()
     __HAL_AFIO_REMAP_SWJ_NONJTRST();
 #endif
 
+    HAL_PINS::Init();
+
     HAL_I2C1::Init();
 
     CDC::Init();

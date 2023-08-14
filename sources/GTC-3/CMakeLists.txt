@@ -2,6 +2,8 @@
 
 project (GTC-3)
 
+#set(CMAKE_UNITY_BUILD OFF)
+
 message("------------------------------------------------------------------------ ${PROJECT_NAME}")
 
 include_directories(../common/_VS_KEIL/CMSIS/
