@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "Display/Colors.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
 #include "Utils/Text/Text.h"
@@ -64,6 +65,8 @@ namespace Display
     static void DrawBigMeasure();
 
     static void DrawTime();
+
+    static void DrawTest();
 
     namespace Buffer
     {
@@ -257,7 +260,9 @@ void Display::Update()
 
             DrawMeasures();
 
-            DrawTime();
+//            DrawTime();
+
+            DrawTest();
 
             if (need_redraw)
             {
@@ -338,6 +343,22 @@ void Display::DrawTime()
     String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(80, 105);
 
     ST7735::WriteBuffer(0, y, width, height);
+}
+
+
+void Display::DrawTest()
+{
+    int width = 160;
+    int height = 16;
+    int y = 105;
+
+    Font::Set(TypeFont::_12_10);
+
+    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
+
+    bool result = W25Q80DV::Test::Result();
+
+    String<>(result ? "Test is OK" : "Test FAIL").Draw(5, 105, result ? Color::GREEN : Color::RED);
 }
 
 

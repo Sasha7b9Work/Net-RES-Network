@@ -30,6 +30,11 @@ namespace W25Q80DV
     static bool IsBusy();
 
     static void WaitRelease();
+
+    namespace Test
+    {
+        static bool result = false;
+    }
 }
 
 
@@ -114,7 +119,7 @@ uint8 W25Q80DV::Read(uint address)
 }
 
 
-bool W25Q80DV::Test()
+void W25Q80DV::Test::Run()
 {
     for (int i = 0; i < 100; i++)
     {
@@ -126,11 +131,18 @@ bool W25Q80DV::Test()
 
         if (byte != Read(0))
         {
-            return false;
+            result = false;
+            return;
         }
     }
 
-    return true;
+    result = true;
+}
+
+
+bool W25Q80DV::Test::Result()
+{
+    return result;
 }
 
 

@@ -7,6 +7,7 @@
 #include "Modules/BME280/BME280.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
 #include "Display/Display.h"
@@ -41,6 +42,8 @@ void Device::Init()
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 
     Beeper::Init();
+
+    W25Q80DV::Test::Run();
 }
 
 

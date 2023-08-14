@@ -19,5 +19,10 @@ namespace W25Q80DV
 
     uint8 Read(uint address);
 
-    bool Test();
+    namespace Test
+    {
+        void Run();
+
+        bool Result();
+    }
 }
