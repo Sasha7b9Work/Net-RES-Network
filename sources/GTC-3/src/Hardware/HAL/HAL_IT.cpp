@@ -13,8 +13,13 @@ void NMI_Handler(void)
 
 void HardFault_Handler(void)
 {
+    static int line = Debug::line[0];
+    static pchar file = Debug::file[0];
+
     while (1)
     {
+        line = line;
+        file = file;
     }
 }
 
