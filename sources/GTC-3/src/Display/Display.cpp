@@ -254,6 +254,10 @@ void Display::Update()
         const Settings *pointer = &gset;
         pointer = pointer;
 
+        Settings settings = gset;
+
+        settings = settings;
+
         if (gset.display.typeDisplaydInfo.IsAllMeasures())
         {
             if (need_redraw)
@@ -263,7 +267,7 @@ void Display::Update()
 
             DrawMeasures();
 
-//            DrawTime();
+            DrawTime();
 
             DrawTest();
 
@@ -331,21 +335,21 @@ void Display::DrawMeasures()
 
 void Display::DrawTime()
 {
-    int width = 160;
-    int height = 16;
-    int y = 105;
-
-    Font::Set(TypeFont::_12_10);
-    
-    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
-
-    PackedTime time = HAL_RTC::GetTime();
-
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
-
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(80, 105);
-
-    ST7735::WriteBuffer(0, y, width, height);
+//    int width = 160;
+//    int height = 16;
+//    int y = 105;
+//
+//    Font::Set(TypeFont::_12_10);
+//    
+//    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
+//
+//    PackedTime time = HAL_RTC::GetTime();
+//
+//    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
+//
+//    String<>("%02d:%02d:%04d", time.day, time.month, time.year).Draw(80, 105);
+//
+//    ST7735::WriteBuffer(0, y, width, height);
 }
 
 
