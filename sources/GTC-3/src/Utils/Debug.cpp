@@ -18,6 +18,7 @@ volatile static uint timePrevMS = 0;
 
 pchar Debug::file[10] = { 0 };
 int   Debug::line[10] = { 0 };
+int   Debug::type = 0;
 
 
 void Debug::StartProfilingMS()

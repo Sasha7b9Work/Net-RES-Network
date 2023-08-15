@@ -8,14 +8,29 @@
 #include <cstdlib>
 
 
-static bme280_dev dev;
+namespace BME280
+{
+    static bme280_dev dev;
 
-static unsigned int timeNext = 1;       // Время следующего измерения
+    static unsigned int timeNext = 1;       // Время следующего измерения
+
+    // Попытка соединения с усройством по адресу id
+    static bool AttemptConnection(uint8 id);
+}
 
 
 void BME280::Init()
 {
-    dev.dev_id = BME280_I2C_ADDR_SEC;
+    if (!AttemptConnection(BME280_I2C_ADDR_PRIM))
+    {
+        AttemptConnection(BME280_I2C_ADDR_SEC);
+    }
+}
+
+
+bool BME280::AttemptConnection(uint8 id)
+{
+    dev.dev_id = id;
     dev.intf = BME280_I2C_INTF;
     dev.read = HAL_I2C1::Read;
     dev.write = HAL_I2C1::Write;
@@ -43,6 +58,12 @@ void BME280::Init()
 
     /* Delay while the sensor completes a measurement */
     dev.delay_ms(70);
+
+    uint8 chip_id = 0x00;
+
+    bme280_get_regs(0xD0, &chip_id, 1, &dev);
+
+    return (chip_id == 0x56) || (chip_id == 0x57) || (chip_id == 0x58) || (chip_id == 0x60);
 }
 
 

@@ -9,8 +9,8 @@
 //#define START_PROFILING_MS Debug::StartProfilingMS()
 //#define POINT_PROFILING_MS Debug::PointProfilingMS(__FILE__, __LINE__)
 
-//#define DEBUG_POINT(x) Debug::line[x] = __LINE__; Debug::file[x] = __FILE__;
-//#define DEBUG_POINT_0  DEBUG_POINT(0)
+#define DEBUG_POINT(x) Debug::line[x] = __LINE__; Debug::file[x] = __FILE__;
+#define DEBUG_POINT_0  DEBUG_POINT(0)
 
 namespace Debug
 {
@@ -19,4 +19,5 @@ namespace Debug
 
     extern int line[10];
     extern pchar file[10];
+    extern int type;
 };

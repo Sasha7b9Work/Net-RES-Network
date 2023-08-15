@@ -77,15 +77,23 @@ void String<capacity>::SetFormat(pchar format, ...)
 template<int capacity>
 String<capacity>::String(pchar format, ...)
 {
+    DEBUG_POINT_0;
+
     std::va_list args;
     va_start(args, format);
     int num_symbols = std::vsprintf(buffer, format, args);
     va_end(args);
 
+    DEBUG_POINT_0;
+
     if(num_symbols < 0 || num_symbols > capacity - 1)
     {
+        DEBUG_POINT_0;
         LOG_ERROR_TRACE("Very small string buffer %d, need %d:", capacity, num_symbols);
+        DEBUG_POINT_0;
     }
+
+    DEBUG_POINT_0;
 }
 
 

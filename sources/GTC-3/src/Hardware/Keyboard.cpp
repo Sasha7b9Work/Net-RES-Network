@@ -40,29 +40,39 @@ void Keyboard::Init()
 
 void Keyboard::Update()
 {
+    DEBUG_POINT_0;
     for (int i = 0; i < Key::Count; i++)
     {
+        DEBUG_POINT_0;
         UpdateKey((Key::E)i);
+        DEBUG_POINT_0;
     }
+    DEBUG_POINT_0;
 }
 
 
 void Keyboard::UpdateKey(Key::E key)
 {
+    DEBUG_POINT_0;
     if (meter.ElapsedTime() < 100)
     {
         return;
     }
+    DEBUG_POINT_0;
 
     if (pressed[key])
     {
+        DEBUG_POINT_0;
         if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long[key])
         {
+            DEBUG_POINT_0;
             Menu::LongPress(key);
             taboo_long[key] = true;
+            DEBUG_POINT_0;
         }
         else
         {
+            DEBUG_POINT_0;
             if (!KeyPressed(key))
             {
                 pressed[key] = false;
@@ -73,16 +83,22 @@ void Keyboard::UpdateKey(Key::E key)
                 }
                 taboo_long[key] = false;
             }
+            DEBUG_POINT_0;
         }
     }
     else
     {
+        DEBUG_POINT_0;
         if (KeyPressed(key))
         {
+            DEBUG_POINT_0;
             pressed[key] = true;
             meter.Reset();
+            DEBUG_POINT_0;
         }
+        DEBUG_POINT_0;
     }
+    DEBUG_POINT_0;
 }
 
 

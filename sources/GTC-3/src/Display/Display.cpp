@@ -239,24 +239,33 @@ void Display::EndScene()
 
 void Display::Update()
 {
+    DEBUG_POINT_0;
     TimeMeterMS meter_fps;
 
     need_redraw = true;
 
+    DEBUG_POINT_0;
     if (Menu::Opened())
     {
+        DEBUG_POINT_0;
         Menu::Draw();
 
         need_redraw = true;
+        DEBUG_POINT_0;
     }
     else
     {
+        DEBUG_POINT_0;
         if (gset.display.typeDisplaydInfo.IsAllMeasures())
         {
+            DEBUG_POINT_0;
             if (need_redraw)
             {
+                DEBUG_POINT_0;
                 BeginScene(Color::BLACK);
+                DEBUG_POINT_0;
             }
+            DEBUG_POINT_0;
 
             DrawMeasures();
 
@@ -272,14 +281,20 @@ void Display::Update()
             }
 
 //            DrawZones();
+            DEBUG_POINT_0;
         }
         else
         {
+            DEBUG_POINT_0;
             DrawBigMeasure();
+            DEBUG_POINT_0;
         }
 
+        DEBUG_POINT_0;
         zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+        DEBUG_POINT_0;
     }
+    DEBUG_POINT_0;
 }
 
 
@@ -364,9 +379,12 @@ void Display::DrawTest()
 
 void Display::DrawBigMeasure()
 {
+    DEBUG_POINT_0;
     Font::Set(TypeFont::_8);
 
+    DEBUG_POINT_0;
     BeginScene(Color::BLACK);
+    DEBUG_POINT_0;
 
     static const int x[TypeMeasure::Count] =
     {
@@ -375,21 +393,28 @@ void Display::DrawBigMeasure()
         28,
         35
     };
+    DEBUG_POINT_0;
 
     Measure &measure = measures[gset.display.typeDisplaydInfo.value];
+    DEBUG_POINT_0;
 
     Font::Text::DrawBig(x[measure.type], 15, 2, measure.Name().c_str(), Color::_1);
+    DEBUG_POINT_0;
 
     measures[measure.type].Draw(27, 50, 4);
 
+    DEBUG_POINT_0;
     Font::Text::DrawBig(68, 95, 2, measure.Units().c_str(), Color::_1);
 
+    DEBUG_POINT_0;
     EndScene();
+    DEBUG_POINT_0;
 }
 
 
 String<> Display::Measure::Name()
 {
+    DEBUG_POINT_0;
     static const pchar names[TypeMeasure::Count] =
     {
         "“≈Ãœ≈–¿“”–¿",
@@ -397,8 +422,15 @@ String<> Display::Measure::Name()
         "¬À¿∆ÕŒ—“‹",
         "“Œ◊ ¿ –Œ—€"
     };
+    DEBUG_POINT_0;
 
-    return String<>(names[type]);
+    Debug::type = (int)type;
+
+    String<> result(names[type]);
+
+    DEBUG_POINT_0;
+
+    return result;
 }
 
 String<> Display::Measure::Units()
