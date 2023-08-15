@@ -27,9 +27,9 @@ void Device::Init()
 {
     HAL::Init();
 
-    gset.Load();
+//    gset.Load();
 
-    gset.Reset();
+//    gset.Reset();
 
     ST7735::Init();
 
@@ -53,10 +53,8 @@ void Device::Update()
     float pressure = 0.0f;
     float humidity = 0.0;
 
-    DEBUG_POINT_0;
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
-        DEBUG_POINT_0;
         InterCom::Send(TypeMeasure::Temperature, temp);
         InterCom::Send(TypeMeasure::Pressure, pressure);
         InterCom::Send(TypeMeasure::Humidity, humidity);
@@ -79,19 +77,10 @@ void Device::Update()
             Beeper::Start(100);
         }
     }
-    DEBUG_POINT_0;
 
     Keyboard::Update();
-
-    DEBUG_POINT_0;
-
     Display::Update();
-
-    DEBUG_POINT_0;
-
     HAL_ADC::Update();
-
-    DEBUG_POINT_0;
 }
 
 

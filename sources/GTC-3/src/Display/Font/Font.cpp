@@ -218,7 +218,6 @@ int Font::Symbol::DrawBig(int eX, int eY, int size, char s)
 
 void Font::Text::DrawBig(int eX, int eY, int size, pchar buffer, Color::E color)
 {
-    DEBUG_POINT_0;
     Color::SetCurrent(color);
 
     int numSymbols = (int)std::strlen(buffer);
@@ -227,10 +226,7 @@ void Font::Text::DrawBig(int eX, int eY, int size, pchar buffer, Color::E color)
 
     for (int i = 0; i < numSymbols; i++)
     {
-        DEBUG_POINT_0;
         x = Font::Symbol::DrawBig(x, eY, size, buffer[i]);
         x += size;
-        DEBUG_POINT_0;
     }
-    DEBUG_POINT_0;
 }
