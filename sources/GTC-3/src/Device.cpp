@@ -27,9 +27,9 @@ void Device::Init()
 {
     HAL::Init();
 
-//    gset.Load();
+    gset.Load();
 
-//    gset.Reset();
+    gset.Reset();
 
     ST7735::Init();
 
@@ -44,6 +44,13 @@ void Device::Init()
     Beeper::Init();
 
     W25Q80DV::Test::Run();
+
+    while (1)
+    {
+        uint8 id[2] = { 0, 0 };
+
+        W25Q80DV::ReadID(id);
+    }
 }
 
 

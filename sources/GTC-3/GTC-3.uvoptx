@@ -152,34 +152,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>261</LineNumber>
+          <LineNumber>20</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134249502</Address>
+          <Address>134235876</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Display\Display.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Display/Display.cpp\261</Expression>
+          <Expression>\\GTC_3\src/Hardware/HAL/HAL_IT.cpp\20</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>24</LineNumber>
+          <LineNumber>52</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134249976</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Device.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\GTC_3\src/Device.cpp\52</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>

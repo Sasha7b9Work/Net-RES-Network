@@ -202,6 +202,8 @@ bool W25Q80DV::IsBusy()
 
 void W25Q80DV::ReadID(uint8 id[2])
 {
+    pinWP.ToHi();
+
     uint8 out[6] = { 0x90, 0, 0, 0, 0, 0 };
     uint8 in[6] = { 0, 0, 0, 0, 0, 0 };
 
@@ -209,4 +211,6 @@ void W25Q80DV::ReadID(uint8 id[2])
 
     id[0] = in[4];
     id[1] = in[5];
+
+    pinWP.ToLow();
 }

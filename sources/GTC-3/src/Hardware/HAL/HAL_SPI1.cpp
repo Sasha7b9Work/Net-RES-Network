@@ -77,7 +77,7 @@ void HAL_SPI1::Init()
 
 void HAL_SPI1::WriteRead(const void *out, uint8 *in, int size)
 {
-    HAL_SPI_TransmitReceive(&handle, (uint8 *)out, in, (uint16)size, 100);
+    HAL_SPI_TransmitReceive(&handle, (uint8 *)out, in, (uint16)size, 10000);
 }
 
 
