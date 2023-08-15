@@ -251,6 +251,9 @@ void Display::Update()
     }
     else
     {
+        const Settings *pointer = &gset;
+        pointer = pointer;
+
         if (gset.display.typeDisplaydInfo.IsAllMeasures())
         {
             if (need_redraw)
