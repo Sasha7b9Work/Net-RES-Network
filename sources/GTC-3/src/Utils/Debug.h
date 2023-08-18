@@ -20,4 +20,4 @@ namespace Debug
     extern int line[10];
     extern pchar file[10];
     extern int type;
-};
+}

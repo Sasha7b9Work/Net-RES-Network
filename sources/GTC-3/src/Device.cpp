@@ -49,6 +49,8 @@ void Device::Init()
     {
         uint8 id[2] = { 0, 0 };
 
+        Timer::Delay(1);
+
         W25Q80DV::ReadID(id);
     }
 }

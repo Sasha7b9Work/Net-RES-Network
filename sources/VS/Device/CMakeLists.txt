@@ -2,6 +2,8 @@
 
 project (Device)
 
+#set(CMAKE_UNITY_BUILD OFF)
+
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
@@ -46,6 +48,7 @@ if(WIN32)
                                     # function under -EHc.
     add_compile_options(/wd5045)
     add_compile_options(/wd5220)
+    add_compile_options(/wd5267)
     add_compile_options(/wd26812)
 endif()
 

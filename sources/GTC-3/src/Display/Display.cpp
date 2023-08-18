@@ -405,8 +405,6 @@ String<> Display::Measure::Name()
         "ÒÎ×ÊÀ ĞÎÑÛ"
     };
 
-    Debug::type = (int)type;
-
     String<> result(names[type]);
 
     return result;

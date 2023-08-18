@@ -2,6 +2,8 @@
 
 project (GTC-3)
 
+#set(CMAKE_UNITY_BUILD OFF)
+
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
@@ -46,6 +48,7 @@ if(WIN32)
     add_compile_options(/wd5220)    # 'xxx': a non-static data member with a volatile qualified type no longer implies that
                                     # compiler generated copy/move constructors and copy/move assignment operators are not trivial
                                     # add_compile_options(/wd26812)
+    add_compile_options(/wd5267)
 endif()
 
 file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
@@ -68,30 +71,32 @@ file(GLOB MODULES_BH1750            ../../GTC-3/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280            ../../GTC-3/src/Modules/BME280/*.*)
 file(GLOB MODULES_HC12              ../../GTC-3/src/Modules/HC12/*.*)
 file(GLOB MODULES_ST7735            ../../GTC-3/src/Modules/ST7735/*.*)
+file(GLOB MODULES_W25Q80DV          ../../GTC-3/src/Modules/W25Q80DV/*.*)
 file(GLOB SETTINGS                  ../../GTC-3/src/Settings/*.*)
 file(GLOB UTILS                     ../../GTC-3/src/Utils/*.*)
 file(GLOB UTILS_TEXT                ../../GTC-3/src/Utils/Text/*.*)
 
-source_group(libs/STM32F1               FILES ${LIBS_STM32F1})
-source_group(libs/STM32F1/Inc           FILES ${LIBS_STM32F1_INC})
-source_group(libs/USBD                  FILES ${LIBS_USBD})
-source_group(src                        FILES ${SRC})
-source_group(Display                    FILES ${DISPLAY})
-source_group(Display/Font               FILES ${DISPLAY_FONT})
-source_group(Hardware                   FILES ${HARDWARE})
-source_group(Hardware/CDC               FILES ${HARDWARE_CDC})
-source_group(Hardware/HAL               FILES ${HARDWARE_HAL})
-source_group(Hardware/LAN               FILES ${HARDWARE_LAN})
-source_group(Hardware/LAN/libnet        FILES ${HARDWARE_LAN_LIBNET})
-source_group(Menu                       FILES ${MENU})
-source_group(Menu/Pages                 FILES ${MENU_PAGES})
-source_group(Modules/BH1750             FILES ${MODULES_BH1750})
-source_group(Modules/BME280             FILES ${MODULES_BME280})
-source_group(Modules/HC12               FILES ${MODULES_HC12})
-source_group(Modules/ST7735             FILES ${MODULES_ST7735})
-source_group(Settings                   FILES ${SETTINGS})
-source_group(Utils                      FILES ${UTILS})
-source_group(Utils/Text                 FILES ${UTILS_TEXT})
+source_group(libs/STM32F1           FILES ${LIBS_STM32F1})
+source_group(libs/STM32F1/Inc       FILES ${LIBS_STM32F1_INC})
+source_group(libs/USBD              FILES ${LIBS_USBD})
+source_group(src                    FILES ${SRC})
+source_group(Display                FILES ${DISPLAY})
+source_group(Display/Font           FILES ${DISPLAY_FONT})
+source_group(Hardware               FILES ${HARDWARE})
+source_group(Hardware/CDC           FILES ${HARDWARE_CDC})
+source_group(Hardware/HAL           FILES ${HARDWARE_HAL})
+source_group(Hardware/LAN           FILES ${HARDWARE_LAN})
+source_group(Hardware/LAN/libnet    FILES ${HARDWARE_LAN_LIBNET})
+source_group(Menu                   FILES ${MENU})
+source_group(Menu/Pages             FILES ${MENU_PAGES})
+source_group(Modules/BH1750         FILES ${MODULES_BH1750})
+source_group(Modules/BME280         FILES ${MODULES_BME280})
+source_group(Modules/HC12           FILES ${MODULES_HC12})
+source_group(Modules/ST7735         FILES ${MODULES_ST7735})
+source_group(Modules/W25Q80DV       FILES ${MODULES_W25Q80DV})
+source_group(Settings               FILES ${SETTINGS})
+source_group(Utils                  FILES ${UTILS})
+source_group(Utils/Text             FILES ${UTILS_TEXT})
 
 
 set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
@@ -106,6 +111,7 @@ set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
 
 
 set_source_files_properties(../../GTC-3/src/Hardware/CDC/usbd_conf.c
+#                            ../../GTC-3/src/Hardware/CDC/usbd_desc.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}
@@ -126,6 +132,7 @@ add_executable( ${PROJECT_NAME}
                 ${MODULES_BME280}
                 ${MODULES_HC12}
                 ${MODULES_ST7735}
+                ${MODULES_W25Q80DV}
                 ${SETTINGS}
                 ${UTILS}
                 ${UTILS_TEXT}
