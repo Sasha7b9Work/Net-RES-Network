@@ -13,9 +13,9 @@ void NMI_Handler(void)
 
 void HardFault_Handler(void)
 {
-    static int line = _Debug::line[0];
-    static pchar file = _Debug::file[0];
-    static int type = _Debug::type;
+    static int line = Debug::line[0];
+    static pchar file = Debug::file[0];
+    static int type = Debug::type;
 
     while (1) //-V776
     {
