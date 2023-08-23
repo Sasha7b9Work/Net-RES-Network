@@ -84,11 +84,30 @@ void HAL_SPI1::Init()
 
     HAL_GPIO_Init(GPIOA, &is);
 
+    //-------------------------------------------------
     is.Pin = GPIO_PIN_6;                // MISO
     is.Mode = GPIO_MODE_INPUT;
     is.Pull = GPIO_NOPULL;
 
     HAL_GPIO_Init(GPIOA, &is);
+
+    uint data = GPIOA->ODR;
+    _SET_BIT(data, 6);
+    GPIOA->ODR = data;
+
+    data = GPIOA->CRL;
+    
+    _CLEAR_BIT(data, 24);
+    _CLEAR_BIT(data, 25);
+    _CLEAR_BIT(data, 26);
+    _CLEAR_BIT(data, 27);
+    
+//    _SET_BIT(data, 26);
+    _SET_BIT(data, 27);
+
+    GPIOA->CRL = data;
+
+    //-------------------------------------------------
 
     is.Pin = GPIO_PIN_4;                // NSS
     is.Mode = GPIO_MODE_OUTPUT_PP;
