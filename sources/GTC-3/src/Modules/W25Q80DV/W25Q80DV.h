@@ -21,7 +21,7 @@ namespace W25Q80DV
 
     namespace Test
     {
-        void Run();
+        bool Run();
 
         bool Result();
     }

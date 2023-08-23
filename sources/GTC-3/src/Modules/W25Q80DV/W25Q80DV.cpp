@@ -42,8 +42,6 @@ void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
 {
     pinWP.ToHi();
 
-    EraseSectorForAddress(0x000000);
-
     WaitRelease();
 
     HAL_SPI1::Write(WRITE_ENABLE);          // Write enable
@@ -131,24 +129,31 @@ uint8 W25Q80DV::Read(uint address)
 }
 
 
-void W25Q80DV::Test::Run()
+bool W25Q80DV::Test::Run()
 {
-    for (int i = 0; i < 10; i++)
-    {
-        EraseSectorForAddress(0);
+    EraseSectorForAddress(0);
 
+    result = false;
+
+    for (uint i = 0; i < 1024; i++)
+    {
         uint8 byte = (uint8)std::rand();
 
-        Write(0, byte);
+        Write(i, byte);
 
-        if (byte != Read(0))
+        if (byte != Read(i))
         {
+            EraseSectorForAddress(0);
             result = false;
-            return;
+            return result;
         }
     }
 
+    EraseSectorForAddress(0);
+
     result = true;
+
+    return result;
 }
 
 
