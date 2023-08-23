@@ -12,3 +12,4 @@ endif()
 
 add_subdirectory(Device)
 add_subdirectory(GTC-3)
+add_subdirectory(TwoSensors)

@@ -43,16 +43,16 @@ void Device::Init()
 
     Beeper::Init();
 
-    W25Q80DV::Test::Run();
+//    W25Q80DV::Test::Run();
 
-    while (1)
-    {
-        uint8 id[2] = { 0, 0 };
-
-        Timer::Delay(1);
-
-        W25Q80DV::ReadID(id);
-    }
+//    while (1)
+//    {
+//        uint8 id[2] = { 0, 0 };
+//
+//        Timer::Delay(1);
+//
+//        W25Q80DV::ReadID(id);
+//    }
 }
 
 
