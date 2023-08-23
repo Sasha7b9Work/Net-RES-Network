@@ -17,11 +17,20 @@ namespace BH1750
     bool WriteUINT8(uint8);
 
     bool ReadUINT16(uint8 *);
+
+    static bool is_init = false;
+
+    bool IsInit()
+    {
+        return is_init;
+    }
 }
 
 
 void BH1750::Init()
 {
+    is_init = true;
+
     WriteUINT8(CMD_POWER_ON);
     WriteUINT8(CMD_RESET);
     WriteUINT8(CMD_H_RES_MODE);
