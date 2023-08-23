@@ -20,3 +20,9 @@ sources/GTC-3/Objects/
 sources/GTC-3/Listings-Debug/
 sources/GTC-3/Objects-Debug/
 sources/GTC-3/DebugConfig/
+
+sources/TwoSensors/Listings/
+sources/TwoSensors/Objects/
+sources/TwoSensors/Listings-Debug/
+sources/TwoSensors/Objects-Debug/
+sources/TwoSensors/DebugConfig/
