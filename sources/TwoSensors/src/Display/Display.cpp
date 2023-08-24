@@ -312,23 +312,24 @@ void Display::DrawMeasures()
     int start = BME280::IsInit() ? 0 : 4;
     int end = BME280::IsInit() ? 4 : TypeMeasure::Count;
 
-    for (int i = start; i < end; i++)
+    int i = start;
+
+    for (; i < end; i++)
     {
         int x = 93;
         int y = y0 + i * dY;
         int width = 30;
         int height = 15;
 
-        if (gset.display.show_measure[types[i]])
+        if (need_redraw)
         {
-            if (need_redraw)
-            {
-                String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Measures::InRange((TypeMeasure::E)i, measures[i].value) ? Color::WHITE : Color::FLASH_10);
-                measures[types[i]].Units().Draw(x + 41, y);
-            }
+            String<>("%s", measures[types[i]].Name().c_str()).
+                Draw(x0, y, Measures::InRange((TypeMeasure::E)i, measures[i].value) ? Color::WHITE : Color::FLASH_10);
 
-            measures[types[i]].Draw(x, y);
+            measures[types[i]].Units().Draw(x + 41, y);
         }
+
+        measures[types[i]].Draw(x, y);
 
         ST7735::WriteBuffer(x - 1, y, width, height);
     }
@@ -337,14 +338,14 @@ void Display::DrawMeasures()
 
 void Display::DrawProgressBar()
 {
-    static int counter = 0;
-    counter++;
-
-    if (counter % 2)
-    {
-        Rectangle(4, 4).Fill(0, 124, Color::WHITE);
-        ST7735::WriteBuffer(0, 124, 4, 4);
-    }
+//    static int counter = 0;
+//    counter++;
+//
+//    if (counter % 2)
+//    {
+//        Rectangle(4, 4).Fill(0, 124, Color::WHITE);
+//        ST7735::WriteBuffer(0, 124, 4, 4);
+//    }
 }
 
 
@@ -359,7 +360,8 @@ void Display::DrawBigMeasure()
         30,
         12,
         28,
-        35
+        35,
+        10
     };
 
     Measure &measure = measures[gset.display.typeDisplaydInfo.value];
@@ -382,7 +384,7 @@ String<> Display::Measure::Name()
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
         "ÒÎ×ÊÀ ĞÎÑÛ",
-        "ÎÑÂÅÙ¨ÍÍÎÑÒÜ"
+        "ÎÑÂÅÙÅÍÍÎÑÒÜ"
     };
 
     String<> result(names[type]);
