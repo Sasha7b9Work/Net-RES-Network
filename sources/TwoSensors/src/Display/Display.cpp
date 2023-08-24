@@ -61,6 +61,8 @@ namespace Display
 
     static void DrawMeasures();
 
+    static void DrawProgressBar();
+
     // Вывести одно измерение на весь экран
     static void DrawBigMeasure();
 
@@ -263,6 +265,8 @@ void Display::Update()
 
             DrawMeasures();
 
+            DrawProgressBar();
+
             if (need_redraw)
             {
                 EndScene();
@@ -321,6 +325,19 @@ void Display::DrawMeasures()
         }
 
         ST7735::WriteBuffer(x - 1, y, width, height);
+    }
+}
+
+
+void Display::DrawProgressBar()
+{
+    static int counter = 0;
+    counter++;
+
+    if (counter % 2)
+    {
+        Rectangle(4, 4).Fill(0, 124, Color::WHITE);
+        ST7735::WriteBuffer(0, 124, 4, 4);
     }
 }
 
