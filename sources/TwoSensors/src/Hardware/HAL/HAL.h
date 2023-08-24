@@ -46,6 +46,7 @@ namespace HAL_ADC
 namespace HAL_I2C1
 {
     void Init();
+    void DeInit();
 
     int8 Read(uint8 dev_id, uint8 reg_addr, uint8 *reg_data, uint16 len);
     int8 Read16(uint8 dev_id, uint8 *data);

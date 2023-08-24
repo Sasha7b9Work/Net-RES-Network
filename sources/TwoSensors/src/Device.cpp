@@ -33,6 +33,8 @@ void Device::Init()
     gset.Reset();
 
     ST7735::Init();
+    
+    Timer::Delay(1000);
 
     if (!BME280::Init())
     {
@@ -57,6 +59,18 @@ void Device::Update()
     float pressure = 0.0f;
     float humidity = 0.0;
     float illumination = 0.0f;
+
+    if (!BME280::IsInit())
+    {
+        HAL_I2C1::DeInit();
+
+        HAL_I2C1::Init();
+
+        if (!BME280::Init())
+        {
+            BH1750::Init();
+        }
+    }
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {

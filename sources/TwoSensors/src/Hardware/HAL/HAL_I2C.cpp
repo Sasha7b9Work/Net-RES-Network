@@ -28,6 +28,12 @@ void HAL_I2C1::Init(void)
 }
 
 
+void HAL_I2C1::DeInit()
+{
+    HAL_I2C_DeInit(&hi2c1);
+}
+
+
 void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle) //-V2009
 {
     GPIO_InitTypeDef GPIO_InitStruct;
