@@ -8,6 +8,7 @@
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
+#include "Modules/BH1750/BH1750.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
 #include "Display/Display.h"
@@ -33,7 +34,10 @@ void Device::Init()
 
     ST7735::Init();
 
-    BME280::Init();
+    if (!BME280::Init())
+    {
+        BH1750::Init();
+    }
 
 //    HC12::Init();
 

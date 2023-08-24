@@ -16,15 +16,21 @@ namespace BME280
 
     // ѕопытка соединени€ с усройством по адресу id
     static bool AttemptConnection(uint8 id);
+
+    static bool is_init = false;
+
+    bool IsInit()
+    {
+        return is_init;
+    }
 }
 
 
-void BME280::Init()
+bool BME280::Init()
 {
-    if (!AttemptConnection(BME280_I2C_ADDR_PRIM))
-    {
-        AttemptConnection(BME280_I2C_ADDR_SEC);
-    }
+    is_init = AttemptConnection(BME280_I2C_ADDR_PRIM) || AttemptConnection(BME280_I2C_ADDR_SEC);
+
+    return is_init;
 }
 
 
