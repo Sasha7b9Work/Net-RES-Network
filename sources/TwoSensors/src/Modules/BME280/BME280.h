@@ -10,8 +10,5 @@ namespace BME280
 {
     void Init();
 
-    // Инициализирован ли модуль
-    bool IsInit();
-
     bool GetMeasures(float *temp, float *pressure, float *humidity);
 }

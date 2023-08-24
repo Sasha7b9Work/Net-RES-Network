@@ -5,7 +5,6 @@
 #include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/BME280/BME280.h"
-#include "Modules/BH1750/BH1750.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
@@ -36,12 +35,7 @@ void Device::Init()
 
     BME280::Init();
 
-    if (!BME280::IsInit())
-    {
-        BH1750::Init();
-    }
-
-    HC12::Init();
+//    HC12::Init();
 
     Keyboard::Init();
 
@@ -50,15 +44,6 @@ void Device::Init()
     Beeper::Init();
 
     W25Q80DV::Test::Run();
-
-    while (1)
-    {
-        uint8 id[2] = { 0, 0 };
-
-        Timer::Delay(1);
-
-        W25Q80DV::ReadID(id);
-    }
 }
 
 
@@ -67,7 +52,6 @@ void Device::Update()
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;
-    float illumination = 0.0f;
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
@@ -92,12 +76,6 @@ void Device::Update()
         {
             Beeper::Start(100);
         }
-    }
-
-
-    if (BH1750::GetMeasure(&illumination))
-    {
-        InterCom::Send(TypeMeasure::Illumination, illumination);
     }
 
     Keyboard::Update();

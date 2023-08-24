@@ -56,8 +56,7 @@ namespace Display
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
-        Measure(TypeMeasure::DewPoint),
-        Measure(TypeMeasure::Illumination)
+        Measure(TypeMeasure::DewPoint)
     };
 
     static void DrawMeasures();
@@ -366,7 +365,7 @@ void Display::DrawTest()
 
     bool result = W25Q80DV::Test::Result();
 
-    String<>(result ? "Òåñò ÏĞÎÉÄÅÍ" : "Òåñò ÏĞÎÂÀËÅÍ").Draw(5, 105, result ? Color::GREEN : Color::RED);
+    String<>(result ? "Ïàìÿòü: OK" : "Ïàìÿòü: FAIL").Draw(5, 105, result ? Color::GREEN : Color::RED);
 }
 
 
