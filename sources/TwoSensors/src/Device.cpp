@@ -62,8 +62,6 @@ void Device::Update()
 
     if (!BME280::IsInit())
     {
-        HAL_I2C1::DeInit();
-
         HAL_I2C1::Init();
 
         if (!BME280::Init())
