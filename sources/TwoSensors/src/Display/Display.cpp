@@ -12,6 +12,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Hardware/HAL/HAL.h"
+#include "Modules/BME280/BME280.h"
 #include "Measures.h"
 #include <cstdlib>
 
@@ -304,10 +305,14 @@ void Display::DrawMeasures()
         TypeMeasure::Temperature,
         TypeMeasure::Pressure,
         TypeMeasure::Humidity,
-        TypeMeasure::DewPoint
+        TypeMeasure::DewPoint,
+        TypeMeasure::Illuminate
     };
 
-    for (int i = 0; i < TypeMeasure::Count; i++)
+    int start = BME280::IsInit() ? 0 : 4;
+    int end = BME280::IsInit() ? 4 : TypeMeasure::Count;
+
+    for (int i = start; i < end; i++)
     {
         int x = 93;
         int y = y0 + i * dY;
@@ -376,7 +381,8 @@ String<> Display::Measure::Name()
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
-        "ÒÎ×ÊÀ ĞÎÑÛ"
+        "ÒÎ×ÊÀ ĞÎÑÛ",
+        "ÎÑÂÅÙ¨ÍÍÎÑÒÜ"
     };
 
     String<> result(names[type]);
@@ -391,7 +397,8 @@ String<> Display::Measure::Units()
         "¨Ñ",
         "ãÏà",
         "%%",
-        "¨Ñ"
+        "¨Ñ",
+        "ëê"
     };
 
     return String<>(units[type]);
