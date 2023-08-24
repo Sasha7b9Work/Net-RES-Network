@@ -11,7 +11,7 @@ static const Settings def_set =
     0,
     // Display
     {
-        {1, 1, 1, 0},
+        {1, 1, 1, 1, 1},
         { TypeDisplayedInformation::AllMeasures }
     },
     // System
@@ -22,8 +22,8 @@ static const Settings def_set =
     {
         {-30, 225 , 10, -30, 0},
         { 60, 1000, 98,  60, 1000000000},
-        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
-        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
+        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT},
+        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT}
     }
 };
 

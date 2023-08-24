@@ -11,6 +11,7 @@ struct TypeDisplayedInformation
         MeasureHumidity,
         MeasurePressure,
         MeasureDewPoint,
+        MeasureIllumination,
         AllMeasures,
         Menu,
         Count
