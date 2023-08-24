@@ -21,6 +21,13 @@ namespace BH1750
     bool ReadAddrL(uint8 *);
 
     bool ReadAddrH(uint8 *);
+
+    static bool is_init = false;
+
+    bool IsInit()
+    {
+        return is_init;
+    }
 }
 
 
@@ -38,11 +45,18 @@ void BH1750::Init()
 //    WriteAddrL(0x10);   // Чувствительноть 2
 
     WriteAddrL(CMD_MEASURE);
+
+    is_init = true;
 }
 
 
 bool BH1750::GetMeasure(float *illumination)
 {
+    if (!IsInit())
+    {
+        return false;
+    }
+
     if (HAL_GetTick() < timeNext)
     {
         return false;

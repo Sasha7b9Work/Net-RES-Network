@@ -75,6 +75,11 @@ bool BME280::AttemptConnection(uint8 id)
 
 bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
 {
+    if (!IsInit())
+    {
+        return false;
+    }
+
     if(HAL_GetTick() < timeNext)
     {
         return false;

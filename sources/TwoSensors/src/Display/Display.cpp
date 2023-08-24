@@ -56,7 +56,8 @@ namespace Display
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
-        Measure(TypeMeasure::DewPoint)
+        Measure(TypeMeasure::DewPoint),
+        Measure(TypeMeasure::Illuminate)
     };
 
     static void DrawMeasures();

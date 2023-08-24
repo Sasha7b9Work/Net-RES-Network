@@ -12,6 +12,7 @@ struct TypeMeasure
         Pressure,           // Давление
         Humidity,           // Влажность
         DewPoint,           // Точка росы
+        Illuminate,
         Count
     };
 };

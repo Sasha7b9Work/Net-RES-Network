@@ -56,6 +56,7 @@ void Device::Update()
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;
+    float illumination = 0.0f;
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
@@ -80,6 +81,11 @@ void Device::Update()
         {
             Beeper::Start(100);
         }
+    }
+
+    if (BH1750::GetMeasure(&illumination))
+    {
+        InterCom::Send(TypeMeasure::Illuminate, illumination);
     }
 
     Keyboard::Update();
