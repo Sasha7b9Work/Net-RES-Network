@@ -38,7 +38,7 @@ static void Before_OpenTime(bool open)
 {
     if (open)
     {
-        time = HAL_RTC::GetTime();
+        time = PackedTime(9, 10, 0, 25, 8, 23);
     }
 }
 

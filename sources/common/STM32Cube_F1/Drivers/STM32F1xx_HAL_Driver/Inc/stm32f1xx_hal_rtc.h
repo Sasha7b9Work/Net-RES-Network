@@ -518,6 +518,10 @@ HAL_StatusTypeDef HAL_RTC_SetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTim
 HAL_StatusTypeDef HAL_RTC_GetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTime, uint32_t Format);
 HAL_StatusTypeDef HAL_RTC_SetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDate, uint32_t Format);
 HAL_StatusTypeDef HAL_RTC_GetDate(RTC_HandleTypeDef *hrtc, RTC_DateTypeDef *sDate, uint32_t Format);
+
+HAL_StatusTypeDef HAL_RTC_SetTimeDate(RTC_HandleTypeDef * hrtc, RTC_TimeTypeDef * sTime, RTC_DateTypeDef *sDate);
+HAL_StatusTypeDef HAL_RTC_GetTimeDate(RTC_HandleTypeDef * hrtc, RTC_TimeTypeDef * sTime, RTC_DateTypeDef *sDate);
+
 /**
   * @}
   */

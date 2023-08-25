@@ -24,6 +24,7 @@ void HAL::Init()
     __HAL_RCC_GPIOD_CLK_ENABLE();
 
     __HAL_RCC_SPI1_CLK_ENABLE();
+    __HAL_RCC_RTC_ENABLE();
 
 #ifndef WIN32
     __HAL_AFIO_REMAP_SWJ_NONJTRST();
@@ -35,7 +36,7 @@ void HAL::Init()
 
     CDC::Init();
 
-//    HAL_RTC::Init();
+    HAL_RTC::Init();
 
     HAL_USART_HC12::Init();
 

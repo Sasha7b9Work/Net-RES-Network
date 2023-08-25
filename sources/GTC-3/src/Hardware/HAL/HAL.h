@@ -10,7 +10,7 @@ struct PackedTime
     int hours;
     int minutes;
     int seconds;
-    int year;
+    int year;           // Год отсчитывается от 2000, т.е. 2023 будет 23
     int month;
     int day;
     int ms;
@@ -73,7 +73,7 @@ namespace HAL_RTC
 
     PackedTime GetTime();
 
-    uint SetTime(const PackedTime &);
+    void SetTime(const PackedTime &);
 }
 
 

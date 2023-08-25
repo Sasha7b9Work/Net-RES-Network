@@ -564,6 +564,119 @@ HAL_StatusTypeDef HAL_RTC_SetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTim
   }
 }
 
+
+HAL_StatusTypeDef HAL_RTC_GetTimeDate(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTime, RTC_DateTypeDef *sDate)
+{
+    /* Check input parameters */
+    if ((hrtc == NULL) || (sTime == NULL))
+    {
+        return HAL_ERROR;
+    }
+
+    /* Check if counter overflow occurred */
+    if (__HAL_RTC_OVERFLOW_GET_FLAG(hrtc, RTC_FLAG_OW))
+    {
+        return HAL_ERROR;
+    }
+
+    /* Read the time counter*/
+    time_t raw_time = (time_t)RTC_ReadTimeCounter(hrtc);
+
+    struct tm *time_now = localtime(&raw_time);
+
+    sTime->Hours = time_now->tm_hour;
+    sTime->Minutes = time_now->tm_min;
+    sTime->Seconds = time_now->tm_sec;
+
+    sDate->Year = time_now->tm_year;
+    sDate->Month = time_now->tm_mon;
+    sDate->Date = time_now->tm_mday;
+    sDate->WeekDay = time_now->tm_wday;
+
+    return HAL_OK;
+}
+
+
+HAL_StatusTypeDef HAL_RTC_SetTimeDate(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTime, RTC_DateTypeDef *sDate)
+{
+    uint32_t counter_time = 0U, counter_alarm = 0U;
+
+    /* Check input parameters */
+    if ((hrtc == NULL) || (sTime == NULL))
+    {
+        return HAL_ERROR;
+    }
+
+    /* Process Locked */
+    __HAL_LOCK(hrtc);
+
+    hrtc->State = HAL_RTC_STATE_BUSY;
+
+    struct tm time_info =
+    {
+        sTime->Seconds,
+        sTime->Minutes,
+        sTime->Hours,
+        sDate->Date,
+        sDate->Month,
+        sDate->Year + 2000 - 1900,
+        0,
+        0,
+        0
+    };
+
+    counter_time = (uint32_t)mktime(&time_info);
+
+    /* Write time counter in RTC registers */
+    if (RTC_WriteTimeCounter(hrtc, counter_time) != HAL_OK)
+    {
+        /* Set RTC state */
+        hrtc->State = HAL_RTC_STATE_ERROR;
+
+        /* Process Unlocked */
+        __HAL_UNLOCK(hrtc);
+
+        return HAL_ERROR;
+    }
+    else
+    {
+        /* Clear Second and overflow flags */
+        CLEAR_BIT(hrtc->Instance->CRL, (RTC_FLAG_SEC | RTC_FLAG_OW));
+
+        /* Read current Alarm counter in RTC registers */
+        counter_alarm = RTC_ReadAlarmCounter(hrtc);
+
+        /* Set again alarm to match with new time if enabled */
+        if (counter_alarm != RTC_ALARM_RESETVALUE)
+        {
+            if (counter_alarm < counter_time)
+            {
+                /* Add 1 day to alarm counter*/
+                counter_alarm += (uint32_t)(24U * 3600U);
+
+                /* Write new Alarm counter in RTC registers */
+                if (RTC_WriteAlarmCounter(hrtc, counter_alarm) != HAL_OK)
+                {
+                    /* Set RTC state */
+                    hrtc->State = HAL_RTC_STATE_ERROR;
+
+                    /* Process Unlocked */
+                    __HAL_UNLOCK(hrtc);
+
+                    return HAL_ERROR;
+                }
+            }
+        }
+
+        hrtc->State = HAL_RTC_STATE_READY;
+
+        __HAL_UNLOCK(hrtc);
+
+        return HAL_OK;
+    }
+}
+
+
 /**
   * @brief  Gets RTC current time.
   * @param  hrtc   pointer to a RTC_HandleTypeDef structure that contains
