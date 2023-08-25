@@ -53,7 +53,7 @@ PackedTime HAL_RTC::GetTime()
 
     if (HAL_RTC_GetTimeDate(&handleRTC, &time, &date) == HAL_OK)
     {
-        return PackedTime(time.Hours, time.Minutes, time.Seconds, date.Year, date.Month, date.Date);
+        return PackedTime(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
     }
 
     return PackedTime();
@@ -78,10 +78,6 @@ void HAL_RTC::SetTime(const PackedTime &pack_time)
     };
 
     HAL_RTC_SetTimeDate(&handleRTC, &time, &date);
-
-    PackedTime _time = GetTime();
-
-    _time = _time;
 }
 
 

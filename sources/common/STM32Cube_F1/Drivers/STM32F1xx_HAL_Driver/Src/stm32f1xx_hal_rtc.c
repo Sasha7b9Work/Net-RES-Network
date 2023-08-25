@@ -588,7 +588,7 @@ HAL_StatusTypeDef HAL_RTC_GetTimeDate(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *
     sTime->Minutes = time_now->tm_min;
     sTime->Seconds = time_now->tm_sec;
 
-    sDate->Year = time_now->tm_year;
+    sDate->Year = time_now->tm_year + 1900 - 2000;
     sDate->Month = time_now->tm_mon;
     sDate->Date = time_now->tm_mday;
     sDate->WeekDay = time_now->tm_wday;
