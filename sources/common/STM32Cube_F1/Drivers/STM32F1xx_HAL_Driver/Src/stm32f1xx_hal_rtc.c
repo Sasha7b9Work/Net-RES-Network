@@ -582,16 +582,16 @@ HAL_StatusTypeDef HAL_RTC_GetTimeDate(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *
     /* Read the time counter*/
     time_t raw_time = (time_t)RTC_ReadTimeCounter(hrtc);
 
-    struct tm *time_now = localtime(&raw_time);
+    struct tm time_now = *localtime(&raw_time);
 
-    sTime->Hours = time_now->tm_hour;
-    sTime->Minutes = time_now->tm_min;
-    sTime->Seconds = time_now->tm_sec;
+    sTime->Hours = time_now.tm_hour;
+    sTime->Minutes = time_now.tm_min;
+    sTime->Seconds = time_now.tm_sec;
 
-    sDate->Year = time_now->tm_year + 1900 - 2000;
-    sDate->Month = time_now->tm_mon;
-    sDate->Date = time_now->tm_mday;
-    sDate->WeekDay = time_now->tm_wday;
+    sDate->Year = time_now.tm_year + 1900 - 2000;
+    sDate->Month = time_now.tm_mon + 1;
+    sDate->Date = time_now.tm_mday;
+    sDate->WeekDay = time_now.tm_wday;
 
     return HAL_OK;
 }
@@ -618,7 +618,7 @@ HAL_StatusTypeDef HAL_RTC_SetTimeDate(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *
         sTime->Minutes,
         sTime->Hours,
         sDate->Date,
-        sDate->Month,
+        sDate->Month - 1,
         sDate->Year + 2000 - 1900,
         0,
         0,
