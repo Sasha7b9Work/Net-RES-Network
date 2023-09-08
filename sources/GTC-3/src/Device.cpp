@@ -46,14 +46,6 @@ void Device::Init()
     W25Q80DV::Test::Run();
 
     Beeper::Start(2000);
-
-    PackedTime time(9, 0, 0, 31, 10, 23);
-
-    HAL_RTC::SetTime(time);
-
-    time = HAL_RTC::GetTime();
-
-    time = time;
 }
 
 

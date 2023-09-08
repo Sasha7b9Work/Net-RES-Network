@@ -21,7 +21,7 @@ void HardFault_Handler(void)
     {
         line = line; //-V570
         file = file; //-V570
-        type = type;
+        type = type; //-V570
     }
 }
 
