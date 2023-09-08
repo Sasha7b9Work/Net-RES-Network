@@ -4,6 +4,8 @@
 
 namespace W25Q80DV
 {
+    static const int SIZE_SECTOR = 4 * 1024;
+
     // Размер буфера ограничен 1024 байтами
     void Write1024bytes(uint address, const uint8 *buffer, int size);
 

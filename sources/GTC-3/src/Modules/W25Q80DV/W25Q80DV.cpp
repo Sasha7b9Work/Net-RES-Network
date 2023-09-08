@@ -81,9 +81,9 @@ void W25Q80DV::EraseSectorForAddress(uint address)
 {
     pinWP.ToHi();
 
-    address /= (4 * 1024);      // \ 
+    address /= SIZE_SECTOR;     // \ 
                                 // | Рассчитываем адрес первого байта стираемого сектора
-    address *= (4 * 1024);      // / 
+    address *= SIZE_SECTOR;     // / 
 
     WaitRelease();
 

@@ -3,6 +3,20 @@
 #include "Storage/Storage.h"
 
 
+/*
+*   В первых двух секторах хранится служебная информация
+*/
+
+
+namespace Storage
+{
+    struct DataInfo
+    {
+        uint address_first;     // адрес первой записи
+        uint address_last;      // адрес последней записи
+    };
+}
+
 
 void Storage::AppendData(const DataStruct &)
 {
