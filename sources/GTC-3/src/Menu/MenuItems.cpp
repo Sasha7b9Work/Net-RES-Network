@@ -332,21 +332,25 @@ void TimeItem::ChangeCurrentField(Key::E key) const
 
     if (*data->cur_field < 6)
     {
-        int max[6] = { 23, 59, 59, 31, 12, 99 };
+        static const int max[6] = { 23, 59, 59, 31, 12, 99 };
 
         PackedTime &time = *data->time;
 
-        int *values[6] = { &time.hours, &time.minutes, &time.seconds,
-                            &time.day, &time.month, &time.year };
+        uint values[6] = { time.hours, time.minutes, time.seconds,
+                           time.day,   time.month,   time.year };
+
+        int value = (int)values[*data->cur_field];
 
         if (key == Key::_1)
         {
-            Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
+            Math::CircleIncrease(&value, 0, max[*data->cur_field]);
         }
         else if (key == Key::_2)
         {
-            Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
+            Math::CircleDecrease(&value, 0, max[*data->cur_field]);
         }
+
+        values[*data->cur_field] = (uint)value;
     }
 }
 
@@ -401,7 +405,7 @@ void TimeItem::DrawOpened(int, int, bool) const
     int dX = 48;
     int dY = 40;
 
-    int values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
+    uint values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
         data->time->day, data->time->month, data->time->year };
 
     for (int i = 0; i < 6; i++)

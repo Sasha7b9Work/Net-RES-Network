@@ -7,15 +7,14 @@
 
 struct PackedTime
 {
-    int hours;
-    int minutes;
-    int seconds;
-    int year;           // Год отсчитывается от 2000, т.е. 2023 будет 23
-    int month;
-    int day;
-    int ms;
-    PackedTime(int h = 11, int m = 11, int s = 11, int d = 11, int mo = 11, int y = 11) :
-        hours(h), minutes(m), seconds(s), year(y), month(mo), day(d), ms(0) {};
+    uint hours : 5;
+    uint minutes : 6;
+    uint seconds : 6;
+    uint year : 6;           // Год отсчитывается от 2000, т.е. 2023 будет 23
+    uint month : 4;
+    uint day : 5;
+    PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
+        hours(h), minutes(m), seconds(s), year(y), month(mo), day(d) {};
 
     String<> ToString() const;
 };

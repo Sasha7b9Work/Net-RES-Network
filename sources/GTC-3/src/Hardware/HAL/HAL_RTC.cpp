@@ -83,5 +83,5 @@ void HAL_RTC::SetTime(const PackedTime &pack_time)
 
 String<> PackedTime::ToString() const
 {
-    return String<>("%02d:%02d:%02d:%03d", hours, minutes, seconds, ms);
+    return String<>("%02u:%02u:%02u", hours, minutes, seconds);
 }
