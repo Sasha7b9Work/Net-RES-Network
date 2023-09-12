@@ -161,7 +161,7 @@ uint StructData::CalculateCRC() const
 
 bool StructData::Write(uint address) const
 {
-    W25Q80DV::Write1024bytes(address, (const uint8 *)this, (int)sizeof(StructData));
+    W25Q80DV::WriteLess1024bytes(address, (const uint8 *)this, (int)sizeof(StructData));
 
     return std::memcmp((void *)this, (void *)address, sizeof(StructData)) == 0;
 }

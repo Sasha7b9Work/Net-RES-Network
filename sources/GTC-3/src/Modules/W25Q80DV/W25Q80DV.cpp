@@ -38,7 +38,7 @@ namespace W25Q80DV
 }
 
 
-void W25Q80DV::Write1024bytes(uint address, const void *_buffer, int size)
+void W25Q80DV::WriteLess1024bytes(uint address, const void *_buffer, int size)
 {
     const uint8 *buffer = (const uint8 *)_buffer;
 
@@ -71,7 +71,7 @@ void W25Q80DV::Write1024bytes(uint address, const void *_buffer, int size)
 
 void W25Q80DV::WriteUInt(uint address, uint value)
 {
-    Write1024bytes(address, &value, (int)sizeof(value));
+    WriteLess1024bytes(address, &value, (int)sizeof(value));
 }
 
 
@@ -79,7 +79,7 @@ void W25Q80DV::Write(uint address, uint8 byte)
 {
     pinWP.ToHi();
 
-    Write1024bytes(address, &byte, 1);
+    WriteLess1024bytes(address, &byte, 1);
 
     pinWP.ToLow();
 }
@@ -111,7 +111,7 @@ void W25Q80DV::ErasePage(int num_page)
 }
 
 
-void W25Q80DV::Read1024bytes(uint address, void *_buffer, int size)
+void W25Q80DV::ReadLess1024bytes(uint address, void *_buffer, int size)
 {
     uint8 *buffer = (uint8 *)_buffer;
 
@@ -139,7 +139,7 @@ uint8 W25Q80DV::Read(uint address)
 {
     uint8 result = 0;
 
-    Read1024bytes(address, &result, 1);
+    ReadLess1024bytes(address, &result, 1);
 
     return result;
 }

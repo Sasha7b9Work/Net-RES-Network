@@ -9,10 +9,10 @@ namespace W25Q80DV
     static const int SIZE_SECTOR = 4 * 1024;
 
     // Размер буфера ограничен 1024 байтами
-    void Write1024bytes(uint address, const void *buffer, int size);
+    void WriteLess1024bytes(uint address, const void *buffer, int size);
 
     // Размер буфера ограничен 1024 байтами
-    void Read1024bytes(uint address, void *buffer, int size);
+    void ReadLess1024bytes(uint address, void *buffer, int size);
 
     void ReadID(uint8 id[2]);
 
