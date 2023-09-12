@@ -38,8 +38,10 @@ namespace W25Q80DV
 }
 
 
-void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
+void W25Q80DV::Write1024bytes(uint address, const void *_buffer, int size)
 {
+    const uint8 *buffer = (const uint8 *)_buffer;
+
     pinWP.ToHi();
 
     WaitRelease();
@@ -64,6 +66,12 @@ void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
     HAL_SPI1::Write(WRITE_DISABLE);                 // Write disable
 
     pinWP.ToLow();
+}
+
+
+void W25Q80DV::WriteUInt(uint address, uint value)
+{
+    Write1024bytes(address, &value, (int)sizeof(value));
 }
 
 
@@ -97,8 +105,16 @@ void W25Q80DV::EraseSectorForAddress(uint address)
 }
 
 
-void W25Q80DV::Read1024bytes(uint address, uint8 *buffer, int size)
+void W25Q80DV::ErasePage(int num_page)
 {
+    EraseSectorForAddress((uint)num_page * SIZE_SECTOR);
+}
+
+
+void W25Q80DV::Read1024bytes(uint address, void *_buffer, int size)
+{
+    uint8 *buffer = (uint8 *)_buffer;
+
     WaitRelease();
 
     Buffer<uint8, 1024> out;

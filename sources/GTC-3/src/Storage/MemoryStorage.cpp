@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Storage/MemoryStorage.h"
 #include "Utils/Math.h"
-#include "Hardware/HAL/HAL.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 #include <cstring>
 
 
@@ -75,13 +75,13 @@ void MemoryStorage::Data::Erase(StructData *data)
 
 void MemoryStorage::EraseFull()
 {
-    int start_page = (BEGIN - HAL_ROM::ADDR_BASE) / HAL_ROM::SIZE_PAGE;
+    int start_page = BEGIN / W25Q80DV::SIZE_SECTOR;
 
-    int end_page = (END - HAL_ROM::ADDR_BASE) / HAL_ROM::SIZE_PAGE;
+    int end_page = END / W25Q80DV::SIZE_SECTOR;
 
     for (int page = start_page; page < end_page; page++)
     {
-        HAL_ROM::ErasePage(page);
+        W25Q80DV::ErasePage(page);
     }
 }
 
@@ -137,7 +137,7 @@ bool StructData::IsValid() const
 
 void StructData::Erase()
 {
-    HAL_ROM::WriteUInt((uint)FirstWord(), 0U);
+    W25Q80DV::WriteUInt((uint)FirstWord(), 0U);
 }
 
 
@@ -155,15 +155,15 @@ uint *StructData::FirstWord()
 
 uint StructData::CalculateCRC() const
 {
-    return Math::CalculateCRC((uint)this, sizeof(StructData) - sizeof(crc) - sizeof(control_field));
+    return Math::CalculateCRC(this, sizeof(StructData) - sizeof(crc) - sizeof(control_field));
 }
 
 
 bool StructData::Write(uint address) const
 {
-    HAL_ROM::WriteData(address, this, (int)sizeof(StructData));
+    W25Q80DV::Write1024bytes(address, (const uint8 *)this, (int)sizeof(StructData));
 
-    return std::memcmp(this, (void *)address, sizeof(StructData)) == 0;
+    return std::memcmp((void *)this, (void *)address, sizeof(StructData)) == 0;
 }
 
 
@@ -172,10 +172,4 @@ bool StructData::Read(uint address)
     std::memcpy((void *)address, this, sizeof(StructData));
 
     return (CalculateCRC() == crc) && (control_field.word == 0);
-}
-
-
-void MemoryStorage::Write(uint address, uint value)
-{
-    HAL_ROM::WriteData(address, &value, 4);
 }

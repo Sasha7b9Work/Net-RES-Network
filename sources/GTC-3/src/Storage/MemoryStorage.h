@@ -1,6 +1,7 @@
 // 2023/09/08 22:13:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Hardware/HAL/HAL.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 
 
 struct StructData
@@ -64,8 +65,8 @@ struct StructIncident
 
 struct MemoryStorage
 {
-    static const uint BEGIN = 0x8000000 + 200 * 1024;
-    static const uint END = 0x8000000 + 256 * 1024;
+    static const uint BEGIN = W25Q80DV::BEGIN;
+    static const uint END = W25Q80DV::END;
 
     static void Init();
 
@@ -90,8 +91,6 @@ struct MemoryStorage
     };
 
 private:
-
-    static void Write(uint address, uint value);
 
     static StructData *FindFirstEmpty();
 

@@ -90,9 +90,6 @@ namespace HAL_USART_HC12
 
 namespace HAL_ROM
 {
-    static const uint ADDR_BASE = 0x08000000U;
-    static const uint SIZE_PAGE = 2 * 1024;
-
     void SaveSettings(const Settings &);
     bool LoadSettings(Settings &);
 }
