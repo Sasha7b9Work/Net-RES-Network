@@ -24,6 +24,7 @@ typedef unsigned char uchar;
 
 union BitSet32
 {
+    BitSet32(uint _word) : word(_word) { }
     uint   word;
     uint16 half_word[2];
     uint8  byte[4];
