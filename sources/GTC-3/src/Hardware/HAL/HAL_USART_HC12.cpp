@@ -1,7 +1,7 @@
 // 2023/04/11 12:09:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 namespace HAL_USART_HC12

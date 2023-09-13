@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstring>
 
 

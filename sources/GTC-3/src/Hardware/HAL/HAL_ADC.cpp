@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 namespace HAL_ADC
@@ -44,7 +44,7 @@ void HAL_ADC::Init()
 
     sConfig.Channel = ADC_CHANNEL_3;
     sConfig.Rank = ADC_REGULAR_RANK_1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
+//    sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
 
     HAL_ADC_ConfigChannel(&handleADC, &sConfig);
 

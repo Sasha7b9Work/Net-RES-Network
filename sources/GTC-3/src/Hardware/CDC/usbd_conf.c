@@ -1,6 +1,6 @@
 // 2022/04/20 08:54:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "stm32f1xx.h"
-#include "stm32f1xx_hal.h"
+#include "stm32f3xx.h"
+#include "stm32f3xx_hal.h"
 #include "usbd_def.h"
 #include "usbd_core.h"
 #include "usbd_cdc.h"
@@ -32,8 +32,8 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef * pcdHandle)
         __HAL_RCC_USB_CLK_ENABLE();
 
         /* Peripheral interrupt init */
-        HAL_NVIC_SetPriority(USB_LP_CAN1_RX0_IRQn, 0, 0);
-        HAL_NVIC_EnableIRQ(USB_LP_CAN1_RX0_IRQn);
+        HAL_NVIC_SetPriority(USB_LP_IRQn, 0, 0);
+        HAL_NVIC_EnableIRQ(USB_LP_IRQn);
         /* USER CODE BEGIN USB_MspInit 1 */
 
         /* USER CODE END USB_MspInit 1 */
@@ -51,7 +51,7 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef * pcdHandle)
         __HAL_RCC_USB_CLK_DISABLE();
 
         /* Peripheral interrupt Deinit*/
-        HAL_NVIC_DisableIRQ(USB_LP_CAN1_RX0_IRQn);
+        HAL_NVIC_DisableIRQ(USB_LP_IRQn);
 
         /* USER CODE BEGIN USB_MspDeInit 1 */
 

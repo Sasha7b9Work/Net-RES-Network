@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "defines.h"
-#include "stm32f1xx.h"
-#include "stm32f1xx_hal.h"
+#include "stm32f3xx.h"
+#include "stm32f3xx_hal.h"
 
 /* USER CODE BEGIN INCLUDE */
 

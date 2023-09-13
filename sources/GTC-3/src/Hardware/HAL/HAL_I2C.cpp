@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 static I2C_HandleTypeDef hi2c1;
@@ -15,8 +15,8 @@ namespace HAL_I2C1
 void HAL_I2C1::Init(void)
 {
     hi2c1.Instance = I2C1;
-    hi2c1.Init.ClockSpeed = 100000;
-    hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+//    hi2c1.Init.ClockSpeed = 100000;
+//    hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
     hi2c1.Init.OwnAddress1 = 0;
     hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
     hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;

@@ -7,7 +7,7 @@
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstring>
 
 
@@ -140,7 +140,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     SendCommand(0x2C);
 
-    SPI2->CR1 |= SPI_CR1_DFF;
+//    SPI2->CR1 |= SPI_CR1_DFF;
     SET_DC;
     RESET_CS;
 
@@ -224,7 +224,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     SET_CS;
 
-    SPI2->CR1 &= ~SPI_CR1_DFF;
+//    SPI2->CR1 &= ~SPI_CR1_DFF;
 }
 
 
@@ -253,7 +253,7 @@ void ST7735::SendData16(uint16 data)
     SET_DC;
     RESET_CS;
 
-    SPI2->CR1 |= SPI_CR1_DFF;
+//    SPI2->CR1 |= SPI_CR1_DFF;
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {
@@ -327,7 +327,7 @@ void ST7735::SendCommand(uint8 data)
     RESET_DC;
     RESET_CS;
 
-    SPI2->CR1 &= ~SPI_CR1_DFF;
+//    SPI2->CR1 &= ~SPI_CR1_DFF;
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {

@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
 #include "Hardware/Beeper.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 void NMI_Handler(void)

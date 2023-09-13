@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 namespace HAL_SPI1
@@ -22,11 +22,7 @@ namespace HAL_SPI1
             SPI_TIMODE_DISABLE,             // Init.TIMode
             SPI_CRCCALCULATION_DISABLE,     // Init.CRCCalculation
             7                               // InitCRCPolynomial
-        },
-        0, 0, 0, 0, 0, 0,
-        0,
-        0,
-        0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+        }
     };
 
     namespace WP

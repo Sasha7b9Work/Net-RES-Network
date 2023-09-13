@@ -3,7 +3,7 @@
 #include "Modules/BME280/BME280.h"
 #include "Modules/BME280/bme280_driver.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstring>
 #include <cstdlib>
 

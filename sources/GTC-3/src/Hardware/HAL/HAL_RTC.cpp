@@ -1,7 +1,7 @@
 // 2023/01/30 15:35:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <ctime>
 
 
@@ -13,7 +13,7 @@ namespace HAL_RTC
     {
         RTC,
         {
-            RTC_AUTO_1_SECOND       // AsynchPrediv
+//            RTC_AUTO_1_SECOND       // AsynchPrediv
         }
     };
 }
@@ -51,12 +51,12 @@ PackedTime HAL_RTC::GetTime()
     RTC_TimeTypeDef time;
     RTC_DateTypeDef date;
 
-    if (HAL_RTC_GetTimeDate(&handleRTC, &time, &date) == HAL_OK)
+//    if (HAL_RTC_GetTimeDate(&handleRTC, &time, &date) == HAL_OK)
     {
         return PackedTime(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
     }
 
-    return PackedTime();
+//    return PackedTime();
 }
 
 
@@ -77,7 +77,7 @@ void HAL_RTC::SetTime(const PackedTime &pack_time)
         (uint8)pack_time.year
     };
 
-    HAL_RTC_SetTimeDate(&handleRTC, &time, &date);
+//    HAL_RTC_SetTimeDate(&handleRTC, &time, &date);
 }
 
 

@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/CDC/CDC.h"
 #include "Utils/Math.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstring>
 
 
@@ -16,7 +16,7 @@ void HAL::Init()
     SystemClock_Config();
 
     __HAL_RCC_PWR_CLK_ENABLE();
-    __HAL_RCC_AFIO_CLK_ENABLE();
+//    __HAL_RCC_AFIO_CLK_ENABLE();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -27,7 +27,7 @@ void HAL::Init()
     __HAL_RCC_RTC_ENABLE();
 
 #ifndef WIN32
-    __HAL_AFIO_REMAP_SWJ_NONJTRST();
+//    __HAL_AFIO_REMAP_SWJ_NONJTRST();
 #endif
 
     HAL_PINS::Init();
@@ -79,7 +79,7 @@ static void SystemClock_Config()
     HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1);
   
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
-    PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+//    PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
 
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
 }

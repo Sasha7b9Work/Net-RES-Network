@@ -1,7 +1,7 @@
 // 2023/06/15 14:13:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 PinOut pinWP(Port::B, Pin::_0, PMode::OUTPUT_PP_PULL_UP);
@@ -104,7 +104,7 @@ void Pin::Init()
 
     if (port == Port::D && (pin == Pin::_0 || pin == Pin::_1))
     {
-        __HAL_AFIO_REMAP_PD01_ENABLE();
+//        __HAL_AFIO_REMAP_PD01_ENABLE();
     }
 }
 
