@@ -8,16 +8,16 @@ message("-----------------------------------------------------------------------
 
 include_directories(../common/_VS_KEIL/CMSIS/
                     ../common/_VS_KEIL/std_includes/
-                    ../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/
-                    ../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/
-                    ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/
-                    ../common/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include/
+                    ../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/
+                    ../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/
+                    ../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc/
+                    ../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include/
                     src/Hardware/HAL/
                     src/Hardware/CDC/
                     src/
                     )
 
-add_definitions(-DSTM32F103xB)
+add_definitions(-DSTM32F303xC)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
@@ -34,8 +34,8 @@ add_compile_options(/wd5264)
 add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 
-file(GLOB STM32F1               ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/*.c
-                                ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.h)
+file(GLOB STM32F3               ../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Src/*.c
+                                ../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc/*.h)
 file(GLOB SRC                   src/*.*)
 file(GLOB DISPLAY               src/Display/*.*)
 file(GLOB DISPLAY_FONT          src/Display/Font/*.*)
@@ -54,7 +54,7 @@ file(GLOB STORAGE               src/Storage/*.*)
 file(GLOB UTILS                 src/Utils/*.*)
 file(GLOB UTILS_TEXT            src/Utils/Text/*.*)
 
-source_group(STM32F1            FILES ${STM32F1})
+source_group(STM32F3            FILES ${STM32F3})
 source_group(src                FILES ${SRC})
 source_group(Display            FILES ${DISPLAY})
 source_group(Display/Font       FILES ${DISPLAY_FONT})
@@ -73,14 +73,14 @@ source_group(Storage            FILES ${STORAGE})
 source_group(Utils              FILES ${UTILS})
 source_group(Utils/Text         FILES ${UTILS_TEXT})
 
-set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
+set_source_files_properties(${STM32F3} ${HARDWARE_CMSIS}
                             src/Hardware/CDC/usbd_desc.c
                             src/Hardware/CDC/usb_device.c
                             src/Hardware/CDC/usbd_conf.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_library(${PROJECT_NAME}
-            ${STM32F1}
+            ${STM32F3}
             ${SRC}
             ${DISPLAY}
             ${DISPLAY_FONT}
