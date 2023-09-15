@@ -16,8 +16,6 @@ namespace HAL_ADC
 
 void HAL_ADC::Init()
 {
-    return;
-    
 #ifndef WIN32
     __HAL_RCC_ADC1_CLK_ENABLE();
 #endif
