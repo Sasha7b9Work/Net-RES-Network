@@ -16,12 +16,7 @@ namespace HAL_USART_HC12
 
 void HAL_USART_HC12::Init()
 {
-    return;
-
     GPIO_InitTypeDef  is;
-
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_USART1_CLK_ENABLE();
 
     is.Pin = GPIO_PIN_9;
     is.Mode = GPIO_MODE_AF_PP;
@@ -29,11 +24,13 @@ void HAL_USART_HC12::Init()
 
     HAL_GPIO_Init(GPIOA, &is);
 
-    is.Pin = GPIO_PIN_10;              // TX
+    is.Pin = GPIO_PIN_10;              // RX
     is.Pull = GPIO_NOPULL;
     is.Mode = GPIO_MODE_INPUT;
 
     HAL_GPIO_Init(GPIOA, &is);
+
+    return;
 
     handleUART.Instance = USART1;
     handleUART.Init.BaudRate = 9600;

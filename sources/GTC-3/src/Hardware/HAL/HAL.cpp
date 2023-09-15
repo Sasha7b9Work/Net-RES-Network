@@ -16,7 +16,6 @@ void HAL::Init()
     SystemClock_Config();
 
     __HAL_RCC_PWR_CLK_ENABLE();
-//    __HAL_RCC_AFIO_CLK_ENABLE();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -25,10 +24,7 @@ void HAL::Init()
 
     __HAL_RCC_SPI1_CLK_ENABLE();
     __HAL_RCC_RTC_ENABLE();
-
-#ifndef WIN32
-//    __HAL_AFIO_REMAP_SWJ_NONJTRST();
-#endif
+    __HAL_RCC_USART1_CLK_ENABLE();      // HC12
 
     HAL_PINS::Init();
 
