@@ -16,6 +16,8 @@ namespace HAL_USART_HC12
 
 void HAL_USART_HC12::Init()
 {
+    return;
+
     GPIO_InitTypeDef  is;
 
     __HAL_RCC_GPIOA_CLK_ENABLE();

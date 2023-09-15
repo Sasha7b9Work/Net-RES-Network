@@ -16,6 +16,8 @@ namespace HAL_ADC
 
 void HAL_ADC::Init()
 {
+    return;
+    
 #ifndef WIN32
     __HAL_RCC_ADC1_CLK_ENABLE();
 #endif
@@ -42,7 +44,7 @@ void HAL_ADC::Init()
 
     HAL_ADC_Init(&handleADC);
 
-    sConfig.Channel = ADC_CHANNEL_3;
+    sConfig.Channel = ADC_CHANNEL_4;
     sConfig.Rank = ADC_REGULAR_RANK_1;
 //    sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
 
