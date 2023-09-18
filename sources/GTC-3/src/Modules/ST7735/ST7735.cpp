@@ -143,21 +143,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
     SET_DC;
     RESET_CS;
 
-#define WRITE_NIBBLE(nibble)                    \
-            value >>= 4;                        \
-            while ((SPI2->SR & SPI_SR_BSY))     \
-            {                                   \
-                if (meter.ElapsedTime() > 100)  \
-                {                               \
-                    break;                      \
-                }                               \
-            }                                   \
-            SPI2->DR = Color::colors[value & 0x0f];
-
     if ((x0 % 8) == 0 && ((width % 8) == 0))
     {
-
-
         for (int y = y0; y < y0 + height; y++)
         {
             uint* points = (uint *)Display::Buffer::GetLine(x0, y);
@@ -166,23 +153,22 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                while (SPI2->SR & SPI_SR_BSY)
-                {
-                    if (meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                };
-
-                SPI2->DR = Color::colors[value & 0x0f];            // 0 nibble
-
-                WRITE_NIBBLE(1);
-                WRITE_NIBBLE(2);
-                WRITE_NIBBLE(3);
-                WRITE_NIBBLE(4);
-                WRITE_NIBBLE(5);
-                WRITE_NIBBLE(6);
-                WRITE_NIBBLE(7);
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                value >>= 4;
 
                 value = *(++points);
             }
@@ -198,34 +184,15 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                while ((SPI2->SR & SPI_SR_BSY))
-                {
-                    if (meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                }
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
 
-                SPI2->DR = Color::colors[value & 0x0F];
-
-                while ((SPI2->SR & SPI_SR_BSY))
-                {
-                    if (meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                }
-
-                SPI2->DR = Color::colors[value >> 4];
-
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value >> 4], 1, 100);
                 value = *(++points);
             }
         }
     }
 
     SET_CS;
-
-//    SPI2->CR1 &= ~SPI_CR1_DFF;
 }
 
 
