@@ -152,50 +152,82 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>15</LineNumber>
+          <LineNumber>290</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134257498</Address>
+          <Address>134254372</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\main.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Modules\ST7735\ST7735.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/main.cpp\15</Expression>
+          <Expression>\\GTC_3\src/Modules/ST7735/ST7735.cpp\290</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>31</LineNumber>
+          <LineNumber>274</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134244808</Address>
+          <Address>134255490</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_USART_HC12.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Modules\ST7735\ST7735.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Hardware/HAL/HAL_USART_HC12.cpp\31</Expression>
+          <Expression>\\GTC_3\src/Modules/ST7735/ST7735.cpp\274</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>25</LineNumber>
+          <LineNumber>258</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134244788</Address>
+          <Address>134254298</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_USART_HC12.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Modules\ST7735\ST7735.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Hardware/HAL/HAL_USART_HC12.cpp\25</Expression>
+          <Expression>\\GTC_3\src/Modules/ST7735/ST7735.cpp\258</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>261</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134254302</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Modules\ST7735\ST7735.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\GTC_3\src/Modules/ST7735/ST7735.cpp\261</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>277</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134255494</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Modules\ST7735\ST7735.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\GTC_3\src/Modules/ST7735/ST7735.cpp\277</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -204,7 +236,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>0</periodic>
-        <aLwin>0</aLwin>
+        <aLwin>1</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>

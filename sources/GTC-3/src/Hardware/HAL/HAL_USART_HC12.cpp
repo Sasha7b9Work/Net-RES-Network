@@ -30,8 +30,6 @@ void HAL_USART_HC12::Init()
 
     HAL_GPIO_Init(GPIOA, &is);
 
-    return;
-
     handleUART.Instance = USART1;
     handleUART.Init.BaudRate = 9600;
     handleUART.Init.WordLength = UART_WORDLENGTH_8B;

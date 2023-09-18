@@ -140,7 +140,6 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     SendCommand(0x2C);
 
-//    SPI2->CR1 |= SPI_CR1_DFF;
     SET_DC;
     RESET_CS;
 
@@ -157,6 +156,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     if ((x0 % 8) == 0 && ((width % 8) == 0))
     {
+
+
         for (int y = y0; y < y0 + height; y++)
         {
             uint* points = (uint *)Display::Buffer::GetLine(x0, y);
@@ -253,31 +254,10 @@ void ST7735::SendData16(uint16 data)
     SET_DC;
     RESET_CS;
 
-//    SPI2->CR1 |= SPI_CR1_DFF;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
+    if (HAL_SPI_Transmit(&handle, (uint8 *)&data, 2, 100) != HAL_OK)
     {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
-    SPI2->DR = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
-    while ((SPI2->SR & SPI_SR_BSY))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
+        int i = 0;
+    }
 
     SET_CS;
 }
@@ -290,30 +270,9 @@ void ST7735::SendData8(uint8 data)
     SET_DC;
     RESET_CS;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
+    if (HAL_SPI_Transmit(&handle, &data, 1, 100) != HAL_OK)
     {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    SPI2->DR = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    while (SPI2->SR & SPI_SR_BSY)
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
+        int i = 0;
     }
 
     SET_CS;
@@ -327,32 +286,9 @@ void ST7735::SendCommand(uint8 data)
     RESET_DC;
     RESET_CS;
 
-//    SPI2->CR1 &= ~SPI_CR1_DFF;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
+    if (HAL_SPI_Transmit(&handle, &data, 1, 100) != HAL_OK)
     {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    SPI2->DR = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    while ((SPI2->SR & SPI_SR_BSY))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
+        int i = 0;
     }
 
     SET_CS;
