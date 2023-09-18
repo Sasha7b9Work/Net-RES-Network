@@ -66,7 +66,9 @@ void ST7735::Init()
     spi_struct.Pin = GPIO_PIN_13 |     // SCL
                      GPIO_PIN_15;      // MOSI
     spi_struct.Mode = GPIO_MODE_AF_PP;
+    spi_struct.Pull = GPIO_PULLDOWN;
     spi_struct.Speed = GPIO_SPEED_FREQ_HIGH;
+    spi_struct.Alternate = GPIO_AF6_SPI2;
 
     HAL_GPIO_Init(GPIOB, &spi_struct);
 
@@ -77,13 +79,16 @@ void ST7735::Init()
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
     handle.Init.NSS = SPI_NSS_SOFT;
-    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
     handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
     handle.Init.TIMode = SPI_TIMODE_DISABLE;
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-    handle.Init.CRCPolynomial = 10;
+    handle.Init.CRCPolynomial = 7;
 
-    HAL_SPI_Init(&handle);
+    if (HAL_SPI_Init(&handle) != HAL_OK)
+    {
+        int i = 0;
+    }
 
     GPIO_InitTypeDef gpio_struct = {0};
 
