@@ -19,15 +19,27 @@ private:
 };
 
 
+struct PinInput : public Pin
+{
+    PinInput(GPIO_TypeDef *_gpio, uint16 _pin, uint pull) : Pin(_gpio, _pin, GPIO_MODE_INPUT, pull) { }
+};
+
+
 struct PinOutputPP : public Pin
 {
-    PinOutputPP(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP) { }
+    PinOutputPP(GPIO_TypeDef *_gpio, uint16 _pin, uint pull) : Pin(_gpio, _pin, GPIO_MODE_OUTPUT_PP, pull) { }
 };
 
 
 struct PinAF_OD : public Pin
 {
     PinAF_OD(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_AF_OD, GPIO_PULLUP) { }
+};
+
+
+struct PinAF_PP : public Pin
+{
+    PinAF_PP(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_AF_PP, GPIO_PULLUP) { }
 };
 
 
@@ -42,3 +54,6 @@ extern PinOutputPP pinBEEP;
 extern PinAnalog pinADC;
 extern PinAF_OD pinSCL;
 extern PinAF_OD pinSDA;
+extern PinAF_PP pinSCK;     // SPI1
+extern PinAF_PP pinMOSI;    // SPI1
+extern PinInput pinMISO;    // SPI1

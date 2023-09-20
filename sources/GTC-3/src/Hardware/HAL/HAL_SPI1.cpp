@@ -62,6 +62,10 @@ void HAL_SPI1::Init()
 {
     WP::Init();
 
+    pinSCK.Init();
+    pinMOSI.Init();
+    pinMISO.Init();
+
     GPIO_InitTypeDef is =
     {//      SCK       MOSI
         GPIO_PIN_5 | GPIO_PIN_7,
