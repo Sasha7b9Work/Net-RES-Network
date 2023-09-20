@@ -3,12 +3,6 @@
 #include <stm32f3xx_hal.h>
 
 
-namespace HAL_PINS
-{
-    void Init();
-}
-
-
 struct Pin
 {
     Pin(GPIO_TypeDef *_gpio, uint16 _pin, uint _mode, uint _pull) : gpio(_gpio), pin(_pin), mode(_mode), pull(_pull) { }

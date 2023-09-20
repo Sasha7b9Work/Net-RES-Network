@@ -26,8 +26,6 @@ void HAL::Init()
     __HAL_RCC_RTC_ENABLE();
     __HAL_RCC_USART1_CLK_ENABLE();      // HC12
 
-    HAL_PINS::Init();
-
     HAL_I2C1::Init();
 
     CDC::Init();

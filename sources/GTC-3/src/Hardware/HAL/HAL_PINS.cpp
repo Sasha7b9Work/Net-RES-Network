@@ -47,10 +47,3 @@ bool Pin::IsHi()
 {
     return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_SET;
 }
-
-
-void HAL_PINS::Init()
-{
-    pinWP.Init();
-    pinWP.ToLow();
-}

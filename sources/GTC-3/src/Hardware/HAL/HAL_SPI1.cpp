@@ -29,25 +29,17 @@ namespace HAL_SPI1
     {
         void Init()
         {
-            GPIO_InitTypeDef is =
-            {
-                GPIO_PIN_0,
-                GPIO_MODE_OUTPUT_PP,
-                GPIO_PULLUP,
-                GPIO_SPEED_FREQ_HIGH
-            };
+            pinWP.Init();
 
-            HAL_GPIO_Init(GPIOB, &is);
-
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+            pinWP.ToLow();
 
             Timer::Delay(50);
 
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+            pinWP.ToHi();
 
             Timer::Delay(50);
 
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+            pinWP.ToLow();
         }
     }
 
