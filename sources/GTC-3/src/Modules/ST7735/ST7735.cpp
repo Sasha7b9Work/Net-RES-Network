@@ -38,10 +38,10 @@ const uint16 Color::colors[Color::Count] =
 
 namespace ST7735
 {
-#define SET_DC   HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_SET);
-#define RESET_DC HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_RESET);
-#define SET_CS   HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_SET);
-#define RESET_CS HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
+#define SET_DC   pinDC_ST.ToHi()
+#define RESET_DC pinDC_ST.ToLow()
+#define SET_CS   pinCS_ST.ToHi()
+#define RESET_CS pinCS_ST.ToLow()
 
     static const uint16 PIN_RESET = GPIO_PIN_11;
     static const uint16 PIN_DC = GPIO_PIN_14;
