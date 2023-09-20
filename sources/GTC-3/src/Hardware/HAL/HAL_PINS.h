@@ -49,11 +49,12 @@ struct PinAnalog : public Pin
 };
 
 
-extern Pin pinWP;
+extern Pin         pinWP;
 extern PinOutputPP pinBEEP;
-extern PinAnalog pinADC;
-extern PinAF_OD pinSCL;
-extern PinAF_OD pinSDA;
-extern PinAF_PP pinSCK;     // SPI1
-extern PinAF_PP pinMOSI;    // SPI1
-extern PinInput pinMISO;    // SPI1
+extern PinAnalog   pinADC;
+extern PinAF_OD    pinSCL;
+extern PinAF_OD    pinSDA;
+extern PinAF_PP    pinSCK;      // SPI1
+extern PinAF_PP    pinMOSI;     // SPI1
+extern PinInput    pinMISO;     // SPI1
+extern PinOutputPP pinNSS;      // SPI1

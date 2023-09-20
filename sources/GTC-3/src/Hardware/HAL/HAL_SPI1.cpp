@@ -65,27 +65,7 @@ void HAL_SPI1::Init()
     pinSCK.Init();
     pinMOSI.Init();
     pinMISO.Init();
-
-    GPIO_InitTypeDef is =
-    {//      SCK       MOSI
-        GPIO_PIN_5 | GPIO_PIN_7,
-        GPIO_MODE_AF_PP,
-        GPIO_PULLUP,
-        GPIO_SPEED_FREQ_HIGH
-    };
-
-    HAL_GPIO_Init(GPIOA, &is);
-
-    is.Pin = GPIO_PIN_6;                // MISO
-    is.Mode = GPIO_MODE_INPUT;
-    is.Pull = GPIO_NOPULL;
-
-    HAL_GPIO_Init(GPIOA, &is);
-
-    is.Pin = GPIO_PIN_4;                // NSS
-    is.Mode = GPIO_MODE_OUTPUT_PP;
-
-    HAL_GPIO_Init(GPIOA, &is);
+    pinNSS.Init();
 
     CS::Set();
 

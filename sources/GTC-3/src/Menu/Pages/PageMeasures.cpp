@@ -239,7 +239,7 @@ void OnPress_ResetDewPoint(bool)
 }
 
 
-DEF_BUTTON(bResetDewPoint,
+    DEF_BUTTON(bResetDewPoint,
     "—брос мин-макс",
     *PageMeasures::DewPoint::self,
     OnPress_ResetDewPoint,

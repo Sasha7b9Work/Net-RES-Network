@@ -12,6 +12,7 @@ PinAF_OD    pinSDA(GPIOB, GPIO_PIN_7);
 PinAF_PP    pinSCK(GPIOA, GPIO_PIN_5);
 PinAF_PP    pinMOSI(GPIOA, GPIO_PIN_7);
 PinInput    pinMISO(GPIOA, GPIO_PIN_6, GPIO_NOPULL);
+PinOutputPP pinNSS(GPIOA, GPIO_PIN_4, GPIO_NOPULL);
 
 
 void Pin::Init()
