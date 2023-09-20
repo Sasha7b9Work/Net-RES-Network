@@ -60,3 +60,5 @@ extern PinInput    pinMISO;     // SPI1
 extern PinOutputPP pinNSS;      // SPI1
 extern PinAF_PP    pinTX;       // HC12 TX
 extern PinInput    pinRX;       // HC12 RX
+extern PinInput    pinKey1;
+extern PinInput    pinKey2;

@@ -15,6 +15,8 @@ PinInput    pinMISO(GPIOA, GPIO_PIN_6, GPIO_NOPULL);
 PinOutputPP pinNSS(GPIOA, GPIO_PIN_4, GPIO_NOPULL);
 PinAF_PP    pinTX(GPIOA, GPIO_PIN_9, GPIO_NOPULL);
 PinInput    pinRX(GPIOA, GPIO_PIN_10, GPIO_NOPULL);
+PinInput    pinKey1(GPIOB, GPIO_PIN_8, GPIO_PULLUP);
+PinInput    pinKey2(GPIOB, GPIO_PIN_9, GPIO_PULLUP);
 
 
 void Pin::Init()
