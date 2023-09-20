@@ -1,5 +1,6 @@
 // 2023/06/15 14:13:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include <stm32f3xx_hal.h>
 
 
 namespace HAL_PINS
@@ -8,70 +9,20 @@ namespace HAL_PINS
 }
 
 
-struct Port
-{
-    enum E
-    {
-        A,
-        B,
-        C,
-        D,
-        Count
-    };
-};
-
-
-struct PMode
-{
-    enum E
-    {
-        OUTPUT_PP_PULL_UP,
-        OUTPUT_PP_PULL_DOWN,
-        INPUT_NO_PULL,
-        INPUT_PULL_DOWN
-    };
-};
-
-
 struct Pin
 {
-    enum E
-    {
-        _0,
-        _1,
-        _2,
-        _3,
-        _4,
-        _5,
-        _6,
-        _7,
-        _8,
-        _9,
-        _10,
-        _11,
-        _12,
-        _13,
-        _14,
-        _15,
-        Count
-    };
-
-    Pin(Port::E, Pin::E, PMode::E);
+    Pin(GPIO_TypeDef *_gpio, uint16 _pin, uint _mode, uint _pull) : gpio(_gpio), pin(_pin), mode(_mode), pull(_pull) {}
     void Init();
-protected:
-    Port::E  port;
-    Pin::E   pin;
-    PMode::E mode;
-};
-
-
-struct PinOut : public Pin
-{
-    PinOut(Port::E, Pin::E, PMode::E);
-    void ToHi();
     void ToLow();
+    void ToHi();
     void Set(bool);
+    bool IsHi();
+private:
+    GPIO_TypeDef *gpio;
+    uint16        pin;
+    uint          mode;
+    uint          pull;
 };
 
 
-extern PinOut pinWP;
+extern Pin pinWP;

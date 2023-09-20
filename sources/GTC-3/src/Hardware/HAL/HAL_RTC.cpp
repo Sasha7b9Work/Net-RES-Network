@@ -48,34 +48,34 @@ void HAL_RTC::Init()
 
 PackedTime HAL_RTC::GetTime()
 {
-    RTC_TimeTypeDef time;
-    RTC_DateTypeDef date;
-
+//    RTC_TimeTypeDef time;
+//    RTC_DateTypeDef date;
+//
 //    if (HAL_RTC_GetTimeDate(&handleRTC, &time, &date) == HAL_OK)
-    {
-        return PackedTime(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
-    }
+//    {
+//        return PackedTime(time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
+//    }
 
-//    return PackedTime();
+    return PackedTime();
 }
 
 
-void HAL_RTC::SetTime(const PackedTime &pack_time)
+void HAL_RTC::SetTime(const PackedTime & /*pack_time*/)
 {
-    RTC_TimeTypeDef time =
-    {
-        (uint8)pack_time.hours,
-        (uint8)pack_time.minutes,
-        (uint8)pack_time.seconds
-    };
-
-    RTC_DateTypeDef date =
-    {
-        0,
-        (uint8)pack_time.month,
-        (uint8)pack_time.day,
-        (uint8)pack_time.year
-    };
+//    RTC_TimeTypeDef time =
+//    {
+//        (uint8)pack_time.hours,
+//        (uint8)pack_time.minutes,
+//        (uint8)pack_time.seconds
+//    };
+//
+//    RTC_DateTypeDef date =
+//    {
+//        0,
+//        (uint8)pack_time.month,
+//        (uint8)pack_time.day,
+//        (uint8)pack_time.year
+//    };
 
 //    HAL_RTC_SetTimeDate(&handleRTC, &time, &date);
 }
