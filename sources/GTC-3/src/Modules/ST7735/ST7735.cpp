@@ -81,15 +81,9 @@ void ST7735::Init()
         int i = 0;
     }
 
-    GPIO_InitTypeDef gpio_struct = {0};
-
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET | PIN_DC | PIN_CS, GPIO_PIN_RESET);
-
-    gpio_struct.Pin = PIN_RESET | PIN_DC | PIN_CS;
-    gpio_struct.Mode = GPIO_MODE_OUTPUT_PP;
-    gpio_struct.Pull = GPIO_NOPULL;
-    gpio_struct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOB, &gpio_struct);
+    pinRESET_ST.Init();
+    pinDC_ST.Init();
+    pinCS_ST.Init();
 
     SPI2->CR1 |= SPI_CR1_SPE;
 

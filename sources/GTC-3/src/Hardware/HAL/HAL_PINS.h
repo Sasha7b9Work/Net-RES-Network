@@ -67,4 +67,6 @@ extern PinInput    pinKey2;
 extern PinOutputPP pinCS_HC12;
 extern Pin         pinSCL_SPI2;     // SPI2
 extern Pin         pinMOSI_SPI2;    // SPI2
-
+extern PinOutputPP pinRESET_ST;     // ST7735
+extern PinOutputPP pinDC_ST;        // ST7735
+extern PinOutputPP pinCS_ST;        // ST7735
