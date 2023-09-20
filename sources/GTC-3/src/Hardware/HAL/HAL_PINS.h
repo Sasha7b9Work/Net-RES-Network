@@ -39,7 +39,7 @@ struct PinAF_OD : public Pin
 
 struct PinAF_PP : public Pin
 {
-    PinAF_PP(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_AF_PP, GPIO_PULLUP) { }
+    PinAF_PP(GPIO_TypeDef *_gpio, uint16 _pin, uint pull) : Pin(_gpio, _pin, GPIO_MODE_AF_PP, pull) { }
 };
 
 

@@ -18,7 +18,7 @@ void HAL_USART_HC12::Init()
 {
     GPIO_InitTypeDef  is;
 
-    is.Pin = GPIO_PIN_9;
+    is.Pin = GPIO_PIN_9;                // TX
     is.Mode = GPIO_MODE_AF_PP;
     is.Speed = GPIO_SPEED_FREQ_HIGH;
 
