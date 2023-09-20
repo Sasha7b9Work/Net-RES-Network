@@ -20,15 +20,7 @@ void HAL_ADC::Init()
     __HAL_RCC_ADC1_CLK_ENABLE();
 #endif
 
-    GPIO_InitTypeDef is;
-
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-
-    is.Pin = GPIO_PIN_3;
-    is.Mode = GPIO_MODE_ANALOG;
-    is.Pull = GPIO_NOPULL;
-
-    HAL_GPIO_Init(GPIOA, &is);
+    pinADC.Init();
 
     ADC_ChannelConfTypeDef sConfig = { 0 };
 

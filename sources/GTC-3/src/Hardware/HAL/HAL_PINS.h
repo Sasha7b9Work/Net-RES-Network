@@ -31,6 +31,14 @@ struct PinOutputPP : public Pin
 };
 
 
+struct PinAnalog : public Pin
+{
+    PinAnalog(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_ANALOG, GPIO_NOPULL) { }
+};
+
+
 extern Pin pinWP;
 
 extern PinOutputPP pinBEEP;
+
+extern PinAnalog pinADC;

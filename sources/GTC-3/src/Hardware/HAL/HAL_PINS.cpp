@@ -6,6 +6,7 @@
 
 Pin         pinWP(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP);
 PinOutputPP pinBEEP(GPIOB, GPIO_PIN_4);
+PinAnalog   pinADC(GPIOA, GPIO_PIN_3);
 
 
 void Pin::Init()
