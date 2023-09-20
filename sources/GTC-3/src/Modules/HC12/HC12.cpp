@@ -58,7 +58,7 @@ void HC12::Transmit(const void *buffer, int size)
 
 void HC12::Command(pchar command)
 {
-    HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_RESET);
+    pinCS_HC12.ToLow();
 
     TimeMeterMS().PauseOnMS(40);
 
@@ -67,7 +67,7 @@ void HC12::Command(pchar command)
     Transmit(command, (int)std::strlen(command));
     Transmit("\r", 1);
 
-    HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
+    pinCS_HC12.ToHi();
 }
 
 
