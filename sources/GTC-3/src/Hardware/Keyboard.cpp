@@ -81,9 +81,9 @@ void Keyboard::UpdateKey(Key::E key)
 
 bool Keyboard::KeyPressed(Key::E key)
 {
-    static const uint16 pins[Key::Count] = { GPIO_PIN_8, GPIO_PIN_9 };
+    static const PinInput *pins[Key::Count] = { &pinKey1, &pinKey2 };
 
-    return HAL_GPIO_ReadPin(GPIOB, pins[key]) == GPIO_PIN_RESET;
+    return pins[key]->IsLow();
 }
 
 

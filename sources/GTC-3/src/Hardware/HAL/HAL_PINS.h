@@ -11,7 +11,8 @@ struct Pin
     void ToLow();
     void ToHi();
     void Set(bool);
-    bool IsHi();
+    bool IsHi() const;
+    bool IsLow() const;
 private:
     GPIO_TypeDef *gpio;
     uint16        pin;

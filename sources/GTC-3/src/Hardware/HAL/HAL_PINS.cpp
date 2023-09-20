@@ -58,7 +58,13 @@ void Pin::Set(bool hi)
 }
 
 
-bool Pin::IsHi()
+bool Pin::IsHi() const
 {
-    return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_SET;
+    return HAL_GPIO_ReadPin(gpio, pin) != GPIO_PIN_RESET;
+}
+
+
+bool Pin::IsLow() const
+{
+    return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_RESET;
 }
