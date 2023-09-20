@@ -55,19 +55,24 @@ struct PinAnalog : public Pin
 extern Pin         pinWP;
 extern PinOutputPP pinBEEP;
 extern PinAnalog   pinADC;
-extern PinAF_OD    pinSCL;
-extern PinAF_OD    pinSDA;
+
 extern PinAF_PP    pinSCK_SPI1;     // SPI1
 extern PinAF_PP    pinMOSI_SPI1;    // SPI1
 extern PinInput    pinMISO_SPI1;    // SPI1
 extern PinOutputPP pinNSS_SPI1;     // SPI1
-extern PinAF_PP    pinTX;           // HC12 TX
-extern PinInput    pinRX;           // HC12 RX
-extern PinInput    pinKey1;
-extern PinInput    pinKey2;
-extern PinOutputPP pinCS_HC12;
+
 extern Pin         pinSCL_SPI2;     // SPI2
 extern Pin         pinMOSI_SPI2;    // SPI2
 extern PinOutputPP pinRESET_ST;     // ST7735
 extern PinOutputPP pinDC_ST;        // ST7735
 extern PinOutputPP pinCS_ST;        // ST7735
+
+extern PinAF_OD    pinSCL;          // I2C
+extern PinAF_OD    pinSDA;          // I2C
+
+extern PinAF_PP    pinTX;           // HC12 TX
+extern PinInput    pinRX;           // HC12 RX
+extern PinOutputPP pinCS_HC12;      // HC12 CS
+
+extern PinInput    pinKey1;         // Keyboard
+extern PinInput    pinKey2;         // Keyboard
