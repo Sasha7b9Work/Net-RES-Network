@@ -47,12 +47,12 @@ namespace HAL_SPI1
     {
         void Set()
         {
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+            pinNSS_SPI1.ToHi();
         }
 
         void Reset()
         {
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+            pinNSS_SPI1.ToLow();
         }
     }
 }
