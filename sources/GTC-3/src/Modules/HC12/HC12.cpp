@@ -45,13 +45,8 @@ namespace HC12
 
 void HC12::Init()
 {
-    GPIO_InitTypeDef is;
-    is.Pin = PIN_SET;
-    is.Mode = GPIO_MODE_OUTPUT_PP;
-    is.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(PORT_SET, &is);
-
-    HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
+    pinCS_HC12.Init();
+    pinCS_HC12.ToHi();
 }
 
 
@@ -73,14 +68,6 @@ void HC12::Command(pchar command)
     Transmit("\r", 1);
 
     HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
-
-//    TimeMeterMS().WaitMS(80);
-//
-//    char *answer = recv_buffer.Data();
-//    answer = answer;
-//    
-//    int num = recv_buffer.NumSymbols();
-//    num = num;
 }
 
 
