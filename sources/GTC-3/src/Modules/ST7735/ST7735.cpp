@@ -59,18 +59,9 @@ namespace ST7735
 void ST7735::Init()
 {
     __HAL_RCC_SPI2_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
 
-    GPIO_InitTypeDef spi_struct = {0};
-
-    spi_struct.Pin = GPIO_PIN_13 |     // SCL
-                     GPIO_PIN_15;      // MOSI
-    spi_struct.Mode = GPIO_MODE_AF_PP;
-    spi_struct.Pull = GPIO_PULLDOWN;
-    spi_struct.Speed = GPIO_SPEED_FREQ_HIGH;
-    spi_struct.Alternate = GPIO_AF6_SPI2;
-
-    HAL_GPIO_Init(GPIOB, &spi_struct);
+    pinSCL_SPI2.Init();
+    pinMOSI_SPI2.Init();
 
     handle.Instance = SPI2;
     handle.Init.Mode = SPI_MODE_MASTER;

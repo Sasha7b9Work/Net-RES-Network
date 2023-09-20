@@ -5,7 +5,8 @@
 
 struct Pin
 {
-    Pin(GPIO_TypeDef *_gpio, uint16 _pin, uint _mode, uint _pull) : gpio(_gpio), pin(_pin), mode(_mode), pull(_pull) { }
+    Pin(GPIO_TypeDef *_gpio, uint16 _pin, uint _mode, uint _pull, uint _alternate = 0U) :
+        gpio(_gpio), pin(_pin), mode(_mode), pull(_pull), alternate(_alternate) { }
     void Init();
     void ToLow();
     void ToHi();
@@ -16,6 +17,7 @@ private:
     uint16        pin;
     uint          mode;
     uint          pull;
+    uint          alternate;
 };
 
 
@@ -54,12 +56,15 @@ extern PinOutputPP pinBEEP;
 extern PinAnalog   pinADC;
 extern PinAF_OD    pinSCL;
 extern PinAF_OD    pinSDA;
-extern PinAF_PP    pinSCK;      // SPI1
-extern PinAF_PP    pinMOSI;     // SPI1
-extern PinInput    pinMISO;     // SPI1
-extern PinOutputPP pinNSS;      // SPI1
-extern PinAF_PP    pinTX;       // HC12 TX
-extern PinInput    pinRX;       // HC12 RX
+extern PinAF_PP    pinSCK_SPI1;     // SPI1
+extern PinAF_PP    pinMOSI_SPI1;    // SPI1
+extern PinInput    pinMISO_SPI1;    // SPI1
+extern PinOutputPP pinNSS_SPI1;     // SPI1
+extern PinAF_PP    pinTX;           // HC12 TX
+extern PinInput    pinRX;           // HC12 RX
 extern PinInput    pinKey1;
 extern PinInput    pinKey2;
 extern PinOutputPP pinCS_HC12;
+extern Pin         pinSCL_SPI2;     // SPI2
+extern Pin         pinMOSI_SPI2;    // SPI2
+

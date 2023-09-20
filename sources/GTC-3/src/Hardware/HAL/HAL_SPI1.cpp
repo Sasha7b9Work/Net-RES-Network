@@ -62,10 +62,10 @@ void HAL_SPI1::Init()
 {
     WP::Init();
 
-    pinSCK.Init();
-    pinMOSI.Init();
-    pinMISO.Init();
-    pinNSS.Init();
+    pinSCK_SPI1.Init();
+    pinMOSI_SPI1.Init();
+    pinMISO_SPI1.Init();
+    pinNSS_SPI1.Init();
 
     CS::Set();
 
