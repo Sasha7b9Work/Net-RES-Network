@@ -30,11 +30,7 @@ namespace Beeper
 
 void Beeper::Init()
 {
-    GPIO_InitTypeDef is;
-    is.Pin = GPIO_PIN_4;
-    is.Mode = GPIO_MODE_OUTPUT_PP;
-    is.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOB, &is);
+    pinBEEP.Init();
 }
 
 

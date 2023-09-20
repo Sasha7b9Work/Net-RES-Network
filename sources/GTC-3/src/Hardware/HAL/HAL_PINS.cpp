@@ -4,7 +4,8 @@
 #include <stm32f3xx_hal.h>
 
 
-Pin pinWP(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP);
+Pin         pinWP(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP);
+PinOutputPP pinBEEP(GPIOB, GPIO_PIN_4);
 
 
 void Pin::Init()
@@ -14,7 +15,7 @@ void Pin::Init()
         pin,
         mode,
         pull,
-        GPIO_SPEED_HIGH
+        GPIO_SPEED_FREQ_HIGH
     };
 
     HAL_GPIO_Init(gpio, &is);

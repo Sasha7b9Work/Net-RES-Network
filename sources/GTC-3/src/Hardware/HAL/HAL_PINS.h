@@ -11,7 +11,7 @@ namespace HAL_PINS
 
 struct Pin
 {
-    Pin(GPIO_TypeDef *_gpio, uint16 _pin, uint _mode, uint _pull) : gpio(_gpio), pin(_pin), mode(_mode), pull(_pull) {}
+    Pin(GPIO_TypeDef *_gpio, uint16 _pin, uint _mode, uint _pull) : gpio(_gpio), pin(_pin), mode(_mode), pull(_pull) { }
     void Init();
     void ToLow();
     void ToHi();
@@ -25,4 +25,12 @@ private:
 };
 
 
+struct PinOutputPP : public Pin
+{
+    PinOutputPP(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP) { }
+};
+
+
 extern Pin pinWP;
+
+extern PinOutputPP pinBEEP;
