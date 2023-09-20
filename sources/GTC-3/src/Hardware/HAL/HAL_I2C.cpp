@@ -14,6 +14,11 @@ namespace HAL_I2C1
 
 void HAL_I2C1::Init(void)
 {
+    __HAL_RCC_I2C1_CLK_ENABLE();
+
+    pinSCL.Init();
+    pinSDA.Init();
+
     hi2c1.Instance = I2C1;
 //    hi2c1.Init.ClockSpeed = 100000;
 //    hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
@@ -25,24 +30,6 @@ void HAL_I2C1::Init(void)
     hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
     HAL_I2C_Init(&hi2c1);
-}
-
-
-void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle) //-V2009
-{
-    GPIO_InitTypeDef GPIO_InitStruct;
-
-    if (i2cHandle->Instance == I2C1)
-    {
-        GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7;
-        GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-        GPIO_InitStruct.Pull = GPIO_PULLUP;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-
-        HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-        __HAL_RCC_I2C1_CLK_ENABLE();
-    }
 }
 
 

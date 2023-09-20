@@ -31,6 +31,12 @@ struct PinOutputPP : public Pin
 };
 
 
+struct PinAF_OD : public Pin
+{
+    PinAF_OD(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_AF_OD, GPIO_PULLUP) { }
+};
+
+
 struct PinAnalog : public Pin
 {
     PinAnalog(GPIO_TypeDef *_gpio, uint16 _pin) : Pin(_gpio, _pin, GPIO_MODE_ANALOG, GPIO_NOPULL) { }
@@ -38,7 +44,7 @@ struct PinAnalog : public Pin
 
 
 extern Pin pinWP;
-
 extern PinOutputPP pinBEEP;
-
 extern PinAnalog pinADC;
+extern PinAF_OD pinSCL;
+extern PinAF_OD pinSDA;

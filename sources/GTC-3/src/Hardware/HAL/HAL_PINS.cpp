@@ -7,6 +7,8 @@
 Pin         pinWP(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP);
 PinOutputPP pinBEEP(GPIOB, GPIO_PIN_4);
 PinAnalog   pinADC(GPIOA, GPIO_PIN_3);
+PinAF_OD    pinSCL(GPIOB, GPIO_PIN_6);
+PinAF_OD    pinSDA(GPIOB, GPIO_PIN_7);
 
 
 void Pin::Init()
