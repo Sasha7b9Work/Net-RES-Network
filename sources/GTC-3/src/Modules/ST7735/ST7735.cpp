@@ -87,13 +87,12 @@ void ST7735::Init()
 
     SPI2->CR1 |= SPI_CR1_SPE;
 
-    HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
-
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET); //-V525
+    pinCS_ST.ToLow();
+    pinRESET_ST.ToHi();
     HAL_Delay(5);
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_RESET);
+    pinRESET_ST.ToLow();
     HAL_Delay(5);
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET);
+    pinRESET_ST.ToHi();
     HAL_Delay(5);
 
     SendCommand(0x01);      // SWRESET Software reset
