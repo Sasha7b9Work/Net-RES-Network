@@ -43,10 +43,6 @@ namespace ST7735
 #define SET_CS   pinCS_ST.ToHi()
 #define RESET_CS pinCS_ST.ToLow()
 
-    static const uint16 PIN_RESET = GPIO_PIN_11;
-    static const uint16 PIN_DC = GPIO_PIN_14;
-    static const uint16 PIN_CS = GPIO_PIN_12;
-
     static SPI_HandleTypeDef handle;
 
     static void SendCommand(uint8);
