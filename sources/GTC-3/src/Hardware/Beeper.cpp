@@ -100,7 +100,7 @@ void Beeper::CallbackOnTimer()
 
     level = !level;
 
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, level ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    pinBEEP.Set(level);
 }
 
 
