@@ -34,9 +34,16 @@ Diagram::Pool::Pool(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 
     for (int i = 0; i < TypeMeasure::Count; i++)
     {
-        pool[i] = new Diagram(this, (TypeMeasure::E)i);
+        if (TypeMeasure::Exist((TypeMeasure::E)i))
+        {
+            pool[i] = new Diagram(this, (TypeMeasure::E)i);
 
-        sizer->Add(pool[i]);
+            sizer->Add(pool[i]);
+        }
+        else
+        {
+            pool[i] = nullptr;
+        }
     }
 
     SetSizer(sizer);
@@ -53,11 +60,14 @@ Diagram::Pool *Diagram::Pool::Create(wxWindow *parent)
 
 void Diagram::Pool::SetSizeArea(int width, int height)
 {
-    int dy = height / TypeMeasure::Count;
+    int dy = height / TypeMeasure::NumMeasures();
 
     for (Diagram *diagram : pool)
     {
-        diagram->SetSizeArea(width, dy);
+        if (diagram)
+        {
+            diagram->SetSizeArea(width, dy);
+        }
     }
 
     Refresh();
