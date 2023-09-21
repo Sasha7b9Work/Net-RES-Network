@@ -1,5 +1,5 @@
 // 2022/04/27 14:59:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef * /*huart*/)

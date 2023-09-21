@@ -35,7 +35,7 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 
     for (int meas = 0; meas < TypeMeasure::Count; meas++)
     {
-        SetColLabelValue(meas + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
+        SetColLabelValue(meas + 1, wxString(TypeMeasure::_GetTitle((TypeMeasure::E)meas)) +
             wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
     }
 

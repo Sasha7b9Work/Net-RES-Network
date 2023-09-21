@@ -1,5 +1,5 @@
 // 2023/06/20 10:40:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *, uint32_t *)

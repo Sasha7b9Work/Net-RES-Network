@@ -1,5 +1,5 @@
 // 2022/04/27 15:03:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 HAL_StatusTypeDef HAL_I2C_Init(I2C_HandleTypeDef * /*hi2c*/)

@@ -16,7 +16,7 @@ struct TypeMeasure
         Count
     };
 
-    static pchar GetTitle(TypeMeasure::E);
+    static pchar _GetTitle(TypeMeasure::E);
     static pchar GetUnits(TypeMeasure::E);
 };
 

@@ -2,7 +2,7 @@
 
 project (GTC-3)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
@@ -15,14 +15,14 @@ include_directories(.
                     ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_KEIL/CMSIS
                     ../../common/_VS_LIBS/STM32F1
-                    ../../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../../common/STM32Cube_F1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../../common/STM32Cube_F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include
-                    ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc)
+                    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+                    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+                    ../../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include
+                    ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
-add_definitions(-DSTM32F103xB -DWXUSINGDLL -DGUI -DDEVICE)
+add_definitions(-DSTM32F303xC -DWXUSINGDLL -DGUI -DDEVICE)
 
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
@@ -51,8 +51,8 @@ if(WIN32)
     add_compile_options(/wd5267)
 endif()
 
-file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f1/*.*)
-file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.*)
+file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f3/*.*)
+file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                       *.h *.cpp
                                     ../../GTC-3/src/*.*)

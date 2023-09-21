@@ -16,7 +16,7 @@ map<uint, Sensor> Sensor::Pool::pool;
 DataPoint DataPoint::null{ 0.0f, {0, 0, 0} };
 
 
-pchar TypeMeasure::GetTitle(TypeMeasure::E type)
+pchar TypeMeasure::_GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
     {

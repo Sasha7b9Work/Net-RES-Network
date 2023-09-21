@@ -9,7 +9,7 @@ PackedTime HAL_RTC::GetTime()
 }
 
 
-uint HAL_RTC::SetTime(const PackedTime &)
+void HAL_RTC::SetTime(const PackedTime &)
 {
-    return 0;
+
 }
