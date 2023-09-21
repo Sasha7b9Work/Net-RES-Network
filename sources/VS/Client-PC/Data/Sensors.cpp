@@ -16,7 +16,7 @@ map<uint, Sensor> Sensor::Pool::pool;
 DataPoint DataPoint::null{ 0.0f, {0, 0, 0} };
 
 
-pchar TypeMeasure::_GetTitle(TypeMeasure::E type)
+pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
     {
@@ -28,6 +28,65 @@ pchar TypeMeasure::_GetTitle(TypeMeasure::E type)
     };
 
     return titles[type];
+}
+
+
+bool TypeMeasure::Exist(TypeMeasure::E type)
+{
+    static const bool exists[Count] =
+    {
+        true,
+        false,
+        true,
+        true,
+        false
+    };
+
+    return exists[type];
+}
+
+
+int TypeMeasure::NumMeasures()
+{
+    int result = 0;
+
+    for (int i = 0; i < Count; i++)
+    {
+        if (Exist((TypeMeasure::E)i))
+        {
+            result++;
+        }
+    }
+
+    return result;
+}
+
+
+int TypeMeasure::NumColumn(TypeMeasure::E type)
+{
+    int result = 0;
+
+    for (int i = 0; i < Count; i++)
+    {
+        if (type == (TypeMeasure::E)i)
+        {
+            if (Exist(type))
+            {
+                break;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        if (Exist((TypeMeasure::E)i))
+        {
+            result++;
+        }
+    }
+
+    return result;
 }
 
 

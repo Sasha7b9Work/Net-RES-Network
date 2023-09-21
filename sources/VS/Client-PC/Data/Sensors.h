@@ -16,8 +16,13 @@ struct TypeMeasure
         Count
     };
 
-    static pchar _GetTitle(TypeMeasure::E);
+    static pchar GetTitle(TypeMeasure::E);
     static pchar GetUnits(TypeMeasure::E);
+    static bool Exist(TypeMeasure::E);
+    // ¬озвращает количество присутствующих измерений
+    static int NumMeasures();
+    // Ќомер колонки дл€ вывода
+    static int NumColumn(TypeMeasure::E);
 };
 
 

@@ -23,7 +23,7 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 {
     CreateGrid(0, 0);
 
-    AppendCols(6);
+    AppendCols(TypeMeasure::NumMeasures() + 1);
 
     EnableEditing(false);
 
@@ -35,13 +35,18 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 
     for (int meas = 0; meas < TypeMeasure::Count; meas++)
     {
-        SetColLabelValue(meas + 1, wxString(TypeMeasure::_GetTitle((TypeMeasure::E)meas)) +
-            wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
+        int col = TypeMeasure::NumColumn((TypeMeasure::E)meas);
+
+        if (col >= 0)
+        {
+            SetColLabelValue(col + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
+                wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
+        }
     }
 
     SetColSize(0, FromDIP(40));
 
-    for (int i = 1; i < 5; i++)
+    for (int i = 1; i < TypeMeasure::NumMeasures(); i++)
     {
         SetColSize(i, FromDIP(60));
     }
