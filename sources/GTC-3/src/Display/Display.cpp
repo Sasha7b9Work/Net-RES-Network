@@ -239,6 +239,8 @@ void Display::EndScene()
 
 void Display::Update()
 {
+    DEBUG_POINT_0;
+
     TimeMeterMS meter_fps;
 
     need_redraw = true;
@@ -258,15 +260,19 @@ void Display::Update()
                 BeginScene(Color::BLACK);
             }
 
+            DEBUG_POINT_0;
             DrawMeasures();
-
+            DEBUG_POINT_0;
             DrawTime();
+            DEBUG_POINT_0;
 
 //            DrawTest();
 
             if (need_redraw)
             {
+                DEBUG_POINT_0;
                 EndScene();
+                DEBUG_POINT_0;
 
                 need_redraw = false;
             }
@@ -280,6 +286,7 @@ void Display::Update()
 
         zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
     }
+    DEBUG_POINT_0;
 }
 
 
@@ -318,10 +325,14 @@ void Display::DrawMeasures()
                 measures[types[i]].Units().Draw(x + 41, y);
             }
 
+            DEBUG_POINT_0;
             measures[types[i]].Draw(x, y);
+            DEBUG_POINT_0;
         }
 
+        DEBUG_POINT_0;
         ST7735::WriteBuffer(x - 1, y, width, height);
+        DEBUG_POINT_0;
     }
 }
 
