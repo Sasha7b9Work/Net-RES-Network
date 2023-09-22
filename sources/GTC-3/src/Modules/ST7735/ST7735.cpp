@@ -79,10 +79,7 @@ void ST7735::Init()
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
     handle.Init.CRCPolynomial = 7;
 
-    if (HAL_SPI_Init(&handle) != HAL_OK)
-    {
-        int i = 0;
-    }
+    HAL_SPI_Init(&handle);
 
     SPI2->CR1 |= SPI_CR1_SPE;
 
@@ -208,10 +205,7 @@ void ST7735::SendData16(uint16 data)
     SET_DC;
     RESET_CS;
 
-    if (HAL_SPI_Transmit(&handle, (uint8 *)&data, 2, 100) != HAL_OK)
-    {
-        int i = 0;
-    }
+    HAL_SPI_Transmit(&handle, (uint8 *)&data, 2, 100);
 
     SET_CS;
 }
@@ -224,10 +218,7 @@ void ST7735::SendData8(uint8 data)
     SET_DC;
     RESET_CS;
 
-    if (HAL_SPI_Transmit(&handle, &data, 1, 100) != HAL_OK)
-    {
-        int i = 0;
-    }
+    HAL_SPI_Transmit(&handle, &data, 1, 100);
 
     SET_CS;
 }
@@ -239,10 +230,7 @@ void ST7735::SendCommand(uint8 data)
     RESET_DC;
     RESET_CS;
 
-    if (HAL_SPI_Transmit(&handle, &data, 1, 100) != HAL_OK)
-    {
-        int i = 0;
-    }
+    HAL_SPI_Transmit(&handle, &data, 1, 100);
 
     SET_CS;
 }
