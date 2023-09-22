@@ -51,8 +51,6 @@ void Device::Init()
 
 void Device::Update()
 {
-    DEBUG_POINT_0;
-
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;
@@ -83,9 +81,9 @@ void Device::Update()
     }
 
     Keyboard::Update();
-    DEBUG_POINT_0;
+
     Display::Update();
-    DEBUG_POINT_0;
+
     HAL_ADC::Update();
 }
 

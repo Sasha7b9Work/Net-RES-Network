@@ -62,6 +62,10 @@ void ST7735::Init()
     pinDC_ST.Init();
     pinCS_ST.Init();
 
+    pinRESET_ST.ToLow();
+    pinDC_ST.ToLow();
+    pinCS_ST.ToLow();
+
     handle.Instance = SPI2;
     handle.Init.Mode = SPI_MODE_MASTER;
     handle.Init.Direction = SPI_DIRECTION_2LINES;
@@ -118,16 +122,11 @@ void ST7735::Init()
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
-    DEBUG_POINT_0;
     TimeMeterMS meter;
 
-    DEBUG_POINT_0;
     SetWindow(x0, y0, width, height);
-    DEBUG_POINT_0;
 
     SendCommand(0x2C);
-
-    DEBUG_POINT_0;
 
     SET_DC;
     RESET_CS;
@@ -182,30 +181,21 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
     }
 
     SET_CS;
-
-    DEBUG_POINT_0;
 }
 
 
 void ST7735::SetWindow(int x, int y, int width, int height)
 {
-    DEBUG_POINT_0;
     SendCommand(0x2A);      // CASET
-    DEBUG_POINT_0;
     SendData8(0x00);
-    DEBUG_POINT_0;
     SendData8((uint8)x);
-    DEBUG_POINT_0;
     SendData8(0x00);
-    DEBUG_POINT_0;
     SendData8((uint8)(x + width - 1));
-    DEBUG_POINT_0;
     SendCommand(0x2B);      // RASET
     SendData8(0x00);
     SendData8((uint8)y);
     SendData8(0x00);
     SendData8((uint8)(y + height - 1));
-    DEBUG_POINT_0;
 }
 
 #endif
@@ -245,18 +235,14 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
-    DEBUG_POINT_0;
     TimeMeterMS meter;
-    DEBUG_POINT_0;
     RESET_DC;
     RESET_CS;
-    DEBUG_POINT_0;
+
     if (HAL_SPI_Transmit(&handle, &data, 1, 100) != HAL_OK)
     {
-        DEBUG_POINT_0;
         int i = 0;
     }
-    DEBUG_POINT_0;
+
     SET_CS;
-    DEBUG_POINT_0;
 }
