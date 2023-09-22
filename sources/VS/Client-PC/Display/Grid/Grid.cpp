@@ -75,7 +75,7 @@ void Grid::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 
     row = rows.find(id);
 
-    SetCellValue(row->second, type + 1, (float)value, color);
+    SetCellValue(row->second, TypeMeasure::NumColumn((TypeMeasure::E)type) + 1, (float)value, color);
 
 }
 

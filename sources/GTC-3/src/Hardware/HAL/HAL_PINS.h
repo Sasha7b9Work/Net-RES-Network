@@ -61,8 +61,8 @@ extern PinAF_PP    pinMOSI_SPI1;    // SPI1
 extern PinInput    pinMISO_SPI1;    // SPI1
 extern PinOutputPP pinNSS_SPI1;     // SPI1
 
-extern Pin         pinSCL_SPI2;     // SPI2
-extern Pin         pinMOSI_SPI2;    // SPI2
+extern Pin         pinSCL_SPI2;     // SPI2 ST7735
+extern Pin         pinMOSI_SPI2;    // SPI2 ST7735
 extern PinOutputPP pinRESET_ST;     // ST7735
 extern PinOutputPP pinDC_ST;        // ST7735
 extern PinOutputPP pinCS_ST;        // ST7735

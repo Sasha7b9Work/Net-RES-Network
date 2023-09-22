@@ -58,6 +58,9 @@ void ST7735::Init()
 
     pinSCL_SPI2.Init();
     pinMOSI_SPI2.Init();
+    pinRESET_ST.Init();
+    pinDC_ST.Init();
+    pinCS_ST.Init();
 
     handle.Instance = SPI2;
     handle.Init.Mode = SPI_MODE_MASTER;
@@ -76,10 +79,6 @@ void ST7735::Init()
     {
         int i = 0;
     }
-
-    pinRESET_ST.Init();
-    pinDC_ST.Init();
-    pinCS_ST.Init();
 
     SPI2->CR1 |= SPI_CR1_SPE;
 
