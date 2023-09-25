@@ -206,7 +206,33 @@ void ST7735::SendData16(uint16 data)
     SET_DC;
     RESET_CS;
 
-    HAL_SPI_Transmit(&handle, (uint8 *)&data, 2, 100);
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR |= 
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    };
+    SPI2->DR = data;
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    };
+
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    };
 
     SET_CS;
 }
