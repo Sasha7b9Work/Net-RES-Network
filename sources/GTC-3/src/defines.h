@@ -16,6 +16,7 @@ typedef unsigned char uchar;
 
 #ifdef WIN32
     #define IN_MODE_TEST
+    #define asm(x)
 #else
     #define nullptr 0 //-V1059
     #pragma diag_suppress 2748

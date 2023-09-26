@@ -117,70 +117,8 @@ void ST7735::Init()
 #ifndef GUI
 
 
-namespace ST7735
-{
-    void SendWord(uint16 word)
-    {
-        TimeMeterMS meter;
-
-//        while ((SPI2->SR & SPI_SR_BSY))
-//        {
-//            if (meter.ElapsedTime() > 100)
-//            {
-//                break;
-//            }
-//        }
-
-//        while (!(SPI2->SR & SPI_SR_TXE))
-//        {
-//            if (meter.ElapsedTime() > 100)
-//            {
-//                break;
-//            }
-//        }
-
-        SPI2->DR = word;
-
-//        while (!(SPI2->SR & SPI_SR_TXE))
-//        {
-//            if (meter.ElapsedTime() > 100)
-//            {
-//                break;
-//            }
-//        }
-
-//        while ((SPI2->SR & SPI_SR_BSY))
-//        {
-//            if (meter.ElapsedTime() > 100)
-//            {
-//                break;
-//            }
-//        }
-    }
-}
-
-
 #define WRITE_NIBBLE(nibble)    \
     value >>= 4;                \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
-    asm("nop");                 \
     asm("nop");                 \
     asm("nop");                 \
     asm("nop");                 \
@@ -253,11 +191,6 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
                 asm("nop");
                 asm("nop");
                 asm("nop");
