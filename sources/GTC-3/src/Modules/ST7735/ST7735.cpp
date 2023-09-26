@@ -69,7 +69,7 @@ void ST7735::Init()
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
     handle.Init.NSS = SPI_NSS_SOFT;
-    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
     handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
     handle.Init.TIMode = SPI_TIMODE_DISABLE;
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -128,9 +128,53 @@ void ST7735::Init()
 #ifndef GUI
 
 
+namespace ST7735
+{
+    void SendWord(uint16 word)
+    {
+        TimeMeterMS meter;
+
+        while ((SPI2->SR & SPI_SR_BSY))
+        {
+            if (meter.ElapsedTime() > 100)
+            {
+                break;
+            }
+        }
+
+        while (!(SPI2->SR & SPI_SR_TXE))
+        {
+            if (meter.ElapsedTime() > 100)
+            {
+                break;
+            }
+        }
+
+        SPI2->DR = word;
+
+        while (!(SPI2->SR & SPI_SR_TXE))
+        {
+            if (meter.ElapsedTime() > 100)
+            {
+                break;
+            }
+        }
+
+        while ((SPI2->SR & SPI_SR_BSY))
+        {
+            if (meter.ElapsedTime() > 100)
+            {
+                break;
+            }
+        }
+
+    }
+}
+
+
 #define WRITE_NIBBLE(nibble)    \
     value >>= 4;                \
-    HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);    \
+    SendWord(Color::colors[value & 0x0f]);
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
@@ -140,6 +184,9 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
     SetWindow(x0, y0, width, height);
 
     SendCommand(0x2C);
+
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_16BIT;
 
     SET_DC;
     RESET_CS;
@@ -154,7 +201,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);
+                SendWord(Color::colors[value & 0x0f]);
 
                 WRITE_NIBBLE(1);
                 WRITE_NIBBLE(2);
@@ -188,6 +235,9 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
     }
 
     SET_CS;
+
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_8BIT;
 }
 
 
