@@ -64,7 +64,7 @@ void ST7735::Init()
 
     handle.Instance = SPI2;
     handle.Init.Mode = SPI_MODE_MASTER;
-    handle.Init.Direction = SPI_DIRECTION_1LINE;
+    handle.Init.Direction = SPI_DIRECTION_2LINES;
     handle.Init.DataSize = SPI_DATASIZE_8BIT;
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
@@ -79,21 +79,21 @@ void ST7735::Init()
 
     pinRESET_ST.ToLow();
     pinDC_ST.ToLow();
-    pinCS_ST.ToLow();
+    pinCS_ST.ToHi();
 
     pinRESET_ST.Init();
     pinDC_ST.Init();
     pinCS_ST.Init();
 
-//    SPI2->CR1 |= SPI_CR1_SPE;
+    SPI2->CR1 |= SPI_CR1_SPE;
 
     pinCS_ST.ToLow();
     pinRESET_ST.ToHi();
-    HAL_Delay(5);
+    HAL_Delay(20);
     pinRESET_ST.ToLow();
-    HAL_Delay(5);
+    HAL_Delay(20);
     pinRESET_ST.ToHi();
-    HAL_Delay(5);
+    HAL_Delay(20);
 
     SendCommand(0x01);      // SWRESET Software reset
     HAL_Delay(12);
@@ -107,13 +107,18 @@ void ST7735::Init()
     SendCommand(0x36);      // MADCTL Memory Data Access Control
     SendData8(BINARY_U8(01100000));
 
-    SendCommand(0xB1);      // FRMCTR1 Frame rate
+//    SendCommand(0xB1);      // FRMCTR1 Frame rate
+//
+//    SendData16(0x000F);
+//    SendData16(0x000F);
+//    SendData16(0x000F);
 
-    SendData16(0x000F);
-    SendData16(0x000F);
-    SendData16(0x000F);
+//    while (true)
+    {
+        SendCommand(0x29);      // DISPON Display on
 
-    SendCommand(0x29);      // DISPON Display on
+//        Timer::Delay(1000);
+    }
 
     Display::BeginScene(Color::BLACK);
     Display::EndScene();
@@ -247,10 +252,46 @@ void ST7735::SendData16(uint16 data)
 
 void ST7735::SendData8(uint8 data)
 {
+    __HAL_SPI_ENABLE(&handle);
+
+    TimeMeterMS meter;
+
     SET_DC;
     RESET_CS;
 
-    HAL_SPI_Transmit(&handle, &data, 1, 10);
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    SPI2_DR_8bit = data;
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
@@ -258,10 +299,48 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
+    __HAL_SPI_ENABLE(&handle);
+
+    TimeMeterMS meter;
+
     RESET_DC;
     RESET_CS;
 
-    HAL_SPI_Transmit(&handle, &data, 1, 10);
+//    HAL_SPI_Transmit(&handle, &data, 1, 10);
+
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    SPI2_DR_8bit = data;
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
