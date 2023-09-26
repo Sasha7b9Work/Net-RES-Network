@@ -162,7 +162,71 @@ namespace ST7735
 
 #define WRITE_NIBBLE(nibble)    \
     value >>= 4;                \
-    SendWord(Color::colors[value & 0x0f]);
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    SPI2->DR = Color::colors[value & 0x0f];
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
@@ -189,7 +253,71 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                SendWord(Color::colors[value & 0x0f]);
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                SPI2->DR = Color::colors[value & 0x0f];
 
                 WRITE_NIBBLE(1);
                 WRITE_NIBBLE(2);
