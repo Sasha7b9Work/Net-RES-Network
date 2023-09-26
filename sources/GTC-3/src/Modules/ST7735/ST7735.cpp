@@ -50,7 +50,6 @@ namespace ST7735
 
     static void SendCommand(uint8);
     static void SendData8(uint8);
-    static void SendData16(uint16);
     static void SetWindow(int startX, int startY, int stopX, int stopY);
 }
 
@@ -118,7 +117,6 @@ void ST7735::Init()
 
 
 #define WRITE_NIBBLE(nibble)    \
-    value >>= 4;                \
     asm("nop");                 \
     asm("nop");                 \
     asm("nop");                 \
@@ -173,8 +171,11 @@ void ST7735::Init()
     asm("nop");                 \
     asm("nop");                 \
     asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
     \
-    SPI2->DR = Color::colors[value & 0x0f];
+    SPI2->DR = Color::colors[value & 0x0f]; \
+    value >>= 4;
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
@@ -201,80 +202,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-
-#ifndef DEBUG
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop");
-#endif
-
-                SPI2->DR = Color::colors[value & 0x0f];
-
+                WRITE_NIBBLE(0);
                 WRITE_NIBBLE(1);
                 WRITE_NIBBLE(2);
                 WRITE_NIBBLE(3);
@@ -297,9 +225,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);
-
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value >> 4], 1, 10);
+                WRITE_NIBBLE(0);
+                WRITE_NIBBLE(1);
 
                 value = *(++points);
             }
@@ -328,48 +255,6 @@ void ST7735::SetWindow(int x, int y, int width, int height)
 }
 
 #endif
-
-
-void ST7735::SendData16(uint16 data)
-{
-    TimeMeterMS meter;
-
-    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
-    SPI2->CR2 |= SPI_DATASIZE_16BIT;
-
-    SET_DC;
-    RESET_CS;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
-
-    SPI2->DR = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
-    while ((SPI2->SR & SPI_SR_BSY))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
-
-    SET_CS;
-
-    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
-    SPI2->CR2 |= SPI_DATASIZE_8BIT;
-}
 
 
 void ST7735::SendData8(uint8 data)
@@ -427,8 +312,6 @@ void ST7735::SendCommand(uint8 data)
 
     RESET_DC;
     RESET_CS;
-
-//    HAL_SPI_Transmit(&handle, &data, 1, 10);
 
     while ((SPI2->SR & SPI_SR_BSY))
     {
