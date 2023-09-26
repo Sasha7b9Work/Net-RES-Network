@@ -69,7 +69,7 @@ void ST7735::Init()
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
     handle.Init.NSS = SPI_NSS_SOFT;
-    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
     handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
     handle.Init.TIMode = SPI_TIMODE_DISABLE;
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -109,24 +109,9 @@ void ST7735::Init()
 
     SendCommand(0xB1);      // FRMCTR1 Frame rate
 
-//    handle.Init.DataSize = SPI_DATASIZE_16BIT;
-//    HAL_SPI_Init(&handle);
-
-    SendData8(0xFF);
-    SendData8(0x00);
-
-    SendData8(0xFF);
-    SendData8(0x00);
-
-    SendData8(0xFF);
-    SendData8(0x00);
-
-//    SendData16(0x000F);
-//    SendData16(0x000F);
-//    SendData16(0x000F);
-
-//    handle.Init.DataSize = SPI_DATASIZE_8BIT;
-//    HAL_SPI_Init(&handle);
+    SendData16(0x000F);
+    SendData16(0x000F);
+    SendData16(0x000F);
 
     SendCommand(0x29);      // DISPON Display on
 
@@ -140,7 +125,7 @@ void ST7735::Init()
 
 #define WRITE_NIBBLE(nibble)    \
     value >>= 4;                \
-    HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);
+    HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);    \
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
@@ -222,6 +207,9 @@ void ST7735::SendData16(uint16 data)
 {
     TimeMeterMS meter;
 
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_16BIT;
+
     SET_DC;
     RESET_CS;
 
@@ -232,8 +220,6 @@ void ST7735::SendData16(uint16 data)
             break;
         }
     };
-
-    data = (uint16)((uint8)(data >> 8) + ((uint8)data << 8));
 
     SPI2->DR = data;
 
@@ -253,6 +239,9 @@ void ST7735::SendData16(uint16 data)
     };
 
     SET_CS;
+
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_8BIT;
 }
 
 
