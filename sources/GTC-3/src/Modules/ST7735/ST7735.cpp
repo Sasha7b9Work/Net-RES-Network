@@ -164,6 +164,16 @@ void ST7735::Init()
     asm("nop");                 \
     asm("nop");                 \
     asm("nop");                 \
+    \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    \
     SPI2->DR = Color::colors[value & 0x0f];
 
 
@@ -250,6 +260,19 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
                 asm("nop");
                 asm("nop");
                 asm("nop");
+
+#ifndef DEBUG
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop");
+#endif
+
                 SPI2->DR = Color::colors[value & 0x0f];
 
                 WRITE_NIBBLE(1);
