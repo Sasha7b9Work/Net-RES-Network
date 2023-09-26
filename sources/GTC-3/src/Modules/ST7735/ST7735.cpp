@@ -69,7 +69,7 @@ void ST7735::Init()
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
     handle.Init.NSS = SPI_NSS_SOFT;
-    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+    handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
     handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
     handle.Init.TIMode = SPI_TIMODE_DISABLE;
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -107,18 +107,7 @@ void ST7735::Init()
     SendCommand(0x36);      // MADCTL Memory Data Access Control
     SendData8(BINARY_U8(01100000));
 
-//    SendCommand(0xB1);      // FRMCTR1 Frame rate
-//
-//    SendData16(0x000F);
-//    SendData16(0x000F);
-//    SendData16(0x000F);
-
-//    while (true)
-    {
-        SendCommand(0x29);      // DISPON Display on
-
-//        Timer::Delay(1000);
-    }
+    SendCommand(0x29);      // DISPON Display on
 
     Display::BeginScene(Color::BLACK);
     Display::EndScene();
@@ -134,40 +123,39 @@ namespace ST7735
     {
         TimeMeterMS meter;
 
-        while ((SPI2->SR & SPI_SR_BSY))
-        {
-            if (meter.ElapsedTime() > 100)
-            {
-                break;
-            }
-        }
+//        while ((SPI2->SR & SPI_SR_BSY))
+//        {
+//            if (meter.ElapsedTime() > 100)
+//            {
+//                break;
+//            }
+//        }
 
-        while (!(SPI2->SR & SPI_SR_TXE))
-        {
-            if (meter.ElapsedTime() > 100)
-            {
-                break;
-            }
-        }
+//        while (!(SPI2->SR & SPI_SR_TXE))
+//        {
+//            if (meter.ElapsedTime() > 100)
+//            {
+//                break;
+//            }
+//        }
 
         SPI2->DR = word;
 
-        while (!(SPI2->SR & SPI_SR_TXE))
-        {
-            if (meter.ElapsedTime() > 100)
-            {
-                break;
-            }
-        }
+//        while (!(SPI2->SR & SPI_SR_TXE))
+//        {
+//            if (meter.ElapsedTime() > 100)
+//            {
+//                break;
+//            }
+//        }
 
-        while ((SPI2->SR & SPI_SR_BSY))
-        {
-            if (meter.ElapsedTime() > 100)
-            {
-                break;
-            }
-        }
-
+//        while ((SPI2->SR & SPI_SR_BSY))
+//        {
+//            if (meter.ElapsedTime() > 100)
+//            {
+//                break;
+//            }
+//        }
     }
 }
 
