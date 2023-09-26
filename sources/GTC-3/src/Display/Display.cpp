@@ -239,16 +239,16 @@ void Display::EndScene()
 
 void Display::Update()
 {
-    Rectangle(WIDTH, HEIGHT).Fill(0, 0, Color::BLACK);
+    Rectangle(WIDTH, HEIGHT).Fill(0, 0, Color::WHITE);
 
     static int width = 10;
 
     static int x = 0;
     static int y = 0;
-    static int vel_x = 10;
-    static int vel_y = 10;
+    static int vel_x = 1;
+    static int vel_y = 1;
 
-    Rectangle(width, width).Fill(x, y, Color::WHITE);
+    Rectangle(width, width).Fill(x, y, Color::BLACK);
 
     x += vel_x;
     y += vel_y;

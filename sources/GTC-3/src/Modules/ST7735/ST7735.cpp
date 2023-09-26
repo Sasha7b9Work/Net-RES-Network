@@ -64,7 +64,7 @@ void ST7735::Init()
 
     handle.Instance = SPI2;
     handle.Init.Mode = SPI_MODE_MASTER;
-    handle.Init.Direction = SPI_DIRECTION_2LINES;
+    handle.Init.Direction = SPI_DIRECTION_1LINE;
     handle.Init.DataSize = SPI_DATASIZE_8BIT;
     handle.Init.CLKPolarity = SPI_POLARITY_LOW;
     handle.Init.CLKPhase = SPI_PHASE_1EDGE;
@@ -85,7 +85,7 @@ void ST7735::Init()
     pinDC_ST.Init();
     pinCS_ST.Init();
 
-    SPI2->CR1 |= SPI_CR1_SPE;
+//    SPI2->CR1 |= SPI_CR1_SPE;
 
     pinCS_ST.ToLow();
     pinRESET_ST.ToHi();
@@ -108,9 +108,25 @@ void ST7735::Init()
     SendData8(BINARY_U8(01100000));
 
     SendCommand(0xB1);      // FRMCTR1 Frame rate
-    SendData16(0x000F);
-    SendData16(0x000F);
-    SendData16(0x000F);
+
+//    handle.Init.DataSize = SPI_DATASIZE_16BIT;
+//    HAL_SPI_Init(&handle);
+
+    SendData8(0xFF);
+    SendData8(0x00);
+
+    SendData8(0xFF);
+    SendData8(0x00);
+
+    SendData8(0xFF);
+    SendData8(0x00);
+
+//    SendData16(0x000F);
+//    SendData16(0x000F);
+//    SendData16(0x000F);
+
+//    handle.Init.DataSize = SPI_DATASIZE_8BIT;
+//    HAL_SPI_Init(&handle);
 
     SendCommand(0x29);      // DISPON Display on
 
@@ -120,6 +136,12 @@ void ST7735::Init()
 
 
 #ifndef GUI
+
+
+#define WRITE_NIBBLE(nibble)    \
+    value >>= 4;                \
+    HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);
+
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
@@ -142,22 +164,15 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
-                value >>= 4;
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);
+
+                WRITE_NIBBLE(1);
+                WRITE_NIBBLE(2);
+                WRITE_NIBBLE(3);
+                WRITE_NIBBLE(4);
+                WRITE_NIBBLE(5);
+                WRITE_NIBBLE(6);
+                WRITE_NIBBLE(7);
 
                 value = *(++points);
             }
@@ -173,9 +188,10 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 100);
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value & 0x0f], 1, 10);
 
-                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value >> 4], 1, 100);
+                HAL_SPI_Transmit(&handle, (uint8 *)&Color::colors[value >> 4], 1, 10);
+
                 value = *(++points);
             }
         }
@@ -206,9 +222,6 @@ void ST7735::SendData16(uint16 data)
 {
     TimeMeterMS meter;
 
-    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
-    SPI2->CR2 |= SPI_DATASIZE_16BIT;
-
     SET_DC;
     RESET_CS;
 
@@ -219,6 +232,9 @@ void ST7735::SendData16(uint16 data)
             break;
         }
     };
+
+    data = (uint16)((uint8)(data >> 8) + ((uint8)data << 8));
+
     SPI2->DR = data;
 
     while (!(SPI2->SR & SPI_SR_TXE))
@@ -237,44 +253,15 @@ void ST7735::SendData16(uint16 data)
     };
 
     SET_CS;
-
-    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
-    SPI2->CR2 |= SPI_DATASIZE_8BIT;
 }
 
 
 void ST7735::SendData8(uint8 data)
 {
-    TimeMeterMS meter;
-
     SET_DC;
     RESET_CS;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    SPI2_DR_8bit = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    while (SPI2->SR & SPI_SR_BSY)
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
+    HAL_SPI_Transmit(&handle, &data, 1, 10);
 
     SET_CS;
 }
@@ -282,35 +269,10 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
-    TimeMeterMS meter;
     RESET_DC;
     RESET_CS;
 
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    SPI2_DR_8bit = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
-
-    while ((SPI2->SR & SPI_SR_BSY))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    }
+    HAL_SPI_Transmit(&handle, &data, 1, 10);
 
     SET_CS;
 }
