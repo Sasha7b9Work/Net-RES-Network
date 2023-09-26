@@ -36,6 +36,9 @@ const uint16 Color::colors[Color::Count] =
 };
 
 
+#define SPI2_DR_8bit         *(__IO uint8_t*)&(SPI2->DR)
+
+
 namespace ST7735
 {
 #define SET_DC   pinDC_ST.ToHi()
@@ -203,11 +206,11 @@ void ST7735::SendData16(uint16 data)
 {
     TimeMeterMS meter;
 
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_16BIT;
+
     SET_DC;
     RESET_CS;
-
-    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
-    SPI2->CR |= 
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {
@@ -225,7 +228,6 @@ void ST7735::SendData16(uint16 data)
             break;
         }
     };
-
     while ((SPI2->SR & SPI_SR_BSY))
     {
         if (meter.ElapsedTime() > 100)
@@ -235,6 +237,9 @@ void ST7735::SendData16(uint16 data)
     };
 
     SET_CS;
+
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_8BIT;
 }
 
 
@@ -245,7 +250,31 @@ void ST7735::SendData8(uint8 data)
     SET_DC;
     RESET_CS;
 
-    HAL_SPI_Transmit(&handle, &data, 1, 100);
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    SPI2_DR_8bit = data;
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while (SPI2->SR & SPI_SR_BSY)
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
@@ -257,7 +286,31 @@ void ST7735::SendCommand(uint8 data)
     RESET_DC;
     RESET_CS;
 
-    HAL_SPI_Transmit(&handle, &data, 1, 100);
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    SPI2_DR_8bit = data;
+
+    while (!(SPI2->SR & SPI_SR_TXE))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
+
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     SET_CS;
 }
