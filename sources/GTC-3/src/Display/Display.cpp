@@ -239,43 +239,47 @@ void Display::EndScene()
 
 void Display::Update()
 {
-    Rectangle(WIDTH, HEIGHT).Fill(0, 0, Color::WHITE);
+    TimeMeterMS meter_fps;
 
-    static int width = 10;
+    need_redraw = true;
 
-    static int x = 0;
-    static int y = 0;
-    static int vel_x = 1;
-    static int vel_y = 1;
-
-    Rectangle(width, width).Fill(x, y, Color::BLACK);
-
-    x += vel_x;
-    y += vel_y;
-
-    if (x + width >= WIDTH)
+    if (Menu::Opened())
     {
-        vel_x = -vel_x;
-        x = WIDTH - width;
-    }
-    else if (x < 0)
-    {
-        vel_x = -vel_x;
-        x = 0;
-    }
+        Menu::Draw();
 
-    if (y + width >= HEIGHT)
-    {
-        vel_y = -vel_y;
-        y = HEIGHT - width;
+        need_redraw = true;
     }
-    else if (y < 0)
+    else
     {
-        vel_y = -vel_y;
-        y = 0;
-    }
+        if (gset.display.typeDisplaydInfo.IsAllMeasures())
+        {
+            if (need_redraw)
+            {
+                BeginScene(Color::BLACK);
+            }
 
-    EndScene();
+            DrawMeasures();
+
+            DrawTime();
+
+            //            DrawTest();
+
+            if (need_redraw)
+            {
+                EndScene();
+
+                need_redraw = false;
+            }
+
+            //            DrawZones();
+        }
+        else
+        {
+            DrawBigMeasure();
+        }
+
+        zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+    }
 }
 
 
