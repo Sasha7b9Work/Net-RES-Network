@@ -483,6 +483,11 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_usb.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f3xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1483,6 +1488,11 @@
               <FileName>stm32f3xx_ll_usb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_usb.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c</FilePath>
             </File>
           </Files>
         </Group>

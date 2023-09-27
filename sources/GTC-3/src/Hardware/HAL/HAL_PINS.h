@@ -67,8 +67,8 @@ extern PinOutputPP pinRESET_ST;     // ST7735
 extern PinOutputPP pinDC_ST;        // ST7735
 extern PinOutputPP pinCS_ST;        // ST7735
 
-extern PinAF_OD    pinSCL;          // I2C
-extern PinAF_OD    pinSDA;          // I2C
+extern Pin         pinSCL;          // I2C
+extern Pin         pinSDA;          // I2C
 
 extern PinAF_PP    pinTX;           // HC12 TX
 extern PinInput    pinRX;           // HC12 RX
