@@ -10,7 +10,7 @@ void MemoryStorage::Init()
 {
     for (StructData *address = (StructData *)BEGIN; (uint)address < END; address++)
     {
-        if (address && address->IsEmpty())
+        if (address)
         {
             if (address->IsEmpty())
             {

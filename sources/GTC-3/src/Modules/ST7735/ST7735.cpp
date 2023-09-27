@@ -87,7 +87,7 @@ void ST7735::Init()
     SPI2->CR1 |= SPI_CR1_SPE;
 
     pinCS_ST.ToLow();
-    pinRESET_ST.ToHi();
+    pinRESET_ST.ToHi(); //-V525
     HAL_Delay(20);
     pinRESET_ST.ToLow();
     HAL_Delay(20);
@@ -225,7 +225,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                WRITE_NIBBLE(0);
+                WRITE_NIBBLE(0); //-V760
                 WRITE_NIBBLE(1);
 
                 value = *(++points);
