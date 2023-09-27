@@ -3,6 +3,7 @@
 #include "Modules/BME280/BME280.h"
 #include "Modules/BME280/bme280_driver.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <stm32f3xx_hal.h>
 #include <cstring>
 #include <cstdlib>
@@ -21,9 +22,15 @@ namespace BME280
 
 void BME280::Init()
 {
-    if (!AttemptConnection(BME280_I2C_ADDR_PRIM))
+    while (true)
     {
-        AttemptConnection(BME280_I2C_ADDR_SEC);
+        AttemptConnection(BME280_I2C_ADDR_PRIM);
+
+        {
+            AttemptConnection(BME280_I2C_ADDR_SEC);
+        }
+
+        Timer::Delay(10);
     }
 }
 
@@ -37,6 +44,8 @@ bool BME280::AttemptConnection(uint8 id)
     dev.delay_ms = HAL_Delay;
 
     bme280_init(&dev);
+
+    return false;
 
     uint8_t settings_sel;
 

@@ -30,15 +30,15 @@ void HAL::Init()
 
     HAL_I2C1::Init();
 
-    CDC::Init();
+//    CDC::Init();
 
-    HAL_RTC::Init();
+//    HAL_RTC::Init();
 
 //    HAL_USART_HC12::Init();       // \todo здесь багнутая библиотечная функция инициализации - виснет наглухо
 
-    HAL_ADC::Init();
+//    HAL_ADC::Init();
 
-    HAL_SPI1::Init();
+//    HAL_SPI1::Init();
 }
 
 
