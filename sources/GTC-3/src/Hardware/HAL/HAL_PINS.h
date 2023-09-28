@@ -70,8 +70,8 @@ extern PinOutputPP pinCS_ST;        // ST7735
 extern Pin         pinSCL;          // I2C
 extern Pin         pinSDA;          // I2C
 
-extern PinAF_PP    pinTX;           // HC12 TX
-extern PinInput    pinRX;           // HC12 RX
+extern Pin         pinTX;           // HC12 TX
+extern Pin         pinRX;           // HC12 RX
 extern PinOutputPP pinCS_HC12;      // HC12 CS
 
 extern PinInput    pinKey1;         // Keyboard

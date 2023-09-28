@@ -27,6 +27,8 @@ void HAL_USART_HC12::Init()
     handleUART.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     handleUART.Init.Mode = UART_MODE_TX_RX;
     handleUART.Init.OverSampling = UART_OVERSAMPLING_16;
+    handleUART.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    handleUART.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
 
     HAL_UART_Init(&handleUART);
 
