@@ -41,8 +41,6 @@ void HAL_USART_HC12::Init()
 
 void HAL_USART_HC12::Transmit(const void *buffer, int size)
 {
-    return;
-
     if (!buffer)
     {
         return;
