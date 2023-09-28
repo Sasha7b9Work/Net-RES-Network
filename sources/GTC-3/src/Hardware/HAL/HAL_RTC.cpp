@@ -26,28 +26,18 @@ namespace HAL_RTC
 
 void HAL_RTC::Init()
 {
-//    RCC_OscInitTypeDef RCC_OscInitStruct;
-//    RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
-//
-//    /*##-1- Configue LSI as RTC clock soucre ###################################*/
-//    HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
-//
-//    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
-//    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-//    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
-//    RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
-//    HAL_RCC_OscConfig(&RCC_OscInitStruct);
-//
-//    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
-//    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
-//    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
-
-    /*##-2- Enable RTC peripheral Clocks #######################################*/
-    /* Enable RTC Clock */
     __HAL_RCC_RTC_ENABLE();
 
     HAL_RTC_Init(&handleRTC);
+
+#define VALUE_FOR_RTC 0x644
+
+    if (HAL_RTCEx_BKUPRead((RTC_HandleTypeDef *)&handleRTC, RTC_BKP_DR0) != VALUE_FOR_RTC)
+    {
+        SetTime(PackedTime(11, 11, 11, 11, 11, 11));
+
+        HAL_RTCEx_BKUPWrite((RTC_HandleTypeDef *)&handleRTC, RTC_BKP_DR0, VALUE_FOR_RTC);
+    }
 }
 
 
