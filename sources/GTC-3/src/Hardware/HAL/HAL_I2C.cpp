@@ -18,7 +18,7 @@ void HAL_I2C1::Init(void)
     pinSDA.Init();
 
     hi2c1.Instance = I2C1;
-    hi2c1.Init.Timing = 0x2000090E;
+    hi2c1.Init.Timing = 0x00B0DBFF;
     hi2c1.Init.OwnAddress1 = 0;
     hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
     hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -29,19 +29,15 @@ void HAL_I2C1::Init(void)
 
     if (HAL_I2C_Init(&hi2c1) != HAL_OK)
     {
-        int i = 0;
     }
 
-    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_DISABLE) != HAL_OK)
     {
-        int i = 0;
     }
 
     if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
     {
-        int i = 0;
     }
-    
 }
 
 
