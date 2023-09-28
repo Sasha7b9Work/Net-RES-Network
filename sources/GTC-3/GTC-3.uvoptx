@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>70</LineNumber>
+          <LineNumber>31</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134241000</Address>
+          <Address>134251536</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,71 +163,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Hardware/HAL/HAL.cpp\70</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>84</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134241036</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Hardware/HAL/HAL.cpp\84</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>94</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134241070</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Hardware/HAL/HAL.cpp\94</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>2604</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134227574</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c\2604</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>55</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134252268</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_I2C.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\GTC_3\src/Hardware/HAL/HAL_I2C.cpp\55</Expression>
+          <Expression>\\GTC_3\src/Hardware/HAL/HAL.cpp\31</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>

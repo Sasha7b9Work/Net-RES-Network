@@ -22,15 +22,9 @@ namespace BME280
 
 void BME280::Init()
 {
-    while (true)
+    if(!AttemptConnection(BME280_I2C_ADDR_PRIM))
     {
-        AttemptConnection(BME280_I2C_ADDR_PRIM);
-
-        {
-            AttemptConnection(BME280_I2C_ADDR_SEC);
-        }
-
-        Timer::Delay(10);
+        AttemptConnection(BME280_I2C_ADDR_SEC);
     }
 }
 
@@ -44,8 +38,6 @@ bool BME280::AttemptConnection(uint8 id)
     dev.delay_ms = HAL_Delay;
 
     bme280_init(&dev);
-
-    return false;
 
     uint8_t settings_sel;
 
