@@ -13,21 +13,26 @@
 
 typedef enum
 {
-    HAL_IO_OPT_SET_SDA_LOW = 0,
-    HAL_IO_OPT_SET_SDA_HIGH,
-    HAL_IO_OPT_SET_SCL_LOW,
-    HAL_IO_OPT_SET_SCL_HIGH,
-    HAL_IO_OPT_SET_SDA_INPUT,
-    HAL_IO_OPT_SET_SDA_OUTPUT,
-    HAL_IO_OPT_SET_SCL_INPUT,
-    HAL_IO_OPT_SET_SCL_OUTPUT,
-    HAL_IO_OPT_GET_SDA_LEVEL,
-    HAL_IO_OPT_GET_SCL_LEVEL,
-}hal_io_opt_e;
+    HAL_IO_OPT_SET_SDA_LOW = 0,     // Перевести SDA в 0
+    HAL_IO_OPT_SET_SDA_HIGH,        // Перевести SDA в 1
 
-typedef struct sw_i2c_s {
+    HAL_IO_OPT_SET_SCL_LOW,         // Перевести SCL в 0
+    HAL_IO_OPT_SET_SCL_HIGH,        // Перевести SCL в 1
+
+    HAL_IO_OPT_SET_SDA_INPUT,       // Инициалазировать SDA в INPUT
+    HAL_IO_OPT_SET_SDA_OUTPUT,      // Инициализировать SDA в OUTPUT
+
+    HAL_IO_OPT_SET_SCL_INPUT,       // Инициализировать SCL в INPUT
+    HAL_IO_OPT_SET_SCL_OUTPUT,      // Инициализировать SCL в OUTPUT
+
+    HAL_IO_OPT_GET_SDA_LEVEL,       // Считать уровень на SDA
+    HAL_IO_OPT_GET_SCL_LEVEL,       // Считать уровень на SCL
+} hal_io_opt_e;
+
+typedef struct sw_i2c_s
+{
     int (*hal_init)(void);
-    int (*hal_io_ctl)(hal_io_opt_e opt, void *arg);
+    int (*hal_io_ctl)(hal_io_opt_e opt);
     void (*hal_delay_us)(uint32_t us);
 } sw_i2c_t;
 

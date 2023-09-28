@@ -94,7 +94,7 @@ static void sw_i2c_port_delay_us(uint32_t us)
     for (; nCount != 0; nCount--);
 }
 
-static int sw_i2c_port_io_ctl(hal_io_opt_e opt, void * /*param*/)
+static int sw_i2c_port_io_ctl(hal_io_opt_e opt)
 {
     int ret = -1;
     switch (opt)
