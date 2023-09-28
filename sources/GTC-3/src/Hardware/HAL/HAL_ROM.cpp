@@ -13,10 +13,10 @@
 
 namespace HAL_ROM
 {
-    #define ADDR_FLASH_PAGE_62    ((uint)0x0800F800) /* Base @ of Page 62, 1 Kbytes */
-    #define ADDR_FLASH_PAGE_63    ((uint)0x0800FC00) /* Base @ of Page 63, 1 Kbytes */
+    #define ADDR_FLASH_PAGE_62    ((uint)0x0801F000) /* Base @ of Page 62, 2 Kbytes */
+    #define ADDR_FLASH_PAGE_63    ((uint)0x0801F800) /* Base @ of Page 63, 2 Kbytes */
 
-    #define SIZE_SECTOR 1024
+    #define SIZE_SECTOR 2048
 
     #define ADDR_SECTOR_0   ADDR_FLASH_PAGE_62
     #define ADDR_SECTOR_1   ADDR_FLASH_PAGE_63
