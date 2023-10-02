@@ -7,8 +7,6 @@
 
 namespace HAL_RTC
 {
-#define WAKEUP_TIMER_ENABLE 0x32F2
-
     static RTC_HandleTypeDef handleRTC =
     {
         RTC,

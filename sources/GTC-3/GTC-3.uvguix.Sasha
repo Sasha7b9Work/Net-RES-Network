@@ -6,7 +6,7 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <PrjGuiSettings>
-    <LastAddFilePath>D:\Projects\RES-Network\sources\GTC-3\src\Hardware\HAL\I2C</LastAddFilePath>
+    <LastAddFilePath>D:\Projects\RES-Network\sources\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src</LastAddFilePath>
   </PrjGuiSettings>
 
   <ViewPool/>
@@ -20,12 +20,12 @@
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>860 479</TableColWidths>
+      <TableColWidths>860 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1020 153 153 100</TableColWidths>
+      <TableColWidths>1020</TableColWidths>
     </View>
   </SECTreeCtrl>
 
