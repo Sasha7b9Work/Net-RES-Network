@@ -20,12 +20,12 @@
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>860 160</TableColWidths>
+      <TableColWidths>860 479</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1020</TableColWidths>
+      <TableColWidths>1020 153 153 100</TableColWidths>
     </View>
   </SECTreeCtrl>
 
