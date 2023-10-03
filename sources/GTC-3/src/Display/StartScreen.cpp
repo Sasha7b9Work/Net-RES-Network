@@ -3,6 +3,7 @@
 #include "Display/StartScreen.h"
 #include "Display/Display.h"
 #include "Hardware/Timer.h"
+#include "Modules/ST7735/ST7735.h"
 
 
 void StartScreen::Run()
@@ -13,8 +14,8 @@ void StartScreen::Run()
 
     for (int i = 0; i < Display::HEIGHT; i++)
     {
-        HLine(Display::WIDTH).Draw(0, i, Color::BLUE);
+        HLine(Display::WIDTH).Draw(0, i, Color::BLACK);
 
-        Display::EndScene();
+        ST7735::WriteBuffer(0, i, Display::WIDTH, 1);
     }
 }
