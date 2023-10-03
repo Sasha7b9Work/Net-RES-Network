@@ -36,7 +36,7 @@ void Device::Init()
 
     BME280::Init();
 
-//    HC12::Init();
+    HC12::Init();
 
     Keyboard::Init();
 
