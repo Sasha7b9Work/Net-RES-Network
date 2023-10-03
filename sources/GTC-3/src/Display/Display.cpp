@@ -67,7 +67,7 @@ namespace Display
 
     static void DrawTime();
 
-//    static void DrawTest();
+    static void DrawStar();
 
     namespace Buffer
     {
@@ -279,7 +279,7 @@ void Display::Update()
 
             DrawTime();
 
-            //            DrawTest();
+            DrawStar();
 
             if (need_redraw)
             {
@@ -288,7 +288,7 @@ void Display::Update()
                 need_redraw = false;
             }
 
-            //            DrawZones();
+//            DrawZones();
         }
         else
         {
@@ -363,20 +363,13 @@ void Display::DrawTime()
 }
 
 
-//void Display::DrawTest()
-//{
-//    int width = 160;
-//    int height = 16;
-//    int y = 105;
-//
-//    Font::Set(TypeFont::_12_10);
-//
-//    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
-//
-//    bool result = W25Q80DV::Test::Result();
-//
-//    String<>(result ? "Память: OK" : "Память: FAIL").Draw(5, 105, result ? Color::GREEN : Color::RED);
-//}
+void Display::DrawStar()
+{
+    if (((TIME_MS / 500) % 2) == 0)
+    {
+        String<>("*").Draw(156, 0, Color::WHITE);
+    }
+}
 
 
 void Display::DrawBigMeasure()
