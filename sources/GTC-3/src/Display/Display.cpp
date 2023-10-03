@@ -14,6 +14,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Measures.h"
 #include <cstdlib>
+#include <cstring>
 
 
 namespace Display
@@ -107,6 +108,25 @@ namespace Display
             *pixels = value;
         }
 
+        static void DrawHLine(int y, int x1, int x2)
+        {
+            if ((x1 % 2) == 0 && (x2 % 2) == 0)
+            {
+                uint8 *first_byte = &buffer[y * Display::WIDTH / 2];
+
+                uint8 value = (uint8)((uint8)(Color::GetCurrent()) + (Color::GetCurrent() << 4));
+
+                std::memset(first_byte, value, (x2 - x1) / 2U);
+            }
+            else
+            {
+                for (int x = x1; x < x2; x++)
+                {
+                    Display::Buffer::SetPoint(x, y);
+                }
+            }
+        }
+
         static void Fill(Color::E color)
         {
             uint8 value = (uint8)((int)(color) | (int)(color << 4));
@@ -121,10 +141,7 @@ void HLine::Draw(int x0, int y, Color::E color)
 {
     Color::SetCurrent(color);
 
-    for (int x = x0; x < x0 + width + 1; x++)
-    {
-        Display::Buffer::SetPoint(x, y);
-    }
+    Display::Buffer::DrawHLine(y, x0, x0 + width);
 }
 
 
