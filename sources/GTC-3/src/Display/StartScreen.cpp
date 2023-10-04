@@ -4,6 +4,7 @@
 #include "Display/Display.h"
 #include "Hardware/Timer.h"
 #include "Modules/ST7735/ST7735.h"
+#include <cstdlib>
 
 
 void StartScreen::Run()
@@ -12,10 +13,15 @@ void StartScreen::Run()
 
     Display::EndScene();
 
-    for (int i = 0; i < Display::HEIGHT; i++)
-    {
-        HLine(Display::WIDTH).Draw(0, i, Color::BLACK);
+//    for (int i = 0; i < Display::HEIGHT; i++)
+//    {
+//        HLine(Display::WIDTH).Draw(0, i, Color::BLACK);
+//
+//        ST7735::WriteBuffer(0, i, Display::WIDTH, 1);
+//    }
 
-        ST7735::WriteBuffer(0, i, Display::WIDTH, 1);
+    for (int i = 0; i < 20000; i++)
+    {
+        ST7735::WritePoint((int)(std::rand() % Display::WIDTH), (int)(std::rand() % Display::HEIGHT), 0);
     }
 }
