@@ -89,7 +89,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
     if (handle == HAL_USART_HC12::handle)
     {
-        HC12::ReceiveCallback();
+        HC12::_ReceiveCallback();
     }
 }
 

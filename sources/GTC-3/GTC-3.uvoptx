@@ -148,7 +148,56 @@
           <Name>(105=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>51</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134254102</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_USART_HC12.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\GTC_3\src/Hardware/HAL/HAL_USART_HC12.cpp\51</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>92</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134238804</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\GTC_3\src/Hardware/HAL/HAL_IT.cpp\92</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>84</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134241090</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\GTC_3\src/Hardware/HAL/HAL_IT.cpp\84</Expression>
+        </Bp>
+      </Breakpoint>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
@@ -671,7 +720,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1187,7 +1236,7 @@
 
   <Group>
     <GroupName>Hardware/HAL</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1543,7 +1592,7 @@
 
   <Group>
     <GroupName>Modules/HC12</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

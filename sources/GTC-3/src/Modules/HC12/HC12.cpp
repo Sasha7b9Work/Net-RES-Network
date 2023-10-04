@@ -47,6 +47,9 @@ void HC12::Init()
 {
     pinCS_HC12.Init();
     pinCS_HC12.ToHi();
+
+    Command("AT+DEFAULT");
+    Command("AT");
 }
 
 
@@ -71,7 +74,7 @@ void HC12::Command(pchar command)
 }
 
 
-void HC12::ReceiveCallback()
+void HC12::_ReceiveCallback()
 {
     recv_buffer.Push(HAL_USART_HC12::recv_byte);
 

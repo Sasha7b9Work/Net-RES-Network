@@ -33,7 +33,7 @@ void HAL::Init()
 
     HAL_RTC::Init();
 
-    HAL_USART_HC12::Init();       // \todo здесь багнутая библиотечная функция инициализации - виснет наглухо
+    HAL_USART_HC12::Init();
 
     HAL_ADC::Init();
 
@@ -74,8 +74,8 @@ static void SystemClock_Config()
 
     /** Initializes the CPU, AHB and APB buses clocks
     */
-    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
-        | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK |
+        RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -85,9 +85,8 @@ static void SystemClock_Config()
     {
     }
 
-    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB | RCC_PERIPHCLK_USART1
-        | RCC_PERIPHCLK_I2C1 | RCC_PERIPHCLK_RTC
-        | RCC_PERIPHCLK_ADC12;
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB | RCC_PERIPHCLK_USART1 |
+        RCC_PERIPHCLK_I2C1 | RCC_PERIPHCLK_RTC | RCC_PERIPHCLK_ADC12;
     PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
     PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
     PeriphClkInit.Adc12ClockSelection = RCC_ADC12PLLCLK_DIV1;

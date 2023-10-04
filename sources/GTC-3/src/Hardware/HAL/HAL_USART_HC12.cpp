@@ -16,8 +16,8 @@ namespace HAL_USART_HC12
 
 void HAL_USART_HC12::Init()
 {
-    pinTX.Init();
-    pinRX.Init();
+    pinTX_HC12.Init();
+    pinRX_HC12.Init();
 
     handleUART.Instance = USART1;
     handleUART.Init.BaudRate = 9600;
@@ -46,5 +46,8 @@ void HAL_USART_HC12::Transmit(const void *buffer, int size)
         return;
     }
 
-    HAL_UART_Transmit(&handleUART, (uint8_t *)buffer, (uint16_t)size, 0xFFFF);
+    if (HAL_UART_Transmit(&handleUART, (uint8_t *)buffer, (uint16_t)size, 0xFFFF) != HAL_OK)
+    {
+        int i = 0;
+    }
 }
