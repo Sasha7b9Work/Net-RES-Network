@@ -219,6 +219,12 @@ static wxColour ConvertColor(Color::E e)
 }
 
 
+void ST7735::WritePoint(int /*x*/, int /*y*/, uint16 /*color*/)
+{
+
+}
+
+
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
     static const wxColour colors[16] =

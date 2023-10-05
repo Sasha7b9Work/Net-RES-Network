@@ -2,19 +2,20 @@
 
 project (GTC-3)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
 include_directories(.
+                    GTC-3
                     ../../GTC-3/src
                     ../../GTC-3/src/Hardware/CDC
                     ../../GTC-3/src/Hardware/HAL
                     ../../VS/ThirdParty/wxWidgets/include
                     ../../generated/ThirdParty/lib/vc_dll/mswud
                     ../../common/_VS_KEIL/CMSIS
-                    ../../common/_VS_LIBS/STM32F1
+                    ../../common/_VS_LIBS/STM32F3
                     ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
                     ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
                     ../../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include
@@ -62,6 +63,7 @@ file(GLOB HARDWARE                  ../../GTC-3/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC              ../../GTC-3/src/Hardware/CDC/*.*
                                                     Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL              ../../GTC-3/src/Hardware/HAL/*.h
+                                    ../../GTC-3/src/Hardware/HAL/HAL_PINS.cpp
                                                     Hardware/HAL/*.*)
 file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                       Hardware/LAN/libnet/*.*)
@@ -111,7 +113,7 @@ set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
 
 
 set_source_files_properties(../../GTC-3/src/Hardware/CDC/usbd_conf.c
-#                            ../../GTC-3/src/Hardware/CDC/usbd_desc.c
+                            ../../GTC-3/src/Hardware/CDC/usbd_desc.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}
