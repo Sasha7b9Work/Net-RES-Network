@@ -703,7 +703,7 @@ int netbase::recvSocket(sock_t sd, uint8_t* buffer)
 
 //Default functions for function pointers.  Your replacement must return
 //  number of bytes consumed.
-size_t netbase::incomingCB( netpacket* pkt, void *CBD) {
+size_t netbase::incomingCB( netpacket* pkt, void * /*CBD*/) {
   
     
     if (pkt == NULL) {
@@ -728,7 +728,7 @@ size_t netbase::incomingCB( netpacket* pkt, void *CBD) {
 }
 
 //Default new incoming connection callback
-size_t netbase::connectionCB( sock_t con, void *CBD) {
+size_t netbase::connectionCB( sock_t con, void * /*CBD*/) {
 
 #ifdef DEBUG
     if ( CBD == NULL) {
@@ -742,7 +742,7 @@ size_t netbase::connectionCB( sock_t con, void *CBD) {
 };
 
 //Default disconnect callback
-size_t netbase::disconnectionCB( sock_t con, void *CBD) {
+size_t netbase::disconnectionCB( sock_t con, void * /*CBD*/) {
 #ifdef DEBUG
     if ( CBD == NULL) {
         std::cerr << "Null callback data on disconnectionCB!" << endl;
@@ -907,7 +907,7 @@ bool netbase::closeLog() const
 }
 
 //Print contents of packet.  Wrap unprintable bytes in { }
-size_t netbase::debugPacket(const netpacket *pkt) const
+size_t netbase::debugPacket(const netpacket * /*pkt*/) const
 {
     //Only in debug mode!
 #ifndef DEBUG
