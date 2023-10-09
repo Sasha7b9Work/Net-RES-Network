@@ -46,8 +46,5 @@ void HAL_USART_HC12::Transmit(const void *buffer, int size)
         return;
     }
 
-    if (HAL_UART_Transmit(&handleUART, (uint8_t *)buffer, (uint16_t)size, 0xFFFF) != HAL_OK)
-    {
-        int i = 0;
-    }
+    HAL_UART_Transmit(&handleUART, (uint8_t *)buffer, (uint16_t)size, 0xFFFF);
 }

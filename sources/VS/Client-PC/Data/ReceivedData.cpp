@@ -14,7 +14,7 @@ namespace ReceivedData
 
     static bool FindFirstABC();
 
-    static bool ParseCommand(char bytes[16]);
+    static bool ParseCommand(char bytes[20]);
 }
 
 
@@ -26,13 +26,13 @@ void ReceivedData::Append(uint8 *data, int size)
 
 void ReceivedData::Update()
 {
-    while (buffer.Size() >= 16 && FindFirstABC())
+    while (buffer.Size() >= 20 && FindFirstABC())
     {
-        char bytes[16];
+        char bytes[20];
 
-        std::memcpy(bytes, buffer.Data(), 16);
+        std::memcpy(bytes, buffer.Data(), 20);
 
-        buffer.RemoveFirst(16);
+        buffer.RemoveFirst(20);
 
         if (!ParseCommand(bytes))
         {
@@ -90,17 +90,17 @@ bool ReceivedData::ParseCommand(char message[16])
 {
     uint8 type = message[3];
 
-    uint id = 0;
+    uint id;
 
-    std::memcpy(&id, &message[4], 4);
+    std::memcpy(&id, &message[4], 4);           // offset 4
 
     uint hash = 0;
 
-    std::memcpy(&hash, &message[8], 4);
+    std::memcpy(&hash, &message[8], 4);        // offset 12
 
     float value = 0.0f;
 
-    std::memcpy(&value, &message[12], 4);
+    std::memcpy(&value, &message[12], 4);       // offset 16
 
     if (Math::CalculateHash(&value, 4) == hash)
     {

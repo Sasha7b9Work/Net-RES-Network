@@ -9,7 +9,7 @@ void HAL::Init()
 }
 
 
-String<> HAL::GetUID()
+uint HAL::GetUID()
 {
-    return String<>("");
+    return 123;
 }

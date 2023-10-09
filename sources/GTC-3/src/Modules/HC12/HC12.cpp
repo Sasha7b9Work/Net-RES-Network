@@ -48,8 +48,13 @@ void HC12::Init()
     pinCS_HC12.Init();
     pinCS_HC12.ToHi();
 
-    Command("AT+DEFAULT");
-    Command("AT");
+//    while (true)
+    {
+        Command("AT+DEFAULT");
+        Command("AT");
+
+//        Timer::Delay(100);
+    }
 }
 
 
