@@ -1,3 +1,4 @@
+// 2023/10/09 11:47:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/Text/String.h"
 

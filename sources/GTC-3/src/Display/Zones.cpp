@@ -1,3 +1,4 @@
+// 2023/10/09 11:47:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Zones.h"
 #include "Display/Display.h"
