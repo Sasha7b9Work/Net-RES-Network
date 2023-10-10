@@ -40,6 +40,8 @@ namespace HAL_ADC
 
     float GetVoltage();
 
+    float GetPressure();
+
     extern void *handle;           // ADC_HandleTypeDef
 }
 
