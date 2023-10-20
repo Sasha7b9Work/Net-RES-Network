@@ -21,7 +21,9 @@ namespace HAL_SPI1
             SPI_FIRSTBIT_MSB,               // Init.FirstBit
             SPI_TIMODE_DISABLE,             // Init.TIMode
             SPI_CRCCALCULATION_DISABLE,     // Init.CRCCalculation
-            7                               // InitCRCPolynomial
+            7,                              // InitCRCPolynomial
+            SPI_CRC_LENGTH_8BIT,
+            SPI_NSS_PULSE_DISABLE
         }
     };
 

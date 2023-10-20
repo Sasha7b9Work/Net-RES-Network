@@ -57,9 +57,9 @@ extern PinOutputPP pinBEEP;
 extern PinAnalog   pinADC;
 extern PinAnalog   pinHumidity;
 
-extern PinAF_PP    pinSCK_SPI1;     // SPI1
-extern PinAF_PP    pinMOSI_SPI1;    // SPI1
-extern PinInput    pinMISO_SPI1;    // SPI1
+extern Pin         pinSCK_SPI1;     // SPI1
+extern Pin         pinMOSI_SPI1;    // SPI1
+extern Pin         pinMISO_SPI1;    // SPI1
 extern PinOutputPP pinNSS_SPI1;     // SPI1
 
 extern Pin         pinSCL_SPI2;     // SPI2 ST7735
