@@ -50,7 +50,4 @@
 extern USBD_CDC_ItfTypeDef  USBD_CDC_fops;
 
 
-struct HCDC
-{
-    static void *handlePCD;
-};
+extern void *handlePCD;

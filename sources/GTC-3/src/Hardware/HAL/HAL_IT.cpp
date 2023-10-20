@@ -76,7 +76,7 @@ void SysTick_Handler(void)
 
 void USB_LP_CAN_RX0_IRQHandler(void)
 {
-    HAL_PCD_IRQHandler((PCD_HandleTypeDef *)HCDC::handlePCD);
+    HAL_PCD_IRQHandler((PCD_HandleTypeDef *)handlePCD);
 }
 
 void USART1_IRQHandler(void)

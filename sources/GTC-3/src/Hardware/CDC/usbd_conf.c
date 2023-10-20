@@ -207,14 +207,16 @@ void HAL_PCD_DisconnectCallback(PCD_HandleTypeDef *hpcd)
   */
 USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
 {
+    PCD_HandleTypeDef *handle = (PCD_HandleTypeDef *)handlePCD;
+
     /* Set LL Driver parameters */
-    CDC::handlePCD->Instance = USB;
-    CDC::handlePCD->Init.dev_endpoints = 8;
-    CDC::handlePCD->Init.phy_itface = PCD_PHY_EMBEDDED;
-    CDC::handlePCD->Init.speed = PCD_SPEED_FULL;
+    handle->Instance = USB;
+    handle->Init.dev_endpoints = 8;
+    handle->Init.phy_itface = PCD_PHY_EMBEDDED;
+    handle->Init.speed = PCD_SPEED_FULL;
     /* Link The driver to the stack */
-    handlePCD.pData = pdev;
-    pdev->pData = &handlePCD;
+    handle->pData = pdev;
+    pdev->pData = handle;
     /* Initialize LL Driver */
     HAL_PCD_Init((PCD_HandleTypeDef *)pdev->pData);
 
@@ -431,7 +433,7 @@ void USBD_LL_Delay(uint32_t Delay)
   * @param  size: size of allocated memory
   * @retval None
   */
-void *USBD_static_malloc(uint32_t)
+void *USBD_static_malloc(uint32_t t)
 {
     static uint32_t mem[sizeof(USBD_CDC_HandleTypeDef) / 4 + 1];
 
@@ -443,7 +445,7 @@ void *USBD_static_malloc(uint32_t)
   * @param  *p pointer to allocated  memory address
   * @retval None
   */
-void USBD_static_free(void *)
+void USBD_static_free(void *t)
 {
 
 }
@@ -454,7 +456,7 @@ void USBD_static_free(void *)
   * @param  state: connection state (0 : disconnected / 1: connected)
   * @retval None
   */
-void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *, uint8_t state)
+void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *h, uint8_t state)
 {
     if (state == 1)
     {
