@@ -19,6 +19,8 @@
 
 namespace Display
 {
+    static float voltage = 0.0f;
+
     bool need_redraw = true;
 
     uint time_prev_redraw = 0;
@@ -57,6 +59,7 @@ namespace Display
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
+        Measure(TypeMeasure::Humidity2),
         Measure(TypeMeasure::DewPoint)
     };
 
@@ -64,8 +67,6 @@ namespace Display
 
     // Âûâåñòè îäíî èçìåğåíèå íà âåñü ıêğàí
     static void DrawBigMeasure();
-
-    static void DrawTime();
 
     static void DrawStar();
 
@@ -134,6 +135,12 @@ namespace Display
             std::memset(buffer, value, WIDTH * HEIGHT / 2);
         }
     }
+}
+
+
+void Display::SendVoltage(float volt)
+{
+    voltage = volt;
 }
 
 
@@ -277,8 +284,6 @@ void Display::Update()
 
             DrawMeasures();
 
-            DrawTime();
-
             DrawStar();
 
             if (need_redraw)
@@ -317,49 +322,27 @@ void Display::DrawMeasures()
         TypeMeasure::Temperature,
         TypeMeasure::Pressure,
         TypeMeasure::Humidity,
+        TypeMeasure::Humidity2,
         TypeMeasure::DewPoint
     };
 
-    for (int i = 0; i < TypeMeasure::Count; i++)
+    for (int i = 0; i < 4; i++)
     {
         int x = 93;
         int y = y0 + i * dY;
         int width = 30;
         int height = 15;
 
-        if (gset.display.show_measure[types[i]])
+        if (need_redraw)
         {
-            if (need_redraw)
-            {
-                String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Measures::InRange((TypeMeasure::E)i, measures[i].value) ? Color::WHITE : Color::FLASH_10);
-                measures[types[i]].Units().Draw(x + 41, y);
-            }
-
-            measures[types[i]].Draw(x, y);
+            String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
+            measures[types[i]].Units().Draw(x + 41, y);
         }
+
+        measures[types[i]].Draw(x, y);
 
         ST7735::WriteBuffer(x - 1, y, width, height);
     }
-}
-
-
-void Display::DrawTime()
-{
-    int width = 160;
-    int height = 16;
-    int y = 105;
-
-    Font::Set(TypeFont::_12_10);
-    
-    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
-
-    PackedTime time = HAL_RTC::GetTime();
-
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
-
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(80, 105);
-
-    ST7735::WriteBuffer(0, y, width, height);
 }
 
 
@@ -369,6 +352,8 @@ void Display::DrawStar()
     {
         String<>("*").Draw(156, 0, Color::WHITE);
     }
+
+    String<>("%f", voltage).Draw(100, 110, Color::WHITE);
 }
 
 
@@ -383,7 +368,8 @@ void Display::DrawBigMeasure()
         30,
         12,
         28,
-        35
+        35,
+        10
     };
 
     Measure &measure = measures[gset.display.typeDisplaydInfo.value];
@@ -405,6 +391,7 @@ String<> Display::Measure::Name()
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
+        "HIH-4000",
         "ÒÎ×ÊÀ ĞÎÑÛ"
     };
 
@@ -419,6 +406,7 @@ String<> Display::Measure::Units()
     {
         "¨Ñ",
         "ãÏà",
+        "%%",
         "%%",
         "¨Ñ"
     };

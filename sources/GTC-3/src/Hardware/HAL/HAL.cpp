@@ -1,13 +1,18 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/CDC/CDC.h"
 #include "Utils/Math.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include <stm32f3xx_hal.h>
 #include <cstring>
+#include <usbd_cdc.h>
+#include <usbd_desc.h>
 
 
 static void SystemClock_Config();
+
+
+USBD_HandleTypeDef hUSBDDevice;
 
 
 void HAL::Init()
@@ -26,10 +31,21 @@ void HAL::Init()
     __HAL_RCC_RTC_ENABLE();
     __HAL_RCC_USART1_CLK_ENABLE();      // HC12
     __HAL_RCC_I2C1_CLK_ENABLE();
+    __HAL_RCC_ADC1_CLK_ENABLE();
 
     HAL_I2C1::Init();
 
-    CDC::Init();
+    /* Init Device Library */
+    USBD_Init(&hUSBDDevice, &VCP_Desc, 0);
+
+    /* Add Supported Class */
+    USBD_RegisterClass(&hUSBDDevice, &USBD_CDC);
+
+    /* Add CDC Interface Class */
+    USBD_CDC_RegisterInterface(&hUSBDDevice, &USBD_CDC_fops);
+
+    /* Start Device Process */
+    USBD_Start(&hUSBDDevice);
 
     HAL_RTC::Init();
 

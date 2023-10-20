@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/CDC/CDC.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
 #include "Hardware/Beeper.h"
@@ -74,9 +74,9 @@ void SysTick_Handler(void)
 }
 
 
-void USB_LP_CAN1_RX0_IRQHandler(void)
+void USB_LP_CAN_RX0_IRQHandler(void)
 {
-    CDC::OnIRQHandler();
+    HAL_PCD_IRQHandler((PCD_HandleTypeDef *)HCDC::handlePCD);
 }
 
 void USART1_IRQHandler(void)

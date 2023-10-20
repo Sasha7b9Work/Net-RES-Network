@@ -2,10 +2,10 @@
 #include "defines.h"
 #include "Device.h"
 #include "Measures.h"
-#include "Modules/HC12/HC12.h"
 #include "Hardware/HAL/HAL.h"
+#include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
-#include "Hardware/CDC/CDC.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Hardware/Timer.h"
@@ -14,6 +14,7 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/Beeper.h"
 #include "Display/StartScreen.h"
+#include "Modules/HIH4000/HIH4000.h"
 #include <cmath>
 
 
@@ -60,6 +61,12 @@ void Device::Update()
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
+        float voltage = 0.0f;
+
+        InterCom::Send(TypeMeasure::Humidity2, HIH4000::GetHumidity(temp, &voltage));
+
+        Display::SendVoltage(voltage);
+
         InterCom::Send(TypeMeasure::Temperature, temp);
         InterCom::Send(TypeMeasure::Pressure, pressure);
         InterCom::Send(TypeMeasure::Humidity, humidity);
@@ -87,7 +94,7 @@ void Device::Update()
 
     Display::Update();
 
-    HAL_ADC::Update();
+    HAL_ADC::GetVoltage();
 }
 
 

@@ -3,71 +3,149 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include <stm32f3xx_hal.h>
+#include <cstring>
 
 
 namespace HAL_ADC
 {
     static ADC_HandleTypeDef handleADC;
     void *handle = (void *)&handleADC;
+    static bool flag_ready = false;
 
-    static float voltage = 0.0f;
+    static uint ReadChannel(uint channel);
 }
 
 
 void HAL_ADC::Init()
 {
-#ifndef WIN32
-    __HAL_RCC_ADC1_CLK_ENABLE();
-#endif
-
     pinADC.Init();
-
-    ADC_ChannelConfTypeDef sConfig = { 0 };
+    pinHumidity.Init();
 
     handleADC.Instance = ADC1;
+    handleADC.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV1;
+    handleADC.Init.Resolution = ADC_RESOLUTION_12B;
     handleADC.Init.ScanConvMode = ADC_SCAN_DISABLE;
     handleADC.Init.ContinuousConvMode = DISABLE;
     handleADC.Init.DiscontinuousConvMode = DISABLE;
+    handleADC.Init.NbrOfDiscConversion = 0;
     handleADC.Init.ExternalTrigConv = ADC_SOFTWARE_START;
     handleADC.Init.DataAlign = ADC_DATAALIGN_RIGHT;
     handleADC.Init.NbrOfConversion = 1;
 
     HAL_ADC_Init(&handleADC);
 
-    sConfig.Channel = ADC_CHANNEL_4;
-    sConfig.Rank = ADC_REGULAR_RANK_1;
-//    sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
-
-    HAL_ADC_ConfigChannel(&handleADC, &sConfig);
-
     HAL_NVIC_SetPriority(ADC1_IRQn, 1, 1);
+}
 
-    HAL_NVIC_EnableIRQ(ADC1_IRQn);
 
-    HAL_ADC_Start_IT(&handleADC);
+uint HAL_ADC::ReadChannel(uint channel)
+{
+    ADC_ChannelConfTypeDef config = { 0 };
+
+    config.Channel = channel;
+    config.Rank = ADC_REGULAR_RANK_1;
+    config.SamplingTime = ADC_SAMPLETIME_601CYCLES_5;
+
+    uint value = 0;
+
+    if (HAL_ADC_ConfigChannel(&handleADC, &config) == HAL_OK)
+    {
+        HAL_NVIC_EnableIRQ(ADC1_IRQn);
+
+        flag_ready = false;
+
+        if (HAL_ADC_Start_IT(&handleADC) == HAL_OK)
+        {
+            while (!flag_ready)
+            {
+            }
+
+            value = HAL_ADC_GetValue(&handleADC);
+
+            if (value != 0 && value != 0xFFF && value != 0xF9D)
+            {
+                value = value;
+            }
+        }
+    }
+
+    return value;
 }
 
 
 float HAL_ADC::GetVoltage()
 {
+    static TimeMeterMS meter;
+
+    static float voltage = 0.0f;
+
+    if (meter.IsFinished())
+    {
+        voltage = (float)ReadChannel(ADC_CHANNEL_4) * 3.3f * 1.25f / (float)(1 << 12);
+
+        meter.FinishAfter(1000);
+    }
+
     return voltage;
 }
 
 
-void HAL_ADC::Update()
+template<int size_buffer>
+class Averager //-V730
 {
-    static TimeMeterMS meter;
+public:
+    Averager() : num_elements(0) { }
 
-    if (meter.ElapsedTime() > 250)
+    void Push(float value)
     {
-        HAL_ADC_Start_IT((ADC_HandleTypeDef *)HAL_ADC::handle);
+        if (num_elements == size_buffer)
+        {
+            std::memmove(buffer, buffer + 1, sizeof(float) * (size_buffer - 1));
 
-        meter.Reset();
+            num_elements--;
+        }
+        buffer[num_elements++] = value;
     }
+
+    float Pop(int index)
+    {
+        return buffer[index];
+    }
+
+    float Get()
+    {
+        float sum = 0;
+
+        for (int i = 0; i < num_elements; i++)
+        {
+            sum += buffer[i];
+        }
+
+        return sum / (float)num_elements;
+    }
+    int NumElements() const { return num_elements; }
+    void Reset() { num_elements = 0; }
+private:
+    float buffer[size_buffer];
+    int num_elements;
+};
+
+
+float HAL_ADC::GetHumidity()
+{
+    static Averager<8> averager;
+
+    float voltage = (float)ReadChannel(ADC_CHANNEL_1) * 3.3f / (float)(1 << 12) + 0.075f;
+
+    voltage = voltage * 3.0f / 2.0f;
+
+    averager.Push(voltage);
+
+    return averager.Get();
 }
 
 
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *)
 {
-    HAL_ADC::voltage = (float)HAL_ADC_GetValue(hadc) / (1 << 12) * 3.3f * 1.25f;
+    HAL_ADC::flag_ready = true;
 }

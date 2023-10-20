@@ -493,6 +493,11 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pwr.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f3xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -669,34 +674,14 @@
           <GroupName>Hardware/CDC</GroupName>
           <Files>
             <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_conf.h</FilePath>
             </File>
             <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_desc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
             </File>
             <File>
               <FileName>usbd_core.c</FileName>
@@ -717,6 +702,26 @@
               <FileName>usbd_ioreq.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -887,6 +892,21 @@
               <FileName>HC12.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules/HIH4000</GroupName>
+          <Files>
+            <File>
+              <FileName>HIH4000.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\HIH4000\HIH4000.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HIH4000.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\HIH4000\HIH4000.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1539,6 +1559,11 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pwr.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f3xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1715,34 +1740,14 @@
           <GroupName>Hardware/CDC</GroupName>
           <Files>
             <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_conf.h</FilePath>
             </File>
             <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_desc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
             </File>
             <File>
               <FileName>usbd_core.c</FileName>
@@ -1763,6 +1768,26 @@
               <FileName>usbd_ioreq.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1933,6 +1958,21 @@
               <FileName>HC12.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules/HIH4000</GroupName>
+          <Files>
+            <File>
+              <FileName>HIH4000.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\HIH4000\HIH4000.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HIH4000.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\HIH4000\HIH4000.h</FilePath>
             </File>
           </Files>
         </Group>

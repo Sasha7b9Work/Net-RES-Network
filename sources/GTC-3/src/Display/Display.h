@@ -11,6 +11,7 @@ struct TypeMeasure
         Temperature,        // Температура
         Pressure,           // Давление
         Humidity,           // Влажность
+        Humidity2,
         DewPoint,           // Точка росы
         Count
     };
@@ -31,6 +32,8 @@ namespace Display
     void BeginScene(Color::E);
 
     void EndScene();
+
+    void SendVoltage(float);
 
     namespace Buffer
     {
