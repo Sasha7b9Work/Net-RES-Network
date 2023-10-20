@@ -43,21 +43,11 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     __HAL_REMAPINTERRUPT_USB_ENABLE();
 #endif
 
-#if defined (USE_USB_INTERRUPT_DEFAULT)
-
     /* Set USB Default FS Interrupt priority */
     HAL_NVIC_SetPriority(USB_LP_CAN_RX0_IRQn, 5, 0);
 
     /* Enable USB FS Interrupt */
     HAL_NVIC_EnableIRQ(USB_LP_CAN_RX0_IRQn);
-
-#elif defined (USE_USB_INTERRUPT_REMAPPED)
-    /* Set USB Remapped FS Interrupt priority */
-    HAL_NVIC_SetPriority(USB_LP_IRQn, 5, 0);
-
-    /* Enable USB FS Interrupt */
-    HAL_NVIC_EnableIRQ(USB_LP_IRQn);
-#endif
 }
 
 /**
