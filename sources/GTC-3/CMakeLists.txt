@@ -2,7 +2,7 @@
 
 project (GTC-3)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 message("------------------------------------------------------------------------ ${PROJECT_NAME}")
 
@@ -21,6 +21,7 @@ add_definitions(-DSTM32F303xC)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4131)    # 'malloc' : uses old-style declarator
 add_compile_options(/wd4201)
 add_compile_options(/wd4310)
 add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed

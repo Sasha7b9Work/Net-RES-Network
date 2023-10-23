@@ -425,6 +425,8 @@ void USBD_LL_Delay(uint32_t Delay)
   */
 void *USBD_static_malloc(uint32_t t)
 {
+    UNUSED(t);
+
     static uint32_t mem[sizeof(USBD_CDC_HandleTypeDef) / 4 + 1];
 
     return mem;
@@ -437,7 +439,7 @@ void *USBD_static_malloc(uint32_t t)
   */
 void USBD_static_free(void *t)
 {
-
+    UNUSED(t);
 }
 
 /**
@@ -448,6 +450,8 @@ void USBD_static_free(void *t)
   */
 void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *h, uint8_t state)
 {
+    UNUSED(h);
+
     if (state == 1)
     {
         HAL_GPIO_WritePin(USB_DISCONNECT_PORT, USB_DISCONNECT_PIN, GPIO_PIN_RESET);
