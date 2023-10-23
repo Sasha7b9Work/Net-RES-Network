@@ -95,3 +95,17 @@ bool Key::IsPressed() const
 {
     return Keyboard::pressed[value];
 }
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (pinKey1.IsLow())
+    {
+
+    }
+
+    if (pinKey2.IsLow())
+    {
+
+    }
+}
