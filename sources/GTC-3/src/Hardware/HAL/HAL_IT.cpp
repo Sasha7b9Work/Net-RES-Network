@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/CDC/usbd_cdc_interface.h"
+#include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
 #include "Hardware/Beeper.h"
@@ -103,4 +103,10 @@ void ADC1_2_IRQHandler(void)
 void TIM3_IRQHandler(void)
 {
     HAL_TIM_IRQHandler((TIM_HandleTypeDef *)Beeper::handleTIM3);
+}
+
+
+void EXTI9_5_IRQHandler(void)
+{
+
 }

@@ -1,6 +1,6 @@
 #include "usbd_cdc.h"
-#include "Hardware/CDC/usbd_cdc_interface.h"
 
+extern void *handlePCD;
 
 #define USB_DISCONNECT_PORT                 GPIOB
 #define USB_DISCONNECT_PIN                  GPIO_PIN_8

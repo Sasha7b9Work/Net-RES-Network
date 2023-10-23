@@ -93,26 +93,3 @@ namespace HAL_ROM
     void SaveSettings(const Settings &);
     bool LoadSettings(Settings &);
 }
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif 
-
-    void NMI_Handler(void);
-    void HardFault_Handler(void);
-    void MemManage_Handler(void);
-    void BusFault_Handler(void);
-    void UsageFault_Handler(void);
-    void SVC_Handler(void);
-    void DebugMon_Handler(void);
-    void PendSV_Handler(void);
-    void SysTick_Handler(void);
-    void USB_LP_CAN_RX0_IRQHandler(void);
-    void USART1_IRQHandler(void);
-    void ADC1_2_IRQHandler(void);
-    void TIM3_IRQHandler(void);
-
-#ifdef __cplusplus
-}
-#endif

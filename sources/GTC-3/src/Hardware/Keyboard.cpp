@@ -26,6 +26,10 @@ namespace Keyboard
 
 void Keyboard::Init()
 {
+    /*
+    * PB8, PB9
+    */
+
     pinKey1.Init();
     pinKey2.Init();
 }
