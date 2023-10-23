@@ -181,8 +181,6 @@ bool W25Q80DV::Test::Result()
 
 void W25Q80DV::Write32bit(uint8 command, uint bits24)
 {
-    pinWP.ToHi();
-
     uint8 data[4];
 
     data[0] = command;
@@ -191,8 +189,6 @@ void W25Q80DV::Write32bit(uint8 command, uint bits24)
     data[3] = (uint8)(bits24);
 
     HAL_SPI1::Write(data, 4);
-
-    pinWP.ToLow();
 }
 
 
