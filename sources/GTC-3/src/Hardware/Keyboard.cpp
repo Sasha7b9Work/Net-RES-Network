@@ -85,7 +85,7 @@ void Keyboard::UpdateKey(Key::E key)
 
 bool Keyboard::KeyPressed(Key::E key)
 {
-    static const PinInput *pins[Key::Count] = { &pinKey1, &pinKey2 };
+    static const Pin *pins[Key::Count] = { &pinKey1, &pinKey2 };
 
     return pins[key]->IsLow();
 }
@@ -97,7 +97,7 @@ bool Key::IsPressed() const
 }
 
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t)
 {
     if (pinKey1.IsLow())
     {
