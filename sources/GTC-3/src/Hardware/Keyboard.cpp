@@ -32,6 +32,9 @@ void Keyboard::Init()
 
     pinKey1.Init();
     pinKey2.Init();
+
+    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
 
