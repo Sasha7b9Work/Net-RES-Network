@@ -10,7 +10,7 @@ namespace HAL_ADC
 {
     static ADC_HandleTypeDef handleADC;
     void *handle = (void *)&handleADC;
-    static bool flag_ready = false;
+    static volatile bool flag_ready = false;
 
     static uint ReadChannel(uint channel);
 }
