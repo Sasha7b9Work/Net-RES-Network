@@ -4,7 +4,7 @@
 #include "Modules/W25Q80DV/W25Q80DV.h"
 
 
-struct DataStruct
+struct Measurements
 {
     uint  crc32;
     float temperature;
@@ -17,16 +17,16 @@ struct DataStruct
 
 namespace Storage
 {
-    static const int SIZE = 1024 * 1024 - 2 * W25Q80DV::SIZE_SECTOR;        // 8 MBit = 1 MByte
+    static const int SIZE = 1024 * 1024 - 2 * W25Q80DV::SIZE_PAGE;        // 8 MBit = 1 MByte
 
-    void AppendData(const DataStruct &);
+    void AppendData(const Measurements &);
 
     bool IsEmpty();
 
     // Возвращает указатель на следующие данные, если таковые имеются. Не удаляет данные из хранилищца.
     // Чтобы удалить, нужно вызывать EraseData() с указателем на эти данные.
-    DataStruct *GetNextData();
+    Measurements *GetNextData();
 
-    void EraseData(DataStruct *);
+    void EraseData(Measurements *);
 }
 

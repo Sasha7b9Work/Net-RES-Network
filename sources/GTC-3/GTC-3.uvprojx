@@ -978,6 +978,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Storage\MemoryStorage.h</FilePath>
             </File>
+            <File>
+              <FileName>MemoryStorage_test.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\MemoryStorage_test.inc</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2043,6 +2048,11 @@
               <FileName>MemoryStorage.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Storage\MemoryStorage.h</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryStorage_test.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\MemoryStorage_test.inc</FilePath>
             </File>
           </Files>
         </Group>

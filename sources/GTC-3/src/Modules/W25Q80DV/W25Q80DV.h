@@ -6,7 +6,7 @@ namespace W25Q80DV
 {
     static const uint BEGIN = 0;
     static const uint END = 1024 * 1024;
-    static const int SIZE_SECTOR = 4 * 1024;
+    static const int SIZE_PAGE = 4 * 1024;
 
     // Размер буфера ограничен 1024 байтами
     void WriteLess1024bytes(uint address, const void *buffer, int size);
@@ -24,6 +24,8 @@ namespace W25Q80DV
     void WriteUInt(uint address, uint value);
 
     void Write(uint address, uint8 byte);
+
+    void WriteData(uint, const void *, int);
 
     uint8 Read(uint address);
 

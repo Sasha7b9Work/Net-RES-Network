@@ -18,7 +18,7 @@ namespace Storage
 }
 
 
-void Storage::AppendData(const DataStruct &)
+void Storage::AppendData(const Measurements &)
 {
 
 }
@@ -30,13 +30,13 @@ bool Storage::IsEmpty()
 }
 
 
-DataStruct *Storage::GetNextData()
+Measurements *Storage::GetNextData()
 {
     return nullptr;
 }
 
 
-void Storage::EraseData(DataStruct *)
+void Storage::EraseData(Measurements *)
 {
 
 }
