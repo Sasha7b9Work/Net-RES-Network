@@ -21,6 +21,11 @@ namespace Keyboard
 
     static bool KeyPressed(Key::E);
     static void UpdateKey(Key::E);
+
+    namespace IT
+    {
+        static bool pressed[Key::Count] = { false, false };
+    }
 }
 
 
@@ -88,9 +93,7 @@ void Keyboard::UpdateKey(Key::E key)
 
 bool Keyboard::KeyPressed(Key::E key)
 {
-    static const Pin *pins[Key::Count] = { &pinKey1, &pinKey2 };
-
-    return pins[key]->IsLow();
+    return IT::pressed[key];
 }
 
 
@@ -102,13 +105,7 @@ bool Key::IsPressed() const
 
 void HAL_GPIO_EXTI_Callback(uint16_t)
 {
-    if (pinKey1.IsLow())
-    {
+    Keyboard::IT::pressed[Key::_1] = pinKey1.IsLow();
 
-    }
-
-    if (pinKey2.IsLow())
-    {
-
-    }
+    Keyboard::IT::pressed[Key::_2] = pinKey2.IsLow();
 }
