@@ -25,34 +25,31 @@ namespace InterCom
     *  1       - 'B'
     *  2       - 'C'
     *  3       - type
-    *  4 ...11 - ID
-    *  12...15 - hash[12...15]
-    *  16...19 - value
+    *  4 ...7  - ID
+    *  8 ...11 - hash
+    *  12...15 - value
     */
 
     Direction::E direction = Direction::_None;
 
-    Buffer<uint8, 20> CreateMessage(TypeMeasure::E type, float value)
+    Buffer<uint8, 16> CreateMessage(TypeMeasure::E type, float value)
     {
-        Buffer<uint8, 20> message;
+        Buffer<uint8, 16> message;
 
-        message[0] = 'A';
+        message[0] = 'A';                               // offset 0
         message[1] = 'B';
         message[2] = 'C';
         message[3] = (uint8)type;
 
-        String<> id = HAL::GetUID();
+        uint id = HAL::GetUID();
 
-        for (int i = 0; i < 8; i++)
-        {
-            message[i + 4] = (uint8)id[i];
-        }
+        std::memcpy(&message[4], &id, 4);               // offset 4
 
-        std::memcpy(&message[16], &value, 4);
+        std::memcpy(&message[12], &value, 4);           // offset 12
 
         uint hash = Math::CalculateCRC(&value, 4);
 
-        std::memcpy(&message[12], &hash, 4);
+        std::memcpy(&message[8], &hash, 4);             // offset 8
 
         return message;
     }
@@ -98,7 +95,7 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         CDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
-    Buffer<uint8, 20> data = CreateMessage(type, measure); //-V821
+    Buffer<uint8, 16> data = CreateMessage(type, measure); //-V821
 
     if (direction & Direction::HC12)
     {

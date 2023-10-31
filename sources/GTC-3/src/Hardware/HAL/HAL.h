@@ -28,7 +28,7 @@ namespace HAL
 
     void Delay(unsigned int timeMS);
 
-    String<> GetUID();
+    uint GetUID();
 }
 
 
