@@ -38,7 +38,7 @@ bool TypeMeasure::Exist(TypeMeasure::E type)
         true,
         false,
         true,
-        false,
+        true,
         false
     };
 

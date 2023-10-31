@@ -39,7 +39,7 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 
         if (col >= 0)
         {
-            SetColLabelValue(col + 1, wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
+            SetColLabelValue(TypeMeasure::NumColumn((TypeMeasure::E)meas), wxString(TypeMeasure::GetTitle((TypeMeasure::E)meas)) +
                 wxString("\n") + wxString(TypeMeasure::GetUnits((TypeMeasure::E)meas)));
         }
     }
