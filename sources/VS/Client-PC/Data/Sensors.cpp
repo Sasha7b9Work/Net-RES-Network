@@ -38,7 +38,7 @@ bool TypeMeasure::Exist(TypeMeasure::E type)
         true,
         false,
         true,
-        true,
+        false,
         false
     };
 
@@ -86,7 +86,7 @@ int TypeMeasure::NumColumn(TypeMeasure::E type)
         }
     }
 
-    return result;
+    return result + 1;
 }
 
 

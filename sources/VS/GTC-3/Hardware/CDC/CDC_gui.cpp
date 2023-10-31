@@ -2,7 +2,10 @@
 #include "Hardware/CDC/CDC.h"
 
 
-uint8 CDC::Transmit(const void *, int)
-{
-    return 0;
-}
+USBD_HandleTypeDef hUSBDDevice;
+
+
+//uint8 CDC::Transmit(const void *, int)
+//{
+//    return 0;
+//}

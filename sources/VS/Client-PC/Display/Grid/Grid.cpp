@@ -75,22 +75,27 @@ void Grid::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 
     row = rows.find(id);
 
-    SetCellValue(row->second, TypeMeasure::NumColumn((TypeMeasure::E)type) + 1, (float)value, color);
-
+    SetCellValue(row->second, TypeMeasure::NumColumn((TypeMeasure::E)type), (float)value, color);
 }
 
 
 void Grid::SetCellValue(int row, int col, float value, const wxColour &color)
 {
-    SetCellTextColour(row, col, color);
+    if (col >= 0)
+    {
+        SetCellTextColour(row, col, color);
 
-    wxGrid::SetCellValue(row, col, wxString::Format("%10.2f", value));
+        wxGrid::SetCellValue(row, col, wxString::Format("%10.2f", value));
+    }
 }
 
 
 void Grid::SetCellValue(int row, int col, int value, const wxColour &color)
 {
-    SetCellTextColour(row, col, color);
+    if (col >= 0)
+    {
+        SetCellTextColour(row, col, color);
 
-    wxGrid::SetCellValue(row, col, wxString::Format("%d", value));
+        wxGrid::SetCellValue(row, col, wxString::Format("%08X", value));
+    }
 }
