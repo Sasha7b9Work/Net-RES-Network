@@ -20,10 +20,11 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
     {
-        "Давление",
-        "Освещённость",
         "Температура",
+        "Давление",
         "Влажность",
+        "Точка росы",
+        "Освещённость",
         "Скорость"
     };
 
@@ -36,9 +37,10 @@ bool TypeMeasure::Exist(TypeMeasure::E type)
     static const bool exists[Count] =
     {
         true,
+        true,
+        true,
+        true,
         false,
-        true,
-        true,
         false
     };
 
@@ -94,10 +96,11 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
 {
     static const pchar units[Count] =
     {
-        "гПа",
-        "лк",
         "С",
+        "гПа",
+        "%",
         "%%",
+        "лк",
         "м/с"
     };
 
