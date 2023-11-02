@@ -60,10 +60,6 @@ void Device::Update()
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
-        float voltage = 0.0f;
-
-        Display::SendVoltage(voltage);
-
         InterCom::Send(TypeMeasure::Temperature, temp);
         InterCom::Send(TypeMeasure::Pressure, pressure);
         InterCom::Send(TypeMeasure::Humidity, humidity);

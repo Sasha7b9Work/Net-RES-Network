@@ -19,8 +19,6 @@
 
 namespace Display
 {
-    static float voltage = 0.0f;
-
     bool need_redraw = true;
 
     uint time_prev_redraw = 0;
@@ -134,12 +132,6 @@ namespace Display
             std::memset(buffer, value, WIDTH * HEIGHT / 2);
         }
     }
-}
-
-
-void Display::SendVoltage(float volt)
-{
-    voltage = volt;
 }
 
 
@@ -350,8 +342,6 @@ void Display::DrawStar()
     {
         String<>("*").Draw(156, 0, Color::WHITE);
     }
-
-    String<>("%f", voltage).Draw(100, 110, Color::WHITE);
 }
 
 

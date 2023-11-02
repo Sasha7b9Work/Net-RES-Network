@@ -32,8 +32,6 @@ namespace Display
 
     void EndScene();
 
-    void SendVoltage(float);
-
     namespace Buffer
     {
         // Возвращает указатель на строку
