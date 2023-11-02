@@ -13,9 +13,9 @@ namespace StartScreen
     {
         uint pixels[5];         // Здесь хранятся 150 пикселей
 
-        int GetBit(int num_bit)
+        int GetBit(int /*num_bit*/)
         {
-            int num_pixel = num_bit / 32;
+//            int num_pixel = num_bit / 32;
 
             return 0;
         }
@@ -35,7 +35,7 @@ namespace StartScreen
 
         bool AppendPixel()
         {
-            bool num_fills = 0;
+            int num_fills = 0;
 
             for (int i = 0; i < 5; i++)
             {
@@ -54,10 +54,10 @@ namespace StartScreen
 
             while (!append)
             {
-                int value = std::rand() % 160;
+//                int value = std::rand() % 160;
             }
 
-
+            return false;
         }
     };
 
