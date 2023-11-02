@@ -7,6 +7,89 @@
 #include <cstdlib>
 
 
+namespace StartScreen
+{
+    struct Row
+    {
+        uint pixels[5];         // Здесь хранятся 150 пикселей
+
+        int GetBit(int num_bit)
+        {
+            int num_pixel = num_bit / 32;
+
+            return 0;
+        }
+
+        void SetBit(int num_bit)
+        {
+
+        }
+
+        void Init()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                pixels[i] = 0;
+            }
+        }
+
+        bool AppendPixel()
+        {
+            bool num_fills = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (pixels[i] == (uint)(-1))
+                {
+                    num_fills++;
+                }
+            }
+
+            if (num_fills == 5)
+            {
+                return false;
+            }
+
+            bool append = false;
+
+            while (!append)
+            {
+                int value = std::rand() % 160;
+            }
+
+
+        }
+    };
+
+    struct ScreenBuffer
+    {
+        Row rows[128];
+
+        void Init()
+        {
+            for (int i = 0; i < 128; i++)
+            {
+                rows[i].Init();
+            }
+        }
+
+        // Возвращает false, если добавлять некуда
+        bool AppendPixel()
+        {
+            for (int i = 0; i < 128; i++)
+            {
+                if (!rows[i].AppendPixel())
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    };
+}
+
+
 void StartScreen::Run()
 {
     Display::BeginScene(Color::WHITE);

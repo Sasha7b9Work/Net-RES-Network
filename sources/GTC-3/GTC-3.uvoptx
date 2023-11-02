@@ -75,7 +75,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -154,7 +154,7 @@
           <Type>0</Type>
           <LineNumber>43</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134262518</Address>
+          <Address>134272542</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -170,7 +170,7 @@
           <Type>0</Type>
           <LineNumber>72</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134262590</Address>
+          <Address>134272630</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -186,7 +186,7 @@
           <Type>0</Type>
           <LineNumber>99</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134225916</Address>
+          <Address>134225794</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -212,7 +212,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>0</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
@@ -312,7 +312,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
