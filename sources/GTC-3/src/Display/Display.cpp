@@ -59,7 +59,6 @@ namespace Display
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
-        Measure(TypeMeasure::Humidity2),
         Measure(TypeMeasure::DewPoint)
     };
 
@@ -322,7 +321,6 @@ void Display::DrawMeasures()
         TypeMeasure::Temperature,
         TypeMeasure::Pressure,
         TypeMeasure::Humidity,
-        TypeMeasure::Humidity2,
         TypeMeasure::DewPoint
     };
 
@@ -368,7 +366,6 @@ void Display::DrawBigMeasure()
         30,
         12,
         28,
-        35,
         10
     };
 
@@ -391,7 +388,6 @@ String<> Display::Measure::Name()
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
-        "HIH-4000",
         "ÒÎ×ÊÀ ĞÎÑÛ"
     };
 
@@ -406,7 +402,6 @@ String<> Display::Measure::Units()
     {
         "¨Ñ",
         "ãÏà",
-        "%%",
         "%%",
         "¨Ñ"
     };

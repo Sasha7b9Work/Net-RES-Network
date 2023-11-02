@@ -69,7 +69,6 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         "Temperature",
         "Pressure",
         "Humidity",
-        "Humidity2",
         "Dew Point"
     };
 
@@ -77,7 +76,6 @@ void InterCom::Send(TypeMeasure::E type, float measure)
     {
         "degress Celsius",
         "hPa",
-        "%%",
         "%%",
         "degress Celsius"
     };

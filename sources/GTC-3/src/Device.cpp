@@ -14,7 +14,6 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/Beeper.h"
 #include "Display/StartScreen.h"
-#include "Modules/HIH4000/HIH4000.h"
 #include <cmath>
 
 
@@ -62,8 +61,6 @@ void Device::Update()
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
         float voltage = 0.0f;
-
-        InterCom::Send(TypeMeasure::Humidity2, HIH4000::GetHumidity(temp, &voltage));
 
         Display::SendVoltage(voltage);
 
