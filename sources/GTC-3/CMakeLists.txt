@@ -2,7 +2,7 @@
 
 project (GTC-3)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 message("------------------------------------------------------------------------ ${PROJECT_NAME}")
 
@@ -69,7 +69,7 @@ source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 source_group(Hardware/HAL/I2C   FILES ${HARDWARE_HAL_I2C})
 source_group(Menu               FILES ${MENU})
 source_group(Menu/Pages         FILES ${MENU_PAGES})
-source_group(Modueles/BH1750    FILES ${MODULES_BH1750})
+source_group(Modules/BH1750     FILES ${MODULES_BH1750})
 source_group(Modules/BME280     FILES ${MODULES_BME280})
 source_group(Modules/HC12       FILES ${MODULES_HC12})
 source_group(Modules/HIH4000    FILES ${MODULES_HIH4000})
@@ -81,9 +81,6 @@ source_group(Utils              FILES ${UTILS})
 source_group(Utils/Text         FILES ${UTILS_TEXT})
 
 set_source_files_properties(${STM32F3} ${HARDWARE_CMSIS}
-#                            src/Hardware/CDC/usbd_desc.c
-#                            src/Hardware/CDC/usb_device.c
-#                            src/Hardware/CDC/usbd_conf.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_library(${PROJECT_NAME}

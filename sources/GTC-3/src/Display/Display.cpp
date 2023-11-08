@@ -57,7 +57,8 @@ namespace Display
         Measure(TypeMeasure::Temperature),
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
-        Measure(TypeMeasure::DewPoint)
+        Measure(TypeMeasure::DewPoint),
+        Measure(TypeMeasure::Illumination)
     };
 
     static void DrawMeasures();
@@ -317,25 +318,27 @@ void Display::DrawMeasures()
         TypeMeasure::Temperature,
         TypeMeasure::Pressure,
         TypeMeasure::Humidity,
-        TypeMeasure::DewPoint
+        TypeMeasure::DewPoint,
+        TypeMeasure::Illumination
     };
 
-    for (int i = 0; i < 4; i++)
+    int y = y0;
+
+    for (int i = 0; i < TypeMeasure::Count; i++)
     {
         int x = 93;
-        int y = y0 + i * dY;
         int width = 30;
         int height = 15;
 
-        if (need_redraw)
+        if (need_redraw && measures[types[i]].current.Size())
         {
             String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
             measures[types[i]].Units().Draw(x + 41, y);
+            measures[types[i]].Draw(x, y);
+
+            ST7735::WriteBuffer(x - 1, y, width, height);
+            y += dY;
         }
-
-        measures[types[i]].Draw(x, y);
-
-        ST7735::WriteBuffer(x - 1, y, width, height);
     }
 }
 
@@ -380,6 +383,7 @@ void Display::DrawBigMeasure()
         30,
         12,
         28,
+        10,
         10
     };
 
@@ -402,7 +406,8 @@ String<> Display::Measure::Name()
         "ÒÅÌÏÅĞÀÒÓĞÀ",
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
-        "ÒÎ×ÊÀ ĞÎÑÛ"
+        "ÒÎ×ÊÀ ĞÎÑÛ",
+        "ÎÑÂÅÙÅÍÍÎÑÒÜ"
     };
 
     String<> result(names[type]);
@@ -417,7 +422,8 @@ String<> Display::Measure::Units()
         "¨Ñ",
         "ãÏà",
         "%%",
-        "¨Ñ"
+        "¨Ñ",
+        "ëì"
     };
 
     return String<>(units[type]);

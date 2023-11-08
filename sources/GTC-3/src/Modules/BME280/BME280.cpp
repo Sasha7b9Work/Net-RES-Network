@@ -20,12 +20,19 @@ namespace BME280
 }
 
 
-void BME280::Init()
+bool BME280::Init()
 {
-    if(!AttemptConnection(BME280_I2C_ADDR_PRIM))
+    if (AttemptConnection(BME280_I2C_ADDR_PRIM))
     {
-        AttemptConnection(BME280_I2C_ADDR_SEC);
+        return true;
     }
+
+    if (AttemptConnection(BME280_I2C_ADDR_SEC))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 
