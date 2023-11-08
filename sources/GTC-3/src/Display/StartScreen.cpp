@@ -20,7 +20,7 @@ namespace StartScreen
             return 0;
         }
 
-        void SetBit(int num_bit)
+        void SetBit(int)
         {
 
         }

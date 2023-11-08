@@ -2,7 +2,7 @@
 
 project (GTC-3)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 message("------------------------------------------------------------------------ ${PROJECT_NAME}")
 
@@ -47,6 +47,7 @@ file(GLOB HARDWARE_HAL          src/Hardware/HAL/*.*)
 file(GLOB HARDWARE_HAL_I2C      src/Hardware/HAL/I2C/*.*)
 file(GLOB MENU                  src/Menu/*.*)
 file(GLOB MENU_PAGES            src/Menu/Pages/*.*)
+file(GLOB MODULES_BH1750        src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280        src/Modules/BME280/*.*)
 file(GLOB MODULES_HC12          src/Modules/HC12/*.*)
 file(GLOB MODULES_HIH4000       src/Modules/HIH4000/*.*)
@@ -68,6 +69,7 @@ source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 source_group(Hardware/HAL/I2C   FILES ${HARDWARE_HAL_I2C})
 source_group(Menu               FILES ${MENU})
 source_group(Menu/Pages         FILES ${MENU_PAGES})
+source_group(Modueles/BH1750    FILES ${MODULES_BH1750})
 source_group(Modules/BME280     FILES ${MODULES_BME280})
 source_group(Modules/HC12       FILES ${MODULES_HC12})
 source_group(Modules/HIH4000    FILES ${MODULES_HIH4000})
@@ -96,6 +98,7 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_HAL_I2C}
             ${MENU}
             ${MENU_PAGES}
+            ${MODULES_BH1750}
             ${MODULES_BME280}
             ${MODULES_HC12}
             ${MODULES_HIH4000}

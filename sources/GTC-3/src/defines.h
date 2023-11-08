@@ -1,6 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
+#define VERSION 1
+
 typedef unsigned char uint8;
 typedef signed char int8;
 typedef unsigned short uint16;
@@ -28,7 +30,7 @@ typedef unsigned char uchar;
 
 union BitSet32
 {
-    BitSet32(uint _word) : word(_word) { }
+    BitSet32(uint _word = 0) : word(_word) { }
     uint   word;
     uint16 half_word[2];
     uint8  bytes[4];
