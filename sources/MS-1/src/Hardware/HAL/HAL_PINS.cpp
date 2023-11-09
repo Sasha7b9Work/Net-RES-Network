@@ -4,7 +4,7 @@
 #include <stm32f3xx_hal.h>
 
 
-PinInput    pinPowerIn(GPIOA, GPIO_PIN_8, GPIO_PULLUP);
+PinInput    pinPowerIn(GPIOA, GPIO_PIN_8, GPIO_PULLDOWN);
 PinOutputPP pinPowerOut(GPIOB, GPIO_PIN_10, GPIO_PULLDOWN);
 PinOutputPP pinOUT(GPIOB, GPIO_PIN_5, GPIO_PULLUP);
 

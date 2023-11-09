@@ -24,7 +24,7 @@ void EnergySwitch::Update()
         return;
     }
 
-    if (pinPowerIn.IsLow())
+    if (pinPowerIn.IsHi())
     {
         Timer::Delay(3000);
 
