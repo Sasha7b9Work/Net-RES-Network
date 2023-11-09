@@ -653,6 +653,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Beeper.h</FilePath>
             </File>
+            <File>
+              <FileName>EnergySwitch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EnergySwitch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1723,6 +1733,16 @@
               <FileName>Beeper.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Beeper.h</FilePath>
+            </File>
+            <File>
+              <FileName>EnergySwitch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EnergySwitch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.h</FilePath>
             </File>
           </Files>
         </Group>

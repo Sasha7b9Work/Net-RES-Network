@@ -15,6 +15,7 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/Beeper.h"
 #include "Display/StartScreen.h"
+#include "Hardware/EnergySwitch.h"
 #include <cmath>
 
 
@@ -28,6 +29,8 @@ namespace Device
 void Device::Init()
 {
     HAL::Init();
+
+    EnergySwitch::Init();
 
     gset.Load();
 
@@ -97,6 +100,8 @@ void Device::Update()
     Display::Update();
 
     HAL_ADC::GetVoltage();
+
+    EnergySwitch::Update();
 }
 
 
