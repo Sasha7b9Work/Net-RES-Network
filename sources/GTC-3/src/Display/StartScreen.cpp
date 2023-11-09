@@ -45,18 +45,6 @@ namespace StartScreen
                 }
             }
 
-            if (num_fills == 5)
-            {
-                return false;
-            }
-
-            bool append = false;
-
-            while (!append)
-            {
-//                int value = std::rand() % 160;
-            }
-
             return false;
         }
     };
