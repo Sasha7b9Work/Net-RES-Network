@@ -13,11 +13,15 @@
 
   <project>
     <PathAndName>.\GTC-3\GTC-3.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\TwoSensors\TwoSensors.uvprojx</PathAndName>
+  </project>
+
+  <project>
+    <PathAndName>.\MS-1\MS-1.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
