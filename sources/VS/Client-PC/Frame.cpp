@@ -5,6 +5,7 @@
 #include "Display/Grid/Grid.h"
 #include "Display/Diagram/Canvas.h"
 #include "Settings.h"
+#include "Controls/ConsoleSCPI.h"
 
 
 Frame *Frame::self = nullptr;
@@ -23,6 +24,8 @@ enum
 
     TOOL_VIEW_BRIEF,        // Сокращённый вид отображения
     TOOL_VIEW_FULL,         // Полный вид отображения
+
+    TOOL_CONSOLE,
 
     MEAS_PRESSURE,          // Давление
     MEAS_ILLUMINATION,      // Освещённость
@@ -68,6 +71,9 @@ Frame::Frame(const wxString &title)
 
     menuSettings->AppendSubMenu(menuSpeed, "Скорость обновления");
 
+    wxMenu *menuTools = new wxMenu();
+    menuTools->Append(TOOL_CONSOLE, "Open console\tCtrl-K", "Open console");
+
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_1);
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_2);
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_5);
@@ -76,10 +82,13 @@ Frame::Frame(const wxString &title)
 
     menuBar->Append(menuSettings, _("Настройки"));
 
+    menuBar->Append(menuTools, _("Инструменты"));
+
     wxFrameBase::SetMenuBar(menuBar);
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
+    Bind(wxEVT_MENU, &Frame::OnToolConsole, this, TOOL_CONSOLE);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
@@ -159,4 +168,10 @@ void Frame::OnSize(wxSizeEvent &event)
     Grid::self->SetSize(size);
 
     event.Skip();
+}
+
+
+void Frame::OnToolConsole(wxCommandEvent &)
+{
+    ConsoleSCPI::Self()->SwitchVisibility();
 }

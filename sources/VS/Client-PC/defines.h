@@ -3,7 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 
-#define VERSION 2
+#define VERSION 3
 
 
 typedef const char *pchar;
