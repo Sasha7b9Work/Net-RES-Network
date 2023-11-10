@@ -1,4 +1,4 @@
-// 2022/04/29 13:56:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+Ôªø// 2022/04/29 13:56:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Frame.h"
 #include "Display/Diagram/Diagram.h"
@@ -22,16 +22,16 @@ enum
     TOOL_UNDO,
     TOOL_REDO,
 
-    TOOL_VIEW_BRIEF,        // —ÓÍ‡˘∏ÌÌ˚È ‚Ë‰ ÓÚÓ·‡ÊÂÌËˇ
-    TOOL_VIEW_FULL,         // œÓÎÌ˚È ‚Ë‰ ÓÚÓ·‡ÊÂÌËˇ
+    TOOL_VIEW_BRIEF,        // –°–æ–∫—Ä–∞—â—ë–Ω–Ω—ã–π –≤–∏–¥ –æ—Ç–æ–±—Ä–∞–∂–µ–Ω–∏—è
+    TOOL_VIEW_FULL,         // –ü–æ–ª–Ω—ã–π –≤–∏–¥ –æ—Ç–æ–±—Ä–∞–∂–µ–Ω–∏—è
 
     TOOL_CONSOLE,
 
-    MEAS_PRESSURE,          // ƒ‡‚ÎÂÌËÂ
-    MEAS_ILLUMINATION,      // ŒÒ‚Â˘∏ÌÌÓÒÚ¸
-    MEAS_HUMIDITY,          // ¬Î‡ÊÌÓÒÚ¸
-    MEAS_VELOCITY,          // —ÍÓÓÒÚ¸
-    MEAS_TEMPERATURE,       // “ÂÏÔÂ‡ÚÛ‡
+    MEAS_PRESSURE,          // –î–∞–≤–ª–µ–Ω–∏–µ
+    MEAS_ILLUMINATION,      // –û—Å–≤–µ—â—ë–Ω–Ω–æ—Å—Ç—å
+    MEAS_HUMIDITY,          // –í–ª–∞–∂–Ω–æ—Å—Ç—å
+    MEAS_VELOCITY,          // –°–∫–æ—Ä–æ—Å—Ç—å
+    MEAS_TEMPERATURE,       // –¢–µ–º–ø–µ—Ä–∞—Ç—É—Ä–∞
 
     ID_SPEED_1,
     ID_SPEED_2,
@@ -51,17 +51,17 @@ Frame::Frame(const wxString &title)
     wxMenuBar *menuBar = new wxMenuBar;
 
     wxMenu *menuFile = new wxMenu;
-    menuFile->Append(FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
-    menuBar->Append(menuFile, _("‘‡ÈÎ"));
+    menuFile->Append(FILE_QUIT, "–í—ã—Ö–æ–¥\tAlt-X", "–ó–∞–∫—Ä—ã—Ç—å –æ–∫–Ω–æ –ø—Ä–æ–≥—Ä–∞–º–º—ã");
+    menuBar->Append(menuFile, _("–§–∞–π–ª"));
 
     wxMenu *menuSettings = new wxMenu();
     wxMenu *menuSpeed = new wxMenu();
 
-    wxMenuItem *miSpeed1 = new wxMenuItem(menuSpeed, ID_SPEED_1, "1 ÒÂÍ", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed2 = new wxMenuItem(menuSpeed, ID_SPEED_2, "2 ÒÂÍ", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed5 = new wxMenuItem(menuSpeed, ID_SPEED_5, "5 ÒÂÍ", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed30 = new wxMenuItem(menuSpeed, ID_SPEED_30, "30 ÒÂÍ", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed60 = new wxMenuItem(menuSpeed, ID_SPEED_60, "60 ÒÂÍ", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed1 = new wxMenuItem(menuSpeed, ID_SPEED_1, "1 —Å–µ–∫", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed2 = new wxMenuItem(menuSpeed, ID_SPEED_2, "2 —Å–µ–∫", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed5 = new wxMenuItem(menuSpeed, ID_SPEED_5, "5 —Å–µ–∫", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed30 = new wxMenuItem(menuSpeed, ID_SPEED_30, "30 —Å–µ–∫", wxEmptyString, wxITEM_RADIO);
+    wxMenuItem *miSpeed60 = new wxMenuItem(menuSpeed, ID_SPEED_60, "60 —Å–µ–∫", wxEmptyString, wxITEM_RADIO);
 
     menuSpeed->Append(miSpeed1);
     menuSpeed->Append(miSpeed2);
@@ -69,10 +69,10 @@ Frame::Frame(const wxString &title)
     menuSpeed->Append(miSpeed30);
     menuSpeed->Append(miSpeed60);
 
-    menuSettings->AppendSubMenu(menuSpeed, "—ÍÓÓÒÚ¸ Ó·ÌÓ‚ÎÂÌËˇ");
+    menuSettings->AppendSubMenu(menuSpeed, "–°–∫–æ—Ä–æ—Å—Ç—å –æ–±–Ω–æ–≤–ª–µ–Ω–∏—è");
 
     wxMenu *menuTools = new wxMenu();
-    menuTools->Append(TOOL_CONSOLE, "Open console\tCtrl-K", "Open console");
+    menuTools->Append(TOOL_CONSOLE, "–û—Ç–∫—Ä—ã—Ç—å –∫–æ–Ω—Å–æ–ª—å\tCtrl-K", "–û—Ç–∫—Ä—ã—Ç—å –∫–æ–Ω—Å–æ–ª—å");
 
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_1);
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_2);
@@ -80,9 +80,9 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_30);
     Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_60);
 
-    menuBar->Append(menuSettings, _("Õ‡ÒÚÓÈÍË"));
+    menuBar->Append(menuSettings, _("–ù–∞—Å—Ç—Ä–æ–π–∫–∏"));
 
-    menuBar->Append(menuTools, _("»ÌÒÚÛÏÂÌÚ˚"));
+    menuBar->Append(menuTools, _("–ò–Ω—Å—Ç—Ä—É–º–µ–Ω—Ç—ã"));
 
     wxFrameBase::SetMenuBar(menuBar);
 

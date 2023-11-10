@@ -1,4 +1,4 @@
-// 2022/04/29 13:56:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+Ôªø// 2022/04/29 13:56:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Application.h"
 #include "Frame.h"
@@ -21,7 +21,7 @@ bool Application::OnInit()
     wxImage::AddHandler(new wxPNGHandler);
 
     // create and show the main application window
-    Frame *frame = new Frame(_("√“÷-3"));
+    Frame *frame = new Frame(_("–ì–¢–¶-3"));
 
     Init();
 
