@@ -12,6 +12,8 @@ Frame *Frame::self = nullptr;
 
 enum
 {
+    FILE_QUIT = wxID_HIGHEST + 1,
+
     TOOL_OPEN,
     TOOL_SAVE,
     TOOL_NEW,
@@ -46,7 +48,7 @@ Frame::Frame(const wxString &title)
     wxMenuBar *menuBar = new wxMenuBar;
 
     wxMenu *menuFile = new wxMenu;
-    menuFile->Append(wxID_EXIT);
+    menuFile->Append(FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
     menuBar->Append(menuFile, _("Τΰιλ"));
 
     wxMenu *menuSettings = new wxMenu();
@@ -77,7 +79,7 @@ Frame::Frame(const wxString &title)
     wxFrameBase::SetMenuBar(menuBar);
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
-    Bind(wxEVT_MENU, &Frame::OnQuit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);

@@ -3,6 +3,9 @@
 #define WIN32_LEAN_AND_MEAN
 
 
+#define VERSION 1
+
+
 typedef const char *pchar;
 typedef unsigned char uchar;
 typedef unsigned char uint8;
