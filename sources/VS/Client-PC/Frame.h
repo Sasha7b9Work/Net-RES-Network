@@ -20,13 +20,13 @@ private:
 
     wxToolBar    *toolBar = nullptr;
 
-    void OnTimeScaleEvent(wxCommandEvent &);
-
     void OnSize(wxSizeEvent &);
 
     void OnCloseWindow(wxCloseEvent &);
 
-    void OnTool(wxCommandEvent &);
+    void OnMenuTool(wxCommandEvent &);
+
+    void OnMenuSettings(wxCommandEvent &);
 
     void OnClose();
 };

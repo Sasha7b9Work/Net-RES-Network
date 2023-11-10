@@ -26,6 +26,7 @@ enum
     TOOL_VIEW_FULL,         // Полный вид отображения
 
     TOOL_CONSOLE,
+    TOOL_DATABASE,
 
     MEAS_PRESSURE,          // Давление
     MEAS_ILLUMINATION,      // Освещённость
@@ -51,7 +52,7 @@ Frame::Frame(const wxString &title)
     wxMenuBar *menuBar = new wxMenuBar;
 
     wxMenu *menuFile = new wxMenu;
-    menuFile->Append(FILE_QUIT, "Выход\tAlt-X", "Закрыть окно программы");
+    menuFile->Append(FILE_QUIT, _("Выход\tAlt-X"), _("Закрыть окно программы"));
     menuBar->Append(menuFile, _("Файл"));
 
     wxMenu *menuSettings = new wxMenu();
@@ -69,16 +70,17 @@ Frame::Frame(const wxString &title)
     menuSpeed->Append(miSpeed30);
     menuSpeed->Append(miSpeed60);
 
-    menuSettings->AppendSubMenu(menuSpeed, "Скорость обновления");
+    menuSettings->AppendSubMenu(menuSpeed, _("Скорость обновления"));
 
     wxMenu *menuTools = new wxMenu();
-    menuTools->Append(TOOL_CONSOLE, "Открыть консоль\tCtrl-K", "Открыть консоль");
+    menuTools->Append(TOOL_CONSOLE, _("Открыть консоль\tCtrl-K"), _("Открыть консоль"));
+    menuTools->Append(TOOL_DATABASE, _("База данных\tCtrl-D"), _("База данных"));
 
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_1);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_2);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_5);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_30);
-    Bind(wxEVT_MENU, &Frame::OnTimeScaleEvent, this, ID_SPEED_60);
+    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_1);
+    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_2);
+    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_5);
+    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_30);
+    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_60);
 
     menuBar->Append(menuSettings, _("Настройки"));
 
@@ -88,7 +90,8 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
-    Bind(wxEVT_MENU, &Frame::OnTool, this, TOOL_CONSOLE);
+    Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_CONSOLE);
+    Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_DATABASE);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
@@ -108,7 +111,7 @@ Frame::Frame(const wxString &title)
 }
 
 
-void Frame::OnTimeScaleEvent(wxCommandEvent &event)
+void Frame::OnMenuSettings(wxCommandEvent &event)
 {
     static const int scales[] = { 1, 2, 5, 30, 60 };
 
@@ -173,7 +176,7 @@ void Frame::OnSize(wxSizeEvent &event)
 }
 
 
-void Frame::OnTool(wxCommandEvent &event)
+void Frame::OnMenuTool(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -182,5 +185,9 @@ void Frame::OnTool(wxCommandEvent &event)
         ConsoleSCPI::Self()->SwitchVisibility();
 
         FindItemInMenuBar(TOOL_CONSOLE)->SetItemLabel(ConsoleSCPI::Self()->IsShown() ? _("Закрыть консоль") : _("Открыть консоль"));
+    }
+    else if (id == TOOL_DATABASE)
+    {
+
     }
 }
