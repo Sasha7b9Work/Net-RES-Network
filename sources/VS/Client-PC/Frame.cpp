@@ -180,5 +180,7 @@ void Frame::OnTool(wxCommandEvent &event)
     if (id == TOOL_CONSOLE)
     {
         ConsoleSCPI::Self()->SwitchVisibility();
+
+        FindItemInMenuBar(TOOL_CONSOLE)->SetItemLabel(ConsoleSCPI::Self()->IsShown() ? _("Закрыть консоль") : _("Открыть консоль"));
     }
 }
