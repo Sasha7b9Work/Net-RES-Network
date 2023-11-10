@@ -88,7 +88,7 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
-    Bind(wxEVT_MENU, &Frame::OnToolConsole, this, TOOL_CONSOLE);
+    Bind(wxEVT_MENU, &Frame::OnTool, this, TOOL_CONSOLE);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
@@ -103,6 +103,8 @@ Frame::Frame(const wxString &title)
 
     SetClientSize(1024, 600);
     wxWindowBase::SetMinClientSize({ 800, 300 });
+
+    ConsoleSCPI::Self()->SwitchVisibility();
 }
 
 
@@ -171,7 +173,12 @@ void Frame::OnSize(wxSizeEvent &event)
 }
 
 
-void Frame::OnToolConsole(wxCommandEvent &)
+void Frame::OnTool(wxCommandEvent &event)
 {
-    ConsoleSCPI::Self()->SwitchVisibility();
+    int id = event.GetId();
+
+    if (id == TOOL_CONSOLE)
+    {
+        ConsoleSCPI::Self()->SwitchVisibility();
+    }
 }

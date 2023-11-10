@@ -26,7 +26,7 @@ private:
 
     void OnCloseWindow(wxCloseEvent &);
 
-    void OnToolConsole(wxCommandEvent &);
+    void OnTool(wxCommandEvent &);
 
     void OnClose();
 };

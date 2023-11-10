@@ -8,6 +8,7 @@
 #include "Data/ReceivedData.h"
 #include "Display/Diagram/Diagram.h"
 #include "Utils/Clock.h"
+#include "Controls/ConsoleSCPI.h"
 
 
 using namespace std;
@@ -36,4 +37,6 @@ void Application::Update()
 void Frame::OnClose()
 {
     Log::DeInit();
+
+    ConsoleSCPI::Self()->Destroy();
 }
