@@ -1,7 +1,7 @@
 // 2022/04/29 13:56:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Communicator/HC12/HC12.h"
-#include "Communicator/HC12/RS232/rs232.h"
+#include "Communicator/RS232/rs232.h"
 #include "Data/ReceivedData.h"
 
 

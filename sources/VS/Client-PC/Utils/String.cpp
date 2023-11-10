@@ -1,6 +1,6 @@
 // 2022/03/30 08:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Utils/Text/String.h"
+#include "Utils/String.h"
 #include "Display/Font.h"
 #include <cstdarg>
 #include <cstring>
@@ -9,6 +9,7 @@
 
 
 template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
+template      String<1024>::String(pchar, ...);
 template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color);
 template void String<(int)DEFAULT_SIZE_STRING>::Append(pchar);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawInCenterRect(int x, int y, int width, int height, Color);
@@ -18,6 +19,7 @@ template void String<(int)DEFAULT_SIZE_STRING>::DrawRelativelyRight(int xRight, 
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawOnBackground(int x, int y, Color colorBackground);
 template void String<(int)DEFAULT_SIZE_STRING>::DrawInRect(int x, int y, int width, int height, int dy);
 template void String<(int)DEFAULT_SIZE_STRING>::SetFormat(pchar format, ...);
+template void String<1024>::SetFormat(pchar format, ...);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground,
     Color colorFill);
 template int  String<(int)DEFAULT_SIZE_STRING>::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height,
