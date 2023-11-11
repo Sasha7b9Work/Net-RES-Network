@@ -83,6 +83,9 @@ source_group(Utils/Text         FILES ${UTILS_TEXT})
 set_source_files_properties(${STM32F3} ${HARDWARE_CMSIS}
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
+set_source_files_properties(src/Storage/MemoryStorage.cpp
+                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+
 add_library(${PROJECT_NAME}
             ${STM32F3}
             ${SRC}
