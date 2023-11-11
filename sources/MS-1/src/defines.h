@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-#define VERSION 6
+#define VERSION 7
 
 typedef unsigned char uint8;
 typedef signed char int8;

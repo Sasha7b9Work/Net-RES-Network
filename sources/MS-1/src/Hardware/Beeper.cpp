@@ -14,7 +14,7 @@ namespace Beeper
         {
             (uint)(60000 / 2000 - 1),
             TIM_COUNTERMODE_UP,
-            999,
+            400,
             TIM_CLOCKDIVISION_DIV1,
             0,
             TIM_AUTORELOAD_PRELOAD_DISABLE

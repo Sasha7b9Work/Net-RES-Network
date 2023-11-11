@@ -52,7 +52,7 @@ void Device::Init()
 
     W25Q80DV::Test::Run();
 
-    Beeper::Start(2000);
+    Beeper::Start(1000);
 
     StartScreen::Run();
 }
