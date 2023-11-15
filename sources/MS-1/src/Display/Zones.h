@@ -30,9 +30,11 @@ class ZoneFPS : public Zone
 {
 public:
 
+    virtual ~ZoneFPS() override { }
+
     String<> string;
 
     ZoneFPS() : Zone(136, 119, 24, 8, Color::BLACK) { }
 
-    virtual void Draw();
+    virtual void Draw() override;
 };

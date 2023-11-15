@@ -21,8 +21,6 @@ namespace Display
 {
     bool need_redraw = true;
 
-    uint time_prev_redraw = 0;
-
     static ZoneFPS zoneFPS;
 
     static Zone *zones[] =
@@ -74,10 +72,10 @@ namespace Display
     {
         static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
 
-        uint8 GetPixels(int x, int y)
-        {
-            return buffer[(y * WIDTH + x) / 2];
-        }
+//        static uint8 GetPixels(int x, int y)
+//        {
+//            return buffer[(y * WIDTH + x) / 2];
+//        }
 
         uint8* GetLine(int x, int y)
         {
@@ -117,7 +115,7 @@ namespace Display
 
                 uint8 value = (uint8)((uint8)(Color::GetCurrent()) + (Color::GetCurrent() << 4));
 
-                std::memset(first_byte, value, (x2 - x1) / 2U);
+                std::memset(first_byte, value, (uint)(x2 - x1) / 2U);
             }
             else
             {
@@ -202,7 +200,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     if (value == measure.value) //-V550
     {
         return;
-    };
+    }
 
     measure.old.SetFormat(measure.current.c_str());
 
@@ -210,7 +208,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     measure.time = TIME_MS;
     measure.value = value;
 
-    measure.current.SetFormat("%.1f", value);
+    measure.current.SetFormat("%.1f", (double)value);
     measure.current[6] = '\0';
 }
 

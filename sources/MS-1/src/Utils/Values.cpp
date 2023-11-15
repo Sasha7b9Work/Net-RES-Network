@@ -23,5 +23,5 @@ Float::Float(float _value) : value(_value)
 
 String<> Float::ToString() const
 {
-    return String<>("%.1f", value);
+    return String<>("%.1f", (double)value);
 }

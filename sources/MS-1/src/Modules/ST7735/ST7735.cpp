@@ -172,7 +172,7 @@ void ST7735::Init()
     asm("nop");                 \
     \
     SPI2->DR = Color::colors[value & 0x0f]; \
-    value >>= 4;
+    value >>= 4
 
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)

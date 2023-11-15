@@ -126,11 +126,3 @@ uint HAL::GetUID()
     return Math::CalculateCRC(bytes, 12);
 #endif
 }
-
-
-void Error_Handler()
-{
-    while(1)
-    {
-    }
-}

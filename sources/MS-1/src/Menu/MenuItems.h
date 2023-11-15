@@ -71,7 +71,7 @@ struct Item
     // ¬озвращает пор€дковый номер на странице
     int NumberOnPage() const;
 
-    static const Item *Opened() { return opened_item; };
+    static const Item *Opened() { return opened_item; }
 
     bool IsPage() const     { return (ToDItem()->type == TypeItem::Page);   }
     bool IsChoice() const   { return (ToDItem()->type == TypeItem::Choice); }
@@ -141,7 +141,7 @@ private:
 
     int NumItems() const;
 
-    virtual ~Page() { }
+    virtual ~Page() override { }
 };
 
 

@@ -13,7 +13,7 @@ struct Key
 
     E value;
 
-    Key(E v) : value(v) {};
+    Key(E v) : value(v) {}
 
     bool IsPressed() const;
 };

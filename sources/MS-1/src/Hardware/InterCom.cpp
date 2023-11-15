@@ -30,9 +30,9 @@ namespace InterCom
     *  16...19 - value
     */
 
-    Direction::E direction = Direction::_None;
+    static Direction::E direction = Direction::_None;
 
-    Buffer<uint8, 16> CreateMessage(TypeMeasure::E type, float value)
+    static Buffer<uint8, 16> CreateMessage(TypeMeasure::E type, float value)
     {
         Buffer<uint8, 16> message;
 
@@ -92,7 +92,7 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     if (direction & Direction::CDC)
     {
-        String<> message("%s : %f %s", names[type], measure, units[type]);
+        String<> message("%s : %f %s", names[type], (double)measure, units[type]);
 
         HCDC::Transmit(message.c_str(), message.Size() + 1);
     }

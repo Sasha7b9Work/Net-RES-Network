@@ -70,7 +70,7 @@ namespace MemoryStorage
 
         bool IsValid()
         {
-            if (number == (uint)-1 || number == 0 || control_field != 0)
+            if ((uint)number == (uint)-1 || number == 0 || control_field != 0)
             {
                 return false;
             }
@@ -94,7 +94,7 @@ namespace MemoryStorage
     {
         void Init(int num_page)
         {
-            startAddress = BEGIN + W25Q80DV::SIZE_PAGE * num_page;
+            startAddress = BEGIN + W25Q80DV::SIZE_PAGE * (uint)num_page;
         }
 
         Record *FirstRecord()
@@ -499,7 +499,7 @@ namespace MemoryStorage
 
                 while (value == 0)
                 {
-                    address = BEGIN + std::rand() % (END - BEGIN);
+                    address = BEGIN + ((uint)std::rand() % (END - BEGIN));
 
                     address &= 0xFFFFFFFFFC;
 

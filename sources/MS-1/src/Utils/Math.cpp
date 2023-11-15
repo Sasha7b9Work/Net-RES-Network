@@ -9,7 +9,7 @@ template void Math::CircleDecrease<int>(int *, int, int);
 
 namespace Math
 {
-    uint SDBMHash(uint hash, uint8 d)
+    static uint SDBMHash(uint hash, uint8 d)
     {
         return d + (hash << 6) + (hash << 16) - hash;
     }

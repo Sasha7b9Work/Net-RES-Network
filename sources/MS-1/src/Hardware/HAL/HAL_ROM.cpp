@@ -112,7 +112,7 @@ void HAL_ROM::Save(uint address, const Settings &set)
 
     uint *data = (uint *)&set;
 
-    for (int i = 0; i < (sizeof(Settings) / sizeof(uint) + 1); i++)
+    for (uint i = 0; i < (sizeof(Settings) / sizeof(uint) + 1); i++)
     {
         HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, *data);
 

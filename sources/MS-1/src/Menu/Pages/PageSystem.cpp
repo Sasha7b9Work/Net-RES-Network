@@ -13,7 +13,7 @@ static int state = 0;
 static PackedTime time;
 
 
-void OnClose_Battery(bool)
+static void OnClose_Battery(bool)
 {
 
 }

@@ -11,7 +11,7 @@ namespace BH1750
     static const uint8 CMD_RESET      = 0x03;
     static const uint8 CMD_MEASURE    = 0x10;
 
-    uint timeNext = 1;
+    static uint timeNext = 1;
 
     bool WriteAddrL(uint8);
 
@@ -47,7 +47,7 @@ bool BH1750::GetMeasure(float *illumination)
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 100);
+    timeNext += (uint)(TIME_MEASURE + (std::rand() % 100));
 
 #ifdef IN_MODE_TEST
 

@@ -26,7 +26,7 @@ extern const DPage pageMain;
 
 
 //-------------------------------------------------------------------------------------
-void ClosePageTemperature(bool)
+static void ClosePageTemperature(bool)
 {
     PageMeasures::Temperature::self->Close();
 }
@@ -56,7 +56,7 @@ DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60,
 DEF_STATE_MIN_MAX(sTemperature, PageMeasures::Temperature::self, TypeMeasure::Temperature);
 
 
-void OnPress_ResetTemperature(bool)
+static void OnPress_ResetTemperature(bool)
 {
     gset.ResetMeasure(TypeMeasure::Temperature);
 }
@@ -87,7 +87,7 @@ DEF_PAGE_7(pageTemperature, //-V1027
 
 
 //------------------------------------------------------------------------------------
-void ClosePagePressure(bool)
+static void ClosePagePressure(bool)
 {
     PageMeasures::Pressure::self->Close();
 }
@@ -116,7 +116,7 @@ DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 1000, TypeMeas
 DEF_STATE_MIN_MAX(sPressure, PageMeasures::Pressure::self, TypeMeasure::Pressure);
 
 
-void OnPress_ResetPressure(bool)
+static void OnPress_ResetPressure(bool)
 {
     gset.ResetMeasure(TypeMeasure::Pressure);
 }
@@ -147,7 +147,7 @@ DEF_PAGE_7(pagePressure, //-V1027
 
 
 //-------------------------------------------------------------------------------------
-void ClosePageHumidity(bool)
+static void ClosePageHumidity(bool)
 {
     PageMeasures::Humidity::self->Close();
 }
@@ -175,7 +175,7 @@ DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, TypeMeasure
 
 DEF_STATE_MIN_MAX(sHumidity, PageMeasures::Humidity::self, TypeMeasure::Humidity);
 
-void OnPress_ResetHumidity(bool)
+static void OnPress_ResetHumidity(bool)
 {
     gset.ResetMeasure(TypeMeasure::Humidity);
 }
@@ -205,7 +205,7 @@ DEF_PAGE_7(pageHumidity, //-V1027
 
 
 //------------------------------------------------------------------------------------
-void ClosePageDewPoint(bool)
+static void ClosePageDewPoint(bool)
 {
     PageMeasures::DewPoint::self->Close();
 }
@@ -233,19 +233,20 @@ DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeas
 
 DEF_STATE_MIN_MAX(sDewPoint, PageMeasures::DewPoint::self, TypeMeasure::DewPoint);
 
-void OnPress_ResetDewPoint(bool)
-{
-    gset.ResetMeasure(TypeMeasure::DewPoint);
-}
+//static void OnPress_ResetDewPoint(bool)
+//{
+//    gset.ResetMeasure(TypeMeasure::DewPoint);
+//}
 
-
-    DEF_BUTTON(bResetDewPoint,
+/*
+DEF_BUTTON(bResetDewPoint,
     "Сброс мин-макс",
     *PageMeasures::DewPoint::self,
     OnPress_ResetDewPoint,
     nullptr,
     nullptr
 )
+*/
 
 DEF_PAGE_7(pageDewPoint, //-V1027
     "ТОЧКА РОСЫ",
