@@ -6,7 +6,6 @@
 
 #ifndef WIN32
     #pragma clang diagnostic ignored "-Wpadded"
-    #pragma clang diagnostic ignored "-Wunused-parameter"
     #pragma clang diagnostic ignored "-Wcovered-switch-default"
     #pragma clang diagnostic ignored "-Wshorten-64-to-32"
     #pragma clang diagnostic ignored "-Wcast-align"
