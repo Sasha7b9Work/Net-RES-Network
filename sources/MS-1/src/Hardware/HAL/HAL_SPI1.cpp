@@ -29,7 +29,7 @@ namespace HAL_SPI1
 
     namespace WP
     {
-        void Init()
+        static void Init()
         {
             pinWP.Init();
 
@@ -47,12 +47,12 @@ namespace HAL_SPI1
 
     namespace CS
     {
-        void Set()
+        static void Set()
         {
             pinNSS_SPI1.ToHi();
         }
 
-        void Reset()
+        static void Reset()
         {
             pinNSS_SPI1.ToLow();
         }

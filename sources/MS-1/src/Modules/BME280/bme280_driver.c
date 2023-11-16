@@ -47,6 +47,10 @@
 
 /*! @file bme280.c
     @brief Sensor driver for BME280 sensor */
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+
 #include "bme280_driver.h"
 
 /**\name Internal macros */
@@ -776,7 +780,7 @@ static int8_t set_filter_standby_settings(uint8_t desired_settings, const struct
  */
 static void fill_filter_settings(uint8_t *reg_data, const struct bme280_settings *settings)
 {
-	*reg_data = BME280_SET_BITS(*reg_data, BME280_FILTER, settings->filter);
+	*reg_data = BME280_SET_BITS(*reg_data, BME280_FILTER, (uint32_t)settings->filter);
 }
 
 /*!
@@ -785,7 +789,7 @@ static void fill_filter_settings(uint8_t *reg_data, const struct bme280_settings
  */
 static void fill_standby_settings(uint8_t *reg_data, const struct bme280_settings *settings)
 {
-	*reg_data = BME280_SET_BITS(*reg_data, BME280_STANDBY, settings->standby_time);
+	*reg_data = BME280_SET_BITS(*reg_data, BME280_STANDBY, (uint32_t)settings->standby_time);
 }
 
 /*!
@@ -794,7 +798,7 @@ static void fill_standby_settings(uint8_t *reg_data, const struct bme280_setting
  */
 static void fill_osr_press_settings(uint8_t *reg_data, const struct bme280_settings *settings)
 {
-	*reg_data = BME280_SET_BITS(*reg_data, BME280_CTRL_PRESS, settings->osr_p);
+	*reg_data = BME280_SET_BITS(*reg_data, BME280_CTRL_PRESS, (uint32_t)settings->osr_p);
 }
 
 /*!
@@ -803,7 +807,7 @@ static void fill_osr_press_settings(uint8_t *reg_data, const struct bme280_setti
  */
 static void fill_osr_temp_settings(uint8_t *reg_data, const struct bme280_settings *settings)
 {
-	*reg_data = BME280_SET_BITS(*reg_data, BME280_CTRL_TEMP, settings->osr_t);
+	*reg_data = BME280_SET_BITS(*reg_data, BME280_CTRL_TEMP, (uint32_t)settings->osr_t);
 }
 
 /*!
@@ -927,7 +931,7 @@ static double compensate_pressure(const struct bme280_uncomp_data *uncomp_data,
 	var1 = (var3 + ((double)calib_data->dig_P2) * var1) / 524288.0;
 	var1 = (1.0 + var1 / 32768.0) * ((double)calib_data->dig_P1);
 	/* avoid exception caused by division by zero */
-	if (var1) { //-V550
+	if (var1 != 0.0) { //-V550
 		pressure = 1048576.0 - (double) uncomp_data->pressure;
 		pressure = (pressure - (var2 / 4096.0)) * 6250.0 / var1;
 		var1 = ((double)calib_data->dig_P9) * pressure * pressure / 2147483648.0;
@@ -1193,10 +1197,10 @@ static void parse_temp_press_calib_data(const uint8_t *reg_data, struct bme280_d
 {
 	struct bme280_calib_data *calib_data = &dev->calib_data;
 
-	calib_data->dig_T1 = BME280_CONCAT_BYTES(reg_data[1], reg_data[0]);
+	calib_data->dig_T1 = (uint16_t)BME280_CONCAT_BYTES(reg_data[1], reg_data[0]);
 	calib_data->dig_T2 = (int16_t)BME280_CONCAT_BYTES(reg_data[3], reg_data[2]);
 	calib_data->dig_T3 = (int16_t)BME280_CONCAT_BYTES(reg_data[5], reg_data[4]);
-	calib_data->dig_P1 = BME280_CONCAT_BYTES(reg_data[7], reg_data[6]);
+	calib_data->dig_P1 = (uint16_t)BME280_CONCAT_BYTES(reg_data[7], reg_data[6]);
 	calib_data->dig_P2 = (int16_t)BME280_CONCAT_BYTES(reg_data[9], reg_data[8]);
 	calib_data->dig_P3 = (int16_t)BME280_CONCAT_BYTES(reg_data[11], reg_data[10]);
 	calib_data->dig_P4 = (int16_t)BME280_CONCAT_BYTES(reg_data[13], reg_data[12]);

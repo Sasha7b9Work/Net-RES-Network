@@ -19,9 +19,9 @@ static void OnClose_Battery(bool)
 }
 
 
-void OnDraw_Battery(int x, int y)
+static void OnDraw_Battery(int x, int y)
 {
-    String<>("%.2f Â", HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, Color::WHITE);
+    String<>("%.2f Â", (double)HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, Color::WHITE);
 }
 
 
@@ -54,7 +54,7 @@ DEF_GOVERNOR(gSerialNumber,
 )
 
 
-void ClosePageSystem(bool)
+static void ClosePageSystem(bool)
 {
     PageSystem::self->Close();
 }

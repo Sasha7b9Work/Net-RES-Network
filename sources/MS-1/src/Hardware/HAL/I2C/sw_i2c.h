@@ -26,7 +26,7 @@ typedef enum
     HAL_IO_OPT_SET_SCL_OUTPUT,      // »нициализировать SCL в OUTPUT
 
     HAL_IO_OPT_GET_SDA_LEVEL,       // —читать уровень на SDA
-    HAL_IO_OPT_GET_SCL_LEVEL,       // —читать уровень на SCL
+    HAL_IO_OPT_GET_SCL_LEVEL        // —читать уровень на SCL
 } hal_io_opt_e;
 
 typedef struct sw_i2c_s
