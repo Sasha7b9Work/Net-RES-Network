@@ -2,7 +2,7 @@
 #pragma once
 
 
-#define VERSION 9
+#define VERSION 10
 
 
 #ifndef WIN32

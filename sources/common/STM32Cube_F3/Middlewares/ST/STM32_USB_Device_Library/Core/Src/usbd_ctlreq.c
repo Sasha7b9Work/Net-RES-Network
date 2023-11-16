@@ -20,8 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_ctlreq.h"
 #include "usbd_ioreq.h"
-#pragma clang diagnostic ignored "-Wimplicit-int-conversion"
 
+#if __ARMCLIB_VERSION >= 6000000
+    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+#endif
 
 /** @addtogroup STM32_USBD_STATE_DEVICE_LIBRARY
   * @{
