@@ -57,6 +57,14 @@ void Device::Init()
 
 void Device::Update()
 {
+    if (Beeper::Running())
+    {
+        if (TIME_MS > 5000)
+        {
+            Beeper::Stop();
+        }
+    }
+
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;

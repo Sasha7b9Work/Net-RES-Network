@@ -19,14 +19,14 @@ void EnergySwitch::Init()
 
 void EnergySwitch::Update()
 {
-    if (TIME_MS < 3000)
+    if (TIME_MS < 1000)
     {
         return;
     }
 
     if (pinPowerIn.IsHi())
     {
-        Timer::Delay(3000);
+        Timer::Delay(1000);
 
         pinPowerOut.ToLow();
     }

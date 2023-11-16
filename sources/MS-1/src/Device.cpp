@@ -53,13 +53,16 @@ void Device::Init()
     W25Q80DV::Test::Run();
 
     Beeper::Start(4000);
-
-    StartScreen::Run();
 }
 
 
 void Device::Update()
 {
+    if (Beeper::Running() && TIME_MS > 2000)
+    {
+        Beeper::Stop();
+    }
+
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;
