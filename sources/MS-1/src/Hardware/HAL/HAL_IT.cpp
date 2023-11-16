@@ -6,6 +6,11 @@
 #include <stm32f3xx_hal.h>
 
 
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wmissing-noreturn"
+#endif
+
+
 void NMI_Handler(void)
 {
 }

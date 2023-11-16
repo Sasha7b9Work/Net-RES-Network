@@ -5,21 +5,7 @@
 #endif
 
 #ifndef WIN32
-    #pragma clang diagnostic ignored "-Wundefined-func-template"
-    #pragma clang diagnostic ignored "-Wmissing-field-initializers"
-//    #pragma clang diagnostic ignored "-Wdeprecated-register"
-    #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
-    #pragma clang diagnostic ignored "-Wold-style-cast"
-//    #pragma clang diagnostic ignored "-Wformat-nonliteral"
-    #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-//    #pragma clang diagnostic ignored "-Wunused-private-field"
     #pragma clang diagnostic ignored "-Wpadded"
-//    #pragma clang diagnostic ignored "-Wglobal-constructors"
-    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
-    #pragma clang diagnostic ignored "-Wcast-qual"
-    #pragma clang diagnostic ignored "-Wweak-vtables"
-    #pragma clang diagnostic ignored "-Wmissing-noreturn"
-    #pragma clang diagnostic ignored "-Wswitch-enum"
     #pragma clang diagnostic ignored "-Wunused-parameter"
     #pragma clang diagnostic ignored "-Wcovered-switch-default"
     #pragma clang diagnostic ignored "-Wshorten-64-to-32"

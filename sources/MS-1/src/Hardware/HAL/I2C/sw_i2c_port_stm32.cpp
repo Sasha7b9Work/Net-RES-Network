@@ -1,6 +1,11 @@
+#include "defines.h"
 #include "sw_i2c.h"
 
 #include <stm32f3xx_hal.h>
+
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wmissing-field-initializers"
+#endif
 
 #define SW_I2C1_SCL_PORT    GPIOB
 #define SW_I2C1_SDA_PORT    GPIOB

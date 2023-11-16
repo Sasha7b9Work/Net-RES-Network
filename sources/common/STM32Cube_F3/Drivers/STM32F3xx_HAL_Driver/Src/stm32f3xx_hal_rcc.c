@@ -885,6 +885,9 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
 #endif
 void HAL_RCC_MCOConfig(uint32_t RCC_MCOx, uint32_t RCC_MCOSource, uint32_t RCC_MCODiv)
 {
+  (void)RCC_MCOx;
+  (void)RCC_MCODiv;
+
   GPIO_InitTypeDef gpio;
 
   /* Check the parameters */

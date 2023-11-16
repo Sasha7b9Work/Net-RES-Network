@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_ctlreq.h"
 #include "usbd_ioreq.h"
+#pragma clang diagnostic ignored "-Wimplicit-int-conversion"
 
 
 /** @addtogroup STM32_USBD_STATE_DEVICE_LIBRARY

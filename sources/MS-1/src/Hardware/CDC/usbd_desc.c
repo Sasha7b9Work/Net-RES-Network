@@ -21,6 +21,10 @@
 #include "usbd_desc.h"
 #include "usbd_conf.h"
 
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wcast-qual"
+#endif
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define USBD_VID                      0x0483
