@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Modules/CG-Anem/CG-Anem.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstdlib>
 #include <cstring>
 
@@ -13,12 +13,6 @@ namespace CG_Anem
 }
 
 
-void CG_Anem::Init()
-{
-
-}
-
-
 bool CG_Anem::GetMeasure(float *velocity_out)
 {
     if (HAL_GetTick() < timeNext)
@@ -26,7 +20,7 @@ bool CG_Anem::GetMeasure(float *velocity_out)
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 100);
+    timeNext += TIME_MEASURE + (uint)(std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 
@@ -40,24 +34,24 @@ bool CG_Anem::GetMeasure(float *velocity_out)
 
     BitSet32 temp_cold;
 
-    if (HAL_I2C1::Read(0x11, 0x10, &temp_cold.byte[1], 1) != 0)
+    if (HAL_I2C1::Read(0x11, 0x10, &temp_cold.bytes[1], 1) != 0)
     {
         result = false;
     }
 
-    if (HAL_I2C1::Read(0x11, 0x11, &temp_cold.byte[0], 1) != 0)
+    if (HAL_I2C1::Read(0x11, 0x11, &temp_cold.bytes[0], 1) != 0)
     {
         result = false;
     }
 
     BitSet32 velocity;
     
-    if (HAL_I2C1::Read(0x11, 0x07, &velocity.byte[1], 1) != 0)
+    if (HAL_I2C1::Read(0x11, 0x07, &velocity.bytes[1], 1) != 0)
     {
         result = false;
     }
 
-    if (HAL_I2C1::Read(0x11, 0x08, &velocity.byte[0], 1) != 0)
+    if (HAL_I2C1::Read(0x11, 0x08, &velocity.bytes[0], 1) != 0)
     {
         result = false;
     }

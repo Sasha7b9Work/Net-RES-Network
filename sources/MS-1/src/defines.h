@@ -2,7 +2,7 @@
 #pragma once
 
 
-#define VERSION 10
+#define VERSION 11
 
 
 #ifndef WIN32
@@ -37,7 +37,7 @@ typedef unsigned char uchar;
 
 
 #ifdef WIN32
-    #define IN_MODE_TEST
+//    #define IN_MODE_TEST
     #ifndef GUI
         #define asm(x)
     #endif

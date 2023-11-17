@@ -5,7 +5,5 @@
 
 namespace CG_Anem
 {
-    void Init();
-
     bool GetMeasure(float *velocity);
 }
