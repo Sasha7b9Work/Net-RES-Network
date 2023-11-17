@@ -6,6 +6,7 @@
 #include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
 #include "Modules/BH1750/BH1750.h"
+#include "Modules/CG-Anem/CG-Anem.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
@@ -36,23 +37,23 @@ void Device::Init()
 
     gset.Reset();
 
-    ST7735::Init();
+    ST7735::Init();         // Дисплей
 
-    BME280::Init();
+    BME280::Init();         // Температура, давление, влажность, точка росы
 
-    BH1750::Init();
+    BH1750::Init();         // Освещённость
 
-    HC12::Init();
+    HC12::Init();           // Радиомодуль
 
     Keyboard::Init();
 
-    InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
+    W25Q80DV::Test::Run();  // Микросхема памяти
 
     Beeper::Init();
 
-    W25Q80DV::Test::Run();
-
     Beeper::Start(4000);
+
+    InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 }
 
 
@@ -67,6 +68,7 @@ void Device::Update()
     float pressure = 0.0f;
     float humidity = 0.0;
     float illumination = 0.0f;
+    float velocity = 0.0f;
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity))
     {
@@ -96,6 +98,11 @@ void Device::Update()
     if (BH1750::GetMeasure(&illumination))
     {
         InterCom::Send(TypeMeasure::Illumination, illumination);
+    }
+
+    if (CG_Anem::GetMeasure(&velocity))
+    {
+        InterCom::Send(TypeMeasure::Velocity, velocity);
     }
 
     Keyboard::Update();

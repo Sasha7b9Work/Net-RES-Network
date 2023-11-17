@@ -70,7 +70,8 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         "Pressure",
         "Humidity",
         "Dew Point",
-        "Illuminance"
+        "Illuminance",
+        "Velocity"
     };
 
     static const pchar units[TypeMeasure::Count] =
@@ -79,7 +80,8 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         "hPa",
         "%%",
         "degress Celsius",
-        "lumen"
+        "lumen",
+        "m/s"
     };
 
     if (direction & Direction::Display)

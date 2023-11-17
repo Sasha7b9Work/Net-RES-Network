@@ -56,7 +56,8 @@ namespace Display
         Measure(TypeMeasure::Pressure),
         Measure(TypeMeasure::Humidity),
         Measure(TypeMeasure::DewPoint),
-        Measure(TypeMeasure::Illumination)
+        Measure(TypeMeasure::Illumination),
+        Measure(TypeMeasure::Velocity)
     };
 
     static void DrawMeasures();
@@ -193,6 +194,11 @@ void Rectangle::Draw(int x, int y, Color::E color)
 
 void Display::SetMeasure(TypeMeasure::E type, float value)
 {
+    if (type == TypeMeasure::DewPoint)
+    {
+        return;
+    }
+
     Settings::SaveMeasure(type, value);
 
     Measure &measure = measures[type];
@@ -317,7 +323,8 @@ void Display::DrawMeasures()
         TypeMeasure::Pressure,
         TypeMeasure::Humidity,
         TypeMeasure::DewPoint,
-        TypeMeasure::Illumination
+        TypeMeasure::Illumination,
+        TypeMeasure::Velocity
     };
 
     int y = y0;
@@ -382,6 +389,7 @@ void Display::DrawBigMeasure()
         12,
         28,
         10,
+        10,
         10
     };
 
@@ -405,7 +413,8 @@ String<> Display::Measure::Name()
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
         "ÒÎ×ÊÀ ĞÎÑÛ",
-        "ÎÑÂÅÙÅÍÍÎÑÒÜ"
+        "ÎÑÂÅÙÅÍÍÎÑÒÜ",
+        "ÑÊÎĞÎÑÒÜ"
     };
 
     String<> result(names[type]);
@@ -421,7 +430,8 @@ String<> Display::Measure::Units()
         "ãÏà",
         "%%",
         "¨Ñ",
-        "ëì"
+        "ëì",
+        "ì/ñ"
     };
 
     return String<>(units[type]);
