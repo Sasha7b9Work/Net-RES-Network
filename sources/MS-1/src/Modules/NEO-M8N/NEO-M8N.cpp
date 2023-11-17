@@ -132,7 +132,7 @@ float NEO_M8N::GetLatitude()
         return 0.0f;
     }
 
-    float result = std::atof(buffer);
+    float result = (float)std::atof(buffer);
 
     return result / 100.0f;
 }
@@ -149,7 +149,7 @@ float NEO_M8N::GetLongitude()
         return 0.0f;
     }
 
-    float result = std::atof(buffer);
+    float result = (float)std::atof(buffer);
 
     return result / 100.0f;
 }
@@ -166,5 +166,5 @@ float NEO_M8N::GetAltitude()
         return 0.0f;
     }
 
-    return std::atof(buffer);
+    return (float)std::atof(buffer);
 }

@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Modules/GY511/GY511.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 #define GY511_CTRL_REG1     0x20U
