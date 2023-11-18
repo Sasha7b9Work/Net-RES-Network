@@ -1,5 +1,7 @@
 #include "usbd_cdc.h"
 
+#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+
 extern void *handlePCD;
 
 #define USB_DISCONNECT_PORT                 GPIOB

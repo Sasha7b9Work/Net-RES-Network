@@ -322,6 +322,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
+#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */

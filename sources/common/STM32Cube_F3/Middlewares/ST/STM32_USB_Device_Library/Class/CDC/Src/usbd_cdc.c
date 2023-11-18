@@ -60,6 +60,9 @@ EndBSPDependencies */
 #include "usbd_ctlreq.h"
 
 
+#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+
+
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */

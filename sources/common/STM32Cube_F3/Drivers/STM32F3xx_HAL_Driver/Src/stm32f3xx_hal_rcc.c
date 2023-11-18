@@ -60,6 +60,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
+#ifndef WIN32
+	#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#endif
+
+
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
@@ -888,12 +893,12 @@ void HAL_RCC_MCOConfig(uint32_t RCC_MCOx, uint32_t RCC_MCOSource, uint32_t RCC_M
   (void)RCC_MCOx;
   (void)RCC_MCODiv;
 
-  GPIO_InitTypeDef gpio;
-
   /* Check the parameters */
   assert_param(IS_RCC_MCO(RCC_MCOx));
   assert_param(IS_RCC_MCODIV(RCC_MCODiv));
   assert_param(IS_RCC_MCO1SOURCE(RCC_MCOSource));
+
+  GPIO_InitTypeDef gpio;
   
   /* Configure the MCO1 pin in alternate function mode */
   gpio.Mode      = GPIO_MODE_AF_PP;

@@ -35,13 +35,10 @@ namespace StartScreen
 
         bool AppendPixel()
         {
-            int num_fills = 0;
-
             for (int i = 0; i < 5; i++)
             {
                 if (pixels[i] == (uint)(-1))
                 {
-                    num_fills++;
                 }
             }
 

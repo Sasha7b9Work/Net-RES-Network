@@ -52,6 +52,9 @@
 #endif
 
 #include "bme280_driver.h"
+#ifndef WIN32
+	#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#endif
 
 /**\name Internal macros */
 /* To identify osr settings selected by user */

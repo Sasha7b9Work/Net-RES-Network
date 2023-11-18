@@ -19,6 +19,8 @@
     #pragma clang diagnostic ignored "-Wfloat-equal"
     #pragma clang diagnostic ignored "-Wexit-time-destructors"
     #pragma clang diagnostic ignored "-Wformat-nonliteral"
+		#pragma clang diagnostic ignored "-Winvalid-utf8"
+		#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
 #endif
 
 
