@@ -19,7 +19,6 @@
     #pragma clang diagnostic ignored "-Wfloat-equal"
     #pragma clang diagnostic ignored "-Wexit-time-destructors"
     #pragma clang diagnostic ignored "-Wformat-nonliteral"
-//    #pragma clang diagnostic ignored "-Winvalid-utf8"
     #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
 #endif
 
@@ -39,7 +38,7 @@ typedef unsigned char uchar;
 
 
 #ifdef WIN32
-//    #define IN_MODE_TEST
+    #define IN_MODE_TEST
     #ifndef GUI
         #define asm(x)
     #endif

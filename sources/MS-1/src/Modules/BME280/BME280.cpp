@@ -7,6 +7,7 @@
 #include <stm32f3xx_hal.h>
 #include <cstring>
 #include <cstdlib>
+#include <cmath>
 
 
 namespace BME280
@@ -17,6 +18,10 @@ namespace BME280
 
     // ѕопытка соединени€ с усройством по адресу id
     static bool AttemptConnection(uint8 id);
+
+    static float CalculateDewPoint(float temperature, float humidity);
+
+    static float CalculateF(float temperature, float humidity);
 }
 
 
@@ -75,7 +80,21 @@ bool BME280::AttemptConnection(uint8 id)
 }
 
 
-bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
+float BME280::CalculateDewPoint(float temperature, float humidity)
+{
+    float f = CalculateF(temperature, humidity);
+
+    return (237.7f * f) / (17.27f - f);
+}
+
+
+float BME280::CalculateF(float temperature, float humidity)
+{
+    return (17.27f * temperature) / (237.7f + temperature) + std::log(humidity / 100.0f);
+}
+
+
+bool BME280::GetMeasures(float* temp, float* pressure, float* humidity, float *dew_point)
 {
     if(HAL_GetTick() < timeNext)
     {
@@ -102,6 +121,8 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
         value = 1.34f;
     }
 
+    *dew_point = CalculateDewPoint(*temp, *humidity);
+
     return true;
 
 #else
@@ -115,6 +136,7 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
         *temp = (float)comp_data.temperature;
         *pressure = (float)comp_data.pressure / 100.0f;
         *humidity = (float)comp_data.humidity;
+        *dew_point = CalculateDewPoint(*temp, *humidity);
     }
 
     return (result == BME280_OK);

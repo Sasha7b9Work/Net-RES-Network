@@ -10,5 +10,5 @@ namespace BME280
 {
     bool Init();
 
-    bool GetMeasures(float *temp, float *pressure, float *humidity);
+    bool GetMeasures(float *temp, float *pressure, float *humidity, float *dew_point);
 }

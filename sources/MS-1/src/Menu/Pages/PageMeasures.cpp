@@ -299,11 +299,11 @@ DEF_PAGE_6(pageMeasures, //-V1027
     pageMain,
     nullptr,
     nullptr,
-    bFixateMeasures,
     pageTemperature,
     pagePressure,
     pageHumidity,
     pageDewPoint,
+    bFixateMeasures,
     bCloseMeasures
 )
 

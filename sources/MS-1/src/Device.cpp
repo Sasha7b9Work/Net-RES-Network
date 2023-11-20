@@ -20,13 +20,6 @@
 #include <cmath>
 
 
-namespace Device
-{
-    static float CalculateDewPoint(float temperature, float humidity);
-    static float CalculateF(float temperature, float humidity);
-}
-
-
 void Device::Init()
 {
     HAL::Init();
@@ -67,17 +60,20 @@ void Device::Update()
     float temp = 0.0f;
     float pressure = 0.0f;
     float humidity = 0.0;
+    float dew_point = 0.0f;
     float illumination = 0.0f;
     float velocity = 0.0f;
+    float latitude = 0.0f;
+    float longitude = 0.0f;
+    float magnetic_x = 0.0f;
+    float magnetic_y = 0.0f;
+    float magnetic_z = 0.0f;
 
-    if (BME280::GetMeasures(&temp, &pressure, &humidity))
+    if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
         InterCom::Send(TypeMeasure::Temperature, temp);
         InterCom::Send(TypeMeasure::Pressure, pressure);
         InterCom::Send(TypeMeasure::Humidity, humidity);
-
-        float dew_point = CalculateDewPoint(temp, humidity);
-
         InterCom::Send(TypeMeasure::DewPoint, dew_point);
 
         bool in_range = Measures::InRange(TypeMeasure::Temperature, temp) &&
@@ -112,18 +108,4 @@ void Device::Update()
     HAL_ADC::GetVoltage();
 
     EnergySwitch::Update();
-}
-
-
-float Device::CalculateDewPoint(float temperature, float humidity)
-{
-    float f = CalculateF(temperature, humidity);
-
-    return (237.7f * f) / (17.27f - f);
-}
-
-
-float Device::CalculateF(float temperature, float humidity)
-{
-    return (17.27f * temperature) / (237.7f + temperature) + std::log(humidity / 100.0f);
 }
