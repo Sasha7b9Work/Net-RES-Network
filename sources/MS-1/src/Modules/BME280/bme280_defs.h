@@ -70,8 +70,8 @@
 /********************************************************/
 
 #ifdef GUI
-	#define UINT8_C (unsigned char)
-	#define INT8_C (signed char)
+//  #define UINT8_C (unsigned char)
+//  #define INT8_C (signed char)
 #endif
 
 #ifdef WIN32
