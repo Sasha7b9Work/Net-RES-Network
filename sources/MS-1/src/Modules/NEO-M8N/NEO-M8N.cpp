@@ -75,7 +75,7 @@ void NEO_M8N::Parse(char *data)
 
 char *NEO_M8N::ExtractField(int num_filed, char buffer[32])
 {
-    if (std::strlen(message) == 0)
+    if (message[0] == '\0')
     {
         buffer[0] = 0;
     }
