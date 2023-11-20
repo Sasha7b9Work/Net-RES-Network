@@ -19,6 +19,8 @@ void EnergySwitch::Init()
 
 void EnergySwitch::Update()
 {
+#ifndef WIN32
+
     if (TIME_MS < 1000)
     {
         return;
@@ -39,4 +41,6 @@ void EnergySwitch::Update()
     {
         pinOUT.ToHi();
     }
+
+#endif
 }
