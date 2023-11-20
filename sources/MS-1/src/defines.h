@@ -2,7 +2,7 @@
 #pragma once
 
 
-#define VERSION 15
+#define VERSION 16
 
 
 #ifndef WIN32

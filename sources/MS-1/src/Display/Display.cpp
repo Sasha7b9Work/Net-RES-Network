@@ -255,6 +255,8 @@ void Display::BeginScene(Color::E color)
 
 void Display::EndScene()
 {
+    DrawStar();
+
     ST7735::WriteBuffer(0, 0, WIDTH, HEIGHT);
 }
 
@@ -283,8 +285,6 @@ void Display::Update()
             DrawMeasures();
 
             DrawTime();
-
-            DrawStar();
 
             if (need_redraw)
             {
