@@ -112,7 +112,7 @@ namespace Display
         {
             if ((x1 % 2) == 0 && (x2 % 2) == 0)
             {
-                uint8 *first_byte = &buffer[y * Display::WIDTH / 2];
+                uint8 *first_byte = &buffer[y * Display::WIDTH / 2 + x1 / 2];
 
                 uint8 value = (uint8)((uint8)(Color::GetCurrent()) + (Color::GetCurrent() << 4));
 
