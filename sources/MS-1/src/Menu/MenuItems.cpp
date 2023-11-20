@@ -350,7 +350,30 @@ void TimeItem::ChangeCurrentField(Key::E key) const
             Math::CircleDecrease(&value, 0, max[*data->cur_field]);
         }
 
-        values[*data->cur_field] = (uint)value;
+        if (*data->cur_field == 0)
+        {
+            time.hours = (uint)value;
+        }
+        else if (*data->cur_field == 1)
+        {
+            time.minutes = (uint)value;
+        }
+        else if (*data->cur_field == 2)
+        {
+            time.seconds = (uint)value;
+        }
+        else if (*data->cur_field == 3)
+        {
+            time.day = (uint)value;
+        }
+        else if (*data->cur_field == 4)
+        {
+            time.month = (uint)value;
+        }
+        else
+        {
+            time.year = (uint)value;
+        }
     }
 }
 
