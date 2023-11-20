@@ -42,4 +42,8 @@ private:
     };
 
     History history;
+
+    static wxTextCtrl *text;
+    static wxTextCtrl *line;
+    static ConsoleSCPI *self;
 };

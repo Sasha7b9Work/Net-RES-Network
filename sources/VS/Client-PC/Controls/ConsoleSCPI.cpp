@@ -18,11 +18,9 @@ enum
 };
 
 
-static wxTextCtrl *text = nullptr;
-static wxTextCtrl *line = nullptr;
-
-
-static ConsoleSCPI *self = nullptr;
+wxTextCtrl *ConsoleSCPI::text = nullptr;
+wxTextCtrl *ConsoleSCPI::line = nullptr;
+ConsoleSCPI *ConsoleSCPI::self = nullptr;
 
 
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("√“÷-3 SCPI"))
