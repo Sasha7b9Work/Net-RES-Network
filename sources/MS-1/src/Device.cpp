@@ -69,8 +69,6 @@ void Device::Update()
     float dew_point = 0.0f;
     float illumination = 0.0f;
     float velocity = 0.0f;
-    float latitude = 0.0f;
-    float longitude = 0.0f;
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
