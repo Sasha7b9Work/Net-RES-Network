@@ -33,7 +33,6 @@ namespace Display
 
     struct Measure
     {
-        String<> old;
         String<> current;
 
         TypeMeasure::E type;
@@ -214,7 +213,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
         return;
     }
 
-    measure.old.SetFormat(measure.current.c_str());
+//    measure.old.SetFormat(measure.current.c_str());
 
     measure.position = 0;
     measure.time = TIME_MS;
