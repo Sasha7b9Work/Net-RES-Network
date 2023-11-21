@@ -58,6 +58,7 @@ namespace Display
         Measure(TypeMeasure::Illumination),
         Measure(TypeMeasure::Velocity),
         Measure(TypeMeasure::Latitude),
+        Measure(TypeMeasure::Altitude),
         Measure(TypeMeasure::Longitude),
         Measure(TypeMeasure::MagneticX),
         Measure(TypeMeasure::MagneticY),
@@ -332,6 +333,7 @@ void Display::DrawMeasures()
         TypeMeasure::Velocity,
         TypeMeasure::Latitude,
         TypeMeasure::Longitude,
+        TypeMeasure::Altitude,
         TypeMeasure::MagneticX,
         TypeMeasure::MagneticY,
         TypeMeasure::MagneticZ,
@@ -407,6 +409,7 @@ void Display::DrawBigMeasure()
         10,
         10,
         10,
+        10,
         10
     };
 
@@ -434,6 +437,7 @@ String<> Display::Measure::Name()
         "ÑÊÎĞÎÑÒÜ",
         "ØÈĞÎÒÀ",
         "ÄÎËÃÎÒÀ",
+        "ÂÛÑÎÒÀ",
         "ÌÀÃÍ X",
         "ÌÀÃÍ Y",
         "ÌÀÃÍ Z",
@@ -457,6 +461,7 @@ String<> Display::Measure::Units()
         "ì/ñ",
         "¨",
         "¨",
+        "ì",
         "¨",
         "¨",
         "¨",

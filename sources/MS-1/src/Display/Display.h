@@ -14,8 +14,9 @@ struct TypeMeasure
         DewPoint,       // Точка росы
         Illumination,   // Освещёность
         Velocity,       // Скорость воздуха
-        Latitude,
-        Longitude,
+        Latitude,       // Широта
+        Longitude,      // Долгота
+        Altitude,       // Высота
         MagneticX,
         MagneticY,
         MagneticZ,

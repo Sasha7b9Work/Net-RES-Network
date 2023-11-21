@@ -121,6 +121,12 @@ char *NEO_M8N::ExtractField(int num_filed, char buffer[32])
 }
 
 
+bool NEO_M8N::IsReady()
+{
+    return true;
+}
+
+
 float NEO_M8N::GetLatitude()
 {
     char buffer[32];

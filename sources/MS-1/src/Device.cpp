@@ -17,6 +17,8 @@
 #include "Hardware/Beeper.h"
 #include "Display/StartScreen.h"
 #include "Hardware/EnergySwitch.h"
+#include "Modules/GY511/GY511.h"
+#include "Modules/NEO-M8N/NEO-M8N.h"
 #include <cmath>
 
 
@@ -35,6 +37,10 @@ void Device::Init()
     BME280::Init();         // Температура, давление, влажность, точка росы
 
     BH1750::Init();         // Освещённость
+
+    GY511::Init();          // Компас
+
+    NEO_M8N::Init();        // Координаты
 
     HC12::Init();           // Радиомодуль
 
@@ -65,9 +71,6 @@ void Device::Update()
     float velocity = 0.0f;
     float latitude = 0.0f;
     float longitude = 0.0f;
-    float magnetic_x = 0.0f;
-    float magnetic_y = 0.0f;
-    float magnetic_z = 0.0f;
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
@@ -100,6 +103,24 @@ void Device::Update()
     {
         InterCom::Send(TypeMeasure::Velocity, velocity);
     }
+
+    StructDataRAW3 data;
+
+    if (GY511::GetAcceleration(data))
+    {
+        InterCom::Send(TypeMeasure::MagneticX, data.data[0].ToMagnetic());
+        InterCom::Send(TypeMeasure::MagneticY, data.data[1].ToMagnetic());
+        InterCom::Send(TypeMeasure::MagneticZ, data.data[2].ToMagnetic());
+    }
+
+    if (NEO_M8N::IsReady())
+    {
+        InterCom::Send(TypeMeasure::Latitude, NEO_M8N::GetLatitude());
+        InterCom::Send(TypeMeasure::Longitude, NEO_M8N::GetLongitude());
+        InterCom::Send(TypeMeasure::Altitude, NEO_M8N::GetAltitude());
+    }
+
+    GY511::Update();
 
     Keyboard::Update();
 

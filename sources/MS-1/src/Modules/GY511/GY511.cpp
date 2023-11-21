@@ -35,6 +35,8 @@ namespace GY511
         HAL_I2C1::Read(0x19, reg, &result, 1);
         return result;
     }
+
+    static bool is_reading = false;
 }
 
 
@@ -73,23 +75,24 @@ void GY511::Update()
 
         raw_acce_z.byte[0] = Read(GY511_OUT_Z_L);
         raw_acce_z.byte[1] = Read(GY511_OUT_Z_H);
+
+        is_reading = true;
     }
 }
 
 
-StructDataRaw GY511::GetAccelerationX()
+bool GY511::GetAcceleration(StructDataRAW3 &data)
 {
-    return raw_acce_x;
-}
+    if (is_reading)
+    {
+        is_reading = false;
 
+        data.data[0] = raw_acce_x;
+        data.data[1] = raw_acce_y;
+        data.data[2] = raw_acce_z;
 
-StructDataRaw GY511::GetAccelerationY()
-{
-    return raw_acce_y;
-}
+        return true;
+    }
 
-
-StructDataRaw GY511::GetAccelerationZ()
-{
-    return raw_acce_z;
+    return false;
 }

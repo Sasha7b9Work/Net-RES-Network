@@ -18,6 +18,11 @@ union StructDataRaw
 };
 
 
+struct StructDataRAW3
+{
+    StructDataRaw data[3];
+};
+
 
 namespace GY511
 {
@@ -25,9 +30,5 @@ namespace GY511
 
     void Update();
 
-    StructDataRaw GetAccelerationX();
-
-    StructDataRaw GetAccelerationY();
-
-    StructDataRaw GetAccelerationZ();
+    bool GetAcceleration(StructDataRAW3 &);
 }
