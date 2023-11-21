@@ -92,9 +92,11 @@ void Device::Update()
         }
     }
 
-    if (BH1750::GetMeasure(&illumination))
+    Measure measure;
+
+    if (BH1750::GetMeasure(measure))
     {
-        InterCom::Send(TypeMeasure::Illumination, illumination);
+        InterCom::Send(TypeMeasure::Illumination, measure.value_f);
     }
 
     if (CG_Anem::GetMeasure(&velocity))

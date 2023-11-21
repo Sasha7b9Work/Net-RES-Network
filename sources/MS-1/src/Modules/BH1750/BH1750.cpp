@@ -40,8 +40,10 @@ void BH1750::Init()
 }
 
 
-bool BH1750::GetMeasure(float *illumination)
+bool BH1750::GetMeasure(Measure &measure)
 {
+    measure.Clear();
+
     if (HAL_GetTick() < timeNext)
     {
         return false;
@@ -55,7 +57,7 @@ bool BH1750::GetMeasure(float *illumination)
 
     value *= 1.98f;
 
-    *illumination = value / 100.0f;
+    measure.CreateFloat(value / 100.0f);
 
     if (value > 1e4f)
     {
@@ -74,7 +76,7 @@ bool BH1750::GetMeasure(float *illumination)
 
 //        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
 
-        *illumination = value;
+        measure.CreateFloat(value);
 
         return true;
     }
