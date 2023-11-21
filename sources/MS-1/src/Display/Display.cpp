@@ -31,7 +31,7 @@ namespace Display
 
     void DrawZones();
 
-    struct Measure
+    struct DMeasure
     {
         String<> current;
 
@@ -40,7 +40,7 @@ namespace Display
         int position;               // “екуща€ отрисовываема€ позици€
         uint time;                  // ¬рем€ последнего изменени€ текущей отрисовываемой позиции
 
-        Measure(TypeMeasure::E t) : type(t), value(0.0f), position(0), time(0) {}
+        DMeasure(TypeMeasure::E t) : type(t), value(0.0f), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
 
@@ -49,21 +49,21 @@ namespace Display
         String<> Units();
     };
 
-    static Measure measures[TypeMeasure::Count] =
+    static DMeasure measures[TypeMeasure::Count] =
     {
-        Measure(TypeMeasure::Temperature),
-        Measure(TypeMeasure::Pressure),
-        Measure(TypeMeasure::Humidity),
-        Measure(TypeMeasure::DewPoint),
-        Measure(TypeMeasure::Illumination),
-        Measure(TypeMeasure::Velocity),
-        Measure(TypeMeasure::Latitude),
-        Measure(TypeMeasure::Altitude),
-        Measure(TypeMeasure::Longitude),
-        Measure(TypeMeasure::MagneticX),
-        Measure(TypeMeasure::MagneticY),
-        Measure(TypeMeasure::MagneticZ),
-        Measure(TypeMeasure::Time)
+        DMeasure(TypeMeasure::Temperature),
+        DMeasure(TypeMeasure::Pressure),
+        DMeasure(TypeMeasure::Humidity),
+        DMeasure(TypeMeasure::DewPoint),
+        DMeasure(TypeMeasure::Illumination),
+        DMeasure(TypeMeasure::Velocity),
+        DMeasure(TypeMeasure::Latitude),
+        DMeasure(TypeMeasure::Altitude),
+        DMeasure(TypeMeasure::Longitude),
+        DMeasure(TypeMeasure::MagneticX),
+        DMeasure(TypeMeasure::MagneticY),
+        DMeasure(TypeMeasure::MagneticZ),
+        DMeasure(TypeMeasure::Time)
     };
 
     static void DrawMeasures();
@@ -207,7 +207,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 
     Settings::SaveMeasure(type, value);
 
-    Measure &measure = measures[type];
+    DMeasure &measure = measures[type];
 
     if (value == measure.value) //-V550
     {
@@ -225,7 +225,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
 }
 
 
-void Display::Measure::Draw(const int x0, const int y0, int size)
+void Display::DMeasure::Draw(const int x0, const int y0, int size)
 {
     int width_zone = 38;
     int height_zone = 12;
@@ -413,7 +413,7 @@ void Display::DrawBigMeasure()
         10
     };
 
-    Measure &measure = measures[gset.display.typeDisplaydInfo.value];
+    DMeasure &measure = measures[gset.display.typeDisplaydInfo.value];
 
     Font::Text::DrawBig(x[measure.type], 15, 2, measure.Name().c_str(), Color::_1);
 
@@ -425,7 +425,7 @@ void Display::DrawBigMeasure()
 }
 
 
-String<> Display::Measure::Name()
+String<> Display::DMeasure::Name()
 {
     static const pchar names[TypeMeasure::Count] =
     {
@@ -449,7 +449,7 @@ String<> Display::Measure::Name()
     return result;
 }
 
-String<> Display::Measure::Units()
+String<> Display::DMeasure::Units()
 {
     static const pchar units[TypeMeasure::Count] =
     {
