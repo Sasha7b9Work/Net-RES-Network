@@ -11,12 +11,7 @@ union StructDataRaw
         int16 raw;
     };
 
-    float ToTemperatrue()
-    {
-        return 25.0f + (float)raw / 256.0f;
-    }
-
-    float ToAccelearation()
+    float ToMagnetic()
     {
         return (float)raw / 16.0f / 1000.0f;
     }
@@ -35,6 +30,4 @@ namespace GY511
     StructDataRaw GetAccelerationY();
 
     StructDataRaw GetAccelerationZ();
-
-    StructDataRaw GetRawTemperature();
 }

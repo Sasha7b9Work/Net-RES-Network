@@ -57,7 +57,13 @@ namespace Display
         Measure(TypeMeasure::Humidity),
         Measure(TypeMeasure::DewPoint),
         Measure(TypeMeasure::Illumination),
-        Measure(TypeMeasure::Velocity)
+        Measure(TypeMeasure::Velocity),
+        Measure(TypeMeasure::Latitude),
+        Measure(TypeMeasure::Longitude),
+        Measure(TypeMeasure::MagneticX),
+        Measure(TypeMeasure::MagneticY),
+        Measure(TypeMeasure::MagneticZ),
+        Measure(TypeMeasure::Time)
     };
 
     static void DrawMeasures();
@@ -324,7 +330,13 @@ void Display::DrawMeasures()
         TypeMeasure::Humidity,
         TypeMeasure::DewPoint,
         TypeMeasure::Illumination,
-        TypeMeasure::Velocity
+        TypeMeasure::Velocity,
+        TypeMeasure::Latitude,
+        TypeMeasure::Longitude,
+        TypeMeasure::MagneticX,
+        TypeMeasure::MagneticY,
+        TypeMeasure::MagneticZ,
+        TypeMeasure::Time
     };
 
     int y = y0;
@@ -390,6 +402,12 @@ void Display::DrawBigMeasure()
         28,
         10,
         10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
         10
     };
 
@@ -414,7 +432,13 @@ String<> Display::Measure::Name()
         "ÂËÀÆÍÎÑÒÜ",
         "ÒÎ×ÊÀ ĞÎÑÛ",
         "ÎÑÂÅÙÅÍÍÎÑÒÜ",
-        "ÑÊÎĞÎÑÒÜ"
+        "ÑÊÎĞÎÑÒÜ",
+        "ØÈĞÎÒÀ",
+        "ÄÎËÃÎÒÀ",
+        "ÌÀÃÍ X",
+        "ÌÀÃÍ Y",
+        "ÌÀÃÍ Z",
+        "ÂĞÅÌß"
     };
 
     String<> result(names[type]);
@@ -431,7 +455,13 @@ String<> Display::Measure::Units()
         "%%",
         "¨Ñ",
         "ëì",
-        "ì/ñ"
+        "ì/ñ",
+        "¨",
+        "¨",
+        "¨",
+        "¨",
+        "¨",
+        ""
     };
 
     return String<>(units[type]);

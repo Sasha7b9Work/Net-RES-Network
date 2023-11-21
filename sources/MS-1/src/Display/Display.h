@@ -19,6 +19,7 @@ struct TypeMeasure
         MagneticX,
         MagneticY,
         MagneticZ,
+        Time,
         Count
     };
 };
