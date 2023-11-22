@@ -69,9 +69,11 @@
 /*! @name		Common macros		        */
 /********************************************************/
 
-#ifndef GUI
-//	#define UINT8_C (unsigned char)
-//	#define INT8_C (signed char)
+#ifdef WIN32
+    #ifndef GUI
+        #define UINT8_C (unsigned char)
+        #define INT8_C (signed char)
+    #endif
 #endif
 
 #if !defined(UINT8_C) && !defined(INT8_C)
