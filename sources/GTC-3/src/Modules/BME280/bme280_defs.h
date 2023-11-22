@@ -70,8 +70,8 @@
 /********************************************************/
 
 #ifndef GUI
-	#define UINT8_C (unsigned char)
-	#define INT8_C (signed char)
+//	#define UINT8_C (unsigned char)
+//	#define INT8_C (signed char)
 #endif
 
 #if !defined(UINT8_C) && !defined(INT8_C)

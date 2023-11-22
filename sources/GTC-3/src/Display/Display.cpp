@@ -117,7 +117,7 @@ namespace Display
 
                 uint8 value = (uint8)((uint8)(Color::GetCurrent()) + (Color::GetCurrent() << 4));
 
-                std::memset(first_byte, value, (x2 - x1) / 2U);
+                std::memset(first_byte, value, (uint)(x2 - x1) / 2U);
             }
             else
             {
@@ -202,7 +202,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     if (value == measure.value) //-V550
     {
         return;
-    };
+    }
 
     measure.old.SetFormat(measure.current.c_str());
 
@@ -210,7 +210,7 @@ void Display::SetMeasure(TypeMeasure::E type, float value)
     measure.time = TIME_MS;
     measure.value = value;
 
-    measure.current.SetFormat("%.1f", value);
+    measure.current.SetFormat("%.1f", (double)value);
     measure.current[6] = '\0';
 }
 

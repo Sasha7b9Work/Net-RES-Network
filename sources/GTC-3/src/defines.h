@@ -4,7 +4,7 @@
 #define VERSION 2
 
 
-#ifndef WIN32
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic ignored "-Wundefined-func-template"
     #pragma clang diagnostic ignored "-Wmissing-field-initializers"
     #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
@@ -22,6 +22,7 @@
     #pragma clang diagnostic ignored "-Wcast-align"
     #pragma clang diagnostic ignored "-Wmissing-prototypes"
     #pragma clang diagnostic ignored "-Wmissing-variable-declarations"
+    #pragma clang diagnostic ignored "-Wmissing-noreturn"
 #endif
 
 
@@ -41,6 +42,10 @@ typedef unsigned char uchar;
 
 #ifdef GUI
     #define IN_MODE_TEST
+#else
+    #ifdef WIN32
+        #define asm(x)
+    #endif
 #endif
 
 

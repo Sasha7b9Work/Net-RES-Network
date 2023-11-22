@@ -5,7 +5,7 @@
 #define VERSION 17
 
 
-#ifndef WIN32
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic ignored "-Wundefined-func-template"
     #pragma clang diagnostic ignored "-Wmissing-field-initializers"
     #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"

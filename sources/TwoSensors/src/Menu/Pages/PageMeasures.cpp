@@ -239,13 +239,13 @@ void OnPress_ResetDewPoint(bool)
 }
 
 
-DEF_BUTTON(bResetDewPoint,
-    "Сброс мин-макс",
-    *PageMeasures::DewPoint::self,
-    OnPress_ResetDewPoint,
-    nullptr,
-    nullptr
-)
+//DEF_BUTTON(bResetDewPoint,
+//    "Сброс мин-макс",
+//    *PageMeasures::DewPoint::self,
+//    OnPress_ResetDewPoint,
+//    nullptr,
+//    nullptr
+//)
 
 DEF_PAGE_7(pageDewPoint, //-V1027
     "ТОЧКА РОСЫ",

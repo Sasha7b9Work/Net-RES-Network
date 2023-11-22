@@ -61,11 +61,6 @@ uint HAL_ADC::ReadChannel(uint channel)
             }
 
             value = HAL_ADC_GetValue(&handleADC);
-
-            if (value != 0 && value != 0xFFF && value != 0xF9D)
-            {
-                value = value;
-            }
         }
     }
 
