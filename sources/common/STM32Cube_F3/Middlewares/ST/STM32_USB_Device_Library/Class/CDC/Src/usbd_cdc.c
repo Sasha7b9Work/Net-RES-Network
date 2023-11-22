@@ -60,7 +60,9 @@ EndBSPDependencies */
 #include "usbd_ctlreq.h"
 
 
-#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#endif
 
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY

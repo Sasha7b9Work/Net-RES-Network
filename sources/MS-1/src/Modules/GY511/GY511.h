@@ -1,5 +1,6 @@
 // 2023/01/30 16:44:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Storage/Measure.h"
 
 
 // Структура содержит нативные данные, считанные из акселерометра
@@ -18,17 +19,11 @@ union StructDataRaw
 };
 
 
-struct StructDataRAW3
-{
-    StructDataRaw data[3];
-};
-
-
 namespace GY511
 {
     void Init();
 
     void Update();
 
-    bool GetAcceleration(StructDataRAW3 &);
+    bool GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ);
 }

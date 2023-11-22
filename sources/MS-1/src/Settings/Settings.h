@@ -70,7 +70,7 @@ struct Settings
     static void Reset();
 
     // ≈сли value больше или меньше уже сохранЄнного измерени€, то перезаписывает старое
-    static void SaveMeasure(TypeMeasure::E, float value);
+    static void SaveMeasure(TypeMeasure::E, const Measure &);
 
     // —брасывает мин и макс значени€ измерени€
     static void ResetMeasure(TypeMeasure::E);

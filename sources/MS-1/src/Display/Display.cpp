@@ -36,11 +36,11 @@ namespace Display
         String<> current;
 
         TypeMeasure::E type;
-        float value;                // ѕоследнее установленное значение
+        Measure value;              // ѕоследнее установленное значение
         int position;               // “екуща€ отрисовываема€ позици€
         uint time;                  // ¬рем€ последнего изменени€ текущей отрисовываемой позиции
 
-        DMeasure(TypeMeasure::E t) : type(t), value(0.0f), position(0), time(0) {}
+        DMeasure(TypeMeasure::E t) : type(t), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
 
@@ -198,30 +198,30 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void Display::SetMeasure(TypeMeasure::E type, float value)
+void Display::SetMeasure(TypeMeasure::E type, const Measure &measure)
 {
-    if (type == TypeMeasure::DewPoint)
+    if (!measure.IsDouble())
     {
         return;
     }
 
-    Settings::SaveMeasure(type, value);
+    Settings::SaveMeasure(type, measure);
 
-    DMeasure &measure = measures[type];
+    DMeasure &value = measures[type];
 
-    if (value == measure.value) //-V550
+    if (value.value.GetDouble() == measure.GetDouble()) //-V550
     {
         return;
     }
 
 //    measure.old.SetFormat(measure.current.c_str());
 
-    measure.position = 0;
-    measure.time = TIME_MS;
-    measure.value = value;
+    value.position = 0;
+    value.time = TIME_MS;
+    value.value = measure;
 
-    measure.current.SetFormat("%.1f", (double)value);
-    measure.current[6] = '\0';
+    value.current.SetFormat("%.1f", (double)measure.GetDouble());
+    value.current[6] = '\0';
 }
 
 

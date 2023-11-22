@@ -94,7 +94,7 @@ float BME280::CalculateF(float temperature, float humidity)
 }
 
 
-bool BME280::GetMeasures(float* temp, float* pressure, float* humidity, float *dew_point)
+bool BME280::GetMeasures(Measure *temp, Measure *pressure, Measure *humidity, Measure *dew_point)
 {
     if(HAL_GetTick() < timeNext)
     {
@@ -108,20 +108,20 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity, float *d
     static float value = 1.1f;
 
     value *= 7.1f;
-    *temp = value / 100.0f;
+    temp->SetDouble(value / 100.0f);
 
     value *= 1.2f;
-    *pressure = value / 100.0f;
+    pressure->SetDouble(value / 100.0f);
 
     value *= 0.83f;
-    *humidity = value / 99.28f;
+    humidity->SetDouble(value / 99.28f);
 
     if (value > 1e4f)
     {
         value = 1.34f;
     }
 
-    *dew_point = CalculateDewPoint(*temp, *humidity);
+    dew_point->SetDouble(CalculateDewPoint((float)temp->GetDouble(), (float)humidity->GetDouble()));
 
     return true;
 
@@ -133,10 +133,10 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity, float *d
 
     if (result == BME280_OK)
     {
-        *temp = (float)comp_data.temperature;
-        *pressure = (float)comp_data.pressure / 100.0f;
-        *humidity = (float)comp_data.humidity;
-        *dew_point = CalculateDewPoint(*temp, *humidity);
+        temp->SetDouble(comp_data.temperature);
+        pressure->SetDouble(comp_data.pressure / 100.0);
+        humidity->SetDouble(comp_data.humidity);
+        dew_point->SetDouble(CalculateDewPoint((float)temp->GetDouble(), (float)humidity->GetDouble()));
     }
 
     return (result == BME280_OK);

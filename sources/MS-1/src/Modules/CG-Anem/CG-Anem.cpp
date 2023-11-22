@@ -13,8 +13,10 @@ namespace CG_Anem
 }
 
 
-bool CG_Anem::GetMeasure(float *velocity_out)
+bool CG_Anem::GetMeasure(Measure *velocity_out)
 {
+    velocity_out->Clear();
+
     if (HAL_GetTick() < timeNext)
     {
         return false;
@@ -24,7 +26,7 @@ bool CG_Anem::GetMeasure(float *velocity_out)
 
 #ifdef IN_MODE_TEST
 
-    *velocity_out = (float)(std::rand() % 10000) / 100.0f;
+    velocity_out->SetDouble((float)(std::rand() % 10000) / 100.0f);
 
     return true;
 
@@ -58,7 +60,7 @@ bool CG_Anem::GetMeasure(float *velocity_out)
 
     if (result)
     {
-        *velocity_out = velocity.half_word[0] * 0.1f;
+        velocity_out->SetDouble(velocity.half_word[0] * 0.1f);
     }
 
     return result;

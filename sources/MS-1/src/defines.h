@@ -37,9 +37,10 @@ typedef unsigned char uchar;
 #define TIME_MEASURE  500
 
 
-#ifdef WIN32
+#ifdef GUI
     #define IN_MODE_TEST
-    #ifndef GUI
+#else
+    #ifdef WIN32
         #define asm(x)
     #endif
 #endif

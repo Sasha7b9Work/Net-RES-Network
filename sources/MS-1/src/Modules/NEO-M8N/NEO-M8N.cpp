@@ -127,50 +127,21 @@ bool NEO_M8N::IsReady()
 }
 
 
-float NEO_M8N::GetLatitude()
+bool NEO_M8N::GetMeasures(Measure *latitude, Measure *longitude, Measure *altitude)
 {
     char buffer[32];
 
     ExtractField(2, buffer);
 
-    if (buffer[0] == 0)
-    {
-        return 0.0f;
-    }
-
-    float result = (float)std::atof(buffer);
-
-    return result / 100.0f;
-}
-
-
-float NEO_M8N::GetLongitude()
-{
-    char buffer[32];
+    latitude->SetDouble(std::atof(buffer) / 100.0);
 
     ExtractField(4, buffer);
 
-    if (buffer[0] == 0)
-    {
-        return 0.0f;
-    }
-
-    float result = (float)std::atof(buffer);
-
-    return result / 100.0f;
-}
-
-
-float NEO_M8N::GetAltitude()
-{
-    char buffer[32];
+    longitude->SetDouble(std::atof(buffer) / 100.0);
 
     ExtractField(9, buffer);
 
-    if (buffer[0] == 0)
-    {
-        return 0.0f;
-    }
+    altitude->SetDouble(std::atof(buffer));
 
-    return (float)std::atof(buffer);
+    return true;
 }

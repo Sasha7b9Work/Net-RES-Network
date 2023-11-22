@@ -5,7 +5,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
-#include "Modules/BH1750/BH1750.h"
 #include "Modules/CG-Anem/CG-Anem.h"
 #include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
@@ -36,8 +35,6 @@ void Device::Init()
 
     BME280::Init();         // Температура, давление, влажность, точка росы
 
-    BH1750::Init();         // Освещённость
-
     GY511::Init();          // Компас
 
     NEO_M8N::Init();        // Координаты
@@ -63,12 +60,17 @@ void Device::Update()
         Beeper::Stop();
     }
 
-    float temp = 0.0f;
-    float pressure = 0.0f;
-    float humidity = 0.0;
-    float dew_point = 0.0f;
-    float illumination = 0.0f;
-    float velocity = 0.0f;
+    Measure temp;
+    Measure pressure;
+    Measure humidity;
+    Measure dew_point;
+    Measure velocity;
+    Measure magneticX;
+    Measure magneticY;
+    Measure magneticZ;
+    Measure latitude;
+    Measure longitude;
+    Measure altitude;
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
@@ -77,10 +79,10 @@ void Device::Update()
         InterCom::Send(TypeMeasure::Humidity, humidity);
         InterCom::Send(TypeMeasure::DewPoint, dew_point);
 
-        bool in_range = Measures::InRange(TypeMeasure::Temperature, temp) &&
-            Measures::InRange(TypeMeasure::Pressure, pressure) &&
-            Measures::InRange(TypeMeasure::Humidity, humidity) &&
-            Measures::InRange(TypeMeasure::DewPoint, dew_point);
+        bool in_range = Measures::InRange(TypeMeasure::Temperature, temp.GetDouble()) &&
+            Measures::InRange(TypeMeasure::Pressure, pressure.GetDouble()) &&
+            Measures::InRange(TypeMeasure::Humidity, humidity.GetDouble()) &&
+            Measures::InRange(TypeMeasure::DewPoint, dew_point.GetDouble());
 
         if (in_range)
         {
@@ -92,32 +94,23 @@ void Device::Update()
         }
     }
 
-    Measure measure;
-
-    if (BH1750::GetMeasure(measure))
-    {
-        InterCom::Send(TypeMeasure::Illumination, measure.value_f);
-    }
-
     if (CG_Anem::GetMeasure(&velocity))
     {
         InterCom::Send(TypeMeasure::Velocity, velocity);
     }
 
-    StructDataRAW3 data;
-
-    if (GY511::GetAcceleration(data))
+    if (GY511::GetMagnetic(&magneticX, &magneticY, &magneticZ))
     {
-        InterCom::Send(TypeMeasure::MagneticX, data.data[0].ToMagnetic());
-        InterCom::Send(TypeMeasure::MagneticY, data.data[1].ToMagnetic());
-        InterCom::Send(TypeMeasure::MagneticZ, data.data[2].ToMagnetic());
+        InterCom::Send(TypeMeasure::MagneticX, magneticX);
+        InterCom::Send(TypeMeasure::MagneticY, magneticY);
+        InterCom::Send(TypeMeasure::MagneticZ, magneticZ);
     }
 
-    if (NEO_M8N::IsReady())
+    if (NEO_M8N::GetMeasures(&latitude, &longitude, &altitude))
     {
-        InterCom::Send(TypeMeasure::Latitude, NEO_M8N::GetLatitude());
-        InterCom::Send(TypeMeasure::Longitude, NEO_M8N::GetLongitude());
-        InterCom::Send(TypeMeasure::Altitude, NEO_M8N::GetAltitude());
+        InterCom::Send(TypeMeasure::Latitude, latitude);
+        InterCom::Send(TypeMeasure::Longitude, longitude);
+        InterCom::Send(TypeMeasure::Altitude, altitude);
     }
 
     GY511::Update();

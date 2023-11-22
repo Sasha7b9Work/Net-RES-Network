@@ -10,5 +10,5 @@ namespace BH1750
 {
     void Init();
 
-    bool GetMeasure(Measure &);
+    bool GetMeasure(Measure *);
 }

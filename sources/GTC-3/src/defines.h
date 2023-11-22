@@ -3,6 +3,25 @@
 
 #define VERSION 2
 
+
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wundefined-func-template"
+    #pragma clang diagnostic ignored "-Wmissing-field-initializers"
+    #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
+    #pragma clang diagnostic ignored "-Wold-style-cast"
+    #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+    #pragma clang diagnostic ignored "-Wpadded"
+    #pragma clang diagnostic ignored "-Wglobal-constructors"
+    #pragma clang diagnostic ignored "-Wcast-qual"
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+    #pragma clang diagnostic ignored "-Winvalid-source-encoding"
+    #pragma clang diagnostic ignored "-Wfloat-equal"
+    #pragma clang diagnostic ignored "-Wexit-time-destructors"
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+    #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#endif
+
+
 typedef unsigned char uint8;
 typedef signed char int8;
 typedef unsigned short uint16;
@@ -17,14 +36,8 @@ typedef unsigned char uchar;
 #define TIME_MEASURE  500
 
 
-#ifdef WIN32
+#ifdef GUI
     #define IN_MODE_TEST
-    #ifndef GUI
-        #define asm(x)
-    #endif
-#else
-    #define nullptr 0 //-V1059
-    #pragma diag_suppress 2748
 #endif
 
 

@@ -9,29 +9,49 @@ struct Measure
         enum E
         {
             None,
-            Float,
             Double,
             String
         };
     };
 
-    Type::E type;
-
     union
     {
-        float  value_f;
         double value_d;
         char   str[32];
     };
+
+    bool IsDouble() const
+    {
+        return (type == Type::Double);
+    }
+
+    bool IsString() const
+    {
+        return type == Type::String;
+    }
 
     void Clear()
     {
         type = Type::None;
     }
 
-    void CreateFloat(float value)
+    void SetDouble(double value)
     {
-        type = Type::Float;
-        value_f = value;
+        type = Type::Double;
+        value_d = value;
     }
+
+    void SetDouble(float value)
+    {
+        SetDouble((double)value);
+    }
+
+    double GetDouble() const
+    {
+        return value_d;
+    }
+
+private:
+
+    Type::E type;
 };

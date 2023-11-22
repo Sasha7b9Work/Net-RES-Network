@@ -81,15 +81,15 @@ void GY511::Update()
 }
 
 
-bool GY511::GetAcceleration(StructDataRAW3 &data)
+bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ)
 {
     if (is_reading)
     {
         is_reading = false;
 
-        data.data[0] = raw_acce_x;
-        data.data[1] = raw_acce_y;
-        data.data[2] = raw_acce_z;
+        magneticX->SetDouble(raw_acce_x.ToMagnetic());
+        magneticY->SetDouble(raw_acce_y.ToMagnetic());
+        magneticZ->SetDouble(raw_acce_z.ToMagnetic());
 
         return true;
     }

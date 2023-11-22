@@ -23,14 +23,14 @@ bool Measures::IsFixed()
 }
 
 
-bool Measures::InRange(TypeMeasure::E type, float value)
+bool Measures::InRange(TypeMeasure::E type, double value)
 {
-    if (value < (float)gset.measures.limit_min[type])
+    if (value < gset.measures.limit_min[type])
     {
         return false;
     }
 
-    if (value > (float)gset.measures.limit_max[type])
+    if (value > gset.measures.limit_max[type])
     {
         return false;
     }

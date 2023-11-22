@@ -8,5 +8,5 @@ namespace Measures
     // Фиксирует последние измерения на экране
     void SetFixed(bool fixed);
     bool IsFixed();
-    bool InRange(TypeMeasure::E, float);
+    bool InRange(TypeMeasure::E, double);
 }

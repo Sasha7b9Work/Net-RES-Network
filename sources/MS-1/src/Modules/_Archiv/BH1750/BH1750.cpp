@@ -40,9 +40,9 @@ void BH1750::Init()
 }
 
 
-bool BH1750::GetMeasure(Measure &measure)
+bool BH1750::GetMeasure(Measure *measure)
 {
-    measure.Clear();
+    measure->Clear();
 
     if (HAL_GetTick() < timeNext)
     {
@@ -57,7 +57,7 @@ bool BH1750::GetMeasure(Measure &measure)
 
     value *= 1.98f;
 
-    measure.CreateFloat(value / 100.0f);
+    measure->SetDouble(value / 100.0f);
 
     if (value > 1e4f)
     {

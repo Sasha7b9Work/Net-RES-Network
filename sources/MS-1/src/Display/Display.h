@@ -2,6 +2,7 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Utils/Text/String.h"
+#include "Storage/Measure.h"
 
 
 struct TypeMeasure
@@ -33,7 +34,7 @@ namespace Display
 
     extern bool need_redraw;
 
-    void SetMeasure(TypeMeasure::E, float measure);
+    void SetMeasure(TypeMeasure::E, const Measure &);
 
     void Update();
 
