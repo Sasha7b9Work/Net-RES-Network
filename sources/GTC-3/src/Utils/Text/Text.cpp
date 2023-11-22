@@ -382,7 +382,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
         y += 9;
     }
 
-    LIMITATION(*height, y - top + 4, 0, 239);
+    LIMITATION(*height, y - top + 4, 0, 239)
 
     return curSymbol == numSymb;
 }
@@ -598,7 +598,8 @@ String<> SU::Bin2String16(uint16 value)
     char buffer[19];
 
     std::strcpy(buffer, Bin2String((uint8)(value >> 8)).c_str());
-    std::strcpy((buffer[8] = ' ', buffer + 9), Bin2String((uint8)value).c_str());
+    buffer[8] = ' ';
+    std::strcpy(buffer + 9, Bin2String((uint8)value).c_str());
 
     return String<>(buffer);
 }
@@ -641,7 +642,7 @@ String<> SU::Float2String(float value, bool alwaysSign, int numDigits)
         format[5] = '.';
     }
 
-    std::snprintf(buffer, 19, format, std::fabs(value));
+    std::snprintf(buffer, 19, format, (double)std::fabs(value));
     
     if((int)std::strlen(buffer) > numDigits + 1)        // Это затычка на то, что число -9.99999 выводится как -10.000, хотя должно быть четыре цифры - 2 цифры после запятой
     {
@@ -702,7 +703,26 @@ String<> SU::Int2String(int value, bool alwaysSign, int numMinFields)
 String<> SU::Hex8toString(uint8 value)
 {
     char buffer[3];
-    std::sprintf(value < 16 ? (buffer[0] = '0', buffer + 1) : (buffer), "%x", value);
+
+    if(value < 16)
+    {
+        buffer[0] = '\0';
+        std::sprintf(buffer + 1, "%x", value);
+    }
+    else
+    {
+        std::sprintf(buffer, "%x", value);
+    }
+    
+    if(value < 16)
+    {
+        buffer[0] = '0';
+        std::sprintf(buffer + 1, "%x", value);
+    }
+    else
+    {
+        std::sprintf(buffer, "%x", value);
+    }
     return String<>(buffer);
 }
 

@@ -20,7 +20,7 @@ int Font::Text::Length(pchar text)
 
     while (*text)
     {
-        result += Font::Symbol::Width((uint8)*text) + Font::GetSpacing();
+        result += (uint)Font::Symbol::Width((uint8)*text) + (uint)Font::GetSpacing();
         text++;
     }
 

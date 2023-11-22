@@ -8,31 +8,48 @@ struct Measure
     {
         enum E
         {
-            None,
-            Double,
-            String
+            Double,     // Всё, кроме времени
+            Uint,       // Время в секундах после 2000 г
+            Count
+        };
+    };
+
+    struct Name
+    {
+        enum E
+        {
+            Temperature,    // Температура
+            Pressure,       // Давление
+            Humidity,       // Влажность
+            DewPoint,       // Точка росы
+            Illumination,   // Освещёность
+            Velocity,       // Скорость воздуха
+            Latitude,       // Широта
+            Longitude,      // Долгота
+            Altitude,       // Высота
+            MagneticX,
+            MagneticY,
+            MagneticZ,
+            Time,
+            Count
         };
     };
 
     union
     {
         double value_d;
-        char   str[32];
+        uint   value_32;
     };
-
-    bool IsDouble() const
-    {
-        return (type == Type::Double);
-    }
-
-    bool IsString() const
-    {
-        return type == Type::String;
-    }
 
     void Clear()
     {
-        type = Type::None;
+        type = Type::Count;
+        name = Name::Count;
+    }
+
+    bool IsDouble() const
+    {
+        return type == Type::Double;
     }
 
     void SetDouble(double value)
@@ -51,7 +68,19 @@ struct Measure
         return value_d;
     }
 
+    Name::E GetName() const
+    {
+        return name;
+    }
+
+    Type::E GetType() const
+    {
+        return type;
+    }
+
 private:
 
     Type::E type;
+
+    Name::E name;
 };

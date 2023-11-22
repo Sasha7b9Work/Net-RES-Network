@@ -44,21 +44,21 @@ DEF_CHOICE_2(chTemperature,
     *PageMeasures::Temperature::self,
     nullptr,
     nullptr,
-    gset.display.show_measure[TypeMeasure::Temperature],
+    gset.display.show_measure[Measure::Name::Temperature],
     "Нет", "Да"
 )
 
 
-DEF_GOVERNOR_MIN(gTemperatureLimitMin, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
+DEF_GOVERNOR_MIN(gTemperatureLimitMin, PageMeasures::Temperature::self, -30, 60, Measure::Name::Temperature);
 
-DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60, TypeMeasure::Temperature);
+DEF_GOVERNOR_MAX(gTemperatureLimitMax, PageMeasures::Temperature::self, -30, 60, Measure::Name::Temperature);
 
-DEF_STATE_MIN_MAX(sTemperature, PageMeasures::Temperature::self, TypeMeasure::Temperature);
+DEF_STATE_MIN_MAX(sTemperature, PageMeasures::Temperature::self, Measure::Name::Temperature);
 
 
 static void OnPress_ResetTemperature(bool)
 {
-    gset.ResetMeasure(TypeMeasure::Temperature);
+    gset.ResetMeasure(Measure::Name::Temperature);
 }
 
 
@@ -105,20 +105,20 @@ DEF_CHOICE_2(chPressure,
     *PageMeasures::Pressure::self,
     nullptr,
     nullptr,
-    gset.display.show_measure[TypeMeasure::Pressure],
+    gset.display.show_measure[Measure::Name::Pressure],
     "Нет", "Да"
 )
 
-DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 1000, TypeMeasure::Pressure);
+DEF_GOVERNOR_MIN(gPressureMin, PageMeasures::Pressure::self, 225, 1000, Measure::Name::Pressure);
 
-DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 1000, TypeMeasure::Pressure);
+DEF_GOVERNOR_MAX(gPressureMax, PageMeasures::Pressure::self, 225, 1000, Measure::Name::Pressure);
 
-DEF_STATE_MIN_MAX(sPressure, PageMeasures::Pressure::self, TypeMeasure::Pressure);
+DEF_STATE_MIN_MAX(sPressure, PageMeasures::Pressure::self, Measure::Name::Pressure);
 
 
 static void OnPress_ResetPressure(bool)
 {
-    gset.ResetMeasure(TypeMeasure::Pressure);
+    gset.ResetMeasure(Measure::Name::Pressure);
 }
 
 
@@ -165,19 +165,19 @@ DEF_CHOICE_2(chHumidity,
     *PageMeasures::Humidity::self,
     nullptr,
     nullptr,
-    gset.display.show_measure[TypeMeasure::Humidity],
+    gset.display.show_measure[Measure::Name::Humidity],
     "Нет", "Да"
 )
 
-DEF_GOVERNOR_MIN(gHumidityMin, PageMeasures::Humidity::self, 10, 98, TypeMeasure::Humidity);
+DEF_GOVERNOR_MIN(gHumidityMin, PageMeasures::Humidity::self, 10, 98, Measure::Name::Humidity);
 
-DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, TypeMeasure::Humidity);
+DEF_GOVERNOR_MAX(gHumidityMax, PageMeasures::Humidity::self, 10, 98, Measure::Name::Humidity);
 
-DEF_STATE_MIN_MAX(sHumidity, PageMeasures::Humidity::self, TypeMeasure::Humidity);
+DEF_STATE_MIN_MAX(sHumidity, PageMeasures::Humidity::self, Measure::Name::Humidity);
 
 static void OnPress_ResetHumidity(bool)
 {
-    gset.ResetMeasure(TypeMeasure::Humidity);
+    gset.ResetMeasure(Measure::Name::Humidity);
 }
 
 
@@ -223,19 +223,19 @@ DEF_CHOICE_2(chDewPoint,
     *PageMeasures::DewPoint::self,
     nullptr,
     nullptr,
-    gset.display.show_measure[TypeMeasure::DewPoint],
+    gset.display.show_measure[Measure::Name::DewPoint],
     "Нет", "Да"
 )
 
-DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, -100, 100, TypeMeasure::DewPoint);
+DEF_GOVERNOR_MIN(gDewPointMin, PageMeasures::DewPoint::self, -100, 100, Measure::Name::DewPoint);
 
-DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, TypeMeasure::DewPoint);
+DEF_GOVERNOR_MAX(gDewPointMax, PageMeasures::DewPoint::self, -100, 100, Measure::Name::DewPoint);
 
-DEF_STATE_MIN_MAX(sDewPoint, PageMeasures::DewPoint::self, TypeMeasure::DewPoint);
+DEF_STATE_MIN_MAX(sDewPoint, PageMeasures::DewPoint::self, Measure::Name::DewPoint);
 
 //static void OnPress_ResetDewPoint(bool)
 //{
-//    gset.ResetMeasure(TypeMeasure::DewPoint);
+//    gset.ResetMeasure(Measure::Name::DewPoint);
 //}
 
 /*

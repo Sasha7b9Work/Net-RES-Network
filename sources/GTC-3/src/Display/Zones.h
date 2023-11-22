@@ -34,5 +34,5 @@ public:
 
     ZoneFPS() : Zone(136, 119, 24, 8, Color::BLACK) { }
 
-    virtual void Draw();
+    virtual void Draw() override;
 };

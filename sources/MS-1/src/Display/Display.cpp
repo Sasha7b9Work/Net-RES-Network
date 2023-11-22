@@ -35,12 +35,12 @@ namespace Display
     {
         String<> current;
 
-        TypeMeasure::E type;
+        Measure::Name::E name;
         Measure value;              // Последнее установленное значение
         int position;               // Текущая отрисовываемая позиция
         uint time;                  // Время последнего изменения текущей отрисовываемой позиции
 
-        DMeasure(TypeMeasure::E t) : type(t), position(0), time(0) {}
+        DMeasure(Measure::Name::E n) : name(n), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
 
@@ -49,21 +49,21 @@ namespace Display
         String<> Units();
     };
 
-    static DMeasure measures[TypeMeasure::Count] =
+    static DMeasure measures[Measure::Name::Count] =
     {
-        DMeasure(TypeMeasure::Temperature),
-        DMeasure(TypeMeasure::Pressure),
-        DMeasure(TypeMeasure::Humidity),
-        DMeasure(TypeMeasure::DewPoint),
-        DMeasure(TypeMeasure::Illumination),
-        DMeasure(TypeMeasure::Velocity),
-        DMeasure(TypeMeasure::Latitude),
-        DMeasure(TypeMeasure::Altitude),
-        DMeasure(TypeMeasure::Longitude),
-        DMeasure(TypeMeasure::MagneticX),
-        DMeasure(TypeMeasure::MagneticY),
-        DMeasure(TypeMeasure::MagneticZ),
-        DMeasure(TypeMeasure::Time)
+        DMeasure(Measure::Name::Temperature),
+        DMeasure(Measure::Name::Pressure),
+        DMeasure(Measure::Name::Humidity),
+        DMeasure(Measure::Name::DewPoint),
+        DMeasure(Measure::Name::Illumination),
+        DMeasure(Measure::Name::Velocity),
+        DMeasure(Measure::Name::Latitude),
+        DMeasure(Measure::Name::Altitude),
+        DMeasure(Measure::Name::Longitude),
+        DMeasure(Measure::Name::MagneticX),
+        DMeasure(Measure::Name::MagneticY),
+        DMeasure(Measure::Name::MagneticZ),
+        DMeasure(Measure::Name::Time)
     };
 
     static void DrawMeasures();
@@ -198,16 +198,11 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void Display::SetMeasure(TypeMeasure::E type, const Measure &measure)
+void Display::SetMeasure(const Measure &measure)
 {
-    if (!measure.IsDouble())
-    {
-        return;
-    }
+    Settings::SaveMeasure(measure);
 
-    Settings::SaveMeasure(type, measure);
-
-    DMeasure &value = measures[type];
+    DMeasure &value = measures[measure.GetName()];
 
     if (value.value.GetDouble() == measure.GetDouble()) //-V550
     {
@@ -323,36 +318,36 @@ void Display::DrawMeasures()
     const int y0 = d_lines;
     const int dY = d_lines + Font::Height();
 
-    static const TypeMeasure::E types[TypeMeasure::Count] =
+    static const Measure::Name::E names[Measure::Name::Count] =
     {
-        TypeMeasure::Temperature,
-        TypeMeasure::Pressure,
-        TypeMeasure::Humidity,
-        TypeMeasure::DewPoint,
-        TypeMeasure::Illumination,
-        TypeMeasure::Velocity,
-        TypeMeasure::Latitude,
-        TypeMeasure::Longitude,
-        TypeMeasure::Altitude,
-        TypeMeasure::MagneticX,
-        TypeMeasure::MagneticY,
-        TypeMeasure::MagneticZ,
-        TypeMeasure::Time
+        Measure::Name::Temperature,
+        Measure::Name::Pressure,
+        Measure::Name::Humidity,
+        Measure::Name::DewPoint,
+        Measure::Name::Illumination,
+        Measure::Name::Velocity,
+        Measure::Name::Latitude,
+        Measure::Name::Longitude,
+        Measure::Name::Altitude,
+        Measure::Name::MagneticX,
+        Measure::Name::MagneticY,
+        Measure::Name::MagneticZ,
+        Measure::Name::Time
     };
 
     int y = y0;
 
-    for (int i = 0; i < TypeMeasure::Count; i++)
+    for (int i = 0; i < Measure::Name::Count; i++)
     {
         int x = 93;
         int width = 30;
         int height = 15;
 
-        if (need_redraw && measures[types[i]].current.Size())
+        if (need_redraw && measures[names[i]].current.Size())
         {
-            String<>("%s", measures[types[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
-            measures[types[i]].Units().Draw(x + 41, y);
-            measures[types[i]].Draw(x, y);
+            String<>("%s", measures[names[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
+            measures[names[i]].Units().Draw(x + 41, y);
+            measures[names[i]].Draw(x, y);
 
             ST7735::WriteBuffer(x - 1, y, width, height);
             y += dY;
@@ -396,7 +391,7 @@ void Display::DrawBigMeasure()
 
     BeginScene(Color::BLACK);
 
-    static const int x[TypeMeasure::Count] =
+    static const int x[Measure::Name::Count] =
     {
         30,
         12,
@@ -415,9 +410,9 @@ void Display::DrawBigMeasure()
 
     DMeasure &measure = measures[gset.display.typeDisplaydInfo.value];
 
-    Font::Text::DrawBig(x[measure.type], 15, 2, measure.Name().c_str(), Color::_1);
+    Font::Text::DrawBig(x[measure.value.GetName()], 15, 2, measure.Name().c_str(), Color::_1);
 
-    measures[measure.type].Draw(27, 50, 4);
+    measures[measure.value.GetName()].Draw(27, 50, 4);
 
     Font::Text::DrawBig(68, 95, 2, measure.Units().c_str(), Color::_1);
 
@@ -427,7 +422,7 @@ void Display::DrawBigMeasure()
 
 String<> Display::DMeasure::Name()
 {
-    static const pchar names[TypeMeasure::Count] =
+    static const pchar names[Measure::Name::Count] =
     {
         "ТЕМПЕРАТУРА",
         "ДАВЛЕНИЕ",
@@ -444,14 +439,14 @@ String<> Display::DMeasure::Name()
         "ВРЕМЯ"
     };
 
-    String<> result(names[type]);
+    String<> result(names[name]);
 
     return result;
 }
 
 String<> Display::DMeasure::Units()
 {
-    static const pchar units[TypeMeasure::Count] =
+    static const pchar units[Measure::Name::Count] =
     {
         "ЁС",
         "гПа",
@@ -468,5 +463,5 @@ String<> Display::DMeasure::Units()
         ""
     };
 
-    return String<>(units[type]);
+    return String<>(units[name]);
 }

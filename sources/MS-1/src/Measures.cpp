@@ -23,16 +23,19 @@ bool Measures::IsFixed()
 }
 
 
-bool Measures::InRange(TypeMeasure::E type, double value)
+bool Measures::InRange(const Measure &measure)
 {
-    if (value < gset.measures.limit_min[type])
+    if (measure.IsDouble())
     {
-        return false;
-    }
+        if (measure.GetDouble() < gset.measures.limit_min[measure.GetName()])
+        {
+            return false;
+        }
 
-    if (value > gset.measures.limit_max[type])
-    {
-        return false;
+        if (measure.GetDouble() > gset.measures.limit_max[measure.GetName()])
+        {
+            return false;
+        }
     }
 
     return true;

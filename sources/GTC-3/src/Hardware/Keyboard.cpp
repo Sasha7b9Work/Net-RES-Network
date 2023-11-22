@@ -14,10 +14,10 @@ namespace Keyboard
 {
     static const int TIME_LONG_PRESS = 500;
 
-    TimeMeterMS meter;
+    static TimeMeterMS meter;
 
-    bool pressed[Key::Count] = { false, false };        // Если true, клавиша нажата
-    bool taboo_long[Key::Count] = { false, false };     // Если true, запрещено длинное срабатывание
+    static bool pressed[Key::Count] = { false, false };        // Если true, клавиша нажата
+    static bool taboo_long[Key::Count] = { false, false };     // Если true, запрещено длинное срабатывание
 
     static bool KeyPressed(Key::E);
     static void UpdateKey(Key::E);

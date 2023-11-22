@@ -32,18 +32,20 @@ namespace InterCom
 
     static Direction::E direction = Direction::_None;
 
-    static Buffer<uint8, 16> CreateMessage(TypeMeasure::E type, float value)
+    static Buffer<uint8, 16> CreateMessage(const Measure &measure)
     {
         Buffer<uint8, 16> message;
 
         message[0] = 'A';                           // offset 0
         message[1] = 'B';
         message[2] = 'C';
-        message[3] = (uint8)type;
+        message[3] = (uint8)measure.GetName();
 
         uint id = HAL::GetUID();                    // offset 4
 
         std::memcpy(&message[4], &id, 4);
+
+        float value = (float)measure.GetDouble();
 
         std::memcpy(&message[12], &value, 4);       // offset 12
 
@@ -62,14 +64,14 @@ void InterCom::SetDirection(Direction::E dir)
 }
 
 
-void InterCom::Send(TypeMeasure::E type, const Measure &measure)
+void InterCom::Send(const Measure &measure)
 {
     if (!measure.IsDouble())
     {
         return;
     }
 
-    static const pchar names[TypeMeasure::Count] =
+    static const pchar names[Measure::Name::Count] =
     {
         "Temperature",
         "Pressure",
@@ -86,7 +88,7 @@ void InterCom::Send(TypeMeasure::E type, const Measure &measure)
         "Time"
     };
 
-    static const pchar units[TypeMeasure::Count] =
+    static const pchar units[Measure::Name::Count] =
     {
         "degress Celsius",
         "hPa",
@@ -107,18 +109,18 @@ void InterCom::Send(TypeMeasure::E type, const Measure &measure)
     {
         if (!Measures::IsFixed())
         {
-            Display::SetMeasure(type, measure);
+            Display::SetMeasure(measure);
         }
     }
 
     if (direction & Direction::CDC)
     {
-        String<> message("%s : %f %s", names[type], measure.GetDouble(), units[type]);
+        String<> message("%s : %f %s", names[measure.GetName()], measure.GetDouble(), units[measure.GetName()]);
 
         HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
-    Buffer<uint8, 16> data = CreateMessage(type, (float)measure.GetDouble()); //-V821
+    Buffer<uint8, 16> data = CreateMessage(measure);
 
     if (direction & Direction::HC12)
     {

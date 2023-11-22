@@ -5,28 +5,6 @@
 #include "Storage/Measure.h"
 
 
-struct TypeMeasure
-{
-    enum E
-    {
-        Temperature,    // Температура
-        Pressure,       // Давление
-        Humidity,       // Влажность
-        DewPoint,       // Точка росы
-        Illumination,   // Освещёность
-        Velocity,       // Скорость воздуха
-        Latitude,       // Широта
-        Longitude,      // Долгота
-        Altitude,       // Высота
-        MagneticX,
-        MagneticY,
-        MagneticZ,
-        Time,
-        Count
-    };
-};
-
-
 namespace Display
 {
     static const int WIDTH = 160;
@@ -34,7 +12,7 @@ namespace Display
 
     extern bool need_redraw;
 
-    void SetMeasure(TypeMeasure::E, const Measure &);
+    void SetMeasure(const Measure &);
 
     void Update();
 

@@ -92,12 +92,12 @@ void InterCom::Send(TypeMeasure::E type, float measure)
 
     if (direction & Direction::CDC)
     {
-        String<> message("%s : %f %s", names[type], measure, units[type]);
+        String<> message("%s : %f %s", names[type], (double)measure, units[type]);
 
         HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
-    Buffer<uint8, 16> data = CreateMessage(type, measure); //-V821
+    Buffer<uint8, 16> data = CreateMessage(type, measure);
 
     if (direction & Direction::HC12)
     {

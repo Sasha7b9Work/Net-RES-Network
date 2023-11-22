@@ -14,7 +14,7 @@ struct PackedTime
     uint month : 4;
     uint day : 5;
     PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
-        hours(h), minutes(m), seconds(s), year(y), month(mo), day(d) {};
+        hours(h), minutes(m), seconds(s), year(y), month(mo), day(d) {}
 
     String<> ToString() const;
 

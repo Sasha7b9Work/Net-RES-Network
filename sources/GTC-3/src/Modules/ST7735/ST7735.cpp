@@ -199,14 +199,14 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                WRITE_NIBBLE(0);
-                WRITE_NIBBLE(1);
-                WRITE_NIBBLE(2);
-                WRITE_NIBBLE(3);
-                WRITE_NIBBLE(4);
-                WRITE_NIBBLE(5);
-                WRITE_NIBBLE(6);
-                WRITE_NIBBLE(7);
+                WRITE_NIBBLE(0)
+                WRITE_NIBBLE(1)
+                WRITE_NIBBLE(2)
+                WRITE_NIBBLE(3)
+                WRITE_NIBBLE(4)
+                WRITE_NIBBLE(5)
+                WRITE_NIBBLE(6)
+                WRITE_NIBBLE(7)
 
                 value = *(++points);
             }
@@ -222,8 +222,8 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                WRITE_NIBBLE(0); //-V760
-                WRITE_NIBBLE(1);
+                WRITE_NIBBLE(0) //-V760
+                WRITE_NIBBLE(1)
 
                 value = *(++points);
             }

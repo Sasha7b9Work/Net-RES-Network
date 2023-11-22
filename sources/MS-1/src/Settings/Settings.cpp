@@ -101,29 +101,31 @@ bool Settings::operator!=(const Settings &rhs)
 }
 
 
-void Settings::SaveMeasure(TypeMeasure::E type, const Measure &measure)
+void Settings::SaveMeasure(const Measure &measure)
 {
     if (measure.IsDouble())
     {
         float value = (float)measure.GetDouble();
 
-        if (gset.measures.value_max[type] == ERROR_VALUE_FLOAT)
+        Measure::Name::E name = measure.GetName();
+
+        if (gset.measures.value_max[name] == ERROR_VALUE_FLOAT)
         {
-            gset.measures.value_max[type] = value;
+            gset.measures.value_max[name] = value;
         }
 
-        if (gset.measures.value_min[type] == ERROR_VALUE_FLOAT)
+        if (gset.measures.value_min[name] == ERROR_VALUE_FLOAT)
         {
-            gset.measures.value_min[type] = value;
+            gset.measures.value_min[name] = value;
         }
 
-        if (value > gset.measures.value_max[type])
+        if (value > gset.measures.value_max[name])
         {
-            gset.measures.value_max[type] = value;
+            gset.measures.value_max[name] = value;
         }
-        else if (value < gset.measures.value_min[type])
+        else if (value < gset.measures.value_min[name])
         {
-            gset.measures.value_min[type] = value;
+            gset.measures.value_min[name] = value;
         }
 
         Save();
@@ -131,9 +133,9 @@ void Settings::SaveMeasure(TypeMeasure::E type, const Measure &measure)
 }
 
 
-void Settings::ResetMeasure(TypeMeasure::E type)
+void Settings::ResetMeasure(Measure::Name::E name)
 {
-    gset.measures.value_max[type] = ERROR_VALUE_FLOAT;
+    gset.measures.value_max[name] = ERROR_VALUE_FLOAT;
 
-    gset.measures.value_min[type] = ERROR_VALUE_FLOAT;
+    gset.measures.value_min[name] = ERROR_VALUE_FLOAT;
 }

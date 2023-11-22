@@ -157,8 +157,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
+
+
 #if __ARMCLIB_VERSION >= 6000000
     #pragma clang diagnostic ignored "-Wswitch-enum"
+    #pragma clang diagnostic ignored "-Wcast-align"
 #endif
 
 /** @addtogroup STM32F3xx_HAL_Driver

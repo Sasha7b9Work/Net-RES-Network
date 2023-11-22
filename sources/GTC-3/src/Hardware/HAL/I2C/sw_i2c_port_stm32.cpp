@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "sw_i2c.h"
 
 #include <stm32f3xx_hal.h>

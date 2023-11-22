@@ -74,15 +74,15 @@ void Device::Update()
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
-        InterCom::Send(TypeMeasure::Temperature, temp);
-        InterCom::Send(TypeMeasure::Pressure, pressure);
-        InterCom::Send(TypeMeasure::Humidity, humidity);
-        InterCom::Send(TypeMeasure::DewPoint, dew_point);
+        InterCom::Send(temp);
+        InterCom::Send(pressure);
+        InterCom::Send(humidity);
+        InterCom::Send(dew_point);
 
-        bool in_range = Measures::InRange(TypeMeasure::Temperature, temp.GetDouble()) &&
-            Measures::InRange(TypeMeasure::Pressure, pressure.GetDouble()) &&
-            Measures::InRange(TypeMeasure::Humidity, humidity.GetDouble()) &&
-            Measures::InRange(TypeMeasure::DewPoint, dew_point.GetDouble());
+        bool in_range = Measures::InRange(temp) &&
+            Measures::InRange(pressure) &&
+            Measures::InRange(humidity) &&
+            Measures::InRange(dew_point);
 
         if (in_range)
         {
@@ -96,21 +96,21 @@ void Device::Update()
 
     if (CG_Anem::GetMeasure(&velocity))
     {
-        InterCom::Send(TypeMeasure::Velocity, velocity);
+        InterCom::Send(velocity);
     }
 
     if (GY511::GetMagnetic(&magneticX, &magneticY, &magneticZ))
     {
-        InterCom::Send(TypeMeasure::MagneticX, magneticX);
-        InterCom::Send(TypeMeasure::MagneticY, magneticY);
-        InterCom::Send(TypeMeasure::MagneticZ, magneticZ);
+        InterCom::Send(magneticX);
+        InterCom::Send(magneticY);
+        InterCom::Send(magneticZ);
     }
 
     if (NEO_M8N::GetMeasures(&latitude, &longitude, &altitude))
     {
-        InterCom::Send(TypeMeasure::Latitude, latitude);
-        InterCom::Send(TypeMeasure::Longitude, longitude);
-        InterCom::Send(TypeMeasure::Altitude, altitude);
+        InterCom::Send(latitude);
+        InterCom::Send(longitude);
+        InterCom::Send(altitude);
     }
 
     GY511::Update();

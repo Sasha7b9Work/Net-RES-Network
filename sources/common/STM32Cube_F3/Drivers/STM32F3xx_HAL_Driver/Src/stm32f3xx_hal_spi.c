@@ -199,6 +199,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
+
+#ifndef WIN32
+    #pragma clang diagnostic ignored "-Wcast-align"
+#endif
+
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
