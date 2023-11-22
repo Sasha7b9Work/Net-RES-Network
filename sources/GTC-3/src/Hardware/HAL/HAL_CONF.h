@@ -1,5 +1,6 @@
 #pragma once
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic ignored "-Wundefined-func-template"
     #pragma clang diagnostic ignored "-Wmissing-field-initializers"
     #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
@@ -19,6 +20,7 @@
     #pragma clang diagnostic ignored "-Wshorten-64-to-32"
     #pragma clang diagnostic ignored "-Wcovered-switch-default"
     #pragma clang diagnostic ignored "-Wbad-function-cast"
+#endif
 
 #ifdef __cplusplus
  extern "C" {
