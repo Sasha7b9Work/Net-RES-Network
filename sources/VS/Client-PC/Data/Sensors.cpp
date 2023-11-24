@@ -99,7 +99,7 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
         "ׁ",
         "דֿא",
         "%",
-        "%%",
+        "ׁ",
         "כך",
         "ל/ס"
     };
