@@ -45,16 +45,11 @@ namespace HC12
 
 void HC12::Init()
 {
-    pinCS_HC12.Init();
-    pinCS_HC12.ToHi();
-
-//    while (true)
-    {
-        Command("AT+DEFAULT");
-        Command("AT");
-
-//        Timer::Delay(100);
-    }
+//    pinCS_HC12.Init();
+//    pinCS_HC12.ToHi();
+//
+//    Command("AT+DEFAULT");
+//    Command("AT");
 }
 
 
