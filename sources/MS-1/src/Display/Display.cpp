@@ -71,7 +71,7 @@ namespace Display
     // Вывести одно измерение на весь экран
     static void DrawBigMeasure();
 
-    static void DrawTime();
+//    static void DrawTime();
 
     static void DrawStar();
 
@@ -140,6 +140,10 @@ namespace Display
             std::memset(buffer, value, WIDTH * HEIGHT / 2);
         }
     }
+
+    // Какие измерения сейчас выводить на экран. Т.к. все они одновременно на экран не помещаются,
+    // то выводятся по пять штук на одном экране, которые автоматически переключаются.
+    static int CurrentDisplayMeasures();
 }
 
 
@@ -288,7 +292,7 @@ void Display::Update()
 
             DrawMeasures();
 
-            DrawTime();
+//            DrawTime();
 
             if (need_redraw)
             {
@@ -340,43 +344,52 @@ void Display::DrawMeasures()
 
     int y = y0;
 
-    for (int i = 9; i < Measure::Name::Count; i++)
+    for (int i = CurrentDisplayMeasures() * MEAS_ON_DISPLAY; i < (CurrentDisplayMeasures() + 1) * MEAS_ON_DISPLAY; i++)
     {
-        int x = 93;
-        int width = 30;
-        int height = 15;
-
-        if (need_redraw && measures[names[i]].current.Size())
+        if (i < Measure::Name::Count)
         {
-            String<>("%s", measures[names[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
-            measures[names[i]].Units().Draw(x + 41, y);
-            measures[names[i]].Draw(x, y);
+            int x = 93;
+            int width = 30;
+            int height = 15;
 
-            ST7735::WriteBuffer(x - 1, y, width, height);
-            y += dY;
+            if (need_redraw && measures[names[i]].current.Size())
+            {
+                String<>("%s", measures[names[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
+                measures[names[i]].Units().Draw(x + 41, y);
+                measures[names[i]].Draw(x, y);
+
+                ST7735::WriteBuffer(x - 1, y, width, height);
+                y += dY;
+            }
         }
     }
 }
 
 
-void Display::DrawTime()
+int Display::CurrentDisplayMeasures()
 {
-    int width = 160;
-    int height = 16;
-    int y = 105;
-
-    Font::Set(TypeFont::_12_10);
-
-    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
-
-    PackedTime time = HAL_RTC::GetTime();
-
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
-
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(80, 105);
-
-    ST7735::WriteBuffer(0, y, width, height);
+    const int num_dislays = Measure::Name::Count / MEAS;
 }
+
+
+//void Display::DrawTime()
+//{
+//    int width = 160;
+//    int height = 16;
+//    int y = 105;
+//
+//    Font::Set(TypeFont::_12_10);
+//
+//    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
+//
+//    PackedTime time = HAL_RTC::GetTime();
+//
+//    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
+//
+//    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(80, 105);
+//
+//    ST7735::WriteBuffer(0, y, width, height);
+//}
 
 
 void Display::DrawStar()

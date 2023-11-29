@@ -10,6 +10,9 @@ namespace Display
     static const int WIDTH = 160;
     const int HEIGHT = 128;
 
+    // Столько измерений помещается на одном экране
+    static const int MEAS_ON_DISPLAY = 5;
+
     extern bool need_redraw;
 
     void SetMeasure(const Measure &);
