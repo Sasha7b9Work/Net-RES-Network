@@ -60,7 +60,7 @@ bool CG_Anem::GetMeasure(Measure *velocity_out)
 
     if (result)
     {
-        velocity_out->SetDouble(velocity.half_word[0] * 0.1f);
+        velocity_out->Set(Measure::Name::Velocity, velocity.half_word[0] * 0.1f);
     }
 
     return result;

@@ -133,10 +133,10 @@ bool BME280::GetMeasures(Measure *temp, Measure *pressure, Measure *humidity, Me
 
     if (result == BME280_OK)
     {
-        temp->SetDouble(comp_data.temperature);
-        pressure->SetDouble(comp_data.pressure / 100.0);
-        humidity->SetDouble(comp_data.humidity);
-        dew_point->SetDouble(CalculateDewPoint((float)temp->GetDouble(), (float)humidity->GetDouble()));
+        temp->Set(Measure::Name::Temperature, comp_data.temperature);
+        pressure->Set(Measure::Name::Pressure, comp_data.pressure / 100.0);
+        humidity->Set(Measure::Name::Humidity, comp_data.humidity);
+        dew_point->Set(Measure::Name::DewPoint, CalculateDewPoint((float)temp->GetDouble(), (float)humidity->GetDouble()));
     }
 
     return (result == BME280_OK);
