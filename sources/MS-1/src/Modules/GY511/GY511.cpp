@@ -83,6 +83,15 @@ void GY511::Update()
 
 bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ)
 {
+#ifdef IN_MODE_TEST
+
+    magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToMagnetic());
+    magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToMagnetic());
+    magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToMagnetic());
+
+    return true;
+
+#else
     if (is_reading)
     {
         is_reading = false;
@@ -95,4 +104,5 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
     }
 
     return false;
+#endif
 }

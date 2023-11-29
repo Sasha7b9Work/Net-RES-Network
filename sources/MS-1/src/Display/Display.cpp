@@ -206,7 +206,10 @@ void Display::SetMeasure(const Measure &measure)
 
     if (value.value.GetDouble() == measure.GetDouble()) //-V550
     {
-        return;
+        if (value.current.Size())
+        {
+            return;
+        }
     }
 
 //    measure.old.SetFormat(measure.current.c_str());
@@ -337,7 +340,7 @@ void Display::DrawMeasures()
 
     int y = y0;
 
-    for (int i = 0; i < Measure::Name::Count; i++)
+    for (int i = 9; i < Measure::Name::Count; i++)
     {
         int x = 93;
         int width = 30;
