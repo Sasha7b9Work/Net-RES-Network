@@ -52,17 +52,6 @@ struct Measure
         return type == Type::Double;
     }
 
-    void SetDouble(double value)
-    {
-        type = Type::Double;
-        value_d = value;
-    }
-
-    void SetDouble(float value)
-    {
-        SetDouble((double)value);
-    }
-
     double GetDouble() const
     {
         return value_d;
@@ -78,7 +67,30 @@ struct Measure
         return type;
     }
 
+    void Set(Name::E _name, float value)
+    {
+        Set(_name, (double)value);
+    }
+
+    void Set(Name::E _name, double value)
+    {
+        name = _name;
+        SetDouble(value);
+    }
+
+
 private:
+
+    void SetDouble(float value)
+    {
+        SetDouble((double)value);
+    }
+
+    void SetDouble(double value)
+    {
+        type = Type::Double;
+        value_d = value;
+    }
 
     Type::E type;
 

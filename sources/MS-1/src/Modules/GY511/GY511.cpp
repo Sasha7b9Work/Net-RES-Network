@@ -87,9 +87,9 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
     {
         is_reading = false;
 
-        magneticX->SetDouble(raw_acce_x.ToMagnetic());
-        magneticY->SetDouble(raw_acce_y.ToMagnetic());
-        magneticZ->SetDouble(raw_acce_z.ToMagnetic());
+        magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToMagnetic());
+        magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToMagnetic());
+        magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToMagnetic());
 
         return true;
     }

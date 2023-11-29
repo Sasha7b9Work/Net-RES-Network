@@ -133,15 +133,15 @@ bool NEO_M8N::GetMeasures(Measure *latitude, Measure *longitude, Measure *altitu
 
     ExtractField(2, buffer);
 
-    latitude->SetDouble(std::atof(buffer) / 100.0);
+    latitude->Set(Measure::Name::Latitude, std::atof(buffer) / 100.0);
 
     ExtractField(4, buffer);
 
-    longitude->SetDouble(std::atof(buffer) / 100.0);
+    longitude->Set(Measure::Name::Longitude, std::atof(buffer) / 100.0);
 
     ExtractField(9, buffer);
 
-    altitude->SetDouble(std::atof(buffer));
+    altitude->Set(Measure::Name::Altitude, std::atof(buffer));
 
     return true;
 }

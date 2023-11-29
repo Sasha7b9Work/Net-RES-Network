@@ -26,7 +26,7 @@ bool CG_Anem::GetMeasure(Measure *velocity_out)
 
 #ifdef IN_MODE_TEST
 
-    velocity_out->SetDouble((float)(std::rand() % 10000) / 100.0f);
+    velocity_out->Set(Measure::Name::Velocity, (float)(std::rand() % 10000) / 100.0f);
 
     return true;
 

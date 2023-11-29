@@ -45,8 +45,8 @@ namespace HC12
 
 void HC12::Init()
 {
-//    pinCS_HC12.Init();
-//    pinCS_HC12.ToHi();
+    pinCS_HC12.Init();
+    pinCS_HC12.ToHi();
 
     Command("AT+DEFAULT");
     Command("AT");
@@ -55,15 +55,13 @@ void HC12::Init()
 
 void HC12::Transmit(const void *buffer, int size)
 {
-    return;
     HAL_USART_HC12::Transmit(buffer, size);
 }
 
 
 void HC12::Command(pchar command)
 {
-    return;
-//    pinCS_HC12.ToLow();
+    pinCS_HC12.ToLow();
 
     TimeMeterMS().PauseOnMS(40);
 
@@ -72,7 +70,7 @@ void HC12::Command(pchar command)
     Transmit(command, (int)std::strlen(command));
     Transmit("\r", 1);
 
-//    pinCS_HC12.ToHi();
+    pinCS_HC12.ToHi();
 }
 
 
