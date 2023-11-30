@@ -344,7 +344,7 @@ void Display::DrawMeasures()
 
     int y = y0;
 
-    for (int i = CurrentDisplayMeasures() * MEAS_ON_DISPLAY; i < (CurrentDisplayMeasures() + 1) * MEAS_ON_DISPLAY; i++)
+    for (int i = CurrentDisplayMeasures(); i < (CurrentDisplayMeasures() + 5); i++)
     {
         if (i < Measure::Name::Count)
         {
@@ -368,7 +368,9 @@ void Display::DrawMeasures()
 
 int Display::CurrentDisplayMeasures()
 {
-    const int num_dislays = Measure::Name::Count / MEAS;
+//    const int num_dislays = Measure::Name::Count / MEAS;
+    
+    return 7;
 }
 
 
