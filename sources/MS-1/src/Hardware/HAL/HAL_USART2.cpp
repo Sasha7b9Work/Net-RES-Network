@@ -31,7 +31,7 @@ void HAL_USART2::Init()
 
     HAL_UART_Init(&handleUART);
 
-    HAL_NVIC_SetPriority(USART2_IRQn, 0, 1);
+    HAL_NVIC_SetPriority(USART2_IRQn, 1, 1);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
 
     HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
