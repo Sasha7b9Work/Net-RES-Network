@@ -4,7 +4,7 @@
 #include <stm32f3xx_hal.h>
 
 
-namespace HAL_USART_HC12
+namespace HAL_USART1
 {
     static UART_HandleTypeDef handleUART;
 
@@ -14,7 +14,7 @@ namespace HAL_USART_HC12
 }
 
 
-void HAL_USART_HC12::Init()
+void HAL_USART1::Init()
 {
     pinTX_HC12.Init();
     pinRX_HC12.Init();
@@ -39,7 +39,7 @@ void HAL_USART_HC12::Init()
 }
 
 
-void HAL_USART_HC12::Transmit(const void *buffer, int size)
+void HAL_USART1::Transmit(const void *buffer, int size)
 {
     if (!buffer)
     {

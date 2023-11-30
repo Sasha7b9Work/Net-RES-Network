@@ -11,5 +11,5 @@ namespace HC12
     // ”правл€юща€ команда
     void Command(pchar);
 
-    void _ReceiveCallback();
+    void ReceiveCallback();
 }

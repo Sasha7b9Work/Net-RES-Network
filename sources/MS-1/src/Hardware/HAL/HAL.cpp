@@ -50,9 +50,9 @@ void HAL::Init()
 
     HAL_RTC::Init();
 
-    HAL_USART_HC12::Init();
+    HAL_USART1::Init();
 
-    HAL_USART_NEO_8M::Init();
+    HAL_USART2::Init();
 
     HAL_ADC::Init();
 

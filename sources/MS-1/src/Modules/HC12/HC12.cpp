@@ -7,7 +7,7 @@
 #include <cstring>
 
 
-namespace HAL_USART_HC12
+namespace HAL_USART1
 {
     extern char recv_byte;
 }
@@ -55,7 +55,7 @@ void HC12::Init()
 
 void HC12::Transmit(const void *buffer, int size)
 {
-    HAL_USART_HC12::Transmit(buffer, size);
+    HAL_USART1::Transmit(buffer, size);
 }
 
 
@@ -74,9 +74,9 @@ void HC12::Command(pchar command)
 }
 
 
-void HC12::_ReceiveCallback()
+void HC12::ReceiveCallback()
 {
-    recv_buffer.Push(HAL_USART_HC12::recv_byte);
+    recv_buffer.Push(HAL_USART1::recv_byte);
 
-    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART_HC12::handle, (uint8 *)&HAL_USART_HC12::recv_byte, 1);
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART1::handle, (uint8 *)&HAL_USART1::recv_byte, 1);
 }

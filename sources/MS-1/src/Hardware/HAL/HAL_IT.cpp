@@ -86,21 +86,21 @@ void USB_LP_CAN_RX0_IRQHandler(void)
 
 void USART1_IRQHandler(void)
 {
-    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART_HC12::handle);
+    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART1::handle);
 }
 
 
 void USART2_IRQHandler(void)
 {
-    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART_NEO_8M::handle);
+    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
 }
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
-    if (handle == HAL_USART_HC12::handle)
+    if (handle == HAL_USART1::handle)
     {
-        HC12::_ReceiveCallback();
+        HC12::ReceiveCallback();
     }
 }
 

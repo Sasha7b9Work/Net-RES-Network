@@ -78,7 +78,8 @@ namespace HAL_RTC
 }
 
 
-namespace HAL_USART_HC12
+// HC-12
+namespace HAL_USART1
 {
     static const int SIZE_PAGE = 2 * 1024;
 
@@ -90,7 +91,8 @@ namespace HAL_USART_HC12
 }
 
 
-namespace HAL_USART_NEO_8M
+// NEO-8M
+namespace HAL_USART2
 {
     void Init();
 

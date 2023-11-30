@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-namespace HAL_USART_NEO_8M
+namespace HAL_USART2
 {
     static UART_HandleTypeDef handleUART;
 
@@ -13,7 +13,7 @@ namespace HAL_USART_NEO_8M
 }
 
 
-void HAL_USART_NEO_8M::Init()
+void HAL_USART2::Init()
 {
     pinTX_NEO_8M.Init();
     pinRX_NEO_8M.Init();
