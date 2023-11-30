@@ -75,6 +75,9 @@ extern Pin         pinTX_HC12;
 extern Pin         pinRX_HC12;
 extern PinOutputPP pinCS_HC12;
 
+extern Pin         pinTX_NEO_8M;
+extern Pin         pinRX_NEO_8M;
+
 extern Pin         pinKey1;         // Keyboard
 extern Pin         pinKey2;         // Keyboard
 

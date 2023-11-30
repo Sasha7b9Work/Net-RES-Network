@@ -798,6 +798,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_USART_NEO_8M.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART_NEO_8M.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1908,6 +1913,11 @@
               <FileName>HAL_SPI1.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART_NEO_8M.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART_NEO_8M.cpp</FilePath>
             </File>
           </Files>
         </Group>

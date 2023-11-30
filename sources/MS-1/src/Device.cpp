@@ -37,8 +37,6 @@ void Device::Init()
 
     GY511::Init();          // Компас
 
-    NEO_M8N::Init();        // Координаты
-
     HC12::Init();           // Радиомодуль
 
     Keyboard::Init();

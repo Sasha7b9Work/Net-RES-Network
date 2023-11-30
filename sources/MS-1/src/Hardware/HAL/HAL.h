@@ -90,6 +90,14 @@ namespace HAL_USART_HC12
 }
 
 
+namespace HAL_USART_NEO_8M
+{
+    void Init();
+
+    extern void *handle;            // UART_HandleTypeDef
+}
+
+
 namespace HAL_ROM
 {
     void SaveSettings(const Settings &);
@@ -112,6 +120,7 @@ extern "C" {
     void SysTick_Handler(void);
     void USB_LP_CAN_RX0_IRQHandler(void);
     void USART1_IRQHandler(void);
+    void USART2_IRQHandler(void);
     void ADC1_2_IRQHandler(void);
     void TIM3_IRQHandler(void);
     void EXTI9_5_IRQHandler(void);

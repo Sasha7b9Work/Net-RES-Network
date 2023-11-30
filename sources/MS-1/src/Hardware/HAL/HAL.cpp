@@ -30,6 +30,7 @@ void HAL::Init()
     __HAL_RCC_SPI1_CLK_ENABLE();
     __HAL_RCC_RTC_ENABLE();
     __HAL_RCC_USART1_CLK_ENABLE();      // HC12
+    __HAL_RCC_USART2_CLK_ENABLE();      // NEO-8M
     __HAL_RCC_I2C1_CLK_ENABLE();
     __HAL_RCC_ADC1_CLK_ENABLE();
 
@@ -50,6 +51,8 @@ void HAL::Init()
     HAL_RTC::Init();
 
     HAL_USART_HC12::Init();
+
+    HAL_USART_NEO_8M::Init();
 
     HAL_ADC::Init();
 

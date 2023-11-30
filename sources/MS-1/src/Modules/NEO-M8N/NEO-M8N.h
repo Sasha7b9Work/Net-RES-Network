@@ -5,8 +5,6 @@
 
 namespace NEO_M8N
 {
-    void Init();
-
     void ReceiveNewSymbolHandler(char);
 
     char *GetData();

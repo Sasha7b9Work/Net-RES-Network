@@ -3,6 +3,7 @@
 #include "Modules/GY511/GY511.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f3xx_hal.h>
+#include <cmath>
 
 
 #define ADDR_ACCE   0x19
@@ -122,9 +123,9 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
 {
 #ifdef IN_MODE_TEST
 
-    magneticX->Set(Measure::Name::MagneticX, raw_magn_x.Magnetic());
-    magneticY->Set(Measure::Name::MagneticY, raw_magn_y.Magnetic());
-    magneticZ->Set(Measure::Name::MagneticZ, raw_magn_z.Magnetic());
+    magneticX->Set(Measure::Name::MagneticX, (float)raw_magn_x.raw);
+    magneticY->Set(Measure::Name::MagneticY, (float)raw_magn_y.raw);
+    magneticZ->Set(Measure::Name::MagneticZ, (float)raw_magn_z.raw);
 
     return true;
 
@@ -133,9 +134,15 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
     {
         is_ready_acce = false;
 
-        magneticX->Set(Measure::Name::MagneticX, raw_magn_x.ToMagnetic());
-        magneticY->Set(Measure::Name::MagneticY, raw_magn_y.ToMagnetic());
-        magneticZ->Set(Measure::Name::MagneticZ, raw_magn_z.ToMagnetic());
+        float x = (float)raw_magn_x.raw;
+        float y = (float)raw_magn_y.raw;
+        float z = (float)raw_magn_z.raw;
+
+        float module = std::sqrtf(x * x + y * y + z * z);
+
+        magneticX->Set(Measure::Name::MagneticX, x / module);
+        magneticY->Set(Measure::Name::MagneticY, y / module);
+        magneticZ->Set(Measure::Name::MagneticZ, z / module);
 
         return true;
     }
