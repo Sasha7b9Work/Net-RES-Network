@@ -6,7 +6,7 @@
 
 
 #define ADDR_ACCE   0x19
-#define ADDR_MAGN   0x1F
+#define ADDR_MAGN   0x1E
 
 #define GY511_CTRL_REG1     0x20U
 #define GY511_CTRL_REG3     0x22U
@@ -19,6 +19,17 @@
 #define GY511_OUT_Y_H_A     0x2BU
 #define GY511_OUT_Z_L_A     0x2CU
 #define GY511_OUT_Z_H_A     0x2DU
+
+#define GY511_OUT_X_H_M     0x03
+#define GY511_OUT_X_L_M     0x04
+#define GY511_OUT_Y_H_M     0x07
+#define GY511_OUT_Y_L_M     0x08
+#define GY511_OUT_Z_H_M     0x05
+#define GY511_OUT_Z_L_M     0x06
+
+#define GY511_CRA_REG_M     0x00
+#define GY511_MR_REG_M      0x02
+#define GY511_SR_REG_M      0x09
 
 
 namespace GY511
@@ -43,7 +54,8 @@ namespace GY511
         return result;
     }
 
-    static bool is_reading = false;
+    static bool is_ready_acce = false;
+    static bool is_ready_magn = false;
 }
 
 
@@ -67,6 +79,10 @@ void GY511::Init()
     HAL_I2C1::Read(ADDR_ACCE, GY511_CTRL_REG4, &data, 1);
     data |= (1 << 3);                                           // HR = 1, (LPen = 0 - High resolution mode)
     Write(ADDR_ACCE, GY511_CTRL_REG4, data);
+
+    Write(ADDR_MAGN, GY511_CRA_REG_M, 0x14);    // CRA_REG_M
+
+    Write(ADDR_MAGN, GY511_MR_REG_M, 0x00);     // MR_REG_M
 }
 
 
@@ -83,7 +99,21 @@ void GY511::Update()
         raw_acce_z.byte[0] = Read(ADDR_ACCE, GY511_OUT_Z_L_A);
         raw_acce_z.byte[1] = Read(ADDR_ACCE, GY511_OUT_Z_H_A);
 
-        is_reading = true;
+        is_ready_acce = true;
+    }
+
+    if (Read(ADDR_MAGN, GY511_SR_REG_M) & (0x01))
+    {
+        raw_magn_x.byte[0] = Read(ADDR_MAGN, GY511_OUT_X_L_M);
+        raw_magn_x.byte[1] = Read(ADDR_MAGN, GY511_OUT_X_H_M);
+
+        raw_magn_y.byte[0] = Read(ADDR_MAGN, GY511_OUT_Y_L_M);
+        raw_magn_y.byte[1] = Read(ADDR_MAGN, GY511_OUT_Y_H_M);
+
+        raw_magn_z.byte[0] = Read(ADDR_MAGN, GY511_OUT_Z_L_M);
+        raw_magn_z.byte[1] = Read(ADDR_MAGN, GY511_OUT_Z_H_M);
+
+        is_ready_magn = true;
     }
 }
 
@@ -92,20 +122,20 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
 {
 #ifdef IN_MODE_TEST
 
-    magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToAccelerate());
-    magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToAccelerate());
-    magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToAccelerate());
+    magneticX->Set(Measure::Name::MagneticX, raw_magn_x.Magnetic());
+    magneticY->Set(Measure::Name::MagneticY, raw_magn_y.Magnetic());
+    magneticZ->Set(Measure::Name::MagneticZ, raw_magn_z.Magnetic());
 
     return true;
 
 #else
-    if (is_reading)
+    if (is_ready_acce)
     {
-        is_reading = false;
+        is_ready_acce = false;
 
-        magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToAccelerate());
-        magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToAccelerate());
-        magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToAccelerate());
+        magneticX->Set(Measure::Name::MagneticX, raw_magn_x.ToMagnetic());
+        magneticY->Set(Measure::Name::MagneticY, raw_magn_y.ToMagnetic());
+        magneticZ->Set(Measure::Name::MagneticZ, raw_magn_z.ToMagnetic());
 
         return true;
     }

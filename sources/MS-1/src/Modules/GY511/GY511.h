@@ -19,7 +19,7 @@ union StructDataRaw
 
     float ToMagnetic()
     {
-        return (float)raw / 16.0f / 1000.0f;
+        return (float)raw / 100.0f;
     }
 };
 
