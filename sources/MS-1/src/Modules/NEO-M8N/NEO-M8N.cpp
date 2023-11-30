@@ -2,8 +2,15 @@
 #include "defines.h"
 #include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Hardware/HAL/HAL_PINS.h"
+#include "Hardware/HAL/HAL.h"
 #include <cstring>
 #include <cstdlib>
+
+
+namespace HAL_USART2
+{
+    extern char recv_byte;
+}
 
 
 namespace NEO_M8N
@@ -17,8 +24,10 @@ namespace NEO_M8N
 }
 
 
-void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
+void NEO_M8N::CallbackOnReceive()
 {
+    char symbol = HAL_USART2::recv_byte;
+
     static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных
 
     if (in_mode_receive)
@@ -59,6 +68,8 @@ void NEO_M8N::ReceiveNewSymbolHandler(char symbol)
             ptr = 0;
         }
     }
+
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8 *)&HAL_USART2::recv_byte, 1);
 }
 
 

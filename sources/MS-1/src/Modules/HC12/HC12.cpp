@@ -74,7 +74,7 @@ void HC12::Command(pchar command)
 }
 
 
-void HC12::ReceiveCallback()
+void HC12::CallbackOnReceive()
 {
     recv_buffer.Push(HAL_USART1::recv_byte);
 

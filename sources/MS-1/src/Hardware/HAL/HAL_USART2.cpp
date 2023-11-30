@@ -9,7 +9,7 @@ namespace HAL_USART2
 
     void *handle = (void *)&handleUART;
 
-    static char recv_byte = 0;
+    char recv_byte = 0;
 }
 
 
