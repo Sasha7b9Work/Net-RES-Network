@@ -5,17 +5,20 @@
 #include <stm32f3xx_hal.h>
 
 
+#define ADDR_ACCE   0x19
+#define ADDR_MAGN   0x1F
+
 #define GY511_CTRL_REG1     0x20U
 #define GY511_CTRL_REG3     0x22U
 #define GY511_CTRL_REG4     0x23U
 #define GY511_STATUS_REG    0x27U
 
-#define GY511_OUT_X_L       0x28U
-#define GY511_OUT_X_H       0x29U
-#define GY511_OUT_Y_L       0x2AU
-#define GY511_OUT_Y_H       0x2BU
-#define GY511_OUT_Z_L       0x2CU
-#define GY511_OUT_Z_H       0x2DU
+#define GY511_OUT_X_L_A     0x28U
+#define GY511_OUT_X_H_A     0x29U
+#define GY511_OUT_Y_L_A     0x2AU
+#define GY511_OUT_Y_H_A     0x2BU
+#define GY511_OUT_Z_L_A     0x2CU
+#define GY511_OUT_Z_H_A     0x2DU
 
 
 namespace GY511
@@ -24,15 +27,19 @@ namespace GY511
     static StructDataRaw raw_acce_y;
     static StructDataRaw raw_acce_z;
 
-    static void Write(uint8 reg, uint8 data)
+    static StructDataRaw raw_magn_x;
+    static StructDataRaw raw_magn_y;
+    static StructDataRaw raw_magn_z;
+
+    static void Write(uint8 addr, uint8 reg, uint8 data)
     {
-        HAL_I2C1::Write(0x19, reg, &data, 1);
+        HAL_I2C1::Write(addr, reg, &data, 1);
     }
 
-    static uint8 Read(uint8 reg)
+    static uint8 Read(uint8 addr, uint8 reg)
     {
         uint8 result = 0;
-        HAL_I2C1::Read(0x19, reg, &result, 1);
+        HAL_I2C1::Read(addr, reg, &result, 1);
         return result;
     }
 
@@ -44,37 +51,37 @@ void GY511::Init()
 {
     uint8 data = 0;
     _SET_BIT(data, 4);                              // I1_ZYXDA = 1 - разрешаем прерывания INT1 по полученным измерениям
-    Write(GY511_CTRL_REG3, data);
+    Write(ADDR_ACCE, GY511_CTRL_REG3, data);
 
     // Enable Block Data Update.
-    data = Read(GY511_CTRL_REG4);
+    data = Read(ADDR_ACCE, GY511_CTRL_REG4);
     data |= (1 << 7);                               // BDU = 1
-    Write(GY511_CTRL_REG4, data);
+    Write(ADDR_ACCE, GY511_CTRL_REG4, data);
 
     // Set Output Data Rate to 1Hz.
-    HAL_I2C1::Read(0x19, GY511_CTRL_REG1, &data, 1);
+    HAL_I2C1::Read(ADDR_ACCE, GY511_CTRL_REG1, &data, 1);
     data |= (1 << 4);                               // ODR = 0b0001, 1Hz
-    HAL_I2C1::Write(0x19, GY511_CTRL_REG1, &data, 1);
+    HAL_I2C1::Write(ADDR_ACCE, GY511_CTRL_REG1, &data, 1);
 
     // Set device in continuous mode with 12 bit resol.
-    HAL_I2C1::Read(0x19, GY511_CTRL_REG4, &data, 1);
+    HAL_I2C1::Read(ADDR_ACCE, GY511_CTRL_REG4, &data, 1);
     data |= (1 << 3);                                           // HR = 1, (LPen = 0 - High resolution mode)
-    Write(GY511_CTRL_REG4, data);
+    Write(ADDR_ACCE, GY511_CTRL_REG4, data);
 }
 
 
 void GY511::Update()
 {
-    if (Read(GY511_STATUS_REG) & (1 << 3))
+    if (Read(ADDR_ACCE, GY511_STATUS_REG) & (1 << 3))
     {
-        raw_acce_x.byte[0] = Read(GY511_OUT_X_L);
-        raw_acce_x.byte[1] = Read(GY511_OUT_X_H);
+        raw_acce_x.byte[0] = Read(ADDR_ACCE, GY511_OUT_X_L_A);
+        raw_acce_x.byte[1] = Read(ADDR_ACCE, GY511_OUT_X_H_A);
 
-        raw_acce_y.byte[0] = Read(GY511_OUT_Y_L);
-        raw_acce_y.byte[1] = Read(GY511_OUT_Y_H);
+        raw_acce_y.byte[0] = Read(ADDR_ACCE, GY511_OUT_Y_L_A);
+        raw_acce_y.byte[1] = Read(ADDR_ACCE, GY511_OUT_Y_H_A);
 
-        raw_acce_z.byte[0] = Read(GY511_OUT_Z_L);
-        raw_acce_z.byte[1] = Read(GY511_OUT_Z_H);
+        raw_acce_z.byte[0] = Read(ADDR_ACCE, GY511_OUT_Z_L_A);
+        raw_acce_z.byte[1] = Read(ADDR_ACCE, GY511_OUT_Z_H_A);
 
         is_reading = true;
     }
@@ -85,9 +92,9 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
 {
 #ifdef IN_MODE_TEST
 
-    magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToMagnetic());
-    magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToMagnetic());
-    magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToMagnetic());
+    magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToAccelerate());
+    magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToAccelerate());
+    magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToAccelerate());
 
     return true;
 
@@ -96,9 +103,9 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
     {
         is_reading = false;
 
-        magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToMagnetic());
-        magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToMagnetic());
-        magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToMagnetic());
+        magneticX->Set(Measure::Name::MagneticX, raw_acce_x.ToAccelerate());
+        magneticY->Set(Measure::Name::MagneticY, raw_acce_y.ToAccelerate());
+        magneticZ->Set(Measure::Name::MagneticZ, raw_acce_z.ToAccelerate());
 
         return true;
     }

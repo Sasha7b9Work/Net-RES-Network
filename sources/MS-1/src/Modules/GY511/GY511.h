@@ -12,6 +12,11 @@ union StructDataRaw
         int16 raw;
     };
 
+    float ToAccelerate()
+    {
+        return (float)raw / 16.0f / 1000.0f;
+    }
+
     float ToMagnetic()
     {
         return (float)raw / 16.0f / 1000.0f;
