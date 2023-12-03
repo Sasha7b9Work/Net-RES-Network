@@ -2,7 +2,7 @@
 
 project (MS-1)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
@@ -52,8 +52,8 @@ if(WIN32)
     add_compile_options(/wd5267)
 endif()
 
-file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f3/*.*)
-file(GLOB LIBS_STM32F1_INC          ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc/*.*)
+file(GLOB LIBS_STM32F3              ../../common/_VS_LIBS/STM32f3/*.*)
+file(GLOB LIBS_STM32F3_INC          ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
 file(GLOB SRC                       *.h *.cpp
                                     ../../MS-1/src/*.*)
@@ -63,6 +63,7 @@ file(GLOB HARDWARE                  ../../MS-1/src/Hardware/*.*)
 file(GLOB HARDWARE_CDC              ../../MS-1/src/Hardware/CDC/*.*
                                                     Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL              ../../MS-1/src/Hardware/HAL/*.h
+                                    ../../MS-1/src/Hardware/HAL/HAL_USART1.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_USART2.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_PINS.cpp
                                                     Hardware/HAL/*.*)
@@ -84,8 +85,8 @@ file(GLOB STORAGE                   ../../MS-1/src/Storage/*.*)
 file(GLOB UTILS                     ../../MS-1/src/Utils/*.*)
 file(GLOB UTILS_TEXT                ../../MS-1/src/Utils/Text/*.*)
 
-source_group(libs/STM32F1           FILES ${LIBS_STM32F1})
-source_group(libs/STM32F1/Inc       FILES ${LIBS_STM32F1_INC})
+source_group(libs/STM32F3           FILES ${LIBS_STM32F3})
+source_group(libs/STM32F3/Inc       FILES ${LIBS_STM32F3_INC})
 source_group(libs/USBD              FILES ${LIBS_USBD})
 source_group(src                    FILES ${SRC})
 source_group(Display                FILES ${DISPLAY})
@@ -130,8 +131,8 @@ set_source_files_properties(../../MS-1/src/Hardware/CDC/usbd_conf.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}
-                ${LIBS_STM32F1}
-                ${LIBS_STM32F1_INC}
+                ${LIBS_STM32F3}
+                ${LIBS_STM32F3_INC}
                 ${LIBS_USBD}
                 ${SRC}
                 ${DISPLAY}
