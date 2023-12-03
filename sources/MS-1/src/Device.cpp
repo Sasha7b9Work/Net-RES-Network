@@ -45,14 +45,18 @@ void Device::Init()
 
     Beeper::Init();
 
-    Beeper::Start(4000);
+//    Beeper::Start(4000);
 
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
+
+    HAL_USART2::Init();
 }
 
 
 void Device::Update()
 {
+    HAL_USART2::Transmit(data, 3);
+
     if (Beeper::Running() && TIME_MS > 2000)
     {
         Beeper::Stop();

@@ -52,8 +52,6 @@ void HAL::Init()
 
     HAL_USART1::Init();
 
-    HAL_USART2::Init();
-
     HAL_ADC::Init();
 
     HAL_SPI1::Init();
