@@ -40,3 +40,21 @@ HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef * /*hi2c*/, uint16_t
 {
     return HAL_OK;
 }
+
+
+HAL_StatusTypeDef HAL_I2CEx_ConfigAnalogFilter(I2C_HandleTypeDef * /*hi2c*/, uint32_t /*AnalogFilter*/)
+{
+    return HAL_OK;
+}
+
+
+HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef * /*hi2c*/, uint32_t /*DigitalFilter*/)
+{
+    return HAL_OK;
+}
+
+
+HAL_I2C_StateTypeDef HAL_I2C_GetState(const I2C_HandleTypeDef * /*hi2c*/)
+{
+    return HAL_I2C_STATE_READY;
+}
