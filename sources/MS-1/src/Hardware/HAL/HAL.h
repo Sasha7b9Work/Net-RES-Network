@@ -96,8 +96,6 @@ namespace HAL_USART2
 {
     void Init();
 
-    void Transmit(const void *buffer, int size);
-
     extern void *handle;            // UART_HandleTypeDef
 }
 

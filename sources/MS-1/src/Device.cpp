@@ -55,8 +55,6 @@ void Device::Init()
 
 void Device::Update()
 {
-    HAL_USART2::Transmit(data, 3);
-
     if (Beeper::Running() && TIME_MS > 2000)
     {
         Beeper::Stop();
