@@ -40,6 +40,11 @@ void HAL_ADC::Init()
 
 uint HAL_ADC::ReadChannel(uint channel)
 {
+#ifdef GUI
+
+    return 100;
+
+#else
     ADC_ChannelConfTypeDef config = { 0 };
 
     config.Channel = channel;
@@ -65,6 +70,7 @@ uint HAL_ADC::ReadChannel(uint channel)
     }
 
     return value;
+#endif
 }
 
 
