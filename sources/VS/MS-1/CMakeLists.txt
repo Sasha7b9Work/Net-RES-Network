@@ -65,6 +65,7 @@ file(GLOB HARDWARE_CDC              ../../MS-1/src/Hardware/CDC/*.*
 file(GLOB HARDWARE_HAL              ../../MS-1/src/Hardware/HAL/*.h
                                     ../../MS-1/src/Hardware/HAL/HAL_ADC.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_I2C.cpp
+                                    ../../MS-1/src/Hardware/HAL/HAL_SPI1.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_USART1.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_USART2.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_PINS.cpp
