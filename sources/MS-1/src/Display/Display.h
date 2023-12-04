@@ -28,6 +28,12 @@ namespace Display
         // Возвращает указатель на строку
         uint8 *GetLine(int x, int y);
     }
+
+    namespace Mode
+    {
+        // Включить/отключть режим отображения компаса
+        void EnableCompass(bool enable);
+    }
 }
 
 

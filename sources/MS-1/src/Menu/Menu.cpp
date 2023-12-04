@@ -39,7 +39,6 @@ void Menu::LongPress(Key::E key)
 {
     if (!Opened())
     {
-
     }
     else
     {

@@ -19,18 +19,6 @@
 
 namespace Display
 {
-    bool need_redraw = true;
-
-    static ZoneFPS zoneFPS;
-
-    static Zone *zones[] =
-    {
-        &zoneFPS,
-        nullptr
-    };
-
-    void DrawZones();
-
     struct DMeasure
     {
         String<> current;
@@ -66,25 +54,16 @@ namespace Display
         DMeasure(Measure::Name::Time)
     };
 
-    static void DrawMeasures();
-
-    // Вывести одно измерение на весь экран
-    static void DrawBigMeasure();
-
-//    static void DrawTime();
-
-    static void DrawStar();
-
     namespace Buffer
     {
         static uint8 buffer[WIDTH * HEIGHT / 2];       // Четырёхбитный цвет
 
-//        static uint8 GetPixels(int x, int y)
-//        {
-//            return buffer[(y * WIDTH + x) / 2];
-//        }
+        uint8 GetPixels(int x, int y)
+        {
+            return buffer[(y * WIDTH + x) / 2];
+        }
 
-        uint8* GetLine(int x, int y)
+        uint8 *GetLine(int x, int y)
         {
             return &buffer[(y * WIDTH + x) / 2];
         }
@@ -96,7 +75,7 @@ namespace Display
             if (x >= WIDTH) { return; }
             if (y >= HEIGHT) { return; }
 
-            uint8* pixels = &buffer[(y * WIDTH + x) / 2];
+            uint8 *pixels = &buffer[(y * WIDTH + x) / 2];
 
             uint8 value = *pixels;
 
@@ -140,10 +119,39 @@ namespace Display
             std::memset(buffer, value, WIDTH * HEIGHT / 2);
         }
     }
+}
+
+
+namespace Display
+{
+    bool need_redraw = true;
+
+    static bool mode_compass = false;        // Если true - рисуем компас
+
+    static ZoneFPS zoneFPS;
+
+    static Zone *zones[] =
+    {
+        &zoneFPS,
+        nullptr
+    };
+
+    void DrawZones();
+
+    static void DrawMeasures();
+
+    // Вывести одно измерение на весь экран
+    static void DrawBigMeasure();
+
+    void DrawTime();
+
+    static void DrawStar();
 
     // Какие измерения сейчас выводить на экран. Т.к. все они одновременно на экран не помещаются,
     // то выводятся по пять штук на одном экране, которые автоматически переключаются.
     static int CurrentDisplayMeasures();
+
+    static void DrawCompass();
 }
 
 
@@ -269,45 +277,58 @@ void Display::EndScene()
 
 void Display::Update()
 {
-    TimeMeterMS meter_fps;
-
-    need_redraw = true;
-
-    if (Menu::Opened())
+    if (mode_compass)
     {
-        Menu::Draw();
-
-        need_redraw = true;
+        DrawCompass();
     }
     else
     {
-        if (gset.display.typeDisplaydInfo.IsAllMeasures())
+        TimeMeterMS meter_fps;
+
+        need_redraw = true;
+
+        if (Menu::Opened())
         {
-            if (need_redraw)
-            {
-                BeginScene(Color::BLACK);
-            }
+            Menu::Draw();
 
-            DrawMeasures();
-
-//            DrawTime();
-
-            if (need_redraw)
-            {
-                EndScene();
-
-                need_redraw = false;
-            }
-
-//            DrawZones();
+            need_redraw = true;
         }
         else
         {
-            DrawBigMeasure();
-        }
+            if (gset.display.typeDisplaydInfo.IsAllMeasures())
+            {
+                if (need_redraw)
+                {
+                    BeginScene(Color::BLACK);
+                }
 
-        zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+                DrawMeasures();
+
+                //DrawTime();
+
+                if (need_redraw)
+                {
+                    EndScene();
+
+                    need_redraw = false;
+                }
+
+                //DrawZones();
+            }
+            else
+            {
+                DrawBigMeasure();
+            }
+
+            zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
+        }
     }
+}
+
+
+void Display::DrawCompass()
+{
+
 }
 
 
@@ -376,24 +397,24 @@ int Display::CurrentDisplayMeasures()
 }
 
 
-//void Display::DrawTime()
-//{
-//    int width = 160;
-//    int height = 16;
-//    int y = 105;
-//
-//    Font::Set(TypeFont::_12_10);
-//
-//    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
-//
-//    PackedTime time = HAL_RTC::GetTime();
-//
-//    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
-//
-//    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(80, 105);
-//
-//    ST7735::WriteBuffer(0, y, width, height);
-//}
+void Display::DrawTime()
+{
+    int width = 160;
+    int height = 16;
+    int y = 105;
+
+    Font::Set(TypeFont::_12_10);
+
+    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
+
+    PackedTime time = HAL_RTC::GetTime();
+
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
+
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(80, 105);
+
+    ST7735::WriteBuffer(0, y, width, height);
+}
 
 
 void Display::DrawStar()
