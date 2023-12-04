@@ -279,6 +279,7 @@ void Display::Update()
 {
     if (mode_compass)
     {
+        Отрисовать компас
         DrawCompass();
     }
     else
@@ -505,4 +506,10 @@ String<> Display::DMeasure::Units()
     };
 
     return String<>(units[name]);
+}
+
+
+void Display::Mode::EnableCompass(bool enable)
+{
+    mode_compass = enable;
 }

@@ -57,8 +57,8 @@ struct Item
     void DrawOpened(int x, int y, bool active) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     const Page *Keeper() const { return ToDItem()->keeper; }
@@ -117,8 +117,8 @@ struct Page : public Item
     void DrawOpened(int x, int y, bool acitve) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     void Close() const;
@@ -163,7 +163,7 @@ struct Choice : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -186,7 +186,7 @@ struct DButton
 
 struct Button : public Item
 {
-    void ShortPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
     void LongPressure() const { if (ToDItem()->funcOnOpenClose) { ToDItem()->funcOnOpenClose(true); } }
     void DoubleClick() const;
 
@@ -212,8 +212,8 @@ struct DState
 
 struct StateItem : public Item
 {
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;
@@ -241,7 +241,7 @@ struct Governor : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -287,12 +287,12 @@ struct TimeItem : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     const DTimeItem *ToDTimeItem() const { return (DTimeItem *)this; }
 private:
 
-    void ChangeCurrentField(Key::E) const;
+    void ChangeCurrentField(const Key &) const;
 };

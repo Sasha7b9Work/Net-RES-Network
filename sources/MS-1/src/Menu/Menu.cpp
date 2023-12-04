@@ -8,11 +8,11 @@
 #include "Display/Font/Font.h"
 
 
-void Menu::ShortPress(Key::E key)
+void Menu::ShortPress(const Key &key)
 {
     if (!Opened())
     {
-        if (key == Key::_1)
+        if (key.Is1())
         {
             ++gset.display.typeDisplaydInfo;
 
@@ -21,7 +21,7 @@ void Menu::ShortPress(Key::E key)
                 gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasureTemperature;
             }
         }
-        else if (key == Key::_2)
+        else if (key.Is2())
         {
             PageMain::self->Open();
         }
@@ -35,10 +35,14 @@ void Menu::ShortPress(Key::E key)
 }
 
 
-void Menu::LongPress(Key::E key)
+void Menu::LongPress(const Key &key)
 {
     if (!Opened())
     {
+        if (key.Is1())
+        {
+            Display::Mode::EnableCompass(true);
+        }
     }
     else
     {
@@ -49,7 +53,7 @@ void Menu::LongPress(Key::E key)
 }
 
 
-void Menu::DoubleClick(Key::E)
+void Menu::DoubleClick(const Key &)
 {
     if (Opened())
     {

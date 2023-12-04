@@ -19,8 +19,8 @@ namespace Keyboard
     static bool pressed[Key::Count] = { false, false };        // Если true, клавиша нажата
     static bool taboo_long[Key::Count] = { false, false };     // Если true, запрещено длинное срабатывание
 
-    static bool KeyPressed(Key::E);
-    static void UpdateKey(Key::E);
+    static bool KeyPressed(const Key &);
+    static void UpdateKey(const Key &);
 
     namespace IT
     {
@@ -52,31 +52,31 @@ void Keyboard::Update()
 }
 
 
-void Keyboard::UpdateKey(Key::E key)
+void Keyboard::UpdateKey(const Key &key)
 {
     if (meter.ElapsedTime() < 100)
     {
         return;
     }
 
-    if (pressed[key])
+    if (pressed[key.value])
     {
-        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long[key])
+        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long[key.value])
         {
             Menu::LongPress(key);
-            taboo_long[key] = true;
+            taboo_long[key.value] = true;
         }
         else
         {
             if (!KeyPressed(key))
             {
-                pressed[key] = false;
+                pressed[key.value] = false;
                 meter.Reset();
-                if (!taboo_long[key])
+                if (!taboo_long[key.value])
                 {
                     Menu::ShortPress(key);
                 }
-                taboo_long[key] = false;
+                taboo_long[key.value] = false;
             }
         }
     }
@@ -84,16 +84,16 @@ void Keyboard::UpdateKey(Key::E key)
     {
         if (KeyPressed(key))
         {
-            pressed[key] = true;
+            pressed[key.value] = true;
             meter.Reset();
         }
     }
 }
 
 
-bool Keyboard::KeyPressed(Key::E key)
+bool Keyboard::KeyPressed(const Key &key)
 {
-    return IT::pressed[key];
+    return IT::pressed[key.value];
 }
 
 

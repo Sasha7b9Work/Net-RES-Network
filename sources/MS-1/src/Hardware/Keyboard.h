@@ -16,6 +16,9 @@ struct Key
     Key(E v) : value(v) {}
 
     bool IsPressed() const;
+
+    bool Is1() const { return (value == _1); }
+    bool Is2() const { return (value == _2); }
 };
 
 

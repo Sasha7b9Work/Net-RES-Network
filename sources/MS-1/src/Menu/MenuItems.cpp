@@ -313,7 +313,7 @@ void TimeItem::DrawClosed(int x, int y, bool) const
 }
 
 
-void TimeItem::LongPressure(Key::E) const
+void TimeItem::LongPressure(const Key &) const
 {
     if (IsOpened())
     {
@@ -326,7 +326,7 @@ void TimeItem::LongPressure(Key::E) const
 }
 
 
-void TimeItem::ChangeCurrentField(Key::E key) const
+void TimeItem::ChangeCurrentField(const Key &key) const
 {
     const DTimeItem *data = ToDTimeItem();
 
@@ -341,11 +341,11 @@ void TimeItem::ChangeCurrentField(Key::E key) const
 
         int value = (int)values[*data->cur_field];
 
-        if (key == Key::_1)
+        if (key.Is1())
         {
             Math::CircleIncrease(&value, 0, max[*data->cur_field]);
         }
-        else if (key == Key::_2)
+        else if (key.Is2())
         {
             Math::CircleDecrease(&value, 0, max[*data->cur_field]);
         }
@@ -378,7 +378,7 @@ void TimeItem::ChangeCurrentField(Key::E key) const
 }
 
 
-void TimeItem::ShortPressure(Key::E key) const
+void TimeItem::ShortPressure(const Key &key) const
 {
     if (IsOpened())
     {
@@ -386,11 +386,11 @@ void TimeItem::ShortPressure(Key::E key) const
 
         if (*data->state == 0)
         {
-            if (key == Key::_1)
+            if (key.Is1())
             {
                 Math::CircleIncrease<int>(data->cur_field, 0, 7);
             }
-            else if (key == Key::_2)
+            else if (key.Is2())
             {
                 if (*data->cur_field == 6)
                 {
@@ -546,9 +546,9 @@ int Page::NumItems() const
 }
 
 
-void Page::ShortPressure(Key::E key) const
+void Page::ShortPressure(const Key &key) const
 {
-    if (key == Key::_1)
+    if (key.Is1())
     {
         uint8 *currentItem = ToDPage()->currentItem;
 
@@ -559,14 +559,14 @@ void Page::ShortPressure(Key::E key) const
             *currentItem = 0;
         }
     }
-    else if (key == Key::_2)
+    else if (key.Is2())
     {
         LongPressure(key);
     }
 }
 
 
-void Page::LongPressure(Key::E key) const
+void Page::LongPressure(const Key &key) const
 {
     const Item *item = CurrentItem();
 
@@ -591,19 +591,19 @@ void Page::DoubleClick() const
 }
 
 
-void Choice::ShortPressure(Key::E) const
+void Choice::ShortPressure(const Key &) const
 {
 
 }
 
 
-void Button::ShortPressure(Key::E) const
+void Button::ShortPressure(const Key &) const
 {
 
 }
 
 
-void StateItem::ShortPressure(Key::E) const
+void StateItem::ShortPressure(const Key &) const
 {
 }
 
@@ -621,7 +621,7 @@ void Choice::LongPressure() const
 }
 
 
-void StateItem::LongPressure(Key::E key) const
+void StateItem::LongPressure(const Key &key) const
 {
     if (IsOpened())
     {
@@ -629,7 +629,7 @@ void StateItem::LongPressure(Key::E key) const
     }
     else
     {
-        if (key == Key::_2)
+        if (key.Is2())
         {
             Open();
         }
@@ -655,7 +655,7 @@ void StateItem::DoubleClick() const
 }
 
 
-void Item::ShortPressure(Key::E key) const
+void Item::ShortPressure(const Key &key) const
 {
     TypeItem::E _type = ToDItem()->type;
 
@@ -672,7 +672,7 @@ void Item::ShortPressure(Key::E key) const
 }
 
 
-void Item::LongPressure(Key::E key) const
+void Item::LongPressure(const Key &key) const
 {
     switch (ToDItem()->type)
     {
@@ -702,15 +702,15 @@ void Item::DoubleClick() const
 }
 
 
-void Governor::ShortPressure(Key::E key) const
+void Governor::ShortPressure(const Key &key) const
 {
     if (Item::Opened())
     {
-        if (key == Key::_1)
+        if (key.Is1())
         {
             Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
         }
-        else if (key == Key::_2)
+        else if (key.Is2())
         {
             if (active_control == ActiveControl::Close)
             {
@@ -745,7 +745,7 @@ void Governor::ShortPressure(Key::E key) const
     }
     else
     {
-        if (key == Key::_2)
+        if (key.Is2())
         {
             Open();
         }
