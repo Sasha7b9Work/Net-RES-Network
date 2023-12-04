@@ -216,8 +216,6 @@ void Display::SetMeasure(const Measure &measure)
         }
     }
 
-//    measure.old.SetFormat(measure.current.c_str());
-
     value.position = 0;
     value.time = TIME_MS;
     value.value = measure;
