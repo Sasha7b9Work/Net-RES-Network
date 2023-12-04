@@ -81,7 +81,7 @@ void InterCom::Send(const Measure &measure)
         "Velocity",
         "Latitude",
         "Longitude",
-        "Latitude",
+        "Altitude",
         "MagneticX",
         "MagneticY",
         "MagneticZ",

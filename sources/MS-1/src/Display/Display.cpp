@@ -368,9 +368,13 @@ void Display::DrawMeasures()
 
 int Display::CurrentDisplayMeasures()
 {
-//    const int num_dislays = Measure::Name::Count / MEAS;
-    
-    return 7;
+    const int num_displays = Measure::Name::Count / MEAS_ON_DISPLAY + 1;
+
+    int secs = TIME_MS / 1000;
+
+    int secs_5 = secs / 5;
+
+    return (secs_5 % num_displays) * MEAS_ON_DISPLAY;
 }
 
 
