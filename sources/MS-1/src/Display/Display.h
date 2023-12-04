@@ -33,6 +33,8 @@ namespace Display
     {
         // Включить/отключть режим отображения компаса
         void EnableCompass(bool enable);
+
+        bool IsEnabledCompass();
     }
 }
 
@@ -81,4 +83,16 @@ private:
 struct Point
 {
     void Set(int x, int y, Color::E color = Color::Count);
+};
+
+
+struct Circle
+{
+    Circle(int r) : radius(r) {}
+
+    void Draw(int, int, Color::E = Color::Count);
+
+private:
+
+    int radius;
 };

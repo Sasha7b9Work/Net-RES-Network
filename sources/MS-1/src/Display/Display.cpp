@@ -201,6 +201,41 @@ void Rectangle::DrawFilled(int x, int y, Color::E fill, Color::E draw)
 }
 
 
+void Circle::Draw(int _x, int _y, Color::E color)
+{
+    Color::SetCurrent(color);
+
+    int x = radius;
+    int y = 0;
+    int radiusError = 1 - x;
+
+    int dx = (_x - radius);
+    int dy = (_y - radius);
+
+    while (x >= y)
+    {
+        Display::Buffer::SetPoint(x + radius + dx, y + radius + dy);
+        Display::Buffer::SetPoint(y + radius + dx, x + radius + dy);
+        Display::Buffer::SetPoint(-x + radius + dx, y + radius + dy);
+        Display::Buffer::SetPoint(-y + radius + dx, x + radius + dy);
+        Display::Buffer::SetPoint(-x + radius + dx, -y + radius + dy);
+        Display::Buffer::SetPoint(-y + radius + dx, -x + radius + dy);
+        Display::Buffer::SetPoint(x + radius + dx, -y + radius + dy);
+        Display::Buffer::SetPoint(y + radius + dx, -x + radius + dy);
+        y++;
+        if(radiusError < 0)
+        {
+            radiusError += 2 * y + 1;
+        }
+        else
+        {
+            x--;
+            radiusError += 2 * (y - x) + 1;
+        }
+    }
+}
+
+
 void Rectangle::Draw(int x, int y, Color::E color)
 {
     HLine(width).Draw(x, y, color);
@@ -279,7 +314,6 @@ void Display::Update()
 {
     if (mode_compass)
     {
-        Отрисовать компас
         DrawCompass();
     }
     else
@@ -329,7 +363,11 @@ void Display::Update()
 
 void Display::DrawCompass()
 {
+    BeginScene(Color::BLACK);
 
+    Circle(62).Draw(Display::WIDTH / 2, Display::HEIGHT / 2, Color::GRAY_50);
+
+    EndScene();
 }
 
 
@@ -512,4 +550,10 @@ String<> Display::DMeasure::Units()
 void Display::Mode::EnableCompass(bool enable)
 {
     mode_compass = enable;
+}
+
+
+bool Display::Mode::IsEnabledCompass()
+{
+    return mode_compass;
 }

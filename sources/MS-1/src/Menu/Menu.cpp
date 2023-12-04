@@ -41,7 +41,7 @@ void Menu::LongPress(const Key &key)
     {
         if (key.Is1())
         {
-            Display::Mode::EnableCompass(true);
+            Display::Mode::EnableCompass(!Display::Mode::IsEnabledCompass());
         }
     }
     else
