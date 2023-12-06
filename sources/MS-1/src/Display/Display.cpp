@@ -15,6 +15,7 @@
 #include "Measures.h"
 #include <cstdlib>
 #include <cstring>
+#include <cmath>
 
 
 namespace Display
@@ -51,6 +52,7 @@ namespace Display
         DMeasure(Measure::Name::MagneticX),
         DMeasure(Measure::Name::MagneticY),
         DMeasure(Measure::Name::MagneticZ),
+        DMeasure(Measure::Name::MagneticModule),
         DMeasure(Measure::Name::Time)
     };
 
@@ -365,7 +367,21 @@ void Display::DrawCompass()
 {
     BeginScene(Color::BLACK);
 
-    Circle(62).Draw(Display::WIDTH / 2, Display::HEIGHT / 2, Color::GRAY_50);
+    int x0 = Display::WIDTH / 2;
+    int y0 = Display::HEIGHT / 2;
+
+    Circle(62).Draw(x0, y0, Color::GRAY_50);
+
+    Buffer::SetPoint(x0, y0);
+
+    double x = measures[Measure::Name::MagneticX].value.GetDouble();
+    double y = measures[Measure::Name::MagneticY].value.GetDouble();
+//    double z = measures[Measure::Name::MagneticZ].value.GetDouble();
+
+    double module = std::sqrt(x * x + y * y);
+
+    String<>("x=%.3f", x / module).Draw(0, 10, Color::WHITE);
+    String<>("y=%.3f", y / module).Draw(0, 20);
 
     EndScene();
 }
@@ -397,6 +413,7 @@ void Display::DrawMeasures()
         Measure::Name::MagneticX,
         Measure::Name::MagneticY,
         Measure::Name::MagneticZ,
+        Measure::Name::MagneticModule,
         Measure::Name::Time
     };
 
@@ -426,13 +443,15 @@ void Display::DrawMeasures()
 
 int Display::CurrentDisplayMeasures()
 {
-    const int num_displays = Measure::Name::Count / MEAS_ON_DISPLAY + 1;
+    return 9;
 
-    int secs = TIME_MS / 1000;
-
-    int secs_5 = secs / 5;
-
-    return (secs_5 % num_displays) * MEAS_ON_DISPLAY;
+//    const int num_displays = Measure::Name::Count / MEAS_ON_DISPLAY + 1;
+//
+//    int secs = TIME_MS / 1000;
+//
+//    int secs_5 = secs / 5;
+//
+//    return (secs_5 % num_displays) * MEAS_ON_DISPLAY;
 }
 
 
@@ -485,6 +504,7 @@ void Display::DrawBigMeasure()
         10,
         10,
         10,
+        10,
         10
     };
 
@@ -516,6 +536,7 @@ String<> Display::DMeasure::Name()
         "Ã¿√Õ X",
         "Ã¿√Õ Y",
         "Ã¿√Õ Z",
+        "Ã¿√Õ ÃŒƒ",
         "¬–≈Ãﬂ"
     };
 
@@ -540,6 +561,7 @@ String<> Display::DMeasure::Units()
         "®",
         "®",
         "®",
+        "",
         ""
     };
 

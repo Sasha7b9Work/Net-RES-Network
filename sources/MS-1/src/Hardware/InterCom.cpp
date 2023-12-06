@@ -85,6 +85,7 @@ void InterCom::Send(const Measure &measure)
         "MagneticX",
         "MagneticY",
         "MagneticZ",
+        "MagneticModule",
         "Time"
     };
 
@@ -102,6 +103,7 @@ void InterCom::Send(const Measure &measure)
         "degress",
         "degress",
         "degress",
+        "",
         ""
     };
 

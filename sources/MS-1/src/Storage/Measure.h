@@ -30,6 +30,7 @@ struct Measure
             MagneticX,
             MagneticY,
             MagneticZ,
+            MagneticModule,
             Time,
             Count
         };

@@ -119,7 +119,7 @@ void GY511::Update()
 }
 
 
-bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ)
+bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ, Measure *magneticModule)
 {
 #ifdef IN_MODE_TEST
 
@@ -143,6 +143,7 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
         magneticX->Set(Measure::Name::MagneticX, x / module);
         magneticY->Set(Measure::Name::MagneticY, y / module);
         magneticZ->Set(Measure::Name::MagneticZ, z / module);
+        magneticModule->Set(Measure::Name::MagneticModule, module);
 
         return true;
     }
