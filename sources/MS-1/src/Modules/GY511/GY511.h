@@ -25,5 +25,5 @@ namespace GY511
 
     void Update();
 
-    bool GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ, Measure *magneticModule);
+    bool GetMagnetic(Measure *azimuth);
 }

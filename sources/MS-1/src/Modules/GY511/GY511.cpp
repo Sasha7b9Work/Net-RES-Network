@@ -57,6 +57,8 @@ namespace GY511
 
     static bool is_ready_acce = false;
     static bool is_ready_magn = false;
+
+    static float CalculateAzimuth();
 }
 
 
@@ -119,13 +121,11 @@ void GY511::Update()
 }
 
 
-bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneticZ, Measure *magneticModule)
+bool GY511::GetMagnetic(Measure *azimuth)
 {
 #ifdef IN_MODE_TEST
 
-    magneticX->Set(Measure::Name::MagneticX, (float)raw_magn_x.raw);
-    magneticY->Set(Measure::Name::MagneticY, (float)raw_magn_y.raw);
-    magneticZ->Set(Measure::Name::MagneticZ, (float)raw_magn_z.raw);
+    azimuth->Set(Measure::Name::Azimuth, CalculateAzimuth());
 
     return true;
 
@@ -134,20 +134,17 @@ bool GY511::GetMagnetic(Measure *magneticX, Measure *magneticY, Measure *magneti
     {
         is_ready_acce = false;
 
-        float x = (float)raw_magn_x.raw;
-        float y = (float)raw_magn_y.raw;
-        float z = (float)raw_magn_z.raw;
-
-        float module = std::sqrtf(x * x + y * y + z * z);
-
-        magneticX->Set(Measure::Name::MagneticX, x / module);
-        magneticY->Set(Measure::Name::MagneticY, y / module);
-        magneticZ->Set(Measure::Name::MagneticZ, z / module);
-        magneticModule->Set(Measure::Name::MagneticModule, module);
+        azimuth->Set(Measure::Name::Azimuth, CalculateAzimuth());
 
         return true;
     }
 
     return false;
 #endif
+}
+
+
+float GY511::CalculateAzimuth()
+{
+    return 0.0f;
 }

@@ -27,10 +27,7 @@ struct Measure
             Latitude,       // Широта
             Longitude,      // Долгота
             Altitude,       // Высота
-            MagneticX,
-            MagneticY,
-            MagneticZ,
-            MagneticModule,
+            Azimuth,        // Азимут - угол от направления на север
             Time,
             Count
         };

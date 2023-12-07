@@ -49,10 +49,7 @@ namespace Display
         DMeasure(Measure::Name::Latitude),
         DMeasure(Measure::Name::Altitude),
         DMeasure(Measure::Name::Longitude),
-        DMeasure(Measure::Name::MagneticX),
-        DMeasure(Measure::Name::MagneticY),
-        DMeasure(Measure::Name::MagneticZ),
-        DMeasure(Measure::Name::MagneticModule),
+        DMeasure(Measure::Name::Azimuth),
         DMeasure(Measure::Name::Time)
     };
 
@@ -374,14 +371,9 @@ void Display::DrawCompass()
 
     Buffer::SetPoint(x0, y0);
 
-    double x = measures[Measure::Name::MagneticX].value.GetDouble();
-    double y = measures[Measure::Name::MagneticY].value.GetDouble();
-//    double z = measures[Measure::Name::MagneticZ].value.GetDouble();
+    double x = measures[Measure::Name::Azimuth].value.GetDouble();
 
-    double module = std::sqrt(x * x + y * y);
-
-    String<>("x=%.3f", x / module).Draw(0, 10, Color::WHITE);
-    String<>("y=%.3f", y / module).Draw(0, 20);
+    String<>("x=%.3f", x).Draw(0, 10, Color::WHITE);
 
     EndScene();
 }
@@ -410,10 +402,7 @@ void Display::DrawMeasures()
         Measure::Name::Latitude,
         Measure::Name::Longitude,
         Measure::Name::Altitude,
-        Measure::Name::MagneticX,
-        Measure::Name::MagneticY,
-        Measure::Name::MagneticZ,
-        Measure::Name::MagneticModule,
+        Measure::Name::Azimuth,
         Measure::Name::Time
     };
 
@@ -443,15 +432,13 @@ void Display::DrawMeasures()
 
 int Display::CurrentDisplayMeasures()
 {
-    return 9;
+    const int num_displays = Measure::Name::Count / MEAS_ON_DISPLAY + 1;
 
-//    const int num_displays = Measure::Name::Count / MEAS_ON_DISPLAY + 1;
-//
-//    int secs = TIME_MS / 1000;
-//
-//    int secs_5 = secs / 5;
-//
-//    return (secs_5 % num_displays) * MEAS_ON_DISPLAY;
+    int secs = TIME_MS / 1000;
+
+    int secs_5 = secs / 5;
+
+    return (secs_5 % num_displays) * MEAS_ON_DISPLAY;
 }
 
 
@@ -502,9 +489,6 @@ void Display::DrawBigMeasure()
         10,
         10,
         10,
-        10,
-        10,
-        10,
         10
     };
 
@@ -533,10 +517,7 @@ String<> Display::DMeasure::Name()
         "ÿ»–Œ“¿",
         "ƒŒÀ√Œ“¿",
         "¬€—Œ“¿",
-        "Ã¿√Õ X",
-        "Ã¿√Õ Y",
-        "Ã¿√Õ Z",
-        "Ã¿√Õ ÃŒƒ",
+        "¿«»Ã”“",
         "¬–≈Ãﬂ"
     };
 
@@ -559,10 +540,7 @@ String<> Display::DMeasure::Units()
         "®",
         "Ï",
         "®",
-        "®",
-        "®",
-        "",
-        ""
+        "®"
     };
 
     return String<>(units[name]);

@@ -65,10 +65,7 @@ void Device::Update()
     Measure humidity;
     Measure dew_point;
     Measure velocity;
-    Measure magneticX;
-    Measure magneticY;
-    Measure magneticZ;
-    Measure magneticModule;
+    Measure azimuth;
     Measure latitude;
     Measure longitude;
     Measure altitude;
@@ -100,12 +97,9 @@ void Device::Update()
         InterCom::Send(velocity);
     }
 
-    if (GY511::GetMagnetic(&magneticX, &magneticY, &magneticZ, &magneticModule))
+    if (GY511::GetMagnetic(&azimuth))
     {
-        InterCom::Send(magneticX);
-        InterCom::Send(magneticY);
-        InterCom::Send(magneticZ);
-        InterCom::Send(magneticModule);
+        InterCom::Send(azimuth);
     }
 
     if (NEO_M8N::GetMeasures(&latitude, &longitude, &altitude))

@@ -82,10 +82,7 @@ void InterCom::Send(const Measure &measure)
         "Latitude",
         "Longitude",
         "Altitude",
-        "MagneticX",
-        "MagneticY",
-        "MagneticZ",
-        "MagneticModule",
+        "Azimuth",
         "Time"
     };
 
@@ -101,10 +98,7 @@ void InterCom::Send(const Measure &measure)
         "degress",
         "m",
         "degress",
-        "degress",
-        "degress",
-        "",
-        ""
+        "degress"
     };
 
     if (direction & Direction::Display)
