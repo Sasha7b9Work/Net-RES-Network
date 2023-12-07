@@ -32,17 +32,17 @@ struct TypeDisplayedInformation
 
 struct SettingsDisplay
 {
-    uint8                       show_measure[Measure::Name::Count];
+    uint8                       show_measure[Measure::Count];
     TypeDisplayedInformation    typeDisplaydInfo;
 };
 
 
 struct SettingsMeasures
 {
-    int   limit_min[Measure::Name::Count];
-    int   limit_max[Measure::Name::Count];
-    float value_min[Measure::Name::Count];
-    float value_max[Measure::Name::Count];
+    int   limit_min[Measure::Count];
+    int   limit_max[Measure::Count];
+    float value_min[Measure::Count];
+    float value_max[Measure::Count];
 };
 
 
@@ -73,7 +73,7 @@ struct Settings
     static void SaveMeasure(const Measure &);
 
     // —брасывает мин и макс значени€ измерени€
-    static void ResetMeasure(Measure::Name::E);
+    static void ResetMeasure(Measure::E);
 };
 
 

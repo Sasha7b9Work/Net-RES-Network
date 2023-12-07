@@ -125,7 +125,7 @@ bool GY511::GetMagnetic(Measure *azimuth)
 {
 #ifdef IN_MODE_TEST
 
-    azimuth->Set(Measure::Name::Azimuth, CalculateAzimuth());
+    azimuth->Set(Measure::Azimuth, CalculateAzimuth());
 
     return true;
 
@@ -134,7 +134,7 @@ bool GY511::GetMagnetic(Measure *azimuth)
     {
         is_ready_acce = false;
 
-        azimuth->Set(Measure::Name::Azimuth, CalculateAzimuth());
+        azimuth->Set(Measure::Azimuth, CalculateAzimuth());
 
         return true;
     }

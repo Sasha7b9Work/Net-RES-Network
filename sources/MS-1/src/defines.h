@@ -2,7 +2,7 @@
 #pragma once
 
 
-#define VERSION 19
+#define VERSION 20
 
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)

@@ -24,12 +24,12 @@ namespace Display
     {
         String<> current;
 
-        Measure::Name::E name;
+        Measure::E name;
         Measure value;              // Последнее установленное значение
         int position;               // Текущая отрисовываемая позиция
         uint time;                  // Время последнего изменения текущей отрисовываемой позиции
 
-        DMeasure(Measure::Name::E n) : name(n), position(0), time(0) {}
+        DMeasure(Measure::E n) : name(n), position(0), time(0) {}
 
         void Draw(const int x, const int y, int size = 1);
 
@@ -38,19 +38,19 @@ namespace Display
         String<> Units();
     };
 
-    static DMeasure measures[Measure::Name::Count] =
+    static DMeasure measures[Measure::Count] =
     {
-        DMeasure(Measure::Name::Temperature),
-        DMeasure(Measure::Name::Pressure),
-        DMeasure(Measure::Name::Humidity),
-        DMeasure(Measure::Name::DewPoint),
-        DMeasure(Measure::Name::Illumination),
-        DMeasure(Measure::Name::Velocity),
-        DMeasure(Measure::Name::Latitude),
-        DMeasure(Measure::Name::Altitude),
-        DMeasure(Measure::Name::Longitude),
-        DMeasure(Measure::Name::Azimuth),
-        DMeasure(Measure::Name::Time)
+        DMeasure(Measure::Temperature),
+        DMeasure(Measure::Pressure),
+        DMeasure(Measure::Humidity),
+        DMeasure(Measure::DewPoint),
+        DMeasure(Measure::Illumination),
+        DMeasure(Measure::Velocity),
+        DMeasure(Measure::Latitude),
+        DMeasure(Measure::Altitude),
+        DMeasure(Measure::Longitude),
+        DMeasure(Measure::Azimuth),
+        DMeasure(Measure::Time)
     };
 
     namespace Buffer
@@ -371,7 +371,7 @@ void Display::DrawCompass()
 
     Buffer::SetPoint(x0, y0);
 
-    double x = measures[Measure::Name::Azimuth].value.GetDouble();
+    double x = measures[Measure::Azimuth].value.GetDouble();
 
     String<>("x=%.3f", x).Draw(0, 10, Color::WHITE);
 
@@ -391,26 +391,26 @@ void Display::DrawMeasures()
     const int y0 = d_lines;
     const int dY = d_lines + Font::Height();
 
-    static const Measure::Name::E names[Measure::Name::Count] =
+    static const Measure::E names[Measure::Count] =
     {
-        Measure::Name::Temperature,
-        Measure::Name::Pressure,
-        Measure::Name::Humidity,
-        Measure::Name::DewPoint,
-        Measure::Name::Illumination,
-        Measure::Name::Velocity,
-        Measure::Name::Latitude,
-        Measure::Name::Longitude,
-        Measure::Name::Altitude,
-        Measure::Name::Azimuth,
-        Measure::Name::Time
+        Measure::Temperature,
+        Measure::Pressure,
+        Measure::Humidity,
+        Measure::DewPoint,
+        Measure::Illumination,
+        Measure::Velocity,
+        Measure::Latitude,
+        Measure::Longitude,
+        Measure::Altitude,
+        Measure::Azimuth,
+        Measure::Time
     };
 
     int y = y0;
 
     for (int i = CurrentDisplayMeasures(); i < (CurrentDisplayMeasures() + 5); i++)
     {
-        if (i < Measure::Name::Count)
+        if (i < Measure::Count)
         {
             int x = 93;
             int width = 30;
@@ -432,13 +432,13 @@ void Display::DrawMeasures()
 
 int Display::CurrentDisplayMeasures()
 {
-    const int num_displays = Measure::Name::Count / MEAS_ON_DISPLAY + 1;
+    const int num_displays = Measure::Count / MEAS_ON_DISPLAY + 1;
 
-    int secs = TIME_MS / 1000;
+    uint secs = TIME_MS / 1000U;
 
-    int secs_5 = secs / 5;
+    uint secs_5 = secs / 5;
 
-    return (secs_5 % num_displays) * MEAS_ON_DISPLAY;
+    return (int)((secs_5 % num_displays) * MEAS_ON_DISPLAY);
 }
 
 
@@ -477,7 +477,7 @@ void Display::DrawBigMeasure()
 
     BeginScene(Color::BLACK);
 
-    static const int x[Measure::Name::Count] =
+    static const int x[Measure::Count] =
     {
         30,
         12,
@@ -506,7 +506,7 @@ void Display::DrawBigMeasure()
 
 String<> Display::DMeasure::Name()
 {
-    static const pchar names[Measure::Name::Count] =
+    static const pchar names[Measure::Count] =
     {
         "ТЕМПЕРАТУРА",
         "ДАВЛЕНИЕ",
@@ -528,7 +528,7 @@ String<> Display::DMeasure::Name()
 
 String<> Display::DMeasure::Units()
 {
-    static const pchar units[Measure::Name::Count] =
+    static const pchar units[Measure::Count] =
     {
         "ЁС",
         "гПа",

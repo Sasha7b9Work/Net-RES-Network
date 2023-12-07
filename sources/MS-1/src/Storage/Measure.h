@@ -4,32 +4,29 @@
 
 struct Measure
 {
+    enum E
+    {
+        Temperature,    // Температура
+        Pressure,       // Давление
+        Humidity,       // Влажность
+        DewPoint,       // Точка росы
+        Illumination,   // Освещёность
+        Velocity,       // Скорость воздуха
+        Latitude,       // Широта
+        Longitude,      // Долгота
+        Altitude,       // Высота
+        Azimuth,        // Азимут - угол от направления на север
+        Time,
+        Count
+    };
+
     struct Type
     {
         enum E
         {
             Double,     // Всё, кроме времени
             Uint,       // Время в секундах после 2000 г
-            Count
-        };
-    };
-
-    struct Name
-    {
-        enum E
-        {
-            Temperature,    // Температура
-            Pressure,       // Давление
-            Humidity,       // Влажность
-            DewPoint,       // Точка росы
-            Illumination,   // Освещёность
-            Velocity,       // Скорость воздуха
-            Latitude,       // Широта
-            Longitude,      // Долгота
-            Altitude,       // Высота
-            Azimuth,        // Азимут - угол от направления на север
-            Time,
-            Count
+            TypeCount
         };
     };
 
@@ -41,8 +38,8 @@ struct Measure
 
     void Clear()
     {
-        type = Type::Count;
-        name = Name::Count;
+        type = Type::TypeCount;
+        name = E::Count;
     }
 
     bool IsDouble() const
@@ -55,7 +52,7 @@ struct Measure
         return value_d;
     }
 
-    Name::E GetName() const
+    E GetName() const
     {
         return name;
     }
@@ -65,12 +62,12 @@ struct Measure
         return type;
     }
 
-    void Set(Name::E _name, float value)
+    void Set(E _name, float value)
     {
         Set(_name, (double)value);
     }
 
-    void Set(Name::E _name, double value)
+    void Set(E _name, double value)
     {
         name = _name;
         SetDouble(value);
@@ -92,5 +89,5 @@ private:
 
     Type::E type;
 
-    Name::E name;
+    E name;
 };

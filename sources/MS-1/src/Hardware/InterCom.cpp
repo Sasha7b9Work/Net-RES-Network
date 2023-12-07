@@ -71,7 +71,7 @@ void InterCom::Send(const Measure &measure)
         return;
     }
 
-    static const pchar names[Measure::Name::Count] =
+    static const pchar names[Measure::Count] =
     {
         "Temperature",
         "Pressure",
@@ -86,7 +86,7 @@ void InterCom::Send(const Measure &measure)
         "Time"
     };
 
-    static const pchar units[Measure::Name::Count] =
+    static const pchar units[Measure::Count] =
     {
         "degress Celsius",
         "hPa",

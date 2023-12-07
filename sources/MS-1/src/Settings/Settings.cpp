@@ -107,7 +107,7 @@ void Settings::SaveMeasure(const Measure &measure)
     {
         float value = (float)measure.GetDouble();
 
-        Measure::Name::E name = measure.GetName();
+        Measure::E name = measure.GetName();
 
         if (gset.measures.value_max[name] == ERROR_VALUE_FLOAT)
         {
@@ -133,7 +133,7 @@ void Settings::SaveMeasure(const Measure &measure)
 }
 
 
-void Settings::ResetMeasure(Measure::Name::E name)
+void Settings::ResetMeasure(Measure::E name)
 {
     gset.measures.value_max[name] = ERROR_VALUE_FLOAT;
 
