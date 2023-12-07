@@ -19,9 +19,9 @@ static void OnClose_Battery(bool)
 }
 
 
-static void OnDraw_Battery(int x, int y)
+static void OnDraw_Battery(int x, int y, Color::E, Color::E color_draw)
 {
-    String<>("%.2f Â", (double)HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, Color::WHITE);
+    String<>("%.2f Â", (double)HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, color_draw);
 }
 
 
@@ -45,14 +45,27 @@ static void Before_OpenTime(bool open)
 DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
 
 
+static void OnDraw_SerialNumber(int x, int y, Color::E color_fill, Color::E color_draw)
+{
+    Rectangle(6, 12).Fill(x + 143, y + 5, color_fill);
+
+    String<> serial_number("%08X", HAL::GetUID());
+
+    serial_number.Draw(x + 85, y + 5, color_draw);
+}
+
+
+static int null_value = 0;
+
+
 DEF_GOVERNOR(gSerialNumber,
     "Ñ/Í",
     *PageSystem::self,
     nullptr,
-    nullptr,
+    OnDraw_SerialNumber,
     0,
-    (int)0x7FFFFFFF,
-    gset.system.serial_number
+    0,
+    null_value
 )
 
 

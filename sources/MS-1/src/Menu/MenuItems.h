@@ -30,14 +30,14 @@ struct StateItem;
 
 
 typedef void(*FuncOpenClose)(bool);
-typedef void(*FuncOnDraw)(int, int);
+typedef void(*FuncAfterDraw)(int, int, Color::E fill, Color::E draw);
 
 
 #define COMMON_PART_ITEM    TypeItem::E    type;             \
                             pchar          title;            \
                             const Page    *keeper;           \
                             FuncOpenClose  funcOnOpenClose;  \
-                            FuncOnDraw     funcOnDraw
+                            FuncAfterDraw  funcOnDraw
 
 struct DItem
 {
@@ -56,6 +56,9 @@ struct Item
 
     void DrawOpened(int x, int y, bool active) const;
     void DrawClosed(int x, int y, bool active) const;
+
+    Color::E ColorFill() const;
+    Color::E ColorDraw() const;
 
     void ShortPressure(const Key &) const;
     void LongPressure(const Key &) const;

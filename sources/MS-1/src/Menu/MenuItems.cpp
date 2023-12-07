@@ -117,8 +117,20 @@ void Item::DrawOpened(int x, int y, bool active) const
 
     if (ToDItem()->funcOnDraw)
     {
-        ToDItem()->funcOnDraw(x, y);
+        ToDItem()->funcOnDraw(x, y, ColorFill(), ColorDraw());
     }
+}
+
+
+Color::E Item::ColorFill() const
+{
+    return ToDItem()->keeper->CurrentItem() == this ? Color::MenuItem() : Color::BLACK;
+}
+
+
+Color::E Item::ColorDraw() const
+{
+    return Color::WHITE;
 }
 
 
@@ -155,7 +167,7 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     if (ToDItem()->funcOnDraw)
     {
-        ToDItem()->funcOnDraw(x, y);
+        ToDItem()->funcOnDraw(x, y, ColorFill(), ColorDraw());
     }
 }
 
