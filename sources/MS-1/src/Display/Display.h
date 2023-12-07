@@ -15,9 +15,9 @@ namespace Display
 
     extern bool need_redraw;
 
-    void SetMeasure(const Measure &);
+    void SetMeasure(const Measure &, uint timeMS);
 
-    void Update();
+    void Update(uint timeMS);
 
     void BeginScene(Color::E);
 

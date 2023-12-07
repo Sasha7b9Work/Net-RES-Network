@@ -70,12 +70,14 @@ void Device::Update()
     Measure longitude;
     Measure altitude;
 
+    uint time = TIME_MS;
+
     if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
-        InterCom::Send(temp);
-        InterCom::Send(pressure);
-        InterCom::Send(humidity);
-        InterCom::Send(dew_point);
+        InterCom::Send(temp, time);
+        InterCom::Send(pressure, time);
+        InterCom::Send(humidity, time);
+        InterCom::Send(dew_point, time);
 
         bool in_range = Measures::InRange(temp) &&
             Measures::InRange(pressure) &&
@@ -94,26 +96,26 @@ void Device::Update()
 
     if (CG_Anem::GetMeasure(&velocity))
     {
-        InterCom::Send(velocity);
+        InterCom::Send(velocity, time);
     }
 
     if (GY511::GetMagnetic(&azimuth))
     {
-        InterCom::Send(azimuth);
+        InterCom::Send(azimuth, time);
     }
 
     if (NEO_M8N::GetMeasures(&latitude, &longitude, &altitude))
     {
-        InterCom::Send(latitude);
-        InterCom::Send(longitude);
-        InterCom::Send(altitude);
+        InterCom::Send(latitude, time);
+        InterCom::Send(longitude, time);
+        InterCom::Send(altitude, time);
     }
 
     GY511::Update();
 
     Keyboard::Update();
 
-    Display::Update();
+    Display::Update(TIME_MS);
 
     HAL_ADC::GetVoltage();
 

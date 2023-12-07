@@ -64,7 +64,7 @@ void InterCom::SetDirection(Direction::E dir)
 }
 
 
-void InterCom::Send(const Measure &measure)
+void InterCom::Send(const Measure &measure, uint timeMS)
 {
     static const pchar names[Measure::Count] =
     {
@@ -96,7 +96,7 @@ void InterCom::Send(const Measure &measure)
     {
         if (!Measures::IsFixed())
         {
-            Display::SetMeasure(measure);
+            Display::SetMeasure(measure, timeMS);
         }
     }
 

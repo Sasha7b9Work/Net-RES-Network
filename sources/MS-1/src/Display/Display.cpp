@@ -1,21 +1,13 @@
 // 2022/04/20 08:53:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Display.h"
-#include "Hardware/Timer.h"
-#include "Display/Colors.h"
 #include "Modules/ST7735/ST7735.h"
-#include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Display/Font/Font.h"
 #include "Utils/Text/String.h"
-#include "Utils/Text/Text.h"
 #include "Display/Zones.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Hardware/HAL/HAL.h"
 #include "Measures.h"
-#include <cstdlib>
-#include <cstring>
-#include <cmath>
+#include "Hardware/Timer.h"
 
 
 namespace Display
@@ -135,18 +127,18 @@ namespace Display
 
     void DrawZones();
 
-    static void DrawMeasures();
+    static void DrawMeasures(uint timeMS);
 
     // Вывести одно измерение на весь экран
     static void DrawBigMeasure();
 
-    void DrawTime();
+    static void DrawTime();
 
     static void DrawStar();
 
-    // Какие измерения сейчас выводить на экран. Т.к. все они одновременно на экран не помещаются,
-    // то выводятся по пять штук на одном экране, которые автоматически переключаются.
-    static int CurrentDisplayMeasures();
+    // Какую страницу измерений сейчас выводить на экран. Т.к. все они одновременно на экран не помещаются,
+    // то выводятся по пять штук на одном экране и автоматически переключаются.
+    static int PageMeasures(uint timeMS);
 
     static void DrawCompass();
 }
@@ -242,7 +234,7 @@ void Rectangle::Draw(int x, int y, Color::E color)
 }
 
 
-void Display::SetMeasure(const Measure &measure)
+void Display::SetMeasure(const Measure &measure, uint timeMS)
 {
     Settings::SaveMeasure(measure);
 
@@ -257,7 +249,7 @@ void Display::SetMeasure(const Measure &measure)
     }
 
     value.position = 0;
-    value.time = TIME_MS;
+    value.time = timeMS;
     value.value = measure;
 
     value.current.SetFormat("%.1f", (double)measure.GetDouble());
@@ -307,7 +299,7 @@ void Display::EndScene()
 }
 
 
-void Display::Update()
+void Display::Update(uint timeMS)
 {
     if (mode_compass)
     {
@@ -334,9 +326,12 @@ void Display::Update()
                     BeginScene(Color::BLACK);
                 }
 
-                DrawMeasures();
+                DrawMeasures(timeMS);
 
-                //DrawTime();
+                if (PageMeasures(timeMS) == 1)
+                {
+                    DrawTime();
+                }
 
                 if (need_redraw)
                 {
@@ -377,7 +372,7 @@ void Display::DrawCompass()
 }
 
 
-void Display::DrawMeasures()
+void Display::DrawMeasures(uint timeMS)
 {
     Font::Set(TypeFont::_12_10);
 
@@ -404,7 +399,7 @@ void Display::DrawMeasures()
 
     int y = y0;
 
-    for (int i = CurrentDisplayMeasures(); i < (CurrentDisplayMeasures() + 5); i++)
+    for (int i = PageMeasures(timeMS) * MEAS_ON_DISPLAY; i < (PageMeasures(timeMS) + 1) * MEAS_ON_DISPLAY; i++)
     {
         if (i < Measure::Count)
         {
@@ -426,15 +421,15 @@ void Display::DrawMeasures()
 }
 
 
-int Display::CurrentDisplayMeasures()
+int Display::PageMeasures(uint timeMS)
 {
     const int num_displays = Measure::Count / MEAS_ON_DISPLAY + 1;
 
-    uint secs = TIME_MS / 1000U;
+    uint secs = timeMS / 1000U;
 
     uint secs_5 = secs / 5;
 
-    return (int)((secs_5 % num_displays) * MEAS_ON_DISPLAY);
+    return (int)(secs_5 % num_displays);
 }
 
 
