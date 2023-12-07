@@ -43,7 +43,6 @@ namespace HAL_ADC
     extern void *handle;           // ADC_HandleTypeDef
 }
 
-
 namespace HAL_I2C1
 {
     void Init();
@@ -104,6 +103,14 @@ namespace HAL_ROM
 {
     void SaveSettings(const Settings &);
     bool LoadSettings(Settings &);
+}
+
+
+namespace HAL_WWDG
+{
+    void Init();
+
+    void Update();
 }
 
 

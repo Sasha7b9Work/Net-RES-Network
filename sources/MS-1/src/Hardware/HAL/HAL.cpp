@@ -34,6 +34,8 @@ void HAL::Init()
     __HAL_RCC_I2C1_CLK_ENABLE();
     __HAL_RCC_ADC1_CLK_ENABLE();
 
+    __HAL_RCC_WWDG_CLK_ENABLE();
+
     HAL_I2C1::Init();
 
     /* Init Device Library */
@@ -55,6 +57,8 @@ void HAL::Init()
     HAL_ADC::Init();
 
     HAL_SPI1::Init();
+
+    HAL_WWDG::Init();
 }
 
 
