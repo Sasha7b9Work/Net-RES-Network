@@ -66,24 +66,17 @@ void InterCom::SetDirection(Direction::E dir)
 
 void InterCom::Send(const Measure &measure)
 {
-    if (!measure.IsDouble())
-    {
-        return;
-    }
-
     static const pchar names[Measure::Count] =
     {
         "Temperature",
         "Pressure",
         "Humidity",
-        "Dew Point",
         "Illuminance",
         "Velocity",
         "Latitude",
         "Longitude",
         "Altitude",
-        "Azimuth",
-        "Time"
+        "Azimuth"
     };
 
     static const pchar units[Measure::Count] =
@@ -92,12 +85,10 @@ void InterCom::Send(const Measure &measure)
         "hPa",
         "%%",
         "degress Celsius",
-        "lumen",
         "m/s",
         "degress",
         "degress",
         "m",
-        "degress",
         "degress"
     };
 

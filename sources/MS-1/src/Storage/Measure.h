@@ -10,24 +10,13 @@ struct Measure
         Pressure,       // Давление
         Humidity,       // Влажность
         DewPoint,       // Точка росы
-        Illumination,   // Освещёность
         Velocity,       // Скорость воздуха
         Latitude,       // Широта
         Longitude,      // Долгота
         Altitude,       // Высота
         Azimuth,        // Азимут - угол от направления на север
-        Time,
-        Count
-    };
 
-    struct Type
-    {
-        enum E
-        {
-            Double,     // Всё, кроме времени
-            Uint,       // Время в секундах после 2000 г
-            TypeCount
-        };
+        Count
     };
 
     union
@@ -38,13 +27,7 @@ struct Measure
 
     void Clear()
     {
-        type = Type::TypeCount;
         name = E::Count;
-    }
-
-    bool IsDouble() const
-    {
-        return type == Type::Double;
     }
 
     double GetDouble() const
@@ -55,11 +38,6 @@ struct Measure
     E GetName() const
     {
         return name;
-    }
-
-    Type::E GetType() const
-    {
-        return type;
     }
 
     void Set(E _name, float value)
@@ -83,11 +61,8 @@ private:
 
     void SetDouble(double value)
     {
-        type = Type::Double;
         value_d = value;
     }
-
-    Type::E type;
 
     E name;
 };

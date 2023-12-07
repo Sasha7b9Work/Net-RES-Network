@@ -44,13 +44,11 @@ namespace Display
         DMeasure(Measure::Pressure),
         DMeasure(Measure::Humidity),
         DMeasure(Measure::DewPoint),
-        DMeasure(Measure::Illumination),
         DMeasure(Measure::Velocity),
         DMeasure(Measure::Latitude),
-        DMeasure(Measure::Altitude),
         DMeasure(Measure::Longitude),
-        DMeasure(Measure::Azimuth),
-        DMeasure(Measure::Time)
+        DMeasure(Measure::Altitude),
+        DMeasure(Measure::Azimuth)
     };
 
     namespace Buffer
@@ -397,13 +395,11 @@ void Display::DrawMeasures()
         Measure::Pressure,
         Measure::Humidity,
         Measure::DewPoint,
-        Measure::Illumination,
         Measure::Velocity,
         Measure::Latitude,
         Measure::Longitude,
         Measure::Altitude,
-        Measure::Azimuth,
-        Measure::Time
+        Measure::Azimuth
     };
 
     int y = y0;
@@ -487,8 +483,6 @@ void Display::DrawBigMeasure()
         10,
         10,
         10,
-        10,
-        10,
         10
     };
 
@@ -512,13 +506,11 @@ String<> Display::DMeasure::Name()
         "ÄÀÂËÅÍÈÅ",
         "ÂËÀÆÍÎÑÒÜ",
         "ÒÎ×ÊÀ ĞÎÑÛ",
-        "ÎÑÂÅÙÅÍÍÎÑÒÜ",
         "ÑÊÎĞÎÑÒÜ",
         "ØÈĞÎÒÀ",
         "ÄÎËÃÎÒÀ",
         "ÂÛÑÎÒÀ",
-        "ÀÇÈÌÓÒ",
-        "ÂĞÅÌß"
+        "ÀÇÈÌÓÒ"
     };
 
     String<> result(names[name]);
@@ -534,12 +526,10 @@ String<> Display::DMeasure::Units()
         "ãÏà",
         "%%",
         "¨Ñ",
-        "ëì",
         "ì/ñ",
         "¨",
         "¨",
         "ì",
-        "¨",
         "¨"
     };
 
