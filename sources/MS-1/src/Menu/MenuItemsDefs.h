@@ -8,8 +8,8 @@
 #define DEF_STATE(name, title, keeper, funcOpenClose, funcOnDraw, type, is_min)                                                     \
     static const DState name = { TypeItem::State, title, (const Page *)&keeper, funcOpenClose, funcOnDraw, type, is_min};
 
-#define DEF_GOVERNOR(name, title, keeper, beforeOpen, min, max, value)                                                              \
-    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, nullptr, min, max, &(value) };
+#define DEF_GOVERNOR(name, title, keeper, beforeOpen, funcAfterDraw, min, max, value)                                                \
+    static const DGovernor name = { TypeItem::Governor, title, (const Page *)&keeper, beforeOpen, funcAfterDraw, min, max, &(value) };
 
 #define DEF_TIMEITEM(name, keeper, beforeOpen, value, state, time)                                                                  \
     static const DTimeItem name = { TypeItem::Time, "", (const Page *)&keeper, beforeOpen, nullptr, &(value), &(state), &(time)};

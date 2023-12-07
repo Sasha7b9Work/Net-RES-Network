@@ -49,7 +49,9 @@ DEF_GOVERNOR(gSerialNumber,
     "Ñ/Í",
     *PageSystem::self,
     nullptr,
-    0, (int)0x7FFFFFFF,
+    nullptr,
+    0,
+    (int)0x7FFFFFFF,
     gset.system.serial_number
 )
 

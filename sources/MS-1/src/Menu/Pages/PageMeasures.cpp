@@ -6,10 +6,10 @@
 
 
 #define DEF_GOVERNOR_MIN(_name, page_self, _min, _max, type)                                        \
-DEF_GOVERNOR(_name, "Предел мин", *page_self, nullptr, _min, _max, gset.measures.limit_min[type])
+DEF_GOVERNOR(_name, "Предел мин", *page_self, nullptr, nullptr, _min, _max, gset.measures.limit_min[type])
 
 #define DEF_GOVERNOR_MAX(_name, page_self, _min, _max, type)                                        \
-DEF_GOVERNOR(_name, "Предел макс", *page_self, nullptr, _min, _max, gset.measures.limit_max[type])
+DEF_GOVERNOR(_name, "Предел макс", *page_self, nullptr, nullptr, _min, _max, gset.measures.limit_max[type])
 
 #define DEF_STATE_MIN(_name, page_self, type)                                                       \
 DEF_STATE(_name, "Значение мин", *page_self, nullptr, nullptr, type, true)
