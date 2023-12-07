@@ -150,7 +150,7 @@ void Item::DrawClosed(int x, int y, bool active) const
         fill = Color::GRAY_10;
     }
 
-    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+    Rectangle(Item::WIDTH, Item::HEIGHT + 1).DrawFilled(x, y, fill, draw);
 
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 

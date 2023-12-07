@@ -228,9 +228,9 @@ void Circle::Draw(int _x, int _y, Color::E color)
 void Rectangle::Draw(int x, int y, Color::E color)
 {
     HLine(width).Draw(x, y, color);
-    HLine(width).Draw(x, y + height);
+    HLine(width).Draw(x, y + height - 1);
     VLine(height).Draw(x, y);
-    VLine(height).Draw(x + width, y);
+    VLine(height).Draw(x + width - 1, y);
 }
 
 

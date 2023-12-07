@@ -47,7 +47,7 @@ struct DItem
 
 struct Item
 {
-    static const int WIDTH = Display::WIDTH - 1;
+    static const int WIDTH = Display::WIDTH;
     static const int HEIGHT = 20;
 
     String<> Title() const;
