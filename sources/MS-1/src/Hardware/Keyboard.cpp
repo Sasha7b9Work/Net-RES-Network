@@ -109,3 +109,45 @@ void HAL_GPIO_EXTI_Callback(uint16_t)
 
     Keyboard::IT::pressed[Key::_2] = pinKey2.IsLow();
 }
+
+
+void EXTI9_5_IRQHandler(void)
+{
+    if (GPIOB->IDR & GPIO_PIN_8)                                // Не нажата
+    {
+        if (Keyboard::IT::pressed[Key::_1])
+        {
+            Keyboard::IT::pressed[Key::_1] = false;
+
+            __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_8);
+        }
+    }
+    else                                                        // Нажата
+    {
+        if (!Keyboard::IT::pressed[Key::_1])
+        {
+            Keyboard::IT::pressed[Key::_1] = true;
+
+            __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_8);
+        }
+    }
+
+    if(GPIOB->IDR & GPIO_PIN_9)
+    {
+        if (Keyboard::IT::pressed[Key::_2])
+        {
+            Keyboard::IT::pressed[Key::_2] = false;
+
+            __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_9);
+        }
+    }
+    else
+    {
+        if (!Keyboard::IT::pressed[Key::_2])
+        {
+            Keyboard::IT::pressed[Key::_2] = true;
+        }
+
+        __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_9);
+    }
+}
