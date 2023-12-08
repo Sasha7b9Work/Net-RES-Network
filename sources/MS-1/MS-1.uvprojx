@@ -498,6 +498,16 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f3xx_hal_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_iwdg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -802,6 +812,11 @@
               <FileName>HAL_USART2.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IWDG.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1614,6 +1629,16 @@
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f3xx_hal_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_iwdg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1918,6 +1943,11 @@
               <FileName>HAL_USART2.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IWDG.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
             </File>
           </Files>
         </Group>

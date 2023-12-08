@@ -106,7 +106,7 @@ namespace HAL_ROM
 }
 
 
-namespace HAL_WWDG
+namespace HAL_IWDG
 {
     void Init();
 

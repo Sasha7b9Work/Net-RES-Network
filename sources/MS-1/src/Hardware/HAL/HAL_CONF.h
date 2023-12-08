@@ -35,7 +35,7 @@
 #define HAL_RTC_MODULE_ENABLED
 #define HAL_ADC_MODULE_ENABLED
 #define HAL_TIM_MODULE_ENABLED
-#define HAL_WWDG_MODULE_ENABLED
+#define HAL_IWDG_MODULE_ENABLED
 
 /* ########################## HSE/HSI Values adaptation ##################### */
 /**

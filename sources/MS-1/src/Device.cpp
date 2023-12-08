@@ -50,11 +50,15 @@ void Device::Init()
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 
     HAL_USART2::Init();
+
+    HAL_IWDG::Init();
 }
 
 
 void Device::Update()
 {
+    HAL_IWDG::Update();
+
     if (Beeper::Running() && TIME_MS > 2000)
     {
         Beeper::Stop();
