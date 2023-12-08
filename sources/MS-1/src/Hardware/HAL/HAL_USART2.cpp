@@ -36,3 +36,11 @@ void HAL_USART2::Init()
 
     HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
 }
+
+
+void HAL_USART2::ReInit()
+{
+    HAL_UART_DeInit(&handleUART);
+
+    Init();
+}

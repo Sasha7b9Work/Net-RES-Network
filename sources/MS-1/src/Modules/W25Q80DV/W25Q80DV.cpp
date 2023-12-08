@@ -48,7 +48,7 @@ void W25Q80DV::WriteLess1024bytes(uint address, const void *_buffer, int size)
 
     HAL_SPI1::Write(WRITE_ENABLE);          // Write enable
 
-    Buffer<uint8, 1024> data;
+    Buffer<1024> data;
 
     data[0] = PROGRAM_PAGE; //-V525
     data[1] = (uint8)(address >> 16);       // /
@@ -123,14 +123,14 @@ void W25Q80DV::ReadLess1024bytes(uint address, void *_buffer, int size)
 
     WaitRelease();
 
-    Buffer<uint8, 1024> out;
+    Buffer<1024> out;
 
     out[0] = READ_DATA; //-V525
     out[1] = (uint8)(address >> 16);
     out[2] = (uint8)(address >> 8);
     out[3] = (uint8)(address);
 
-    Buffer<uint8, 1024> in;
+    Buffer<1024> in;
 
     HAL_SPI1::WriteRead(out.Data(), in.Data(), size + 1 + 3);
 

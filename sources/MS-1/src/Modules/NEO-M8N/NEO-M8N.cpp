@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL_PINS.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
+#include "Utils/RingBuffer.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -16,22 +17,33 @@ namespace HAL_USART2
 
 namespace NEO_M8N
 {
-    static void Parse(char *);
-
     static const int SIZE_MESSAGE = 100;
     static char message[SIZE_MESSAGE] = { '\0' };
 
     char *GetData() { return message; }
+
+    static RingBuffer<1024> in_buffer;
+
+    static Buffer<2048> out_buffer;
 }
 
 
-void NEO_M8N::CallbackOnReceive()
-{
-    char symbol = HAL_USART2::recv_byte;
 
-    HC12::Transmit(&symbol, 1);
+void NEO_M8N::Update()
+{
+    return;
+    in_buffer.GetData(out_buffer);
 
     static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных
+
+    if (out_buffer.Size() == 0)
+    {
+        return;
+    }
+
+    char symbol = (char)out_buffer[0];
+
+    out_buffer.RemoveFirstByte();
 
     if (in_mode_receive)
     {
@@ -41,7 +53,7 @@ void NEO_M8N::CallbackOnReceive()
         if (symbol == 0x0d)
         {
             data[pointer] = '\0';
-            Parse(data);
+            std::strcpy(message, data);
             in_mode_receive = false;
             pointer = 0;
         }
@@ -59,7 +71,6 @@ void NEO_M8N::CallbackOnReceive()
         if (symbol == request[ptr])
         {
             ptr++;
-            
             if (ptr == (int)std::strlen(request))
             {
                 ptr = 0;
@@ -71,14 +82,18 @@ void NEO_M8N::CallbackOnReceive()
             ptr = 0;
         }
     }
-
-    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8 *)&HAL_USART2::recv_byte, 1);
 }
 
 
-void NEO_M8N::Parse(char *data)
+void NEO_M8N::CallbackOnReceive()
 {
-    std::strcpy(message, data);
+    char symbol = HAL_USART2::recv_byte;
+
+//    in_buffer.Append((uint8)symbol);
+
+    HC12::Transmit(&symbol, 1);
+
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8 *)&HAL_USART2::recv_byte, 1);
 }
 
 

@@ -5,6 +5,8 @@
 
 namespace NEO_M8N
 {
+    void Update();
+
     void CallbackOnReceive();
 
     char *GetData();

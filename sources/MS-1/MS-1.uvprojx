@@ -1083,6 +1083,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
+            <File>
+              <FileName>RingBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\RingBuffer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2264,6 +2269,11 @@
               <FileName>Debug.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Debug.h</FilePath>
+            </File>
+            <File>
+              <FileName>RingBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\RingBuffer.h</FilePath>
             </File>
           </Files>
         </Group>

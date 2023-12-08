@@ -109,6 +109,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
     }
 }
 
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *handle)
+{
+    if (handle == HAL_USART2::handle)
+    {
+        HAL_USART2::ReInit();
+    }
+}
+
 
 void ADC1_2_IRQHandler(void)
 {

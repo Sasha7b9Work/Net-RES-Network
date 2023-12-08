@@ -32,9 +32,9 @@ namespace InterCom
 
     static Direction::E direction = Direction::_None;
 
-    static Buffer<uint8, 16> CreateMessage(const Measure &measure)
+    static Buffer<16> CreateMessage(const Measure &measure)
     {
-        Buffer<uint8, 16> message;
+        Buffer<16> message;
 
         message[0] = 'A';                           // offset 0
         message[1] = 'B';
@@ -107,7 +107,7 @@ void InterCom::Send(const Measure &measure, uint timeMS)
         HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
-    Buffer<uint8, 16> data = CreateMessage(measure);
+    Buffer<16> data = CreateMessage(measure);
 
     if (direction & Direction::HC12)
     {
