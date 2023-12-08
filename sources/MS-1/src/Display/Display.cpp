@@ -399,11 +399,13 @@ void Display::DrawMeasures(uint timeMS)
 
     int y = y0;
 
-    for (int i = PageMeasures(timeMS) * MEAS_ON_DISPLAY; i < (PageMeasures(timeMS) + 1) * MEAS_ON_DISPLAY; i++)
+    int page = PageMeasures(timeMS);
+
+    for (int i = page * MEAS_ON_DISPLAY; i < (page + 1) * MEAS_ON_DISPLAY; i++)
     {
         if (i < Measure::Count)
         {
-            int x = 93;
+            int x =  (page == 0) ? 93 : 81;
             int width = 30;
             int height = 15;
 

@@ -3,6 +3,7 @@
 #include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Hardware/HAL/HAL_PINS.h"
 #include "Hardware/HAL/HAL.h"
+#include "Modules/HC12/HC12.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -27,6 +28,8 @@ namespace NEO_M8N
 void NEO_M8N::CallbackOnReceive()
 {
     char symbol = HAL_USART2::recv_byte;
+
+    HC12::Transmit(&symbol, 1);
 
     static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных
 
