@@ -109,6 +109,10 @@ void ST7735::Init()
     SendCommand(0x36);      // MADCTL Memory Data Access Control
     SendData8(BINARY_U8(01100000));
 
+    Display::BeginScene(Color::BLACK);
+
+    Display::EndScene();
+
     SendCommand(0x29);      // DISPON Display on
 }
 

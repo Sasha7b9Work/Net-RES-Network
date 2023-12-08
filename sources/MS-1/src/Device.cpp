@@ -25,13 +25,15 @@ void Device::Init()
 {
     HAL::Init();
 
+    Timer::Delay(1000);
+
     EnergySwitch::Init();
+
+    ST7735::Init();         // Дисплей
 
     gset.Load();
 
     gset.Reset();
-
-    ST7735::Init();         // Дисплей
 
     BME280::Init();         // Температура, давление, влажность, точка росы
 
