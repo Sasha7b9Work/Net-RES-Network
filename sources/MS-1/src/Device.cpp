@@ -25,11 +25,11 @@ void Device::Init()
 {
     HAL::Init();
 
+    ST7735::Init();         // Дисплей
+
     Timer::Delay(1000);
 
     EnergySwitch::Init();
-
-    ST7735::Init();         // Дисплей
 
     gset.Load();
 
