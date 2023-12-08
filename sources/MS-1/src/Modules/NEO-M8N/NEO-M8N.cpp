@@ -31,55 +31,52 @@ namespace NEO_M8N
 
 void NEO_M8N::Update()
 {
-    return;
     in_buffer.GetData(out_buffer);
 
-    static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных
+    static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных. Строка $GNGGA обнаружена
 
-    if (out_buffer.Size() == 0)
+    while (out_buffer.Size())
     {
-        return;
-    }
+        char symbol = (char)out_buffer[0];
 
-    char symbol = (char)out_buffer[0];
+        out_buffer.RemoveFirstByte();
 
-    out_buffer.RemoveFirstByte();
-
-    if (in_mode_receive)
-    {
-        static char data[256];
-        static int pointer = 0;
-
-        if (symbol == 0x0d)
+        if (in_mode_receive)
         {
-            data[pointer] = '\0';
-            std::strcpy(message, data);
-            in_mode_receive = false;
-            pointer = 0;
-        }
-        else
-        {
-            data[pointer++] = symbol;
-        }
-    }
-    else
-    {
-        static const char *request = "$GNGGA";
+            static char data[256];
+            static int pointer = 0;
 
-        static int ptr = 0;
-
-        if (symbol == request[ptr])
-        {
-            ptr++;
-            if (ptr == (int)std::strlen(request))
+            if (symbol == 0x0d)
             {
-                ptr = 0;
-                in_mode_receive = true;
+                data[pointer] = '\0';
+                std::strcpy(message, data);
+                in_mode_receive = false;
+                pointer = 0;
+            }
+            else
+            {
+                data[pointer++] = symbol;
             }
         }
         else
         {
-            ptr = 0;
+            static const char *request = "$GNGGA";
+
+            static int ptr = 0;
+
+            if (symbol == request[ptr])
+            {
+                ptr++;
+                if (ptr == (int)std::strlen(request))
+                {
+                    ptr = 0;
+                    in_mode_receive = true;
+                }
+            }
+            else
+            {
+                ptr = 0;
+            }
         }
     }
 }
@@ -89,7 +86,7 @@ void NEO_M8N::CallbackOnReceive()
 {
     char symbol = HAL_USART2::recv_byte;
 
-//    in_buffer.Append((uint8)symbol);
+    in_buffer.Append((uint8)symbol);
 
     HC12::Transmit(&symbol, 1);
 
