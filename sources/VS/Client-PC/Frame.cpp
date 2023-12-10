@@ -148,17 +148,28 @@ void Frame::SetModeView(ModeView::E mode)
     case ModeView::Full:
         sizer->Show(Table::self);
         sizer->Show(Diagram::Pool::self);
+        Table::self->StretchEntireWidth(Table::self->GetCreatedWidth());
+        Diagram::Pool::self->SetPosition({ Table::self->GetCreatedWidth(), 0 });
         break;
 
     case ModeView::Table:
         sizer->Show(Table::self);
         sizer->Hide(Diagram::Pool::self);
-        Table::self->StretchEntireFrame();
+        Table::self->StretchEntireWidth(GetClientSize().x);
         break;
 
     case ModeView::Graph:
         sizer->Hide(Table::self);
         sizer->Show(Diagram::Pool::self);
+        Table::self->SetPosition({ 0, 0 });
+        wxSize size{ GetClientSize().x, GetClientSize().y };
+        Diagram::Pool::self->SetSizeArea(size.x, size.y);
+        Table::self->SetMinClientSize(size);
+        Table::self->SetClientSize(size);
+        Table::self->SetSize(size);
+        Table::self->Layout();
+        sizer->Layout();
+        Layout();
         break;
     }
 }
@@ -178,7 +189,7 @@ void Frame::OnSize(wxSizeEvent &event)
     }
     else if (mode_view == ModeView::Table)
     {
-        Table::self->StretchEntireFrame();
+        Table::self->StretchEntireWidth(GetClientSize().x);
     }
     else if (mode_view == ModeView::Graph)
     {

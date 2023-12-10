@@ -56,12 +56,16 @@ void Table::StretchColumns()
 {
     int width = GetSize().x;
 
-    int size = width / TypeMeasure::NumMeasures();
+    int size = width / GetNumberCols();
 
-    for (int i = 0; i < TypeMeasure::NumMeasures(); i++)
+    for (int i = 0; i < GetNumberCols() - 1; i++)
     {
         SetColSize(i, size);
+
+        width -= size;
     }
+
+    SetColSize(GetNumberCols() - 1, width);
 }
 
 
@@ -113,9 +117,11 @@ void Table::SetCellValue(int row, int col, int value, const wxColour &color)
 }
 
 
-void Table::StretchEntireFrame()
+void Table::StretchEntireWidth(int width)
 {
     wxSize size = GetParent()->GetClientSize();
+
+    size.x = width;
 
     SetMinSize(size);
     SetMaxSize(size);

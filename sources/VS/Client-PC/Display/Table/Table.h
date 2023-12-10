@@ -15,8 +15,8 @@ public:
 
     int GetCreatedWidth() const { return create_width; }
 
-    // Растянуть на весь фрейм
-    void StretchEntireFrame();
+    // Растянуть на ширину width
+    void StretchEntireWidth(int width);
 
 private:
 
