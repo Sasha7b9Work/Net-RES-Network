@@ -21,6 +21,8 @@ Grid *Grid::Create(wxWindow *parent, const wxSize &size)
 Grid::Grid(wxWindow *parent, const wxSize &size) :
     wxGrid(parent, wxID_ANY, { 0, 0 }, size)
 {
+    create_width = size.x;
+
     CreateGrid(0, 0);
 
     AppendCols(TypeMeasure::NumMeasures() + 1);
@@ -44,14 +46,22 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
         }
     }
 
-    SetColSize(0, FromDIP(40));
-
-    for (int i = 1; i < TypeMeasure::NumMeasures(); i++)
-    {
-        SetColSize(i, FromDIP(60));
-    }
+    StretchColumns();
 
 //    wxScrollHelperBase::SetScrollbars(20, 20, 5, 5);
+}
+
+
+void Grid::StretchColumns()
+{
+    int width = GetSize().x;
+
+    int size = width / TypeMeasure::NumMeasures();
+
+    for (int i = 0; i < TypeMeasure::NumMeasures(); i++)
+    {
+        SetColSize(i, size);
+    }
 }
 
 
@@ -100,4 +110,17 @@ void Grid::SetCellValue(int row, int col, int value, const wxColour &color)
 
         wxGrid::SetCellValue(row, col, wxString::Format("%08X", value));
     }
+}
+
+
+void Grid::StretchEntireFrame()
+{
+    wxSize size = GetParent()->GetClientSize();
+
+    SetMinSize(size);
+    SetMaxSize(size);
+
+    SetSize(size);
+
+    StretchColumns();
 }

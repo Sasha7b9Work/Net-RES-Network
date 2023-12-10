@@ -18,7 +18,21 @@ public:
 
 private:
 
-    wxToolBar    *toolBar = nullptr;
+    struct ModeView
+    {
+        enum E
+        {
+            Full,
+            Table,
+            Graph
+        };
+    };
+
+    ModeView::E mode_view = ModeView::Full;
+
+    wxToolBar *toolBar = nullptr;
+
+    wxBoxSizer *sizer = nullptr;
 
     void OnSize(wxSizeEvent &);
 
@@ -29,4 +43,6 @@ private:
     void OnMenuSettings(wxCommandEvent &);
 
     void OnClose();
+
+    void SetModeView(ModeView::E);
 };

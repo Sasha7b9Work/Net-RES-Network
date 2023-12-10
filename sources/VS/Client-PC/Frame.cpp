@@ -76,19 +76,15 @@ Frame::Frame(const wxString &title)
     menuSettings->AppendSubMenu(menuSpeed, _("Скорость обновления"));
     menuSettings->AppendSubMenu(menuModeView, _("Вид"));
 
-    wxMenu *menuTools = new wxMenu();
-    menuTools->Append(TOOL_CONSOLE, _("Открыть консоль\tCtrl-K"), _("Открыть консоль"));
-    menuTools->Append(TOOL_DATABASE, _("База данных\tCtrl-D"), _("База данных"));
+//    wxMenu *menuTools = new wxMenu();
+//    menuTools->Append(TOOL_CONSOLE, _("Открыть консоль\tCtrl-K"), _("Открыть консоль"));
+//    menuTools->Append(TOOL_DATABASE, _("База данных\tCtrl-D"), _("База данных"));
 
-    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_1);
-    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_2);
-    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_5);
-    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_30);
-    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this, ID_SPEED_60);
+    Bind(wxEVT_MENU, &Frame::OnMenuSettings, this);
 
     menuBar->Append(menuSettings, _("Настройки"));
 
-    menuBar->Append(menuTools, _("Инструменты"));
+//    menuBar->Append(menuTools, _("Инструменты"));
 
     wxFrameBase::SetMenuBar(menuBar);
 
@@ -100,7 +96,7 @@ Frame::Frame(const wxString &title)
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
 
-    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    sizer = new wxBoxSizer(wxHORIZONTAL);
 
     sizer->Add(Grid::Create(this, FromDIP(wxSize((TypeMeasure::NumMeasures() + 1) * 60, 400))));
 
@@ -117,9 +113,89 @@ Frame::Frame(const wxString &title)
 
 void Frame::OnMenuSettings(wxCommandEvent &event)
 {
-    static const int scales[] = { 1, 2, 5, 30, 60 };
+    int id = event.GetId();
 
-    Set::TimeScale::Set(scales[event.GetId() - ID_SPEED_1]);
+    if (id >= ID_SPEED_1 && id <= ID_SPEED_60)
+    {
+        static const int scales[] = { 1, 2, 5, 30, 60 };
+
+        Set::TimeScale::Set(scales[event.GetId() - ID_SPEED_1]);
+    }
+    else if(id >= ID_MODE_VIEW_FULL && id <= ID_MODE_VIEW_GRAPH)
+    {
+        if (id == ID_MODE_VIEW_TABLE)
+        {
+            SetModeView(ModeView::Table);
+        }
+        else if (id == ID_MODE_VIEW_GRAPH)
+        {
+            SetModeView(ModeView::Graph);
+        }
+        else if (id == ID_MODE_VIEW_FULL)
+        {
+            SetModeView(ModeView::Full);
+        }
+    }
+}
+
+
+void Frame::SetModeView(ModeView::E mode)
+{
+    mode_view = mode;
+
+    switch (mode_view)
+    {
+    case ModeView::Full:
+        sizer->Show(Grid::self);
+        sizer->Show(Diagram::Pool::self);
+        break;
+
+    case ModeView::Table:
+        sizer->Show(Grid::self);
+        sizer->Hide(Diagram::Pool::self);
+        Grid::self->StretchEntireFrame();
+        break;
+
+    case ModeView::Graph:
+        sizer->Hide(Grid::self);
+        sizer->Show(Diagram::Pool::self);
+        break;
+    }
+}
+
+
+void Frame::OnSize(wxSizeEvent &event)
+{
+    if (mode_view == ModeView::Full)
+    {
+        Diagram::Pool::self->SetSizeArea(GetClientRect().width - Grid::self->GetSize().x, GetClientRect().height);
+
+        wxSize size = { Grid::self->GetSize().GetWidth(), GetClientRect().height };
+
+        Grid::self->SetMinClientSize(size);
+        Grid::self->SetClientSize(size);
+        Grid::self->SetSize(size);
+    }
+    else if (mode_view == ModeView::Table)
+    {
+        Grid::self->StretchEntireFrame();
+    }
+    else if (mode_view == ModeView::Graph)
+    {
+        Grid::self->SetPosition({0, 0});
+
+        wxSize size{ GetClientSize().x, GetClientSize().y };
+
+        Diagram::Pool::self->SetSizeArea(size.x, size.y);
+
+        Grid::self->SetMinClientSize(size);
+        Grid::self->SetClientSize(size);
+        Grid::self->SetSize(size);
+    }
+
+    Layout();
+
+    event.Skip();
 }
 
 
@@ -163,20 +239,6 @@ void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Fit(&dlg);
 
     dlg.ShowModal();
-}
-
-
-void Frame::OnSize(wxSizeEvent &event)
-{
-    Diagram::Pool::self->SetSizeArea(GetClientRect().width - Grid::self->GetSize().x, GetClientRect().height);
-
-    wxSize size = { Grid::self->GetSize().GetWidth(), GetClientRect().height };
-
-    Grid::self->SetMinClientSize(size);
-    Grid::self->SetClientSize(size);
-    Grid::self->SetSize(size);
-
-    event.Skip();
 }
 
 
