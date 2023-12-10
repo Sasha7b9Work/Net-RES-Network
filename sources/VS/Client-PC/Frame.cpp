@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Frame.h"
 #include "Display/Diagram/Diagram.h"
-#include "Display/Grid/Grid.h"
+#include "Display/Grid/Table.h"
 #include "Display/Diagram/Canvas.h"
 #include "Settings.h"
 #include "Controls/ConsoleSCPI.h"
