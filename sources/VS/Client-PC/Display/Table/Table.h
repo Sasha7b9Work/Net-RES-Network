@@ -1,5 +1,6 @@
 // 2022/09/05 10:18:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Settings/Settings.h"
 #include <map>
 
 
@@ -17,6 +18,8 @@ public:
 
     // Растянуть на ширину width
     void StretchEntireWidth(int width);
+
+    void OnEventSize(ModeView::E);
 
 private:
 

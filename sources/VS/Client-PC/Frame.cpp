@@ -148,7 +148,7 @@ void Frame::SetModeView(ModeView::E mode)
     case ModeView::Full:
         sizer->Show(Table::self);
         sizer->Show(Diagram::Pool::self);
-        Table::self->StretchEntireWidth(Table::self->GetCreatedWidth());
+        Table::self->OnEventSize(mode);
         Diagram::Pool::self->SetPosition({ Table::self->GetCreatedWidth(), 0 });
         break;
 
@@ -181,11 +181,7 @@ void Frame::OnSize(wxSizeEvent &event)
     {
         Diagram::Pool::self->SetSizeArea(GetClientRect().width - Table::self->GetSize().x, GetClientRect().height);
 
-        wxSize size = { Table::self->GetSize().GetWidth(), GetClientRect().height };
-
-        Table::self->SetMinClientSize(size);
-        Table::self->SetClientSize(size);
-        Table::self->SetSize(size);
+        Table::self->OnEventSize(mode_view);
     }
     else if (mode_view == ModeView::Table)
     {

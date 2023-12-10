@@ -130,3 +130,18 @@ void Table::StretchEntireWidth(int width)
 
     StretchColumns();
 }
+
+
+void Table::OnEventSize(ModeView::E mode)
+{
+    if (mode == ModeView::Full)
+    {
+        wxSize size = { GetSize().GetWidth(), GetParent()->GetClientSize().y };
+
+        Table::self->SetMinClientSize(size);
+        Table::self->SetClientSize(size);
+        Table::self->SetSize(size);
+
+        StretchEntireWidth(create_width);
+    }
+}
