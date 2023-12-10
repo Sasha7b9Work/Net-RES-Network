@@ -24,8 +24,11 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
         "Давление",
         "Влажность",
         "Точка росы",
-        "Освещённость",
-        "Скорость"
+        "Скорость",
+        "Широта",
+        "Долгота",
+        "Высота",
+        "Азимут"
     };
 
     return titles[type];
@@ -41,7 +44,10 @@ bool TypeMeasure::Exist(TypeMeasure::E type)
         true,
         true,
         true,
-        false
+        true,
+        true,
+        true,
+        true
     };
 
     return exists[type];
@@ -100,8 +106,11 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
         "гПа",
         "%",
         "С",
-        "лк",
-        "м/с"
+        "м/с",
+        "град",
+        "град",
+        "м",
+        "град"
     };
 
     return units[type];

@@ -38,7 +38,11 @@ enum
     ID_SPEED_2,
     ID_SPEED_5,
     ID_SPEED_30,
-    ID_SPEED_60
+    ID_SPEED_60,
+
+    ID_MODE_VIEW_FULL,
+    ID_MODE_VIEW_TABLE,
+    ID_MODE_VIEW_GRAPH
 };
 
 
@@ -57,20 +61,20 @@ Frame::Frame(const wxString &title)
 
     wxMenu *menuSettings = new wxMenu();
     wxMenu *menuSpeed = new wxMenu();
+    wxMenu* menuModeView = new wxMenu();
 
-    wxMenuItem *miSpeed1 = new wxMenuItem(menuSpeed, ID_SPEED_1, "1 сек", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed2 = new wxMenuItem(menuSpeed, ID_SPEED_2, "2 сек", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed5 = new wxMenuItem(menuSpeed, ID_SPEED_5, "5 сек", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed30 = new wxMenuItem(menuSpeed, ID_SPEED_30, "30 сек", wxEmptyString, wxITEM_RADIO);
-    wxMenuItem *miSpeed60 = new wxMenuItem(menuSpeed, ID_SPEED_60, "60 сек", wxEmptyString, wxITEM_RADIO);
+    menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_1, "1 сек", wxEmptyString, wxITEM_RADIO));
+    menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_2, "2 сек", wxEmptyString, wxITEM_RADIO));
+    menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_5, "5 сек", wxEmptyString, wxITEM_RADIO));
+    menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_30, "30 сек", wxEmptyString, wxITEM_RADIO));
+    menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_60, "60 сек", wxEmptyString, wxITEM_RADIO));
 
-    menuSpeed->Append(miSpeed1);
-    menuSpeed->Append(miSpeed2);
-    menuSpeed->Append(miSpeed5);
-    menuSpeed->Append(miSpeed30);
-    menuSpeed->Append(miSpeed60);
+    menuModeView->Append(new wxMenuItem(menuModeView, ID_MODE_VIEW_FULL, "Полный", wxEmptyString, wxITEM_RADIO));
+    menuModeView->Append(new wxMenuItem(menuModeView, ID_MODE_VIEW_TABLE, "Таблица", wxEmptyString, wxITEM_RADIO));
+    menuModeView->Append(new wxMenuItem(menuModeView, ID_MODE_VIEW_GRAPH, "График", wxEmptyString, wxITEM_RADIO));
 
     menuSettings->AppendSubMenu(menuSpeed, _("Скорость обновления"));
+    menuSettings->AppendSubMenu(menuModeView, _("Вид"));
 
     wxMenu *menuTools = new wxMenu();
     menuTools->Append(TOOL_CONSOLE, _("Открыть консоль\tCtrl-K"), _("Открыть консоль"));
