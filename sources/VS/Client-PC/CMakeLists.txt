@@ -75,6 +75,7 @@ file(GLOB DATA                    Data/*.*)
 file(GLOB DISPLAY                 Display/*.*)
 file(GLOB DISPLAY_DIAGRAM         Display/Diagram/*.*)
 file(GLOB DISPLAY_TABLE           Display/Table/*.*)
+file(GLOB SETTINGS                Settings/*.*)
 file(GLOB UTILS                   Utils/*.*)
 
 source_group(resources               FILES ${RESOURCES})
@@ -90,6 +91,7 @@ source_group(Data                    FILES ${DATA})
 source_group(Display                 FILES ${DISPLAY})
 source_group(Display/Diagram         FILES ${DISPLAY_DIAGRAM})
 source_group(Display/Table           FILES ${DISPLAY_TABLE})
+source_group(Settings                FILES ${SETTINGS})
 source_group(Utils                   FILES ${UTILS})
 
 set_source_files_properties(Communicator/LAN/libnet/netserver.cpp
@@ -112,6 +114,7 @@ add_executable( ${PROJECT_NAME}
                 ${DISPLAY}
                 ${DISPLAY_DIAGRAM}
                 ${DISPLAY_TABLE}
+                ${SETTINGS}
                 ${UTILS}
                 )
 

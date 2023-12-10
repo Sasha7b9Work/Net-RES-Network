@@ -1,6 +1,7 @@
 ﻿// 2022/04/29 13:56:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Display/Table/Table.h"
+#include "Settings/Settings.h"
 
 
 class DiagramPool;
@@ -17,16 +18,6 @@ public:
     static Frame *self;
 
 private:
-
-    struct ModeView
-    {
-        enum E
-        {
-            Full,
-            Table,
-            Graph
-        };
-    };
 
     ModeView::E mode_view = ModeView::Full;
 
