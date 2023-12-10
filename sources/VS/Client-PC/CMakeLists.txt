@@ -74,7 +74,7 @@ file(GLOB CONTROLS                Controls/*.*)
 file(GLOB DATA                    Data/*.*)
 file(GLOB DISPLAY                 Display/*.*)
 file(GLOB DISPLAY_DIAGRAM         Display/Diagram/*.*)
-file(GLOB DISPLAY_GRID            Display/Grid/*.*)
+file(GLOB DISPLAY_TABLE           Display/Table/*.*)
 file(GLOB UTILS                   Utils/*.*)
 
 source_group(resources               FILES ${RESOURCES})
@@ -89,7 +89,7 @@ source_group(Controls                FILES ${CONTROLS})
 source_group(Data                    FILES ${DATA})
 source_group(Display                 FILES ${DISPLAY})
 source_group(Display/Diagram         FILES ${DISPLAY_DIAGRAM})
-source_group(Display/Grid            FILES ${DISPLAY_GRID})
+source_group(Display/Table           FILES ${DISPLAY_TABLE})
 source_group(Utils                   FILES ${UTILS})
 
 set_source_files_properties(Communicator/LAN/libnet/netserver.cpp
@@ -111,7 +111,7 @@ add_executable( ${PROJECT_NAME}
                 ${DATA}
                 ${DISPLAY}
                 ${DISPLAY_DIAGRAM}
-                ${DISPLAY_GRID}
+                ${DISPLAY_TABLE}
                 ${UTILS}
                 )
 
