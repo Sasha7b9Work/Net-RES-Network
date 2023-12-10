@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Diagram/Diagram.h"
 #include "Display/Diagram/Canvas.h"
+#include "Display/Table/Table.h"
 #include "Utils/Clock.h"
 
 
@@ -85,5 +86,24 @@ void Diagram::Pool::UpdateArea()
         prev = time.sec;
 
         Refresh();
+    }
+}
+
+
+void Diagram::Pool::OnEventSize(ModeView::E mode)
+{
+    if (mode == ModeView::Full)
+    {
+        SetSizeArea(GetParent()->GetClientRect().width - Table::self->GetSize().x, GetParent()->GetClientRect().height);
+
+        int x = Table::self->GetCreatedWidth();
+
+        SetPosition({ x, 0 });
+    }
+    else if (mode == ModeView::Graph)
+    {
+        wxSize size = GetParent()->GetClientSize();
+
+        SetSizeArea(size.x, size.y);
     }
 }

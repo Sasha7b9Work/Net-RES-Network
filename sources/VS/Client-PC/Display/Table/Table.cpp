@@ -144,4 +144,8 @@ void Table::OnEventSize(ModeView::E mode)
 
         StretchEntireWidth(create_width);
     }
+    else if (mode == ModeView::Table)
+    {
+        StretchEntireWidth(GetParent()->GetClientSize().x);
+    }
 }
