@@ -22,13 +22,21 @@ namespace HAL_IWDG
 
 void HAL_IWDG::Init()
 {
+#ifndef WIN32
+
     __HAL_RCC_CLEAR_RESET_FLAGS();
 
     HAL_IWDG_Init(&handle);
+
+#endif
 }
 
 
 void HAL_IWDG::Update()
 {
+#ifndef WIN32
+
     HAL_IWDG_Refresh(&handle);
+
+#endif
 }
