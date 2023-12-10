@@ -2,6 +2,7 @@
 #pragma once
 #include "Data/Sensors.h"
 #include "Display/Diagram/Canvas.h"
+#include "Settings/Settings.h"
 
 
 /*
@@ -34,6 +35,8 @@ public:
         void SetSizeArea(int width, int height);
 
         void UpdateArea();
+
+        void OnEventSize(ModeView::E);
 
     private:
 
