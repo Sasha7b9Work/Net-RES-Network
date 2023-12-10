@@ -54,7 +54,7 @@ Table::Table(wxWindow *parent, const wxSize &size) :
 
 void Table::StretchColumns()
 {
-    int width = GetSize().x;
+    int width = wxGrid::GetSize().x;
 
     int size = width / GetNumberCols();
 

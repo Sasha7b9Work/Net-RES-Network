@@ -125,18 +125,7 @@ void Frame::OnMenuSettings(wxCommandEvent &event)
     }
     else if(id >= ID_MODE_VIEW_FULL && id <= ID_MODE_VIEW_GRAPH)
     {
-        if (id == ID_MODE_VIEW_TABLE)
-        {
-            SetModeView(ModeView::Table);
-        }
-        else if (id == ID_MODE_VIEW_GRAPH)
-        {
-            SetModeView(ModeView::Graph);
-        }
-        else if (id == ID_MODE_VIEW_FULL)
-        {
-            SetModeView(ModeView::Full);
-        }
+        SetModeView((ModeView::E)(id - ID_MODE_VIEW_FULL));
     }
 }
 
