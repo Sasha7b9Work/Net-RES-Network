@@ -98,7 +98,7 @@ Frame::Frame(const wxString &title)
 
     sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(Grid::Create(this, FromDIP(wxSize((TypeMeasure::NumMeasures() + 1) * 60, 400))));
+    sizer->Add(Table::Create(this, FromDIP(wxSize((TypeMeasure::NumMeasures() + 1) * 60, 400))));
 
     sizer->Add(Diagram::Pool::Create(this));
 
@@ -146,18 +146,18 @@ void Frame::SetModeView(ModeView::E mode)
     switch (mode_view)
     {
     case ModeView::Full:
-        sizer->Show(Grid::self);
+        sizer->Show(Table::self);
         sizer->Show(Diagram::Pool::self);
         break;
 
     case ModeView::Table:
-        sizer->Show(Grid::self);
+        sizer->Show(Table::self);
         sizer->Hide(Diagram::Pool::self);
-        Grid::self->StretchEntireFrame();
+        Table::self->StretchEntireFrame();
         break;
 
     case ModeView::Graph:
-        sizer->Hide(Grid::self);
+        sizer->Hide(Table::self);
         sizer->Show(Diagram::Pool::self);
         break;
     }
@@ -168,29 +168,29 @@ void Frame::OnSize(wxSizeEvent &event)
 {
     if (mode_view == ModeView::Full)
     {
-        Diagram::Pool::self->SetSizeArea(GetClientRect().width - Grid::self->GetSize().x, GetClientRect().height);
+        Diagram::Pool::self->SetSizeArea(GetClientRect().width - Table::self->GetSize().x, GetClientRect().height);
 
-        wxSize size = { Grid::self->GetSize().GetWidth(), GetClientRect().height };
+        wxSize size = { Table::self->GetSize().GetWidth(), GetClientRect().height };
 
-        Grid::self->SetMinClientSize(size);
-        Grid::self->SetClientSize(size);
-        Grid::self->SetSize(size);
+        Table::self->SetMinClientSize(size);
+        Table::self->SetClientSize(size);
+        Table::self->SetSize(size);
     }
     else if (mode_view == ModeView::Table)
     {
-        Grid::self->StretchEntireFrame();
+        Table::self->StretchEntireFrame();
     }
     else if (mode_view == ModeView::Graph)
     {
-        Grid::self->SetPosition({0, 0});
+        Table::self->SetPosition({0, 0});
 
         wxSize size{ GetClientSize().x, GetClientSize().y };
 
         Diagram::Pool::self->SetSizeArea(size.x, size.y);
 
-        Grid::self->SetMinClientSize(size);
-        Grid::self->SetClientSize(size);
-        Grid::self->SetSize(size);
+        Table::self->SetMinClientSize(size);
+        Table::self->SetClientSize(size);
+        Table::self->SetSize(size);
     }
 
     Layout();

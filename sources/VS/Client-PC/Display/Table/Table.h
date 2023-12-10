@@ -3,13 +3,13 @@
 #include <map>
 
 
-class Grid : public wxGrid
+class Table : public wxGrid
 {
 public:
 
-    static Grid *Create(wxWindow *, const wxSize &);
+    static Table *Create(wxWindow *, const wxSize &);
 
-    static Grid *self;
+    static Table *self;
 
     void SetMeasure(uint id, const wxColour &color, uint8 type, float value);
 
@@ -20,7 +20,7 @@ public:
 
 private:
 
-    Grid(wxWindow *, const wxSize &);
+    Table(wxWindow *, const wxSize &);
 
     int create_width = 0;                   // “акую ширину имеет таблица во врем€ создани€
 

@@ -7,18 +7,18 @@
 using namespace std;
 
 
-Grid *Grid::self = nullptr;
+Table *Table::self = nullptr;
 
 
-Grid *Grid::Create(wxWindow *parent, const wxSize &size)
+Table *Table::Create(wxWindow *parent, const wxSize &size)
 {
-    self = new Grid(parent, size);
+    self = new Table(parent, size);
 
     return self;
 }
 
 
-Grid::Grid(wxWindow *parent, const wxSize &size) :
+Table::Table(wxWindow *parent, const wxSize &size) :
     wxGrid(parent, wxID_ANY, { 0, 0 }, size)
 {
     create_width = size.x;
@@ -52,7 +52,7 @@ Grid::Grid(wxWindow *parent, const wxSize &size) :
 }
 
 
-void Grid::StretchColumns()
+void Table::StretchColumns()
 {
     int width = GetSize().x;
 
@@ -65,7 +65,7 @@ void Grid::StretchColumns()
 }
 
 
-void Grid::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
+void Table::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 {
     if (id == 0)
     {
@@ -91,7 +91,7 @@ void Grid::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 }
 
 
-void Grid::SetCellValue(int row, int col, float value, const wxColour &color)
+void Table::SetCellValue(int row, int col, float value, const wxColour &color)
 {
     if (col >= 0)
     {
@@ -102,7 +102,7 @@ void Grid::SetCellValue(int row, int col, float value, const wxColour &color)
 }
 
 
-void Grid::SetCellValue(int row, int col, int value, const wxColour &color)
+void Table::SetCellValue(int row, int col, int value, const wxColour &color)
 {
     if (col >= 0)
     {
@@ -113,7 +113,7 @@ void Grid::SetCellValue(int row, int col, int value, const wxColour &color)
 }
 
 
-void Grid::StretchEntireFrame()
+void Table::StretchEntireFrame()
 {
     wxSize size = GetParent()->GetClientSize();
 

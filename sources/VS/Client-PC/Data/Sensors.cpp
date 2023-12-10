@@ -132,7 +132,7 @@ void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
     {
         sensor->second.AppendMeasure(type, value);
 
-        Grid::self->SetMeasure(id, sensor->second.GetColor(), type, value);
+        Table::self->SetMeasure(id, sensor->second.GetColor(), type, value);
     }
 }
 
