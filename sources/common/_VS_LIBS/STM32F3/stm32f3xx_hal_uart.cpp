@@ -8,6 +8,12 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef * /*huart*/)
 }
 
 
+HAL_StatusTypeDef HAL_UART_DeInit(UART_HandleTypeDef * /*huart*/)
+{
+    return HAL_OK;
+}
+
+
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef * /*huart*/, const uint8_t * /*pData*/, uint16_t /*Size*/, uint32_t /*Timeout*/)
 {
     return HAL_OK;

@@ -15,7 +15,6 @@ struct Measure
         Longitude,      // Долгота
         Altitude,       // Высота
         Azimuth,        // Азимут - угол от направления на север
-
         Count
     };
 

@@ -8,13 +8,17 @@ struct TypeMeasure
 {
     enum E
     {
-        Temperature,        // Температура
-        Pressure,           // Давление
-        Humidity,           // Влажность
-        DewPoint,           // Точка росы
-        Illumination,       // Освещённость
-        Velocity,           // Скорость
+        Temperature,    // Температура
+        Pressure,       // Давление
+        Humidity,       // Влажность
+        DewPoint,       // Точка росы
+        Velocity,       // Скорость воздуха
+        Latitude,       // Широта
+        Longitude,      // Долгота
+        Altitude,       // Высота
+        Azimuth,        // Азимут - угол от направления на север
         Count
+
     };
 
     static pchar GetTitle(TypeMeasure::E);

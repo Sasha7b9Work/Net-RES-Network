@@ -2,7 +2,7 @@
 
 project (MS-1)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
@@ -69,6 +69,7 @@ file(GLOB HARDWARE_HAL              ../../MS-1/src/Hardware/HAL/*.h
                                     ../../MS-1/src/Hardware/HAL/HAL_SPI1.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_USART1.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_USART2.cpp
+                                    ../../MS-1/src/Hardware/HAL/HAL_IWDG.cpp
                                     ../../MS-1/src/Hardware/HAL/HAL_PINS.cpp
                                                     Hardware/HAL/*.*)
 file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
