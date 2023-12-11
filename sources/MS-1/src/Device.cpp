@@ -18,7 +18,14 @@
 #include "Hardware/EnergySwitch.h"
 #include "Modules/GY511/GY511.h"
 #include "Modules/NEO-M8N/NEO-M8N.h"
+#include "Storage/Storage.h"
 #include <cmath>
+
+
+namespace Device
+{
+    static void ProcessMeasure(const Measure &, uint time);
+}
 
 
 void Device::Init()
@@ -51,6 +58,8 @@ void Device::Init()
 
     HAL_USART2::Init();
 
+    Storage::Init();
+
 //    HAL_IWDG::Init();
 }
 
@@ -75,38 +84,38 @@ void Device::Update()
 
     if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
-        InterCom::Send(temp, time);
-        InterCom::Send(pressure, time);
-        InterCom::Send(humidity, time);
-        InterCom::Send(dew_point, time);
+        ProcessMeasure(temp, time);
+        ProcessMeasure(pressure, time);
+        ProcessMeasure(humidity, time);
+        ProcessMeasure(dew_point, time);
     }
 
     if (CG_Anem::GetMeasure(&velocity))
     {
-        InterCom::Send(velocity, time);
+        ProcessMeasure(velocity, time);
     }
 
     if (GY511::GetMagnetic(&azimuth))
     {
-        InterCom::Send(azimuth, time);
+        ProcessMeasure(azimuth, time);
     }
 
     NEO_M8N::GetMeasures(&latitude, &longitude, &altitude);
 
     if (latitude.correct)
     {
-        InterCom::Send(latitude, time);
+        ProcessMeasure(latitude, time);
     }
     if (longitude.correct)
     {
-        InterCom::Send(longitude, time);
+        ProcessMeasure(longitude, time);
     }
     if (altitude.correct)
     {
-        InterCom::Send(altitude, time);
+        ProcessMeasure(altitude, time);
     }
 
-    GY511::Update();
+    Beeper::Update();
 
     Keyboard::Update();
 
@@ -115,4 +124,12 @@ void Device::Update()
     HAL_ADC::GetVoltage();
 
     EnergySwitch::Update();
+}
+
+
+void Device::ProcessMeasure(const Measure &measure, uint time)
+{
+    InterCom::Send(measure, time);
+
+    Storage::AppendMeasure(measure);
 }

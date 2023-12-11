@@ -1,8 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "opt.h"
 
 
-#define VERSION 28
+#define VERSION 29
 
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)

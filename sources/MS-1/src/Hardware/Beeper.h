@@ -6,6 +6,8 @@ namespace Beeper
 {
     void Init();
 
+    void Update();
+
     void Beep(int frequency, uint timeMS);
 
     void Start(int frequency);

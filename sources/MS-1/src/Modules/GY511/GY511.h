@@ -23,7 +23,5 @@ namespace GY511
 {
     void Init();
 
-    void Update();
-
     bool GetMagnetic(Measure *azimuth);
 }

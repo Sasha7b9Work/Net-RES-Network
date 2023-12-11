@@ -11,6 +11,11 @@ struct Measurements
     float pressure;
     float humidity;
     float dev_point;
+    float velocity;
+    float latitude;
+    float longitude;
+    float altitude;
+    float azimuth;
     PackedTime time;
 };
 
@@ -19,7 +24,11 @@ namespace Storage
 {
     static const int SIZE = 1024 * 1024 - 2 * W25Q80DV::SIZE_PAGE;        // 8 MBit = 1 MByte
 
-    void AppendData(const Measurements &);
+    void Init();
+
+    void AppendMeasure(const Measure &);
+
+    bool GetMeasure(Measure::E, Measure &);
 
     bool IsEmpty();
 

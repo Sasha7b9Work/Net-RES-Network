@@ -59,6 +59,8 @@ namespace GY511
     static bool is_ready_magn = false;
 
     static float CalculateAzimuth();
+
+    static void Update();
 }
 
 
@@ -123,6 +125,8 @@ void GY511::Update()
 
 bool GY511::GetMagnetic(Measure *azimuth)
 {
+    Update();
+
 #ifdef IN_MODE_TEST
 
     azimuth->Set(Measure::Azimuth, CalculateAzimuth());

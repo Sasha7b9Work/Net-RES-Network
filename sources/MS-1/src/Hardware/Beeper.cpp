@@ -3,6 +3,8 @@
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Storage/Storage.h"
+#include "Measures.h"
 #include <stm32f3xx_hal.h>
 
 
@@ -31,6 +33,28 @@ namespace Beeper
 void Beeper::Init()
 {
     pinBEEP.Init();
+}
+
+
+void Beeper::Update()
+{
+    bool need_sound = false;
+
+    for (int i = 0; i < NUM_MEASURES_TO_CONTROL; i++)
+    {
+        Measure measure;
+
+        if (Storage::GetMeasure((Measure::E)i, measure))
+        {
+            if (Measures::InRange(measure))
+            {
+                need_sound = true;
+                break;
+            }
+        }
+    }
+
+    need_sound ? Start(4000) : Stop();
 }
 
 

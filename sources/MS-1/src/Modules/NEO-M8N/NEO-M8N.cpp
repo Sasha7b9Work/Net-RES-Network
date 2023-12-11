@@ -177,19 +177,19 @@ void NEO_M8N::GetMeasures(Measure *latitude, Measure *longitude, Measure *altitu
 
     double lat = std::atof(buffer) / 100.0;
     latitude->Set(Measure::Latitude, lat);
-    latitude->correct = lat > 10.0;
+    latitude->correct = lat > 25.0;
 
     Message::ExtractField(4, buffer);
 
     double _long = std::atof(buffer) / 100.0;
     longitude->Set(Measure::Longitude, _long);
-    longitude->correct = _long > 10.0;
+    longitude->correct = _long > 25.0;
 
     Message::ExtractField(9, buffer);
 
     double alt = std::atof(buffer);
     altitude->Set(Measure::Altitude, alt);
-    altitude->correct = alt > 100.0;
+    altitude->correct = alt > 260.0;
 
     Message::Clear();
 }

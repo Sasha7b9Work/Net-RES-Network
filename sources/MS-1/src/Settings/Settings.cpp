@@ -19,11 +19,11 @@ static const Settings def_set =
         0                                           // serial_number
     },
     // Measures
-    {
-        {-30, 225, 10, -30},
-        { 60, 1000, 98,  60},
-        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
-        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
+    {//  Temperature         Pressure           Humidity          DewPoint            Velocity
+        {-30,                225,               10,                -30,               0},
+        { 99,                1000,              98,                99,                99},
+        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
+        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
     }
 };
 
@@ -107,23 +107,29 @@ void Settings::SaveMeasure(const Measure &measure)
 
     Measure::E name = measure.GetName();
 
+    bool need_save = false;
+
     if (gset.measures.value_max[name] == ERROR_VALUE_FLOAT)
     {
         gset.measures.value_max[name] = value;
+        need_save = true;
     }
 
     if (gset.measures.value_min[name] == ERROR_VALUE_FLOAT)
     {
         gset.measures.value_min[name] = value;
+        need_save = true;
     }
 
     if (value > gset.measures.value_max[name])
     {
         gset.measures.value_max[name] = value;
+        need_save = true;
     }
     else if (value < gset.measures.value_min[name])
     {
         gset.measures.value_min[name] = value;
+        need_save = true;
     }
 
     Save();

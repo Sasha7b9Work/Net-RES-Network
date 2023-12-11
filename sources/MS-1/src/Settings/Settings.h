@@ -39,10 +39,10 @@ struct SettingsDisplay
 
 struct SettingsMeasures
 {
-    int   limit_min[Measure::Count];
-    int   limit_max[Measure::Count];
-    float value_min[Measure::Count];
-    float value_max[Measure::Count];
+    int   limit_min[NUM_MEASURES_TO_CONTROL];
+    int   limit_max[NUM_MEASURES_TO_CONTROL];
+    float value_min[NUM_MEASURES_TO_CONTROL];
+    float value_max[NUM_MEASURES_TO_CONTROL];
 };
 
 

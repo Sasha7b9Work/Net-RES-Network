@@ -15,12 +15,43 @@ namespace Storage
         uint address_first;     // адрес первой записи
         uint address_last;      // адрес последней записи
     };
+
+    static Measure measures[NUM_MEASURES_TO_CONTROL];
 }
 
 
-void Storage::AppendData(const Measurements &)
+void Storage::Init()
 {
+    for (int i = 0; i < NUM_MEASURES_TO_CONTROL; i++)
+    {
+        measures[i].Set((Measure::E)i, ERROR_VALUE_FLOAT);
+        measures[i].correct = false;
+    }
+}
 
+
+void Storage::AppendMeasure(const Measure &measure)
+{
+    if (measure.GetName() < NUM_MEASURES_TO_CONTROL)
+    {
+        if (measure.correct)
+        {
+            measures[measure.GetName()] = measure;
+        }
+    }
+}
+
+
+bool Storage::GetMeasure(Measure::E name, Measure &measure)
+{
+    if (measure.GetName() < NUM_MEASURES_TO_CONTROL)
+    {
+        measure = measures[name];
+
+        return measure.correct;
+    }
+
+    return false;
 }
 
 
