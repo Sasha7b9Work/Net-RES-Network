@@ -544,16 +544,6 @@
               <FilePath>.\src\Device.h</FilePath>
             </File>
             <File>
-              <FileName>Measures.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measures.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measures.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measures.h</FilePath>
-            </File>
-            <File>
               <FileName>description.txt</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\description.txt</FilePath>
@@ -1052,6 +1042,26 @@
               <FileName>MemoryStorage_test.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Storage\MemoryStorage_test.inc</FilePath>
+            </File>
+            <File>
+              <FileName>Measure.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Measure.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Measure.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Measures.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1690,16 +1700,6 @@
               <FilePath>.\src\Device.h</FilePath>
             </File>
             <File>
-              <FileName>Measures.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measures.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measures.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Measures.h</FilePath>
-            </File>
-            <File>
               <FileName>description.txt</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\description.txt</FilePath>
@@ -2249,6 +2249,26 @@
               <FileName>MemoryStorage_test.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Storage\MemoryStorage_test.inc</FilePath>
+            </File>
+            <File>
+              <FileName>Measure.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Measure.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Measure.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Measures.h</FilePath>
             </File>
           </Files>
         </Group>
