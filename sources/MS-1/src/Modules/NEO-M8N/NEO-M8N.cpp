@@ -88,8 +88,6 @@ void NEO_M8N::CallbackOnReceive()
 
     in_buffer.Append((uint8)symbol);
 
-    HC12::Transmit(&symbol, 1);
-
     HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8 *)&HAL_USART2::recv_byte, 1);
 }
 
