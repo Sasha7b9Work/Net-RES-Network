@@ -14,7 +14,7 @@ namespace Menu
 
     void Draw();
 
-    bool Opened();
+    bool IsOpened();
 
     namespace Title
     {

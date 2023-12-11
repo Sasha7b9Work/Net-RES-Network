@@ -6,11 +6,12 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Display/Font/Font.h"
+#include "Hardware/Beeper.h"
 
 
 void Menu::ShortPress(const Key &key)
 {
-    if (!Opened())
+    if (!IsOpened())
     {
         if (key.Is1())
         {
@@ -37,7 +38,7 @@ void Menu::ShortPress(const Key &key)
 
 void Menu::LongPress(const Key &key)
 {
-    if (!Opened())
+    if (!IsOpened())
     {
         if (key.Is1())
         {
@@ -55,7 +56,7 @@ void Menu::LongPress(const Key &key)
 
 void Menu::DoubleClick(const Key &)
 {
-    if (Opened())
+    if (IsOpened())
     {
         Item::Opened()->DoubleClick();
     }
@@ -64,7 +65,7 @@ void Menu::DoubleClick(const Key &)
 }
 
 
-bool Menu::Opened()
+bool Menu::IsOpened()
 {
     return (Item::Opened() != &Page::Empty);
 }
@@ -72,6 +73,8 @@ bool Menu::Opened()
 
 void Menu::Draw()
 {
+    Beeper::Stop();
+
     Display::BeginScene(Color::BLACK);
 
     Font::Set(TypeFont::_12_10);

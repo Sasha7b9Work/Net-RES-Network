@@ -247,7 +247,7 @@ void Display::SetMeasure(const Measure &measure, uint timeMS)
         }
     }
 
-    if (!Beeper::Running())
+    if (!Beeper::IsRunning())
     {
         Settings::SaveMeasure(measure);
     }
@@ -322,7 +322,7 @@ void Display::Update(uint timeMS)
 
         need_redraw = true;
 
-        if (Menu::Opened())
+        if (Menu::IsOpened())
         {
             Menu::Draw();
 
@@ -437,8 +437,8 @@ void Display::DrawMeasures(uint timeMS)
                     }
                 }
 
-                String<>("%s", measure.Name().c_str()).Draw(x0, y, Measures::InRange(measure.value) ? Color::WHITE : Color::FLASH_10);
-                measure.Units().Draw(((page == 0) ? 134 : 145), y);
+                String<>("%s", measure.Name().c_str()).Draw(x0, y, measure.value.InRange() ? Color::WHITE : Color::FLASH_10);
+                measure.Units().Draw(((page == 0) ? 134 : 145), y, Color::WHITE);
                 measure.Draw(x, y);
 
                 ST7735::WriteBuffer(x - 1, y, width, height);

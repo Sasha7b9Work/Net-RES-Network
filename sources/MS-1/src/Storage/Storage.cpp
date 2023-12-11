@@ -44,7 +44,7 @@ void Storage::AppendMeasure(const Measure &measure)
 
 bool Storage::GetMeasure(Measure::E name, Measure &measure)
 {
-    if (measure.GetName() < NUM_MEASURES_TO_CONTROL)
+    if (name < NUM_MEASURES_TO_CONTROL)
     {
         measure = measures[name];
 

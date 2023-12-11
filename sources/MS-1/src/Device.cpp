@@ -19,6 +19,7 @@
 #include "Modules/GY511/GY511.h"
 #include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Storage/Storage.h"
+#include "Menu/Menu.h"
 #include <cmath>
 
 
@@ -115,7 +116,10 @@ void Device::Update()
         ProcessMeasure(altitude, time);
     }
 
-    Beeper::Update();
+    if (!Menu::IsOpened())
+    {
+        Beeper::Update();
+    }
 
     Keyboard::Update();
 

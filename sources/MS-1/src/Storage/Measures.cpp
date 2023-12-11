@@ -23,16 +23,16 @@ bool Measures::IsFixed()
 }
 
 
-bool Measures::InRange(const Measure &measure)
+bool Measure::InRange() const
 {
-    if (measure.GetName() < NUM_MEASURES_TO_CONTROL)
+    if (name < NUM_MEASURES_TO_CONTROL)
     {
-        if (measure.GetDouble() < gset.measures.limit_min[measure.GetName()])
+        if (GetDouble() < gset.measures.limit_min[name])
         {
             return false;
         }
 
-        if (measure.GetDouble() > gset.measures.limit_max[measure.GetName()])
+        if (GetDouble() > gset.measures.limit_max[name])
         {
             return false;
         }

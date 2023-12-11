@@ -15,7 +15,7 @@ namespace Beeper
     void Stop();
 
     // Возвращает true, если звук идёт
-    bool Running();
+    bool IsRunning();
 
     void CallbackOnTimer();
 

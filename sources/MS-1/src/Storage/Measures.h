@@ -51,6 +51,8 @@ struct Measure
         SetDouble(value);
     }
 
+    bool InRange() const;
+
     bool correct;
 
 private:
@@ -74,5 +76,4 @@ namespace Measures
     // Фиксирует последние измерения на экране
     void SetFixed(bool fixed);
     bool IsFixed();
-    bool InRange(const Measure &);
 }

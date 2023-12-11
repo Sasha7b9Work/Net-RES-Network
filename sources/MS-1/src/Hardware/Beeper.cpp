@@ -46,7 +46,7 @@ void Beeper::Update()
 
         if (Storage::GetMeasure((Measure::E)i, measure))
         {
-            if (Measures::InRange(measure))
+            if (!measure.InRange())
             {
                 need_sound = true;
                 break;
@@ -112,7 +112,7 @@ void Beeper::Stop()
 }
 
 
-bool Beeper::Running()
+bool Beeper::IsRunning()
 {
     return running;
 }
