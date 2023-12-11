@@ -40,6 +40,9 @@ void NEO_M8N::CallbackOnReceive()
 
 void NEO_M8N::Update()
 {
+#ifdef WIN32
+    std::strcpy(message, ",064656.00,3402.91778,S,15101.42545,E,1,12,0.62,140.8,M,18.6,M,,*5E");
+#endif
     in_buffer.GetData(out_buffer);
 
     static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных. Строка $GNGGA обнаружена

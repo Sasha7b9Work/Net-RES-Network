@@ -14,7 +14,7 @@ namespace Display
 {
     struct DMeasure
     {
-        String<> current;
+        String<> str_value;
 
         Measure::E name;
         Measure value;              // Последнее установленное значение
@@ -242,7 +242,7 @@ void Display::SetMeasure(const Measure &measure, uint timeMS)
 
     if (value.value.GetDouble() == measure.GetDouble()) //-V550
     {
-        if (value.current.Size())
+        if (value.str_value.Size())
         {
             return;
         }
@@ -252,8 +252,15 @@ void Display::SetMeasure(const Measure &measure, uint timeMS)
     value.time = timeMS;
     value.value = measure;
 
-    value.current.SetFormat("%.1f", (double)measure.GetDouble());
-    value.current[6] = '\0';
+    pchar format = "%.1f";
+
+    if (value.name == Measure::Longitude || value.name == Measure::Latitude)
+    {
+        format = "%.7f";
+    }
+
+    value.str_value.SetFormat(format, (double)measure.GetDouble());
+//    value.current[6] = '\0';
 }
 
 
@@ -265,7 +272,7 @@ void Display::DMeasure::Draw(const int x0, const int y0, int size)
 
     Rectangle(width_zone, height_zone).Fill(x0, y_zone, Color::BLACK);
 
-    Font::Text::DrawBig(x0, y0, size, current.c_str(), Color::WHITE);
+    Font::Text::DrawBig(x0, y0, size, str_value.c_str(), Color::WHITE);
 }
 
 
@@ -401,19 +408,26 @@ void Display::DrawMeasures(uint timeMS)
 
     int page = PageMeasures(timeMS);
 
+#ifdef WIN32
+    page = 1;
+#endif
+
     for (int i = page * MEAS_ON_DISPLAY; i < (page + 1) * MEAS_ON_DISPLAY; i++)
     {
         if (i < Measure::Count)
         {
-            int x =  (page == 0) ? 93 : 81;
-            int width = 30;
-            int height = 15;
+            DMeasure &measure = measures[names[i]];
 
-            if (need_redraw && measures[names[i]].current.Size())
+            if (need_redraw && measure.str_value.Size())
             {
-                String<>("%s", measures[names[i]].Name().c_str()).Draw(x0, y, Color::WHITE);
-                measures[names[i]].Units().Draw(x + 41, y);
-                measures[names[i]].Draw(x, y);
+                int x = (page == 0) ? 93 : 70;
+
+                int width = 30;
+                int height = 15;
+
+                String<>("%s", measure.Name().c_str()).Draw(x0, y, Color::WHITE);
+                measure.Units().Draw(((page == 0) ? 134 : 145), y);
+                measure.Draw(x, y);
 
                 ST7735::WriteBuffer(x - 1, y, width, height);
                 y += dY;
