@@ -20,8 +20,8 @@ static const Settings def_set =
     },
     // Measures
     {//  Temperature         Pressure           Humidity          DewPoint            Velocity
-        {-30,                225,               10,                -30,               0},
-        { 99,                1000,              98,                99,                99},
+        { 0,                 500,               40,                0,                 0},
+        { 99,                1000,              98,                20,                10},
         { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
         { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
     }

@@ -19,20 +19,18 @@ struct Measure
         Count
     };
 
-    union
-    {
-        double value_d;
-        uint   value_32;
-    };
+    double value;
 
     void Clear()
     {
         name = E::Count;
+        correct = false;
+        value = (double)ERROR_VALUE_FLOAT;
     }
 
     double GetDouble() const
     {
-        return value_d;
+        return value;
     }
 
     E GetName() const
@@ -40,15 +38,16 @@ struct Measure
         return name;
     }
 
-    void Set(E _name, float value)
+    void Set(E _name, float _value)
     {
-        Set(_name, (double)value);
+        Set(_name, (double)_value);
     }
 
-    void Set(E _name, double value)
+    void Set(E _name, double _value)
     {
         name = _name;
-        SetDouble(value);
+        SetDouble(_value);
+        correct = true;
     }
 
     bool InRange() const;
@@ -57,14 +56,14 @@ struct Measure
 
 private:
 
-    void SetDouble(float value)
+    void SetDouble(float _value)
     {
-        SetDouble((double)value);
+        SetDouble((double)_value);
     }
 
-    void SetDouble(double value)
+    void SetDouble(double _value)
     {
-        value_d = value;
+        value = _value;
     }
 
     E name;

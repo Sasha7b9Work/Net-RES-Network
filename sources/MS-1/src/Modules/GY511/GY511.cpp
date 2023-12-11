@@ -125,6 +125,8 @@ void GY511::Update()
 
 bool GY511::GetMagnetic(Measure *azimuth)
 {
+    azimuth->Clear();
+
     Update();
 
 #ifdef IN_MODE_TEST

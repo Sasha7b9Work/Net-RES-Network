@@ -1,4 +1,4 @@
-﻿// 2023/09/08 11:47:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2023/09/08 11:47:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Storage/Storage.h"
 
@@ -44,7 +44,7 @@ void Storage::AppendMeasure(const Measure &measure)
 
 bool Storage::GetMeasure(Measure::E name, Measure &measure)
 {
-    if (name < NUM_MEASURES_TO_CONTROL)
+    if (((int)name) >= 0 && name < NUM_MEASURES_TO_CONTROL)
     {
         measure = measures[name];
 

@@ -96,6 +96,11 @@ float BME280::CalculateF(float temperature, float humidity)
 
 bool BME280::GetMeasures(Measure *temp, Measure *pressure, Measure *humidity, Measure *dew_point)
 {
+    temp->Clear();
+    pressure->Clear();
+    humidity->Clear();
+    dew_point->Clear();
+
     if(HAL_GetTick() < timeNext)
     {
         return false;

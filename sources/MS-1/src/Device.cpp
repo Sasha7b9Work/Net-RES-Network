@@ -41,8 +41,6 @@ void Device::Init()
 
     gset.Load();
 
-    gset.Reset();
-
     BME280::Init();         // Температура, давление, влажность, точка росы
 
     GY511::Init();          // Компас
@@ -103,18 +101,9 @@ void Device::Update()
 
     NEO_M8N::GetMeasures(&latitude, &longitude, &altitude);
 
-    if (latitude.correct)
-    {
-        ProcessMeasure(latitude, time);
-    }
-    if (longitude.correct)
-    {
-        ProcessMeasure(longitude, time);
-    }
-    if (altitude.correct)
-    {
-        ProcessMeasure(altitude, time);
-    }
+    ProcessMeasure(latitude, time);
+    ProcessMeasure(longitude, time);
+    ProcessMeasure(altitude, time);
 
     if (!Menu::IsOpened())
     {
@@ -133,7 +122,10 @@ void Device::Update()
 
 void Device::ProcessMeasure(const Measure &measure, uint time)
 {
-    InterCom::Send(measure, time);
+    if (measure.correct)
+    {
+        InterCom::Send(measure, time);
 
-    Storage::AppendMeasure(measure);
+        Storage::AppendMeasure(measure);
+    }
 }

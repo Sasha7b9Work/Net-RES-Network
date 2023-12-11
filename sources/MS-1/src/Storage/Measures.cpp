@@ -25,7 +25,7 @@ bool Measures::IsFixed()
 
 bool Measure::InRange() const
 {
-    if (name < NUM_MEASURES_TO_CONTROL)
+    if (((int)name) >= 0 && name < NUM_MEASURES_TO_CONTROL)
     {
         if (GetDouble() < gset.measures.limit_min[name])
         {
