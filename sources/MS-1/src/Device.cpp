@@ -51,8 +51,6 @@ void Device::Init()
 
     HAL_USART2::Init();
 
-    Beeper::Start(4000);
-
 //    HAL_IWDG::Init();
 }
 
@@ -81,11 +79,6 @@ void Device::Update()
         InterCom::Send(pressure, time);
         InterCom::Send(humidity, time);
         InterCom::Send(dew_point, time);
-
-        bool in_range = Measures::InRange(temp) &&
-            Measures::InRange(pressure) &&
-            Measures::InRange(humidity) &&
-            Measures::InRange(dew_point);
     }
 
     if (CG_Anem::GetMeasure(&velocity))
