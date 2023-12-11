@@ -28,6 +28,15 @@ namespace NEO_M8N
 }
 
 
+void NEO_M8N::CallbackOnReceive()
+{
+    char symbol = HAL_USART2::recv_byte;
+
+    in_buffer.Append((uint8)symbol);
+
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8 *)&HAL_USART2::recv_byte, 1);
+}
+
 
 void NEO_M8N::Update()
 {
@@ -79,16 +88,6 @@ void NEO_M8N::Update()
             }
         }
     }
-}
-
-
-void NEO_M8N::CallbackOnReceive()
-{
-    char symbol = HAL_USART2::recv_byte;
-
-    in_buffer.Append((uint8)symbol);
-
-    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART2::handle, (uint8 *)&HAL_USART2::recv_byte, 1);
 }
 
 

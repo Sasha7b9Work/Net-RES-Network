@@ -61,6 +61,8 @@ void Device::Update()
 {
     HAL_IWDG::Update();
 
+    NEO_M8N::Update();
+
     if (Beeper::Running() && TIME_MS > 2000)
     {
         Beeper::Stop();
