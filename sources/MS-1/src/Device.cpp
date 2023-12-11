@@ -27,7 +27,7 @@ void Device::Init()
 
     ST7735::Init();         // Дисплей
 
-    Timer::Delay(1000);
+//    Timer::Delay(1000);
 
     EnergySwitch::Init();
 
@@ -53,13 +53,13 @@ void Device::Init()
 
     HAL_USART2::Init();
 
-    HAL_IWDG::Init();
+//    HAL_IWDG::Init();
 }
 
 
 void Device::Update()
 {
-    HAL_IWDG::Update();
+//    HAL_IWDG::Update();
 
     NEO_M8N::Update();
 

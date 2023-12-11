@@ -408,10 +408,6 @@ void Display::DrawMeasures(uint timeMS)
 
     int page = PageMeasures(timeMS);
 
-#ifdef WIN32
-    page = 1;
-#endif
-
     for (int i = page * MEAS_ON_DISPLAY; i < (page + 1) * MEAS_ON_DISPLAY; i++)
     {
         if (i < Measure::Count)
@@ -420,10 +416,22 @@ void Display::DrawMeasures(uint timeMS)
 
             if (need_redraw && measure.str_value.Size())
             {
-                int x = (page == 0) ? 93 : 70;
+                int x = (page == 0) ? 93 : 69;
 
                 int width = 30;
                 int height = 15;
+
+                if (measure.name > Measure::Velocity)
+                {
+                    if (measure.value.GetDouble() < 10.0)
+                    {
+                        x += 14;
+                    }
+                    else if (measure.value.GetDouble() < 100.0)
+                    {
+                        x += 7;
+                    }
+                }
 
                 String<>("%s", measure.Name().c_str()).Draw(x0, y, Color::WHITE);
                 measure.Units().Draw(((page == 0) ? 134 : 145), y);
