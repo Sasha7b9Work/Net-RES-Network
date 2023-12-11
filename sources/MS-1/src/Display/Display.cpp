@@ -496,24 +496,15 @@ void Display::DrawBigMeasure()
 
     BeginScene(Color::BLACK);
 
-    static const int x[Measure::Count] =
-    {
-        30,
-        12,
-        28,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10
-    };
-
     DMeasure &measure = measures[gset.display.typeDisplaydInfo.value];
 
-    Font::Text::DrawBig(x[measure.value.GetName()], 15, 2, measure.Name().c_str(), Color::_1);
+    Measure::E name = measure.value.GetName();
 
-    measures[measure.value.GetName()].Draw(27, 50, 4);
+    int length = Font::Text::GetLength(measure.Name().c_str(), 2);
+
+    Font::Text::DrawBig((Display::WIDTH - length) / 2, 15, 2, measure.Name().c_str(), Color::_1);
+
+    measures[name].Draw(27, 50, 4);
 
     Font::Text::DrawBig(68, 95, 2, measure.Units().c_str(), Color::_1);
 

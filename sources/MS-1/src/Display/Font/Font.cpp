@@ -14,13 +14,13 @@ namespace Font
 }
 
 
-int Font::Text::Length(pchar text)
+int Font::Text::GetLength(pchar text, int size)
 {
     uint result = 0;
 
     while (*text)
     {
-        result += (uint)Font::Symbol::Width((uint8)*text) + (uint)Font::GetSpacing();
+        result += (uint)Font::Symbol::Width((uint8)*text) * size + (uint)Font::GetSpacing() * size;
         text++;
     }
 

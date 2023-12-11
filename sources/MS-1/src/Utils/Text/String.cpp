@@ -155,7 +155,7 @@ int String<capacity>::DrawInCenterRect(int eX, int eY, int width, int eHeight, C
 {
     Color::SetCurrent(color);
 
-    int lenght = Font::Text::Length(buffer);
+    int lenght = Font::Text::GetLength(buffer);
     int height = Font::Symbol::Height(buffer[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
@@ -189,7 +189,7 @@ void String<capacity>::DrawRelativelyRight(int xRight, int y, Color::E color)
 {
     Color::SetCurrent(color);
 
-    int lenght = Font::Text::Length(buffer);
+    int lenght = Font::Text::GetLength(buffer);
     Draw(xRight - lenght, y);
 }
 
@@ -197,7 +197,7 @@ void String<capacity>::DrawRelativelyRight(int xRight, int y, Color::E color)
 template<int capacity>
 int String<capacity>::DrawOnBackground(int x, int y, Color::E colorBackground)
 {
-    int width = Font::Text::Length(buffer);
+    int width = Font::Text::GetLength(buffer);
     int height = Font::Height();
 
     Color::E colorText = Color::GetCurrent();
@@ -353,7 +353,7 @@ int String<capacity>::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eH
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::Text::Length(word.c_str());
+                int lengthString = Font::Text::GetLength(word.c_str());
                 if (x + lengthString > right + 5)
                 {
                     int numSymbols = Text::DrawPartWord(word.c_str(), x, y, right, true);
@@ -380,7 +380,7 @@ template<int capacity>
 void String<capacity>::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color::E colorText,
     int widthBorder, Color::E colorBackground)
 {
-    int lenght = Font::Text::Length(buffer);
+    int lenght = Font::Text::GetLength(buffer);
     int eX = DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
