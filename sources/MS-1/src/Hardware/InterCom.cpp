@@ -71,7 +71,7 @@ void InterCom::Send(const Measure &measure, uint timeMS)
         "Temperature",
         "Pressure",
         "Humidity",
-        "Illuminance",
+        "DewPoint",
         "Velocity",
         "Latitude",
         "Longitude",

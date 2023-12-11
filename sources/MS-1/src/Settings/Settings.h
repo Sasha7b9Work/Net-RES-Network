@@ -29,6 +29,7 @@ struct TypeDisplayedInformation
 };
 
 
+#pragma pack(push, 4)
 
 struct SettingsDisplay
 {
@@ -78,3 +79,5 @@ struct Settings
 
 
 extern Settings gset;
+
+#pragma pack(pop)
