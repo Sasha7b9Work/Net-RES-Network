@@ -8,6 +8,7 @@
 #include "Settings/Settings.h"
 #include "Measures.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Beeper.h"
 
 
 namespace Display
@@ -236,8 +237,6 @@ void Rectangle::Draw(int x, int y, Color::E color)
 
 void Display::SetMeasure(const Measure &measure, uint timeMS)
 {
-    Settings::SaveMeasure(measure);
-
     DMeasure &value = measures[measure.GetName()];
 
     if (value.value.GetDouble() == measure.GetDouble()) //-V550
@@ -246,6 +245,11 @@ void Display::SetMeasure(const Measure &measure, uint timeMS)
         {
             return;
         }
+    }
+
+    if (!Beeper::Running())
+    {
+        Settings::SaveMeasure(measure);
     }
 
     value.position = 0;

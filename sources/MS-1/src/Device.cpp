@@ -47,11 +47,11 @@ void Device::Init()
 
     Beeper::Init();
 
-    Beeper::Start(4000);
-
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 
     HAL_USART2::Init();
+
+    Beeper::Start(4000);
 
 //    HAL_IWDG::Init();
 }
@@ -62,11 +62,6 @@ void Device::Update()
 //    HAL_IWDG::Update();
 
     NEO_M8N::Update();
-
-//    if (Beeper::Running() && TIME_MS > 2000)
-//    {
-//        Beeper::Stop();
-//    }
 
     Measure temp;
     Measure pressure;
@@ -91,15 +86,6 @@ void Device::Update()
             Measures::InRange(pressure) &&
             Measures::InRange(humidity) &&
             Measures::InRange(dew_point);
-
-        if (in_range)
-        {
-            Beeper::Stop();
-        }
-        else
-        {
-            Beeper::Start(100);
-        }
     }
 
     if (CG_Anem::GetMeasure(&velocity))
