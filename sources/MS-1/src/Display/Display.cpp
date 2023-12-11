@@ -504,9 +504,13 @@ void Display::DrawBigMeasure()
 
     Font::Text::DrawBig((Display::WIDTH - length) / 2, 15, 2, measure.Name().c_str(), Color::_1);
 
-    measures[name].Draw(27, 50, 4);
+    length = Font::Text::GetLength(measures[name].str_value.c_str(), 4);
 
-    Font::Text::DrawBig(68, 95, 2, measure.Units().c_str(), Color::_1);
+    measures[name].Draw((Display::WIDTH - length) / 2, 50, 4);
+
+    length = Font::Text::GetLength(measure.Units().c_str(), 2);
+
+    Font::Text::DrawBig((Display::WIDTH - length) / 2, 95, 2, measure.Units().c_str(), Color::_1);
 
     EndScene();
 }
