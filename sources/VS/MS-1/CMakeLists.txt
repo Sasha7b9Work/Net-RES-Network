@@ -8,7 +8,6 @@ set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
 include_directories(.
-                    GTC-3
                     ../../MS-1/src
                     ../../MS-1/src/Hardware/CDC
                     ../../MS-1/src/Hardware/HAL

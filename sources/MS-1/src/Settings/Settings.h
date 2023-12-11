@@ -7,12 +7,12 @@ struct TypeDisplayedInformation
 {
     enum E
     {
-        MeasureTemperature,
-        MeasureHumidity,
-        MeasurePressure,
-        MeasureDewPoint,
+        Temperature,
+        Pressure,
+        Humidity,
+        DewPoint,
+        Velocity,
         AllMeasures,
-        Menu,
         Count
     };
 

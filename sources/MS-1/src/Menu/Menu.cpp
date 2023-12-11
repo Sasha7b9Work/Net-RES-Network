@@ -17,9 +17,9 @@ void Menu::ShortPress(const Key &key)
         {
             ++gset.display.typeDisplaydInfo;
 
-            if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
+            if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Count)
             {
-                gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasureTemperature;
+                gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::Temperature;
             }
         }
         else if (key.Is2())
