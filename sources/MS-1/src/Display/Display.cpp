@@ -429,7 +429,7 @@ void Display::DrawMeasures(uint timeMS)
                     }
                     else if (measure.value.GetDouble() < 100.0)
                     {
-                        x += 7;
+                        x += 8;
                     }
                 }
 
