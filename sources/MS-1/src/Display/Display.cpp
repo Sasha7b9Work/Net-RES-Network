@@ -437,7 +437,7 @@ void Display::DrawMeasures(uint timeMS)
                     }
                 }
 
-                String<>("%s", measure.Name().c_str()).Draw(x0, y, Color::WHITE);
+                String<>("%s", measure.Name().c_str()).Draw(x0, y, Measures::InRange(measure.value) ? Color::WHITE : Color::FLASH_10);
                 measure.Units().Draw(((page == 0) ? 134 : 145), y);
                 measure.Draw(x, y);
 
