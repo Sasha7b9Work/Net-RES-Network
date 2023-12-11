@@ -55,12 +55,19 @@ void NEO_M8N::Update()
 
         if (in_mode_receive)
         {
-            static char data[256];
+            static const int SIZE_DATA = 256;
+            static char data[SIZE_DATA];
             static int pointer = 0;
 
-            if (symbol == 0x0d)
+            if (pointer == SIZE_DATA)
+            {
+                pointer = 0;
+            }
+
+            if (symbol == 0x0d || symbol == 0x0a)
             {
                 data[pointer] = '\0';
+                std::memset(message, 0, SIZE_MESSAGE);
                 std::strcpy(message, data);
                 in_mode_receive = false;
                 pointer = 0;
