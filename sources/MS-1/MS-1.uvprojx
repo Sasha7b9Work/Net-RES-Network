@@ -553,6 +553,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Measures.h</FilePath>
             </File>
+            <File>
+              <FileName>description.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\description.txt</FilePath>
+            </File>
+            <File>
+              <FileName>opt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\opt.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1688,6 +1698,16 @@
               <FileName>Measures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Measures.h</FilePath>
+            </File>
+            <File>
+              <FileName>description.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\description.txt</FilePath>
+            </File>
+            <File>
+              <FileName>opt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\opt.h</FilePath>
             </File>
           </Files>
         </Group>
