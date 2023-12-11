@@ -1044,16 +1044,6 @@
               <FilePath>.\src\Storage\MemoryStorage_test.inc</FilePath>
             </File>
             <File>
-              <FileName>Measure.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Storage\Measure.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Storage\Measure.h</FilePath>
-            </File>
-            <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Storage\Measures.cpp</FilePath>
@@ -2249,16 +2239,6 @@
               <FileName>MemoryStorage_test.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Storage\MemoryStorage_test.inc</FilePath>
-            </File>
-            <File>
-              <FileName>Measure.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Storage\Measure.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Measure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Storage\Measure.h</FilePath>
             </File>
             <File>
               <FileName>Measures.cpp</FileName>
