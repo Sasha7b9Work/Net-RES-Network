@@ -17,10 +17,72 @@ namespace HAL_USART2
 
 namespace NEO_M8N
 {
-    static const int SIZE_MESSAGE = 100;
-    static char message[SIZE_MESSAGE] = { '\0' };
+    namespace Message
+    {
+        static const int SIZE = 100;
+        static char data[SIZE] = { '\0' };
 
-    char *GetData() { return message; }
+        void Clear()
+        {
+            std::memset(data, 0, SIZE);
+        }
+
+        void Set(char *str)
+        {
+            if (std::strlen(str) < SIZE)
+            {
+                std::strcpy(data, str);
+            }
+        }
+
+        // Извлекает слово после num_field запятой. Запятая после GNGGA имеет номер 1
+        char *ExtractField(int num_filed, char buffer[32])
+        {
+            if (data[0] == '\0')
+            {
+                buffer[0] = 0;
+            }
+            else
+            {
+                int pos = 0;
+
+                while (num_filed > 0)
+                {
+                    if (data[pos] == ',' || data[pos] == '\0')
+                    {
+                        num_filed--;
+                    }
+                    pos++;
+                }
+
+                if (data[pos] == ',' || data[pos] == '\0')
+                {
+                    buffer[0] = 0;
+                }
+                else
+                {
+                    int pos_start = pos;
+
+                    while (data[pos] != ',' && data[pos] != '\0')
+                    {
+                        pos++;
+                    }
+
+                    int pos_end = pos;
+                    int iterator = 0;
+
+                    for (pos = pos_start; pos < pos_end; pos++)
+                    {
+                        buffer[iterator++] = data[pos];
+                    }
+
+                    buffer[iterator] = '\0';
+                }
+            }
+
+            return buffer;
+        }
+    }
 
     static RingBuffer<1024> in_buffer;
 
@@ -41,7 +103,7 @@ void NEO_M8N::CallbackOnReceive()
 void NEO_M8N::Update()
 {
 #ifdef WIN32
-    std::strcpy(message, ",064656.00,3402.91778,S,15101.42545,E,1,12,0.62,140.8,M,18.6,M,,*5E");
+    Message::Set(",064656.00, 3402.91778, S, 15101.42545, E, 1, 12, 0.62, 140.8, M, 18.6, M, , *5E");
 #endif
     in_buffer.GetData(out_buffer);
 
@@ -67,8 +129,8 @@ void NEO_M8N::Update()
             if (symbol == 0x0d || symbol == 0x0a)
             {
                 data[pointer] = '\0';
-                std::memset(message, 0, SIZE_MESSAGE);
-                std::strcpy(message, data);
+                Message::Clear();
+                Message::Set(data);
                 in_mode_receive = false;
                 pointer = 0;
             }
@@ -101,75 +163,33 @@ void NEO_M8N::Update()
 }
 
 
-char *NEO_M8N::ExtractField(int num_filed, char buffer[32])
-{
-    if (message[0] == '\0')
-    {
-        buffer[0] = 0;
-    }
-    else
-    {
-        int pos = 0;
-
-        while (num_filed > 0)
-        {
-            if (message[pos] == ',' || message[pos] == '\0')
-            {
-                num_filed--;
-            }
-            pos++;
-        }
-
-        if (message[pos] == ',' || message[pos] == '\0')
-        {
-            buffer[0] = 0;
-        }
-        else
-        {
-            int pos_start = pos;
-
-            while (message[pos] != ',' && message[pos] != '\0')
-            {
-                pos++;
-            }
-
-            int pos_end = pos;
-            int iterator = 0;
-
-            for (pos = pos_start; pos < pos_end; pos++)
-            {
-                buffer[iterator++] = message[pos];
-            }
-
-            buffer[iterator] = '\0';
-        }
-    }
-
-    return buffer;
-}
-
-
 bool NEO_M8N::IsReady()
 {
     return true;
 }
 
 
-bool NEO_M8N::GetMeasures(Measure *latitude, Measure *longitude, Measure *altitude)
+void NEO_M8N::GetMeasures(Measure *latitude, Measure *longitude, Measure *altitude)
 {
     char buffer[32];
 
-    ExtractField(2, buffer);
+    Message::ExtractField(2, buffer);
 
-    latitude->Set(Measure::Latitude, std::atof(buffer) / 100.0);
+    double lat = std::atof(buffer) / 100.0;
+    latitude->Set(Measure::Latitude, lat);
+    latitude->correct = lat > 10.0;
 
-    ExtractField(4, buffer);
+    Message::ExtractField(4, buffer);
 
-    longitude->Set(Measure::Longitude, std::atof(buffer) / 100.0);
+    double _long = std::atof(buffer) / 100.0;
+    longitude->Set(Measure::Longitude, _long);
+    longitude->correct = _long > 10.0;
 
-    ExtractField(9, buffer);
+    Message::ExtractField(9, buffer);
 
-    altitude->Set(Measure::Altitude, std::atof(buffer));
+    double alt = std::atof(buffer);
+    altitude->Set(Measure::Altitude, alt);
+    altitude->correct = alt > 100.0;
 
-    return true;
+    Message::Clear();
 }

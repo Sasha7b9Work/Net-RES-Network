@@ -50,6 +50,7 @@ struct Measure
         SetDouble(value);
     }
 
+    bool correct;
 
 private:
 

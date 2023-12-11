@@ -64,7 +64,7 @@ void Beeper::Start(int _frequency)
 
     handle.Init.Prescaler = (uint)(60000 / frequency - 1);
 
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
+    HAL_NVIC_SetPriority(TIM3_IRQn, 3, 3);
     HAL_NVIC_EnableIRQ(TIM3_IRQn);
 
     HAL_TIM_Base_Init(&handle);
@@ -101,14 +101,5 @@ void Beeper::CallbackOnTimer()
     level = !level;
 
     pinBEEP.Set(level);
-}
-
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
-{
-    if (htim == Beeper::handleTIM3)
-    {
-        Beeper::CallbackOnTimer();
-    }
 }
 

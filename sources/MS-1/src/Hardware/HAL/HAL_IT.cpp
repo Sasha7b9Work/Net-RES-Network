@@ -128,3 +128,12 @@ void TIM3_IRQHandler(void)
 {
     HAL_TIM_IRQHandler((TIM_HandleTypeDef *)Beeper::handleTIM3);
 }
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
+{
+    if (htim == Beeper::handleTIM3)
+    {
+        Beeper::CallbackOnTimer();
+    }
+}

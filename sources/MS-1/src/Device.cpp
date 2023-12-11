@@ -47,7 +47,7 @@ void Device::Init()
 
     Beeper::Init();
 
-//    Beeper::Start(4000);
+    Beeper::Start(4000);
 
     InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
 
@@ -63,10 +63,10 @@ void Device::Update()
 
     NEO_M8N::Update();
 
-    if (Beeper::Running() && TIME_MS > 2000)
-    {
-        Beeper::Stop();
-    }
+//    if (Beeper::Running() && TIME_MS > 2000)
+//    {
+//        Beeper::Stop();
+//    }
 
     Measure temp;
     Measure pressure;
@@ -112,10 +112,18 @@ void Device::Update()
         InterCom::Send(azimuth, time);
     }
 
-    if (NEO_M8N::GetMeasures(&latitude, &longitude, &altitude))
+    NEO_M8N::GetMeasures(&latitude, &longitude, &altitude);
+
+    if (latitude.correct)
     {
         InterCom::Send(latitude, time);
+    }
+    if (longitude.correct)
+    {
         InterCom::Send(longitude, time);
+    }
+    if (altitude.correct)
+    {
         InterCom::Send(altitude, time);
     }
 
