@@ -37,11 +37,11 @@ namespace Test
             {
                 FillRandom(settings_save);
 
-                ::Settings::Save(&settings_save);
+//                ::Settings::Save(&settings_save);
 
                 ::Settings settings_load;
 
-                ::Settings::Load(&settings_load);
+//                ::Settings::Load(&settings_load);
 
                 if (settings_load != settings_save)
                 {

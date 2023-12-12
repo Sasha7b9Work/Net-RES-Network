@@ -28,7 +28,7 @@ namespace Device
 {
     static void ProcessMeasure(const Measure &, uint time);
 
-    static void RunTests();
+    void RunTests();
 }
 
 
@@ -40,7 +40,7 @@ void Device::Init()
 
     EnergySwitch::Init();
 
-    Settings::Load(&gset);
+//    Settings::Load(&gset);
 
     BME280::Init();         // Температура, давление, влажность, точка росы
 
@@ -59,8 +59,6 @@ void Device::Init()
     HAL_USART2::Init();
 
     Storage::Init();
-
-    RunTests();
 
 //    HAL_IWDG::Init();
 }

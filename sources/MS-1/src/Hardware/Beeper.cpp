@@ -70,8 +70,6 @@ void Beeper::Beep(int _frequency, uint timeMS)
 
 void Beeper::Start(int _frequency)
 {
-    return;
-
     if (running && (_frequency == frequency))
     {
         return;

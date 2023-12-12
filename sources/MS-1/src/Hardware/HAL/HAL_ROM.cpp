@@ -25,7 +25,7 @@ bool HAL_ROM::LoadSettings(Settings *settings)
 }
 
 
-void HAL_ROM::SaveSettings(const Settings *settings)
+uint HAL_ROM::SaveSettings(const Settings *settings)
 {
     HAL_FLASH_Unlock();
 
@@ -40,23 +40,32 @@ void HAL_ROM::SaveSettings(const Settings *settings)
 
     if (HAL_FLASHEx_Erase(&itd, &error) != HAL_OK)
     {
-        error = error;
+        HAL_FLASH_Lock();
+
+        return HAL_FLASH_GetError();
     }
 
     uint address = ADDR_SECTOR_SETTINGS;
 
     uint *data = (uint *)settings;
+    
+    uint count = (sizeof(Settings) / sizeof(uint) + 1);
 
-    for (uint i = 0; i < (sizeof(Settings) / sizeof(uint) + 1); i++)
+    for (uint i = 0; i < count; i++)
     {
-        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, *data) != HAL_OK)
+        while (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, *data) != HAL_OK)
         {
-            address = address;
+            FLASH->CR &= (uint)(~(1 << 6));
+
+            FLASH->SR &= (uint)(1 << 2);
         }
+
         address += 4;
         data++;
     }
 
     HAL_FLASH_Lock();
+
+    return 0;
 }
 

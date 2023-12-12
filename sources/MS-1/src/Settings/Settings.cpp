@@ -31,53 +31,53 @@ static const Settings def_set =
 Settings gset = def_set;
 
 
-void Settings::Load(Settings *set)
-{
-#ifndef GUI
-
-    Settings settings;
-
-    if (HAL_ROM::LoadSettings(&settings))
-    {
-        *set = settings;
-    }
-    else
-    {
-        *set = def_set;
-    }
-
-#endif
-}
-
-
-void Settings::Reset()
-{
-    gset = def_set;
-}
+//void Settings::Load(Settings *set)
+//{
+//#ifndef GUI
+//
+//    Settings settings;
+//
+//    if (HAL_ROM::LoadSettings(&settings))
+//    {
+//        *set = settings;
+//    }
+//    else
+//    {
+//        *set = def_set;
+//    }
+//
+//#endif
+//}
 
 
-void Settings::Save(Settings *set)
-{
-#ifndef GUI
+//void Settings::Reset()
+//{
+//    gset = def_set;
+//}
 
-    Settings settings;
 
-    if (HAL_ROM::LoadSettings(&settings))
-    {
-        if (*set == settings)
-        {
-            return;
-        }
-    }
-
-    gset.number++;
-
-    set->number = gset.number;
-
-    HAL_ROM::SaveSettings(set);
-
-#endif
-}
+//void Settings::Save(Settings *set)
+//{
+//#ifndef GUI
+//
+//    Settings settings;
+//
+//    if (HAL_ROM::LoadSettings(&settings))
+//    {
+//        if (*set == settings)
+//        {
+//            return;
+//        }
+//    }
+//
+//    gset.number++;
+//
+//    set->number = gset.number;
+//
+//    HAL_ROM::SaveSettings(set);
+//
+//#endif
+//}
 
 
 bool Settings::operator==(const Settings &rhs)
@@ -125,7 +125,7 @@ void Settings::SaveMeasure(const Measure &measure)
         need_save = true;
     }
 
-    Settings::Save(&gset);
+//    Settings::Save(&gset);
 }
 
 
