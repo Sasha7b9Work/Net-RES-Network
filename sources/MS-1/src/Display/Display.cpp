@@ -164,12 +164,12 @@ void Line::Draw(Color::E color)
     {
         ++x1;
     }
-    int x = x1;
-    int y = y1;
+    int x = (int)(x1);
+    int y = (int)(y1);
     int dx = (int)std::fabsf((float)(x2 - x1));
     int dy = (int)std::fabsf((float)(y2 - y1));
-    int s1 = Math::Sign(x2 - x1);
-    int s2 = Math::Sign(y2 - y1);
+    int s1 = Math::Sign((int)(x2 - x1));
+    int s2 = Math::Sign((int)(y2 - y1));
     int temp;
     int exchange = 0;
     if (dy > dx)
@@ -428,7 +428,7 @@ void Display::DrawCompass()
     int x0 = Display::WIDTH / 2;
     int y0 = Display::HEIGHT / 2;
 
-    int radius = 62;
+    const int radius = 55;
 
     Circle(radius).Draw(x0, y0, Color::GRAY_50);
 
@@ -436,8 +436,8 @@ void Display::DrawCompass()
 
     double angle_rad = (angle + 90.0) * 3.1415296 / 180.0;
 
-    double x = x0 + std::cos(-angle_rad) * radius;
-    double y = y0 + std::sin(-angle_rad) * radius;
+    double x = x0 + std::cos(-angle_rad) * (radius - 1);
+    double y = y0 + std::sin(-angle_rad) * (radius - 1);
 
     Line(x0, y0, (int)x, (int)y).Draw(Color::WHITE);
 
