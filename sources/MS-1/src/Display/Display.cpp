@@ -166,13 +166,15 @@ void Line::Rotate(int x0, int y0, float angle_rad)
 
 void Line::Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float angle)
 {
-    float dx = (float)x0 - *x_in_out;
-    float dy = (float)y0 - *y_in_out;
+    float dx = *x_in_out - (float)x0;
+    float dy = *y_in_out - (float)y0;
 
-    float R = std::sqrtf(dx * dx + dy * dy);
+    float x = dx * std::cosf(angle) - dy * std::sinf(angle) + (float)x0;
 
-    *x_in_out += R * std::cosf(angle);
-    *y_in_out += R * std::sinf(angle);
+    float y = dx * std::sinf(angle) + dy * std::cosf(angle) + (float)y0;
+
+    *x_in_out = x;
+    *y_in_out = y;
 }
 
 
@@ -454,7 +456,7 @@ void Display::DrawCompass()
 
     Circle(radius).Draw(x0, y0, Color::GRAY_50);
 
-    Line line(x0, y0 - radius + 10, x0, y0 - radius - 5);
+    Line line(x0, y0 - radius + 5, x0, y0 - radius - 5);
 
     for (int i = 0; i < 360; i += 30)
     {
