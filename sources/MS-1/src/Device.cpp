@@ -95,7 +95,7 @@ void Device::Update()
         ProcessMeasure(velocity, time);
     }
 
-    if (GY511::GetMagnetic(&azimuth))
+    if (GY511::GetAzimuth(&azimuth))
     {
         ProcessMeasure(azimuth, time);
     }

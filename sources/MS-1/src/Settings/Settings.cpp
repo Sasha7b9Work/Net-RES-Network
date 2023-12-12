@@ -19,9 +19,9 @@ static const Settings def_set =
         0                                           // serial_number
     },
     // Measures
-    {//  Temperature         Pressure           Humidity          DewPoint            Velocity
-        { 0,                 500,               40,                0,                 0},
-        { 99,                1000,              98,                20,                10},
+    {//  Temperature         Pressure           Humidity          DewPoi t            Velocity
+        { 18,                0,                 0,                 -30,               0},
+        { 99,                1000,              100,               99,                1},
         { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
         { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
     }

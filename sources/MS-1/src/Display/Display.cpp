@@ -9,6 +9,7 @@
 #include "Storage/Measures.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
+#include "Modules/GY511/GY511.h"
 
 
 namespace Display
@@ -377,7 +378,7 @@ void Display::DrawCompass()
 
     double x = measures[Measure::Azimuth].value.GetDouble();
 
-    String<>("x=%.3f", x).Draw(0, 10, Color::WHITE);
+    String<>("%.0f¨", x).Draw(0, 3, Color::WHITE);
 
     EndScene();
 }

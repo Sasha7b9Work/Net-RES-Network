@@ -58,6 +58,29 @@ namespace GY511
     static bool is_ready_acce = false;
     static bool is_ready_magn = false;
 
+    struct Value
+    {
+        Value(float _min, float _max) : min(_min), max(_max), value(0.0f) {}
+        float min;
+        float max;
+        void SetValue(float);
+        float GetValue() const { return value; }
+    private:
+        float Min(float v)
+        {
+            return v < min ? v : min;
+        }
+        float Max(float v)
+        {
+            return v > max ? v : max;
+        }
+        float value;
+    };
+
+    static Value x(-220.0f, 170.0f);
+    static Value y(-310.0f, 40.0f);
+    static Value z(-480.0f, 480.0f);
+
     static float CalculateAzimuth();
 
     static void Update();
@@ -123,7 +146,7 @@ void GY511::Update()
 }
 
 
-bool GY511::GetMagnetic(Measure *azimuth)
+bool GY511::GetAzimuth(Measure *azimuth)
 {
     azimuth->Clear();
 
@@ -136,8 +159,9 @@ bool GY511::GetMagnetic(Measure *azimuth)
     return true;
 
 #else
-    if (is_ready_acce)
+    if (is_ready_acce && is_ready_magn)
     {
+        is_ready_magn = false;
         is_ready_acce = false;
 
         azimuth->Set(Measure::Azimuth, CalculateAzimuth());
@@ -152,5 +176,63 @@ bool GY511::GetMagnetic(Measure *azimuth)
 
 float GY511::CalculateAzimuth()
 {
-    return 0.0f;
+    x.SetValue(raw_magn_x.raw);
+    y.SetValue(raw_magn_y.raw);
+    z.SetValue(raw_magn_z.raw);
+
+    float val_x = x.GetValue();
+    float val_y = y.GetValue();
+
+    float k = 180.0f / 3.1415296f;
+
+    float angle = std::atan(x.GetValue() / y.GetValue());
+
+    if (val_x >= 0.0f)
+    {
+        return (val_y >= 0.0f) ? (angle * k) : (angle * k + 180.0f);
+    }
+    else
+    {
+        return (val_y >= 0.0f) ? (angle * k + 360.f) : (angle * k + 180.0f);
+    }
 }
+
+
+void GY511::Value::SetValue(float v)
+{
+    float scale = 2.0f / (Max(v) - Min(v));       // Это масштаб преобразования
+
+    float line = (v - Min(v)) * scale;         // Это приведённая к масштабу [-1;1] величина
+
+    value = -1.0f + line;
+
+    if (value < -1.0f)
+    {
+        value = -1.0f;
+    }
+
+    if (value > 1.0f)
+    {
+        value = 1.0f;
+    }
+}
+
+
+float GY511::GetX()
+{
+    return x.GetValue();
+}
+
+
+float GY511::GetY()
+{
+    return y.GetValue();
+}
+
+
+float GY511::GetZ()
+{
+    return z.GetValue();
+}
+
+

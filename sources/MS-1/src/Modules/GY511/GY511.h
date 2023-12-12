@@ -23,5 +23,11 @@ namespace GY511
 {
     void Init();
 
-    bool GetMagnetic(Measure *azimuth);
+    bool GetAzimuth(Measure *azimuth);
+
+    float GetX();
+
+    float GetY();
+
+    float GetZ();
 }
