@@ -31,7 +31,7 @@ static void OnOpenClose_MainPage(bool open)
     }
     else
     {
-        Settings::Save(gset);
+        Settings::Save(&gset);
     }
 }
 

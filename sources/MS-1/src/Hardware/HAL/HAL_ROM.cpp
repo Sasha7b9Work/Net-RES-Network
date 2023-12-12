@@ -30,15 +30,15 @@ namespace HAL_ROM
 
 
 
-void HAL_ROM::SaveSettings(const Settings &set)
+void HAL_ROM::SaveSettings(const Settings *set)
 {
     if (Read(ADDR_SECTOR_0) == (uint)(-1))           // Если в нулевой сектор ещё ничего не записано
     {
-        Save(ADDR_SECTOR_0, set);
+        Save(ADDR_SECTOR_0, *set);
     }
     else if (Read(ADDR_SECTOR_1) == (uint)(-1))      // Если в первый сектор ещё ничего не записано
     {
-        Save(ADDR_SECTOR_1, set);
+        Save(ADDR_SECTOR_1, *set);
     }
     else
     {
@@ -47,17 +47,17 @@ void HAL_ROM::SaveSettings(const Settings &set)
 
         if (number0 < number1)                              // В нулевом секторе более старые настройки
         {
-            Save(ADDR_SECTOR_0, set);
+            Save(ADDR_SECTOR_0, *set);
         }
         else
         {
-            Save(ADDR_SECTOR_1, set);
+            Save(ADDR_SECTOR_1, *set);
         }
     }
 }
 
 
-bool HAL_ROM::LoadSettings(Settings &set)
+bool HAL_ROM::LoadSettings(Settings *set)
 {
     uint number0 = Read(ADDR_SECTOR_0 + 4);
     uint number1 = Read(ADDR_SECTOR_1 + 4);
@@ -69,15 +69,15 @@ bool HAL_ROM::LoadSettings(Settings &set)
 
     if (number1 == (uint)(-1))
     {
-        return Load(ADDR_SECTOR_0, set);
+        return Load(ADDR_SECTOR_0, *set);
     }
 
     if (number0 > number1)
     {
-        return Load(ADDR_SECTOR_0, set);
+        return Load(ADDR_SECTOR_0, *set);
     }
 
-    return Load(ADDR_SECTOR_1, set);
+    return Load(ADDR_SECTOR_1, *set);
 }
 
 

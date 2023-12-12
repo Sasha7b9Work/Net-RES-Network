@@ -103,8 +103,8 @@ namespace HAL_USART2
 
 namespace HAL_ROM
 {
-    void SaveSettings(const Settings &);
-    bool LoadSettings(Settings &);
+    void SaveSettings(const Settings *);
+    bool LoadSettings(Settings *);
 }
 
 

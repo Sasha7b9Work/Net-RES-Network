@@ -86,6 +86,7 @@ file(GLOB MODULES_ST7735            ../../MS-1/src/Modules/ST7735/*.*)
 file(GLOB MODULES_W25Q80DV          ../../MS-1/src/Modules/W25Q80DV/*.*)
 file(GLOB SETTINGS                  ../../MS-1/src/Settings/*.*)
 file(GLOB STORAGE                   ../../MS-1/src/Storage/*.*)
+file(GLOB TESTS                     ../../MS-1/src/Tests/*.*)
 file(GLOB UTILS                     ../../MS-1/src/Utils/*.*)
 file(GLOB UTILS_TEXT                ../../MS-1/src/Utils/Text/*.*)
 
@@ -113,6 +114,7 @@ source_group(Modules/ST7735         FILES ${MODULES_ST7735})
 source_group(Modules/W25Q80DV       FILES ${MODULES_W25Q80DV})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Storage                FILES ${STORAGE})
+source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 source_group(Utils/Text             FILES ${UTILS_TEXT})
 
@@ -159,6 +161,7 @@ add_executable( ${PROJECT_NAME}
                 ${MODULES_W25Q80DV}
                 ${SETTINGS}
                 ${STORAGE}
+                ${TESTS}
                 ${UTILS}
                 ${UTILS_TEXT}
                 )
