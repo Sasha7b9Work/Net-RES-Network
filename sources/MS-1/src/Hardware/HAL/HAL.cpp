@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
-#include "Hardware/CDC/CDC.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include <stm32f3xx_hal.h>
 #include <cstring>
 #include <usbd_cdc.h>

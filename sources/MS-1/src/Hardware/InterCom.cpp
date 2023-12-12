@@ -1,7 +1,7 @@
 // Sasha7b9@tut.by (c)
 #include "defines.h"
 #include "Hardware/InterCom.h"
-#include "Hardware/CDC/CDC.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include "Modules/HC12/HC12.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Display/Display.h"
@@ -66,31 +66,31 @@ void InterCom::SetDirection(Direction::E dir)
 
 void InterCom::Send(const Measure &measure, uint timeMS)
 {
-    static const pchar names[Measure::Count] =
-    {
-        "Temperature",
-        "Pressure",
-        "Humidity",
-        "DewPoint",
-        "Velocity",
-        "Latitude",
-        "Longitude",
-        "Altitude",
-        "Azimuth"
-    };
+//    static const pchar names[Measure::Count] =
+//    {
+//        "Temperature",
+//        "Pressure",
+//        "Humidity",
+//        "DewPoint",
+//        "Velocity",
+//        "Latitude",
+//        "Longitude",
+//        "Altitude",
+//        "Azimuth"
+//    };
 
-    static const pchar units[Measure::Count] =
-    {
-        "degress Celsius",
-        "hPa",
-        "%%",
-        "degress Celsius",
-        "m/s",
-        "degress",
-        "degress",
-        "m",
-        "degress"
-    };
+//    static const pchar units[Measure::Count] =
+//    {
+//        "degress Celsius",
+//        "hPa",
+//        "%%",
+//        "degress Celsius",
+//        "m/s",
+//        "degress",
+//        "degress",
+//        "m",
+//        "degress"
+//    };
 
     if (direction & Direction::Display)
     {
@@ -102,9 +102,9 @@ void InterCom::Send(const Measure &measure, uint timeMS)
 
     if (direction & Direction::CDC)
     {
-        String<> message("%s : %f %s", names[measure.GetName()], measure.GetDouble(), units[measure.GetName()]);
-
-        HCDC::Transmit(message.c_str(), message.Size() + 1);
+//        String<> message("%s : %f %s", names[measure.GetName()], measure.GetDouble(), units[measure.GetName()]);
+//
+//        HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
     Buffer<16> data = CreateMessage(measure);

@@ -140,7 +140,7 @@ typedef enum
   USB_HP_IRQn                 = 74,     /*!< USB High Priority global Interrupt                                */
   USB_LP_IRQn                 = 75,     /*!< USB Low Priority global Interrupt                                 */
   USBWakeUp_RMP_IRQn          = 76,     /*!< USB Wakeup Interrupt remap                                        */
-  FPU_IRQn                    = 81,      /*!< Floating point Interrupt                                          */
+  FPU_IRQn                    = 81      /*!< Floating point Interrupt                                          */
 } IRQn_Type;
 
 /**

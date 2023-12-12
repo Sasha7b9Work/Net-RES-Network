@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/CDC/CDC.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
 #include "Modules/NEO-M8N/NEO-M8N.h"

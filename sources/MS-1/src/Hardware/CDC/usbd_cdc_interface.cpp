@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/CDC/CDC.h"
+#include "Hardware/CDC/usbd_cdc_interface.h"
 #include <usbd_cdc.h>
 
 
@@ -149,10 +149,4 @@ static int8_t CDC_Itf_Receive(uint8_t *Buf, uint32_t *Len)
     UNUSED(Len);
 
     return (USBD_OK);
-}
-
-
-void HCDC::Transmit(const void *, int)
-{
-
 }

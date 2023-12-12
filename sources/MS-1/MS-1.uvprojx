@@ -734,14 +734,14 @@
               <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
             </File>
             <File>
-              <FileName>CDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
+              <FileName>usbd_cdc_interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.cpp</FilePath>
             </File>
             <File>
-              <FileName>CDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
+              <FileName>usbd_cdc_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1895,14 +1895,14 @@
               <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
             </File>
             <File>
-              <FileName>CDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
+              <FileName>usbd_cdc_interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.cpp</FilePath>
             </File>
             <File>
-              <FileName>CDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
+              <FileName>usbd_cdc_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_cdc_interface.h</FilePath>
             </File>
           </Files>
         </Group>
