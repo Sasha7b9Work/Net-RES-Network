@@ -187,14 +187,18 @@ float GY511::CalculateAzimuth()
 
     float angle = std::atan(x.GetValue() / y.GetValue());
 
-    if (val_x >= 0.0f)
+    float result = angle * k;
+
+    if (val_y < 0.0f)
     {
-        return (val_y >= 0.0f) ? (angle * k) : (angle * k + 180.0f);
+        result += 180.0f;
     }
-    else
+    else if (val_x < 0.0f)
     {
-        return (val_y >= 0.0f) ? (angle * k + 360.f) : (angle * k + 180.0f);
+        result += 360.0f;
     }
+
+    return result;
 }
 
 
