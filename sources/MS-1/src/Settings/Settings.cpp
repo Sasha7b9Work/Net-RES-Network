@@ -99,7 +99,25 @@ bool Settings::operator==(const Settings &rhs)
 
 bool Settings::operator!=(const Settings &rhs)
 {
-    return !(*this == rhs);
+    for (int i = 0; i < Measure::Count; i++)
+    {
+        if (display.show_measure[i] != rhs.display.show_measure[i])
+        {
+            return true;
+        }
+    }
+
+    if (display.typeDisplaydInfo.value != rhs.display.typeDisplaydInfo.value)
+    {
+        return true;
+    }
+
+    if (system.serial_number != rhs.system.serial_number)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 
