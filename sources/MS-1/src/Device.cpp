@@ -6,7 +6,7 @@
 #include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
 #include "Modules/CG-Anem/CG-Anem.h"
-#include "Hardware/CDC/usbd_cdc_interface.h"
+#include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Hardware/Timer.h"

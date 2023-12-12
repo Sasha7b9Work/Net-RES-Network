@@ -51,3 +51,9 @@ extern USBD_CDC_ItfTypeDef  USBD_CDC_fops;
 
 
 extern void *handlePCD;
+
+
+namespace HCDC
+{
+    void Transmit(const void *, int);
+}
