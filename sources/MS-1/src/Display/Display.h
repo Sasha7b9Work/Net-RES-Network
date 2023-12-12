@@ -71,7 +71,7 @@ private:
     float x2;
     float y2;
 
-    void Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float angle);
+    void Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float cos, float sin);
 };
 
 

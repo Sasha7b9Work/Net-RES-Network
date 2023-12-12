@@ -1,6 +1,7 @@
 // 2022/05/04 11:34:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/Math.h"
+#include <cmath>
 
 
 template void Math::CircleIncrease<int>(int *, int, int);
@@ -52,4 +53,69 @@ void Math::CircleDecrease(T *value, T min, T max)
     {
         *value = max;
     }
+}
+
+
+float Math::Sin(float angle_rad)
+{
+    const float k = 180.0f / 3.1415296f;
+
+    float angle = angle_rad * 180.0f / 3.1415296f;
+
+    static float values[360];
+    static bool first = true;
+    if (first)
+    {
+        first = false;
+
+        for (int i = 0; i < 360; i++)
+        {
+            values[i] = std::sinf((float)i / k);
+        }
+    }
+
+    while (angle < 0.0f)
+    {
+        angle += 360.0f;
+    }
+
+    while (angle > 360.0f)
+    {
+        angle -= 360.0f;
+    }
+
+    return values[(int)angle];
+}
+
+
+float Math::Cos(float angle_rad)
+{
+    const float k = 180.0f / 3.1415296f;
+
+    float angle = angle_rad * k;
+
+    static float values[360];
+    static bool first = true;
+
+    if (first)
+    {
+        first = false;
+
+        for (int i = 0; i < 360; i++)
+        {
+            values[i] = std::cosf((float)i / k);
+        }
+    }
+
+    while (angle < 0.0f)
+    {
+        angle += 360.0f;
+    }
+
+    while (angle >= 360.0f)
+    {
+        angle -= 360.0f;
+    }
+
+    return values[(int)angle];
 }

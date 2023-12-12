@@ -158,20 +158,23 @@ void HLine::Draw(int x0, int y, Color::E color)
 
 void Line::Rotate(int x0, int y0, float angle_rad)
 {
-    Rotate(&x1, &y1, x0, y0, angle_rad);
+    float cos = std::cosf(angle_rad);
+    float sin = std::sinf(angle_rad);
 
-    Rotate(&x2, &y2, x0, y0, angle_rad);
+    Rotate(&x1, &y1, x0, y0, cos, sin);
+
+    Rotate(&x2, &y2, x0, y0, cos, sin);
 }
 
 
-void Line::Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float angle)
+void Line::Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float cos, float sin)
 {
     float dx = *x_in_out - (float)x0;
     float dy = *y_in_out - (float)y0;
 
-    float x = dx * std::cosf(angle) - dy * std::sinf(angle) + (float)x0;
+    float x = dx * cos - dy * sin + (float)x0;
 
-    float y = dx * std::sinf(angle) + dy * std::cosf(angle) + (float)y0;
+    float y = dx * sin + dy * cos + (float)y0;
 
     *x_in_out = x;
     *y_in_out = y;

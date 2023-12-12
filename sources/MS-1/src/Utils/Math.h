@@ -18,4 +18,8 @@ namespace Math
     {
         return (val < 0) ? -1 : 1;
     }
+
+    float Sin(float angle_rad);
+
+    float Cos(float angle_rad);
 }
