@@ -31,19 +31,19 @@ static const Settings def_set =
 Settings gset = def_set;
 
 
-void Settings::Load()
+void Settings::Load(Settings &set)
 {
-#ifndef WIN32
+#ifndef GUI
 
     Settings settings;
 
     if (HAL_ROM::LoadSettings(settings))
     {
-        gset = settings;
+        set = settings;
     }
     else
     {
-        gset = def_set;
+        set = def_set;
     }
 
 #endif
@@ -56,9 +56,9 @@ void Settings::Reset()
 }
 
 
-void Settings::Save()
+void Settings::Save(Settings &set)
 {
-#ifndef WIN32
+#ifndef GUI
 
     Settings settings;
 
@@ -66,7 +66,7 @@ void Settings::Save()
 
     if (HAL_ROM::LoadSettings(settings))
     {
-        if (gset != settings)
+        if (set != settings)
         {
             need_save = true;
         }
@@ -80,7 +80,9 @@ void Settings::Save()
     {
         gset.number++;
 
-        HAL_ROM::SaveSettings(gset);
+        set.number = gset.number;
+
+        HAL_ROM::SaveSettings(set);
     }
 
 #endif
@@ -132,7 +134,7 @@ void Settings::SaveMeasure(const Measure &measure)
         need_save = true;
     }
 
-    Save();
+    Settings::Save(gset);
 }
 
 

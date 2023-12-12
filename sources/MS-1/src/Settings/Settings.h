@@ -64,9 +64,9 @@ struct Settings
     bool operator!=(const Settings &);
     bool operator==(const Settings &);
 
-    static void Load();
+    static void Load(Settings &set);
 
-    static void Save();
+    static void Save(Settings &set);
 
     static void Reset();
 
