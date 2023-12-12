@@ -62,28 +62,19 @@ void Settings::Save(Settings *set)
 
     Settings settings;
 
-    bool need_save = false;
-
     if (HAL_ROM::LoadSettings(&settings))
     {
-        if (*set != settings)
+        if (*set == settings)
         {
-            need_save = true;
+            return;
         }
     }
-    else
-    {
-        need_save = true;
-    }
 
-    if (need_save)
-    {
-        gset.number++;
+    gset.number++;
 
-        set->number = gset.number;
+    set->number = gset.number;
 
-        HAL_ROM::SaveSettings(set);
-    }
+    HAL_ROM::SaveSettings(set);
 
 #endif
 }
@@ -99,25 +90,7 @@ bool Settings::operator==(const Settings &rhs)
 
 bool Settings::operator!=(const Settings &rhs)
 {
-    for (int i = 0; i < Measure::Count; i++)
-    {
-        if (display.show_measure[i] != rhs.display.show_measure[i])
-        {
-            return true;
-        }
-    }
-
-    if (display.typeDisplaydInfo.value != rhs.display.typeDisplaydInfo.value)
-    {
-        return true;
-    }
-
-    if (system.serial_number != rhs.system.serial_number)
-    {
-        return true;
-    }
-
-    return false;
+    return !(*this == rhs);
 }
 
 
