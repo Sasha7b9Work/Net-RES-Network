@@ -156,9 +156,23 @@ void HLine::Draw(int x0, int y, Color::E color)
 }
 
 
-void Line::Rotate(float angle_rad)
+void Line::Rotate(int x0, int y0, float angle_rad)
 {
+    Rotate(&x1, &y1, x0, y0, angle_rad);
 
+    Rotate(&x2, &y2, x0, y0, angle_rad);
+}
+
+
+void Line::Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float angle)
+{
+    float dx = (float)x0 - *x_in_out;
+    float dy = (float)y0 - *y_in_out;
+
+    float R = std::sqrtf(dx * dx + dy * dy);
+
+    *x_in_out += R * std::cosf(angle);
+    *y_in_out += R * std::sinf(angle);
 }
 
 
@@ -446,7 +460,7 @@ void Display::DrawCompass()
     {
         line.Draw();
 
-        line.Rotate(30.0f * k);
+        line.Rotate(x0, y0, 30.0f * k);
     }
 
     const double angle = measures[Measure::Azimuth].value.GetDouble();

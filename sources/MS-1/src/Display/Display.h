@@ -63,13 +63,15 @@ struct Line
 
     void Draw(Color::E = Color::Count);
 
-    void Rotate(float angle_rad);
+    void Rotate(int x0, int y0, float angle_rad);
 
 private:
     float x1;
     float y1;
     float x2;
     float y2;
+
+    void Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float angle);
 };
 
 
