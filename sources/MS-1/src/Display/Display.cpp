@@ -10,6 +10,8 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
 #include "Modules/GY511/GY511.h"
+#include "Utils/Math.h"
+#include <cmath>
 
 
 namespace Display
@@ -151,6 +153,60 @@ void HLine::Draw(int x0, int y, Color::E color)
     Color::SetCurrent(color);
 
     Display::Buffer::DrawHLine(y, x0, x0 + width);
+}
+
+
+void Line::Draw(int x1, int y1, int x2, int y2, Color::E color)
+{
+    Color::SetCurrent(color);
+
+    if ((x2 - x1) == 0 && (y2 - y1) == 0)
+    {
+        ++x1;
+    }
+    int x = x1;
+    int y = y1;
+    int dx = (int)std::fabsf((float)(x2 - x1));
+    int dy = (int)std::fabsf((float)(y2 - y1));
+    int s1 = Math::Sign(x2 - x1);
+    int s2 = Math::Sign(y2 - y1);
+    int temp;
+    int exchange = 0;
+    if (dy > dx)
+    {
+        temp = dx;
+        dx = dy;
+        dy = temp;
+        exchange = 1;
+    }
+    int e = 2 * dy - dx;
+    int i = 0;
+    for (; i <= dx; i++)
+    {
+        Point().Set(x, y);
+
+        while (e >= 0)
+        {
+            if (exchange)
+            {
+                x += s1;
+            }
+            else
+            {
+                y += s2;
+            }
+            e = e - 2 * dx;
+        }
+        if (exchange)
+        {
+            y += s2;
+        }
+        else
+        {
+            x += s1;
+        }
+        e = e + 2 * dy;
+    }
 }
 
 
@@ -372,13 +428,22 @@ void Display::DrawCompass()
     int x0 = Display::WIDTH / 2;
     int y0 = Display::HEIGHT / 2;
 
-    Circle(62).Draw(x0, y0, Color::GRAY_50);
+    int radius = 62;
+
+    Circle(radius).Draw(x0, y0, Color::GRAY_50);
+
+    const double angle = measures[Measure::Azimuth].value.GetDouble();
+
+    double angle_rad = (angle + 90.0) * 3.1415296 / 180.0;
+
+    double x = x0 + std::cos(-angle_rad) * radius;
+    double y = y0 + std::sin(-angle_rad) * radius;
+
+    Line().Draw(x0, y0, (int)x, (int)y, Color::WHITE);
 
     Buffer::SetPoint(x0, y0);
 
-    double x = measures[Measure::Azimuth].value.GetDouble();
-
-    String<>("%.0f¨", x).Draw(0, 3, Color::WHITE);
+    String<>("%.0f¨", angle).Draw(0, 3, Color::WHITE);
 
     EndScene();
 }

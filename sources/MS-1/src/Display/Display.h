@@ -56,6 +56,12 @@ private:
 };
 
 
+struct Line
+{
+    void Draw(int x1, int y1, int x2, int y2, Color::E = Color::Count);
+};
+
+
 struct HLine
 {
     HLine(int w) : width(w) {}

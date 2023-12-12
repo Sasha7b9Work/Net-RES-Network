@@ -3,7 +3,7 @@
 #include "opt.h"
 
 
-#define VERSION 39
+#define VERSION 40  
 
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
@@ -25,13 +25,13 @@
 #endif
 
 
-typedef unsigned char uint8;
-typedef signed char int8;
+typedef unsigned char  uint8;
+typedef signed char    int8;
 typedef unsigned short uint16;
-typedef signed short int16;
-typedef unsigned int uint;
-typedef const char *pchar;
-typedef unsigned char uchar;
+typedef signed short   int16;
+typedef unsigned int   uint;
+typedef const char    *pchar;
+typedef unsigned char  uchar;
 
 #define USE_USB_INTERRUPT_DEFAULT   1
 

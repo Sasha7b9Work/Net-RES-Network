@@ -13,4 +13,9 @@ namespace Math
 
     template<class T>
     void CircleDecrease(T *value, T min, T max);
+
+    inline int Sign(int val)
+    {
+        return (val < 0) ? -1 : 1;
+    }
 }
