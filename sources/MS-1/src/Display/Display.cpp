@@ -156,6 +156,12 @@ void HLine::Draw(int x0, int y, Color::E color)
 }
 
 
+void Line::Rotate(float angle_rad)
+{
+
+}
+
+
 void Line::Draw(Color::E color)
 {
     Color::SetCurrent(color);
@@ -423,6 +429,8 @@ void Display::Update(uint timeMS)
 
 void Display::DrawCompass()
 {
+    const float k = 3.1415296f / 180.0f;
+
     BeginScene(Color::BLACK);
 
     int x0 = Display::WIDTH / 2;
@@ -432,9 +440,18 @@ void Display::DrawCompass()
 
     Circle(radius).Draw(x0, y0, Color::GRAY_50);
 
+    Line line(x0, y0 - radius + 10, x0, y0 - radius - 5);
+
+    for (int i = 0; i < 360; i += 30)
+    {
+        line.Draw();
+
+        line.Rotate(30.0f * k);
+    }
+
     const double angle = measures[Measure::Azimuth].value.GetDouble();
 
-    double angle_rad = (angle + 90.0) * 3.1415296 / 180.0;
+    double angle_rad = (angle + 90.0) * k;
 
     double x = x0 + std::cos(-angle_rad) * (radius - 1);
     double y = y0 + std::sin(-angle_rad) * (radius - 1);
