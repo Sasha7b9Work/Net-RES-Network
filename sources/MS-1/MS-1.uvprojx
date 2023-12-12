@@ -1150,6 +1150,21 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Tests</GroupName>
+          <Files>
+            <File>
+              <FileName>Tests.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tests\Tests.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tests.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Tests\Tests.h</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -2344,6 +2359,21 @@
               <FileName>sw_i2c_port_stm32.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\I2C\sw_i2c_port_stm32.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Tests</GroupName>
+          <Files>
+            <File>
+              <FileName>Tests.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tests\Tests.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tests.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Tests\Tests.h</FilePath>
             </File>
           </Files>
         </Group>
