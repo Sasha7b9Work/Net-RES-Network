@@ -156,7 +156,7 @@ void HLine::Draw(int x0, int y, Color::E color)
 }
 
 
-void Line::Draw(int x1, int y1, int x2, int y2, Color::E color)
+void Line::Draw(Color::E color)
 {
     Color::SetCurrent(color);
 
@@ -439,7 +439,7 @@ void Display::DrawCompass()
     double x = x0 + std::cos(-angle_rad) * radius;
     double y = y0 + std::sin(-angle_rad) * radius;
 
-    Line().Draw(x0, y0, (int)x, (int)y, Color::WHITE);
+    Line(x0, y0, (int)x, (int)y).Draw(Color::WHITE);
 
     Buffer::SetPoint(x0, y0);
 

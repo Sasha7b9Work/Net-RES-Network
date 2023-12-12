@@ -176,6 +176,14 @@ bool GY511::GetAzimuth(Measure *azimuth)
 
 float GY511::CalculateAzimuth()
 {
+#ifdef GUI
+
+    static uint ticks = 0;
+    ticks++;
+
+    return (float)(ticks % 360);
+
+#else
     x.SetValue(raw_magn_x.raw);
     y.SetValue(raw_magn_y.raw);
     z.SetValue(raw_magn_z.raw);
@@ -199,6 +207,7 @@ float GY511::CalculateAzimuth()
     }
 
     return result;
+#endif
 }
 
 
