@@ -447,6 +447,8 @@ void Display::DrawCompass()
 {
     const float k = 3.1415296f / 180.0f;
 
+    const float angle = (float)measures[Measure::Azimuth].value.GetDouble();
+
     BeginScene(Color::BLACK);
 
     int x0 = Display::WIDTH / 2;
@@ -456,27 +458,24 @@ void Display::DrawCompass()
 
     Circle(radius).Draw(x0, y0, Color::GRAY_50);
 
-    Line line(x0, y0 - radius + 5, x0, y0 - radius - 5);
+    Line line_scale(x0, y0, x0, y0 - radius);
+
+    line_scale.Rotate(x0, y0, -angle * k);
 
     for (int i = 0; i < 360; i += 30)
     {
-        line.Draw();
+        line_scale.Draw(Color::GRAY_25);
 
-        line.Rotate(x0, y0, 30.0f * k);
+        line_scale.Rotate(x0, y0, 30.0f * k);
     }
 
-    const double angle = measures[Measure::Azimuth].value.GetDouble();
+    Line arrow(x0, y0 - 10, x0, y0 - radius - 2);
 
-    double angle_rad = (angle + 90.0) * k;
+    arrow.Rotate(x0, y0, -angle * k);
 
-    double x = x0 + std::cos(-angle_rad) * (radius - 1);
-    double y = y0 + std::sin(-angle_rad) * (radius - 1);
+    arrow.Draw(Color::WHITE);
 
-    Line(x0, y0, (int)x, (int)y).Draw(Color::WHITE);
-
-    Buffer::SetPoint(x0, y0);
-
-    String<>("%.0f¨", angle).Draw(0, 3, Color::WHITE);
+    String<>("%.0f¨", (double)angle).Draw(0, 3, Color::WHITE);
 
     EndScene();
 }
