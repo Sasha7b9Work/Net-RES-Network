@@ -461,7 +461,7 @@ void Display::DrawCompass()
 
     Circle(radius).Draw(x0, y0, Color::GRAY_50);
 
-    Line line_scale(x0, y0, x0, y0 - radius);
+    Line line_scale(x0, y0, x0, y0 - radius - 5);
 
     line_scale.Rotate(x0, y0, -angle * k);
 
@@ -472,7 +472,7 @@ void Display::DrawCompass()
         line_scale.Rotate(x0, y0, 30.0f * k);
     }
 
-    Line arrow(x0, y0 - 10, x0, y0 - radius - 2);
+    Line arrow(x0, y0 + 10, x0, y0 - radius - 2);
 
     arrow.Rotate(x0, y0, -angle * k);
 
