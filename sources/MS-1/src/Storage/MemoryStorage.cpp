@@ -12,8 +12,6 @@ namespace MemoryStorage
     static const uint BEGIN = 0;
     static const uint END = 1024 * 1024;
 
-#pragma pack(1)
-    
     struct Record
     {
         int          number;

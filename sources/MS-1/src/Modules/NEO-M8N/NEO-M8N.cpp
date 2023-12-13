@@ -107,7 +107,10 @@ void NEO_M8N::Update()
 #endif
     in_buffer.GetData(out_buffer);
 
-    static bool in_mode_receive = false;                // Если true, то находимся в режиме приёма данных. Строка $GNGGA обнаружена
+    static bool in_mode_receive = false;        // Если true, то находимся в режиме приёма данных. Строка $GNGGA обнаружена
+
+    static const char *request = "$GNGGA";
+    static const int len_request = (int)std::strlen(request);
 
     while (out_buffer.Size())
     {
@@ -141,14 +144,12 @@ void NEO_M8N::Update()
         }
         else
         {
-            static const char *request = "$GNGGA";
-
             static int ptr = 0;
 
             if (symbol == request[ptr])
             {
                 ptr++;
-                if (ptr == (int)std::strlen(request))
+                if (ptr == len_request)
                 {
                     ptr = 0;
                     in_mode_receive = true;
