@@ -82,7 +82,12 @@ float HAL_ADC::GetVoltage()
 
     if (meter.IsFinished())
     {
-        voltage = (float)ReadChannel(ADC_CHANNEL_4) * 3.3f * 1.25f / (float)(1 << 12);
+        float value = (float)ReadChannel(ADC_CHANNEL_4) * 3.3f * 1.25f / (float)(1 << 12);
+
+        if (value > 3.0f)
+        {
+            voltage = value;
+        }
 
         meter.FinishAfter(1000);
     }

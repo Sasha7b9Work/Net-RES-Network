@@ -14,10 +14,18 @@ namespace Keyboard
 {
     static const int TIME_LONG_PRESS = 500;
 
-    static TimeMeterMS meter;
+    struct KeyStruct
+    {
+        bool pressed;           // Если true, клавиша нажата
+        bool taboo_long;        // Если true, запрещено длинное срабатывание
+        TimeMeterMS meter;
+    };
 
-    static bool pressed[Key::Count] = { false, false };        // Если true, клавиша нажата
-    static bool taboo_long[Key::Count] = { false, false };     // Если true, запрещено длинное срабатывание
+    static KeyStruct keys[Key::Count] =
+    {
+        { false, false },
+        { false, false }
+    };
 
     static bool KeyPressed(const Key &);
     static void UpdateKey(const Key &);
@@ -52,40 +60,37 @@ void Keyboard::Update()
 }
 
 
-void Keyboard::UpdateKey(const Key &key)
+void Keyboard::UpdateKey(const Key &k)
 {
-    if (meter.ElapsedTime() < 100)
-    {
-        return;
-    }
+    KeyStruct &key = keys[k.value];
 
-    if (pressed[key.value])
+    if (key.pressed)
     {
-        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long[key.value])
+        if (key.meter.ElapsedTime() > TIME_LONG_PRESS && !key.taboo_long)
         {
-            Menu::LongPress(key);
-            taboo_long[key.value] = true;
+            Menu::LongPress(k);
+            key.taboo_long = true;
         }
         else
         {
-            if (!KeyPressed(key))
+            if (!KeyPressed(k))
             {
-                pressed[key.value] = false;
-                meter.Reset();
-                if (!taboo_long[key.value])
+                key.pressed = false;
+                key.meter.Reset();
+                if (!key.taboo_long)
                 {
-                    Menu::ShortPress(key);
+                    Menu::ShortPress(k);
                 }
-                taboo_long[key.value] = false;
+                key.taboo_long = false;
             }
         }
     }
     else
     {
-        if (KeyPressed(key))
+        if (KeyPressed(k))
         {
-            pressed[key.value] = true;
-            meter.Reset();
+            key.pressed = true;
+            key.meter.Reset();
         }
     }
 }
@@ -99,7 +104,7 @@ bool Keyboard::KeyPressed(const Key &key)
 
 bool Key::IsPressed() const
 {
-    return Keyboard::pressed[value];
+    return Keyboard::keys[value].pressed;
 }
 
 
