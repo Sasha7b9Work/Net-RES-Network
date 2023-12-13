@@ -2,15 +2,30 @@
 #pragma once
 #include "Hardware/HAL/HAL.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
+#include "Hardware/HAL/HAL.h"
 
 
 struct Measurements
 {
+public:
+    Measurements(float temp = 0.0f, float press = 0.0f, float hum = 0.0f, float dew = 0.0f, float vel = 0.0f, PackedTime _time = PackedTime()) :
+        temperature(temp),
+        pressure(press),
+        humidity(hum),
+        dew_point(dew),
+        velocity(vel),
+        time(_time)
+    {
+        crc32 = CalculateCRC();
+    }
+
+private:
+
     uint  crc32;
     float temperature;
     float pressure;
     float humidity;
-    float dev_point;
+    float dew_point;
     float velocity;
     PackedTime time;
 

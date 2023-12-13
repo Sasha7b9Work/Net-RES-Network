@@ -78,15 +78,15 @@ bool Storage::GetMeasure(Measure::E name, Measure &measure)
 
 Measurements Storage::GetLastMeasurements()
 {
-    Measurements measurements;
-
-    measurements.temperature = (float)measures[Measure::Temperature].GetDouble();
-    measurements.pressure = (float)measures[Measure::Pressure].GetDouble();
-    measurements.humidity = (float)measures[Measure::Humidity].GetDouble();
-    measurements.dev_point = (float)measures[Measure::DewPoint].GetDouble();
-    measurements.velocity = (float)measures[Measure::Velocity].GetDouble();
-    measurements.time = HAL_RTC::GetTime();
-    measurements.crc32 = measurements.CalculateCRC();
+    Measurements measurements
+    (
+        (float)measures[Measure::Temperature].GetDouble(),
+        (float)measures[Measure::Pressure].GetDouble(),
+        (float)measures[Measure::Humidity].GetDouble(),
+        (float)measures[Measure::DewPoint].GetDouble(),
+        (float)measures[Measure::Velocity].GetDouble(),
+        HAL_RTC::GetTime()
+        );
 
     return measurements;
 }
