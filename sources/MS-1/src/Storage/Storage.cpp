@@ -90,13 +90,3 @@ Measurements Storage::GetLastMeasurements()
 
     return measurements;
 }
-
-
-uint Measurements::CalculateCRC()
-{
-    uint8 *begin = (uint8 *)&temperature;
-
-    uint8 *end = (uint8 *)&time + sizeof(time);
-
-    return Math::CalculateCRC(&temperature, end - begin);
-}

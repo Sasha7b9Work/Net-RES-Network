@@ -16,20 +16,16 @@ public:
         velocity(vel),
         time(_time)
     {
-        crc32 = CalculateCRC();
     }
 
 private:
 
-    uint  crc32;
     float temperature;
     float pressure;
     float humidity;
     float dew_point;
     float velocity;
     PackedTime time;
-
-    uint CalculateCRC();
 };
 
 
