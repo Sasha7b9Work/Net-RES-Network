@@ -55,4 +55,6 @@ extern void *handlePCD;        // PCD_HandleTypeDef
 namespace HCDC
 {
     void Transmit(const void *, int);
+
+    void TransmitF(pchar, ...);
 }

@@ -13,6 +13,10 @@ namespace MemoryStorage
     // с этим указателем, чтобы стереть структуру из хранилища
     const Measurements *GetOldest(int *number = nullptr);
 
+    // Возвращает измерение, следующее за number_prev. Если таковое существует,
+    // в number возвращается номер возвращённого измерения
+    const Measurements *GetNext(int number_prev, int *number);
+
     void Erase(const Measurements *);
 
     void Test();

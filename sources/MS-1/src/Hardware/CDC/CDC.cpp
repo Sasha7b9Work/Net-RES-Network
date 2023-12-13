@@ -1,6 +1,10 @@
 #include "defines.h"
 #include "Hardware/CDC/CDC.h"
 #include <usbd_cdc.h>
+#include <cstdarg>
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
 
 
 #define APP_RX_DATA_SIZE  2048
@@ -169,4 +173,16 @@ void HCDC::Transmit(const void *buffer, int size)
 
     USBD_CDC_SetTxBuffer(&hUSBDDevice, (uint8_t *)buffer, (uint16_t)size);
     USBD_CDC_TransmitPacket(&hUSBDDevice);
+}
+
+
+void HCDC::TransmitF(pchar format, ...)
+{
+    char buffer[128];
+
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(buffer, format, args);
+
+    Transmit((const void *)buffer, (int)std::strlen(buffer) + 1);
 }

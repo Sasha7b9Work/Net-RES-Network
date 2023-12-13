@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>0</tvExp>
+        <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
@@ -152,34 +152,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>69</LineNumber>
+          <LineNumber>88</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134291898</Address>
+          <Address>134297078</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;4&gt;.\src\Hardware\HAL\HAL_ROM.cpp</Filename>
+          <Filename>&lt;4&gt;.\src\Storage\Storage.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\MS_1\src/Hardware/HAL/HAL_ROM.cpp\69</Expression>
+          <Expression>\\MS_1\src/Storage/Storage.cpp\88</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>60</LineNumber>
+          <LineNumber>68</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134291860</Address>
+          <Address>134297018</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;4&gt;.\src\Hardware\HAL\HAL_ROM.cpp</Filename>
+          <Filename>&lt;4&gt;.\src\Storage\Storage.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\MS_1\src/Hardware/HAL/HAL_ROM.cpp\60</Expression>
+          <Expression>\\MS_1\src/Storage/Storage.cpp\68</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -202,8 +202,8 @@
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>8</SubType>
-          <ItemText>message</ItemText>
+          <SubType>3</SubType>
+          <ItemText>address</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>

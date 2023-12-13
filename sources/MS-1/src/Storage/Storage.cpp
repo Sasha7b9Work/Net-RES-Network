@@ -5,6 +5,7 @@
 #include "Storage/MemoryStorage.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
+#include "Hardware/CDC/CDC.h"
 
 
 /*
@@ -51,6 +52,8 @@ void Storage::AppendMeasure(const Measure &measure)
 
 void Storage::Update()
 {
+    SendMeasures();
+
     static TimeMeterMS meter;
     
     if(!meter.IsFinished())
@@ -63,14 +66,33 @@ void Storage::Update()
     Measurements measurements = GetLastMeasurements();
 
     MemoryStorage::Append(measurements);
-
-    SendMeasures();
 }
 
 
 void Storage::SendMeasures()
 {
+    static int prev_number = -1;        // Номер последнего переданного измерения
 
+    if (prev_number == -1)
+    {
+        const Measurements *meas = MemoryStorage::GetOldest(&prev_number);
+
+        if(!meas)
+        {
+            return;
+        }
+    }
+
+    int number = -1;
+
+    const Measurements *meas = MemoryStorage::GetNext(prev_number, &number);
+
+    if (meas)
+    {
+        prev_number = number;
+
+        HCDC::TransmitF("Measure %d", number);
+    }
 }
 
 
@@ -97,7 +119,7 @@ Measurements Storage::GetLastMeasurements()
         (float)measures[Measure::DewPoint].GetDouble(),
         (float)measures[Measure::Velocity].GetDouble(),
         HAL_RTC::GetTime()
-        );
+    );
 
     return measurements;
 }

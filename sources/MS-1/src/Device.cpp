@@ -33,8 +33,6 @@ void Device::Init()
 
     EnergySwitch::Init();
 
-//    Settings::Load(&gset);
-
     BME280::Init();         // Температура, давление, влажность, точка росы
 
     GY511::Init();          // Компас
@@ -43,13 +41,13 @@ void Device::Init()
 
     Keyboard::Init();
 
-    W25Q80DV::Test::Run();  // Микросхема памяти
-
     Beeper::Init();
 
-    InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
+    InterCom::SetDirection((Direction::E)(Direction::HC12 | Direction::Display));
 
     HAL_USART2::Init();
+
+//    W25Q80DV::Clear();
 
     Storage::Init();
 

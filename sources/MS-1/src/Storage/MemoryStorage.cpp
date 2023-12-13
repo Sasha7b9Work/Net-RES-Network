@@ -84,6 +84,9 @@ namespace MemoryStorage
         static Record *Newest();
 
         static Record *ForMeasurements(const Measurements *);
+
+        // ¬озвращает запись, следующую за номером prev_nubmer
+        static Record *GetAfterNumber(int prev_number);
     };
 
     struct Page
@@ -214,6 +217,35 @@ namespace MemoryStorage
                     if (!result || (record->number < result->number))
                     {
                         result = record;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        // ¬озвращает запись с минимальным относительно num_record номером
+        Record *GetMinRecord(int num_record)
+        {
+            Record *result = nullptr;
+
+            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            {
+                if (record->IsValid())
+                {
+                    if (result)
+                    {
+                        if (record->number >= num_record && record->number < result->number)
+                        {
+                            result = record;
+                        }
+                    }
+                    else
+                    {
+                        if (record->number >= num_record)
+                        {
+                            result = record;
+                        }
                     }
                 }
             }
@@ -379,6 +411,29 @@ const Measurements *MemoryStorage::GetOldest(int *number)
 }
 
 
+const Measurements *MemoryStorage::GetNext(int number_prev, int *number)
+{
+    if (number_prev == -1)
+    {
+        return nullptr;
+    }
+
+    if (Record::Newest()->number <= number_prev)
+    {
+        return nullptr;
+    }
+
+    Record *record = Record::GetAfterNumber(number_prev);
+
+    if (number)
+    {
+        *number = record ? record->number : -1;
+    }
+
+    return record ? record->GetMeasurements() : nullptr;
+}
+
+
 void MemoryStorage::Prepare()
 {
     for (int i = 0; i < NUM_PAGES; i++)
@@ -401,6 +456,44 @@ MemoryStorage::Record *MemoryStorage::Record::Oldest()
             if (!result || oldest->number < result->number)
             {
                 result = oldest;
+            }
+        }
+    }
+
+    return result;
+}
+
+
+MemoryStorage::Record *MemoryStorage::Record::GetAfterNumber(int prev_number)
+{
+    int min_number = prev_number + 1;       // ћинимально возможный номер возвращаемой записи
+
+    Record *result = nullptr;
+
+    for (int i = 0; i < NUM_PAGES; i++)
+    {
+        Page &page = pages[i];
+
+        Record *newest = page.GetOldestRecord();
+
+        if (!newest)
+        {
+            continue;
+        }
+        else if(newest->number < min_number)
+        {
+            continue;
+        }
+
+        // ¬ этой странице есть записи, которые больше либо равны min_number
+
+        Record *record = page.GetMinRecord(min_number);
+
+        if (record)
+        {
+            if (!result || (record->number < result->number))
+            {
+                result = record;
             }
         }
     }
