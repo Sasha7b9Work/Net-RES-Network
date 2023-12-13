@@ -11,11 +11,11 @@ namespace MemoryStorage
 
     // Возвращает указатель на самую старую структуру данных (которая считана раньше всех). После использования нужно вызвать Erase()
     // с этим указателем, чтобы стереть структуру из хранилища
-    const Measurements *GetOldest(int *number = nullptr);
+    bool GetOldest(Measurements *meas, int *number);
 
     // Возвращает измерение, следующее за number_prev. Если таковое существует,
     // в number возвращается номер возвращённого измерения
-    const Measurements *GetNext(int number_prev, int *number);
+    bool GetNext(Measurements *meas, int number_prev, int *number);
 
     void Erase(const Measurements *);
 

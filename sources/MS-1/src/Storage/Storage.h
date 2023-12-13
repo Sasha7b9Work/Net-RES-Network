@@ -25,6 +25,8 @@ public:
     float GetVelocity()    const { return velocity; }
     PackedTime GetTime()   const { return time; }
 
+    static void CopyFromMemory(const void *from, Measurements *to);
+
 private:
 
     float temperature;

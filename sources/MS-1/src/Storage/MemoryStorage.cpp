@@ -19,11 +19,6 @@ namespace MemoryStorage
         uint         crc;
         uint         control_field;     // Это нужно для контроля правильности записи
 
-        Measurements *GetMeasurements()
-        {
-            return &measurements;
-        }
-
         void *Begin()
         {
             return (void *)this;
@@ -398,7 +393,7 @@ void *MemoryStorage::Append(const Measurements &meas)
 }
 
 
-const Measurements *MemoryStorage::GetOldest(int *number)
+bool MemoryStorage::GetOldest(Measurements *meas, int *number)
 {
     Record *record = Record::Oldest();
 
@@ -407,20 +402,25 @@ const Measurements *MemoryStorage::GetOldest(int *number)
         *number = record ? record->number : -1;
     }
 
-    return record ? record->GetMeasurements() : nullptr;
+    if (record)
+    {
+        Measurements::CopyFromMemory(&record->measurements, meas);
+    }
+
+    return (record != nullptr);
 }
 
 
-const Measurements *MemoryStorage::GetNext(int number_prev, int *number)
+bool MemoryStorage::GetNext(Measurements *meas, int number_prev, int *number)
 {
     if (number_prev == -1)
     {
-        return nullptr;
+        return false;
     }
 
     if (Record::Newest()->number <= number_prev)
     {
-        return nullptr;
+        return false;
     }
 
     Record *record = Record::GetAfterNumber(number_prev);
@@ -430,7 +430,12 @@ const Measurements *MemoryStorage::GetNext(int number_prev, int *number)
         *number = record ? record->number : -1;
     }
 
-    return record ? record->GetMeasurements() : nullptr;
+    if (record)
+    {
+        Measurements::CopyFromMemory(&record->measurements, meas);
+    }
+
+    return (record != nullptr);
 }
 
 
@@ -610,14 +615,18 @@ namespace MemoryStorage
         {
             while (GetRecordsCount())
             {
-                const Measurements *meas = MemoryStorage::GetOldest();
+                Measurements meas;
+                int number = -1;
 
-//                Record *record = Record::ForMeasurements(meas);
+                if (MemoryStorage::GetOldest(&meas, &number))
+                {
+//                  Record *record = Record::ForMeasurements(meas);
 //
-//                LOG_WRITE("erase record %X number %d for measure %X, all %d, first %d, last %d",
-//                    record, record->number, meas, GetRecordsCount(), NumberOldestRecord(), NumberNewestRecord());
+//                  LOG_WRITE("erase record %X number %d for measure %X, all %d, first %d, last %d",
+//                  record, record->number, meas, GetRecordsCount(), NumberOldestRecord(), NumberNewestRecord());
 
-                MemoryStorage::Erase(meas);
+                    MemoryStorage::Erase(&meas);
+                }
             }
         }
     }

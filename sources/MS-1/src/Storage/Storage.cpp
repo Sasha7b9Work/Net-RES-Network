@@ -73,11 +73,11 @@ void Storage::SendMeasures()
 {
     static int prev_number = -1;        // Номер последнего переданного измерения
 
+    Measurements meas;
+
     if (prev_number == -1)
     {
-        const Measurements *meas = MemoryStorage::GetOldest(&prev_number);
-
-        if(!meas)
+        if (!MemoryStorage::GetOldest(&meas, &prev_number))
         {
             return;
         }
@@ -85,9 +85,7 @@ void Storage::SendMeasures()
 
     int number = -1;
 
-    const Measurements *meas = MemoryStorage::GetNext(prev_number, &number);
-
-    if (meas)
+    if (MemoryStorage::GetNext(&meas, prev_number, &number))
     {
         prev_number = number;
 
