@@ -472,13 +472,27 @@ void Display::DrawCompass()
         line_scale.Rotate(x0, y0, 30.0f * k);
     }
 
-    Line arrow(x0, y0 + 10, x0, y0 - radius - 2);
+    Line arrow(x0, y0, x0, y0 - radius - 2);
 
     arrow.Rotate(x0, y0, -angle * k);
 
     arrow.Draw(Color::WHITE);
 
-    String<>("%.0f¨", (double)angle).Draw(0, 3, Color::WHITE);
+    int width = 30;
+    int height = 18;
+
+    x0 = WIDTH / 2 - width / 2;
+    y0 = HEIGHT / 2 - height / 2;
+
+    Rectangle(width, height).Fill(x0, y0, Color::BLACK);
+
+    Font::Set(TypeFont::_12_10);
+
+    String<> string("%.0f¨", (double)angle);
+
+    int length = Font::Text::GetLength(string.c_str());
+
+    string.Draw(WIDTH / 2 - length / 2, y0 + 3, Color::WHITE);
 
     EndScene();
 }
