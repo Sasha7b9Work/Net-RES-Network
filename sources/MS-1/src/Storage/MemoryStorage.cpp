@@ -14,35 +14,35 @@ namespace MemoryStorage
 
     struct Record
     {
-        int          number;
+        // address - по этому адресу во внешней пам€ти хранитс€ запись
+        Record(uint _address) : address(_address) { }
+
         Measurements measurements;
-        uint         crc;
-        uint         control_field;     // Ёто нужно дл€ контрол€ правильности записи
+        uint         address;
 
-        void *Begin()
+        uint Begin()
         {
-            return (void *)this;
+            return address;
         }
 
-        void *End()
+        uint End()
         {
-            return (void *)(this + 1);
+            return address + 4;     // „етыре байта дл€ записи проверочного нул€
         }
 
-        void Write(int _number, const Measurements &meas)
+        void Write(Measurements &meas)
         {
-            Record data;
-
-            data.number = _number;
-            std::memcpy(&data.measurements, &meas, sizeof(Measurements));
-            data.crc = Math::CalculateCRC(&data, sizeof(number) + sizeof(Measurements));
-            data.control_field = 0;
-
-            W25Q80DV::WriteData((uint)Begin(), (const void *)&data, sizeof(data));
+            meas.WriteToMemory(address);
+            W25Q80DV::WriteUInt(address + sizeof(Measurements), 0);     // «аписываем ноль дл€ контрол€ записи
         }
 
-        bool IsEmpty()                          // —юда может быть произведена запись
+        bool IsEmpty()                                                  // —юда может быть произведена запись
         {
+            for (uint p = Begin(); p < End(); p += 4)
+            {
+                if(W25Q80DV::ReadUInt())
+            }
+
             for (uint *address = (uint *)this; address < (uint *)End(); address++)
             {
                 if (*address != (uint)(-1))
@@ -56,12 +56,12 @@ namespace MemoryStorage
 
         bool IsErased()                         // «апись стЄрта
         {
-            return number == 0;
+            return measurements.number == 0;
         }
 
         bool IsValid()
         {
-            if (number == -1 || number == 0 || control_field != 0)
+            if (measurements.number == -1 || measurements.number == 0 || control_field != 0)
             {
                 return false;
             }

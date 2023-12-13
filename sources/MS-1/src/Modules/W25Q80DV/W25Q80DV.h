@@ -26,6 +26,8 @@ namespace W25Q80DV
 
     void WriteUInt(uint address, uint value);
 
+    uint ReadUInt(uint address);
+
     void Write(uint address, uint8 byte);
 
     void WriteData(uint, const void *, int);

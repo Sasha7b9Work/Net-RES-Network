@@ -16,6 +16,7 @@ public:
         velocity(vel),
         time(_time)
     {
+        crc = CalculateCRC();
     }
 
     float GetTemperature() const { return temperature; }
@@ -27,6 +28,10 @@ public:
 
     static void CopyFromMemory(const void *from, Measurements *to);
 
+    void WriteToMemory(uint);
+
+    int number;
+
 private:
 
     float temperature;
@@ -35,6 +40,9 @@ private:
     float dew_point;
     float velocity;
     PackedTime time;
+    uint crc;
+
+    uint CalculateCRC();
 };
 
 

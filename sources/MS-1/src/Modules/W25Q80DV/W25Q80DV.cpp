@@ -75,6 +75,12 @@ void W25Q80DV::WriteUInt(uint address, uint value)
 }
 
 
+uint W25Q80DV::ReadUInt(uint address)
+{
+
+}
+
+
 void W25Q80DV::Write(uint address, uint8 byte)
 {
     pinWP.ToHi();
