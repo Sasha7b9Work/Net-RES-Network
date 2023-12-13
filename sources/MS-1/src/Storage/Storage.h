@@ -31,15 +31,5 @@ namespace Storage
     void AppendMeasure(const Measure &);
 
     bool GetMeasure(Measure::E, Measure &);
-
-    Measurements GetFullMeasurements();
-
-    bool IsEmpty();
-
-    // Возвращает указатель на следующие данные, если таковые имеются. Не удаляет данные из хранилищца.
-    // Чтобы удалить, нужно вызывать EraseData() с указателем на эти данные.
-    Measurements *GetNextData();
-
-    void EraseData(Measurements *);
 }
 

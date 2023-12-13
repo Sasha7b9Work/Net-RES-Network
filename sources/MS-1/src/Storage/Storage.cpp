@@ -59,21 +59,3 @@ bool Storage::GetMeasure(Measure::E name, Measure &measure)
 
     return false;
 }
-
-
-bool Storage::IsEmpty()
-{
-    return false;
-}
-
-
-Measurements *Storage::GetNextData()
-{
-    return nullptr;
-}
-
-
-void Storage::EraseData(Measurements *)
-{
-
-}
