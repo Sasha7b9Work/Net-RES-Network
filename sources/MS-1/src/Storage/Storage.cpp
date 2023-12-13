@@ -1,6 +1,8 @@
 // 2023/09/08 11:47:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Storage/Storage.h"
+#include "Hardware/Timer.h"
+#include "Storage/MemoryStorage.h"
 
 
 /*
@@ -24,7 +26,7 @@ void Storage::Init()
 {
     for (int i = 0; i < NUM_MEASURES_TO_CONTROL; i++)
     {
-        measures[i].Set((Measure::E)i, ERROR_VALUE_FLOAT);
+        measures[i].Set((Measure::E)i, 0.0f);
         measures[i].correct = false;
     }
 }
@@ -44,7 +46,18 @@ void Storage::AppendMeasure(const Measure &measure)
 
 void Storage::Update()
 {
+    static TimeMeterMS meter;
+    
+    if(!meter.IsFinished())
+    {
+        return;
+    }
 
+    meter.FinishAfter(5000);
+
+    Measurements measurements = GetLastMeasurements();
+
+    MemoryStorage::Append(measurements);
 }
 
 
@@ -58,4 +71,10 @@ bool Storage::GetMeasure(Measure::E name, Measure &measure)
     }
 
     return false;
+}
+
+
+Measurements Storage::GetLastMeasurements()
+{
+
 }

@@ -1,4 +1,4 @@
-﻿// 2023/09/08 11:46:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2023/09/08 11:46:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Hardware/HAL/HAL.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
@@ -31,5 +31,7 @@ namespace Storage
     void AppendMeasure(const Measure &);
 
     bool GetMeasure(Measure::E, Measure &);
+
+    Measurements GetLastMeasurements();
 }
 

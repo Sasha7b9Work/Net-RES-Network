@@ -9,8 +9,8 @@
 
 namespace MemoryStorage
 {
-    static const uint BEGIN = 0x8000000 + 200 * 1024;
-    static const uint END = 0x8000000 + 250 * 1024;
+    static const uint BEGIN = 0;
+    static const uint END = 1024 * 1024;
 
 #pragma pack(1)
     
