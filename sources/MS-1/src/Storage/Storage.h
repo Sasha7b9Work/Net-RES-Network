@@ -26,6 +26,8 @@ namespace Storage
 
     void Init();
 
+    void Update();
+
     void AppendMeasure(const Measure &);
 
     bool GetMeasure(Measure::E, Measure &);

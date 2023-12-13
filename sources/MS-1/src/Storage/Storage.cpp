@@ -42,6 +42,12 @@ void Storage::AppendMeasure(const Measure &measure)
 }
 
 
+void Storage::Update()
+{
+
+}
+
+
 bool Storage::GetMeasure(Measure::E name, Measure &measure)
 {
     if (((int)name) >= 0 && name < NUM_MEASURES_TO_CONTROL)
