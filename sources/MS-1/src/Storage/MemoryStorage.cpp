@@ -2,9 +2,7 @@
 #include "defines.h"
 #include "Storage/MemoryStorage.h"
 #include "Utils/Math.h"
-#include "Modules/W25Q80DV/W25Q80DV.h"
 #include "Hardware/Timer.h"
-#include "Storage/Storage.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -18,10 +16,10 @@ namespace MemoryStorage
     
     struct Record
     {
-        int           number;
-        Measurements  measurements;
-        uint          crc;
-        uint          control_field;     // Это нужно для контроля правильности записи
+        int          number;
+        Measurements measurements;
+        uint         crc;
+        uint         control_field;     // Это нужно для контроля правильности записи
 
         Measurements *GetMeasurements()
         {
@@ -70,7 +68,7 @@ namespace MemoryStorage
 
         bool IsValid()
         {
-            if ((uint)number == (uint)-1 || number == 0 || control_field != 0)
+            if (number == -1 || number == 0 || control_field != 0)
             {
                 return false;
             }
@@ -474,9 +472,7 @@ namespace MemoryStorage
     {
         static void AppendMeasure()
         {
-//            Measurements meas;
-
-//            meas.SetFullMeasure(Measurer::Measure1Min());
+//            Measurements meas = Storage::GetFullMeasurements();
         }
 
         static void Fill()
@@ -499,7 +495,7 @@ namespace MemoryStorage
 
                 while (value == 0)
                 {
-                    address = BEGIN + ((uint)std::rand() % (END - BEGIN));
+                    address = BEGIN + (uint)std::rand() % (END - BEGIN);
 
                     address &= 0xFFFFFFFFFC;
 

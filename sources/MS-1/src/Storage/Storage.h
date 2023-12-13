@@ -30,6 +30,8 @@ namespace Storage
 
     bool GetMeasure(Measure::E, Measure &);
 
+    Measurements GetFullMeasurements();
+
     bool IsEmpty();
 
     // Возвращает указатель на следующие данные, если таковые имеются. Не удаляет данные из хранилищца.
