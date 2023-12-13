@@ -215,7 +215,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
                 WRITE_NIBBLE(6);
                 WRITE_NIBBLE(7);
 
-                value = *(++points);
+                value = *(++points); //-V519
             }
         }
     }
@@ -232,7 +232,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
                 WRITE_NIBBLE(0); //-V760
                 WRITE_NIBBLE(1);
 
-                value = *(++points);
+                value = *(++points); //-V519
             }
         }
     }
