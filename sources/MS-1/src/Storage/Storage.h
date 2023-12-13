@@ -12,11 +12,9 @@ struct Measurements
     float humidity;
     float dev_point;
     float velocity;
-    float latitude;
-    float longitude;
-    float altitude;
-    float azimuth;
     PackedTime time;
+
+    uint CalculateCRC();
 };
 
 

@@ -3,6 +3,8 @@
 #include "Storage/Storage.h"
 #include "Hardware/Timer.h"
 #include "Storage/MemoryStorage.h"
+#include "Hardware/HAL/HAL.h"
+#include "Utils/Math.h"
 
 
 /*
@@ -76,5 +78,25 @@ bool Storage::GetMeasure(Measure::E name, Measure &measure)
 
 Measurements Storage::GetLastMeasurements()
 {
+    Measurements measurements;
 
+    measurements.temperature = (float)measures[Measure::Temperature].GetDouble();
+    measurements.pressure = (float)measures[Measure::Pressure].GetDouble();
+    measurements.humidity = (float)measures[Measure::Humidity].GetDouble();
+    measurements.dev_point = (float)measures[Measure::DewPoint].GetDouble();
+    measurements.velocity = (float)measures[Measure::Velocity].GetDouble();
+    measurements.time = HAL_RTC::GetTime();
+    measurements.crc32 = measurements.CalculateCRC();
+
+    return measurements;
+}
+
+
+uint Measurements::CalculateCRC()
+{
+    uint8 *begin = (uint8 *)&temperature;
+
+    uint8 *end = (uint8 *)&time + sizeof(time);
+
+    return Math::CalculateCRC(&temperature, end - begin);
 }
