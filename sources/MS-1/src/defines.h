@@ -3,7 +3,7 @@
 #include "opt.h"
 
 
-#define VERSION 48
+#define VERSION 49
 
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)

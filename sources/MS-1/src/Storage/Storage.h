@@ -18,6 +18,13 @@ public:
     {
     }
 
+    float GetTemperature() const { return temperature; }
+    float GetPressure()    const { return pressure; }
+    float GetHumidity()    const { return humidity; }
+    float GetDewPoint()    const { return dew_point; }
+    float GetVelocity()    const { return velocity; }
+    PackedTime GetTime()   const { return time; }
+
 private:
 
     float temperature;

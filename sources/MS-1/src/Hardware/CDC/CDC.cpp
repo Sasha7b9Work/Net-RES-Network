@@ -7,6 +7,7 @@
 #define APP_TX_DATA_SIZE  2048
 
 
+
 PCD_HandleTypeDef _handlePCD;
 
 void *handlePCD = &_handlePCD;
@@ -152,7 +153,20 @@ static int8_t CDC_Itf_Receive(uint8_t *Buf, uint32_t *Len)
 }
 
 
-void HCDC::Transmit(const void *, int)
+void HCDC::Transmit(const void *buffer, int size)
 {
+    if (!buffer)
+    {
+        return;
+    }
 
+    USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)hUSBDDevice.pClassData;
+
+    if (hcdc->TxState != 0)
+    {
+        return;
+    }
+
+    USBD_CDC_SetTxBuffer(&hUSBDDevice, (uint8_t *)buffer, (uint16_t)size);
+    USBD_CDC_TransmitPacket(&hUSBDDevice);
 }

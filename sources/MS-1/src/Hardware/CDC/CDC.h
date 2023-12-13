@@ -50,8 +50,7 @@
 extern USBD_CDC_ItfTypeDef  USBD_CDC_fops;
 
 
-extern void *handlePCD;
-
+extern void *handlePCD;        // PCD_HandleTypeDef
 
 namespace HCDC
 {

@@ -21,6 +21,9 @@ namespace Storage
     };
 
     static Measure measures[NUM_MEASURES_TO_CONTROL];
+
+    // Послать некоторые измререния в USB
+    static void SendMeasures();
 }
 
 
@@ -60,6 +63,14 @@ void Storage::Update()
     Measurements measurements = GetLastMeasurements();
 
     MemoryStorage::Append(measurements);
+
+    SendMeasures();
+}
+
+
+void Storage::SendMeasures()
+{
+
 }
 
 

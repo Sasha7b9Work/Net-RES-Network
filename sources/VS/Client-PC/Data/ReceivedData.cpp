@@ -10,7 +10,7 @@
 
 namespace ReceivedData
 {
-    static DynamicBuffer <16>buffer;
+    static DynamicBuffer <SIZE_MESSAGE>buffer;
 
     static bool FindFirstABC();
 
@@ -45,7 +45,7 @@ void ReceivedData::Update()
 
 bool ReceivedData::FindFirstABC()
 {
-    DynamicBuffer <16>removed;
+    DynamicBuffer <20>removed;
 
     int removed_bytes = 0;
 
@@ -86,7 +86,7 @@ bool ReceivedData::FindFirstABC()
 }
 
 
-bool ReceivedData::ParseCommand(char message[16])
+bool ReceivedData::ParseCommand(char message[20])
 {
     uint8 type = message[3];
 

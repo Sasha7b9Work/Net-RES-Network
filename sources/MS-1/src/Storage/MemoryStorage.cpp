@@ -366,9 +366,14 @@ void *MemoryStorage::Append(const Measurements &meas)
 }
 
 
-const Measurements *MemoryStorage::GetOldest()
+const Measurements *MemoryStorage::GetOldest(int *number)
 {
     Record *record = Record::Oldest();
+
+    if (number)
+    {
+        *number = record ? record->number : -1;
+    }
 
     return record ? record->GetMeasurements() : nullptr;
 }
