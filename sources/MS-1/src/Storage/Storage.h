@@ -14,7 +14,8 @@ public:
         humidity(hum),
         dew_point(dew),
         velocity(vel),
-        time(_time)
+        time(_time),
+        control_field(0)
     {
         crc = CalculateCRC();
     }
@@ -26,9 +27,13 @@ public:
     float GetVelocity()    const { return velocity; }
     PackedTime GetTime()   const { return time; }
 
-    static void CopyFromMemory(const void *from, Measurements *to);
+    static void CopyFromMemory(uint address, Measurements *to);
 
     void WriteToMemory(uint);
+
+    uint CalculateCRC();
+
+    uint GetCRC() { return crc; }
 
     int number;
 
@@ -42,7 +47,9 @@ private:
     PackedTime time;
     uint crc;
 
-    uint CalculateCRC();
+public:
+
+    uint control_field;
 };
 
 

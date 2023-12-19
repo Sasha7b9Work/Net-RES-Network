@@ -75,7 +75,7 @@ void W25Q80DV::WriteUInt(uint address, uint value)
 }
 
 
-uint W25Q80DV::ReadUInt(uint address)
+uint W25Q80DV::ReadUInt(uint /*address*/)
 {
 
 }

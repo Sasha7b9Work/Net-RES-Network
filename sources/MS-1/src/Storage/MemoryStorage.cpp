@@ -20,6 +20,26 @@ namespace MemoryStorage
         Measurements measurements;
         uint         address;
 
+        Measurements &GetMeasurements()
+        {
+            static Measurements prev_meas;          // Здесь последние считанные измерения
+            static uint prev_address = (uint)-1;    // Здесь адрес, откуда считаны последние измерения
+
+            if (address != prev_address)
+            {
+                prev_address = address;
+
+                W25Q80DV::ReadLess1024bytes(address, &prev_meas, sizeof(Measurements));
+            }
+
+            return prev_meas;
+        }
+
+        int GetNumber()
+        {
+            return GetMeasurements().number;
+        }
+
         uint Begin()
         {
             return address;
@@ -27,11 +47,12 @@ namespace MemoryStorage
 
         uint End()
         {
-            return address + 4;     // Четыре байта для записи проверочного нуля
+            return Begin() + sizeof(Measurements);     // Четыре байта для записи проверочного нуля
         }
 
-        void Write(Measurements &meas)
+        void Write(int number, Measurements &meas)
         {
+            meas.number = number;
             meas.WriteToMemory(address);
             W25Q80DV::WriteUInt(address + sizeof(Measurements), 0);     // Записываем ноль для контроля записи
         }
@@ -40,12 +61,7 @@ namespace MemoryStorage
         {
             for (uint p = Begin(); p < End(); p += 4)
             {
-                if(W25Q80DV::ReadUInt())
-            }
-
-            for (uint *address = (uint *)this; address < (uint *)End(); address++)
-            {
-                if (*address != (uint)(-1))
+                if (W25Q80DV::ReadUInt(p) != (uint)(-1))
                 {
                     return false;
                 }
@@ -56,17 +72,19 @@ namespace MemoryStorage
 
         bool IsErased()                         // Запись стёрта
         {
-            return measurements.number == 0;
+            return GetMeasurements().number == 0;
         }
 
         bool IsValid()
         {
-            if (measurements.number == -1 || measurements.number == 0 || control_field != 0)
+            Measurements &meas = GetMeasurements();
+
+            if (meas.number == -1 || meas.number == 0 || meas.control_field != 0)
             {
                 return false;
             }
 
-            return Math::CalculateCRC(&number, sizeof(measurements) + sizeof(number)) == crc;
+            return (meas.GetCRC() == meas.CalculateCRC());
         }
 
         void Erase()
@@ -74,7 +92,7 @@ namespace MemoryStorage
             W25Q80DV::WriteUInt((uint)Begin(), 0);
         }
 
-        static Record *Oldest();
+        static bool Oldest(Record *);
 
         static Record *Newest();
 
@@ -82,6 +100,16 @@ namespace MemoryStorage
 
         // Возвращает запись, следующую за номером prev_nubmer
         static Record *GetAfterNumber(int prev_number);
+
+        bool operator<(const Record &rhs)
+        {
+            return address < rhs.address;
+        }
+
+        void operator++(int /*i*/)
+        {
+            address += 4;
+        }
     };
 
     struct Page
@@ -91,9 +119,9 @@ namespace MemoryStorage
             startAddress = BEGIN + W25Q80DV::SIZE_PAGE * (uint)num_page;
         }
 
-        Record *FirstRecord()
+        Record FirstRecord()
         {
-            return (Record *)startAddress;
+            return Record(startAddress);
         }
 
         int GetMaxRecordsCount() const
@@ -101,13 +129,18 @@ namespace MemoryStorage
             return W25Q80DV::SIZE_PAGE / sizeof(Record);
         }
 
+        Record LastRecord()
+        {
+            return Record(startAddress + GetMaxRecordsCount() * sizeof(Record));
+        }
+
         int GetRecordsCount()
         {
             int result = 0;
 
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsValid())
+                if (record.IsValid())
                 {
                     result++;
                 }
@@ -116,24 +149,18 @@ namespace MemoryStorage
             return result;
         }
 
-        Record *LastRecord()
-        {
-            return FirstRecord() + GetMaxRecordsCount();
-
-        }
-
         void Prepare()
         {
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsEmpty() || record->IsErased())
+                if (record.IsEmpty() || record.IsErased())
                 {
                     continue;
                 }
 
-                if (!record->IsValid())
+                if (!record.IsValid())
                 {
-                    record->Erase();
+                    record.Erase();
                 }
             }
         }
@@ -144,20 +171,22 @@ namespace MemoryStorage
         // Возвращает страницу с самой старой записью
         static Page *GetWithOldestRecord();
 
-        Record *GetFirstEmptyRecord()
+        bool GetFirstEmptyRecord(Record *out)
         {
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsEmpty())
+                if (record.IsEmpty())
                 {
-                    return record;
+                    *out = record;
+
+                    return true;
                 }
             }
 
-            return nullptr;
+            return false;
         }
 
-        Record *Append(const Measurements &measurements);
+        Record Append(Measurements &measurements);
 
         void Erase()
         {
@@ -166,16 +195,11 @@ namespace MemoryStorage
             W25Q80DV::ErasePage(num_page);
         }
 
-        void *Begin()
-        {
-            return (void *)startAddress;
-        }
-
         bool IsEmpty()
         {
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsEmpty())
+                if (record.IsEmpty())
                 {
                     continue;
                 }
@@ -190,80 +214,105 @@ namespace MemoryStorage
         {
             int result = 0;
 
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsValid() && record->number > result)
+                if (record.IsValid() && record.GetNumber() > result)
                 {
-                    result = record->number;
+                    result = record.GetNumber();
                 }
             }
 
             return result;
         }
 
-        Record *GetOldestRecord()
+        bool GetOldestRecord(Record *out)
         {
-            Record *result = nullptr;
+            Record result(0);
 
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            bool exist = false;     // Если true, то в result уже что-то записано
+
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsValid())
+                if (record.IsValid())
                 {
-                    if (!result || (record->number < result->number))
+                    if (!exist || (record.GetNumber() < result.GetNumber()))
                     {
+                        exist = true;
+
                         result = record;
                     }
                 }
             }
 
-            return result;
+            if (exist)
+            {
+                *out = result;
+            }
+
+            return exist;
         }
 
         // Возвращает запись с минимальным относительно num_record номером
-        Record *GetMinRecord(int num_record)
+        bool GetMinRecord(int num_record, Record *out)
         {
-            Record *result = nullptr;
+            Record result(0);
 
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            bool exist = false;     // Если true, то в result уже что-то записано
+
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsValid())
+                if (record.IsValid())
                 {
-                    if (result)
+                    if (exist)
                     {
-                        if (record->number >= num_record && record->number < result->number)
+                        if (record.GetNumber() >= num_record && record.GetNumber() < result.GetNumber())
                         {
                             result = record;
                         }
                     }
                     else
                     {
-                        if (record->number >= num_record)
+                        if (record.GetNumber() >= num_record)
                         {
+                            exist = true;
+
                             result = record;
                         }
                     }
                 }
             }
 
-            return result;
+            if (exist)
+            {
+                *out = result;
+            }
+
+            return exist;
         }
 
-        Record *GetNewestRecord()
+        bool GetNewestRecord(Record *out)
         {
-            Record *result = nullptr;
+            Record result(0);
 
-            for (Record *record = FirstRecord(); record < LastRecord(); record++)
+            bool exist = false;     // Если true, то в result уже что-то записано
+
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record->IsValid())
+                if (record.IsValid())
                 {
-                    if (!result || (record->number > result->number))
+                    if (!exist || (record.GetNumber() > result.GetNumber()))
                     {
                         result = record;
                     }
                 }
             }
 
-            return result;
+            if (exist)
+            {
+                *out = result;
+            }
+
+            return exist;
         }
 
     private:
@@ -328,7 +377,9 @@ namespace MemoryStorage
     {
         for (int i = 0; i < NUM_PAGES; i++)
         {
-            if (pages[i].GetFirstEmptyRecord())
+            Record record(0);
+
+            if (pages[i].GetFirstEmptyRecord(&record))
             {
                 return &pages[i];
             }
@@ -337,18 +388,18 @@ namespace MemoryStorage
         return nullptr;
     }
 
-    Record *Page::Append(const Measurements &measurements)
+    Record Page::Append(Measurements &measurements)
     {
-        Record *record = GetFirstEmptyRecord();
+        Record record(0);
 
-        if (!record)
+        if (!GetFirstEmptyRecord(&record))
         {
             Erase();
 
-            record = (Record *)Begin();
+            record = FirstRecord();
         }
 
-        record->Write(GetNewNumber(), measurements);
+        record.Write(GetNewNumber(), measurements);
 
         return record;
     }
@@ -380,7 +431,7 @@ void MemoryStorage::Erase(const Measurements *meas)
 }
 
 
-void *MemoryStorage::Append(const Measurements &meas)
+void MemoryStorage::Append(Measurements &meas)
 {
     Page *page = Page::GetFirstForRecord();
 
@@ -389,29 +440,26 @@ void *MemoryStorage::Append(const Measurements &meas)
         page = Page::GetWithOldestRecord();
     }
 
-    return page->Append(meas);
+    page->Append(meas);
 }
 
 
-bool MemoryStorage::GetOldest(Measurements *meas, int *number)
+bool MemoryStorage::GetOldest(Measurements *meas)
 {
-    Record *record = Record::Oldest();
+    Record record(0);
 
-    if (number)
+    if (Record::Oldest(&record))
     {
-        *number = record ? record->number : -1;
+        Measurements::CopyFromMemory(record.address, meas);
+
+        return true;
     }
 
-    if (record)
-    {
-        Measurements::CopyFromMemory(&record->measurements, meas);
-    }
-
-    return (record != nullptr);
+    return false;
 }
 
 
-bool MemoryStorage::GetNext(Measurements *meas, int number_prev, int *number)
+bool MemoryStorage::GetNext(Measurements *meas, int number_prev)
 {
     if (number_prev == -1)
     {
