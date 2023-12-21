@@ -36,13 +36,28 @@ namespace MemoryStorage
             return Record(startAddress + (uint)GetMaxRecordsCount() * sizeof(Record));
         }
 
-        int GetRecordsCount()
+        int GetCountRecordsGood()
         {
             int result = 0;
 
             for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record.IsValid())
+                if (record.IsCorrectData())
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
+
+        int GetCountRecordsBad()
+        {
+            int result = 0;
+
+            for (Record record = FirstRecord(); record < LastRecord(); record++)
+            {
+                if (record.IsCorrectData())
                 {
                     result++;
                 }
@@ -60,7 +75,7 @@ namespace MemoryStorage
                     continue;
                 }
 
-                if (!record.IsValid())
+                if (!record.IsCorrectData())
                 {
                     record.Erase();
                 }
@@ -118,7 +133,7 @@ namespace MemoryStorage
 
             for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record.IsValid() && record.GetNumber() > result)
+                if (record.IsCorrectData() && record.GetNumber() > result)
                 {
                     result = record.GetNumber();
                 }
@@ -135,7 +150,7 @@ namespace MemoryStorage
 
             for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record.IsValid())
+                if (record.IsCorrectData())
                 {
                     if (!exist || (record.GetNumber() < result.GetNumber()))
                     {
@@ -163,7 +178,7 @@ namespace MemoryStorage
 
             for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record.IsValid())
+                if (record.IsCorrectData())
                 {
                     if (exist)
                     {
@@ -200,7 +215,7 @@ namespace MemoryStorage
 
             for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record.IsValid())
+                if (record.IsCorrectData())
                 {
                     if (!exist || (record.GetNumber() > result.GetNumber()))
                     {
@@ -307,7 +322,11 @@ namespace MemoryStorage
     // Проверить все сектора на предмет повреждённых записей и стереть их
     static void Prepare();
 
-    int GetRecordsCount();
+    static int GetCountRecordsGood();
+    static int GetCountRecordsBad();
+    static int GetCountRecordsAll();
+
+    static void EraseAllRecords();
 }
 
 
@@ -356,13 +375,32 @@ void MemoryStorage::Prepare()
 }
 
 
-int MemoryStorage::GetRecordsCount()
+int MemoryStorage::GetCountRecordsAll()
+{
+    return GetCountRecordsBad() + GetCountRecordsGood();
+}
+
+
+int MemoryStorage::GetCountRecordsGood()
 {
     int result = 0;
 
     for (int i = 0; i < NUM_PAGES; i++)
     {
-        result += pages[i].GetRecordsCount();
+        result += pages[i].GetCountRecordsGood();
+    }
+
+    return result;
+}
+
+
+int MemoryStorage::GetCountRecordsBad()
+{
+    int result = 0;
+
+    for (int i = 0; i < NUM_PAGES; i++)
+    {
+        result += pages[i].GetCountRecordsBad();
     }
 
     return result;
@@ -412,4 +450,31 @@ bool Record::Newest(Record *record)
     }
 
     return exist_result;
+}
+
+
+bool MemoryStorage::Test()
+{
+    EraseAllRecords();
+
+    if (GetCountRecordsBad() != 0)
+    {
+        return false;
+    }
+
+    if (GetCountRecordsGood() != 0)
+    {
+        return false;
+    }
+
+    return GetCountRecordsAll() == 0;
+}
+
+
+void MemoryStorage::EraseAllRecords()
+{
+    for (int i = 0; i < NUM_PAGES; i++)
+    {
+        pages[i].Erase();
+    }
 }

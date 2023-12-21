@@ -66,11 +66,14 @@ struct Record
         return GetMeasurements().number == 0;
     }
 
-    bool IsValid()
+    bool IsCorrectData()
     {
         Measurements &meas = GetMeasurements();
 
-        if (meas.number == -1 || meas.number == 0 || meas.control_field != 0)
+        if (meas.number == -1 ||        // Ничего не было записано
+            meas.number == 0 ||         // Стёрто
+            meas.control_field != 0     // Не записано полностью
+            )
         {
             return false;
         }
@@ -111,5 +114,5 @@ namespace MemoryStorage
 
     void Erase(Record *);
 
-    void Test();
+    bool Test();
 };
