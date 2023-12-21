@@ -75,9 +75,13 @@ void W25Q80DV::WriteUInt(uint address, uint value)
 }
 
 
-uint W25Q80DV::ReadUInt(uint /*address*/)
+uint W25Q80DV::ReadUInt(uint address)
 {
+    uint result = 0;
 
+    ReadLess1024bytes(address, &result, (int)sizeof(result));
+
+    return result;
 }
 
 

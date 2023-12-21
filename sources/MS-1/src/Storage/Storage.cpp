@@ -6,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Hardware/CDC/CDC.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 
 
 /*
@@ -71,26 +72,26 @@ void Storage::Update()
 
 void Storage::SendMeasures()
 {
-    static int prev_number = -1;        // Номер последнего переданного измерения
-
-    Measurements meas;
-
-    if (prev_number == -1)
-    {
-        if (!MemoryStorage::GetOldest(&meas, &prev_number))
-        {
-            return;
-        }
-    }
-
-    int number = -1;
-
-    if (MemoryStorage::GetNext(&meas, prev_number, &number))
-    {
-        prev_number = number;
-
-        HCDC::TransmitF("Measure %d", number);
-    }
+//    static int prev_number = -1;        // Номер последнего переданного измерения
+//
+//    Measurements meas;
+//
+//    if (prev_number == -1)
+//    {
+//        if (!MemoryStorage::GetOldest(&meas, &prev_number))
+//        {
+//            return;
+//        }
+//    }
+//
+//    int number = -1;
+//
+//    if (MemoryStorage::GetNext(&meas, prev_number, &number))
+//    {
+//        prev_number = number;
+//
+//        HCDC::TransmitF("Measure %d", number);
+//    }
 }
 
 
@@ -120,4 +121,18 @@ Measurements Storage::GetLastMeasurements()
     );
 
     return measurements;
+}
+
+
+uint Measurements::CalculateCRC()
+{
+    int size = (uint8 *)&crc - (uint8 *)&number;
+
+    return Math::CalculateCRC(&number, size);
+}
+
+
+void Measurements::WriteToMemory(uint address)
+{
+    W25Q80DV::WriteLess1024bytes(address, this, (int)sizeof(Measurements));
 }

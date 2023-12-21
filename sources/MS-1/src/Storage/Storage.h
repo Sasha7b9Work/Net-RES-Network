@@ -29,7 +29,7 @@ public:
 
     static void CopyFromMemory(uint address, Measurements *to);
 
-    void WriteToMemory(uint);
+    void WriteToMemory(uint address);
 
     uint CalculateCRC();
 
