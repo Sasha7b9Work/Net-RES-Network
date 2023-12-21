@@ -413,6 +413,3 @@ bool Record::Newest(Record *record)
 
     return exist_result;
 }
-
-
-#include "MemoryStorage_test.inc"
