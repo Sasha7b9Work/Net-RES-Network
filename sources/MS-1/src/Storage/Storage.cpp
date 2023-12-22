@@ -136,3 +136,9 @@ void Measurements::WriteToMemory(uint address)
 {
     W25Q80DV::WriteLess1024bytes(address, this, (int)sizeof(Measurements));
 }
+
+
+bool Storage::Test()
+{
+    return MemoryStorage::Test();
+}

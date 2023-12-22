@@ -75,7 +75,6 @@ file(GLOB HARDWARE_LAN                              Hardware/LAN/*.*)
 file(GLOB HARDWARE_LAN_LIBNET                       Hardware/LAN/libnet/*.*)
 file(GLOB MENU                      ../../MS-1/src/Menu/*.*)
 file(GLOB MENU_PAGES                ../../MS-1/src/Menu/Pages/*.*)
-#file(GLOB MODULES_BH1750            ../../MS-1/src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280            ../../MS-1/src/Modules/BME280/*.*)
 file(GLOB MODULES_CG_ANEM           ../../MS-1/src/Modules/CG-Anem/*.*)
 file(GLOB MODULES_GY511             ../../MS-1/src/Modules/GY511/*.*)
@@ -83,7 +82,8 @@ file(GLOB MODULES_HC12              ../../MS-1/src/Modules/HC12/*.*)
 file(GLOB MODULES_NEO_M8N           ../../MS-1/src/Modules/NEO-M8N/*.*)
 file(GLOB MODULES_HIH4000           ../../MS-1/src/Modules/HIH4000/*.*)
 file(GLOB MODULES_ST7735            ../../MS-1/src/Modules/ST7735/*.*)
-file(GLOB MODULES_W25Q80DV          ../../MS-1/src/Modules/W25Q80DV/*.*)
+file(GLOB MODULES_W25Q80DV          ../../MS-1/src/Modules/W25Q80DV/*.h
+                                                   Modules/W25Q80DV/*.cpp)
 file(GLOB SETTINGS                  ../../MS-1/src/Settings/*.*)
 file(GLOB STORAGE                   ../../MS-1/src/Storage/*.*)
 file(GLOB TESTS                     ../../MS-1/src/Tests/*.*)
@@ -103,7 +103,6 @@ source_group(Hardware/LAN           FILES ${HARDWARE_LAN})
 source_group(Hardware/LAN/libnet    FILES ${HARDWARE_LAN_LIBNET})
 source_group(Menu                   FILES ${MENU})
 source_group(Menu/Pages             FILES ${MENU_PAGES})
-#source_group(Modules/BH1750         FILES ${MODULES_BH1750})
 source_group(Modules/BME280         FILES ${MODULES_BME280})
 source_group(Modules/CG-Anem        FILES ${MODULES_CG_ANEM})
 source_group(Modules/GY511          FILES ${MODULES_GY511})
@@ -150,7 +149,6 @@ add_executable( ${PROJECT_NAME}
                 ${HARDWARE_LAN_LIBNET}
                 ${MENU}
                 ${MENU_PAGES}
-#                ${MODULES_BH1750}
                 ${MODULES_BME280}
                 ${MODULES_CG_ANEM}
                 ${MODULES_GY511}

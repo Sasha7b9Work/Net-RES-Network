@@ -47,7 +47,9 @@ void Device::Init()
 
     HAL_USART2::Init();
 
-//    W25Q80DV::Clear();
+    W25Q80DV::Init();
+
+    Storage::Test();
 
     Storage::Init();
 
