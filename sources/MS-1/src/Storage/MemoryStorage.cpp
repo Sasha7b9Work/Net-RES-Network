@@ -57,9 +57,15 @@ namespace MemoryStorage
 
             for (Record record = FirstRecord(); record < LastRecord(); record++)
             {
-                if (record.IsCorrectData())
+                if (!record.IsEmpty())
                 {
-                    result++;
+                    if (!record.IsErased())
+                    {
+                        if (!record.IsCorrectData())
+                        {
+                            result++;
+                        }
+                    }
                 }
             }
 
@@ -314,7 +320,9 @@ namespace MemoryStorage
             record = FirstRecord();
         }
 
-        record.Write(GetNewNumber(), measurements);
+        measurements.number = GetNewNumber();
+
+        record.Write(measurements);
 
         return record;
     }
@@ -453,6 +461,15 @@ bool Record::Newest(Record *record)
 }
 
 
+void MemoryStorage::EraseAllRecords()
+{
+    for (int i = 0; i < NUM_PAGES; i++)
+    {
+        pages[i].Erase();
+    }
+}
+
+
 bool MemoryStorage::Test()
 {
     EraseAllRecords();
@@ -467,14 +484,16 @@ bool MemoryStorage::Test()
         return false;
     }
 
-    return GetCountRecordsAll() == 0;
-}
+    static int prev_records_count = -1;
 
-
-void MemoryStorage::EraseAllRecords()
-{
-    for (int i = 0; i < NUM_PAGES; i++)
+    while (prev_records_count != GetCountRecordsAll())
     {
-        pages[i].Erase();
+        Measurements meas;
+
+        prev_records_count = GetCountRecordsAll();
+
+        Append(meas);
     }
+
+    return GetCountRecordsAll() == 0;
 }

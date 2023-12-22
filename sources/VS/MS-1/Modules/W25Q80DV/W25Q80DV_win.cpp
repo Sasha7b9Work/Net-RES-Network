@@ -51,7 +51,7 @@ void W25Q80DV::ErasePage(int num_page)
 
     while (address < end)
     {
-        buffer[address++] = 0x0;
+        buffer[address++] = 0xFF;
     }
 }
 

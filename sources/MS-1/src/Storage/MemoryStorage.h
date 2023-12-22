@@ -41,11 +41,9 @@ struct Record
         return Begin() + sizeof(Measurements);     // Четыре байта для записи проверочного нуля
     }
 
-    void Write(int number, Measurements &meas)
+    void Write(const Measurements &meas)
     {
-        meas.number = number;
         meas.WriteToMemory(address);
-        W25Q80DV::WriteUInt(address + sizeof(Measurements), 0);     // Записываем ноль для контроля записи
     }
 
     bool IsEmpty()                                                  // Сюда может быть произведена запись
