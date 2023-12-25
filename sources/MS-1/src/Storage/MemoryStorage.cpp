@@ -28,12 +28,12 @@ namespace MemoryStorage
 
         int GetMaxRecordsCount() const
         {
-            return W25Q80DV::SIZE_PAGE / sizeof(Record);
+            return W25Q80DV::SIZE_PAGE / sizeof(Measurements);
         }
 
         Record LastRecord()
         {
-            return Record(startAddress + (uint)GetMaxRecordsCount() * sizeof(Record));
+            return Record(startAddress + (uint)GetMaxRecordsCount() * sizeof(Measurements));
         }
 
         int GetCountRecordsGood()

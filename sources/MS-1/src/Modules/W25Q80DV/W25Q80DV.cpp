@@ -38,6 +38,11 @@ namespace W25Q80DV
 }
 
 
+void W25Q80DV::Init()
+{
+}
+
+
 void W25Q80DV::WriteLess1024bytes(uint address, const void *_buffer, int size)
 {
     const uint8 *buffer = (const uint8 *)_buffer;

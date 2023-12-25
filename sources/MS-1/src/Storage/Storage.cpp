@@ -132,12 +132,6 @@ uint Measurements::CalculateCRC()
 }
 
 
-void Measurements::WriteToMemory(uint address) const
-{
-    W25Q80DV::WriteLess1024bytes(address, this, (int)sizeof(Measurements));
-}
-
-
 bool Storage::Test()
 {
     return MemoryStorage::Test();

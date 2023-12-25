@@ -1,26 +1,32 @@
 // 2023/09/08 22:13:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Storage/Storage.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 
 
 struct Record
 {
+private:
+
+    uint  address;
+
+    Measurements measurements;
+    uint         address_meas = (uint)-1;       // Если address_meas != address, то нужно загрузить
+
+public:
     // address - по этому адресу во внешней памяти хранится запись
     Record(uint _address) : address(_address) { }
 
     Measurements &GetMeasurements()
     {
-        static Measurements prev_meas;          // Здесь последние считанные измерения
-        static uint prev_address = (uint)-1;    // Здесь адрес, откуда считаны последние измерения
-
-        if (address != prev_address)
+        if (address != address_meas)
         {
-            prev_address = address;
+            address_meas = address;
 
-            W25Q80DV::ReadLess1024bytes(address, &prev_meas, sizeof(Measurements));
+            W25Q80DV::ReadLess1024bytes(address, &measurements, sizeof(Measurements));
         }
 
-        return prev_meas;
+        return measurements;
     }
 
     int GetNumber()
@@ -40,7 +46,10 @@ struct Record
 
     void Write(const Measurements &meas)
     {
-        meas.WriteToMemory(address);
+        measurements = meas;
+        address_meas = address;
+
+        W25Q80DV::WriteLess1024bytes(address, &meas, (int)sizeof(Measurements));
     }
 
     bool IsEmpty()                                                  // Сюда может быть произведена запись
@@ -94,10 +103,6 @@ struct Record
     {
         address += 4;
     }
-
-private:
-
-    uint         address;
 };
 
 

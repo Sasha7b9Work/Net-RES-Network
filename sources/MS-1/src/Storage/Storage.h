@@ -27,8 +27,6 @@ public:
     float GetVelocity()    const { return velocity; }
     PackedTime GetTime()   const { return time; }
 
-    void WriteToMemory(uint address) const;
-
     uint CalculateCRC();
 
     uint GetCRC() { return crc; }
