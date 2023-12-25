@@ -54,15 +54,17 @@ public:
 
     bool IsEmpty()                                                  // Сюда может быть произведена запись
     {
-        for (uint p = Begin(); p < End(); p += 4)
+        static bool first = true;
+        static Measurements zero_meas;
+
+        if (first)
         {
-            if (W25Q80DV::ReadUInt(p) != (uint)(-1))
-            {
-                return false;
-            }
+            first = false;
+
+            std::memset(&zero_meas, 0xFF, sizeof(Measurements));
         }
 
-        return true;
+        return std::memcmp(&GetMeasurements(), &zero_meas, sizeof(Measurements)) == 0;
     }
 
     bool IsErased()                         // Запись стёрта
