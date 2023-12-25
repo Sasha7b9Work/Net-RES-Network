@@ -47,9 +47,10 @@ public:
     void Write(const Measurements &meas)
     {
         measurements = meas;
+        measurements.crc = measurements.CalculateCRC();
         address_meas = address;
 
-        W25Q80DV::WriteLess1024bytes(address, &meas, (int)sizeof(Measurements));
+        W25Q80DV::WriteLess1024bytes(address, &measurements, (int)sizeof(Measurements));
     }
 
     bool IsEmpty()                                                  // Сюда может быть произведена запись
@@ -84,7 +85,10 @@ public:
             return false;
         }
 
-        return (meas.GetCRC() == meas.CalculateCRC());
+        uint old_CRC = meas.crc;
+        uint new_CRC = meas.CalculateCRC();
+
+        return (old_CRC == new_CRC);
     }
 
     void Erase()
@@ -101,9 +105,9 @@ public:
         return address < rhs.address;
     }
 
-    void operator++(int /*i*/)
+    void operator++(int)
     {
-        address += 4;
+        address += sizeof(Measurements);
     }
 };
 

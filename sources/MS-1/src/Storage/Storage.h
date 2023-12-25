@@ -17,7 +17,6 @@ public:
         time(_time),
         control_field(0)
     {
-        crc = CalculateCRC();
     }
 
     float GetTemperature() const { return temperature; }
@@ -29,8 +28,6 @@ public:
 
     uint CalculateCRC();
 
-    uint GetCRC() { return crc; }
-
     int number;
 
 private:
@@ -41,10 +38,10 @@ private:
     float dew_point;
     float velocity;
     PackedTime time;
-    uint crc;
 
 public:
 
+    uint crc;
     uint control_field;
 };
 

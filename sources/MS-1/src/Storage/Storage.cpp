@@ -31,6 +31,8 @@ namespace Storage
 
 void Storage::Init()
 {
+    MemoryStorage::Init();
+
     for (int i = 0; i < NUM_MEASURES_TO_CONTROL; i++)
     {
         measures[i].Set((Measure::E)i, 0.0f);
