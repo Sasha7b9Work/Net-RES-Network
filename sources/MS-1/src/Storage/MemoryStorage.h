@@ -8,9 +8,6 @@ struct Record
     // address - по этому адресу во внешней памяти хранится запись
     Record(uint _address) : address(_address) { }
 
-    Measurements measurements;
-    uint         address;
-
     Measurements &GetMeasurements()
     {
         static Measurements prev_meas;          // Здесь последние считанные измерения
@@ -97,6 +94,10 @@ struct Record
     {
         address += 4;
     }
+
+private:
+
+    uint         address;
 };
 
 

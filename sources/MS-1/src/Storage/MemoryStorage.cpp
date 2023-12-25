@@ -55,7 +55,10 @@ namespace MemoryStorage
         {
             int result = 0;
 
-            for (Record record = FirstRecord(); record < LastRecord(); record++)
+            Record first_record = FirstRecord();
+            Record last_rcord = LastRecord();
+
+            for (Record record = first_record; record < last_rcord; record++)
             {
                 if (!record.IsEmpty())
                 {
@@ -385,7 +388,11 @@ void MemoryStorage::Prepare()
 
 int MemoryStorage::GetCountRecordsAll()
 {
-    return GetCountRecordsBad() + GetCountRecordsGood();
+    int bad = GetCountRecordsBad();
+
+    int good = GetCountRecordsGood();
+
+    return bad + good;
 }
 
 
