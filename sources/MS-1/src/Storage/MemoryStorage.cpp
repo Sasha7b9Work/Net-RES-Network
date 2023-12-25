@@ -479,6 +479,8 @@ void MemoryStorage::EraseAllRecords()
 
 bool MemoryStorage::Test()
 {
+    \todo ускорить GetCountRecordsBad(), GetCountRecordsGood()
+
     EraseAllRecords();
 
     if (GetCountRecordsBad() != 0)
@@ -500,6 +502,11 @@ bool MemoryStorage::Test()
         prev_records_count = GetCountRecordsAll();
 
         Append(meas);
+    }
+
+    while (true)
+    {
+        prev_records_count = prev_records_count;
     }
 
     return GetCountRecordsAll() == 0;
