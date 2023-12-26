@@ -29,8 +29,8 @@ namespace MemoryStorage
 
         uint startAddress;
 
-        ValueInt records_good;      // —только хороших записей на странице
-        ValueInt records_bad;       // —только плохих записей на странице
+        ValueInt records_good;              // —только хороших записей на странице
+        ValueInt records_bad;               // —только плохих записей на странице
 
     public:
 
