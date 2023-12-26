@@ -34,6 +34,9 @@ namespace MemoryStorage
 
     public:
 
+        // Пометить страницу по адресу address как "грязную" - нужен пересчёт значений
+        static void MarkAsDirty(uint address);
+
         void Init(int num_page)
         {
             startAddress = BEGIN + W25Q80DV::SIZE_PAGE * (uint)num_page;
@@ -144,6 +147,8 @@ namespace MemoryStorage
             int num_page = (int)(startAddress / W25Q80DV::SIZE_PAGE);
 
             W25Q80DV::ErasePage(num_page);
+
+            MarkAsDirty(startAddress);
         }
 
         bool IsEmpty()
@@ -269,6 +274,14 @@ namespace MemoryStorage
 
     static Page pages[NUM_PAGES];
 
+    void Page::MarkAsDirty(uint address)
+    {
+        Page &page = pages[address / Page::SIZE];
+
+        page.records_bad.is_valid = false;
+        page.records_good.is_valid = false;
+    }
+
     static int GetNewNumber()
     {
         int result = 0;
@@ -388,12 +401,16 @@ void Record::Write(const Measurements &meas)
     address_meas = address;
 
     W25Q80DV::WriteLess1024bytes(address, &measurements, (int)sizeof(Measurements));
+
+    MemoryStorage::Page::MarkAsDirty(address);
 }
 
 
 void Record::Erase()
 {
     W25Q80DV::WriteUInt((uint)Begin(), 0);
+
+    MemoryStorage::Page::MarkAsDirty((uint)Begin());
 }
 
 
