@@ -14,8 +14,26 @@ namespace MemoryStorage
 
     static const int NUM_PAGES = (END - BEGIN) / W25Q80DV::SIZE_PAGE;
 
+    struct ValueInt
+    {
+        int value = 0;
+        bool is_valid = false;
+    };
+
     struct Page
     {
+    public:
+        static const int SIZE = W25Q80DV::SIZE_PAGE;
+
+    private:
+
+        uint startAddress;
+
+        ValueInt records_good;      // —только хороших записей на странице
+        ValueInt records_bad;       // —только плохих записей на странице
+
+    public:
+
         void Init(int num_page)
         {
             startAddress = BEGIN + W25Q80DV::SIZE_PAGE * (uint)num_page;
@@ -38,41 +56,48 @@ namespace MemoryStorage
 
         int GetCountRecordsGood()
         {
-            int result = 0;
-
-            for (Record record = FirstRecord(); record < LastRecord(); record++)
+            if (!records_good.is_valid)
             {
-                if (record.IsCorrectData())
+                records_good.value = 0;
+
+                for (Record record = FirstRecord(); record < LastRecord(); record++)
                 {
-                    result++;
+                    if (record.IsCorrectData())
+                    {
+                        records_good.value++;
+                    }
                 }
+
+                records_good.is_valid = true;
             }
 
-            return result;
+            return records_good.value;
         }
 
         int GetCountRecordsBad()
         {
-            int result = 0;
-
-            Record first_record = FirstRecord();
-            Record last_rcord = LastRecord();
-
-            for (Record record = first_record; record < last_rcord; record++)
+            if (records_bad.is_valid)
             {
-                if (!record.IsEmpty())
+                records_bad.value = 0;
+
+                for (Record record = FirstRecord(); record < LastRecord(); record++)
                 {
-                    if (!record.IsErased())
+                    if (!record.IsEmpty())
                     {
-                        if (!record.IsCorrectData())
+                        if (!record.IsErased())
                         {
-                            result++;
+                            if (!record.IsCorrectData())
+                            {
+                                records_bad.value++;
+                            }
                         }
                     }
                 }
+
+                records_bad.is_valid = true;
             }
 
-            return result;
+            return records_bad.value;
         }
 
         void Prepare()
@@ -240,10 +265,6 @@ namespace MemoryStorage
 
             return exist;
         }
-
-    private:
-
-        uint startAddress;
     };
 
     static Page pages[NUM_PAGES];
@@ -338,6 +359,41 @@ namespace MemoryStorage
     static int GetCountRecordsAll();
 
     static void EraseAllRecords();
+}
+
+
+Record::Record(uint _address) : address(_address)
+{
+//    page = &MemoryStorage::pages[address / MemoryStorage::Page::SIZE];
+}
+
+
+Measurements &Record::GetMeasurements()
+{
+    if (address != address_meas)
+    {
+        address_meas = address;
+
+        W25Q80DV::ReadLess1024bytes(address, &measurements, sizeof(Measurements));
+    }
+
+    return measurements;
+}
+
+
+void Record::Write(const Measurements &meas)
+{
+    measurements = meas;
+    measurements.crc = measurements.CalculateCRC();
+    address_meas = address;
+
+    W25Q80DV::WriteLess1024bytes(address, &measurements, (int)sizeof(Measurements));
+}
+
+
+void Record::Erase()
+{
+    W25Q80DV::WriteUInt((uint)Begin(), 0);
 }
 
 
@@ -479,8 +535,6 @@ void MemoryStorage::EraseAllRecords()
 
 bool MemoryStorage::Test()
 {
-    \todo ускорить GetCountRecordsBad(), GetCountRecordsGood()
-
     EraseAllRecords();
 
     if (GetCountRecordsBad() != 0)

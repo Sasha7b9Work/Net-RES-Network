@@ -1,7 +1,6 @@
 // 2023/09/08 22:13:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Storage/Storage.h"
-#include "Modules/W25Q80DV/W25Q80DV.h"
 
 
 struct Record
@@ -15,19 +14,9 @@ private:
 
 public:
     // address - по этому адресу во внешней памяти хранится запись
-    Record(uint _address) : address(_address) { }
+    Record(uint _address);
 
-    Measurements &GetMeasurements()
-    {
-        if (address != address_meas)
-        {
-            address_meas = address;
-
-            W25Q80DV::ReadLess1024bytes(address, &measurements, sizeof(Measurements));
-        }
-
-        return measurements;
-    }
+    Measurements &GetMeasurements();
 
     int GetNumber()
     {
@@ -44,14 +33,7 @@ public:
         return Begin() + sizeof(Measurements);     // Четыре байта для записи проверочного нуля
     }
 
-    void Write(const Measurements &meas)
-    {
-        measurements = meas;
-        measurements.crc = measurements.CalculateCRC();
-        address_meas = address;
-
-        W25Q80DV::WriteLess1024bytes(address, &measurements, (int)sizeof(Measurements));
-    }
+    void Write(const Measurements &);
 
     bool IsEmpty()                                                  // Сюда может быть произведена запись
     {
@@ -91,10 +73,7 @@ public:
         return (old_CRC == new_CRC);
     }
 
-    void Erase()
-    {
-        W25Q80DV::WriteUInt((uint)Begin(), 0);
-    }
+    void Erase();
 
     static bool Oldest(Record *record);
 
