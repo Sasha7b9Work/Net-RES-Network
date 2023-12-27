@@ -15,9 +15,8 @@ namespace W25Q80DV
     // Размер буфера ограничен 1024 байтами
     void WriteLess1KB(uint address, const void *buffer, int size);
 
-    // Размер буфера ограничен 1024 байтами
-    void ReadLess1KB(uint address, void *buffer, int size);
-    void ReadLess4KB(uint address, void *buffer, int size);
+    template<int count>
+    void ReadLess1KB(uint address, void *buffer);
 
     void ReadID(uint8 id[2]);
 
@@ -34,7 +33,7 @@ namespace W25Q80DV
 
     void WriteData(uint, const void *, int);
 
-    uint8 Read(uint address);
+    uint8 ReadUInt8(uint address);
 
     void Clear();
 

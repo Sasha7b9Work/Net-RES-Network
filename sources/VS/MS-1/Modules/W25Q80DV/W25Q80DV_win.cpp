@@ -1,6 +1,10 @@
 // 2023/12/22 11:26:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Modules/W25Q80DV/W25Q80DV.h"
+#include <cstring>
+
+
+template void W25Q80DV::ReadLess1KB<36>(uint address, void *buffer);
 
 
 namespace W25Q80DV
@@ -31,16 +35,10 @@ void W25Q80DV::WriteLess1KB(uint address, const void *_buffer, int size)
 }
 
 
-void W25Q80DV::ReadLess1KB(uint address, void *_buffer, int size)
+template<int count>
+void W25Q80DV::ReadLess1KB(uint address, void *out)
 {
-    uint end = address + size;
-
-    uint8 *pointer = (uint8 *)_buffer;
-
-    while (address < end)
-    {
-        *pointer++ = buffer[address++];
-    }
+    std::memcpy(out, &buffer[address], (uint)count);
 }
 
 

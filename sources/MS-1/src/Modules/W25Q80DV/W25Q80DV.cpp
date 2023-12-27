@@ -38,6 +38,9 @@ namespace W25Q80DV
 }
 
 
+template void W25Q80DV::ReadLess1KB<36>(uint address, void *buffer);
+
+
 void W25Q80DV::Init()
 {
 }
@@ -84,7 +87,7 @@ uint W25Q80DV::ReadUInt(uint address)
 {
     uint result = 0;
 
-    ReadLess1KB(address, &result, (int)sizeof(result));
+    ReadLess1KB<sizeof(result)>(address, &result);
 
     return result;
 }
@@ -141,49 +144,31 @@ void W25Q80DV::ErasePage(int num_page)
 }
 
 
-void W25Q80DV::ReadLess1KB(uint address, void *buffer, int size)
+template<int count>
+void W25Q80DV::ReadLess1KB(uint address, void *buffer)
 {
     WaitRelease();
 
-    Buffer<1024 + 4> out;
+    Buffer<count + 4> out;
 
     out[0] = READ_DATA; //-V525
     out[1] = (uint8)(address >> 16);
     out[2] = (uint8)(address >> 8);
     out[3] = (uint8)(address);
 
-    Buffer<1024 + 4> in;
+    Buffer<count + 4> in;
 
-    HAL_SPI1::WriteRead(out.Data(), in.Data(), size + 1 + 3);
+    HAL_SPI1::WriteRead(out.Data(), in.Data(), count + 4);
 
-    std::memcpy(buffer, in.Data() + 4, (uint)size);
+    std::memcpy(buffer, in.Data() + 4, (uint)count);
 }
 
 
-void W25Q80DV::ReadLess4KB(uint address, void *buffer, int size)
-{
-    WaitRelease();
-
-    Buffer<4096 + 4> out;
-
-    out[0] = READ_DATA;
-    out[1] = (uint8)(address >> 16);
-    out[2] = (uint8)(address >> 8);
-    out[3] = (uint8)(address);
-
-    Buffer<4096 + 4> in;
-
-    HAL_SPI1::WriteRead(out.Data(), in.Data(), size + 1 + 2);
-
-    std::memcpy(buffer, in.Data() + 4, (uint)size);
-}
-
-
-uint8 W25Q80DV::Read(uint address)
+uint8 W25Q80DV::ReadUInt8(uint address)
 {
     uint8 result = 0;
 
-    ReadLess1KB(address, &result, 1);
+    ReadLess1KB<sizeof(result)>(address, &result);
 
     return result;
 }
@@ -201,7 +186,7 @@ bool W25Q80DV::Test::Run()
 
         Write(i, byte);
 
-        if (byte != Read(i))
+        if (byte != ReadUInt8(i))
         {
             EraseSectorForAddress(0);
             result = false;
