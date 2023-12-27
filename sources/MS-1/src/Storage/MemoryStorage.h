@@ -23,6 +23,8 @@ struct Record
     // Имеет ли смысл данныая запись
     bool IsExist() const { return address < (W25Q80DV::SIZE - Record::SIZE); }
 
+    void Write(Measurements &, int number);
+
     Measurements &GetMeasurements();
 
     bool operator>(Record &rhs)
@@ -34,6 +36,8 @@ struct Record
     {
         return GetMeasurements().number < rhs.GetMeasurements().number;
     }
+
+    static int GetNumber();
 
 private:
 

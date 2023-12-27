@@ -4,6 +4,7 @@
 #include <cstring>
 
 
+template void W25Q80DV::WriteBuffer<36>(uint, const void *);
 template uint8 *MemBuffer<512>::Read(uint);
 template uint8 *MemBuffer<8192>::Read(uint);
 

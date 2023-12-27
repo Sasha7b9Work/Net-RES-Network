@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Storage/MemoryStorage.h"
 #include "Hardware/Timer.h"
+#include "Modules/W25Q80DV/W25Q80DV.h"
 
 
 namespace MemoryStorage
@@ -83,10 +84,31 @@ namespace MemoryStorage
 
             std::memcpy(out, &buffer[shift], (uint)size);
         }
+
+        static void Write(uint address, const Measurements &meas)
+        {
+            W25Q80DV::WriteBuffer<sizeof(meas)>(address, &meas);
+
+            if (Consist(address, sizeof(meas)))
+            {
+                MarkAsDirty();
+            }
+        }
     }
 
     static Record first_record((uint)-1);
     static Record last_record((uint)-1);
+}
+
+
+int Record::GetNumber()
+{
+    if (!MemoryStorage::last_record.IsExist())
+    {
+        return 0;
+    }
+
+    return MemoryStorage::last_record.GetMeasurements().number + 1;
 }
 
 
@@ -137,9 +159,28 @@ void MemoryStorage::Init()
 }
 
 
-void MemoryStorage::Append(Measurements &)
+void MemoryStorage::Append(Measurements &meas)
 {
+    /*
+    *       ѕринцип хранени€.
+    *   1.  ажда€ запись снабжаетс€ пор€дковым номером, который рассчитываетс таким образом:
+    *       - ≈сли хранилище пустое, то этот номер 1.
+    *       - ≈сли в хранилище уже есть записи, то этот номер будет "номер последней записи + 1"
+    *   2. »щем свободное место в пам€ти:
+    *       - ≈сли записей нет, то этот адрес будет 0
+    *       - ≈сли адрес последней записи больше адреса первой записи, то запись будет идти за последней записью и станет последней записью
+    */
 
+    int number = Record::GetNumber();
+
+    if (!last_record.IsExist())
+    {
+        Record(0).Write(meas, number);
+    }
+    els e
+    {
+
+    }
 }
 
 
@@ -202,4 +243,15 @@ Measurements &Record::ValueMeasurements::GetMeasurements(uint addr)
     }
 
     return measurements;
+}
+
+
+void Record::Write(Measurements &meas, int number)
+{
+    meas.number = number;
+    meas.crc = meas.CalculateCRC();
+
+    MemoryStorage::Cache::Write(address, meas);
+
+    MemoryStorage::last_record = *this;
 }
