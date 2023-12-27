@@ -1,6 +1,7 @@
 // 2023/09/08 22:14:01 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Storage/MemoryStorage.h"
+#include "Hardware/Timer.h"
 
 
 namespace MemoryStorage
@@ -45,12 +46,12 @@ void MemoryStorage::Init()
                             last_record = record;
                         }
 
-                        if (record.GetMeasurements().number > last_record.GetMeasurements().number)
+                        if (record > last_record)
                         {
                             last_record = record;
                         }
 
-                        if (record.GetMeasurements().number < first_record.GetMeasurements().number)
+                        if (record < first_record)
                         {
                             first_record = record;
                         }

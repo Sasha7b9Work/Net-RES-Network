@@ -25,6 +25,16 @@ struct Record
 
     Measurements &GetMeasurements();
 
+    bool operator>(Record &rhs)
+    {
+        return GetMeasurements().number > rhs.GetMeasurements().number;
+    }
+
+    bool operator<(Record &rhs)
+    {
+        return GetMeasurements().number < rhs.GetMeasurements().number;
+    }
+
 private:
 
     struct ValueMeasurements
