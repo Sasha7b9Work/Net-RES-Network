@@ -59,6 +59,4 @@ namespace Storage
     bool GetMeasure(Measure::E, Measure &);
 
     Measurements GetLastMeasurements();
-
-    bool Test();
 }

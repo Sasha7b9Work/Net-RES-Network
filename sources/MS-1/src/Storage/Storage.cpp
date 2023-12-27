@@ -132,9 +132,3 @@ uint Measurements::CalculateCRC()
 
     return Math::CalculateCRC(&number, size);
 }
-
-
-bool Storage::Test()
-{
-    return MemoryStorage::Test();
-}

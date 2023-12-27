@@ -366,12 +366,6 @@ namespace MemoryStorage
 
     // Проверить все сектора на предмет повреждённых записей и стереть их
     static void Prepare();
-
-    static int GetCountRecordsGood();
-    static int GetCountRecordsBad();
-    static int GetCountRecordsAll();
-
-    static void EraseAllRecords();
 }
 
 
@@ -459,42 +453,6 @@ void MemoryStorage::Prepare()
 }
 
 
-int MemoryStorage::GetCountRecordsAll()
-{
-    int bad = GetCountRecordsBad();
-
-    int good = GetCountRecordsGood();
-
-    return bad + good;
-}
-
-
-int MemoryStorage::GetCountRecordsGood()
-{
-    int result = 0;
-
-    for (int i = 0; i < NUM_PAGES; i++)
-    {
-        result += pages[i].GetCountRecordsGood();
-    }
-
-    return result;
-}
-
-
-int MemoryStorage::GetCountRecordsBad()
-{
-    int result = 0;
-
-    for (int i = 0; i < NUM_PAGES; i++)
-    {
-        result += pages[i].GetCountRecordsBad();
-    }
-
-    return result;
-}
-
-
 bool Record::Oldest(Record *record)
 {
     bool exist_result = false;
@@ -538,47 +496,4 @@ bool Record::Newest(Record *record)
     }
 
     return exist_result;
-}
-
-
-void MemoryStorage::EraseAllRecords()
-{
-    for (int i = 0; i < NUM_PAGES; i++)
-    {
-        pages[i].Erase();
-    }
-}
-
-
-bool MemoryStorage::Test()
-{
-    EraseAllRecords();
-
-    if (GetCountRecordsBad() != 0)
-    {
-        return false;
-    }
-
-    if (GetCountRecordsGood() != 0)
-    {
-        return false;
-    }
-
-    static int prev_records_count = -1;
-
-    while (prev_records_count != GetCountRecordsAll())
-    {
-        Measurements meas;
-
-        prev_records_count = GetCountRecordsAll();
-
-        Append(meas);
-    }
-
-    while (true)
-    {
-        prev_records_count = prev_records_count;
-    }
-
-    return GetCountRecordsAll() == 0;
 }

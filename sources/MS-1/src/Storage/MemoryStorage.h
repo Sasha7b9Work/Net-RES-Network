@@ -102,6 +102,4 @@ namespace MemoryStorage
     bool GetOldest(Record *record);
 
     void Erase(Record *);
-
-    bool Test();
 };

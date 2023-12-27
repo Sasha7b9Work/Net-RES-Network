@@ -51,8 +51,6 @@ void Device::Init()
 
     Storage::Init();
 
-    Storage::Test();
-
 //    HAL_IWDG::Init();
 }
 
