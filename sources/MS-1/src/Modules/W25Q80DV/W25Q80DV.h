@@ -17,6 +17,7 @@ namespace W25Q80DV
 
     // Размер буфера ограничен 1024 байтами
     void ReadLess1KB(uint address, void *buffer, int size);
+    void ReadLess4KB(uint address, void *buffer, int size);
 
     void ReadID(uint8 id[2]);
 

@@ -143,25 +143,42 @@ void W25Q80DV::ErasePage(int num_page)
 
 void W25Q80DV::ReadLess1KB(uint address, void *_buffer, int size)
 {
-    uint8 *buffer = (uint8 *)_buffer;
-
     WaitRelease();
 
-    Buffer<1024> out;
+    Buffer<1024 + 4> out;
 
     out[0] = READ_DATA; //-V525
     out[1] = (uint8)(address >> 16);
     out[2] = (uint8)(address >> 8);
     out[3] = (uint8)(address);
 
-    Buffer<1024> in;
+    Buffer<1024 + 4> in;
 
     HAL_SPI1::WriteRead(out.Data(), in.Data(), size + 1 + 3);
+
+    uint8 *buffer = (uint8 *)_buffer;
 
     for (int i = 0; i < size; i++)
     {
         buffer[i] = in[4 + i];
     }
+}
+
+
+void W25Q80DV::ReadLess4KB(uint address, void *buffer, int size)
+{
+    WaitRelease();
+
+    Buffer<4096 + 4> out;
+
+    out[0] = READ_DATA;
+    out[1] = (uint8)(address >> 16);
+    out[2] = (uint8)(address >> 8);
+    out[3] = (uint8)(address);
+
+    Buffer<4096 + 4> in;
+
+    HAL_SPI1::WriteRead(out.Data)
 }
 
 
