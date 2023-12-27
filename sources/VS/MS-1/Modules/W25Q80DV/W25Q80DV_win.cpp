@@ -18,7 +18,7 @@ void W25Q80DV::Init()
 }
 
 
-void W25Q80DV::WriteLess1024bytes(uint address, const void *_buffer, int size)
+void W25Q80DV::WriteLess1KB(uint address, const void *_buffer, int size)
 {
     uint end = address + size;
 
@@ -31,7 +31,7 @@ void W25Q80DV::WriteLess1024bytes(uint address, const void *_buffer, int size)
 }
 
 
-void W25Q80DV::ReadLess1024bytes(uint address, void *_buffer, int size)
+void W25Q80DV::ReadLess1KB(uint address, void *_buffer, int size)
 {
     uint end = address + size;
 

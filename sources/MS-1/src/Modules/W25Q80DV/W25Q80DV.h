@@ -13,17 +13,15 @@ namespace W25Q80DV
     void Init();
 
     // Размер буфера ограничен 1024 байтами
-    void WriteLess1024bytes(uint address, const void *buffer, int size);
+    void WriteLess1KB(uint address, const void *buffer, int size);
 
     // Размер буфера ограничен 1024 байтами
-    void ReadLess1024bytes(uint address, void *buffer, int size);
+    void ReadLess1KB(uint address, void *buffer, int size);
 
     void ReadID(uint8 id[2]);
 
     // Стереть страницу, которой принадлежит address
     void EraseSectorForAddress(uint address);
-
-    void Clear();
 
     void ErasePage(int num_page);
 
@@ -36,6 +34,8 @@ namespace W25Q80DV
     void WriteData(uint, const void *, int);
 
     uint8 Read(uint address);
+
+    void Clear();
 
     namespace Test
     {
