@@ -22,6 +22,14 @@ namespace MemoryStorage
     {
         static const int SIZE = 8 * 1024;
         static uint8 buffer[SIZE] __attribute__((section("CCM_DATA")));
+
+        static void Init()
+        {
+            for(int i = 0; i < SIZE; i++)
+            {
+                buffer[i] = 0;
+            }
+        }
     }
 
     static Record first_record((uint)-1);
