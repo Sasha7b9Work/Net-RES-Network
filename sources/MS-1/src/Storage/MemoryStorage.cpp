@@ -23,12 +23,65 @@ namespace MemoryStorage
         static const int SIZE = 8 * 1024;
         static uint8 buffer[SIZE] __attribute__((section("CCM_DATA")));
 
-        static void Init()
+        static uint begin = (uint)-1;               // Начало памяти в кеше
+
+        static bool IsDirty()
         {
-            for(int i = 0; i < SIZE; i++)
+            return begin >= W25Q80DV::SIZE;
+        }
+
+        static uint End()
+        {
+            uint end = begin + SIZE;
+
+            if (end > W25Q80DV::SIZE)
             {
-                buffer[i] = 0;
+                end = W25Q80DV::SIZE;
             }
+
+            return end;
+        }
+
+        static void MarkAsDirty()
+        {
+            begin = (uint)-1;
+        }
+
+        // Возвращает true, если содержит память из адреса address, размером size
+        static bool Consist(uint address, int size)
+        {
+            if (IsDirty() || begin > address)
+            {
+                return false;
+            }
+
+            return address + (uint)size < End();
+        }
+
+        static void Fill(uint address)
+        {
+            begin = address;
+
+            uint size = W25Q80DV::SIZE - begin;
+
+            if (size > SIZE)
+            {
+                size = SIZE;
+            }
+
+            W25Q80DV::ReadBuffer<SIZE>(begin, buffer);
+        }
+
+        static void Read(uint address, void *out, int size)
+        {
+            if (!Consist(address, size))
+            {
+                Fill(address);
+            }
+
+            uint shift = address - begin;
+
+            std::memcpy(out, &buffer[shift], (uint)size);
         }
     }
 
@@ -39,6 +92,8 @@ namespace MemoryStorage
 
 void MemoryStorage::Init()
 {
+    uint time_start = TIME_MS;
+
     for (uint address = 0; address < W25Q80DV::SIZE; address += Record::SIZE)
     {
         Record record(address);
@@ -79,6 +134,10 @@ void MemoryStorage::Init()
             }
         }
     }
+
+    uint time = TIME_MS - time_start;
+
+    time = time;
 }
 
 
@@ -122,7 +181,12 @@ bool Record::IsCorrect()
 
 void Record::Erase()
 {
-        W25Q80DV::WriteUInt(address, 0);
+    W25Q80DV::WriteUInt(address, 0);
+
+    if (MemoryStorage::Cache::Consist(address, sizeof(uint)))
+    {
+        MemoryStorage::Cache::MarkAsDirty();
+    }
 }
 
 
@@ -138,7 +202,7 @@ Measurements &Record::ValueMeasurements::GetMeasurements(uint addr)
     {
         is_valid = true;
 
-        W25Q80DV::ReadBuffer<sizeof(measurements)>(addr, &measurements);
+        MemoryStorage::Cache::Read(addr, &measurements, sizeof(measurements));
     }
 
     return measurements;

@@ -4,7 +4,7 @@
 #include <cstring>
 
 
-template void W25Q80DV::ReadBuffer<36>(uint address, void *buffer);
+template void W25Q80DV::ReadBuffer<8192>(uint address, void *buffer);
 
 
 namespace W25Q80DV
