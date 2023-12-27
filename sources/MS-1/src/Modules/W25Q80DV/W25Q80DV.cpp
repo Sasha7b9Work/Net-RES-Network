@@ -43,6 +43,20 @@ template void W25Q80DV::ReadBuffer<8192>(uint address, void *buffer);
 
 void W25Q80DV::Init()
 {
+    uint time_start = TIME_MS;
+
+    static const int SIZE_BUFFER = 8 * 1024;
+
+    uint8 bytes[SIZE_BUFFER];
+
+    for (uint address = 0; address < SIZE; address += SIZE_BUFFER)
+    {
+        ReadBu ffer<SIZE_BUFFER>(address, bytes);       не выходит из этой функции
+    }
+
+    uint time = TIME_MS - time_start;
+
+    time = time;
 }
 
 
