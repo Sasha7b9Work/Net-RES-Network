@@ -46,30 +46,26 @@ void W25Q80DV::Init()
 }
 
 
-void W25Q80DV::WriteLess1KB(uint address, const void *_buffer, int size)
+template<int count>
+void W25Q80DV::WriteBuffer(uint address, const void *_buffer)
 {
-    const uint8 *buffer = (const uint8 *)_buffer;
-
     pinWP.ToHi();
 
     WaitRelease();
 
     HAL_SPI1::Write(WRITE_ENABLE);          // Write enable
 
-    Buffer<1024> data;
+    Buffer<count + 1 + 3> data;
 
     data[0] = PROGRAM_PAGE; //-V525
     data[1] = (uint8)(address >> 16);       // /
     data[2] = (uint8)(address >> 8);        // | Адрес
     data[3] = (uint8)(address);             // / 
 
-    for (int i = 0; i < size; i++)
-    {
-        data[4 + i] = buffer[i];
-    }
+    std::memcpy(&data[4], _buffer, count);
 
     //                          команда   адрес
-    HAL_SPI1::Write(data.Data(), size + 1 + 3);     // Page program
+    HAL_SPI1::Write(data.Data(), count + 1 + 3);     // Page program
 
     HAL_SPI1::Write(WRITE_DISABLE);                 // Write disable
 
@@ -79,7 +75,7 @@ void W25Q80DV::WriteLess1KB(uint address, const void *_buffer, int size)
 
 void W25Q80DV::WriteUInt(uint address, uint value)
 {
-    WriteLess1KB(address, &value, (int)sizeof(value));
+    WriteBuffer<sizeof(value)>(address, &value);
 }
 
 
@@ -97,7 +93,7 @@ void W25Q80DV::Write(uint address, uint8 byte)
 {
     pinWP.ToHi();
 
-    WriteLess1KB(address, &byte, 1);
+    WriteBuffer<sizeof(byte)>(address, &byte);
 
     pinWP.ToLow();
 }

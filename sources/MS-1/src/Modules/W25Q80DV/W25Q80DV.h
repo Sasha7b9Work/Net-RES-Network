@@ -12,8 +12,8 @@ namespace W25Q80DV
 
     void Init();
 
-    // Размер буфера ограничен 1024 байтами
-    void WriteLess1KB(uint address, const void *buffer, int size);
+    template<int count>
+    void WriteBuffer(uint address, const void *buffer);
 
     template<int count>
     void ReadBuffer(uint address, void *buffer);

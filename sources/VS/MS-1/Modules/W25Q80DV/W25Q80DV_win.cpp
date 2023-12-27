@@ -22,7 +22,8 @@ void W25Q80DV::Init()
 }
 
 
-void W25Q80DV::WriteLess1KB(uint address, const void *_buffer, int size)
+template<int count>
+void W25Q80DV::WriteBuffer(uint address, const void *_buffer)
 {
     uint end = address + size;
 
