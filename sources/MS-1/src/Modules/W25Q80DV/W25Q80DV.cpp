@@ -38,7 +38,7 @@ namespace W25Q80DV
 }
 
 
-template void W25Q80DV::ReadLess1KB<36>(uint address, void *buffer);
+template void W25Q80DV::ReadBuffer<36>(uint address, void *buffer);
 
 
 void W25Q80DV::Init()
@@ -87,7 +87,7 @@ uint W25Q80DV::ReadUInt(uint address)
 {
     uint result = 0;
 
-    ReadLess1KB<sizeof(result)>(address, &result);
+    ReadBuffer<sizeof(result)>(address, &result);
 
     return result;
 }
@@ -145,7 +145,7 @@ void W25Q80DV::ErasePage(int num_page)
 
 
 template<int count>
-void W25Q80DV::ReadLess1KB(uint address, void *buffer)
+void W25Q80DV::ReadBuffer(uint address, void *buffer)
 {
     WaitRelease();
 
@@ -168,7 +168,7 @@ uint8 W25Q80DV::ReadUInt8(uint address)
 {
     uint8 result = 0;
 
-    ReadLess1KB<sizeof(result)>(address, &result);
+    ReadBuffer<sizeof(result)>(address, &result);
 
     return result;
 }

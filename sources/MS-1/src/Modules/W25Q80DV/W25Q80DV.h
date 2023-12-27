@@ -16,7 +16,7 @@ namespace W25Q80DV
     void WriteLess1KB(uint address, const void *buffer, int size);
 
     template<int count>
-    void ReadLess1KB(uint address, void *buffer);
+    void ReadBuffer(uint address, void *buffer);
 
     void ReadID(uint8 id[2]);
 

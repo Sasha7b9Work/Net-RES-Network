@@ -4,7 +4,7 @@
 #include <cstring>
 
 
-template void W25Q80DV::ReadLess1KB<36>(uint address, void *buffer);
+template void W25Q80DV::ReadBuffer<36>(uint address, void *buffer);
 
 
 namespace W25Q80DV
@@ -36,7 +36,7 @@ void W25Q80DV::WriteLess1KB(uint address, const void *_buffer, int size)
 
 
 template<int count>
-void W25Q80DV::ReadLess1KB(uint address, void *out)
+void W25Q80DV::ReadBuffer(uint address, void *out)
 {
     std::memcpy(out, &buffer[address], (uint)count);
 }

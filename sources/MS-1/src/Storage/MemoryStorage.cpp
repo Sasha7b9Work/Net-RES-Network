@@ -123,7 +123,7 @@ Measurements &Record::ValueMeasurements::GetMeasurements(uint addr)
     {
         is_valid = true;
 
-        W25Q80DV::ReadLess1KB<sizeof(measurements)>(addr, &measurements);
+        W25Q80DV::ReadBuffer<sizeof(measurements)>(addr, &measurements);
     }
 
     return measurements;
