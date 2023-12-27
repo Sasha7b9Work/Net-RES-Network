@@ -25,14 +25,7 @@ void W25Q80DV::Init()
 template<int count>
 void W25Q80DV::WriteBuffer(uint address, const void *_buffer)
 {
-    uint end = address + size;
-
-    const uint8 *pointer = (const uint8 *)_buffer;
-
-    while (address < end)
-    {
-        buffer[address++] = *pointer++;
-    }
+    std::memcpy(&buffer[address], _buffer, count);
 }
 
 
