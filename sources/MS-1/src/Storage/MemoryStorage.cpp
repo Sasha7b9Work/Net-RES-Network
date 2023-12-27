@@ -17,6 +17,13 @@ namespace MemoryStorage
         uint address;
     };
 
+    // Сюда считываем много памяти, чтобы потом работать с ОЗУ
+    namespace Cache
+    {
+        static const int SIZE = 8 * 1024;
+        static uint8 buffer[SIZE] __attribute__((section("CCM_DATA")));
+    }
+
     static Record first_record((uint)-1);
     static Record last_record((uint)-1);
 }
