@@ -20,7 +20,7 @@ namespace MemoryStorage
     // Сюда считываем много памяти, чтобы потом работать с ОЗУ
     namespace Cache
     {
-        static const int SIZE = 8 * 1024;
+        static const int SIZE = 512;        // Больше нет смысла делать (при 512 память читается за 3256 мс, при 8192 - за 3149 мс)
         static uint8 buffer[SIZE] __attribute__((section("CCM_DATA")));
 
         static uint begin = (uint)-1;               // Начало памяти в кеше
@@ -69,7 +69,7 @@ namespace MemoryStorage
                 size = SIZE;
             }
 
-            W25Q80DV::ReadBuffer<SIZE>(begin, buffer);
+            std::memcpy(buffer, MemBuffer<SIZE>().Read(begin), SIZE);
         }
 
         static void Read(uint address, void *out, int size)
@@ -98,39 +98,35 @@ void MemoryStorage::Init()
     {
         Record record(address);
 
-        if (record.IsExist())
+        if (record.IsExist() &&
+            !record.IsEmpty() &&                // Если сюда уже что-то было записано
+            !record.IsErased())                 // И не стёрто
         {
-            if (!record.IsEmpty())                      // Если сюда уже что-то было записано
-            {
-                if (!record.IsErased())                 // И не стёрто
+            if (record.IsCorrect())
+            {                                   // Корректируем первую и последнюю записи
+                if (!first_record.IsExist())
                 {
-                    if (record.IsCorrect())
-                    {                                   // Корректируем первую и последнюю записи
-                        if (!first_record.IsExist())
-                        {
-                            first_record = record;
-                        }
-
-                        if (!last_record.IsExist())
-                        {
-                            last_record = record;
-                        }
-
-                        if (record > last_record)
-                        {
-                            last_record = record;
-                        }
-
-                        if (record < first_record)
-                        {
-                            first_record = record;
-                        }
-                    }
-                    else
-                    {
-                        record.Erase();         // Стираем некорректную запись
-                    }
+                    first_record = record;
                 }
+
+                if (!last_record.IsExist())
+                {
+                    last_record = record;
+                }
+
+                if (record > last_record)
+                {
+                    last_record = record;
+                }
+
+                if (record < first_record)
+                {
+                    first_record = record;
+                }
+            }
+            else
+            {
+                record.Erase();         // Стираем некорректную запись
             }
         }
     }

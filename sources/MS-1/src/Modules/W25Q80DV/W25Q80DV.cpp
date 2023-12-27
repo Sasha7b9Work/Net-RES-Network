@@ -38,25 +38,12 @@ namespace W25Q80DV
 }
 
 
-template void W25Q80DV::ReadBuffer<8192>(uint address, void *buffer);
+template uint8 *MemBuffer<512>::Read(uint);
+template uint8 *MemBuffer<8192>::Read(uint);
 
 
 void W25Q80DV::Init()
 {
-    uint time_start = TIME_MS;
-
-    static const int SIZE_BUFFER = 8 * 1024;
-
-    uint8 bytes[SIZE_BUFFER];
-
-    for (uint address = 0; address < SIZE; address += SIZE_BUFFER)
-    {
-        ReadBu ffer<SIZE_BUFFER>(address, bytes);       не выходит из этой функции
-    }
-
-    uint time = TIME_MS - time_start;
-
-    time = time;
 }
 
 
@@ -95,11 +82,11 @@ void W25Q80DV::WriteUInt(uint address, uint value)
 
 uint W25Q80DV::ReadUInt(uint address)
 {
-    uint result = 0;
+    MemBuffer<4> buffer;
 
-    ReadBuffer<sizeof(result)>(address, &result);
+    uint *pointer = (uint *)buffer.Read(address);
 
-    return result;
+    return *pointer;
 }
 
 
@@ -155,32 +142,24 @@ void W25Q80DV::ErasePage(int num_page)
 
 
 template<int count>
-void W25Q80DV::ReadBuffer(uint address, void *buffer)
+uint8 *MemBuffer<count>::Read(uint address)
 {
-    WaitRelease();
+    W25Q80DV::WaitRelease();
 
-    Buffer<count + 4> out;
+    buffer[0] = READ_DATA;
+    buffer[1] = (uint8)(address >> 16);
+    buffer[2] = (uint8)(address >> 8);
+    buffer[3] = (uint8)(address);
 
-    out[0] = READ_DATA; //-V525
-    out[1] = (uint8)(address >> 16);
-    out[2] = (uint8)(address >> 8);
-    out[3] = (uint8)(address);
+    HAL_SPI1::WriteRead(buffer, buffer, count + 4);
 
-    Buffer<count + 4> in;
-
-    HAL_SPI1::WriteRead(out.Data(), in.Data(), count + 4);
-
-    std::memcpy(buffer, in.Data() + 4, (uint)count);
+    return Data();
 }
 
 
 uint8 W25Q80DV::ReadUInt8(uint address)
 {
-    uint8 result = 0;
-
-    ReadBuffer<sizeof(result)>(address, &result);
-
-    return result;
+    return *MemBuffer<1>().Read(address);
 }
 
 

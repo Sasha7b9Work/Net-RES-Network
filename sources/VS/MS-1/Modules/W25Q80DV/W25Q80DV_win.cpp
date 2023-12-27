@@ -4,7 +4,17 @@
 #include <cstring>
 
 
-template void W25Q80DV::ReadBuffer<8192>(uint address, void *buffer);
+template uint8 *MemBuffer<512>::Read(uint);
+template uint8 *MemBuffer<8192>::Read(uint);
+
+
+template<int size>
+uint8 *MemBuffer<size>::Read(uint address)
+{
+    std::memcpy(Data(), &buffer[address], size);
+
+    return Data();
+}
 
 
 namespace W25Q80DV
@@ -26,13 +36,6 @@ template<int count>
 void W25Q80DV::WriteBuffer(uint address, const void *_buffer)
 {
     std::memcpy(&buffer[address], _buffer, count);
-}
-
-
-template<int count>
-void W25Q80DV::ReadBuffer(uint address, void *out)
-{
-    std::memcpy(out, &buffer[address], (uint)count);
 }
 
 

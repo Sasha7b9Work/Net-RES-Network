@@ -2,6 +2,16 @@
 #pragma once
 
 
+template<int size>
+struct MemBuffer
+{
+    uint8 *Read(uint address);
+    uint8 *Data() { return buffer + 4; }
+private:
+    uint8 buffer[size + 4];
+};
+
+
 namespace W25Q80DV
 {
     static const uint BEGIN = 0;
@@ -14,9 +24,6 @@ namespace W25Q80DV
 
     template<int count>
     void WriteBuffer(uint address, const void *buffer);
-
-    template<int count>
-    void ReadBuffer(uint address, void *buffer);
 
     void ReadID(uint8 id[2]);
 
