@@ -5,7 +5,38 @@
 
 struct Record
 {
-    Measurements measurements;
+    static const int SIZE = sizeof(Measurements);
+
+    Record(uint _address = (uint)-1) : address(_address) { }
+
+    // Возможна запись сюда. Все байты равны 0xFF
+    bool IsEmpty();
+
+    // Стёртая запись, это когда на месте номера записан 0
+    bool IsErased();
+
+    // Есть данные и они корректны
+    bool IsCorrect();
+
+    void Erase();
+
+    // Имеет ли смысл данныая запись
+    bool IsExist() const { return address < (W25Q80DV::SIZE - Record::SIZE); }
+
+    Measurements &GetMeasurements();
+
+private:
+
+    struct ValueMeasurements
+    {
+        Measurements measurements;      // Здесь измерения, хранящиеся по адресу address
+        bool is_valid = false;          // true, если измерения загужены
+        Measurements &GetMeasurements(uint address);
+    };
+
+    ValueMeasurements value_meas;
+
+    uint address;
 };
 
 

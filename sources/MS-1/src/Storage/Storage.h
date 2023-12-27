@@ -42,7 +42,7 @@ private:
 public:
 
     uint crc;
-    uint control_field;
+    uint control_field; // Здесь всегда ноль. Если при чтении здесь не ноль, то запись не была завершена - повреждённая запись
 };
 
 
