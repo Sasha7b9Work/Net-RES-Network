@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Modules/GY511/GY511.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Math.h"
 #include <stm32f3xx_hal.h>
 #include <cmath>
 
@@ -106,7 +107,7 @@ void GY511::Init()
     // Set device in continuous mode with 12 bit resol.
     HAL_I2C1::Read(ADDR_ACCE, GY511_CTRL_REG4, &data, 1);
     data |= (1 << 3);                                           // HR = 1, (LPen = 0 - High resolution mode)
-    Write(ADDR_ACCE, GY511_CTRL_REG4, data);
+    Write(ADDR_ACCE, GY511_CTRL_REG4, data); //-V525
 
     Write(ADDR_MAGN, GY511_CRA_REG_M, 0x14);    // CRA_REG_M
 
@@ -191,7 +192,7 @@ float GY511::CalculateAzimuth()
     float val_x = x.GetValue();
     float val_y = y.GetValue();
 
-    float k = 180.0f / 3.1415296f;
+    float k = 180.0f / Math::PI;
 
     float angle = std::atan(x.GetValue() / y.GetValue());
 

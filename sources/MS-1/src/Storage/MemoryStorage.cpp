@@ -177,7 +177,7 @@ void MemoryStorage::Append(Measurements &meas)
     {
         Record(0).Write(meas, number);
     }
-    els e
+    else
     {
 
     }

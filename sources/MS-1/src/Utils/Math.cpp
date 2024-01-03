@@ -58,9 +58,9 @@ void Math::CircleDecrease(T *value, T min, T max)
 
 float Math::Sin(float angle_rad)
 {
-    const float k = 180.0f / 3.1415296f;
+    const float k = 180.0f / PI;
 
-    float angle = angle_rad * 180.0f / 3.1415296f;
+    float angle = angle_rad * 180.0f / PI;
 
     static float values[360];
     static bool first = true;
@@ -90,7 +90,7 @@ float Math::Sin(float angle_rad)
 
 float Math::Cos(float angle_rad)
 {
-    const float k = 180.0f / 3.1415296f;
+    const float k = 180.0f / PI;
 
     float angle = angle_rad * k;
 

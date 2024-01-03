@@ -6,6 +6,8 @@
 
 namespace Math
 {
+    const float PI = 3.1415296f; //-V624
+
     uint CalculateCRC(const void *buffer, int size);
 
     template<class T>

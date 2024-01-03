@@ -448,7 +448,7 @@ void Display::Update(uint timeMS)
 
 void Display::DrawCompass()
 {
-    const float k = 3.1415296f / 180.0f;
+    const float k = Math::PI / 180.0f;
 
     const float angle = (float)measures[Measure::Azimuth].value.GetDouble();
 
