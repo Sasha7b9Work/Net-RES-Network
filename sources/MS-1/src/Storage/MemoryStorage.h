@@ -25,19 +25,15 @@ struct Record
 
     void Write(Measurements &, int number);
 
-    Measurements &GetMeasurements();
+    const Measurements &GetMeasurements() const;
 
-    bool operator>(Record &rhs)
-    {
-        return GetMeasurements().number > rhs.GetMeasurements().number;
-    }
+    uint GetAddress() const { return address; }
 
-    bool operator<(Record &rhs)
-    {
-        return GetMeasurements().number < rhs.GetMeasurements().number;
-    }
+    uint GetNumber() const { return GetMeasurements().number; }
 
-    static int GetNumber();
+    Record GetNextRecord() const;
+
+    static int GetNextNumber();
 
 private:
 
@@ -45,7 +41,7 @@ private:
     {
         Measurements measurements;      // Здесь измерения, хранящиеся по адресу address
         bool is_valid = false;          // true, если измерения загужены
-        Measurements &GetMeasurements(uint address);
+        const Measurements &GetMeasurements(uint address) const;
     };
 
     ValueMeasurements value_meas;

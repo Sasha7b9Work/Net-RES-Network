@@ -101,11 +101,11 @@ namespace MemoryStorage
 }
 
 
-int Record::GetNumber()
+int Record::GetNextNumber()
 {
     if (!MemoryStorage::last_record.IsExist())
     {
-        return 0;
+        return 1;
     }
 
     return MemoryStorage::last_record.GetMeasurements().number + 1;
@@ -136,12 +136,12 @@ void MemoryStorage::Init()
                     last_record = record;
                 }
 
-                if (record > last_record)
+                if (record.GetNumber() > last_record.GetNumber())
                 {
                     last_record = record;
                 }
 
-                if (record < first_record)
+                if (record.GetNumber() < first_record.GetNumber())
                 {
                     first_record = record;
                 }
@@ -171,16 +171,28 @@ void MemoryStorage::Append(Measurements &meas)
     *       - Если адрес последней записи больше адреса первой записи, то запись будет идти за последней записью и станет последней записью
     */
 
-    int number = Record::GetNumber();
+    int number = Record::GetNextNumber();
 
-    if (!last_record.IsExist())
-    {
-        Record(0).Write(meas, number);
-    }
-    else
-    {
+    uint address = 0;
 
+    if (last_record.IsExist())
+    {
+        if (last_record.GetAddress() > first_record.GetAddress())   // Если записи идут в прямом порядке - последняя идёт после первой
+        {
+            Record record = last_record.GetNextRecord();
+
+            if (record.GetAddress() < last_record.GetAddress())     // Если следующая запись находится перед последней записью
+            {
+
+            }
+        }
+        else
+        {
+
+        }
     }
+
+    Record(address).Write(meas, number);
 }
 
 
@@ -196,7 +208,7 @@ bool Record::IsEmpty()
         std::memset(&empty_meas, 0xFF, sizeof(empty_meas));
     }
 
-    Measurements &meas = GetMeasurements();
+    const Measurements &meas = GetMeasurements();
 
     return std::memcmp(&meas, &empty_meas, sizeof(meas)) == 0;
 }
@@ -210,7 +222,7 @@ bool Record::IsErased()
 
 bool Record::IsCorrect()
 {
-    Measurements &meas = GetMeasurements();
+    const Measurements &meas = GetMeasurements();
 
     return (meas.control_field == 0) && (meas.CalculateCRC() == meas.crc);
 }
@@ -227,19 +239,21 @@ void Record::Erase()
 }
 
 
-Measurements &Record::GetMeasurements()
+const Measurements &Record::GetMeasurements() const
 {
     return value_meas.GetMeasurements(address);
 }
 
 
-Measurements &Record::ValueMeasurements::GetMeasurements(uint addr)
+const Measurements &Record::ValueMeasurements::GetMeasurements(uint addr) const
 {
+    Record::ValueMeasurements *pointer = (Record::ValueMeasurements *)this;
+
     if (!is_valid)
     {
-        is_valid = true;
+        pointer->is_valid = true;
 
-        MemoryStorage::Cache::Read(addr, &measurements, sizeof(measurements));
+        MemoryStorage::Cache::Read(addr, &pointer->measurements, sizeof(measurements));
     }
 
     return measurements;
@@ -254,4 +268,19 @@ void Record::Write(Measurements &meas, int number)
     MemoryStorage::Cache::Write(address, meas);
 
     MemoryStorage::last_record = *this;
+}
+
+
+Record Record::GetNextRecord() const
+{
+    uint addr_next = address + SIZE;
+
+    uint addr_end = addr_next + SIZE;
+
+    if (addr_end >= W25Q80DV::SIZE)
+    {
+        addr_next = 0;
+    }
+
+    return Record(addr_next);
 }

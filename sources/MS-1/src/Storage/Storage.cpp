@@ -126,7 +126,7 @@ Measurements Storage::GetLastMeasurements()
 }
 
 
-uint Measurements::CalculateCRC()
+uint Measurements::CalculateCRC() const
 {
     int size = (uint8 *)&crc - (uint8 *)&number;
 

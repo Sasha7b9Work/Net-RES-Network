@@ -26,7 +26,7 @@ public:
     float GetVelocity()    const { return velocity; }
     PackedTime GetTime()   const { return time; }
 
-    uint CalculateCRC();
+    uint CalculateCRC() const;
 
     int number;
 
