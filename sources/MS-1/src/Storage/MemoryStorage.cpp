@@ -96,6 +96,9 @@ namespace MemoryStorage
         }
     }
 
+    // Подготовоить место в памяти для записи новой записи
+    static void PrepareForRecord(const Record &);
+
     static Record first_record((uint)-1);
     static Record last_record((uint)-1);
 }
@@ -173,17 +176,17 @@ void MemoryStorage::Append(Measurements &meas)
 
     int number = Record::GetNextNumber();
 
-    uint address = 0;
+    Record record(0);
 
     if (last_record.IsExist())
     {
         if (last_record.GetAddress() > first_record.GetAddress())   // Если записи идут в прямом порядке - последняя идёт после первой
         {
-            Record record = last_record.GetNextRecord();
+            record = last_record.GetNextRecord();
 
             if (record.GetAddress() < last_record.GetAddress())     // Если следующая запись находится перед последней записью
             {
-
+                MemoryStorage::PrepareForRecord(record);
             }
         }
         else
@@ -192,7 +195,7 @@ void MemoryStorage::Append(Measurements &meas)
         }
     }
 
-    Record(address).Write(meas, number);
+    record.Write(meas, number);
 }
 
 
@@ -283,4 +286,30 @@ Record Record::GetNextRecord() const
     }
 
     return Record(addr_next);
+}
+
+
+void MemoryStorage::PrepareForRecord(const Record &record)
+{
+    // Если нулевой байт record попадает на нулевой байт любой страницы, то нужно стирать эту страницу
+
+    int num_page = record.GetAddress() / W25Q80DV::SIZE_PAGE;
+    int next_page = (record.GetAddress() + Record::SIZE) / W25Q80DV::SIZE_PAGE;
+
+    if (record.GetAddress() % W25Q80DV::SIZE_PAGE)
+    {
+        W25Q80DV::ErasePage(num_page);
+
+        Cache::MarkAsDirty();
+    }
+
+    // Если нулевой байт record попдает на одну страницу, а последний - на следующую, то нужно стирать следующую страницу
+    if (num_page != next_page)
+    {
+        W25Q80DV::ErasePage(next_page);
+
+        Cache::MarkAsDirty();
+
+        need_init = true;
+    }
 }
