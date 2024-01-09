@@ -29,7 +29,7 @@ struct Record
 
     uint GetAddress() const { return address; }
 
-    uint GetNumber() const { return GetMeasurements().number; }
+    int GetNumber() const { return GetMeasurements().number; }
 
     Record GetNextRecord() const;
 

@@ -213,7 +213,7 @@ bool Record::IsEmpty()
 
     const Measurements &meas = GetMeasurements();
 
-    return std::memcmp(&meas, &empty_meas, sizeof(meas)) == 0;
+    return std::memcmp((void *)&meas, &empty_meas, sizeof(meas)) == 0;
 }
 
 
@@ -293,8 +293,8 @@ void MemoryStorage::PrepareForRecord(const Record &record)
 {
     // Если нулевой байт record попадает на нулевой байт любой страницы, то нужно стирать эту страницу
 
-    int num_page = record.GetAddress() / W25Q80DV::SIZE_PAGE;
-    int next_page = (record.GetAddress() + Record::SIZE) / W25Q80DV::SIZE_PAGE;
+    int num_page = (int)(record.GetAddress() / W25Q80DV::SIZE_PAGE);
+    int next_page = (int)((record.GetAddress() + Record::SIZE) / W25Q80DV::SIZE_PAGE);
 
     if (record.GetAddress() % W25Q80DV::SIZE_PAGE)
     {
@@ -309,7 +309,5 @@ void MemoryStorage::PrepareForRecord(const Record &record)
         W25Q80DV::ErasePage(next_page);
 
         Cache::MarkAsDirty();
-
-        need_init = true;
     }
 }
