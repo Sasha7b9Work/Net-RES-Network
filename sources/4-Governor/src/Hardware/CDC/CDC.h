@@ -9,6 +9,8 @@ struct CDC
 
     static uint8_t Transmit(const void *buffer, int size);
 
+    static void TransmitF(char *format, ...);
+
     static void OnIRQHandler();
 
     static void *handlePCD;        // PCD_HandleTypeDef

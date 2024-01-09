@@ -18,55 +18,13 @@ void Device::Init()
 {
     HAL::Init();
 
-    ST7735::Init();
-
-    BME280::Init();
-
-    HC12::Init();
-
-#ifdef TYPE_1
-    CG_Anem::Init();
-#endif
-
-    BH1750::Init();
-
-    Keyboard::Init();
-
-    InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
+    CDC::Init();
 }
 
 
 void Device::Update()
 {
-    float temp = 0.0f;
-    float pressure = 0.0f;
-    float humidity = 0.0;
+    static int counter = 0;
 
-    if (BME280::GetMeasures(&temp, &pressure, &humidity))
-    {
-        InterCom::Send(TypeMeasure::Temperature, temp);
-        InterCom::Send(TypeMeasure::Pressure, pressure);
-        InterCom::Send(TypeMeasure::Humidity, humidity);
-    }
-
-#ifdef TYPE_1
-
-    float velocity = 0.0f;
-
-    if (CG_Anem::GetMeasure(&velocity))
-    {
-        InterCom::Send(TypeMeasure::Velocity, velocity);
-    }
-#endif
-
-    float illumination = 0.0f;
-
-    if (BH1750::GetMeasure(&illumination))
-    {
-        InterCom::Send(TypeMeasure::Illumination, illumination);
-    }
-
-    Keyboard::Update();
-
-    Display::Update();
+    CDC::TransmitF("%d", counter++);
 }

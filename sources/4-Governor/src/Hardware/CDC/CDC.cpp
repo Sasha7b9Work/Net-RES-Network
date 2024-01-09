@@ -2,6 +2,8 @@
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include <usbd_desc.h>
+#include <stdarg.h>
+#include <cstring>
 
 
 static USBD_HandleTypeDef hUsbDeviceFS;
@@ -149,6 +151,18 @@ uint8_t CDC::Transmit(const void *buffer, int size)
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;
+}
+
+
+void CDC::TransmitF(char *format, ...)
+{
+    static char buffer[256];
+    va_list args;
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+
+    Transmit((uint8 *)buffer, (int)std::strlen(buffer));
 }
 
 #endif
