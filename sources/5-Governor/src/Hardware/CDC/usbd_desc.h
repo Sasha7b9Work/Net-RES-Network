@@ -1,23 +1,4 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : usbd_desc.c
-  * @version        : v2.0_Cube
-  * @brief          : Header for usbd_conf.c file.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-/* Define to prevent recursive inclusion -------------------------------------*/
+// 2022/04/20 08:56:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #ifndef __USBD_DESC__C__
 #define __USBD_DESC__C__
 
@@ -40,7 +21,7 @@
   * @brief Usb device descriptors module.
   * @{
   */
-
+  
 /** @defgroup USBD_DESC_Exported_Constants USBD_DESC_Exported_Constants
   * @brief Constants.
   * @{
@@ -141,3 +122,4 @@ extern USBD_DescriptorsTypeDef FS_Desc;
 
 #endif /* __USBD_DESC__C__ */
 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

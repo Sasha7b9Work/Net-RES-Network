@@ -24,7 +24,7 @@ void Device::Init()
 
 void Device::Update()
 {
-    static int counter = 0;
+    Timer::Delay(1000);
 
-//    CDC::TransmitF("Test string %d", counter++);
+    CDC::Transmit("Test\r\n", 6);
 }

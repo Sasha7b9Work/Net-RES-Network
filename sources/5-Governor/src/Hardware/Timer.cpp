@@ -9,6 +9,12 @@ uint Timer::CurrentTime()
 }
 
 
+void Timer::Delay(uint timeMS)
+{
+    HAL_Delay(timeMS);
+}
+
+
 TimeMeterMS::TimeMeterMS()
 {
     Reset();

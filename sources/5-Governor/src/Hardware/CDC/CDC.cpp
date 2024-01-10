@@ -2,7 +2,6 @@
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include <usbd_desc.h>
-#include <cstdarg>
 
 
 static USBD_HandleTypeDef hUsbDeviceFS;
@@ -130,14 +129,14 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t */*Len*/)
 
 #ifndef GUI
 
-uint8 CDC::Transmit(const void *buffer, int size)
+uint8_t CDC::Transmit(const void *buffer, int size)
 {
     if (!buffer)
     {
         return USBD_OK;
     }
 
-    uint8 result = USBD_OK;
+    uint8_t result = USBD_OK;
 
     USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
 
@@ -146,24 +145,11 @@ uint8 CDC::Transmit(const void *buffer, int size)
         return USBD_BUSY;
     }
 
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8 *)buffer, (uint16)size);
+    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)size);
     result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 
     return result;
 }
-
-
-void CDC::TransmitF(char *format, ...)
-{
-    static char buffer[256];
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(buffer, format, args);
-    va_end(args);
-    std::strcat(buffer, "\r\n");
-    Transmit(buffer, (int)std::strlen(buffer));
-}
-
 
 #endif
 
