@@ -24,7 +24,14 @@ void Device::Init()
 
 void Device::Update()
 {
-    Timer::Delay(1000);
+    static float prev_angle = -100.0f;
 
-    CDC::Transmit("Test\r\n", 6);
+    Keyboard::Update();
+
+    if (Keyboard::GetAngle() != prev_angle)
+    {
+        prev_angle = Keyboard::GetAngle();
+
+        CDC::TransmitF("Angle %.1f", prev_angle);
+    }
 }

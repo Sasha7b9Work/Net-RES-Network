@@ -7,4 +7,6 @@ namespace Keyboard
     void Init();
 
     void Update();
+
+    float GetAngle();
 }

@@ -8,14 +8,25 @@
 
 namespace Keyboard
 {
-    static const int TIME_LONG_PRESS = 500;
-
     TimeMeterMS meter;
 
     bool pressed = false;               // Если true, клавиша нажата
     bool taboo_long = false;            // Если true, запрещено длинное срабатывание
 
-#define KEY_PRESSED (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET)
+#define STATE_A (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6) == GPIO_PIN_SET)
+#define STATE_B (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == GPIO_PIN_SET)
+
+    static bool prev_a = false;
+    static bool prev_b = false;
+
+    static const float step_angle = 360.0f / 256.0f;
+    static float angle = 0;
+}
+
+
+float Keyboard::GetAngle()
+{
+    return (float)angle;
 }
 
 
@@ -23,7 +34,7 @@ void Keyboard::Init()
 {
     GPIO_InitTypeDef is =
     {
-        GPIO_PIN_1,
+        GPIO_PIN_6 | GPIO_PIN_7,
         GPIO_MODE_INPUT,
         GPIO_PULLUP,
         GPIO_SPEED_FREQ_MEDIUM
@@ -35,38 +46,33 @@ void Keyboard::Init()
 
 void Keyboard::Update()
 {
-    if (meter.ElapsedTime() < 100)
+    static bool first = true;
+
+    if (first)
     {
+        first = false;
+
+        prev_a = STATE_A;
+        prev_b = STATE_B;
+
         return;
     }
 
-    if (pressed)
+    bool state_a = STATE_A;
+    bool state_b = STATE_B;
+
+    if (state_a && !prev_a)
     {
-        if (meter.ElapsedTime() > TIME_LONG_PRESS && !taboo_long)
+        if (state_b)
         {
-            Menu::LongPress();
-            taboo_long = true;
+            angle += step_angle;
         }
         else
         {
-            if (!KEY_PRESSED)
-            {
-                pressed = false;
-                meter.Reset();
-                if (!taboo_long)
-                {
-                    Menu::ShortPress();
-                }
-                taboo_long = false;
-            }
+            angle -= step_angle;
         }
     }
-    else
-    {
-        if (KEY_PRESSED)
-        {
-            pressed = true;
-            meter.Reset();
-        }
-    }
+
+    prev_a = state_a;
+    prev_b = state_b;
 }
