@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects-Debug\</OutputDirectory>
-          <OutputName>Device</OutputName>
+          <OutputName>5-Governor</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -134,14 +134,14 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4107</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
+          <pFcarmGrp>STM32F1</pFcarmGrp>
           <pFcArmRoot></pFcArmRoot>
           <FcArmLst>0</FcArmLst>
         </Utilities>
@@ -380,31 +380,6 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
-        <Group>
-          <GroupName>doc</GroupName>
-          <Files>
-            <File>
-              <FileName>description.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\doc\description.txt</FilePath>
-            </File>
-            <File>
-              <FileName>DOC028480945.pdf</FileName>
-              <FileType>7</FileType>
-              <FilePath>.\doc\DOC028480945.pdf</FilePath>
-            </File>
-            <File>
-              <FileName>изображение_viber_2024-01-08_16-17-31-135.jpg</FileName>
-              <FileType>9</FileType>
-              <FilePath>.\doc\изображение_viber_2024-01-08_16-17-31-135.jpg</FilePath>
-            </File>
-            <File>
-              <FileName>Распиновка.ioc</FileName>
-              <FileType>7</FileType>
-              <FilePath>.\doc\Распиновка.ioc</FilePath>
-            </File>
-          </Files>
-        </Group>
         <Group>
           <GroupName>STM32F1</GroupName>
           <Files>
@@ -698,6 +673,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_CONF.h</FilePath>
             </File>
+            <File>
+              <FileName>HAL_USART1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -772,6 +752,21 @@
               <FileName>HC12.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Modules/Laser</GroupName>
+          <Files>
+            <File>
+              <FileName>Laser.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\Laser\Laser.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Laser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\Laser\Laser.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1292,31 +1287,6 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>doc</GroupName>
-          <Files>
-            <File>
-              <FileName>description.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\doc\description.txt</FilePath>
-            </File>
-            <File>
-              <FileName>DOC028480945.pdf</FileName>
-              <FileType>7</FileType>
-              <FilePath>.\doc\DOC028480945.pdf</FilePath>
-            </File>
-            <File>
-              <FileName>изображение_viber_2024-01-08_16-17-31-135.jpg</FileName>
-              <FileType>9</FileType>
-              <FilePath>.\doc\изображение_viber_2024-01-08_16-17-31-135.jpg</FilePath>
-            </File>
-            <File>
-              <FileName>Распиновка.ioc</FileName>
-              <FileType>7</FileType>
-              <FilePath>.\doc\Распиновка.ioc</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>STM32F1</GroupName>
           <Files>
             <File>
@@ -1609,6 +1579,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_CONF.h</FilePath>
             </File>
+            <File>
+              <FileName>HAL_USART1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1683,6 +1658,21 @@
               <FileName>HC12.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/Modules/Laser</GroupName>
+          <Files>
+            <File>
+              <FileName>Laser.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\Laser\Laser.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Laser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\Laser\Laser.h</FilePath>
             </File>
           </Files>
         </Group>

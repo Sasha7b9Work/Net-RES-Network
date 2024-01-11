@@ -73,11 +73,11 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 
 void USART1_IRQHandler(void)
 {
-    HAL_UART_IRQHandler((UART_HandleTypeDef *)HC12::handle);
+    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART1::handle);
 }
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *)
 {
-    HC12::ReceiveCallback();
+    HAL_USART1::ReceiveCallback();
 }

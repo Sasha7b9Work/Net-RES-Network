@@ -44,6 +44,7 @@ file(GLOB HARDWARE_MODULES_BH1750   src/Hardware/Modules/BH1750/*.*)
 file(GLOB HARDWARE_MODULES_BME280   src/Hardware/Modules/BME280/*.*)
 file(GLOB HARDWARE_MODULES_CG_ANEM  src/Hardware/Modules/CG-Anem/*.*)
 file(GLOB HARDWARE_MODULES_HC12     src/Hardware/Modules/HC12/*.*)
+file(GLOB HARDWARE_MODULES_LASER    src/Hardware/Modules/Laser/*.*)
 file(GLOB HARDWARE_MODULES_ST7735   src/Hardware/Modules/ST7735/*.*)
 file(GLOB MENU                      src/Menu/*.*)
 file(GLOB MENU_PAGES                src/Menu/Pages/*.*)
@@ -64,6 +65,7 @@ source_group(Hardware/Modules/BH1750    FILES ${HARDWARE_MODULES_BH1750})
 source_group(Hardware/Modules/BME280    FILES ${HARDWARE_MODULES_BME280})
 source_group(Hardware/Modules/CG-Anem   FILES ${HARDWARE_MODULES_CG_ANEM})
 source_group(Hardware/Modules/HC12      FILES ${HARDWARE_MODULES_HC12})
+source_group(Hardware/Modules/Laser     FILES ${HARDWARE_MODULES_LASER})
 source_group(Hardware/Modules/ST7735    FILES ${HARDWARE_MODULES_ST7735})
 source_group(Menu                       FILES ${MENU})
 source_group(Menu/Pages                 FILES ${MENU_PAGES})
@@ -91,6 +93,7 @@ add_library(${PROJECT_NAME}
             ${HARDWARE_MODULES_BME280}
             ${HARDWARE_MODULES_CG_ANEM}
             ${HARDWARE_MODULES_HC12}
+            ${HARDWARE_MODULES_LASER}
             ${HARDWARE_MODULES_ST7735}
             ${MENU}
             ${MENU_PAGES}

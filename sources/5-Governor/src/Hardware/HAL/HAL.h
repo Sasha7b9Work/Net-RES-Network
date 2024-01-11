@@ -48,9 +48,17 @@ namespace HAL
 }
 
 
-namespace HAL_FLASH
+namespace HAL_USART1
 {
+    void Init(void (*callback_on_receive)(pchar));
 
+    void Update();
+
+    void ReceiveCallback();
+
+    void Send(uint8);
+
+    extern void *handle;
 }
 
 

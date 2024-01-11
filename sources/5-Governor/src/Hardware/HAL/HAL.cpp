@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/CDC/CDC.h"
+#include "Hardware/Modules/Laser/Laser.h"
 #include <stm32f1xx_hal.h>
 
 
@@ -19,6 +20,8 @@ void HAL::Init()
     __HAL_RCC_GPIOD_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
+
+    HAL_USART1::Init(Laser::CallbackOnReceive);
 }
 
 

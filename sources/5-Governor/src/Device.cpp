@@ -12,6 +12,7 @@
 #include "Hardware/InterCom.h"
 #include "Display/Display.h"
 #include "Hardware/Keyboard.h"
+#include "Hardware/Modules/Laser/Laser.h"
 
 
 void Device::Init()
@@ -19,11 +20,15 @@ void Device::Init()
     HAL::Init();
 
     CDC::Init();
+
+    Laser::Init();
 }
 
 
 void Device::Update()
 {
+    HAL_USART1::Update();
+
     static float prev_angle = -100.0f;
 
     Keyboard::Update();
