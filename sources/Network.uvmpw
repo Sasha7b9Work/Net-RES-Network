@@ -26,6 +26,7 @@
   <project>
     <PathAndName>.\5-Governor\5-Governor.uvprojx</PathAndName>
     <NodeIsActive>1</NodeIsActive>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
 </ProjectWorkspace>

@@ -30,6 +30,7 @@ add_compile_options(/wd5264)
 add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 
+file(GLOB DOC                       doc/*.*)
 file(GLOB STM32F1                   ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Src/*.c
                                     ../common/STM32Cube_F1/Drivers/STM32F1xx_HAL_Driver/Inc/*.h)
 file(GLOB SRC                       src/*.*)
@@ -50,6 +51,7 @@ file(GLOB SETTINGS                  src/Settings/*.*)
 file(GLOB UTILS                     src/Utils/*.*)
 file(GLOB UTILS_TEXT                src/Utils/Text/*.*)
 
+source_group(doc                        FILES ${DOC})
 source_group(STM32F1                    FILES ${STM32F1})
 source_group(src                        FILES ${SRC})
 source_group(Display                    FILES ${DISPLAY})
@@ -76,6 +78,7 @@ set_source_files_properties(${STM32F1} ${HARDWARE_CMSIS}
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_library(${PROJECT_NAME}
+            ${DOC}
             ${STM32F1}
             ${SRC}
             ${DISPLAY}

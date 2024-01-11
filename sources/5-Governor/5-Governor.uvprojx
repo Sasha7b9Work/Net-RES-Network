@@ -381,6 +381,31 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>doc</GroupName>
+          <Files>
+            <File>
+              <FileName>description.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\doc\description.txt</FilePath>
+            </File>
+            <File>
+              <FileName>DOC028480945.pdf</FileName>
+              <FileType>7</FileType>
+              <FilePath>.\doc\DOC028480945.pdf</FilePath>
+            </File>
+            <File>
+              <FileName>изображение_viber_2024-01-08_16-17-31-135.jpg</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\doc\изображение_viber_2024-01-08_16-17-31-135.jpg</FilePath>
+            </File>
+            <File>
+              <FileName>Распиновка.ioc</FileName>
+              <FileType>7</FileType>
+              <FilePath>.\doc\Распиновка.ioc</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>STM32F1</GroupName>
           <Files>
             <File>
@@ -1266,6 +1291,31 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
+        <Group>
+          <GroupName>doc</GroupName>
+          <Files>
+            <File>
+              <FileName>description.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\doc\description.txt</FilePath>
+            </File>
+            <File>
+              <FileName>DOC028480945.pdf</FileName>
+              <FileType>7</FileType>
+              <FilePath>.\doc\DOC028480945.pdf</FilePath>
+            </File>
+            <File>
+              <FileName>изображение_viber_2024-01-08_16-17-31-135.jpg</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\doc\изображение_viber_2024-01-08_16-17-31-135.jpg</FilePath>
+            </File>
+            <File>
+              <FileName>Распиновка.ioc</FileName>
+              <FileType>7</FileType>
+              <FilePath>.\doc\Распиновка.ioc</FilePath>
+            </File>
+          </Files>
+        </Group>
         <Group>
           <GroupName>STM32F1</GroupName>
           <Files>
