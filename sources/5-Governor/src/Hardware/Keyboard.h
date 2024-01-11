@@ -8,5 +8,9 @@ namespace Keyboard
 
     void Update();
 
-    float GetAngle();
+    // Полный угол
+    float GetAngleFull();
+
+    // Угол относительно круга
+    float GetAngleRelative();
 }

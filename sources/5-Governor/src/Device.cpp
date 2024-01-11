@@ -28,10 +28,10 @@ void Device::Update()
 
     Keyboard::Update();
 
-    if (Keyboard::GetAngle() != prev_angle)
+    if (Keyboard::GetAngleFull() != prev_angle)
     {
-        prev_angle = Keyboard::GetAngle();
+        prev_angle = Keyboard::GetAngleFull();
 
-        CDC::TransmitF("Angle %.1f", prev_angle);
+        CDC::TransmitF("Angle %.1f/%.1f", Keyboard::GetAngleRelative(), prev_angle);
     }
 }

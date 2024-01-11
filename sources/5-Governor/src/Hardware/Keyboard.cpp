@@ -17,16 +17,32 @@ namespace Keyboard
 #define STATE_B (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == GPIO_PIN_SET)
 
     static bool prev_a = false;
-    static bool prev_b = false;
 
     static const float step_angle = 360.0f / 256.0f;
-    static float angle = 0;
+    static float angle_full = 0;
 }
 
 
-float Keyboard::GetAngle()
+float Keyboard::GetAngleFull()
 {
-    return (float)angle;
+    return (float)angle_full;
+}
+
+float Keyboard::GetAngleRelative()
+{
+    float angle = angle_full;
+
+    while (angle < 0.0f)
+    {
+        angle += 360.0f;
+    }
+
+    while (angle >= 360.0f)
+    {
+        angle -= 360.0f;
+    }
+
+    return angle;
 }
 
 
@@ -53,26 +69,23 @@ void Keyboard::Update()
         first = false;
 
         prev_a = STATE_A;
-        prev_b = STATE_B;
 
         return;
     }
 
     bool state_a = STATE_A;
-    bool state_b = STATE_B;
 
     if (state_a && !prev_a)
     {
-        if (state_b)
+        if(STATE_B)
         {
-            angle += step_angle;
+            angle_full -= step_angle;
         }
         else
         {
-            angle -= step_angle;
+            angle_full += step_angle;
         }
     }
 
     prev_a = state_a;
-    prev_b = state_b;
 }
