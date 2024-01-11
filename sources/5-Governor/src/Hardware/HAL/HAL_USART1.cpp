@@ -1,33 +1,13 @@
 // 2024/01/11 10:43:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/RingBuffer.h"
 #include <stm32f1xx_hal.h>
 
 
 namespace HAL_USART1
 {
-    struct RecvBuffer
-    {
-        static const int SIZE = 128;
-
-        RecvBuffer() : pointer(0) { }
-
-        void Push(char symbol)
-        {
-            if (pointer < SIZE)
-            {
-                data[pointer++] = symbol;
-            }
-        }
-
-        char *Data() { return &data[0]; }
-        int NumSymbols() { return pointer; }
-        void Clear() { pointer = 0; }
-
-    private:
-        char data[SIZE];
-        int pointer;
-    } recv_buffer;
+    Rin gBuffer<char, 256> recv_buffer;
 
     static UART_HandleTypeDef handleUART;
     void *handle = (void *)&handleUART;
@@ -94,7 +74,7 @@ void HAL_USART1::ReceiveCallback()
 
 void HAL_USART1::Update()
 {
-    if (!callback_on_receive)
+    if (!callback_on_receive || recv_buffer.GetElementCount() == 0)
     {
         return;
     }
