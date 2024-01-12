@@ -21,7 +21,7 @@ void Device::Init()
 
     CDC::Init();
 
-    Laser::Init();
+    Timer::Delay(1000);
 }
 
 
@@ -29,6 +29,9 @@ void Device::Update()
 {
     HAL_USART1::Update();
 
+    Laser::Update();
+
+/*
     static float prev_angle = -100.0f;
 
     Keyboard::Update();
@@ -39,4 +42,5 @@ void Device::Update()
 
         CDC::TransmitF("Angle %.1f/%.1f", Keyboard::GetAngleRelative(), prev_angle);
     }
+*/
 }

@@ -2,12 +2,13 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/RingBuffer.h"
+#include "Utils/Buffer.h"
 #include <stm32f1xx_hal.h>
 
 
 namespace HAL_USART1
 {
-    Rin gBuffer<char, 256> recv_buffer;
+    RingBuffer<char, 256> recv_buffer;
 
     static UART_HandleTypeDef handleUART;
     void *handle = (void *)&handleUART;
@@ -78,4 +79,26 @@ void HAL_USART1::Update()
     {
         return;
     }
+
+    static Buffer<char, 256> buffer;
+
+    char byte = recv_buffer.Pop();
+
+    if (byte == 0x0d)
+    {
+        return;
+    }
+
+    if (byte == 0x0a)
+    {
+        buffer.Append(0);
+
+        callback_on_receive(buffer.Data());
+
+        buffer.Clear();
+
+        return;
+    }
+
+    buffer.Append(byte);
 }

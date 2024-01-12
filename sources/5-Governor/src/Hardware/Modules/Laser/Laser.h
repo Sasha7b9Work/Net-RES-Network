@@ -4,7 +4,7 @@
 
 namespace Laser
 {
-    void Init();
+    void Update();
 
     void CallbackOnReceive(pchar);
 }
