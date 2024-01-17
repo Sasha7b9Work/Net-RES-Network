@@ -209,12 +209,12 @@ bool Record::IsEmpty()
     {
         first = false;
 
-        std::memset(&empty_meas, 0xFF, sizeof(empty_meas));
+        std::memset(&empty_meas, 0xFF, sizeof(empty_meas)); //-V780
     }
 
     const Measurements &meas = GetMeasurements();
 
-    return std::memcmp((void *)&meas, &empty_meas, sizeof(meas)) == 0;
+    return std::memcmp((void *)&meas, &empty_meas, sizeof(meas)) == 0; //-V1014
 }
 
 
