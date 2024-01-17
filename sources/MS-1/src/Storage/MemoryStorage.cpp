@@ -70,7 +70,14 @@ namespace MemoryStorage
                 size = SIZE;
             }
 
-            std::memcpy(buffer, MemBuffer<SIZE>().Read(begin), SIZE);
+            static int counter = 0;
+            counter++;
+
+            MemBuffer<SIZE> mem_buf;
+
+            uint8 *src = mem_buf.Read(begin);
+
+            std::memcpy(buffer, src, SIZE);
         }
 
         static void Read(uint address, void *out, int size)
@@ -117,8 +124,6 @@ int Record::GetNextNumber()
 
 void MemoryStorage::Init()
 {
-    uint time_start = TIME_MS;
-
     for (uint address = 0; address < W25Q80DV::SIZE; address += Record::SIZE)
     {
         Record record(address);
@@ -155,10 +160,6 @@ void MemoryStorage::Init()
             }
         }
     }
-
-    uint time = TIME_MS - time_start;
-
-    time = time;
 }
 
 
