@@ -59,7 +59,8 @@ namespace MemoryStorage
             return address + (uint)size < End();
         }
 
-        static void Fill(uint address)
+        // «аполнить содержимым пам€ти, начина€ с адреса address
+        static void FillFromMemory(uint address)
         {
             begin = address;
 
@@ -84,7 +85,7 @@ namespace MemoryStorage
         {
             if (!Consist(address, size))
             {
-                Fill(address);
+                FillFromMemory(address);
             }
 
             uint shift = address - begin;
