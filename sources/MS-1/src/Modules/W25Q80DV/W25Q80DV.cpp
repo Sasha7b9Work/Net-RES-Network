@@ -147,12 +147,12 @@ uint8 *MemBuffer<count>::Read(uint address)
 {
     W25Q80DV::WaitRelease();
 
-    buffer[0] = READ_DATA;
-    buffer[1] = (uint8)(address >> 16);
-    buffer[2] = (uint8)(address >> 8);
-    buffer[3] = (uint8)(address);
+    data[0] = READ_DATA;
+    data[1] = (uint8)(address >> 16);
+    data[2] = (uint8)(address >> 8);
+    data[3] = (uint8)(address);
 
-    HAL_SPI1::WriteRead(buffer, buffer, count + 4);
+    HAL_SPI1::WriteRead(data, data, count + 4);
 
     return Data();
 }

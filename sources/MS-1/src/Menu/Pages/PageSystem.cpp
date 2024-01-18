@@ -8,9 +8,12 @@
 extern const DPage pageMain;
 
 
-static int cur_field = 0;
-static int state = 0;
-static PackedTime time;
+namespace PageSystem
+{
+    static int cur_field = 0;
+    static int state = 0;
+    static PackedTime time;
+}
 
 
 static void OnClose_Battery(bool)
@@ -38,11 +41,11 @@ static void Before_OpenTime(bool open)
 {
     if (open)
     {
-        time = HAL_RTC::GetTime();
+        PageSystem::time = HAL_RTC::GetTime();
     }
 }
 
-DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
+DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, PageSystem::cur_field, PageSystem::state, PageSystem::time)
 
 
 static void OnDraw_SerialNumber(int x, int y, Color::E color_fill, Color::E color_draw)

@@ -2,7 +2,7 @@
 
 project (MS-1)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
@@ -28,29 +28,33 @@ if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
-    add_compile_options(/wd4100)    # 'xxx' : unreferenced formal parameter
-    add_compile_options(/wd4310)
-    add_compile_options(/wd4365)    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
-    add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
-    add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted
-    add_compile_options(/wd4625)    # 'derived class' : copy constructor was implicitly defined as deleted because
-                                    # a base class copy constructor is inaccessible or deleted
-    add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because
-                                    # a base class assignment operator is inaccessible or deleted
-    add_compile_options(/wd4774)    # 'string' : format string expected in argument number is not a string literal
-    add_compile_options(/wd4820)    # 'xxx' bytes padding added after construct 'member_name'
-    add_compile_options(/wd4996)    # deprecated
-    add_compile_options(/wd5026)    # 'type': move constructor was implicitly defined as deleted
-    add_compile_options(/wd5027)    # "type": оператор присваивания перемещения неявно определен как удаленный
-    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
-                                    # function under -EHc.
-    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-    add_compile_options(/wd5220)    # 'xxx': a non-static data member with a volatile qualified type no longer implies that
-                                    # compiler generated copy/move constructors and copy/move assignment operators are not trivial
-                                    # add_compile_options(/wd26812)
-    add_compile_options(/wd5267)
+    add_compile_options(
+        /wd4100    # 'xxx' : unreferenced formal parameter
+        /wd4310
+        /wd4365    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
+        /wd4514    # 'function' : unreferenced inline function has been removed
+        /wd4623    # 'derived class' : default constructor was implicitly defined as deleted
+        /wd4625    # 'derived class' : copy constructor was implicitly defined as deleted because
+                   # a base class copy constructor is inaccessible or deleted
+        /wd4626    # 'derived class' : assignment operator was implicitly defined as deleted because
+                   # a base class assignment operator is inaccessible or deleted
+        /wd4774    # 'string' : format string expected in argument number is not a string literal
+        /wd4820    # 'xxx' bytes padding added after construct 'member_name'
+        /wd4996    # deprecated
+        /wd5026    # 'type': move constructor was implicitly defined as deleted
+        /wd5027    # "type": оператор присваивания перемещения неявно определен как удаленный
+        /wd5039    # 'xxx': pointer or reference to potentially throwing function passed to extern C
+                   # function under -EHc.
+        /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+        /wd5220    # 'xxx': a non-static data member with a volatile qualified type no longer implies that
+                   # compiler generated copy/move constructors and copy/move assignment operators are not trivial
+                   # add_compile_options(/wd26812)
+        /wd5267
+    )
+
 endif()
 
+file(GLOB DOC                       ../../MS-1/doc/*.*)
 file(GLOB LIBS_STM32F3              ../../common/_VS_LIBS/STM32f3/*.*)
 file(GLOB LIBS_STM32F3_INC          ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc/*.*)
 file(GLOB LIBS_USBD                 ../../common/_VS_LIBS/USBD/*.*)
@@ -90,6 +94,7 @@ file(GLOB TESTS                     ../../MS-1/src/Tests/*.*)
 file(GLOB UTILS                     ../../MS-1/src/Utils/*.*)
 file(GLOB UTILS_TEXT                ../../MS-1/src/Utils/Text/*.*)
 
+source_group(doc                    FILES ${DOC})
 source_group(libs/STM32F3           FILES ${LIBS_STM32F3})
 source_group(libs/STM32F3/Inc       FILES ${LIBS_STM32F3_INC})
 source_group(libs/USBD              FILES ${LIBS_USBD})
@@ -136,6 +141,7 @@ set_source_files_properties(../../MS-1/src/Hardware/CDC/usbd_conf.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 add_executable( ${PROJECT_NAME}
+                ${DOC}
                 ${LIBS_STM32F3}
                 ${LIBS_STM32F3_INC}
                 ${LIBS_USBD}

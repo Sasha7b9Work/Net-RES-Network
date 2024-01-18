@@ -6,9 +6,11 @@ template<int size>
 struct MemBuffer
 {
     uint8 *Read(uint address);
-    uint8 *Data() { return data; }
+    uint8 *Data() { return data + 4; }
 private:
-    uint8 data[size];
+    // Резервируем на 4 байта больше чем нужно - сюда будет писать служебная информация для
+    // записи во флеш-память
+    uint8 data[size + 4];
 };
 
 
