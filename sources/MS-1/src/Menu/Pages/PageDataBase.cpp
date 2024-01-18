@@ -21,11 +21,12 @@ DEF_BUTTON(bClosePageDataBase,
 )
 
 
-DEF_PAGE_1(pageDataBase,
+DEF_PAGE_2(pageDataBase,
     "¡¿«¿ ƒ¿ÕÕ€’",
     pageMain,
     nullptr,
     nullptr,
+    *PageDataBase::Settings::self,
     bClosePageDataBase
 )
 

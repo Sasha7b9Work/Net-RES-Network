@@ -57,4 +57,14 @@ namespace PageSystem
 namespace PageDataBase
 {
     extern const Page *const self;
+
+    namespace Settings
+    {
+        extern const Page *const self;
+    }
+
+    namespace Browsing
+    {
+        extern const Page *const self;
+    }
 };

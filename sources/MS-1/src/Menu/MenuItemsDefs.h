@@ -50,9 +50,9 @@
     DEF_ITEMS_1(items##name, item1)                                                                                 \
     DEF_PAGE(name, title, keeper, beforeOpen, onDraw, items##name)
 
-#define DEF_PAGE_2(name, title, keeper, beforeOpen, item1, item2)                                                   \
+#define DEF_PAGE_2(name, title, keeper, beforeOpen, onDraw, item1, item2)                                                   \
     DEF_ITEMS_2(items##name, item1, item2)                                                                          \
-    DEF_PAGE(name, title, keeper, beforeOpen, items##name)
+    DEF_PAGE(name, title, keeper, beforeOpen, onDraw, items##name)
 
 #define DEF_PAGE_3(name, title, keeper, beforeOpen, funcOnDraw, item1, item2, item3)                                \
     DEF_ITEMS_3(items##name, item1, item2, item3)                                                                   \
