@@ -29,7 +29,7 @@ static void OnDraw_Battery(int x, int y, Color::E, Color::E color_draw)
 
 
 DEF_BUTTON(bBattery,
-    "АКБ",
+    "Батарея",
     *PageSystem::self,
     OnClose_Battery,
     OnDraw_Battery,

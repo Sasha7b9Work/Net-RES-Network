@@ -44,11 +44,17 @@ namespace PageMeasures
 
 namespace PageHC12
 {
-    extern const Page * const self;
+    extern const Page *const self;
 };
 
 
 namespace PageSystem
 {
-    extern const Page * const self;
+    extern const Page *const self;
+};
+
+
+namespace PageDataBase
+{
+    extern const Page *const self;
 };

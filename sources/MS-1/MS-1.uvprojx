@@ -868,6 +868,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageDataBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDataBase.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2023,6 +2028,11 @@
               <FileName>PageMeasures.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDataBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDataBase.cpp</FilePath>
             </File>
           </Files>
         </Group>
