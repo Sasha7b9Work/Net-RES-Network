@@ -6,9 +6,9 @@ template<int size>
 struct MemBuffer
 {
     uint8 *Read(uint address);
-    uint8 *Data() { return buffer + 4; }
+    uint8 *Data() { return data; }
 private:
-    uint8 buffer[size + 4];
+    uint8 data[size];
 };
 
 

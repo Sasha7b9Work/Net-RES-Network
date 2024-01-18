@@ -9,18 +9,18 @@ template uint8 *MemBuffer<512>::Read(uint);
 template uint8 *MemBuffer<8192>::Read(uint);
 
 
-template<int size>
-uint8 *MemBuffer<size>::Read(uint address)
-{
-    std::memcpy(Data(), &buffer[address], size);
-
-    return Data();
-}
-
-
 namespace W25Q80DV
 {
     static uint8 buffer[SIZE];
+}
+
+
+template<int size>
+uint8 *MemBuffer<size>::Read(uint address)
+{
+    std::memcpy(Data(), &W25Q80DV::buffer[address], size);
+
+    return Data();
 }
 
 
