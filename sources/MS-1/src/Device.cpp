@@ -49,6 +49,8 @@ void Device::Init()
 
     W25Q80DV::Init();
 
+//    W25Q80DV::Test::Run();
+
     Storage::Init();
 
 //    HAL_IWDG::Init();

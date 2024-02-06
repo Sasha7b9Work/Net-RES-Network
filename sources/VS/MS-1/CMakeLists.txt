@@ -7,18 +7,20 @@ project (MS-1)
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 
-include_directories(.
-                    ../../MS-1/src
-                    ../../MS-1/src/Hardware/CDC
-                    ../../MS-1/src/Hardware/HAL
-                    ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud
-                    ../../common/_VS_KEIL/CMSIS
-                    ../../common/_VS_LIBS/STM32F3
-                    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include
-                    ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc)
+include_directories(
+    .
+    ../../MS-1/src
+    ../../MS-1/src/Hardware/CDC
+    ../../MS-1/src/Hardware/HAL
+    ../../VS/ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_dll/mswud
+    ../../common/_VS_KEIL/CMSIS
+    ../../common/_VS_LIBS/STM32F3
+    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    ../../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include
+    ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc
+)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -123,52 +125,56 @@ source_group(Utils                  FILES ${UTILS})
 source_group(Utils/Text             FILES ${UTILS_TEXT})
 
 
-set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
-                            Hardware/LAN/libnet/netbase.cpp
-                            Hardware/LAN/libnet/netclient.cpp
-                            Hardware/LAN/libnet/netpacket.cpp
-                            Hardware/LAN/ClientTCP.cpp
-                            Application.cpp
-                            Frame.cpp
-                            main_win.cpp
-                            ../../MS-1/src/Storage/Measure.cpp
-                            ../../MS-1/src/Storage/MemoryStorage.cpp
-                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+set_source_files_properties(
+    Hardware/LAN/libnet/netserver.cpp
+    Hardware/LAN/libnet/netbase.cpp
+    Hardware/LAN/libnet/netclient.cpp
+    Hardware/LAN/libnet/netpacket.cpp
+    Hardware/LAN/ClientTCP.cpp
+    Application.cpp
+    Frame.cpp
+    main_win.cpp
+    ../../MS-1/src/Storage/Measure.cpp
+    ../../MS-1/src/Storage/MemoryStorage.cpp
+    PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON
+)
 
 
-set_source_files_properties(../../MS-1/src/Hardware/CDC/usbd_conf.c
-                            ../../MS-1/src/Hardware/CDC/usbd_desc.c
-                            PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties(
+    ../../MS-1/src/Hardware/CDC/usbd_conf.c
+    ../../MS-1/src/Hardware/CDC/usbd_desc.c
+    PROPERTIES HEADER_FILE_ONLY TRUE
+)
 
 add_executable( ${PROJECT_NAME}
-                ${DOC}
-                ${LIBS_STM32F3}
-                ${LIBS_STM32F3_INC}
-                ${LIBS_USBD}
-                ${SRC}
-                ${DISPLAY}
-                ${DISPLAY_FONT}
-                ${HARDWARE}
-                ${HARDWARE_CDC}
-                ${HARDWARE_HAL}
-                ${HARDWARE_LAN}
-                ${HARDWARE_LAN_LIBNET}
-                ${MENU}
-                ${MENU_PAGES}
-                ${MODULES_BME280}
-                ${MODULES_CG_ANEM}
-                ${MODULES_GY511}
-                ${MODULES_HC12}
-                ${MODULES_NEO_M8N}
-                ${MODULES_HIH4000}
-                ${MODULES_ST7735}
-                ${MODULES_W25Q80DV}
-                ${SETTINGS}
-                ${STORAGE}
-                ${TESTS}
-                ${UTILS}
-                ${UTILS_TEXT}
-                )
+    ${DOC}
+    ${LIBS_STM32F3}
+    ${LIBS_STM32F3_INC}
+    ${LIBS_USBD}
+    ${SRC}
+    ${DISPLAY}
+    ${DISPLAY_FONT}
+    ${HARDWARE}
+    ${HARDWARE_CDC}
+    ${HARDWARE_HAL}
+    ${HARDWARE_LAN}
+    ${HARDWARE_LAN_LIBNET}
+    ${MENU}
+    ${MENU_PAGES}
+    ${MODULES_BME280}
+    ${MODULES_CG_ANEM}
+    ${MODULES_GY511}
+    ${MODULES_HC12}
+    ${MODULES_NEO_M8N}
+    ${MODULES_HIH4000}
+    ${MODULES_ST7735}
+    ${MODULES_W25Q80DV}
+    ${SETTINGS}
+    ${STORAGE}
+    ${TESTS}
+    ${UTILS}
+    ${UTILS_TEXT}
+)
 
 target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
 
