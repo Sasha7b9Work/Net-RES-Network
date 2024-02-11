@@ -58,7 +58,8 @@ namespace Storage
     // В конце главного цикла вызывается эта функция, которая сохраняет измерения в памяти
     void SaveMeasures();
 
-    bool GetMeasure(Measure::E, Measure &);
+    // Возвращает true, если все измерения находятся в допустимых пределах
+    bool AllLastMeasuresInRange();
 
     Measurements GetLastMeasurements();
 }

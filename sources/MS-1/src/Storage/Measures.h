@@ -21,6 +21,9 @@ struct Measure
 
     double value;
 
+    // У первых NumAlarmed() измерений нужно контролировать выход за границы
+    static int NumAlarmed() { return 5; }
+
     void Clear()
     {
         name = E::Count;

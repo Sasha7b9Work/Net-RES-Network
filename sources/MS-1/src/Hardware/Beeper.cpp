@@ -38,20 +38,20 @@ void Beeper::Init()
 
 void Beeper::Update()
 {
+    Storage::AllLastMeasuresInRange() ? Stop() : Start(4000);
+
+
     bool need_sound = false;
 
     for (int i = 0; i < NUM_MEASURES_TO_CONTROL; i++)
     {
-        Measure measure;
+//        Measure measure;
 
-        if (Storage::GetMeasure((Measure::E)i, measure))
-        {
-            if (!measure.InRange())
-            {
-                need_sound = true;
-                break;
-            }
-        }
+//        if (Storage::GetMeasure((Measure::E)i, measure) && !measure.InRange())
+//        {
+//            need_sound = true;
+//            break;
+//        }
     }
 
     need_sound ? Start(4000) : Stop();

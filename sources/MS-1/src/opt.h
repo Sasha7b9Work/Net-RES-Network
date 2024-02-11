@@ -3,4 +3,4 @@
 
 
 // Будем следить только за этим количеством измерений. Остальные (вроде координат) не нужно контролировать
-#define NUM_MEASURES_TO_CONTROL 5
+#define NUM_MEASURES_TO_CONTROL Measure::Count

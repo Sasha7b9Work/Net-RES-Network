@@ -26,6 +26,8 @@ namespace Storage
 
     // Послать некоторые измререния в USB
     static void SendMeasures();
+
+    static bool GetMeasure(Measure::E, Measure &measure);
 }
 
 
@@ -99,7 +101,7 @@ void Storage::SendMeasures()
 
 bool Storage::GetMeasure(Measure::E name, Measure &measure)
 {
-    if (((int)name) >= 0 && name < NUM_MEASURES_TO_CONTROL)
+    if (((int)name) >= 0 && name < Measure::Count)
     {
         measure = measures[name];
 
@@ -107,6 +109,22 @@ bool Storage::GetMeasure(Measure::E name, Measure &measure)
     }
 
     return false;
+}
+
+
+bool Storage::AllLastMeasuresInRange()
+{
+    Measure measure;
+
+    for (int i = 0; i < Measure::NumAlarmed(); i++)
+    {
+        if (GetMeasure((Measure::E)i, measure) && !measure.InRange())
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
