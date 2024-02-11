@@ -15,6 +15,7 @@
 #include "Storage/Storage.h"
 #include "Menu/Menu.h"
 #include "Tests/Tests.h"
+#include "SCPI/SCPI.h"
 
 
 namespace Device
@@ -113,6 +114,8 @@ void Device::Update()
     EnergySwitch::Update();
 
     Storage::SaveMeasures();
+
+    SCPI::Update();
 }
 
 

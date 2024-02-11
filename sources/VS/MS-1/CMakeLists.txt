@@ -90,6 +90,7 @@ file(GLOB MODULES_HIH4000           ../../MS-1/src/Modules/HIH4000/*.*)
 file(GLOB MODULES_ST7735            ../../MS-1/src/Modules/ST7735/*.*)
 file(GLOB MODULES_W25Q80DV          ../../MS-1/src/Modules/W25Q80DV/*.h
                                                    Modules/W25Q80DV/*.cpp)
+file(GLOB SCPI                      ../../MS-1/src/SCPI/*.*)
 file(GLOB SETTINGS                  ../../MS-1/src/Settings/*.*)
 file(GLOB STORAGE                   ../../MS-1/src/Storage/*.*)
 file(GLOB TESTS                     ../../MS-1/src/Tests/*.*)
@@ -118,6 +119,7 @@ source_group(Modules/NEO-M8N        FILES ${MODULES_NEO_M8N})
 source_group(Modules/HIH4000        FILES ${MODULES_HIH4000})
 source_group(Modules/ST7735         FILES ${MODULES_ST7735})
 source_group(Modules/W25Q80DV       FILES ${MODULES_W25Q80DV})
+source_group(SCPI                   FILES ${SCPI})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Storage                FILES ${STORAGE})
 source_group(Tests                  FILES ${TESTS})
@@ -169,6 +171,7 @@ add_executable( ${PROJECT_NAME}
     ${MODULES_HIH4000}
     ${MODULES_ST7735}
     ${MODULES_W25Q80DV}
+    ${SCPI}
     ${SETTINGS}
     ${STORAGE}
     ${TESTS}
