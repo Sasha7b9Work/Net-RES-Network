@@ -24,9 +24,6 @@ namespace Storage
 
     static Measure measures[NUM_MEASURES_TO_CONTROL];
 
-    // Послать некоторые измререния в USB
-    static void SendMeasures();
-
     static bool GetMeasure(Measure::E, Measure &measure);
 }
 
@@ -57,8 +54,6 @@ void Storage::AppendMeasure(const Measure &measure)
 
 void Storage::SaveMeasures()
 {
-    SendMeasures();
-
     static TimeMeterMS meter;
     
     if(!meter.IsFinished())
@@ -71,31 +66,6 @@ void Storage::SaveMeasures()
     Measurements measurements = GetLastMeasurements();
 
     MemoryStorage::Append(measurements);
-}
-
-
-void Storage::SendMeasures()
-{
-//    static int prev_number = -1;        // Номер последнего переданного измерения
-//
-//    Measurements meas;
-//
-//    if (prev_number == -1)
-//    {
-//        if (!MemoryStorage::GetOldest(&meas, &prev_number))
-//        {
-//            return;
-//        }
-//    }
-//
-//    int number = -1;
-//
-//    if (MemoryStorage::GetNext(&meas, prev_number, &number))
-//    {
-//        prev_number = number;
-//
-//        HCDC::TransmitF("Measure %d", number);
-//    }
 }
 
 
