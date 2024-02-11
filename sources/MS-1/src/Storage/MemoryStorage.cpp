@@ -11,11 +11,11 @@ namespace MemoryStorage
     {
         static const int SIZE = W25Q80DV::SIZE_PAGE;
 
-        Page(uint _address) : address(_address) { }
+        Page(uint) { }
 
     private:
 
-        uint address;
+//        uint address;
     };
 
     // Сюда считываем много памяти, чтобы потом работать с ОЗУ

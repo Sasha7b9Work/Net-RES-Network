@@ -52,9 +52,11 @@ namespace Storage
 
     void Init();
 
-    void Update();
-
+    // В течение главного цикла на каждое измерение вызывается эта фукнция
     void AppendMeasure(const Measure &);
+
+    // В конце главного цикла вызывается эта функция, которая сохраняет измерения в памяти
+    void SaveMeasures();
 
     bool GetMeasure(Measure::E, Measure &);
 

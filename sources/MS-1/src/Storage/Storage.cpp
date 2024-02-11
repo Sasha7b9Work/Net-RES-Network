@@ -53,7 +53,7 @@ void Storage::AppendMeasure(const Measure &measure)
 }
 
 
-void Storage::Update()
+void Storage::SaveMeasures()
 {
     SendMeasures();
 

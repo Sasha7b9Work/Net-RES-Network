@@ -101,6 +101,7 @@ void Settings::SaveMeasure(const Measure &measure)
     Measure::E name = measure.GetName();
 
     bool need_save = false;
+    (void)need_save;
 
     if (gset.measures.value_max[name] == ERROR_VALUE_FLOAT)
     {

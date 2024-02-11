@@ -112,7 +112,7 @@ void Device::Update()
 
     EnergySwitch::Update();
 
-    Storage::Update();
+    Storage::SaveMeasures();
 }
 
 
