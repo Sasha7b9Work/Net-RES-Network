@@ -107,7 +107,7 @@ void InterCom::Send(const Measure &measure, uint timeMS)
         HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
-    Buffer<16> data = CreateMessage(measure);
+    Buffer<16> data = CreateMessage(measure); //-V821
 
     if (direction & Direction::HC12)
     {

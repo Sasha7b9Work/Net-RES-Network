@@ -52,7 +52,7 @@ namespace MemoryStorage
 
         bool IsEmpty()                          // —юда может быть произведена запись
         {
-            for (uint *address = (uint *)this; address < (uint *)End(); address++)
+            for (uint *address = (uint *)this; address < (uint *)End(); address++) //-V1032
             {
                 if (*address != (uint)(-1))
                 {

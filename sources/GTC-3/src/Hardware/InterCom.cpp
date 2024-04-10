@@ -97,7 +97,7 @@ void InterCom::Send(TypeMeasure::E type, float measure)
         HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
-    Buffer<uint8, 16> data = CreateMessage(type, measure);
+    Buffer<uint8, 16> data = CreateMessage(type, measure); //-V821
 
     if (direction & Direction::HC12)
     {

@@ -54,7 +54,7 @@ void Beeper::Update()
 //        }
     }
 
-    need_sound ? Start(4000) : Stop();
+    need_sound ? Start(4000) : Stop(); //-V547
 }
 
 

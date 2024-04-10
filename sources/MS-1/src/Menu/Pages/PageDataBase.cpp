@@ -21,7 +21,7 @@ DEF_BUTTON(bClosePageDataBase,
 )
 
 
-DEF_PAGE_2(pageDataBase,
+DEF_PAGE_2(pageDataBase, //-V1027
     "ÁÀÇÀ ÄÀÍÍÛÕ",
     pageMain,
     nullptr,

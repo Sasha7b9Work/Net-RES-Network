@@ -21,7 +21,7 @@ DEF_BUTTON(bClosePageDataBaseSettings,
 )
 
 
-DEF_PAGE_1(pageDataBaseSettings,
+DEF_PAGE_1(pageDataBaseSettings, //-V1027
     "Õ¿—“–Œ… »",
     *PageDataBase::self,
     nullptr,
