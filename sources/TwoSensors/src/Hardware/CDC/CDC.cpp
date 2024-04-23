@@ -158,3 +158,9 @@ void CDC::OnIRQHandler()
 {
     HAL_PCD_IRQHandler(&_handlePCD);
 }
+
+
+void CDC::TransmitF(char * /*format*/, ...)
+{
+
+}

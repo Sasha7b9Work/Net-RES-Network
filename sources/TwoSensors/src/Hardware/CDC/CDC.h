@@ -9,6 +9,8 @@ namespace CDC
 
     uint8_t Transmit(const void *buffer, int size);
 
+    void TransmitF(char *format, ...);
+
     void OnIRQHandler();
 
     extern void *handlePCD;        // PCD_HandleTypeDef

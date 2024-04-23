@@ -764,6 +764,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_USART_HI50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -883,6 +888,21 @@
               <FileName>HC12.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules/HI50</GroupName>
+          <Files>
+            <File>
+              <FileName>HI50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\HI50\HI50.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HI50.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\HI50\HI50.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1756,6 +1776,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_USART_HI50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1875,6 +1900,21 @@
               <FileName>HC12.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules/HI50</GroupName>
+          <Files>
+            <File>
+              <FileName>HI50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\HI50\HI50.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HI50.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\HI50\HI50.h</FilePath>
             </File>
           </Files>
         </Group>

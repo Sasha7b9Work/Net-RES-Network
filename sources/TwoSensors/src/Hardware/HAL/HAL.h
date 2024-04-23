@@ -78,6 +78,12 @@ namespace HAL_RTC
 }
 
 
+namespace HAL_USART_HI50
+{
+    void Send(uint8);
+}
+
+
 namespace HAL_USART_HC12
 {
     void Init();

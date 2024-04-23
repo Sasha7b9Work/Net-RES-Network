@@ -1,12 +1,12 @@
 // 2024/01/11 11:02:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Hardware/Modules/Laser/Laser.h"
+#include "Modules/HI50/HI50.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
 #include "Hardware/CDC/CDC.h"
 
 
-namespace Laser
+namespace HI50
 {
     static const uint8 TURN_ON = 0x4f;
 //    static const uint8 MEAS_AUTO = 0x44;
@@ -28,12 +28,12 @@ namespace Laser
 
 
 
-void Laser::Update()
+void HI50::Update()
 {
     switch (state)
     {
     case State::IDLE:
-        HAL_USART1::Send(TURN_ON);
+        HAL_USART_HI50::Send(TURN_ON);
         state = State::WAIT_TURN_ON;
         break;
 
@@ -46,7 +46,7 @@ void Laser::Update()
 }
 
 
-void Laser::CallbackOnReceive(pchar message)
+void HI50::CallbackOnReceive(pchar message)
 {
     switch (state)
     {
@@ -54,13 +54,13 @@ void Laser::CallbackOnReceive(pchar message)
         break;
 
     case State::WAIT_TURN_ON:
-        HAL_USART1::Send(MEAS_HI);
+        HAL_USART_HI50::Send(MEAS_HI);
         state = State::WAIT_MEASURE;
         break;
 
     case State::WAIT_MEASURE:
         CDC::TransmitF("%s", message);
-        HAL_USART1::Send(MEAS_HI);
+        HAL_USART_HI50::Send(MEAS_HI);
         break;
     }
 }
