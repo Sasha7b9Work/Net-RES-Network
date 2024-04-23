@@ -49,7 +49,7 @@ void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
     Buffer<uint8, 1024> data;
 
     data[0] = PROGRAM_PAGE; //-V525
-    data[1] = (uint8)(address >> 16);       // \ 
+    data[1] = (uint8)(address >> 16);       // /
     data[2] = (uint8)(address >> 8);        // | Адрес
     data[3] = (uint8)(address);             // / 
 
@@ -81,7 +81,7 @@ void W25Q80DV::EraseSectorForAddress(uint address)
 {
     pinWP.ToHi();
 
-    address /= (4 * 1024);      // \ 
+    address /= (4 * 1024);      // /
                                 // | Рассчитываем адрес первого байта стираемого сектора
     address *= (4 * 1024);      // / 
 

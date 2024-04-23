@@ -10,6 +10,12 @@ typedef const char *pchar;
 typedef unsigned char uchar;
 
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Warmcc-pragma-diag"
+    #pragma clang diagnostic ignored "-Winvalid-source-encoding"
+#endif
+
+
 // Промежуток между измерениями
 #define TIME_MEASURE  500
 
