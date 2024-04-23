@@ -769,6 +769,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_PINS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1795,6 +1805,16 @@
               <FileName>HAL_USART_HI50.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
             </File>
           </Files>
         </Group>
