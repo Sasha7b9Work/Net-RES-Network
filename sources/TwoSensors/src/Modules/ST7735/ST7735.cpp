@@ -7,9 +7,12 @@
 #include "Display/Display.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstring>
 
+// !!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// \warning В настройках файла должна быть отключена оптимизация -O0, иначе не работает
+// !!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /*
     B11 - RST    Reset
@@ -36,22 +39,20 @@ const uint16 Color::colors[Color::Count] =
 };
 
 
+#define SPI2_DR_8bit         *(__IO uint8_t*)&(SPI2->DR)
+
+
 namespace ST7735
 {
-#define SET_DC   HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_SET);
-#define RESET_DC HAL_GPIO_WritePin(GPIOB, PIN_DC, GPIO_PIN_RESET);
-#define SET_CS   HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_SET);
-#define RESET_CS HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
-
-    static const uint16 PIN_RESET = GPIO_PIN_11;
-    static const uint16 PIN_DC = GPIO_PIN_14;
-    static const uint16 PIN_CS = GPIO_PIN_12;
+#define SET_DC   pinDC_ST.ToHi()
+#define RESET_DC pinDC_ST.ToLow()
+#define SET_CS   pinCS_ST.ToHi()
+#define RESET_CS pinCS_ST.ToLow()
 
     static SPI_HandleTypeDef handle;
 
     static void SendCommand(uint8);
     static void SendData8(uint8);
-    static void SendData16(uint16);
     static void SetWindow(int startX, int startY, int stopX, int stopY);
 }
 
@@ -59,16 +60,9 @@ namespace ST7735
 void ST7735::Init()
 {
     __HAL_RCC_SPI2_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
 
-    GPIO_InitTypeDef spi_struct = {0};
-
-    spi_struct.Pin = GPIO_PIN_13 |     // SCL
-                     GPIO_PIN_15;      // MOSI
-    spi_struct.Mode = GPIO_MODE_AF_PP;
-    spi_struct.Speed = GPIO_SPEED_FREQ_HIGH;
-
-    HAL_GPIO_Init(GPIOB, &spi_struct);
+    pinSCL_SPI2.Init();
+    pinMOSI_SPI2.Init();
 
     handle.Instance = SPI2;
     handle.Init.Mode = SPI_MODE_MASTER;
@@ -81,30 +75,27 @@ void ST7735::Init()
     handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
     handle.Init.TIMode = SPI_TIMODE_DISABLE;
     handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-    handle.Init.CRCPolynomial = 10;
+    handle.Init.CRCPolynomial = 7;
 
     HAL_SPI_Init(&handle);
 
-    GPIO_InitTypeDef gpio_struct = {0};
+    pinRESET_ST.ToLow();
+    pinDC_ST.ToLow();
+    pinCS_ST.ToHi();
 
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET | PIN_DC | PIN_CS, GPIO_PIN_RESET);
-
-    gpio_struct.Pin = PIN_RESET | PIN_DC | PIN_CS;
-    gpio_struct.Mode = GPIO_MODE_OUTPUT_PP;
-    gpio_struct.Pull = GPIO_NOPULL;
-    gpio_struct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOB, &gpio_struct);
+    pinRESET_ST.Init();
+    pinDC_ST.Init();
+    pinCS_ST.Init();
 
     SPI2->CR1 |= SPI_CR1_SPE;
 
-    HAL_GPIO_WritePin(GPIOB, PIN_CS, GPIO_PIN_RESET);
-
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET); //-V525
-    HAL_Delay(5);
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_RESET);
-    HAL_Delay(5);
-    HAL_GPIO_WritePin(GPIOB, PIN_RESET, GPIO_PIN_SET);
-    HAL_Delay(5);
+    pinCS_ST.ToLow();
+    pinRESET_ST.ToHi(); //-V525
+    HAL_Delay(20);
+    pinRESET_ST.ToLow();
+    HAL_Delay(20);
+    pinRESET_ST.ToHi();
+    HAL_Delay(20);
 
     SendCommand(0x01);      // SWRESET Software reset
     HAL_Delay(12);
@@ -118,19 +109,82 @@ void ST7735::Init()
     SendCommand(0x36);      // MADCTL Memory Data Access Control
     SendData8(BINARY_U8(01100000));
 
-    SendCommand(0xB1);      // FRMCTR1 Frame rate
-    SendData16(0x000F);
-    SendData16(0x000F);
-    SendData16(0x000F);
+    Display::BeginScene(Color::BLACK);
+
+    Display::EndScene();
 
     SendCommand(0x29);      // DISPON Display on
-
-    Display::BeginScene(Color::BLACK);
-    Display::EndScene();
 }
 
 
 #ifndef GUI
+
+#ifdef WIN32
+#define asm(x)
+#endif
+
+
+#define WRITE_NIBBLE(nibble)    \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    asm("nop");                 \
+    \
+    SPI2->DR = Color::colors[value & 0x0f]; \
+    value >>= 4
+
 
 void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 {
@@ -140,20 +194,11 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
     SendCommand(0x2C);
 
-    SPI2->CR1 |= SPI_CR1_DFF;
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_16BIT;
+
     SET_DC;
     RESET_CS;
-
-#define WRITE_NIBBLE(nibble)                    \
-            value >>= 4;                        \
-            while ((SPI2->SR & SPI_SR_BSY))     \
-            {                                   \
-                if (meter.ElapsedTime() > 100)  \
-                {                               \
-                    break;                      \
-                }                               \
-            }                                   \
-            SPI2->DR = Color::colors[value & 0x0f];
 
     if ((x0 % 8) == 0 && ((width % 8) == 0))
     {
@@ -165,16 +210,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 8)
             {
-                while (SPI2->SR & SPI_SR_BSY)
-                {
-                    if (meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                };
-
-                SPI2->DR = Color::colors[value & 0x0f];            // 0 nibble
-
+                WRITE_NIBBLE(0);
                 WRITE_NIBBLE(1);
                 WRITE_NIBBLE(2);
                 WRITE_NIBBLE(3);
@@ -183,7 +219,7 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
                 WRITE_NIBBLE(6);
                 WRITE_NIBBLE(7);
 
-                value = *(++points);
+                value = *(++points); //-V519
             }
         }
     }
@@ -197,34 +233,265 @@ void ST7735::WriteBuffer(int x0, int y0, int width, int height)
 
             for (int i = 0; i < width; i += 2)
             {
-                while ((SPI2->SR & SPI_SR_BSY))
-                {
-                    if (meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                }
+                WRITE_NIBBLE(0); //-V760
+                WRITE_NIBBLE(1);
 
-                SPI2->DR = Color::colors[value & 0x0F];
-
-                while ((SPI2->SR & SPI_SR_BSY))
-                {
-                    if (meter.ElapsedTime() > 100)
-                    {
-                        break;
-                    }
-                }
-
-                SPI2->DR = Color::colors[value >> 4];
-
-                value = *(++points);
+                value = *(++points); //-V519
             }
         }
     }
 
     SET_CS;
 
-    SPI2->CR1 &= ~SPI_CR1_DFF;
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_8BIT;
+}
+
+
+void ST7735::WritePoint(int x, int y, uint16 color)
+{
+    SetWindow(x, y, 2, 2);
+
+    SendCommand(0x2C);
+
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_16BIT;
+
+    SET_DC;
+    RESET_CS;
+
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    SPI2->DR = color;
+
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    SPI2->DR = color;
+
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    SPI2->DR = color;
+
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    SPI2->DR = color;
+
+    SET_CS;
+
+    SPI2->CR2 &= ~SPI_CR2_DS_Msk;
+    SPI2->CR2 |= SPI_DATASIZE_8BIT;
 }
 
 
@@ -235,60 +502,32 @@ void ST7735::SetWindow(int x, int y, int width, int height)
     SendData8((uint8)x);
     SendData8(0x00);
     SendData8((uint8)(x + width - 1));
-
     SendCommand(0x2B);      // RASET
     SendData8(0x00);
     SendData8((uint8)y);
     SendData8(0x00);
-    SendData8((uint8)(y + height - 1));
+    SendData8((uint8)(y + height));
 }
 
 #endif
 
 
-void ST7735::SendData16(uint16 data)
+void ST7735::SendData8(uint8 data)
 {
+    __HAL_SPI_ENABLE(&handle);
+
     TimeMeterMS meter;
 
     SET_DC;
     RESET_CS;
 
-    SPI2->CR1 |= SPI_CR1_DFF;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
-    SPI2->DR = data;
-
-    while (!(SPI2->SR & SPI_SR_TXE))
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            break;
-        }
-    };
     while ((SPI2->SR & SPI_SR_BSY))
     {
         if (meter.ElapsedTime() > 100)
         {
             break;
         }
-    };
-
-    SET_CS;
-}
-
-
-void ST7735::SendData8(uint8 data)
-{
-    TimeMeterMS meter;
-
-    SET_DC;
-    RESET_CS;
+    }
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {
@@ -298,7 +537,7 @@ void ST7735::SendData8(uint8 data)
         }
     }
 
-    SPI2->DR = data;
+    SPI2_DR_8bit = data;
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {
@@ -308,7 +547,7 @@ void ST7735::SendData8(uint8 data)
         }
     }
 
-    while (SPI2->SR & SPI_SR_BSY)
+    while ((SPI2->SR & SPI_SR_BSY))
     {
         if (meter.ElapsedTime() > 100)
         {
@@ -322,12 +561,20 @@ void ST7735::SendData8(uint8 data)
 
 void ST7735::SendCommand(uint8 data)
 {
+    __HAL_SPI_ENABLE(&handle);
+
     TimeMeterMS meter;
 
     RESET_DC;
     RESET_CS;
 
-    SPI2->CR1 &= ~SPI_CR1_DFF;
+    while ((SPI2->SR & SPI_SR_BSY))
+    {
+        if (meter.ElapsedTime() > 100)
+        {
+            break;
+        }
+    }
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {
@@ -337,7 +584,7 @@ void ST7735::SendCommand(uint8 data)
         }
     }
 
-    SPI2->DR = data;
+    SPI2_DR_8bit = data;
 
     while (!(SPI2->SR & SPI_SR_TXE))
     {

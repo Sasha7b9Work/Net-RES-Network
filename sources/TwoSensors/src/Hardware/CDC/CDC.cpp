@@ -1,166 +1,188 @@
-// 2022/04/20 08:53:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "Hardware/CDC/CDC.h"
-#include "Hardware/HAL/HAL.h"
-#include <usbd_desc.h>
+#include <usbd_cdc.h>
+#include <cstdarg>
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
 
 
-static USBD_HandleTypeDef hUsbDeviceFS;
-static PCD_HandleTypeDef _handlePCD;
-
-void *CDC::handlePCD = &_handlePCD;
+#define APP_RX_DATA_SIZE  512
+#define APP_TX_DATA_SIZE  512
 
 
-#define APP_RX_DATA_SIZE  1000
-#define APP_TX_DATA_SIZE  1000
 
-// Create buffer for reception and transmission
-// It's up to user to redefine and/or remove those define
-// Received data over USB are stored in this buffer
-uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
+PCD_HandleTypeDef _handlePCD;
 
-// Data to send over USB CDC are stored in this buffer
-uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
+void *handlePCD = &_handlePCD;
 
-extern USBD_HandleTypeDef hUsbDeviceFS;
 
-static int8_t CDC_Init_FS(void);
-static int8_t CDC_DeInit_FS(void);
-static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length);
-static int8_t CDC_Receive_FS(uint8_t* pbuf, uint32_t *Len);
-
-USBD_CDC_ItfTypeDef USBD_Interface_fops_FS =
+USBD_CDC_LineCodingTypeDef LineCoding =
 {
-    CDC_Init_FS,
-    CDC_DeInit_FS,
-    CDC_Control_FS,
-    CDC_Receive_FS
+  115200, /* baud rate*/
+  0x00,   /* stop bits-1*/
+  0x00,   /* parity - none*/
+  0x08    /* nb. of bits 8*/
 };
 
+uint8_t UserRxBuffer[APP_RX_DATA_SIZE];/* Received Data over USB are stored in this buffer */
+uint8_t UserTxBuffer[APP_TX_DATA_SIZE];/* Received Data over UART (CDC interface) are stored in this buffer */
+uint32_t BuffLength;
+uint32_t UserTxBufPtrIn = 0;/* Increment this pointer or roll it back to
+                               start address when data are received over USART */
+uint32_t UserTxBufPtrOut = 0; /* Increment this pointer or roll it back to
+                                 start address when data are sent over USB */
 
-void CDC::Init()
+                                 /* USB handler declaration */
+extern USBD_HandleTypeDef  hUSBDDevice;
+
+
+static int8_t CDC_Itf_Init(void);
+static int8_t CDC_Itf_DeInit(void);
+static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length);
+static int8_t CDC_Itf_Receive(uint8_t *pbuf, uint32_t *Len);
+
+USBD_CDC_ItfTypeDef USBD_CDC_fops =
 {
-    USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
+  CDC_Itf_Init,
+  CDC_Itf_DeInit,
+  CDC_Itf_Control,
+  CDC_Itf_Receive
+};
 
-    USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
+/* Private functions ---------------------------------------------------------*/
 
-    USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
-
-    USBD_Start(&hUsbDeviceFS);
-}
-
-
-static int8_t CDC_Init_FS(void)
+/**
+  * @brief  CDC_Itf_Init
+  *         Initializes the CDC media low layer
+  * @param  None
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+  */
+static int8_t CDC_Itf_Init(void)
 {
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, 0);
-    USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
+    USBD_CDC_SetTxBuffer(&hUSBDDevice, UserTxBuffer, 0);
+    USBD_CDC_SetRxBuffer(&hUSBDDevice, UserRxBuffer);
+
     return (USBD_OK);
 }
 
-
-static int8_t CDC_DeInit_FS(void)
+/**
+  * @brief  CDC_Itf_DeInit
+  *         DeInitializes the CDC media low layer
+  * @param  None
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+  */
+static int8_t CDC_Itf_DeInit(void)
 {
     return (USBD_OK);
 }
 
-
-static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* /*pbuf*/, uint16_t /*length*/)
+/**
+  * @brief  CDC_Itf_Control
+  *         Manage the CDC class requests
+  * @param  Cmd: Command code
+  * @param  Buf: Buffer containing command data (request parameters)
+  * @param  Len: Number of data to be sent (in bytes)
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
+  */
+static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length)
 {
-    switch(cmd)
+    UNUSED(length);
+
+    switch (cmd)
     {
     case CDC_SEND_ENCAPSULATED_COMMAND:
+        /* Add your code here */
         break;
 
     case CDC_GET_ENCAPSULATED_RESPONSE:
+        /* Add your code here */
         break;
 
     case CDC_SET_COMM_FEATURE:
+        /* Add your code here */
         break;
 
     case CDC_GET_COMM_FEATURE:
+        /* Add your code here */
         break;
 
     case CDC_CLEAR_COMM_FEATURE:
+        /* Add your code here */
         break;
 
-  /*******************************************************************************/
-  /* Line Coding Structure                                                       */
-  /*-----------------------------------------------------------------------------*/
-  /* Offset | Field       | Size | Value  | Description                          */
-  /* 0      | dwDTERate   |   4  | Number |Data terminal rate, in bits per second*/
-  /* 4      | bCharFormat |   1  | Number | Stop bits                            */
-  /*                                        0 - 1 Stop bit                       */
-  /*                                        1 - 1.5 Stop bits                    */
-  /*                                        2 - 2 Stop bits                      */
-  /* 5      | bParityType |  1   | Number | Parity                               */
-  /*                                        0 - None                             */
-  /*                                        1 - Odd                              */
-  /*                                        2 - Even                             */
-  /*                                        3 - Mark                             */
-  /*                                        4 - Space                            */
-  /* 6      | bDataBits  |   1   | Number Data bits (5, 6, 7, 8 or 16).          */
-  /*******************************************************************************/
     case CDC_SET_LINE_CODING:
+        LineCoding.bitrate = (uint32_t)(pbuf[0] | (pbuf[1] << 8) | \
+            (pbuf[2] << 16) | (pbuf[3] << 24));
+        LineCoding.format = pbuf[4];
+        LineCoding.paritytype = pbuf[5];
+        LineCoding.datatype = pbuf[6];
+
         break;
 
     case CDC_GET_LINE_CODING:
+        pbuf[0] = (uint8_t)(LineCoding.bitrate);
+        pbuf[1] = (uint8_t)(LineCoding.bitrate >> 8);
+        pbuf[2] = (uint8_t)(LineCoding.bitrate >> 16);
+        pbuf[3] = (uint8_t)(LineCoding.bitrate >> 24);
+        pbuf[4] = LineCoding.format;
+        pbuf[5] = LineCoding.paritytype;
+        pbuf[6] = LineCoding.datatype;
+
+        /* Add your code here */
         break;
 
     case CDC_SET_CONTROL_LINE_STATE:
+        /* Add your code here */
         break;
 
     case CDC_SEND_BREAK:
+        /* Add your code here */
         break;
 
     default:
         break;
-  }
+    }
 
-  return (USBD_OK);
-}
-
-
-static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t */*Len*/)
-{
-    USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
-    USBD_CDC_ReceivePacket(&hUsbDeviceFS);
     return (USBD_OK);
 }
 
 
-#ifndef GUI
+static int8_t CDC_Itf_Receive(uint8_t *Buf, uint32_t *Len)
+{
+    UNUSED(Buf);
+    UNUSED(Len);
 
-uint8_t CDC::Transmit(const void *buffer, int size)
+    return (USBD_OK);
+}
+
+
+void HCDC::Transmit(const void *buffer, int size)
 {
     if (!buffer)
     {
-        return USBD_OK;
+        return;
     }
 
-    uint8_t result = USBD_OK;
-
-    USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
+    USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)hUSBDDevice.pClassData;
 
     if (hcdc->TxState != 0)
     {
-        return USBD_BUSY;
+        return;
     }
 
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)buffer, (uint16_t)size);
-    result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
-
-    return result;
-}
-
-#endif
-
-
-void CDC::OnIRQHandler()
-{
-    HAL_PCD_IRQHandler(&_handlePCD);
+    USBD_CDC_SetTxBuffer(&hUSBDDevice, (uint8_t *)buffer, (uint16_t)size);
+    USBD_CDC_TransmitPacket(&hUSBDDevice);
 }
 
 
-void CDC::TransmitF(char * /*format*/, ...)
+void HCDC::TransmitF(pchar format, ...)
 {
+    char buffer[128];
 
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(buffer, format, args);
+
+    Transmit((const void *)buffer, (int)std::strlen(buffer) + 1);
 }

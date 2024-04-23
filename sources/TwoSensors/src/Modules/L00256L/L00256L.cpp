@@ -3,7 +3,7 @@
 #include "Modules/L00256L/L00256L.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 namespace L00256L

@@ -1,138 +1,83 @@
 // 2023/06/15 14:13:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
-PinOut pinWP(Port::B, Pin::_0, PMode::OUTPUT_PP_PULL_UP);
+PinInput    pinPowerIn(GPIOA, GPIO_PIN_8, GPIO_PULLDOWN);
+PinOutputPP pinPowerOut(GPIOB, GPIO_PIN_10, GPIO_PULLDOWN);
+PinOutputPP pinOUT(GPIOB, GPIO_PIN_5, GPIO_PULLUP);
 
 
-namespace HAL_PINS
-{
-    static const uint16 pins[Pin::Count] =
-    {
-        GPIO_PIN_0,
-        GPIO_PIN_1,
-        GPIO_PIN_2,
-        GPIO_PIN_3,
-        GPIO_PIN_4,
-        GPIO_PIN_5,
-        GPIO_PIN_6,
-        GPIO_PIN_7,
-        GPIO_PIN_8,
-        GPIO_PIN_9,
-        GPIO_PIN_10,
-        GPIO_PIN_11,
-        GPIO_PIN_12,
-        GPIO_PIN_13,
-        GPIO_PIN_14,
-        GPIO_PIN_15
-    };
+Pin         pinWP(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_PULLUP);
+PinOutputPP pinBEEP(GPIOB, GPIO_PIN_4, GPIO_PULLUP);
+PinAnalog   pinADC(GPIOA, GPIO_PIN_3);
+PinAnalog   pinHumidity(GPIOA, GPIO_PIN_0);
+Pin         pinSCL(GPIOB, GPIO_PIN_6, GPIO_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1);
+Pin         pinSDA(GPIOB, GPIO_PIN_7, GPIO_MODE_AF_OD, GPIO_NOPULL, GPIO_AF4_I2C1);
 
-    static GPIO_TypeDef *const ports[Port::Count] =
-    {
-        GPIOA,
-        GPIOB,
-        GPIOC,
-        GPIOD
-    };
-}
+Pin         pinSCK_SPI1(GPIOA, GPIO_PIN_5, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_AF5_SPI1);
+Pin         pinMOSI_SPI1(GPIOA, GPIO_PIN_7, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_AF5_SPI1);
+Pin         pinMISO_SPI1(GPIOA, GPIO_PIN_6, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_AF5_SPI1);
+PinOutputPP pinNSS_SPI1(GPIOA, GPIO_PIN_4, GPIO_NOPULL);
 
+Pin         pinTX_HC12(GPIOA, GPIO_PIN_9, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_AF7_USART1);
+Pin         pinRX_HC12(GPIOA, GPIO_PIN_10, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_AF7_USART1);
+PinOutputPP pinCS_HC12(GPIOB, GPIO_PIN_2, GPIO_NOPULL);
 
-void HAL_PINS::Init()
-{
-    pinWP.Init();
-    pinWP.ToLow();
-}
+Pin         pinTX_NEO_8M(GPIOA, GPIO_PIN_2, GPIO_MODE_AF_PP, GPIO_PULLUP, GPIO_AF7_USART2);
+Pin         pinRX_NEO_8M(GPIOA, GPIO_PIN_3, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_AF7_USART2);
 
+Pin         pinKey1(GPIOB, GPIO_PIN_8, GPIO_MODE_IT_RISING_FALLING, GPIO_PULLUP);
+Pin         pinKey2(GPIOB, GPIO_PIN_9, GPIO_MODE_IT_RISING_FALLING, GPIO_PULLUP);
 
-void PinOut::ToLow()
-{
-    HAL_PINS::ports[port]->BSRR = (uint)(HAL_PINS::pins[pin] << 16);
-}
+PinOutputPP pinRESET_ST(GPIOB, GPIO_PIN_11, GPIO_NOPULL);
+PinOutputPP pinCS_ST(GPIOB, GPIO_PIN_12, GPIO_PULLDOWN);
+Pin         pinSCL_SPI2(GPIOB, GPIO_PIN_13, GPIO_MODE_AF_PP, GPIO_PULLDOWN, GPIO_AF5_SPI2);
+PinOutputPP pinDC_ST(GPIOB, GPIO_PIN_14, GPIO_NOPULL);
+Pin         pinMOSI_SPI2(GPIOB, GPIO_PIN_15, GPIO_MODE_AF_PP, GPIO_PULLDOWN, GPIO_AF5_SPI2);
 
 
 void Pin::Init()
 {
-    GPIO_InitTypeDef is;
-
-    is.Pin = HAL_PINS::pins[pin];
-
-    GPIO_TypeDef *gpio = HAL_PINS::ports[port];
-
-    if (mode == PMode::OUTPUT_PP_PULL_UP || mode == PMode::OUTPUT_PP_PULL_DOWN)
+    GPIO_InitTypeDef is =
     {
-        is.Mode = GPIO_MODE_OUTPUT_PP;
-        is.Speed = GPIO_SPEED_FREQ_HIGH;
+        pin,
+        mode,
+        pull,
+        GPIO_SPEED_FREQ_HIGH,
+        alternate
+    };
 
-        HAL_GPIO_Init(gpio, &is);
-
-        uint data = gpio->ODR;
-
-        if (mode == PMode::OUTPUT_PP_PULL_DOWN)
-        {
-            _CLEAR_BIT(data, pin);
-        }
-        else
-        {
-            _SET_BIT(data, pin);
-        }
-
-        gpio->ODR = data;
-    }
-    else if (mode == PMode::INPUT_NO_PULL || mode == PMode::INPUT_PULL_DOWN)
-    {
-        is.Mode = GPIO_MODE_INPUT;
-        is.Speed = GPIO_SPEED_FREQ_HIGH;
-        is.Pull = (mode == PMode::INPUT_NO_PULL) ? GPIO_NOPULL : GPIO_PULLDOWN;
-
-        HAL_GPIO_Init(gpio, &is);
-
-        uint data = gpio->ODR;
-
-        if (mode == PMode::INPUT_PULL_DOWN)
-        {
-            _CLEAR_BIT(data, pin);
-        }
-        else
-        {
-            _SET_BIT(data, pin);
-        }
-
-        gpio->ODR = data;
-    }
-
-    if (port == Port::D && (pin == Pin::_0 || pin == Pin::_1))
-    {
-        __HAL_AFIO_REMAP_PD01_ENABLE();
-    }
+    HAL_GPIO_Init(gpio, &is);
 }
 
 
-Pin::Pin(Port::E _port, Pin::E _pin, PMode::E _mode) :
-    port(_port), pin(_pin), mode(_mode)
+void Pin::ToLow()
 {
+    HAL_GPIO_WritePin(gpio, pin, GPIO_PIN_RESET);
 }
 
 
-PinOut::PinOut(Port::E _port, Pin::E _pin, PMode::E _mode) : Pin(_port, _pin, _mode) {}
-
-
-void PinOut::Set(bool state)
+void Pin::ToHi()
 {
-    if (state)
-    {
-        ToHi();
-    }
-    else
-    {
-        ToLow();
-    }
+    HAL_GPIO_WritePin(gpio, pin, GPIO_PIN_SET);
 }
 
 
-void PinOut::ToHi()
+void Pin::Set(bool hi)
 {
-    HAL_PINS::ports[port]->BSRR = HAL_PINS::pins[pin];
+    HAL_GPIO_WritePin(gpio, pin, hi ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
+
+bool Pin::IsHi() const
+{
+    return HAL_GPIO_ReadPin(gpio, pin) != GPIO_PIN_RESET;
+}
+
+
+bool Pin::IsLow() const
+{
+    return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_RESET;
+}

@@ -9,4 +9,6 @@ namespace ST7735
 
     // Записать часть буфера. x и width должны быть чётными
     void WriteBuffer(int x, int y, int width, int height);
+
+    void WritePoint(int x, int y, uint16 color);
 }

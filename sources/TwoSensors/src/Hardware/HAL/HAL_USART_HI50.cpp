@@ -3,6 +3,12 @@
 #include "Hardware/HAL/HAL.h"
 
 
+void HAL_USART_HI50::Init()
+{
+
+}
+
+
 void HAL_USART_HI50::Send(uint8)
 {
 

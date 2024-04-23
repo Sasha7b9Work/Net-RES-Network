@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Modules/BH1750/BH1750.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 #include <cstdlib>
 
 

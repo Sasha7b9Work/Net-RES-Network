@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 uint Timer::CurrentTime()

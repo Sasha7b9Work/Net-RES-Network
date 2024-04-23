@@ -3,7 +3,7 @@
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 namespace Beeper
@@ -14,7 +14,7 @@ namespace Beeper
         {
             (uint)(60000 / 2000 - 1),
             TIM_COUNTERMODE_UP,
-            999,
+            400,
             TIM_CLOCKDIVISION_DIV1,
             0,
             TIM_AUTORELOAD_PRELOAD_DISABLE
@@ -30,11 +30,12 @@ namespace Beeper
 
 void Beeper::Init()
 {
-    GPIO_InitTypeDef is;
-    is.Pin = GPIO_PIN_4;
-    is.Mode = GPIO_MODE_OUTPUT_PP;
-    is.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOB, &is);
+    pinBEEP.Init();
+}
+
+
+void Beeper::Update()
+{
 }
 
 
@@ -68,7 +69,7 @@ void Beeper::Start(int _frequency)
 
     handle.Init.Prescaler = (uint)(60000 / frequency - 1);
 
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
+    HAL_NVIC_SetPriority(TIM3_IRQn, 3, 3);
     HAL_NVIC_EnableIRQ(TIM3_IRQn);
 
     HAL_TIM_Base_Init(&handle);
@@ -92,7 +93,7 @@ void Beeper::Stop()
 }
 
 
-bool Beeper::Running()
+bool Beeper::IsRunning()
 {
     return running;
 }
@@ -104,15 +105,6 @@ void Beeper::CallbackOnTimer()
 
     level = !level;
 
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, level ? GPIO_PIN_SET : GPIO_PIN_RESET);
-}
-
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //-V2009
-{
-    if (htim == Beeper::handleTIM3)
-    {
-        Beeper::CallbackOnTimer();
-    }
+    pinBEEP.Set(level);
 }
 

@@ -6,6 +6,8 @@ namespace Beeper
 {
     void Init();
 
+    void Update();
+
     void Beep(int frequency, uint timeMS);
 
     void Start(int frequency);
@@ -13,7 +15,7 @@ namespace Beeper
     void Stop();
 
     // Возвращает true, если звук идёт
-    bool Running();
+    bool IsRunning();
 
     void CallbackOnTimer();
 

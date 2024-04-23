@@ -39,6 +39,8 @@ namespace HAL_ADC
 
     float GetVoltage();
 
+    float GetHumidity();
+
     extern void *handle;           // ADC_HandleTypeDef
 }
 
@@ -72,14 +74,18 @@ namespace HAL_RTC
 {
     void Init();
 
+
+
     PackedTime GetTime();
 
-    uint SetTime(const PackedTime &);
+    void SetTime(const PackedTime &);
 }
 
 
 namespace HAL_USART_HI50
 {
+    void Init();
+
     void Send(uint8);
 }
 

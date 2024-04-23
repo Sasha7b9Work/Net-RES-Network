@@ -59,7 +59,7 @@ void HI50::CallbackOnReceive(pchar message)
         break;
 
     case State::WAIT_MEASURE:
-        CDC::TransmitF("%s", message);
+        HCDC::TransmitF("%s", message);
         HAL_USART_HI50::Send(MEAS_HI);
         break;
     }

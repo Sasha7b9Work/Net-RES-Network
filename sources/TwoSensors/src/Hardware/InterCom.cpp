@@ -97,7 +97,7 @@ void InterCom::Send(TypeMeasure::E type, float measure)
     {
         String<> message("%s : %f %s", names[type], measure, units[type]);
 
-        CDC::Transmit(message.c_str(), message.Size() + 1);
+        HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
     Buffer<uint8, 20> data = CreateMessage(type, measure); //-V821

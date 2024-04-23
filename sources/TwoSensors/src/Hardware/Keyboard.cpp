@@ -3,7 +3,7 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 Key key1(Key::_1);

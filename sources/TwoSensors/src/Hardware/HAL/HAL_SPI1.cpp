@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include <stm32f1xx_hal.h>
+#include <stm32f3xx_hal.h>
 
 
 namespace HAL_SPI1
@@ -21,50 +21,40 @@ namespace HAL_SPI1
             SPI_FIRSTBIT_MSB,               // Init.FirstBit
             SPI_TIMODE_DISABLE,             // Init.TIMode
             SPI_CRCCALCULATION_DISABLE,     // Init.CRCCalculation
-            7                               // InitCRCPolynomial
-        },
-        0, 0, 0, 0, 0, 0,
-        0,
-        0,
-        0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+            7,                              // InitCRCPolynomial
+            SPI_CRC_LENGTH_8BIT,
+            SPI_NSS_PULSE_DISABLE
+        }
     };
 
     namespace WP
     {
-        void Init()
+        static void Init()
         {
-            GPIO_InitTypeDef is =
-            {
-                GPIO_PIN_0,
-                GPIO_MODE_OUTPUT_PP,
-                GPIO_PULLUP,
-                GPIO_SPEED_FREQ_HIGH
-            };
+            pinWP.Init();
 
-            HAL_GPIO_Init(GPIOB, &is);
-
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+            pinWP.ToLow();
 
             Timer::Delay(50);
 
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+            pinWP.ToHi();
 
             Timer::Delay(50);
 
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+            pinWP.ToLow();
         }
     }
 
     namespace CS
     {
-        void Set()
+        static void Set()
         {
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+            pinNSS_SPI1.ToHi();
         }
 
-        void Reset()
+        static void Reset()
         {
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+            pinNSS_SPI1.ToLow();
         }
     }
 }
@@ -74,26 +64,10 @@ void HAL_SPI1::Init()
 {
     WP::Init();
 
-    GPIO_InitTypeDef is =
-    {//      SCK       MOSI
-        GPIO_PIN_5 | GPIO_PIN_7,
-        GPIO_MODE_AF_PP,
-        GPIO_PULLUP,
-        GPIO_SPEED_FREQ_HIGH
-    };
-
-    HAL_GPIO_Init(GPIOA, &is);
-
-    is.Pin = GPIO_PIN_6;                // MISO
-    is.Mode = GPIO_MODE_INPUT;
-    is.Pull = GPIO_NOPULL;
-
-    HAL_GPIO_Init(GPIOA, &is);
-
-    is.Pin = GPIO_PIN_4;                // NSS
-    is.Mode = GPIO_MODE_OUTPUT_PP;
-
-    HAL_GPIO_Init(GPIOA, &is);
+    pinSCK_SPI1.Init();
+    pinMOSI_SPI1.Init();
+    pinMISO_SPI1.Init();
+    pinNSS_SPI1.Init();
 
     CS::Set();
 
