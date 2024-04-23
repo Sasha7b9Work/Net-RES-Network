@@ -51,6 +51,7 @@ file(GLOB MODULES_BH1750        src/Modules/BH1750/*.*)
 file(GLOB MODULES_BME280        src/Modules/BME280/*.*)
 file(GLOB MODULES_HC12          src/Modules/HC12/*.*)
 file(GLOB MODULES_HI50          src/Modules/HI50/*.*)
+file(GLOB MODULES_L00256L       src/Modules/L00256L/*.*)
 file(GLOB MODULES_ST7735        src/Modules/ST7735/*.*)
 file(GLOB MODULES_W25Q80DV      src/Modules/W25Q80DV/*.*)
 file(GLOB SETTINGS              src/Settings/*.*)
@@ -71,6 +72,7 @@ source_group(Modules/BH1750     FILES ${MODULES_BH1750})
 source_group(Modules/BME280     FILES ${MODULES_BME280})
 source_group(Modules/HC12       FILES ${MODULES_HC12})
 source_group(Modules/HI50       FILES ${MODULES_HI50})
+source_group(Modules/L00256L    FILES ${MODULES_L00256L})
 source_group(Modules/ST7735     FILES ${MODULES_ST7735})
 source_group(Modules/W25Q80DV   FILES ${MODULES_W25Q80DV})
 source_group(Settings           FILES ${SETTINGS})
@@ -101,6 +103,7 @@ add_library(
     ${MODULES_BME280}
     ${MODULES_HC12}
     ${MODULES_HI50}
+    ${MODULES_L00256L}
     ${MODULES_ST7735}
     ${MODULES_W25Q80DV}
     ${SETTINGS}
