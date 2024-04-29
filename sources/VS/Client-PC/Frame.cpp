@@ -174,10 +174,6 @@ void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
     Close(true);
 
     OnClose();
-
-    wxConfigBase::Get(false)->Flush();
-
-    wxConfigBase::Set(nullptr);
 }
 
 
