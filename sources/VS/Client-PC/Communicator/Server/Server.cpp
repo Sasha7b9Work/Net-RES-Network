@@ -28,6 +28,8 @@ void ServerMeasures::Init()
             wxSOCKET_LOST_FLAG);
 
         socket->Notify(true);
+
+        LOG_WRITE("socket = new wxSocketClient()");
     }
 
     if (!socket->IsConnected() && !wait_connection)
@@ -35,15 +37,32 @@ void ServerMeasures::Init()
         wait_connection = true;
 
         wxIPaddress *addr;
-        wxIPV4address addr4;
-        addr = &addr4;
+//        wxIPV4address addr4;
+        wxIPV6address addr6;
+        addr = &addr6;
+//        addr = &addr4;
 
 //        wxString hostname = "localhost";
         addr->Hostname("localhost");
-        addr->Service(1234);
+        addr->Service(3000);
 
-        socket->Connect(*addr, false);
+        socket->Connect(*addr, true);
+
+        LOG_WRITE("socket->Connect()");
     }
+}
+
+
+void ServerMeasures::DeInit()
+{
+    if (socket)
+    {
+        delete socket;
+        socket = nullptr;
+    }
+
+    wait_connection = false;
+    is_connected = false;
 }
 
 
@@ -86,19 +105,22 @@ void ServerMeasures::CallbackOnSocketEvent(wxSocketEvent &event)
     switch (event.GetSocketEvent())
     {
     case wxSOCKET_INPUT:
+        LOG_WRITE("wxSOCKET_INPUT");
         break;
 
     case wxSOCKET_LOST:
-        wait_connection = false;
-        is_connected = false;
+        LOG_WRITE("wxSOCKET_LOST");
+        DeInit();
         break;
 
     case wxSOCKET_CONNECTION:
+        LOG_WRITE("wxSOCKET_CONNECTION");
         wait_connection = false;
         is_connected = true;
         break;
 
     case wxSOCKET_OUTPUT:
+        LOG_WRITE("wxSOCKET_OUTPUT");
         break;
     }
 }

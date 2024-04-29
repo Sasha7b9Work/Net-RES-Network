@@ -8,6 +8,8 @@ namespace ServerMeasures
 {
     void Init();
 
+    void DeInit();
+
     void Update();
 
     void Send(TypeMeasure::E, float value);
