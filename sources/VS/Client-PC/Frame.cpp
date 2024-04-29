@@ -235,7 +235,5 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
 
 void Frame::OnClose()
 {
-    Log::DeInit();
-
     ConsoleSCPI::Self()->Destroy();
 }
