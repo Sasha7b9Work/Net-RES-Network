@@ -174,6 +174,10 @@ void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
     Close(true);
 
     OnClose();
+
+    delete g_file_config;
+
+    g_file_config = nullptr;
 }
 
 
@@ -182,8 +186,6 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
     self = nullptr;
 
     ServerMeasures::DeInit();
-
-    delete g_file_config;
 
     event.Skip();
 

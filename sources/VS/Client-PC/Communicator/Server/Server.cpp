@@ -52,7 +52,7 @@ void ServerMeasures::Init()
         addr->Hostname(host_name);
         addr->Service((uint16)port);
 
-        socket->Connect(*addr, true);
+        socket->Connect(*addr, false);
     }
 }
 
