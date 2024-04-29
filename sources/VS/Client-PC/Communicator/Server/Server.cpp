@@ -28,8 +28,6 @@ void ServerMeasures::Init()
             wxSOCKET_LOST_FLAG);
 
         socket->Notify(true);
-
-        LOG_WRITE("socket = new wxSocketClient()");
     }
 
     if (!socket->IsConnected() && !wait_connection)
@@ -38,17 +36,20 @@ void ServerMeasures::Init()
 
         wxIPaddress *addr;
         wxIPV4address addr4;
-//        wxIPV6address addr6;
         addr = &addr4;
-//        addr = &addr4;
 
-//        wxString hostname = "localhost";
-        addr->Hostname("localhost");
-        addr->Service(3000);
+        wxString host_name;
+        g_file_config->Read("ip", &host_name, "");
+
+        int port = 0;
+        g_file_config->Read("port", &port, 0);
+
+        LOG_WRITE("Connect to %s:%d", host_name.c_str().AsChar(), port);
+
+        addr->Hostname(host_name);
+        addr->Service((uint16)port);
 
         socket->Connect(*addr, true);
-
-        LOG_WRITE("socket->Connect()");
     }
 }
 

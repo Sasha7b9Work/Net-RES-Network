@@ -183,6 +183,8 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
 
     ServerMeasures::DeInit();
 
+    delete g_file_config;
+
     event.Skip();
 
     OnClose();

@@ -4,6 +4,9 @@
 #include "Frame.h"
 
 
+wxFileConfig *g_file_config = nullptr;
+
+
 wxIMPLEMENT_APP(Application);
 
 enum
@@ -16,6 +19,8 @@ bool Application::OnInit()
 {
     if (!wxApp::OnInit())
         return false;
+
+    g_file_config = new wxFileConfig("", "", wxGetCwd() + "/config.cfg");
 
     // we use a PNG image in our HTML page
     wxImage::AddHandler(new wxPNGHandler);
