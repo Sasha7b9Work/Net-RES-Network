@@ -90,7 +90,6 @@ Frame::Frame(const wxString &title)
     wxFrameBase::SetMenuBar(menuBar);
 
     Bind(wxEVT_MENU, &Frame::OnAbout, this, wxID_ABOUT);
-    Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
     Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_CONSOLE);
     Bind(wxEVT_MENU, &Frame::OnMenuTool, this, TOOL_DATABASE);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
@@ -213,27 +212,11 @@ void Frame::OnSocketEvent(wxSocketEvent &event)
 }
 
 
-void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
-{
-    self = nullptr;
-
-    Close(true);
-
-    OnClose();
-}
-
-
 void Frame::OnCloseWindow(wxCloseEvent &event)
 {
     self = nullptr;
 
-    event.Skip();
-
-    OnClose();
-}
-
-
-void Frame::OnClose()
-{
     ConsoleSCPI::Self()->Destroy();
+
+    event.Skip();
 }

@@ -12,7 +12,6 @@ class Frame : public wxFrame
 public:
     Frame(const wxString &title);
 
-    void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
 
     static Frame *self;
@@ -32,8 +31,6 @@ private:
     void OnMenuTool(wxCommandEvent &);
 
     void OnMenuSettings(wxCommandEvent &);
-
-    void OnClose();
 
     void SetModeView(ModeView::E);
 
