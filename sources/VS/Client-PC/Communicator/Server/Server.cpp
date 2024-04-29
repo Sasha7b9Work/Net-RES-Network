@@ -61,6 +61,13 @@ void ServerMeasures::DeInit()
 {
     if (socket)
     {
+        socket->Close();
+
+        while (socket->IsConnected())
+        {
+
+        }
+
         delete socket;
         socket = nullptr;
     }
