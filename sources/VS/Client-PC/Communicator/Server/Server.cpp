@@ -20,7 +20,7 @@ namespace ServerMeasures
 
 void ServerMeasures::Init()
 {
-    if (socket == nullptr)
+    if (!socket)
     {
         socket = new wxSocketClient();
 
@@ -33,7 +33,7 @@ void ServerMeasures::Init()
         socket->Notify(true);
     }
 
-    if (!socket->IsConnected() && !wait_connection)
+    if (socket && !socket->IsConnected() && !wait_connection)
     {
         wait_connection = true;
 
