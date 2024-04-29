@@ -17,5 +17,5 @@ private:
 
     void Update();
 
-    void OnClose();
+    virtual int OnExit() wxOVERRIDE;
 };

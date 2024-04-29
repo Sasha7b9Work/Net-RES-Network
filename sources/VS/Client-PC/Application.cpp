@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Application.h"
 #include "Frame.h"
+#include "Communicator/Server/Server.h"
 
 
 wxFileConfig *g_file_config = nullptr;
@@ -47,4 +48,18 @@ bool Application::OnInit()
 void Application::OnTimer(wxTimerEvent &)
 {
     Update();
+}
+
+
+int Application::OnExit()
+{
+    wxConfigBase::Get(false)->Flush();
+
+    wxConfigBase::Set(nullptr);
+
+    delete g_file_config;
+
+    ServerMeasures::DeInit();
+
+    return wxApp::OnExit();
 }

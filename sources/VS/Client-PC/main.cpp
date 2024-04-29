@@ -39,8 +39,6 @@ void Application::Update()
 
 void Frame::OnClose()
 {
-    ServerMeasures::DeInit();
-
     Log::DeInit();
 
     ConsoleSCPI::Self()->Destroy();

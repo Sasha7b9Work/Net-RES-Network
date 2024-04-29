@@ -178,10 +178,6 @@ void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
     wxConfigBase::Get(false)->Flush();
 
     wxConfigBase::Set(nullptr);
-
-    delete g_file_config;
-
-    g_file_config = nullptr;
 }
 
 
