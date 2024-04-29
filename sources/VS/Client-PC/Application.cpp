@@ -22,6 +22,8 @@ bool Application::OnInit()
 
     g_file_config = new wxFileConfig("", "", wxGetCwd() + "/config.cfg");
 
+    wxConfigBase::Set(g_file_config);
+
     // we use a PNG image in our HTML page
     wxImage::AddHandler(new wxPNGHandler);
 
