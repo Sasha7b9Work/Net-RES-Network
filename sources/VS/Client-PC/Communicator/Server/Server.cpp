@@ -38,8 +38,8 @@ void ServerMeasures::Init()
         wxIPV4address addr4;
         addr = &addr4;
 
-        wxString hostname = "localhost";
-        addr->Hostname(hostname);
+//        wxString hostname = "localhost";
+        addr->Hostname("localhost");
         addr->Service(1234);
 
         socket->Connect(*addr, false);
@@ -76,7 +76,7 @@ void ServerMeasures::Send(TypeMeasure::E type, float value)
     wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%d-%d %d:%d:%d\"", TypeMeasure::GetTitle(type), value,
         time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
 
-    socket->WriteMsg(&message.GetWritableChar(0), message.Length());
+    socket->WriteMsg(message.GetData(), message.Length());
 }
 
 
