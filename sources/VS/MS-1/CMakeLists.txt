@@ -14,6 +14,7 @@ include_directories(
     ../../MS-1/src/Hardware/HAL
     ../../VS/ThirdParty/wxWidgets/include
     ../../generated/ThirdParty/lib/vc_dll/mswud
+    ../../generated/ThirdParty/lib/vc_lib/mswud
     ../../common/_VS_KEIL/CMSIS
     ../../common/_VS_LIBS/STM32F3
     ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
@@ -22,9 +23,12 @@ include_directories(
     ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc
 )
 
-link_directories(../../generated/ThirdParty/lib/vc_dll)
+link_directories(
+    ../../generated/ThirdParty/lib/vc_dll
+    ../../generated/ThirdParty/lib/vc_lib
+)
 
-add_definitions(-DSTM32F303xC -DWXUSINGDLL -DGUI -DDEVICE)
+add_definitions(-DSTM32F303xC -DGUI -DDEVICE)
 
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
@@ -179,7 +183,7 @@ add_executable( ${PROJECT_NAME}
     ${UTILS_TEXT}
 )
 
-target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase32ud_vc_custom.dll $(OutputPath) /Y)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw32ud_core_vc_custom.dll $(OutputPath) /Y)
+target_link_libraries(${PROJECT_NAME}
+    wxbase32ud wxmsw32ud_core wxpngd wxzlibd
+    Ws2_32 Comctl32 Rpcrt4
+)
