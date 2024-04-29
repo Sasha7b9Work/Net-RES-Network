@@ -42,10 +42,10 @@ void ServerMeasures::Init()
         addr = &addr4;
 
         wxString host_name;
-        g_file_config->Read("ip", &host_name, "");
+        g_file_config->Read("ip", &host_name, "localhost");
 
         int port = 0;
-        g_file_config->Read("port", &port, 0);
+        g_file_config->Read("port", &port, 3333);
 
         LOG_WRITE("Connect to %s:%d", host_name.c_str().AsChar(), port);
 
