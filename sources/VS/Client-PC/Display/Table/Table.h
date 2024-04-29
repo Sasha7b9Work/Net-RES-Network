@@ -12,7 +12,7 @@ public:
 
     static Table *self;
 
-    void _SetMeasure(uint id, const wxColour &color, uint8 type, float value);
+    void SetMeasure(uint id, const wxColour &color, uint8 type, float value);
 
     int GetCreatedWidth() const { return create_width; }
 

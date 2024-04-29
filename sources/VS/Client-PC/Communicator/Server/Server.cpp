@@ -70,8 +70,6 @@ void ServerMeasures::Update()
 {
     if (is_connected)
     {
-        Send(TypeMeasure::Pressure, 2.0f);
-
         return;
     }
 

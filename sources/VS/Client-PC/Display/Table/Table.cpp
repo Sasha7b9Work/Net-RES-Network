@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Table/Table.h"
 #include "Data/Sensors.h"
+#include "Communicator/Server/Server.h"
 
 
 using namespace std;
@@ -69,7 +70,7 @@ void Table::StretchColumns()
 }
 
 
-void Table::_SetMeasure(uint id, const wxColour &color, uint8 type, float value)
+void Table::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 {
     if (id == 0)
     {
@@ -92,6 +93,8 @@ void Table::_SetMeasure(uint id, const wxColour &color, uint8 type, float value)
     TypeMeasure::E type_meas = (TypeMeasure::E)type;
 
     SetCellValue(row->second, TypeMeasure::NumColumn(type_meas), (float)value, color);
+
+    ServerMeasures::Send(type_meas, (float)value);
 }
 
 
