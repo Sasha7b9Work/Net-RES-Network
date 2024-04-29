@@ -69,7 +69,7 @@ void Table::StretchColumns()
 }
 
 
-void Table::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
+void Table::_SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 {
     if (id == 0)
     {

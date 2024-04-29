@@ -36,4 +36,6 @@ private:
     void OnClose();
 
     void SetModeView(ModeView::E);
+
+    void OnSocketEvent(wxSocketEvent &);
 };

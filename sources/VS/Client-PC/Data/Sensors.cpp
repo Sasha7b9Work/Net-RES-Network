@@ -1,4 +1,4 @@
-// 2022/08/24 14:56:17 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2022/08/24 14:56:17 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Data/Sensors.h"
 #include "Display/Table/Table.h"
@@ -20,15 +20,15 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 {
     static const pchar titles[Count] =
     {
-        "Температура",
-        "Давление",
-        "Влажность",
-        "Точка росы",
-        "Скорость",
-        "Широта",
-        "Долгота",
-        "Высота",
-        "Азимут"
+        "РўРµРјРїРµСЂР°С‚СѓСЂР°",
+        "Р”Р°РІР»РµРЅРёРµ",
+        "Р’Р»Р°Р¶РЅРѕСЃС‚СЊ",
+        "РўРѕС‡РєР° СЂРѕСЃС‹",
+        "РЎРєРѕСЂРѕСЃС‚СЊ",
+        "РЁРёСЂРѕС‚Р°",
+        "Р”РѕР»РіРѕС‚Р°",
+        "Р’С‹СЃРѕС‚Р°",
+        "РђР·РёРјСѓС‚"
     };
 
     return titles[type];
@@ -102,15 +102,15 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
 {
     static const pchar units[Count] =
     {
-        "С",
-        "гПа",
+        "РЎ",
+        "РіРџР°",
         "%",
-        "С",
-        "м/с",
-        "град",
-        "град",
-        "м",
-        "град"
+        "РЎ",
+        "Рј/СЃ",
+        "РіСЂР°Рґ",
+        "РіСЂР°Рґ",
+        "Рј",
+        "РіСЂР°Рґ"
     };
 
     return units[type];
@@ -132,7 +132,7 @@ void Sensor::Pool::AppendMeasure(uint id, uint8 type, float value)
     {
         sensor->second.AppendMeasure(type, value);
 
-        Table::self->SetMeasure(id, sensor->second.GetColor(), type, value);
+        Table::self->_SetMeasure(id, sensor->second.GetColor(), type, value);
     }
 }
 
@@ -158,7 +158,7 @@ void Sensor::AppendMeasure(uint8 type, float value)
 
         if (measures[type].Size() && (measures[type].Last().time == point.time))
         {
-            // В это время измерение уже получено - отбрасываем
+            // Р’ СЌС‚Рѕ РІСЂРµРјСЏ РёР·РјРµСЂРµРЅРёРµ СѓР¶Рµ РїРѕР»СѓС‡РµРЅРѕ - РѕС‚Р±СЂР°СЃС‹РІР°РµРј
         }
         else
         {

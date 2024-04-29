@@ -6,6 +6,7 @@
 #include "Display/Diagram/Canvas.h"
 #include "Settings.h"
 #include "Controls/ConsoleSCPI.h"
+#include "Communicator/Server/Server.h"
 
 
 Frame *Frame::self = nullptr;
@@ -95,6 +96,8 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnCloseWindow, this);
 
     Bind(wxEVT_SIZE, &Frame::OnSize, this);
+
+    Bind(wxEVT_SOCKET, &Frame::OnSocketEvent, this, SOCKET_ID);
 
     sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -222,3 +225,10 @@ void Frame::OnMenuTool(wxCommandEvent &event)
 
     }
 }
+
+
+void Frame::OnSocketEvent(wxSocketEvent &event)
+{
+    ServerMeasures::CallbackOnSocketEvent(event);
+}
+

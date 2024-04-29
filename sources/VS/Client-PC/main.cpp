@@ -9,6 +9,7 @@
 #include "Display/Diagram/Diagram.h"
 #include "Utils/Clock.h"
 #include "Controls/ConsoleSCPI.h"
+#include "Communicator/Server/Server.h"
 
 
 using namespace std;
@@ -31,6 +32,8 @@ void Application::Update()
     ReceivedData::Update();
 
     Diagram::Pool::self->UpdateArea();
+
+    ServerMeasures::Update();
 }
 
 

@@ -21,4 +21,12 @@ typedef signed char int8;
 #include <wx/wx.h>
 #include <wx/statline.h>
 #include <wx/grid.h>
+#include <wx/socket.h>
 #pragma warning(pop)
+
+
+enum
+{
+    SOCKET_ID = wxID_HIGHEST + 1000
+};
+

@@ -6,9 +6,11 @@ project (Client-PC)
 
 #set(CMAKE_UNITY_BUILD_BATCH_SIZE 8)
 
-include_directories(.
-                    ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud)
+include_directories(
+    .
+    ../../VS/ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_dll/mswud
+)
 
 link_directories(../../generated/ThirdParty/lib/vc_dll)
 
@@ -70,6 +72,7 @@ file(GLOB COMMUNICATOR_HC12       Communicator/HC12/*.*)
 file(GLOB COMMUNICATOR_LAN        Communicator/LAN/*.*)
 file(GLOB COMMUNICATOR_LAN_LIBNET Communicator/LAN/libnet/*.*)
 file(GLOB COMMUNICATOR_RS232      Communicator/RS232/*.*)
+file(GLOB COMMUNICATOR_SERVER     Communicator/Server/*.*)
 file(GLOB CONTROLS                Controls/*.*)
 file(GLOB DATA                    Data/*.*)
 file(GLOB DISPLAY                 Display/*.*)
@@ -86,6 +89,7 @@ source_group(Communicator/HC12       FILES ${COMMUNICATOR_HC12})
 source_group(Communicator/LAN        FILES ${COMMUNICATOR_LAN})
 source_group(Communicator/LAN/libnet FILES ${COMMUNICATOR_LAN_LIBNET})
 source_group(Communicator/RS232      FILES ${COMMUNICATOR_RS232})
+source_group(Communicator/Server     FILES ${COMMUNICATOR_SERVER})
 source_group(Controls                FILES ${CONTROLS})
 source_group(Data                    FILES ${DATA})
 source_group(Display                 FILES ${DISPLAY})
@@ -94,31 +98,35 @@ source_group(Display/Table           FILES ${DISPLAY_TABLE})
 source_group(Settings                FILES ${SETTINGS})
 source_group(Utils                   FILES ${UTILS})
 
-set_source_files_properties(Communicator/LAN/libnet/netserver.cpp
-                            Communicator/LAN/libnet/netbase.cpp
-                            Communicator/LAN/libnet/netclient.cpp
-                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+set_source_files_properties(
+    Communicator/LAN/libnet/netserver.cpp
+    Communicator/LAN/libnet/netbase.cpp
+    Communicator/LAN/libnet/netclient.cpp
+    PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON
+)
 
 
 add_executable( ${PROJECT_NAME}
-                ${RESOURCES}
-                ${SRC}
-                ${COMMUNICATOR}
-                ${COMMUNICATOR_COMPORT}
-                ${COMMUNICATOR_HC12}
-                ${COMMUNICATOR_LAN}
-                ${COMMUNICATOR_LAN_LIBNET}
-                ${COMMUNICATOR_RS232}
-                ${CONTROLS}
-                ${DATA}
-                ${DISPLAY}
-                ${DISPLAY_DIAGRAM}
-                ${DISPLAY_TABLE}
-                ${SETTINGS}
-                ${UTILS}
-                )
+    ${RESOURCES}
+    ${SRC}
+    ${COMMUNICATOR}
+    ${COMMUNICATOR_COMPORT}
+    ${COMMUNICATOR_HC12}
+    ${COMMUNICATOR_LAN}
+    ${COMMUNICATOR_LAN_LIBNET}
+    ${COMMUNICATOR_RS232}
+    ${COMMUNICATOR_SERVER}
+    ${CONTROLS}
+    ${DATA}
+    ${DISPLAY}
+    ${DISPLAY_DIAGRAM}
+    ${DISPLAY_TABLE}
+    ${SETTINGS}
+    ${UTILS}
+)
 
-target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
+target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core wxbase32ud_net Ws2_32)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase32ud_vc_custom.dll $(OutputPath) /Y)
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw32ud_core_vc_custom.dll $(OutputPath) /Y)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase32ud_net_vc_custom.dll $(OutputPath) /Y)
