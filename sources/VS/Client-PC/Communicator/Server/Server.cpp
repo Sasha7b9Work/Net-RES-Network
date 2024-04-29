@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Communicator/Server/Server.h"
 #include "Frame.h"
+#include "Utils/Timer.h"
 
 
 namespace ServerMeasures
@@ -12,6 +13,8 @@ namespace ServerMeasures
 
     // Послан запрос на соединение. Ждём
     static bool wait_connection = false;
+
+    static uint time_last_send = 0;
 }
 
 
@@ -71,6 +74,11 @@ void ServerMeasures::Update()
 {
     if (is_connected)
     {
+        if (Timer::CurrentTime() - time_last_send > 5000)
+        {
+            Send(TypeMeasure::Temperature, 25.0f);
+        }
+
         return;
     }
 
@@ -91,10 +99,12 @@ void ServerMeasures::Send(TypeMeasure::E type, float value)
 
     wxDateTime time = wxDateTime::Now();
 
-    wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%d-%d %d:%d:%d\"}\r\n", TypeMeasure::GetTitle(type), value,
+    wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%02d-%02d %02d:%02d:%02d\"}\r\n", TypeMeasure::GetTitle(type), value,
         time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
 
     socket->Write(message.GetData(), message.Length());
+
+    time_last_send = Timer::CurrentTime();
 }
 
 
