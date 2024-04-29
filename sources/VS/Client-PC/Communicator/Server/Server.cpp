@@ -15,6 +15,8 @@ namespace ServerMeasures
     static bool wait_connection = false;
 
     static uint time_last_send = 0;
+
+    static void Init();
 }
 
 

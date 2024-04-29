@@ -6,8 +6,6 @@
 // —юда будем посылать измерени€
 namespace ServerMeasures
 {
-    void Init();
-
     void DeInit();
 
     void Update();
