@@ -62,6 +62,8 @@ int Application::OnExit()
 
     delete g_file_config;
 
+    g_file_config = nullptr;
+
     ServerMeasures::DeInit();
 
     return wxApp::OnExit();

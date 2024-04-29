@@ -214,9 +214,7 @@ void Frame::OnSocketEvent(wxSocketEvent &event)
 
 void Frame::OnCloseWindow(wxCloseEvent &event)
 {
-    self = nullptr;
-
-    ConsoleSCPI::Self()->Destroy();
+    delete ConsoleSCPI::Self();
 
     event.Skip();
 }

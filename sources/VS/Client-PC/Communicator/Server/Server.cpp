@@ -28,9 +28,7 @@ void ServerMeasures::Init()
 
         socket->SetEventHandler(*Frame::self, SOCKET_ID);
 
-        socket->SetNotify(wxSOCKET_CONNECTION_FLAG |
-            wxSOCKET_INPUT_FLAG |
-            wxSOCKET_LOST_FLAG);
+        socket->SetNotify(wxSOCKET_CONNECTION_FLAG | wxSOCKET_LOST_FLAG);
 
         socket->Notify(true);
     }
