@@ -6,50 +6,57 @@ project (GTC-3)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
+include_directories(
+    .
+    GTC-3
+    ../../GTC-3/src
+    ../../GTC-3/src/Hardware/CDC
+    ../../GTC-3/src/Hardware/HAL
+    ../../VS/ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_dll/mswud
+    ../../generated/ThirdParty/lib/vc_lib/mswud
+    ../../common/_VS_KEIL/CMSIS
+    ../../common/_VS_LIBS/STM32F3
+    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    ../../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include
+    ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc
+)
 
-include_directories(.
-                    GTC-3
-                    ../../GTC-3/src
-                    ../../GTC-3/src/Hardware/CDC
-                    ../../GTC-3/src/Hardware/HAL
-                    ../../VS/ThirdParty/wxWidgets/include
-                    ../../generated/ThirdParty/lib/vc_dll/mswud
-                    ../../common/_VS_KEIL/CMSIS
-                    ../../common/_VS_LIBS/STM32F3
-                    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../../common/STM32Cube_F3/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../../common/STM32Cube_F3/Drivers/CMSIS/Device/ST/STM32F3xx/Include
-                    ../../common/STM32Cube_F3/Drivers/STM32F3xx_HAL_Driver/Inc)
+link_directories(
+    ../../generated/ThirdParty/lib/vc_dll
+    ../../generated/ThirdParty/lib/vc_lib
+)
 
-link_directories(../../generated/ThirdParty/lib/vc_dll)
-
-add_definitions(-DSTM32F303xC -DWXUSINGDLL -DGUI -DDEVICE)
+add_definitions(-DSTM32F303xC -DGUI -DDEVICE)
 
 if(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 
-    add_compile_options(/wd4100)    # 'xxx' : unreferenced formal parameter
-    add_compile_options(/wd4310)
-    add_compile_options(/wd4365)    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
-    add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
-    add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted
-    add_compile_options(/wd4625)    # 'derived class' : copy constructor was implicitly defined as deleted because
-                                    # a base class copy constructor is inaccessible or deleted
-    add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because
-                                    # a base class assignment operator is inaccessible or deleted
-    add_compile_options(/wd4774)    # 'string' : format string expected in argument number is not a string literal
-    add_compile_options(/wd4820)    # 'xxx' bytes padding added after construct 'member_name'
-    add_compile_options(/wd4996)    # deprecated
-    add_compile_options(/wd5026)    # 'type': move constructor was implicitly defined as deleted
-    add_compile_options(/wd5027)    # "type": оператор присваивания перемещения неявно определен как удаленный
-    add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
-                                    # function under -EHc.
-    add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-    add_compile_options(/wd5220)    # 'xxx': a non-static data member with a volatile qualified type no longer implies that
-                                    # compiler generated copy/move constructors and copy/move assignment operators are not trivial
-                                    # add_compile_options(/wd26812)
-    add_compile_options(/wd5267)
+    add_compile_options(
+        /wd4100    # 'xxx' : unreferenced formal parameter
+        /wd4310
+        /wd4365    # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
+        /wd4514    # 'function' : unreferenced inline function has been removed
+        /wd4623    # 'derived class' : default constructor was implicitly defined as deleted
+        /wd4625    # 'derived class' : copy constructor was implicitly defined as deleted because
+                   # a base class copy constructor is inaccessible or deleted
+        /wd4626    # 'derived class' : assignment operator was implicitly defined as deleted because
+                   # a base class assignment operator is inaccessible or deleted
+        /wd4774    # 'string' : format string expected in argument number is not a string literal
+        /wd4820    # 'xxx' bytes padding added after construct 'member_name'
+        /wd4996    # deprecated
+        /wd5026    # 'type': move constructor was implicitly defined as deleted
+        /wd5027    # "type": оператор присваивания перемещения неявно определен как удаленный
+        /wd5039    # 'xxx': pointer or reference to potentially throwing function passed to extern C
+                   # function under -EHc.
+        /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+        /wd5220    # 'xxx': a non-static data member with a volatile qualified type no longer implies that
+                   # compiler generated copy/move constructors and copy/move assignment operators are not trivial
+                   # add_compile_options(/wd26812)
+        /wd5267
+    )
 endif()
 
 file(GLOB LIBS_STM32F1              ../../common/_VS_LIBS/STM32f3/*.*)
@@ -103,47 +110,51 @@ source_group(Utils                  FILES ${UTILS})
 source_group(Utils/Text             FILES ${UTILS_TEXT})
 
 
-set_source_files_properties(Hardware/LAN/libnet/netserver.cpp
-                            Hardware/LAN/libnet/netbase.cpp
-                            Hardware/LAN/libnet/netclient.cpp
-                            Hardware/LAN/libnet/netpacket.cpp
-                            Hardware/LAN/ClientTCP.cpp
-                            Application.cpp
-                            Frame.cpp
-                            main_win.cpp
-                            PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+set_source_files_properties(
+    Hardware/LAN/libnet/netserver.cpp
+    Hardware/LAN/libnet/netbase.cpp
+    Hardware/LAN/libnet/netclient.cpp
+    Hardware/LAN/libnet/netpacket.cpp
+    Hardware/LAN/ClientTCP.cpp
+    Application.cpp
+    Frame.cpp
+    main_win.cpp
+    PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON
+)
 
 
-set_source_files_properties(../../GTC-3/src/Hardware/CDC/usbd_conf.c
-                            ../../GTC-3/src/Hardware/CDC/usbd_desc.c
-                            PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties(
+    ../../GTC-3/src/Hardware/CDC/usbd_conf.c
+    ../../GTC-3/src/Hardware/CDC/usbd_desc.c
+    PROPERTIES HEADER_FILE_ONLY TRUE
+)
 
 add_executable( ${PROJECT_NAME}
-                ${LIBS_STM32F1}
-                ${LIBS_STM32F1_INC}
-                ${LIBS_USBD}
-                ${SRC}
-                ${DISPLAY}
-                ${DISPLAY_FONT}
-                ${HARDWARE}
-                ${HARDWARE_CDC}
-                ${HARDWARE_HAL}
-                ${HARDWARE_LAN}
-                ${HARDWARE_LAN_LIBNET}
-                ${MENU}
-                ${MENU_PAGES}
-                ${MODULES_BH1750}
-                ${MODULES_BME280}
-                ${MODULES_HC12}
-                ${MODULES_HIH4000}
-                ${MODULES_ST7735}
-                ${MODULES_W25Q80DV}
-                ${SETTINGS}
-                ${UTILS}
-                ${UTILS_TEXT}
-                )
+    ${LIBS_STM32F1}
+    ${LIBS_STM32F1_INC}
+    ${LIBS_USBD}
+    ${SRC}
+    ${DISPLAY}
+    ${DISPLAY_FONT}
+    ${HARDWARE}
+    ${HARDWARE_CDC}
+    ${HARDWARE_HAL}
+    ${HARDWARE_LAN}
+    ${HARDWARE_LAN_LIBNET}
+    ${MENU}
+    ${MENU_PAGES}
+    ${MODULES_BH1750}
+    ${MODULES_BME280}
+    ${MODULES_HC12}
+    ${MODULES_HIH4000}
+    ${MODULES_ST7735}
+    ${MODULES_W25Q80DV}
+    ${SETTINGS}
+    ${UTILS}
+    ${UTILS_TEXT}
+)
 
-target_link_libraries(${PROJECT_NAME} wxbase32ud wxmsw32ud_core Ws2_32)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxbase32ud_vc_custom.dll $(OutputPath) /Y)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy ..\\..\\ThirdParty\\lib\\vc_dll\\wxmsw32ud_core_vc_custom.dll $(OutputPath) /Y)
+target_link_libraries(${PROJECT_NAME}
+    wxbase32ud wxmsw32ud_core wxpngd wxzlibd
+    Ws2_32 Comctl32 Rpcrt4
+)
