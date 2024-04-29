@@ -35,11 +35,3 @@ void Application::Update()
 
     ServerMeasures::Update();
 }
-
-
-void Frame::OnClose()
-{
-    Log::DeInit();
-
-    ConsoleSCPI::Self()->Destroy();
-}

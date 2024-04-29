@@ -167,26 +167,6 @@ void Frame::OnSize(wxSizeEvent &event)
 }
 
 
-void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
-{
-    self = nullptr;
-
-    Close(true);
-
-    OnClose();
-}
-
-
-void Frame::OnCloseWindow(wxCloseEvent &event)
-{
-    self = nullptr;
-
-    event.Skip();
-
-    OnClose();
-}
-
-
 void Frame::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
@@ -232,3 +212,30 @@ void Frame::OnSocketEvent(wxSocketEvent &event)
     ServerMeasures::CallbackOnSocketEvent(event);
 }
 
+
+void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
+{
+    self = nullptr;
+
+    Close(true);
+
+    OnClose();
+}
+
+
+void Frame::OnCloseWindow(wxCloseEvent &event)
+{
+    self = nullptr;
+
+    event.Skip();
+
+    OnClose();
+}
+
+
+void Frame::OnClose()
+{
+    Log::DeInit();
+
+    ConsoleSCPI::Self()->Destroy();
+}
