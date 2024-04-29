@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Frame.h"
 #include "Communicator/Server/Server.h"
+#include "Controls/ConsoleSCPI.h"
 
 
 wxFileConfig *g_file_config = nullptr;
