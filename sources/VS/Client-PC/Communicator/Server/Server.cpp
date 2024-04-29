@@ -1,4 +1,4 @@
-// 2024/04/29 08:37:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+ï»¿// 2024/04/29 08:37:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Communicator/Server/Server.h"
 #include "Frame.h"
@@ -10,7 +10,7 @@ namespace ServerMeasures
 
     static wxSocketClient *socket = nullptr;
 
-    // Ïîñëàí çàïğîñ íà ñîåäèíåíèå. Æä¸ì
+    // ĞŸĞ¾ÑĞ»Ğ°Ğ½ Ğ·Ğ°Ğ¿Ñ€Ğ¾Ñ Ğ½Ğ° ÑĞ¾ĞµĞ´Ğ¸Ğ½ĞµĞ½Ğ¸Ğµ. Ğ–Ğ´Ñ‘Ğ¼
     static bool wait_connection = false;
 }
 
@@ -37,9 +37,9 @@ void ServerMeasures::Init()
         wait_connection = true;
 
         wxIPaddress *addr;
-//        wxIPV4address addr4;
-        wxIPV6address addr6;
-        addr = &addr6;
+        wxIPV4address addr4;
+//        wxIPV6address addr6;
+        addr = &addr4;
 //        addr = &addr4;
 
 //        wxString hostname = "localhost";
@@ -92,10 +92,10 @@ void ServerMeasures::Send(TypeMeasure::E type, float value)
 
     wxDateTime time = wxDateTime::Now();
 
-    wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%d-%d %d:%d:%d\"", TypeMeasure::GetTitle(type), value,
+    wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%d-%d %d:%d:%d\"}\r\n", TypeMeasure::GetTitle(type), value,
         time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
 
-    socket->WriteMsg(message.GetData(), message.Length());
+    socket->Write(message.GetData(), message.Length());
 }
 
 

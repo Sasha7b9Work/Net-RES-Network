@@ -181,6 +181,8 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
 {
     self = nullptr;
 
+    ServerMeasures::DeInit();
+
     event.Skip();
 
     OnClose();
