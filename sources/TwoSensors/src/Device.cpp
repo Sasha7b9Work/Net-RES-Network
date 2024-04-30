@@ -3,15 +3,12 @@
 #include "Device.h"
 #include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
-#include "Modules/CG-Anem/CG-Anem.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
 #include "Hardware/Keyboard.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/EnergySwitch.h"
-#include "Modules/GY511/GY511.h"
-#include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Storage/Storage.h"
 #include "Menu/Menu.h"
 #include "Tests/Tests.h"
@@ -36,8 +33,6 @@ void Device::Init()
 
     BME280::Init();         // Температура, давление, влажность, точка росы
 
-    GY511::Init();          // Компас
-
     HC12::Init();           // Радиомодуль
 
     Keyboard::Init();
@@ -56,14 +51,10 @@ void Device::Init()
 
 void Device::Update()
 {
-    NEO_M8N::Update();
-
     Measure temp;
     Measure pressure;
     Measure humidity;
     Measure dew_point;
-    Measure velocity;
-    Measure azimuth;
     Measure latitude;
     Measure longitude;
     Measure altitude;
@@ -77,18 +68,6 @@ void Device::Update()
         ProcessMeasure(humidity, time);
         ProcessMeasure(dew_point, time);
     }
-
-    if (CG_Anem::GetMeasure(&velocity))
-    {
-        ProcessMeasure(velocity, time);
-    }
-
-    if (GY511::GetAzimuth(&azimuth))
-    {
-        ProcessMeasure(azimuth, time);
-    }
-
-    NEO_M8N::GetMeasures(&latitude, &longitude, &altitude);
 
     ProcessMeasure(latitude, time);
     ProcessMeasure(longitude, time);

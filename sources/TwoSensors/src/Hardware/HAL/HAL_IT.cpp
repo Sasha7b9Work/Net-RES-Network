@@ -2,7 +2,6 @@
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
-#include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Hardware/Beeper.h"
 #include <stm32f3xx_hal.h>
 
@@ -105,7 +104,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
     }
     else if (handle == HAL_USART2::handle)
     {
-        NEO_M8N::CallbackOnReceive();
+//        NEO_M8N::CallbackOnReceive();
     }
 }
 

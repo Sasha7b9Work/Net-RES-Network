@@ -8,9 +8,9 @@
 
 namespace Laser
 {
-    static const uint8 TURN_ON = 0x4f;
+//    static const uint8 TURN_ON = 0x4f;
 //    static const uint8 MEAS_AUTO = 0x44;
-    static const uint8 MEAS_HI = 0x4D;
+//    static const uint8 MEAS_HI = 0x4D;
 
     struct State
     {

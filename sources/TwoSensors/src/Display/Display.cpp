@@ -9,7 +9,6 @@
 #include "Storage/Measures.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Beeper.h"
-#include "Modules/GY511/GY511.h"
 #include "Utils/Math.h"
 #include <cmath>
 
