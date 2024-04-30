@@ -11,15 +11,12 @@
 #include "Hardware/EnergySwitch.h"
 #include "Storage/Storage.h"
 #include "Menu/Menu.h"
-#include "Tests/Tests.h"
 #include "SCPI/SCPI.h"
 
 
 namespace Device
 {
     static void ProcessMeasure(const Measure &, uint time);
-
-    void RunTests();
 }
 
 
@@ -100,10 +97,4 @@ void Device::ProcessMeasure(const Measure &measure, uint time)
 
         Storage::AppendMeasure(measure);
     }
-}
-
-
-void Device::RunTests()
-{
-    Test::Settings::Run();
 }

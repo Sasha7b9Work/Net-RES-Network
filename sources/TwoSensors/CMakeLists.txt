@@ -58,7 +58,6 @@ file(GLOB MODULES_W25Q80DV      src/Modules/W25Q80DV/*.*)
 file(GLOB SCPI                  src/SCPI/*.*)
 file(GLOB SETTINGS              src/Settings/*.*)
 file(GLOB STORAGE               src/Storage/*.*)
-file(GLOB TESTS                 src/Tests/*.*)
 file(GLOB UTILS                 src/Utils/*.*)
 file(GLOB UTILS_TEXT            src/Utils/Text/*.*)
 
@@ -82,7 +81,6 @@ source_group(Modules/W25Q80DV   FILES ${MODULES_W25Q80DV})
 source_group(SCPI               FILES ${SCPI})
 source_group(Settings           FILES ${SETTINGS})
 source_group(Storage            FILES ${STORAGE})
-source_group(Tests              FILES ${TESTS})
 source_group(Utils              FILES ${UTILS})
 source_group(Utils/Text         FILES ${UTILS_TEXT})
 
@@ -118,7 +116,6 @@ add_library(
     ${SCPI}
     ${SETTINGS}
     ${STORAGE}
-    ${TESTS}
     ${UTILS}
     ${UTILS_TEXT}
 )
