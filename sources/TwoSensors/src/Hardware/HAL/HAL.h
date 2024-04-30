@@ -90,17 +90,6 @@ namespace HAL_USART1
 }
 
 
-// NEO-8M
-namespace HAL_USART2
-{
-    void Init();
-
-    void ReInit();
-
-    extern void *handle;            // UART_HandleTypeDef
-}
-
-
 namespace HAL_ROM
 {
     uint SaveSettings(const Settings *);

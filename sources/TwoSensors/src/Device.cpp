@@ -23,21 +23,19 @@ void Device::Init()
 {
     HAL::Init();
 
-    ST7735::Init();         // Дисплей
+    ST7735::Init();
 
     EnergySwitch::Init();
 
-    BME280::Init();         // Температура, давление, влажность, точка росы
+    BME280::Init();
 
-    HC12::Init();           // Радиомодуль
+    HC12::Init();
 
     Keyboard::Init();
 
     Beeper::Init();
 
     InterCom::SetDirection((Direction::E)(Direction::HC12 | Direction::Display));
-
-    HAL_USART2::Init();
 }
 
 

@@ -800,11 +800,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_USART2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_IWDG.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
@@ -1920,11 +1915,6 @@
               <FileName>HAL_USART1.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_USART2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_IWDG.cpp</FileName>

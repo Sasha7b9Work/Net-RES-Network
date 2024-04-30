@@ -90,30 +90,16 @@ void USART1_IRQHandler(void)
 }
 
 
-void USART2_IRQHandler(void)
-{
-    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
-}
-
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
     if (handle == HAL_USART1::handle)
     {
         HC12::CallbackOnReceive();
     }
-    else if (handle == HAL_USART2::handle)
-    {
-//        NEO_M8N::CallbackOnReceive();
-    }
 }
 
-void HAL_UART_ErrorCallback(UART_HandleTypeDef *handle)
+void HAL_UART_ErrorCallback(UART_HandleTypeDef * /*handle*/)
 {
-    if (handle == HAL_USART2::handle)
-    {
-        HAL_USART2::ReInit();
-    }
 }
 
 
