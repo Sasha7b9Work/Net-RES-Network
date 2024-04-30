@@ -9,7 +9,6 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/EnergySwitch.h"
-#include "Storage/Storage.h"
 #include "Menu/Menu.h"
 #include "SCPI/SCPI.h"
 
@@ -39,10 +38,6 @@ void Device::Init()
     InterCom::SetDirection((Direction::E)(Direction::HC12 | Direction::Display));
 
     HAL_USART2::Init();
-
-    W25Q80DV::Init();
-
-    Storage::Init();
 }
 
 
@@ -83,8 +78,6 @@ void Device::Update()
 
     EnergySwitch::Update();
 
-    Storage::SaveMeasures();
-
     SCPI::Update();
 }
 
@@ -94,7 +87,5 @@ void Device::ProcessMeasure(const Measure &measure, uint time)
     if (measure.correct)
     {
         InterCom::Send(measure, time);
-
-        Storage::AppendMeasure(measure);
     }
 }

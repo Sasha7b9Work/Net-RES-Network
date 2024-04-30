@@ -977,21 +977,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Modules/W25Q80DV</GroupName>
-          <Files>
-            <File>
-              <FileName>W25Q80DV.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\W25Q80DV\W25Q80DV.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25Q80DV.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\W25Q80DV\W25Q80DV.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
@@ -1024,26 +1009,6 @@
         <Group>
           <GroupName>Storage</GroupName>
           <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Storage\Storage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Storage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Storage\Storage.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryStorage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Storage\MemoryStorage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryStorage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Storage\MemoryStorage.h</FilePath>
-            </File>
             <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>
@@ -2185,21 +2150,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Modules/W25Q80DV</GroupName>
-          <Files>
-            <File>
-              <FileName>W25Q80DV.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\W25Q80DV\W25Q80DV.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>W25Q80DV.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\W25Q80DV\W25Q80DV.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
@@ -2232,26 +2182,6 @@
         <Group>
           <GroupName>Storage</GroupName>
           <Files>
-            <File>
-              <FileName>Storage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Storage\Storage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Storage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Storage\Storage.h</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryStorage.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Storage\MemoryStorage.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MemoryStorage.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Storage\MemoryStorage.h</FilePath>
-            </File>
             <File>
               <FileName>Measures.cpp</FileName>
               <FileType>8</FileType>

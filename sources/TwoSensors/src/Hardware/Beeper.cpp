@@ -3,7 +3,6 @@
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Storage/Storage.h"
 #include "Storage/Measures.h"
 #include <stm32f3xx_hal.h>
 
@@ -38,9 +37,6 @@ void Beeper::Init()
 
 void Beeper::Update()
 {
-    Storage::AllLastMeasuresInRange() ? Stop() : Start(4000);
-
-
     bool need_sound = false;
 
     for (int i = 0; i < NUM_MEASURES_TO_CONTROL; i++)
