@@ -23,20 +23,20 @@ namespace BH1750
 }
 
 
-void BH1750::Init()
+bool BH1750::Init()
 {
-    WriteAddrL(CMD_POWER_ON);
-    WriteAddrL(CMD_RESET);
+    return  WriteAddrL(CMD_POWER_ON) &&
+            WriteAddrL(CMD_RESET) &&
 
-    WriteAddrL(0x40);   // Чувствительность 0.45
-    WriteAddrL(0x7f);   // Чувствительность 0.45
-    WriteAddrL(0x10);   // Чувствительность 0.45
+            WriteAddrL(0x40) &&   // Чувствительность 0.45
+            WriteAddrL(0x7f) &&   // Чувствительность 0.45
+            WriteAddrL(0x10) &&   // Чувствительность 0.45
 
-//    WriteAddrL(0x44);   // Чувствительноть 2
-//    WriteAddrL(0x6a);   // Чувствительноть 2
-//    WriteAddrL(0x10);   // Чувствительноть 2
-
-    WriteAddrL(CMD_MEASURE);
+      //    WriteAddrL(0x44);   // Чувствительноть 2
+      //    WriteAddrL(0x6a);   // Чувствительноть 2
+      //    WriteAddrL(0x10);   // Чувствительноть 2
+      
+            WriteAddrL(CMD_MEASURE);
 }
 
 

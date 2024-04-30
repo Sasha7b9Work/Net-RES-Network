@@ -3,7 +3,9 @@
 #include "Device.h"
 #include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
+#include "Modules/BH1750/BH1750.h"
 #include "Modules/ST7735/ST7735.h"
+#include "Modules/HI50/HI50.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
 #include "Hardware/Keyboard.h"
@@ -27,7 +29,13 @@ void Device::Init()
 
     EnergySwitch::Init();
 
-    BME280::Init();
+    if (!BME280::Init())
+    {
+        if (!BH1750::Init())
+        {
+            HI50::Init();
+        }
+    }
 
     HC12::Init();
 

@@ -2,8 +2,10 @@
 #pragma once
 
 
-namespace Laser
+namespace HI50
 {
+    void Init();
+
     void Update();
 
     void CallbackOnReceive(pchar);

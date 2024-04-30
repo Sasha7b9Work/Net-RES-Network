@@ -7,7 +7,7 @@
 
 namespace BH1750
 {
-    void Init();
+    bool Init();
 
     bool GetMeasure(float *illumination);
 }

@@ -6,7 +6,7 @@
 #include "Hardware/CDC/CDC.h"
 
 
-namespace Laser
+namespace HI50
 {
 //    static const uint8 TURN_ON = 0x4f;
 //    static const uint8 MEAS_AUTO = 0x44;
@@ -23,13 +23,24 @@ namespace Laser
     };
 
     static State::E state = State::IDLE;
+
+    static bool is_init = false;
 }
 
 
-
-
-void Laser::Update()
+void HI50::Init()
 {
+    is_init = true;
+}
+
+
+void HI50::Update()
+{
+    if (!is_init)
+    {
+        return;
+    }
+
     switch (state)
     {
     case State::IDLE:
@@ -46,7 +57,7 @@ void Laser::Update()
 }
 
 
-void Laser::CallbackOnReceive(pchar /*message*/)
+void HI50::CallbackOnReceive(pchar /*message*/)
 {
     switch (state)
     {
