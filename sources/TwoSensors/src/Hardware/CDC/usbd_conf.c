@@ -1,7 +1,7 @@
 // 2023/11/20 20:57:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "usbd_cdc.h"
 
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#ifndef WIN32
     #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
 #endif
 

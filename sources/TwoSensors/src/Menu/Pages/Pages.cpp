@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
-#include "Measures.h"
+#include "Storage/Measures.h"
 
 
 extern const DPage pageMain;
@@ -31,19 +31,20 @@ static void OnOpenClose_MainPage(bool open)
     }
     else
     {
-        gset.Save();
+//        Settings::Save(&gset);
     }
 }
 
 
-DEF_PAGE_3(pageMain, //-V1027
+DEF_PAGE_6(pageMain, //-V1027
     "лемч",
     Page::Empty,
     OnOpenClose_MainPage,
     nullptr,
     *PageMeasures::self,
-//    *PageDisplay::self,
-//    *PageHC12::self,
+    *PageDataBase::self,
+    *PageDisplay::self,
+    *PageHC12::self,
     *PageSystem::self,
     bCloseMainPage
 )

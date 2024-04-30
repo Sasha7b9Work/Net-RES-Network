@@ -97,7 +97,7 @@ float HAL_ADC::GetVoltage()
 
 
 template<int size_buffer>
-class Averager //-V730  
+class Averager //-V730
 {
 public:
     Averager() : num_elements(0) { }

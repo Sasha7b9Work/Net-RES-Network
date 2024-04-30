@@ -2,20 +2,7 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Utils/Text/String.h"
-
-
-struct TypeMeasure
-{
-    enum E
-    {
-        Temperature,        // Температура
-        Pressure,           // Давление
-        Humidity,           // Влажность
-        DewPoint,           // Точка росы
-        Illuminate,
-        Count
-    };
-};
+#include "Storage/Measures.h"
 
 
 namespace Display
@@ -23,11 +10,14 @@ namespace Display
     static const int WIDTH = 160;
     const int HEIGHT = 128;
 
+    // Столько измерений помещается на одном экране
+    static const int MEAS_ON_DISPLAY = 5;
+
     extern bool need_redraw;
 
-    void SetMeasure(TypeMeasure::E, float measure);
+    void SetMeasure(const Measure &, uint timeMS);
 
-    void Update();
+    void Update(uint timeMS);
 
     void BeginScene(Color::E);
 
@@ -37,6 +27,14 @@ namespace Display
     {
         // Возвращает указатель на строку
         uint8 *GetLine(int x, int y);
+    }
+
+    namespace Mode
+    {
+        // Включить/отключть режим отображения компаса
+        void EnableCompass(bool enable);
+
+        bool IsEnabledCompass();
     }
 }
 
@@ -55,6 +53,25 @@ private:
 
     int width;
     int height;
+};
+
+
+struct Line
+{
+    Line(int _x1, int _y1, int _x2, int _y2) :
+        x1((float)_x1), y1((float)_y1), x2((float)_x2), y2((float)_y2) { }
+
+    void Draw(Color::E = Color::Count);
+
+    void Rotate(int x0, int y0, float angle_rad);
+
+private:
+    float x1;
+    float y1;
+    float x2;
+    float y2;
+
+    void Rotate(float *x_in_out, float *y_in_out, int x0, int y0, float cos, float sin);
 };
 
 
@@ -85,4 +102,16 @@ private:
 struct Point
 {
     void Set(int x, int y, Color::E color = Color::Count);
+};
+
+
+struct Circle
+{
+    Circle(int r) : radius(r) {}
+
+    void Draw(int, int, Color::E = Color::Count);
+
+private:
+
+    int radius;
 };

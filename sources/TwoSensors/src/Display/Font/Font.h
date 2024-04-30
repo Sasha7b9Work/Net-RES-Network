@@ -34,7 +34,7 @@ namespace Font
 
     namespace Text
     {
-        int Length(pchar);
+        int GetLength(pchar, int size = 1);
         void DrawBig(int eX, int eY, int size, pchar, Color::E = Color::Count);
     }
 };

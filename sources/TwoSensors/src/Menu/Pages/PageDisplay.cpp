@@ -7,7 +7,7 @@
 extern const DPage pageMain;
 
 
-void ClosePageDisplay(bool)
+static void ClosePageDisplay(bool)
 {
     PageDisplay::self->Close();
 }

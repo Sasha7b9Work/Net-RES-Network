@@ -11,7 +11,7 @@ static const Settings def_set =
     0,
     // Display
     {
-        {1, 1, 1, 1, 1},
+        {1, 1, 1, 0},
         { TypeDisplayedInformation::AllMeasures }
     },
     // System
@@ -19,11 +19,11 @@ static const Settings def_set =
         0                                           // serial_number
     },
     // Measures
-    {
-        {-30, 225 , 10, -30, 0},
-        { 60, 1000, 98,  60, 1000000000},
-        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT},
-        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT}
+    {//  Temperature         Pressure           Humidity          DewPoi t            Velocity
+        { 18,                0,                 0,                 -30,               0},
+        { 99,                1000,              100,               99,                1},
+        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT },
+        { ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT, ERROR_VALUE_FLOAT }
     }
 };
 
@@ -31,60 +31,53 @@ static const Settings def_set =
 Settings gset = def_set;
 
 
-void Settings::Load()
-{
-#ifndef WIN32
-
-    Settings settings;
-
-    if (HAL_ROM::LoadSettings(settings))
-    {
-        gset = settings;
-    }
-    else
-    {
-        gset = def_set;
-    }
-
-#endif
-}
-
-
-void Settings::Reset()
-{
-    gset = def_set;
-}
+//void Settings::Load(Settings *set)
+//{
+//#ifndef GUI
+//
+//    Settings settings;
+//
+//    if (HAL_ROM::LoadSettings(&settings))
+//    {
+//        *set = settings;
+//    }
+//    else
+//    {
+//        *set = def_set;
+//    }
+//
+//#endif
+//}
 
 
-void Settings::Save()
-{
-#ifndef WIN32
+//void Settings::Reset()
+//{
+//    gset = def_set;
+//}
 
-    Settings settings;
 
-    bool need_save = false;
-
-    if (HAL_ROM::LoadSettings(settings))
-    {
-        if (gset != settings)
-        {
-            need_save = true;
-        }
-    }
-    else
-    {
-        need_save = true;
-    }
-
-    if (need_save)
-    {
-        gset.number++;
-
-        HAL_ROM::SaveSettings(gset);
-    }
-
-#endif
-}
+//void Settings::Save(Settings *set)
+//{
+//#ifndef GUI
+//
+//    Settings settings;
+//
+//    if (HAL_ROM::LoadSettings(&settings))
+//    {
+//        if (*set == settings)
+//        {
+//            return;
+//        }
+//    }
+//
+//    gset.number++;
+//
+//    set->number = gset.number;
+//
+//    HAL_ROM::SaveSettings(set);
+//
+//#endif
+//}
 
 
 bool Settings::operator==(const Settings &rhs)
@@ -101,34 +94,45 @@ bool Settings::operator!=(const Settings &rhs)
 }
 
 
-void Settings::SaveMeasure(TypeMeasure::E type, float value)
+void Settings::SaveMeasure(const Measure &measure)
 {
-    if (gset.measures.value_max[type] == ERROR_VALUE_FLOAT)
+    float value = (float)measure.GetDouble();
+
+    Measure::E name = measure.GetName();
+
+    bool need_save = false;
+    (void)need_save;
+
+    if (gset.measures.value_max[name] == ERROR_VALUE_FLOAT)
     {
-        gset.measures.value_max[type] = value;
+        gset.measures.value_max[name] = value;
+        need_save = true;
     }
 
-    if (gset.measures.value_min[type] == ERROR_VALUE_FLOAT)
+    if (gset.measures.value_min[name] == ERROR_VALUE_FLOAT)
     {
-        gset.measures.value_min[type] = value;
+        gset.measures.value_min[name] = value;
+        need_save = true;
     }
 
-    if (value > gset.measures.value_max[type])
+    if (value > gset.measures.value_max[name])
     {
-        gset.measures.value_max[type] = value;
+        gset.measures.value_max[name] = value;
+        need_save = true;
     }
-    else if (value < gset.measures.value_min[type])
+    else if (value < gset.measures.value_min[name])
     {
-        gset.measures.value_min[type] = value;
+        gset.measures.value_min[name] = value;
+        need_save = true;
     }
 
-    Save();
+//    Settings::Save(&gset);
 }
 
 
-void Settings::ResetMeasure(TypeMeasure::E type)
+void Settings::ResetMeasure(Measure::E name)
 {
-    gset.measures.value_max[type] = ERROR_VALUE_FLOAT;
+    gset.measures.value_max[name] = ERROR_VALUE_FLOAT;
 
-    gset.measures.value_min[type] = ERROR_VALUE_FLOAT;
+    gset.measures.value_min[name] = ERROR_VALUE_FLOAT;
 }

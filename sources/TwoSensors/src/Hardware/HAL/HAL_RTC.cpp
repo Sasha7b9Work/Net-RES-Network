@@ -22,7 +22,7 @@ namespace HAL_RTC
 }
 
 
-void HAL_RTC::_Init()
+void HAL_RTC::Init()
 {
     __HAL_RCC_RTC_ENABLE();
 
@@ -32,14 +32,14 @@ void HAL_RTC::_Init()
 
     if (HAL_RTCEx_BKUPRead((RTC_HandleTypeDef *)&handleRTC, RTC_BKP_DR0) != VALUE_FOR_RTC)
     {
-        _SetTime(PackedTime(11, 11, 11, 11, 11, 11));
+        SetTime(PackedTime(11, 11, 11, 11, 11, 11));
 
         HAL_RTCEx_BKUPWrite((RTC_HandleTypeDef *)&handleRTC, RTC_BKP_DR0, VALUE_FOR_RTC);
     }
 }
 
 
-PackedTime HAL_RTC::_GetTime()
+PackedTime HAL_RTC::GetTime()
 {
     RTC_TimeTypeDef time;
     RTC_DateTypeDef date;
@@ -52,7 +52,7 @@ PackedTime HAL_RTC::_GetTime()
 }
 
 
-void HAL_RTC::_SetTime(const PackedTime &pack_time)
+void HAL_RTC::SetTime(const PackedTime &pack_time)
 {
     RTC_TimeTypeDef time =
     {

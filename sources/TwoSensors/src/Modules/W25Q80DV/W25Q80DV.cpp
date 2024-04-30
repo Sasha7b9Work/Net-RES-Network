@@ -38,7 +38,18 @@ namespace W25Q80DV
 }
 
 
-void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
+template void W25Q80DV::WriteBuffer<36>(uint, const void *);
+template uint8 *MemBuffer<512>::Read(uint);
+template uint8 *MemBuffer<8192>::Read(uint);
+
+
+void W25Q80DV::Init()
+{
+}
+
+
+template<int count>
+void W25Q80DV::WriteBuffer(uint address, const void *_buffer)
 {
     pinWP.ToHi();
 
@@ -46,20 +57,17 @@ void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
 
     HAL_SPI1::Write(WRITE_ENABLE);          // Write enable
 
-    Buffer<uint8, 1024> data;
+    Buffer<count + 1 + 3> data;
 
     data[0] = PROGRAM_PAGE; //-V525
     data[1] = (uint8)(address >> 16);       // /
     data[2] = (uint8)(address >> 8);        // | Адрес
     data[3] = (uint8)(address);             // / 
 
-    for (int i = 0; i < size; i++)
-    {
-        data[4 + i] = buffer[i];
-    }
+    std::memcpy(&data[4], _buffer, count);
 
     //                          команда   адрес
-    HAL_SPI1::Write(data.Data(), size + 1 + 3);     // Page program
+    HAL_SPI1::Write(data.Data(), count + 1 + 3);     // Page program
 
     HAL_SPI1::Write(WRITE_DISABLE);                 // Write disable
 
@@ -67,13 +75,35 @@ void W25Q80DV::Write1024bytes(uint address, const uint8 *buffer, int size)
 }
 
 
+void W25Q80DV::WriteUInt(uint address, uint value)
+{
+    WriteBuffer<sizeof(value)>(address, &value);
+}
+
+
+uint W25Q80DV::ReadUInt(uint address)
+{
+    MemBuffer<4> buffer;
+
+    uint *pointer = (uint *)buffer.Read(address);
+
+    return *pointer;
+}
+
+
 void W25Q80DV::Write(uint address, uint8 byte)
 {
     pinWP.ToHi();
 
-    Write1024bytes(address, &byte, 1);
+    WriteBuffer<sizeof(byte)>(address, &byte);
 
     pinWP.ToLow();
+}
+
+
+void W25Q80DV::WriteData(uint, const void *, int)
+{
+
 }
 
 
@@ -81,9 +111,9 @@ void W25Q80DV::EraseSectorForAddress(uint address)
 {
     pinWP.ToHi();
 
-    address /= (4 * 1024);      // /
-                                // | Рассчитываем адрес первого байта стираемого сектора
-    address *= (4 * 1024);      // / 
+    address /= SIZE_PAGE;     // / 
+                              // | Рассчитываем адрес первого байта стираемого сектора
+    address *= SIZE_PAGE;     // / 
 
     WaitRelease();
 
@@ -97,35 +127,40 @@ void W25Q80DV::EraseSectorForAddress(uint address)
 }
 
 
-void W25Q80DV::Read1024bytes(uint address, uint8 *buffer, int size)
+void W25Q80DV::Clear()
 {
-    WaitRelease();
-
-    Buffer<uint8, 1024> out;
-
-    out[0] = READ_DATA; //-V525
-    out[1] = (uint8)(address >> 16);
-    out[2] = (uint8)(address >> 8);
-    out[3] = (uint8)(address);
-
-    Buffer<uint8, 1024> in;
-
-    HAL_SPI1::WriteRead(out.Data(), in.Data(), size + 1 + 3);
-
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < NUM_PAGES; i++)
     {
-        buffer[i] = in[4 + i];
+        ErasePage(i);
     }
 }
 
 
-uint8 W25Q80DV::Read(uint address)
+void W25Q80DV::ErasePage(int num_page)
 {
-    uint8 result = 0;
+    EraseSectorForAddress((uint)num_page * SIZE_PAGE);
+}
 
-    Read1024bytes(address, &result, 1);
 
-    return result;
+template<int count>
+uint8 *MemBuffer<count>::Read(uint address)
+{
+    W25Q80DV::WaitRelease();
+
+    data[0] = READ_DATA;
+    data[1] = (uint8)(address >> 16);
+    data[2] = (uint8)(address >> 8);
+    data[3] = (uint8)(address);
+
+    HAL_SPI1::WriteRead(data, data, count + 4);
+
+    return Data();
+}
+
+
+uint8 W25Q80DV::ReadUInt8(uint address)
+{
+    return *MemBuffer<1>().Read(address);
 }
 
 
@@ -141,7 +176,7 @@ bool W25Q80DV::Test::Run()
 
         Write(i, byte);
 
-        if (byte != Read(i))
+        if (byte != ReadUInt8(i))
         {
             EraseSectorForAddress(0);
             result = false;
@@ -165,8 +200,6 @@ bool W25Q80DV::Test::Result()
 
 void W25Q80DV::Write32bit(uint8 command, uint bits24)
 {
-    pinWP.ToHi();
-
     uint8 data[4];
 
     data[0] = command;
@@ -175,8 +208,6 @@ void W25Q80DV::Write32bit(uint8 command, uint bits24)
     data[3] = (uint8)(bits24);
 
     HAL_SPI1::Write(data, 4);
-
-    pinWP.ToLow();
 }
 
 

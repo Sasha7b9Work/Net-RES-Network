@@ -50,11 +50,9 @@ void HAL::Init()
     /* Start Device Process */
     USBD_Start(&hUSBDDevice);
 
-//    HAL_RTC::Init();
+    HAL_RTC::Init();
 
-    HAL_USART_HC12::Init();
-
-    HAL_USART_HI50::Init();
+    HAL_USART1::Init();
 
     HAL_ADC::Init();
 
@@ -120,17 +118,15 @@ static void SystemClock_Config()
 }
 
 
-String<> HAL::GetUID()
+uint HAL::GetUID()
 {
 #ifdef WIN32
-    return String<>(" ");
+    return 123;
 #else
     uint8 bytes[12];
 
     std::memcpy(bytes, (void *)0x1FFFF7E8, 12); //-V566
 
-//    return Math::CalculateCRC(bytes, 12);
-    
-    return String<>(" ");
+    return Math::CalculateCRC(bytes, 12);
 #endif
 }

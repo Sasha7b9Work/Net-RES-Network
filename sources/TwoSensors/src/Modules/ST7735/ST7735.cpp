@@ -119,10 +119,6 @@ void ST7735::Init()
 
 #ifndef GUI
 
-#ifdef WIN32
-#define asm(x)
-#endif
-
 
 #define WRITE_NIBBLE(nibble)    \
     asm("nop");                 \

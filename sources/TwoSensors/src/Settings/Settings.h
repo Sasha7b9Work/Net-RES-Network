@@ -7,13 +7,12 @@ struct TypeDisplayedInformation
 {
     enum E
     {
-        MeasureTemperature,
-        MeasureHumidity,
-        MeasurePressure,
-        MeasureDewPoint,
-        MeasureIllumination,
+        Temperature,
+        Pressure,
+        Humidity,
+        DewPoint,
+        Velocity,
         AllMeasures,
-        Menu,
         Count
     };
 
@@ -30,20 +29,19 @@ struct TypeDisplayedInformation
 };
 
 
-
 struct SettingsDisplay
 {
-    uint8                       show_measure[TypeMeasure::Count];
+    uint8                       show_measure[Measure::Count];
     TypeDisplayedInformation    typeDisplaydInfo;
 };
 
 
 struct SettingsMeasures
 {
-    int limit_min[TypeMeasure::Count];
-    int limit_max[TypeMeasure::Count];
-    float value_min[TypeMeasure::Count];
-    float value_max[TypeMeasure::Count];
+    int   limit_min[NUM_MEASURES_TO_CONTROL];
+    int   limit_max[NUM_MEASURES_TO_CONTROL];
+    float value_min[NUM_MEASURES_TO_CONTROL];
+    float value_max[NUM_MEASURES_TO_CONTROL];
 };
 
 
@@ -64,17 +62,17 @@ struct Settings
     bool operator!=(const Settings &);
     bool operator==(const Settings &);
 
-    static void Load();
+//    static void Load(Settings *set);
 
-    static void Save();
+//    static void Save(Settings *set);
 
-    static void Reset();
+//    static void Reset();
 
     // ≈сли value больше или меньше уже сохранЄнного измерени€, то перезаписывает старое
-    static void SaveMeasure(TypeMeasure::E, float value);
+    static void SaveMeasure(const Measure &);
 
     // —брасывает мин и макс значени€ измерени€
-    static void ResetMeasure(TypeMeasure::E);
+    static void ResetMeasure(Measure::E);
 };
 
 

@@ -1,3 +1,4 @@
+// 2023/10/09 11:47:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/Text/String.h"
 
@@ -29,9 +30,11 @@ class ZoneFPS : public Zone
 {
 public:
 
+    virtual ~ZoneFPS() override { }
+
     String<> string;
 
     ZoneFPS() : Zone(136, 119, 24, 8, Color::BLACK) { }
 
-    virtual void Draw();
+    virtual void Draw() override;
 };

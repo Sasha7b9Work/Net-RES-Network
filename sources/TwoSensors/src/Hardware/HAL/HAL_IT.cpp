@@ -2,11 +2,12 @@
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Modules/HC12/HC12.h"
+#include "Modules/NEO-M8N/NEO-M8N.h"
 #include "Hardware/Beeper.h"
 #include <stm32f3xx_hal.h>
 
 
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#ifndef WIN32
     #pragma clang diagnostic ignored "-Wmissing-noreturn"
 #endif
 
@@ -86,34 +87,34 @@ void USB_LP_CAN_RX0_IRQHandler(void)
 
 void USART1_IRQHandler(void)
 {
-//    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART1::handle);
+    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART1::handle);
 }
 
 
 void USART2_IRQHandler(void)
 {
-//    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
+    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART2::handle);
 }
 
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef * /*handle*/)
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
-//    if (handle == HAL_USART1::handle)
-//    {
-//        HC12::CallbackOnReceive();
-//    }
-//    else if (handle == HAL_USART2::handle)
-//    {
-//        NEO_M8N::CallbackOnReceive();
-//    }
+    if (handle == HAL_USART1::handle)
+    {
+        HC12::CallbackOnReceive();
+    }
+    else if (handle == HAL_USART2::handle)
+    {
+        NEO_M8N::CallbackOnReceive();
+    }
 }
 
-void HAL_UART_ErrorCallback(UART_HandleTypeDef * /*handle*/)
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *handle)
 {
-//    if (handle == HAL_USART2::handle)
-//    {
-//        HAL_USART2::ReInit();
-//    }
+    if (handle == HAL_USART2::handle)
+    {
+        HAL_USART2::ReInit();
+    }
 }
 
 

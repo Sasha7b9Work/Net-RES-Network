@@ -6,6 +6,8 @@
 
 namespace Math
 {
+    const float PI = 3.1415296f; //-V624
+
     uint CalculateCRC(const void *buffer, int size);
 
     template<class T>
@@ -13,4 +15,13 @@ namespace Math
 
     template<class T>
     void CircleDecrease(T *value, T min, T max);
+
+    inline int Sign(int val)
+    {
+        return (val < 0) ? -1 : 1;
+    }
+
+    float Sin(float angle_rad);
+
+    float Cos(float angle_rad);
 }

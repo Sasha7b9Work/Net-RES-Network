@@ -3,9 +3,11 @@
 #include "Modules/BME280/BME280.h"
 #include "Modules/BME280/bme280_driver.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 #include <stm32f3xx_hal.h>
 #include <cstring>
 #include <cstdlib>
+#include <cmath>
 
 
 namespace BME280
@@ -17,20 +19,25 @@ namespace BME280
     // ѕопытка соединени€ с усройством по адресу id
     static bool AttemptConnection(uint8 id);
 
-    static bool is_init = false;
+    static float CalculateDewPoint(float temperature, float humidity);
 
-    bool IsInit()
-    {
-        return is_init;
-    }
+    static float CalculateF(float temperature, float humidity);
 }
 
 
 bool BME280::Init()
 {
-    is_init = AttemptConnection(BME280_I2C_ADDR_PRIM) || AttemptConnection(BME280_I2C_ADDR_SEC);
+    if (AttemptConnection(BME280_I2C_ADDR_PRIM))
+    {
+        return true;
+    }
 
-    return is_init;
+    if (AttemptConnection(BME280_I2C_ADDR_SEC))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -73,37 +80,53 @@ bool BME280::AttemptConnection(uint8 id)
 }
 
 
-bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
+float BME280::CalculateDewPoint(float temperature, float humidity)
 {
-    if (!IsInit())
-    {
-        return false;
-    }
+    float f = CalculateF(temperature, humidity);
+
+    return (237.7f * f) / (17.27f - f);
+}
+
+
+float BME280::CalculateF(float temperature, float humidity)
+{
+    return (17.27f * temperature) / (237.7f + temperature) + std::log(humidity / 100.0f);
+}
+
+
+bool BME280::GetMeasures(Measure *temp, Measure *pressure, Measure *humidity, Measure *dew_point)
+{
+    temp->Clear();
+    pressure->Clear();
+    humidity->Clear();
+    dew_point->Clear();
 
     if(HAL_GetTick() < timeNext)
     {
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 100);
+    timeNext += TIME_MEASURE + (uint)(std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 
     static float value = 1.1f;
 
     value *= 7.1f;
-    *temp = value / 100.0f;
+    temp->Set(Measure::Temperature, value / 100.0f);
 
     value *= 1.2f;
-    *pressure = value / 100.0f;
+    pressure->Set(Measure::Pressure, value / 100.0f);
 
     value *= 0.83f;
-    *humidity = value / 99.28f;
+    humidity->Set(Measure::Humidity, value / 99.28f);
 
     if (value > 1e4f)
     {
         value = 1.34f;
     }
+
+    dew_point->Set(Measure::DewPoint, CalculateDewPoint((float)temp->GetDouble(), (float)humidity->GetDouble()));
 
     return true;
 
@@ -115,9 +138,10 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
 
     if (result == BME280_OK)
     {
-        *temp = (float)comp_data.temperature;
-        *pressure = (float)comp_data.pressure / 100.0f;
-        *humidity = (float)comp_data.humidity;
+        temp->Set(Measure::Temperature, comp_data.temperature);
+        pressure->Set(Measure::Pressure, comp_data.pressure / 100.0);
+        humidity->Set(Measure::Humidity, comp_data.humidity);
+        dew_point->Set(Measure::DewPoint, CalculateDewPoint((float)temp->GetDouble(), (float)humidity->GetDouble()));
     }
 
     return (result == BME280_OK);

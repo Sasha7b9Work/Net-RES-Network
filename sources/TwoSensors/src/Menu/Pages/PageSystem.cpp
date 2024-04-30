@@ -8,25 +8,28 @@
 extern const DPage pageMain;
 
 
-static int cur_field = 0;
-static int state = 0;
-static PackedTime time;
+namespace PageSystem
+{
+    static int cur_field = 0;
+    static int state = 0;
+    static PackedTime time;
+}
 
 
-void OnClose_Battery(bool)
+static void OnClose_Battery(bool)
 {
 
 }
 
 
-void OnDraw_Battery(int x, int y)
+static void OnDraw_Battery(int x, int y, Color::E, Color::E color_draw)
 {
-    String<>("%.2f В", HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, Color::WHITE);
+    String<>("%.2f В", (double)HAL_ADC::GetVoltage()).Draw(x + 90, y + 5, color_draw);
 }
 
 
 DEF_BUTTON(bBattery,
-    "АКБ",
+    "Батарея",
     *PageSystem::self,
     OnClose_Battery,
     OnDraw_Battery,
@@ -38,23 +41,38 @@ static void Before_OpenTime(bool open)
 {
     if (open)
     {
-//        time = HAL_RTC::GetTime();
+        PageSystem::time = HAL_RTC::GetTime();
     }
 }
 
-DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, cur_field, state, time)
+DEF_TIMEITEM(tTime, *PageSystem::self, Before_OpenTime, PageSystem::cur_field, PageSystem::state, PageSystem::time)
+
+
+static void OnDraw_SerialNumber(int x, int y, Color::E color_fill, Color::E color_draw)
+{
+    Rectangle(6, 12).Fill(x + 143, y + 5, color_fill);
+
+    String<> serial_number("%08X", HAL::GetUID());
+
+    serial_number.Draw(x + 85, y + 5, color_draw);
+}
+
+
+static int null_value = 0;
 
 
 DEF_GOVERNOR(gSerialNumber,
     "С/Н",
     *PageSystem::self,
     nullptr,
-    0, (int)0x7FFFFFFF,
-    gset.system.serial_number
+    OnDraw_SerialNumber,
+    0,
+    0,
+    null_value
 )
 
 
-void ClosePageSystem(bool)
+static void ClosePageSystem(bool)
 {
     PageSystem::self->Close();
 }

@@ -1,38 +1,60 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "opt.h"
 
-typedef unsigned char uint8;
-typedef signed char int8;
-typedef unsigned short uint16;
-typedef signed short int16;
-typedef unsigned int uint;
-typedef const char *pchar;
-typedef unsigned char uchar;
+
+#define VERSION 53
 
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic ignored "-Warmcc-pragma-diag"
+    #pragma clang diagnostic ignored "-Wundefined-func-template"
+    #pragma clang diagnostic ignored "-Wmissing-field-initializers"
+    #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
+    #pragma clang diagnostic ignored "-Wold-style-cast"
+    #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+    #pragma clang diagnostic ignored "-Wpadded"
+    #pragma clang diagnostic ignored "-Wglobal-constructors"
+    #pragma clang diagnostic ignored "-Wcast-qual"
+    #pragma clang diagnostic ignored "-Wweak-vtables"
     #pragma clang diagnostic ignored "-Winvalid-source-encoding"
+    #pragma clang diagnostic ignored "-Wfloat-equal"
+    #pragma clang diagnostic ignored "-Wexit-time-destructors"
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+    #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+    #pragma clang diagnostic ignored "-Wmissing-prototypes"
 #endif
 
+
+typedef unsigned char  uint8;
+typedef signed char    int8;
+typedef unsigned short uint16;
+typedef signed short   int16;
+typedef unsigned int   uint;
+typedef const char    *pchar;
+typedef unsigned char  uchar;
+
+#define USE_USB_INTERRUPT_DEFAULT   1
 
 // Промежуток между измерениями
 #define TIME_MEASURE  500
 
 
 #ifdef WIN32
-    #define IN_MODE_TEST
-#else
-    #define nullptr 0 //-V1059
-    #pragma diag_suppress 2748
+    #define __attribute__(x)
+    #ifdef GUI
+        #define IN_MODE_TEST
+    #else
+        #define asm(x)
+    #endif
 #endif
 
 
 union BitSet32
 {
+    BitSet32(uint _word = 0) : word(_word) { }
     uint   word;
     uint16 half_word[2];
-    uint8  byte[4];
+    uint8  bytes[4];
 };
 
 
@@ -62,5 +84,5 @@ typedef void(*pFuncVV)(void);
 #define BINARY_U8( bits ) _bitset(0##bits)
 
 
-#include "Log.h"
+#include "Utils/Log.h"
 #include "Utils/Debug.h"

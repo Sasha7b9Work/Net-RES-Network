@@ -117,8 +117,20 @@ void Item::DrawOpened(int x, int y, bool active) const
 
     if (ToDItem()->funcOnDraw)
     {
-        ToDItem()->funcOnDraw(x, y);
+        ToDItem()->funcOnDraw(x, y, ColorFill(), ColorDraw());
     }
+}
+
+
+Color::E Item::ColorFill() const
+{
+    return ToDItem()->keeper->CurrentItem() == this ? Color::MenuItem() : Color::BLACK;
+}
+
+
+Color::E Item::ColorDraw() const
+{
+    return Color::WHITE;
 }
 
 
@@ -138,7 +150,7 @@ void Item::DrawClosed(int x, int y, bool active) const
         fill = Color::GRAY_10;
     }
 
-    Rectangle(Item::WIDTH, Item::HEIGHT).DrawFilled(x, y, fill, draw);
+    Rectangle(Item::WIDTH, Item::HEIGHT + 1).DrawFilled(x, y, fill, draw);
 
     Title().Draw(x + 10, y + 5, Color::MenuLetters(active));
 
@@ -155,7 +167,7 @@ void Item::DrawClosed(int x, int y, bool active) const
 
     if (ToDItem()->funcOnDraw)
     {
-        ToDItem()->funcOnDraw(x, y);
+        ToDItem()->funcOnDraw(x, y, ColorFill(), ColorDraw());
     }
 }
 
@@ -299,21 +311,21 @@ void StateItem::DrawOpened(int, int, bool) const
 }
 
 
-void TimeItem::DrawClosed(int /*x*/, int /*y*/, bool) const
+void TimeItem::DrawClosed(int x, int y, bool) const
 {
-//    PackedTime time = HAL_RTC::GetTime();
-//
-//    y += 4;
-//
-//    x += 15;
-//
-//    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
-//
-//    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(x + 70, y);
+    PackedTime time = HAL_RTC::GetTime();
+
+    y += 4;
+
+    x += 15;
+
+    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
+
+    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(x + 70, y);
 }
 
 
-void TimeItem::LongPressure(Key::E) const
+void TimeItem::LongPressure(const Key &) const
 {
     if (IsOpened())
     {
@@ -326,32 +338,59 @@ void TimeItem::LongPressure(Key::E) const
 }
 
 
-void TimeItem::ChangeCurrentField(Key::E key) const
+void TimeItem::ChangeCurrentField(const Key &key) const
 {
     const DTimeItem *data = ToDTimeItem();
 
     if (*data->cur_field < 6)
     {
-        int max[6] = { 23, 59, 59, 31, 12, 99 };
+        static const int max[6] = { 23, 59, 59, 31, 12, 99 };
 
         PackedTime &time = *data->time;
 
-        int *values[6] = { &time.hours, &time.minutes, &time.seconds,
-                            &time.day, &time.month, &time.year };
+        uint values[6] = { time.hours, time.minutes, time.seconds,
+                           time.day,   time.month,   time.year };
 
-        if (key == Key::_1)
+        int value = (int)values[*data->cur_field];
+
+        if (key.Is1())
         {
-            Math::CircleIncrease(values[*data->cur_field], 0, max[*data->cur_field]);
+            Math::CircleIncrease(&value, 0, max[*data->cur_field]);
         }
-        else if (key == Key::_2)
+        else if (key.Is2())
         {
-            Math::CircleDecrease(values[*data->cur_field], 0, max[*data->cur_field]);
+            Math::CircleDecrease(&value, 0, max[*data->cur_field]);
+        }
+
+        if (*data->cur_field == 0)
+        {
+            time.hours = (uint)value;
+        }
+        else if (*data->cur_field == 1)
+        {
+            time.minutes = (uint)value;
+        }
+        else if (*data->cur_field == 2)
+        {
+            time.seconds = (uint)value;
+        }
+        else if (*data->cur_field == 3)
+        {
+            time.day = (uint)value;
+        }
+        else if (*data->cur_field == 4)
+        {
+            time.month = (uint)value;
+        }
+        else
+        {
+            time.year = (uint)value;
         }
     }
 }
 
 
-void TimeItem::ShortPressure(Key::E key) const
+void TimeItem::ShortPressure(const Key &key) const
 {
     if (IsOpened())
     {
@@ -359,15 +398,15 @@ void TimeItem::ShortPressure(Key::E key) const
 
         if (*data->state == 0)
         {
-            if (key == Key::_1)
+            if (key.Is1())
             {
                 Math::CircleIncrease<int>(data->cur_field, 0, 7);
             }
-            else if (key == Key::_2)
+            else if (key.Is2())
             {
                 if (*data->cur_field == 6)
                 {
-//                    HAL_RTC::SetTime(*data->time);
+                    HAL_RTC::SetTime(*data->time);
                     Close();
                 }
                 else if (*data->cur_field == 7)
@@ -401,7 +440,7 @@ void TimeItem::DrawOpened(int, int, bool) const
     int dX = 48;
     int dY = 40;
 
-    int values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
+    uint values[6] = { data->time->hours, data->time->minutes, data->time->seconds,
         data->time->day, data->time->month, data->time->year };
 
     for (int i = 0; i < 6; i++)
@@ -519,9 +558,9 @@ int Page::NumItems() const
 }
 
 
-void Page::ShortPressure(Key::E key) const
+void Page::ShortPressure(const Key &key) const
 {
-    if (key == Key::_1)
+    if (key.Is1())
     {
         uint8 *currentItem = ToDPage()->currentItem;
 
@@ -532,14 +571,14 @@ void Page::ShortPressure(Key::E key) const
             *currentItem = 0;
         }
     }
-    else if (key == Key::_2)
+    else if (key.Is2())
     {
         LongPressure(key);
     }
 }
 
 
-void Page::LongPressure(Key::E key) const
+void Page::LongPressure(const Key &key) const
 {
     const Item *item = CurrentItem();
 
@@ -564,19 +603,19 @@ void Page::DoubleClick() const
 }
 
 
-void Choice::ShortPressure(Key::E) const
+void Choice::ShortPressure(const Key &) const
 {
 
 }
 
 
-void Button::ShortPressure(Key::E) const
+void Button::ShortPressure(const Key &) const
 {
 
 }
 
 
-void StateItem::ShortPressure(Key::E) const
+void StateItem::ShortPressure(const Key &) const
 {
 }
 
@@ -594,7 +633,7 @@ void Choice::LongPressure() const
 }
 
 
-void StateItem::LongPressure(Key::E key) const
+void StateItem::LongPressure(const Key &key) const
 {
     if (IsOpened())
     {
@@ -602,7 +641,7 @@ void StateItem::LongPressure(Key::E key) const
     }
     else
     {
-        if (key == Key::_2)
+        if (key.Is2())
         {
             Open();
         }
@@ -628,7 +667,7 @@ void StateItem::DoubleClick() const
 }
 
 
-void Item::ShortPressure(Key::E key) const
+void Item::ShortPressure(const Key &key) const
 {
     TypeItem::E _type = ToDItem()->type;
 
@@ -645,7 +684,7 @@ void Item::ShortPressure(Key::E key) const
 }
 
 
-void Item::LongPressure(Key::E key) const
+void Item::LongPressure(const Key &key) const
 {
     switch (ToDItem()->type)
     {
@@ -675,15 +714,15 @@ void Item::DoubleClick() const
 }
 
 
-void Governor::ShortPressure(Key::E key) const
+void Governor::ShortPressure(const Key &key) const
 {
     if (Item::Opened())
     {
-        if (key == Key::_1)
+        if (key.Is1())
         {
             Math::CircleIncrease<int>((int *)&active_control, 0, ActiveControl::Count - 1);
         }
-        else if (key == Key::_2)
+        else if (key.Is2())
         {
             if (active_control == ActiveControl::Close)
             {
@@ -718,7 +757,7 @@ void Governor::ShortPressure(Key::E key) const
     }
     else
     {
-        if (key == Key::_2)
+        if (key.Is2())
         {
             Open();
         }

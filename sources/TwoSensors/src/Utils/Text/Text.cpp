@@ -1,6 +1,5 @@
 // 2022/02/11 17:45:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Log.h"
 #include "Utils/Text/Text.h"
 #include "Display/Font/Font.h"
 #include "Modules/ST7735/ST7735.h"
@@ -314,7 +313,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
         char *subString = PartWordForTransfer(word, lengthSyllables, numSyllabels, i, buffer);
-        int length = Font::Text::Length(subString);
+        int length = Font::Text::GetLength(subString);
 
         if (xRight - x > length - 5)
         {
@@ -363,7 +362,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
             }
             else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::Text::Length(word.c_str());
+                int lengthString = Font::Text::GetLength(word.c_str());
                 if (x + lengthString > right + 5)
                 {
                     int numSymbols = DrawPartWord(word.c_str(), x, y, right, false);
@@ -374,7 +373,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
                 else
                 {
                     curSymbol += length;
-                    x += Font::Text::Length(word.c_str());
+                    x += Font::Text::GetLength(word.c_str());
                 }
             }
         }
@@ -382,7 +381,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
         y += 9;
     }
 
-    LIMITATION(*height, y - top + 4, 0, 239);
+    LIMITATION(*height, y - top + 4, 0, 239)
 
     return curSymbol == numSymb;
 }
@@ -598,7 +597,8 @@ String<> SU::Bin2String16(uint16 value)
     char buffer[19];
 
     std::strcpy(buffer, Bin2String((uint8)(value >> 8)).c_str());
-    std::strcpy((buffer[8] = ' ', buffer + 9), Bin2String((uint8)value).c_str());
+    buffer[8] = ' ';
+    std::strcpy(buffer + 9, Bin2String((uint8)value).c_str());
 
     return String<>(buffer);
 }
@@ -641,7 +641,7 @@ String<> SU::Float2String(float value, bool alwaysSign, int numDigits)
         format[5] = '.';
     }
 
-    std::snprintf(buffer, 19, format, std::fabs(value));
+    std::snprintf(buffer, 19, (const char *)&format[0], (double)std::fabsf(value));
     
     if((int)std::strlen(buffer) > numDigits + 1)        // Это затычка на то, что число -9.99999 выводится как -10.000, хотя должно быть четыре цифры - 2 цифры после запятой
     {
@@ -702,7 +702,26 @@ String<> SU::Int2String(int value, bool alwaysSign, int numMinFields)
 String<> SU::Hex8toString(uint8 value)
 {
     char buffer[3];
-    std::sprintf(value < 16 ? (buffer[0] = '0', buffer + 1) : (buffer), "%x", value);
+
+    if(value < 16)
+    {
+        buffer[0] = '\0';
+        std::sprintf(buffer + 1, "%x", value);
+    }
+    else
+    {
+        std::sprintf(buffer, "%x", value);
+    }
+    
+    if(value < 16)
+    {
+        buffer[0] = '0';
+        std::sprintf(buffer + 1, "%x", value);
+    }
+    else
+    {
+        std::sprintf(buffer, "%x", value);
+    }
     return String<>(buffer);
 }
 

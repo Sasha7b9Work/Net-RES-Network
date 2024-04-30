@@ -4,7 +4,7 @@
  extern "C" {
 #endif
 
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#ifndef WIN32
     #pragma clang diagnostic ignored "-Wpadded"
     #pragma clang diagnostic ignored "-Wcovered-switch-default"
     #pragma clang diagnostic ignored "-Wshorten-64-to-32"

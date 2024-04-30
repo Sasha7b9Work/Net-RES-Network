@@ -30,14 +30,14 @@ struct StateItem;
 
 
 typedef void(*FuncOpenClose)(bool);
-typedef void(*FuncOnDraw)(int, int);
+typedef void(*FuncAfterDraw)(int, int, Color::E fill, Color::E draw);
 
 
 #define COMMON_PART_ITEM    TypeItem::E    type;             \
                             pchar          title;            \
                             const Page    *keeper;           \
                             FuncOpenClose  funcOnOpenClose;  \
-                            FuncOnDraw     funcOnDraw
+                            FuncAfterDraw  funcOnDraw
 
 struct DItem
 {
@@ -47,7 +47,7 @@ struct DItem
 
 struct Item
 {
-    static const int WIDTH = Display::WIDTH - 1;
+    static const int WIDTH = Display::WIDTH;
     static const int HEIGHT = 20;
 
     String<> Title() const;
@@ -57,8 +57,11 @@ struct Item
     void DrawOpened(int x, int y, bool active) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    Color::E ColorFill() const;
+    Color::E ColorDraw() const;
+
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     const Page *Keeper() const { return ToDItem()->keeper; }
@@ -71,7 +74,7 @@ struct Item
     // ¬озвращает пор€дковый номер на странице
     int NumberOnPage() const;
 
-    static const Item *Opened() { return opened_item; };
+    static const Item *Opened() { return opened_item; }
 
     bool IsPage() const     { return (ToDItem()->type == TypeItem::Page);   }
     bool IsChoice() const   { return (ToDItem()->type == TypeItem::Choice); }
@@ -117,8 +120,8 @@ struct Page : public Item
     void DrawOpened(int x, int y, bool acitve) const;
     void DrawClosed(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     void Close() const;
@@ -141,7 +144,7 @@ private:
 
     int NumItems() const;
 
-    virtual ~Page() { }
+    virtual ~Page() override { }
 };
 
 
@@ -163,7 +166,7 @@ struct Choice : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -186,7 +189,7 @@ struct DButton
 
 struct Button : public Item
 {
-    void ShortPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
     void LongPressure() const { if (ToDItem()->funcOnOpenClose) { ToDItem()->funcOnOpenClose(true); } }
     void DoubleClick() const;
 
@@ -204,7 +207,7 @@ struct DState
 {
     COMMON_PART_ITEM;
 
-    TypeMeasure::E type_meas;
+    Measure::E type_meas;
 
     const bool is_min;          // ≈сли true, то хранит минимальное значение, иначе - максимальное
 };
@@ -212,8 +215,8 @@ struct DState
 
 struct StateItem : public Item
 {
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     void DrawClosed(int x, int y, bool active) const;
@@ -241,7 +244,7 @@ struct Governor : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
     void LongPressure() const;
     void DoubleClick() const;
 
@@ -287,12 +290,12 @@ struct TimeItem : public Item
     void DrawClosed(int x, int y, bool active) const;
     void DrawOpened(int x, int y, bool active) const;
 
-    void ShortPressure(Key::E) const;
-    void LongPressure(Key::E) const;
+    void ShortPressure(const Key &) const;
+    void LongPressure(const Key &) const;
     void DoubleClick() const;
 
     const DTimeItem *ToDTimeItem() const { return (DTimeItem *)this; }
 private:
 
-    void ChangeCurrentField(Key::E) const;
+    void ChangeCurrentField(const Key &) const;
 };

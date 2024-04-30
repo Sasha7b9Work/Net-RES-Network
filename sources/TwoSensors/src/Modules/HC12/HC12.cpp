@@ -7,7 +7,7 @@
 #include <cstring>
 
 
-namespace HAL_USART_HC12
+namespace HAL_USART1
 {
     extern char recv_byte;
 }
@@ -45,25 +45,23 @@ namespace HC12
 
 void HC12::Init()
 {
-    GPIO_InitTypeDef is;
-    is.Pin = PIN_SET;
-    is.Mode = GPIO_MODE_OUTPUT_PP;
-    is.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(PORT_SET, &is);
+    pinCS_HC12.Init();
+    pinCS_HC12.ToHi();
 
-    HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
+    Command("AT+DEFAULT");
+    Command("AT");
 }
 
 
 void HC12::Transmit(const void *buffer, int size)
 {
-    HAL_USART_HC12::Transmit(buffer, size);
+    HAL_USART1::Transmit(buffer, size);
 }
 
 
 void HC12::Command(pchar command)
 {
-    HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_RESET);
+    pinCS_HC12.ToLow();
 
     TimeMeterMS().PauseOnMS(40);
 
@@ -72,21 +70,13 @@ void HC12::Command(pchar command)
     Transmit(command, (int)std::strlen(command));
     Transmit("\r", 1);
 
-    HAL_GPIO_WritePin(PORT_SET, PIN_SET, GPIO_PIN_SET);
-
-//    TimeMeterMS().WaitMS(80);
-//
-//    char *answer = recv_buffer.Data();
-//    answer = answer;
-//    
-//    int num = recv_buffer.NumSymbols();
-//    num = num;
+    pinCS_HC12.ToHi();
 }
 
 
-void HC12::ReceiveCallback()
+void HC12::CallbackOnReceive()
 {
-    recv_buffer.Push(HAL_USART_HC12::recv_byte);
+    recv_buffer.Push(HAL_USART1::recv_byte);
 
-    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART_HC12::handle, (uint8 *)&HAL_USART_HC12::recv_byte, 1);
+    HAL_UART_Receive_IT((UART_HandleTypeDef *)HAL_USART1::handle, (uint8 *)&HAL_USART1::recv_byte, 1);
 }

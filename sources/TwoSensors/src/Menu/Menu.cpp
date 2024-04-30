@@ -6,22 +6,23 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Display/Font/Font.h"
+#include "Hardware/Beeper.h"
 
 
-void Menu::ShortPress(Key::E key)
+void Menu::ShortPress(const Key &key)
 {
-    if (!Opened())
+    if (!IsOpened())
     {
-        if (key == Key::_1)
+        if (key.Is1())
         {
             ++gset.display.typeDisplaydInfo;
 
-            if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Menu)
+            if (gset.display.typeDisplaydInfo.value == TypeDisplayedInformation::Count)
             {
-                gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::MeasureTemperature;
+                gset.display.typeDisplaydInfo.value = TypeDisplayedInformation::Temperature;
             }
         }
-        else if (key == Key::_2)
+        else if (key.Is2())
         {
             PageMain::self->Open();
         }
@@ -35,11 +36,14 @@ void Menu::ShortPress(Key::E key)
 }
 
 
-void Menu::LongPress(Key::E key)
+void Menu::LongPress(const Key &key)
 {
-    if (!Opened())
+    if (!IsOpened())
     {
-
+        if (key.Is1())
+        {
+            Display::Mode::EnableCompass(!Display::Mode::IsEnabledCompass());
+        }
     }
     else
     {
@@ -50,9 +54,9 @@ void Menu::LongPress(Key::E key)
 }
 
 
-void Menu::DoubleClick(Key::E)
+void Menu::DoubleClick(const Key &)
 {
-    if (Opened())
+    if (IsOpened())
     {
         Item::Opened()->DoubleClick();
     }
@@ -61,7 +65,7 @@ void Menu::DoubleClick(Key::E)
 }
 
 
-bool Menu::Opened()
+bool Menu::IsOpened()
 {
     return (Item::Opened() != &Page::Empty);
 }
@@ -69,6 +73,8 @@ bool Menu::Opened()
 
 void Menu::Draw()
 {
+    Beeper::Stop();
+
     Display::BeginScene(Color::BLACK);
 
     Font::Set(TypeFont::_12_10);

@@ -16,7 +16,7 @@ public:
     explicit String(pchar, ...);
 
     void SetFormat(pchar format, ...);
-
+        
     char *c_str() const { return (char *)&buffer[0]; }
 
     int Size() const { return (int)std::strlen(buffer); }
@@ -67,7 +67,7 @@ public:
         static char null_char = 0;
 
         return null_char;
-    };
+    }
 
     bool ToInt(int *out);
 

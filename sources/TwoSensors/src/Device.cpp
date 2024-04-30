@@ -1,26 +1,28 @@
 // 2022/04/27 11:48:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device.h"
-#include "Measures.h"
 #include "Modules/HC12/HC12.h"
-#include "Hardware/HAL/HAL.h"
 #include "Modules/BME280/BME280.h"
-#include "Hardware/CDC/CDC.h"
+#include "Modules/CG-Anem/CG-Anem.h"
 #include "Modules/ST7735/ST7735.h"
-#include "Modules/W25Q80DV/W25Q80DV.h"
-#include "Modules/BH1750/BH1750.h"
 #include "Hardware/Timer.h"
 #include "Hardware/InterCom.h"
-#include "Display/Display.h"
 #include "Hardware/Keyboard.h"
 #include "Hardware/Beeper.h"
-#include <cmath>
+#include "Hardware/EnergySwitch.h"
+#include "Modules/GY511/GY511.h"
+#include "Modules/NEO-M8N/NEO-M8N.h"
+#include "Storage/Storage.h"
+#include "Menu/Menu.h"
+#include "Tests/Tests.h"
+#include "SCPI/SCPI.h"
 
 
 namespace Device
 {
-    static float CalculateDewPoint(float temperature, float humidity);
-    static float CalculateF(float temperature, float humidity);
+    static void ProcessMeasure(const Measure &, uint time);
+
+    void RunTests();
 }
 
 
@@ -28,92 +30,107 @@ void Device::Init()
 {
     HAL::Init();
 
-    gset.Load();
+    ST7735::Init();         // Дисплей
 
-    gset.Reset();
+    EnergySwitch::Init();
 
-    ST7735::Init();
-    
-    Timer::Delay(1000);
+    BME280::Init();         // Температура, давление, влажность, точка росы
 
-    if (!BME280::Init())
-    {
-        BH1750::Init();
-    }
+    GY511::Init();          // Компас
 
-//    HC12::Init();
+    HC12::Init();           // Радиомодуль
 
     Keyboard::Init();
 
-    InterCom::SetDirection((Direction::E)(Direction::CDC | Direction::HC12 | Direction::Display));
-
     Beeper::Init();
 
-    W25Q80DV::Test::Run();
+    InterCom::SetDirection((Direction::E)(Direction::HC12 | Direction::Display));
+
+    HAL_USART2::Init();
+
+    W25Q80DV::Init();
+
+//    W25Q80DV::Test::Run();
+
+    Storage::Init();
+
+//    HAL_IWDG::Init();
 }
 
 
 void Device::Update()
 {
-    float temp = 0.0f;
-    float pressure = 0.0f;
-    float humidity = 0.0;
-    float illumination = 0.0f;
+//    HAL_IWDG::Update();
 
-    if (!BME280::IsInit())
+    NEO_M8N::Update();
+
+    Measure temp;
+    Measure pressure;
+    Measure humidity;
+    Measure dew_point;
+    Measure velocity;
+    Measure azimuth;
+    Measure latitude;
+    Measure longitude;
+    Measure altitude;
+
+    uint time = TIME_MS;
+
+    if (BME280::GetMeasures(&temp, &pressure, &humidity, &dew_point))
     {
-        HAL_I2C1::Init();
-
-        if (!BME280::Init())
-        {
-            BH1750::Init();
-        }
+        ProcessMeasure(temp, time);
+        ProcessMeasure(pressure, time);
+        ProcessMeasure(humidity, time);
+        ProcessMeasure(dew_point, time);
     }
 
-    if (BME280::GetMeasures(&temp, &pressure, &humidity))
+    if (CG_Anem::GetMeasure(&velocity))
     {
-        InterCom::Send(TypeMeasure::Temperature, temp);
-        InterCom::Send(TypeMeasure::Pressure, pressure);
-        InterCom::Send(TypeMeasure::Humidity, humidity);
-
-        float dew_point = CalculateDewPoint(temp, humidity);
-
-        InterCom::Send(TypeMeasure::DewPoint, dew_point);
-
-        bool in_range = Measures::InRange(TypeMeasure::Temperature, temp) &&
-            Measures::InRange(TypeMeasure::Pressure, pressure) &&
-            Measures::InRange(TypeMeasure::Humidity, humidity) &&
-            Measures::InRange(TypeMeasure::DewPoint, dew_point);
-
-        if (in_range)
-        {
-            Beeper::Stop();
-        }
-        else
-        {
-            Beeper::Start(100);
-        }
+        ProcessMeasure(velocity, time);
     }
 
-    if (BH1750::GetMeasure(&illumination))
+    if (GY511::GetAzimuth(&azimuth))
     {
-        InterCom::Send(TypeMeasure::Illuminate, illumination);
+        ProcessMeasure(azimuth, time);
+    }
+
+    NEO_M8N::GetMeasures(&latitude, &longitude, &altitude);
+
+    ProcessMeasure(latitude, time);
+    ProcessMeasure(longitude, time);
+    ProcessMeasure(altitude, time);
+
+    if (!Menu::IsOpened())
+    {
+        Beeper::Update();
     }
 
     Keyboard::Update();
-    Display::Update();
+
+    Display::Update(TIME_MS);
+
+    HAL_ADC::GetVoltage();
+
+    EnergySwitch::Update();
+
+    Storage::SaveMeasures();
+
+    SCPI::Update();
 }
 
 
-float Device::CalculateDewPoint(float temperature, float humidity)
+void Device::ProcessMeasure(const Measure &measure, uint time)
 {
-    float f = CalculateF(temperature, humidity);
+    if (measure.correct)
+    {
+        InterCom::Send(measure, time);
 
-    return (237.7f * f) / (17.27f - f);
+        Storage::AppendMeasure(measure);
+    }
 }
 
 
-float Device::CalculateF(float temperature, float humidity)
+void Device::RunTests()
 {
-    return (17.27f * temperature) / (237.7f + temperature) + std::log(humidity / 100.0f);
+    Test::Settings::Run();
 }

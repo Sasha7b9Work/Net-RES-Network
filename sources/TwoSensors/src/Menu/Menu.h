@@ -6,15 +6,15 @@
 
 namespace Menu
 {
-    void ShortPress(Key::E);
+    void ShortPress(const Key &);
 
-    void LongPress(Key::E);
+    void LongPress(const Key &);
 
-    void DoubleClick(Key::E);
+    void DoubleClick(const Key &);
 
     void Draw();
 
-    bool Opened();
+    bool IsOpened();
 
     namespace Title
     {

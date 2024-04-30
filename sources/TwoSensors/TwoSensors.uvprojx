@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects-Debug\</OutputDirectory>
-          <OutputName>TwoSensors</OutputName>
+          <OutputName>MS-1</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -323,14 +323,14 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
-            <uSurpInc>0</uSurpInc>
+            <uSurpInc>1</uSurpInc>
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
-            <v6LangP>5</v6LangP>
+            <v6Lang>5</v6Lang>
+            <v6LangP>6</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -338,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F303xC</Define>
+              <Define>USE_HAL_DRIVER, STM32F303xC</Define>
               <Undefine></Undefine>
-              <IncludePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Inc;.\src;..\common\STM32Cube_F3\Drivers\CMSIS\Core\Include;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;.\src\Hardware\CDC</IncludePath>
+              <IncludePath>.\src;.\src\Hardware\HAL;.\src\Hardware\CDC;..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Inc;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\common\STM32Cube_F3\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\common\STM32Cube_F3\Drivers\CMSIS\Core\Include;..\common\STM32Cube_F3\Drivers\CMSIS\Device\ST\STM32F3xx\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -362,7 +362,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>0</umfTarg>
+            <umfTarg>1</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -371,7 +371,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>.\GTC-3.sct</ScatterFile>
+            <ScatterFile>.\MS-1.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -390,29 +390,14 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_rtc.c</FileName>
+              <FileName>stm32f3xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_cortex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_rtc_ex.c</FileName>
+              <FileName>stm32f3xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_flash.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_pcd.c</FileName>
@@ -425,14 +410,29 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_rcc_ex.c</FileName>
+              <FileName>stm32f3xx_hal_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rcc_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_dma.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_tim_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_adc.c</FileName>
@@ -445,19 +445,19 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_pwr.c</FileName>
+              <FileName>stm32f3xx_hal_pcd_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pwr.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pcd_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_i2c_ex.c</FileName>
+              <FileName>stm32f3xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_tim_ex.c</FileName>
+              <FileName>stm32f3xx_hal_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_tim_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_flash_ex.c</FileName>
@@ -465,19 +465,9 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_flash_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_ll_usb.c</FileName>
+              <FileName>stm32f3xx_hal_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_usb.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_dma.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_uart_ex.c</FileName>
@@ -485,14 +475,39 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_uart_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_gpio.c</FileName>
+              <FileName>stm32f3xx_hal_rtc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_gpio.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_pcd_ex.c</FileName>
+              <FileName>stm32f3xx_ll_usb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pcd_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_usb.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_iwdg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -503,16 +518,6 @@
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Log.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Log.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
             </File>
             <File>
               <FileName>defines.h</FileName>
@@ -530,14 +535,14 @@
               <FilePath>.\src\Device.h</FilePath>
             </File>
             <File>
-              <FileName>Measures.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measures.cpp</FilePath>
+              <FileName>description.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\description.txt</FilePath>
             </File>
             <File>
-              <FileName>Measures.h</FileName>
+              <FileName>opt.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Measures.h</FilePath>
+              <FilePath>.\src\opt.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -573,6 +578,16 @@
               <FileName>Zones.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Zones.h</FilePath>
+            </File>
+            <File>
+              <FileName>StartScreen.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\StartScreen.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StartScreen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\StartScreen.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -639,6 +654,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Beeper.h</FilePath>
             </File>
+            <File>
+              <FileName>EnergySwitch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EnergySwitch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -660,24 +685,44 @@
           <GroupName>Hardware/CDC</GroupName>
           <Files>
             <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_conf.h</FilePath>
             </File>
             <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_desc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ctlreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
             </File>
             <File>
               <FileName>CDC.h</FileName>
@@ -688,26 +733,6 @@
               <FileName>CDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ctlreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ioreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -745,11 +770,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_USART_HC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART_HC12.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_ROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_ROM.cpp</FilePath>
@@ -760,16 +780,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_ADC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_SPI1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_USART_HI50.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_PINS.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
@@ -778,6 +788,26 @@
               <FileName>HAL_PINS.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IWDG.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -839,20 +869,20 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/BH1750</GroupName>
-          <Files>
             <File>
-              <FileName>BH1750.cpp</FileName>
+              <FileName>PageDataBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.cpp</FilePath>
+              <FilePath>.\src\Menu\Pages\PageDataBase.cpp</FilePath>
             </File>
             <File>
-              <FileName>BH1750.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.h</FilePath>
+              <FileName>PageDataBaseBrowsing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDataBaseBrowsing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDataBaseSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDataBaseSettings.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -887,6 +917,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Modules/CG-Anem</GroupName>
+          <Files>
+            <File>
+              <FileName>CG-Anem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\CG-Anem\CG-Anem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CG-Anem.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\CG-Anem\CG-Anem.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules/GY511</GroupName>
+          <Files>
+            <File>
+              <FileName>GY511.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\GY511\GY511.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GY511.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\GY511\GY511.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Modules/HC12</GroupName>
           <Files>
             <File>
@@ -902,32 +962,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Modules/HI50</GroupName>
+          <GroupName>Modules/NEO-M8N</GroupName>
           <Files>
             <File>
-              <FileName>HI50.cpp</FileName>
+              <FileName>NEO-M8N.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Modules\HI50\HI50.cpp</FilePath>
+              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.cpp</FilePath>
             </File>
             <File>
-              <FileName>HI50.h</FileName>
+              <FileName>NEO-M8N.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Modules\HI50\HI50.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/L00256L</GroupName>
-          <Files>
-            <File>
-              <FileName>L00256L.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\L00256L\L00256L.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>L00256L.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\L00256L\L00256L.h</FilePath>
+              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -958,6 +1003,71 @@
               <FileName>W25Q80DV.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\W25Q80DV\W25Q80DV.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>SCPI</GroupName>
+          <Files>
+            <File>
+              <FileName>SCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\SCPI.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Settings</GroupName>
+          <Files>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\Settings.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Storage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Storage.h</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryStorage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\MemoryStorage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryStorage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\MemoryStorage.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Measures.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -999,6 +1109,21 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
+            <File>
+              <FileName>RingBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\RingBuffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Log.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1027,17 +1152,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Settings</GroupName>
+          <GroupName>Hardware/HAL/I2C</GroupName>
           <Files>
             <File>
-              <FileName>Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+              <FileName>readme.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\I2C\readme.md</FilePath>
             </File>
             <File>
-              <FileName>Settings.h</FileName>
+              <FileName>sw_i2c.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\I2C\sw_i2c.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>sw_i2c.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\I2C\sw_i2c.h</FilePath>
+            </File>
+            <File>
+              <FileName>sw_i2c_port_stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\I2C\sw_i2c_port_stm32.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Tests</GroupName>
+          <Files>
+            <File>
+              <FileName>Tests.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tests\Tests.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tests.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Tests\Tests.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1086,11 +1236,11 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>TwoSensors</OutputName>
+          <OutputName>MS-1</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>0</DebugInformation>
+          <DebugInformation>1</DebugInformation>
           <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
@@ -1171,11 +1321,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <DriverSelection>4107</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -1351,7 +1501,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>7</Optim>
             <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -1360,14 +1510,14 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
-            <uSurpInc>0</uSurpInc>
+            <uSurpInc>1</uSurpInc>
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
-            <v6LangP>5</v6LangP>
+            <v6Lang>5</v6Lang>
+            <v6LangP>6</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -1375,9 +1525,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F303xC</Define>
+              <Define>USE_HAL_DRIVER, STM32F303xC</Define>
               <Undefine></Undefine>
-              <IncludePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Inc;.\src;..\common\STM32Cube_F3\Drivers\CMSIS\Device\ST\STM32F3xx\Include;..\common\STM32Cube_F3\Drivers\CMSIS\Core\Include;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;.\src\Hardware\CDC</IncludePath>
+              <IncludePath>.\src;.\src\Hardware\HAL;.\src\Hardware\CDC;..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Inc;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\common\STM32Cube_F3\Drivers\CMSIS\Device\ST\STM32F3xx\Include;..\common\STM32Cube_F3\Drivers\CMSIS\Core\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1399,7 +1549,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>0</umfTarg>
+            <umfTarg>1</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -1408,7 +1558,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>.\GTC-3.sct</ScatterFile>
+            <ScatterFile>.\Objects\GTC-3.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -1427,29 +1577,14 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_rtc.c</FileName>
+              <FileName>stm32f3xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_cortex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_rtc_ex.c</FileName>
+              <FileName>stm32f3xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_flash.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_pcd.c</FileName>
@@ -1462,14 +1597,29 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_rcc_ex.c</FileName>
+              <FileName>stm32f3xx_hal_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rcc_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_dma.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_tim_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_adc.c</FileName>
@@ -1482,19 +1632,19 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_pwr.c</FileName>
+              <FileName>stm32f3xx_hal_pcd_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pwr.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pcd_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_i2c_ex.c</FileName>
+              <FileName>stm32f3xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_tim_ex.c</FileName>
+              <FileName>stm32f3xx_hal_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_tim_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_flash_ex.c</FileName>
@@ -1502,19 +1652,9 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_flash_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_ll_usb.c</FileName>
+              <FileName>stm32f3xx_hal_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_usb.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f3xx_hal_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_dma.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f3xx_hal_uart_ex.c</FileName>
@@ -1522,14 +1662,39 @@
               <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_uart_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_gpio.c</FileName>
+              <FileName>stm32f3xx_hal_rtc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_gpio.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_rtc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f3xx_hal_pcd_ex.c</FileName>
+              <FileName>stm32f3xx_ll_usb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pcd_ex.c</FilePath>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_usb.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f3xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_iwdg.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1540,16 +1705,6 @@
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Log.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Log.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
             </File>
             <File>
               <FileName>defines.h</FileName>
@@ -1567,14 +1722,14 @@
               <FilePath>.\src\Device.h</FilePath>
             </File>
             <File>
-              <FileName>Measures.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Measures.cpp</FilePath>
+              <FileName>description.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\description.txt</FilePath>
             </File>
             <File>
-              <FileName>Measures.h</FileName>
+              <FileName>opt.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Measures.h</FilePath>
+              <FilePath>.\src\opt.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1610,6 +1765,16 @@
               <FileName>Zones.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Zones.h</FilePath>
+            </File>
+            <File>
+              <FileName>StartScreen.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\StartScreen.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StartScreen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\StartScreen.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1676,6 +1841,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Beeper.h</FilePath>
             </File>
+            <File>
+              <FileName>EnergySwitch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EnergySwitch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EnergySwitch.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1697,24 +1872,44 @@
           <GroupName>Hardware/CDC</GroupName>
           <Files>
             <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_conf.h</FilePath>
             </File>
             <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
-            </File>
-            <File>
               <FileName>usbd_desc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ctlreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
             </File>
             <File>
               <FileName>CDC.h</FileName>
@@ -1725,26 +1920,6 @@
               <FileName>CDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ctlreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ioreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1782,11 +1957,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_USART_HC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART_HC12.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_ROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_ROM.cpp</FilePath>
@@ -1797,16 +1967,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_ADC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_SPI1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_USART_HI50.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_PINS.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
@@ -1815,6 +1975,26 @@
               <FileName>HAL_PINS.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IWDG.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1876,20 +2056,20 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMeasures.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/BH1750</GroupName>
-          <Files>
             <File>
-              <FileName>BH1750.cpp</FileName>
+              <FileName>PageDataBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.cpp</FilePath>
+              <FilePath>.\src\Menu\Pages\PageDataBase.cpp</FilePath>
             </File>
             <File>
-              <FileName>BH1750.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\BH1750\BH1750.h</FilePath>
+              <FileName>PageDataBaseBrowsing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDataBaseBrowsing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDataBaseSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDataBaseSettings.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1924,6 +2104,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Modules/CG-Anem</GroupName>
+          <Files>
+            <File>
+              <FileName>CG-Anem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\CG-Anem\CG-Anem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CG-Anem.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\CG-Anem\CG-Anem.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules/GY511</GroupName>
+          <Files>
+            <File>
+              <FileName>GY511.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Modules\GY511\GY511.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GY511.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Modules\GY511\GY511.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Modules/HC12</GroupName>
           <Files>
             <File>
@@ -1939,32 +2149,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Modules/HI50</GroupName>
+          <GroupName>Modules/NEO-M8N</GroupName>
           <Files>
             <File>
-              <FileName>HI50.cpp</FileName>
+              <FileName>NEO-M8N.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Modules\HI50\HI50.cpp</FilePath>
+              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.cpp</FilePath>
             </File>
             <File>
-              <FileName>HI50.h</FileName>
+              <FileName>NEO-M8N.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Modules\HI50\HI50.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/L00256L</GroupName>
-          <Files>
-            <File>
-              <FileName>L00256L.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\L00256L\L00256L.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>L00256L.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\L00256L\L00256L.h</FilePath>
+              <FilePath>.\src\Modules\NEO-M8N\NEO-M8N.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1975,6 +2170,57 @@
               <FileName>ST7735.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Modules\ST7735\ST7735.cpp</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>2</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls>-O0</MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>ST7735.h</FileName>
@@ -1995,6 +2241,71 @@
               <FileName>W25Q80DV.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\W25Q80DV\W25Q80DV.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>SCPI</GroupName>
+          <Files>
+            <File>
+              <FileName>SCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\SCPI.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Settings</GroupName>
+          <Files>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\Settings.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Storage</GroupName>
+          <Files>
+            <File>
+              <FileName>Storage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Storage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Storage.h</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryStorage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\MemoryStorage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MemoryStorage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\MemoryStorage.h</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Storage\Measures.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Measures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Storage\Measures.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2036,6 +2347,21 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
+            <File>
+              <FileName>RingBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\RingBuffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Log.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2064,17 +2390,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Settings</GroupName>
+          <GroupName>Hardware/HAL/I2C</GroupName>
           <Files>
             <File>
-              <FileName>Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+              <FileName>readme.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\I2C\readme.md</FilePath>
             </File>
             <File>
-              <FileName>Settings.h</FileName>
+              <FileName>sw_i2c.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\I2C\sw_i2c.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>sw_i2c.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\I2C\sw_i2c.h</FilePath>
+            </File>
+            <File>
+              <FileName>sw_i2c_port_stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\I2C\sw_i2c_port_stm32.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Tests</GroupName>
+          <Files>
+            <File>
+              <FileName>Tests.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tests\Tests.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tests.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Tests\Tests.h</FilePath>
             </File>
           </Files>
         </Group>
