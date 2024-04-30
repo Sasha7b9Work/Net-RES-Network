@@ -33,4 +33,6 @@ namespace Keyboard
     void Update();
 
     void EnableEncoder();
+
+    bool EnabledEncoder();
 }

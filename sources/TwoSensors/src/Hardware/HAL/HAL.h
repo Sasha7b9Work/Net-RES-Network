@@ -90,6 +90,14 @@ namespace HAL_USART1
 }
 
 
+namespace HAL_USART_HI50
+{
+    void Init();
+
+    void Send(uint8);
+}
+
+
 namespace HAL_ROM
 {
     uint SaveSettings(const Settings *);

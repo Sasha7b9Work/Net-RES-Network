@@ -56,10 +56,8 @@ void Device::Update()
     Measure pressure;
     Measure humidity;
     Measure dew_point;
-    Measure latitude;
-    Measure longitude;
-    Measure altitude;
     Measure illuminate;
+    Measure distance;
 
     uint time = TIME_MS;
 
@@ -76,9 +74,10 @@ void Device::Update()
         ProcessMeasure(illuminate, time);
     }
 
-    ProcessMeasure(latitude, time);
-    ProcessMeasure(longitude, time);
-    ProcessMeasure(altitude, time);
+    if (HI50::GetMeasure(&distance))
+    {
+        ProcessMeasure(distance, time);
+    }
 
     if (!Menu::IsOpened())
     {

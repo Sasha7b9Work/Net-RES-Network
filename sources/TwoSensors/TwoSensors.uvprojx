@@ -804,6 +804,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_USART_HI50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1920,6 +1925,11 @@
               <FileName>HAL_IWDG.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_USART_HI50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_USART_HI50.cpp</FilePath>
             </File>
           </Files>
         </Group>
