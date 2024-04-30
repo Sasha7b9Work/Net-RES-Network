@@ -3,6 +3,17 @@
 #include "Hardware/HAL/HAL.h"
 
 
+namespace HAL_USART_HI50
+{
+    /*
+    *   USART1 RX - PB7
+    *   USART1 TX - PB6
+    */
+
+    void *handle;
+}
+
+
 void HAL_USART_HI50::Init()
 {
 

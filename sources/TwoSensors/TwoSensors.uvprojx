@@ -795,11 +795,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_USART1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_IWDG.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
@@ -928,21 +923,6 @@
               <FileName>bme280_driver.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\BME280\bme280_driver.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/HC12</GroupName>
-          <Files>
-            <File>
-              <FileName>HC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HC12.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1917,11 +1897,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_USART1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_IWDG.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IWDG.cpp</FilePath>
@@ -2050,21 +2025,6 @@
               <FileName>bme280_driver.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Modules\BME280\bme280_driver.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Modules/HC12</GroupName>
-          <Files>
-            <File>
-              <FileName>HC12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HC12.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Modules\HC12\HC12.h</FilePath>
             </File>
           </Files>
         </Group>

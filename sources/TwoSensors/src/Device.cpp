@@ -1,7 +1,6 @@
 // 2022/04/27 11:48:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device.h"
-#include "Modules/HC12/HC12.h"
 #include "Modules/BME280/BME280.h"
 #include "Modules/BH1750/BH1750.h"
 #include "Modules/ST7735/ST7735.h"
@@ -39,8 +38,6 @@ void Device::Init()
             }
         }
     }
-
-    HC12::Init();
 
     Keyboard::Init();
 

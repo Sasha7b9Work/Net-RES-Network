@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Hardware/InterCom.h"
 #include "Hardware/CDC/CDC.h"
-#include "Modules/HC12/HC12.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Display/Display.h"
 #include "Utils/Text/String.h"
@@ -31,30 +30,6 @@ namespace InterCom
     */
 
     static Direction::E direction = Direction::_None;
-
-    static Buffer<16> CreateMessage(const Measure &measure)
-    {
-        Buffer<16> message;
-
-        message[0] = 'A';                           // offset 0
-        message[1] = 'B';
-        message[2] = 'C';
-        message[3] = (uint8)measure.GetName();
-
-        uint id = HAL::GetUID();                    // offset 4
-
-        std::memcpy(&message[4], &id, 4);
-
-        float value = (float)measure.GetDouble();
-
-        std::memcpy(&message[12], &value, 4);       // offset 12
-
-        uint hash = Math::CalculateCRC(&value, 4);
-
-        std::memcpy(&message[8], &hash, 4);         // offset 8
-
-        return message;
-    }
 }
 
 
@@ -109,13 +84,6 @@ void InterCom::Send(const Measure &measure, uint timeMS)
         String<> message("%s : %f %s", names[measure.GetName()], measure.GetDouble(), units[measure.GetName()]);
 
         HCDC::Transmit(message.c_str(), message.Size() + 1);
-    }
-
-    Buffer<16> data = CreateMessage(measure); //-V821
-
-    if (direction & Direction::HC12)
-    {
-        HC12::Transmit(data.Data(), data.Size());
     }
 
 #ifdef GUI

@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
-#include "Modules/HC12/HC12.h"
 #include "Hardware/Beeper.h"
 #include <stm32f3xx_hal.h>
 
@@ -86,15 +85,15 @@ void USB_LP_CAN_RX0_IRQHandler(void)
 
 void USART1_IRQHandler(void)
 {
-    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART1::handle);
+    HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART_HI50::handle);
 }
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
-    if (handle == HAL_USART1::handle)
+    if (handle == HAL_USART_HI50::handle)
     {
-        HC12::CallbackOnReceive();
+//        HC12::CallbackOnReceive();
     }
 }
 

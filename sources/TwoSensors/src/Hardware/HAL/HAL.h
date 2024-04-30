@@ -77,24 +77,13 @@ namespace HAL_RTC
 }
 
 
-// HC-12
-namespace HAL_USART1
-{
-    static const int SIZE_PAGE = 2 * 1024;
-
-    void Init();
-
-    void Transmit(const void *buffer, int size);
-
-    extern void *handle;               // UART_HandleTypeDef
-}
-
-
 namespace HAL_USART_HI50
 {
     void Init();
 
     void Send(uint8);
+
+    extern void *handle;       // UART_HandleTypeDef
 }
 
 
