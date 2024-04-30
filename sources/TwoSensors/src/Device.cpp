@@ -50,18 +50,12 @@ void Device::Init()
 
     W25Q80DV::Init();
 
-//    W25Q80DV::Test::Run();
-
     Storage::Init();
-
-//    HAL_IWDG::Init();
 }
 
 
 void Device::Update()
 {
-//    HAL_IWDG::Update();
-
     NEO_M8N::Update();
 
     Measure temp;

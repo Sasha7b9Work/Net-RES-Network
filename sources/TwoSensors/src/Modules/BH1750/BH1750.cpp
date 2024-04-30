@@ -11,7 +11,7 @@ namespace BH1750
     static const uint8 CMD_RESET      = 0x03;
     static const uint8 CMD_MEASURE    = 0x10;
 
-    static uint timeNext = 1;
+    uint timeNext = 1;
 
     bool WriteAddrL(uint8);
 
@@ -40,16 +40,14 @@ void BH1750::Init()
 }
 
 
-bool BH1750::GetMeasure(Measure *measure)
+bool BH1750::GetMeasure(float *illumination)
 {
-    measure->Clear();
-
     if (HAL_GetTick() < timeNext)
     {
         return false;
     }
 
-    timeNext += (uint)(TIME_MEASURE + (std::rand() % 100));
+    timeNext += TIME_MEASURE + ((uint)std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 
@@ -57,7 +55,7 @@ bool BH1750::GetMeasure(Measure *measure)
 
     value *= 1.98f;
 
-    measure->SetDouble(value / 100.0f);
+    *illumination = value / 100.0f;
 
     if (value > 1e4f)
     {
@@ -76,7 +74,7 @@ bool BH1750::GetMeasure(Measure *measure)
 
 //        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
 
-        measure.CreateFloat(value);
+        *illumination = value;
 
         return true;
     }
