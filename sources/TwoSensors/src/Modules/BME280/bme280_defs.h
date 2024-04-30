@@ -74,6 +74,12 @@
 // #define INT8_C (signed char)
 #endif
 
+
+#ifdef WIN32
+#define S8_C	(signed char)
+#define U8_C	(unsigned char)
+#endif
+
 #if !defined(UINT8_C) && !defined(INT8_C)
 #define INT8_C(x)       S8_C(x)
 #define UINT8_C(x)      U8_C(x)

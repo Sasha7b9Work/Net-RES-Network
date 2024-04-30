@@ -72,13 +72,11 @@ namespace HAL_SPI1
 
 namespace HAL_RTC
 {
-    void Init();
+    void _Init();
 
+    PackedTime _GetTime();
 
-
-    PackedTime GetTime();
-
-    void SetTime(const PackedTime &);
+    void _SetTime(const PackedTime &);
 }
 
 

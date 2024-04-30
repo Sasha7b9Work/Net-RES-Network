@@ -299,17 +299,17 @@ void StateItem::DrawOpened(int, int, bool) const
 }
 
 
-void TimeItem::DrawClosed(int x, int y, bool) const
+void TimeItem::DrawClosed(int /*x*/, int /*y*/, bool) const
 {
-    PackedTime time = HAL_RTC::GetTime();
-
-    y += 4;
-
-    x += 15;
-
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
-
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(x + 70, y);
+//    PackedTime time = HAL_RTC::GetTime();
+//
+//    y += 4;
+//
+//    x += 15;
+//
+//    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(x, y, Color::WHITE);
+//
+//    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(x + 70, y);
 }
 
 
@@ -367,7 +367,7 @@ void TimeItem::ShortPressure(Key::E key) const
             {
                 if (*data->cur_field == 6)
                 {
-                    HAL_RTC::SetTime(*data->time);
+//                    HAL_RTC::SetTime(*data->time);
                     Close();
                 }
                 else if (*data->cur_field == 7)

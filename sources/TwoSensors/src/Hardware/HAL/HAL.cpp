@@ -50,7 +50,7 @@ void HAL::Init()
     /* Start Device Process */
     USBD_Start(&hUSBDDevice);
 
-    HAL_RTC::Init();
+//    HAL_RTC::Init();
 
     HAL_USART_HC12::Init();
 
