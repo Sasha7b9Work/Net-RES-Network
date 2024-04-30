@@ -40,7 +40,7 @@ bool BH1750::Init()
 }
 
 
-bool BH1750::GetMeasure(float *illumination)
+bool BH1750::GetMeasure(Measure *illumination)
 {
     if (HAL_GetTick() < timeNext)
     {
@@ -74,7 +74,7 @@ bool BH1750::GetMeasure(float *illumination)
 
 //        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
 
-        *illumination = value;
+        illumination->Set(Measure::Illuminate, value);
 
         return true;
     }

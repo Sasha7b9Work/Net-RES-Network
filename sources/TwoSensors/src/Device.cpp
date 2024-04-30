@@ -59,6 +59,7 @@ void Device::Update()
     Measure latitude;
     Measure longitude;
     Measure altitude;
+    Measure illuminate;
 
     uint time = TIME_MS;
 
@@ -68,6 +69,11 @@ void Device::Update()
         ProcessMeasure(pressure, time);
         ProcessMeasure(humidity, time);
         ProcessMeasure(dew_point, time);
+    }
+
+    if (BH1750::GetMeasure(&illuminate))
+    {
+        ProcessMeasure(illuminate, time);
     }
 
     ProcessMeasure(latitude, time);

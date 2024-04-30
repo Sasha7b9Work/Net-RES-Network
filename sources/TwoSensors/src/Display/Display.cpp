@@ -43,7 +43,8 @@ namespace Display
         DMeasure(Measure::Latitude),
         DMeasure(Measure::Longitude),
         DMeasure(Measure::Altitude),
-        DMeasure(Measure::Azimuth)
+        DMeasure(Measure::Azimuth),
+        DMeasure(Measure::Illuminate)
     };
 
     namespace Buffer
