@@ -28,9 +28,11 @@ namespace HI50
 }
 
 
-void HI50::Init()
+bool HI50::Init()
 {
     is_init = true;
+
+    return true;
 }
 
 

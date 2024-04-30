@@ -4,7 +4,7 @@
 
 namespace HI50
 {
-    void Init();
+    bool Init();
 
     void Update();
 
