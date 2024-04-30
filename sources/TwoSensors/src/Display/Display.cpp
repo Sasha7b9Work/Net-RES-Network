@@ -135,10 +135,6 @@ namespace Display
     static void DrawMeasures(uint timeMS);
 
     static void DrawStar();
-
-    // Какую страницу измерений сейчас выводить на экран. Т.к. все они одновременно на экран не помещаются,
-    // то выводятся по пять штук на одном экране и автоматически переключаются.
-    static int PageMeasures(uint timeMS);
 }
 
 
@@ -396,7 +392,7 @@ void Display::Update(uint timeMS)
 }
 
 
-void Display::DrawMeasures(uint timeMS)
+void Display::DrawMeasures(uint)
 {
     Font::Set(TypeFont::_12_10);
 
@@ -410,7 +406,7 @@ void Display::DrawMeasures(uint timeMS)
 
     static const Measure::E names[Measure::Count] =
     {
-        Measure::Count,
+        Measure::Temperature,
         Measure::Pressure,
         Measure::Humidity,
         Measure::DewPoint,
@@ -425,54 +421,37 @@ void Display::DrawMeasures(uint timeMS)
 
     int y = y0;
 
-    int page = PageMeasures(timeMS);
-
-    for (int i = page * MEAS_ON_DISPLAY; i < (page + 1) * MEAS_ON_DISPLAY; i++)
+    for (int i = 0; i < Measure::Count; i++)
     {
-        if (i < Measure::Count)
+        DMeasure &measure = measures[names[i]];
+
+        if (measure.str_value.Size())
         {
-            DMeasure &measure = measures[names[i]];
+            int x = 93;
 
-            if (need_redraw && measure.str_value.Size())
+            int width = 30;
+            int height = 15;
+
+            if (measure.name > Measure::Velocity)
             {
-                int x = (page == 0) ? 93 : 69;
-
-                int width = 30;
-                int height = 15;
-
-                if (measure.name > Measure::Velocity)
+                if (measure.value.GetDouble() < 10.0)
                 {
-                    if (measure.value.GetDouble() < 10.0)
-                    {
-                        x += 14;
-                    }
-                    else if (measure.value.GetDouble() < 100.0)
-                    {
-                        x += 8;
-                    }
+                    x += 14;
                 }
-
-                String<>("%s", measure.Name().c_str()).Draw(x0, y, measure.value.InRange() ? Color::WHITE : Color::FLASH_10);
-                measure.Units().Draw(((page == 0) ? 134 : 145), y, Color::WHITE);
-                measure.Draw(x, y);
-
-                ST7735::WriteBuffer(x - 1, y, width, height);
-                y += dY;
+                else if (measure.value.GetDouble() < 100.0)
+                {
+                    x += 8;
+                }
             }
+
+            String<>("%s", measure.Name().c_str()).Draw(x0, y, measure.value.InRange() ? Color::WHITE : Color::FLASH_10);
+            measure.Units().Draw(134, y, Color::WHITE);
+            measure.Draw(x, y);
+
+            ST7735::WriteBuffer(x - 1, y, width, height);
+            y += dY;
         }
     }
-}
-
-
-int Display::PageMeasures(uint timeMS)
-{
-    const int num_displays = Measure::Count / MEAS_ON_DISPLAY + 1;
-
-    uint secs = timeMS / 1000U;
-
-    uint secs_5 = secs / 5;
-
-    return (int)(secs_5 % num_displays);
 }
 
 
@@ -497,7 +476,9 @@ String<> Display::DMeasure::Name()
         "ШИРОТА",
         "ДОЛГОТА",
         "ВЫСОТА",
-        "АЗИМУТ"
+        "АЗИМУТ",
+        "ОСВЕЩЁННОСТЬ",
+        "ДИСТАНЦИЯ"
     };
 
     String<> result(names[name]);
@@ -517,7 +498,9 @@ String<> Display::DMeasure::Units()
         "Ё",
         "Ё",
         "м",
-        "Ё"
+        "Ё",
+        "лк",
+        "м"
     };
 
     return String<>(units[name]);
