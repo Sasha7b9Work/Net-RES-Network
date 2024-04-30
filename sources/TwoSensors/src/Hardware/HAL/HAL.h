@@ -79,9 +79,13 @@ namespace HAL_RTC
 
 namespace HAL_USART_HI50
 {
-    void Init();
+    void Init(void (*_callback_on_receive)(pchar));
 
     void Send(uint8);
+
+    void ReceiveCallback();
+
+    void Update();
 
     extern void *handle;       // UART_HandleTypeDef
 }

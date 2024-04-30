@@ -29,8 +29,7 @@ void HAL::Init()
 
     __HAL_RCC_SPI1_CLK_ENABLE();
     __HAL_RCC_RTC_ENABLE();
-    __HAL_RCC_USART1_CLK_ENABLE();      // HC12
-    __HAL_RCC_USART2_CLK_ENABLE();      // NEO-8M
+    __HAL_RCC_USART1_CLK_ENABLE();      // HI50 - дальномер
     __HAL_RCC_I2C1_CLK_ENABLE();
     __HAL_RCC_ADC1_CLK_ENABLE();
 

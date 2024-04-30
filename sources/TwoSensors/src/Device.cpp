@@ -89,6 +89,8 @@ void Device::Update()
 
     EnergySwitch::Update();
 
+    HAL_USART_HI50::Update();
+
     SCPI::Update();
 }
 

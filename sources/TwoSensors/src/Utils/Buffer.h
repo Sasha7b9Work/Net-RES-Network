@@ -102,6 +102,16 @@ public:
         return size_buffer;
     }
 
+    void Push(uint8 byte)
+    {
+        Append(&byte, 1);
+    }
+
+    void Clear()
+    {
+        size = 0;
+    }
+
     void Append(const void *data, int _size)
     {
         if (Size() + _size > Capacity())

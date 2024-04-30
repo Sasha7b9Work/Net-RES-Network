@@ -9,7 +9,5 @@ namespace HI50
 
     void Update();
 
-    void CallbackOnReceive(pchar);
-
     bool GetMeasure(Measure *);
 }
