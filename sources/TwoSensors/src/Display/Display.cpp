@@ -35,7 +35,7 @@ namespace Display
 
     static DMeasure measures[Measure::Count] =
     {
-        DMeasure(Measure::Temperature),
+        DMeasure(Measure::Count),
         DMeasure(Measure::Pressure),
         DMeasure(Measure::Humidity),
         DMeasure(Measure::DewPoint),
@@ -44,7 +44,8 @@ namespace Display
         DMeasure(Measure::Longitude),
         DMeasure(Measure::Altitude),
         DMeasure(Measure::Azimuth),
-        DMeasure(Measure::Illuminate)
+        DMeasure(Measure::Illuminate),
+        DMeasure(Measure::Distance)
     };
 
     namespace Buffer
@@ -133,18 +134,11 @@ namespace Display
 
     static void DrawMeasures(uint timeMS);
 
-    // Вывести одно измерение на весь экран
-    static void DrawBigMeasure();
-
-    static void DrawTime();
-
     static void DrawStar();
 
     // Какую страницу измерений сейчас выводить на экран. Т.к. все они одновременно на экран не помещаются,
     // то выводятся по пять штук на одном экране и автоматически переключаются.
     static int PageMeasures(uint timeMS);
-
-    static void DrawCompass();
 }
 
 
@@ -394,105 +388,9 @@ void Display::EndScene()
 
 void Display::Update(uint timeMS)
 {
-    if (mode_compass)
-    {
-        DrawCompass();
-    }
-    else
-    {
-        TimeMeterMS meter_fps;
-
-        need_redraw = true;
-
-        if (Menu::IsOpened())
-        {
-            Menu::Draw();
-
-            need_redraw = true;
-        }
-        else
-        {
-            if (gset.display.typeDisplaydInfo.IsAllMeasures())
-            {
-                if (need_redraw)
-                {
-                    BeginScene(Color::BLACK);
-                }
-
-                DrawMeasures(timeMS);
-
-                if (PageMeasures(timeMS) == 1)
-                {
-                    DrawTime();
-                }
-
-                if (need_redraw)
-                {
-                    EndScene();
-
-                    need_redraw = false;
-                }
-
-                //DrawZones();
-            }
-            else
-            {
-                DrawBigMeasure();
-            }
-
-            zoneFPS.string.SetFormat("%02d ms", meter_fps.ElapsedTime());
-        }
-    }
-}
-
-
-void Display::DrawCompass()
-{
-    const float k = Math::PI / 180.0f;
-
-    const float angle = (float)measures[Measure::Azimuth].value.GetDouble();
-
     BeginScene(Color::BLACK);
 
-    int x0 = Display::WIDTH / 2;
-    int y0 = Display::HEIGHT / 2;
-
-    const int radius = 55;
-
-    Circle(radius).Draw(x0, y0, Color::GRAY_50);
-
-    Line line_scale(x0, y0, x0, y0 - radius - 5);
-
-    line_scale.Rotate(x0, y0, -angle * k);
-
-    for (int i = 0; i < 360; i += 30)
-    {
-        line_scale.Draw(Color::GRAY_25);
-
-        line_scale.Rotate(x0, y0, 30.0f * k);
-    }
-
-    Line arrow(x0, y0, x0, y0 - radius - 2);
-
-    arrow.Rotate(x0, y0, -angle * k);
-
-    arrow.Draw(Color::WHITE);
-
-    int width = 30;
-    int height = 18;
-
-    x0 = WIDTH / 2 - width / 2;
-    y0 = HEIGHT / 2 - height / 2;
-
-    Rectangle(width, height).Fill(x0, y0, Color::BLACK);
-
-    Font::Set(TypeFont::_12_10);
-
-    String<> string("%.0fЁ", (double)angle);
-
-    int length = Font::Text::GetLength(string.c_str());
-
-    string.Draw(WIDTH / 2 - length / 2, y0 + 3, Color::WHITE);
+    DrawMeasures(timeMS);
 
     EndScene();
 }
@@ -512,7 +410,7 @@ void Display::DrawMeasures(uint timeMS)
 
     static const Measure::E names[Measure::Count] =
     {
-        Measure::Temperature,
+        Measure::Count,
         Measure::Pressure,
         Measure::Humidity,
         Measure::DewPoint,
@@ -520,7 +418,9 @@ void Display::DrawMeasures(uint timeMS)
         Measure::Latitude,
         Measure::Longitude,
         Measure::Altitude,
-        Measure::Azimuth
+        Measure::Azimuth,
+        Measure::Illuminate,
+        Measure::Distance
     };
 
     int y = y0;
@@ -576,58 +476,12 @@ int Display::PageMeasures(uint timeMS)
 }
 
 
-void Display::DrawTime()
-{
-    int width = 160;
-    int height = 16;
-    int y = 105;
-
-    Font::Set(TypeFont::_12_10);
-
-    Rectangle(width, height).Fill(4, y - 1, Color::BLACK);
-
-    PackedTime time = HAL_RTC::GetTime();
-
-    String<>("%02d:%02d:%02d", time.hours, time.minutes, time.seconds).Draw(5, 105, Color::WHITE);
-
-    String<>("%02d:%02d:%04d", time.day, time.month, time.year + 2000).Draw(80, 105);
-
-    ST7735::WriteBuffer(0, y, width, height);
-}
-
-
 void Display::DrawStar()
 {
     if (((TIME_MS / 500) % 2) == 0)
     {
         String<>("*").Draw(156, 0, Color::WHITE);
     }
-}
-
-
-void Display::DrawBigMeasure()
-{
-    Font::Set(TypeFont::_8);
-
-    BeginScene(Color::BLACK);
-
-    DMeasure &measure = measures[gset.display.typeDisplaydInfo.value];
-
-    Measure::E name = measure.value.GetName();
-
-    int length = Font::Text::GetLength(measure.Name().c_str(), 2);
-
-    Font::Text::DrawBig((Display::WIDTH - length) / 2, 15, 2, measure.Name().c_str(), Color::_1);
-
-    length = Font::Text::GetLength(measures[name].str_value.c_str(), 4);
-
-    measures[name].Draw((Display::WIDTH - length) / 2, 50, 4);
-
-    length = Font::Text::GetLength(measure.Units().c_str(), 2);
-
-    Font::Text::DrawBig((Display::WIDTH - length) / 2, 95, 2, measure.Units().c_str(), Color::_1);
-
-    EndScene();
 }
 
 
