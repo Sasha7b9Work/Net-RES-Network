@@ -37,7 +37,23 @@ bool HI50::Init()
 {
     HAL_USART_HI50::Init(CallbackOnReceive);
 
-    is_init = true;
+    state = State::WAIT_TURN_ON;
+
+    HAL_USART_HI50::Send(TURN_ON);
+
+    TimeMeterMS meter;
+
+    while (meter.ElapsedTime() < 5000)
+    {
+        HAL_USART_HI50::Update();
+
+        if (state == State::WAIT_MEASURE)
+        {
+            break;
+        }
+    }
+
+    is_init = (state == State::WAIT_MEASURE);
 
     return is_init;
 }

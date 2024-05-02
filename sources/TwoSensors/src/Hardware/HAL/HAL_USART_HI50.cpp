@@ -26,18 +26,20 @@ namespace HAL_USART_HI50
 
 void HAL_USART_HI50::Init(void (*_callback_on_receive)(pchar))
 {
+    __HAL_RCC_USART1_CLK_ENABLE();
+
     callback_on_receive = _callback_on_receive;
 
     GPIO_InitTypeDef is;
     is.Pin = GPIO_PIN_6;    // TX
     is.Mode = GPIO_MODE_AF_PP;
+    is.Alternate = GPIO_AF7_USART1;
     is.Speed = GPIO_SPEED_FREQ_HIGH;
+    is.Pull = GPIO_PULLDOWN;
 
     HAL_GPIO_Init(GPIOB, &is);
 
     is.Pin = GPIO_PIN_7;    // RX
-    is.Mode = GPIO_MODE_INPUT;
-    is.Pull = GPIO_NOPULL;
 
     HAL_GPIO_Init(GPIOB, &is);
 
@@ -48,7 +50,7 @@ void HAL_USART_HI50::Init(void (*_callback_on_receive)(pchar))
     handleUART.Init.Parity = UART_PARITY_NONE;
     handleUART.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     handleUART.Init.Mode = UART_MODE_TX_RX;
-    handleUART.Init.OverSampling = UART_OVERSAMPLING_16;
+    handleUART.Init.OverSampling = UART_OVERSAMPLING_8;
     handleUART.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
     handleUART.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
 
@@ -67,9 +69,16 @@ void HAL_USART_HI50::Send(uint8 byte)
 }
 
 
-void HAL_USART_HI50::ReceiveCallback()
+void HAL_USART_HI50::ReceiveCallback(uint8 byte)
 {
-    recv_buffer.Append(recv_byte);
+    static int counter = 0;
+    
+    if(++counter == 2)
+    {
+        counter = counter;
+    }
+    
+    recv_buffer.Append(byte);
 
     HAL_UART_Receive_IT(&handleUART, &recv_byte, 1);
 }

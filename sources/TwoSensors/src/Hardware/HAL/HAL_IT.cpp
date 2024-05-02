@@ -2,6 +2,7 @@
 #include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Beeper.h"
+#include "Modules/HI50/HI50.h"
 #include <stm32f3xx_hal.h>
 
 
@@ -93,12 +94,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
     if (handle == HAL_USART_HI50::handle)
     {
-//        HC12::CallbackOnReceive();
+        HAL_USART_HI50::ReceiveCallback((uint8)(READ_BIT(USART1->RDR, USART_RDR_RDR) & 0xFFU));
     }
 }
 
-void HAL_UART_ErrorCallback(UART_HandleTypeDef * /*handle*/)
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *handle)
 {
+    handle = handle;
 }
 
 

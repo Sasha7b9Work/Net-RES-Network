@@ -32,6 +32,8 @@ void Device::Init()
     {
         if (!BH1750::Init())                // Если нет - то освещённость
         {
+            __HAL_RCC_I2C1_CLK_DISABLE();
+            
             if (!HI50::Init())              // Если нет - то датчик дальности
             {
                 Keyboard::EnableEncoder();  // И в последнюю очередь запускаем энкодер
@@ -90,6 +92,8 @@ void Device::Update()
     EnergySwitch::Update();
 
     HAL_USART_HI50::Update();
+
+    HI50::Update();
 
     SCPI::Update();
 }

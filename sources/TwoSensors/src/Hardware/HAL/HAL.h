@@ -83,7 +83,7 @@ namespace HAL_USART_HI50
 
     void Send(uint8);
 
-    void ReceiveCallback();
+    void ReceiveCallback(uint8);
 
     void Update();
 
