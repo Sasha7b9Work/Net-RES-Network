@@ -41,6 +41,7 @@ typedef unsigned char  uchar;
 
 #ifdef WIN32
     #define __attribute__(x)
+    #define __attribute(x)
     #ifdef GUI
         #define IN_MODE_TEST
     #else

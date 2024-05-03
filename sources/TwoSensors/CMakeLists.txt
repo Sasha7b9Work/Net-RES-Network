@@ -2,7 +2,7 @@
 
 project (TwoSensors)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 message("------------------------------------------------------------------------ ${PROJECT_NAME}")
 
@@ -44,7 +44,7 @@ file(GLOB DISPLAY               src/Display/*.*)
 file(GLOB DISPLAY_FONT          src/Display/Font/*.*)
 file(GLOB HARDWARE              src/Hardware/*.*)
 file(GLOB HARDWARE_CMSIS        src/Hardware/CMSIS/*.*)
-file(GLOB HARDWARE_CDC          src/Hardware/CDC/*.*)
+#file(GLOB HARDWARE_CDC          src/Hardware/CDC/*.*)
 file(GLOB HARDWARE_HAL          src/Hardware/HAL/*.*)
 file(GLOB HARDWARE_HAL_I2C      src/Hardware/HAL/I2C/*.*)
 file(GLOB MENU                  src/Menu/*.*)
@@ -65,7 +65,7 @@ source_group(Display            FILES ${DISPLAY})
 source_group(Display/Font       FILES ${DISPLAY_FONT})
 source_group(Hardware           FILES ${HARDWARE})
 source_group(Hardware/CMSIS     FILES ${HARDWARE_CMSIS})
-source_group(Hardware/CDC       FILES ${HARDWARE_CDC})
+#source_group(Hardware/CDC       FILES ${HARDWARE_CDC})
 source_group(Hardware/HAL       FILES ${HARDWARE_HAL})
 source_group(Hardware/HAL/I2C   FILES ${HARDWARE_HAL_I2C})
 source_group(Menu               FILES ${MENU})
@@ -98,7 +98,7 @@ add_library(
     ${DISPLAY_FONT}
     ${HARDWARE}
     ${HARDWARE_CMSIS}
-    ${HARDWARE_CDC}
+#    ${HARDWARE_CDC}
     ${HARDWARE_HAL}
     ${HARDWARE_HAL_I2C}
     ${MENU}

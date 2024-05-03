@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Beeper.h"
 #include "Modules/HI50/HI50.h"
@@ -79,29 +78,41 @@ void SysTick_Handler(void)
 }
 
 
-void USB_LP_CAN_RX0_IRQHandler(void)
-{
-    HAL_PCD_IRQHandler((PCD_HandleTypeDef *)handlePCD);
-}
+//void USB_LP_CAN_RX0_IRQHandler(void)
+//{
+//    HAL_PCD_IRQHandler((PCD_HandleTypeDef *)handlePCD);
+//}
 
 void USART1_IRQHandler(void)
 {
+//    if (LL_USART_IsActiveFlag_RXNE(USART1) && LL_USART_IsEnabledIT_RXNE(USART1))
+//    {
+//        HAL_USART_HI50::ReceiveCallback(LL_USART_ReceiveData8(USART1));
+//    }
+
     HAL_UART_IRQHandler((UART_HandleTypeDef *)HAL_USART_HI50::handle);
 }
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *handle)
 {
+    static int counter = 0;
+    
+    if(++counter == 2)
+    {
+        counter = counter;
+    }
+    
     if (handle == HAL_USART_HI50::handle)
     {
         HAL_USART_HI50::ReceiveCallback((uint8)(READ_BIT(USART1->RDR, USART_RDR_RDR) & 0xFFU));
     }
 }
 
-void HAL_UART_ErrorCallback(UART_HandleTypeDef *handle)
-{
-    handle = handle;
-}
+//void HAL_UART_ErrorCallback(UART_HandleTypeDef *handle)
+//{
+//    handle = handle;
+//}
 
 
 void ADC1_2_IRQHandler(void)

@@ -1,7 +1,6 @@
 // Sasha7b9@tut.by (c)
 #include "defines.h"
 #include "Hardware/InterCom.h"
-#include "Hardware/CDC/CDC.h"
 #include "Modules/ST7735/ST7735.h"
 #include "Display/Display.h"
 #include "Utils/Text/String.h"
@@ -83,7 +82,7 @@ void InterCom::Send(const Measure &measure, uint timeMS)
     {
         String<> message("%s : %f %s", names[measure.GetName()], measure.GetDouble(), units[measure.GetName()]);
 
-        HCDC::Transmit(message.c_str(), message.Size() + 1);
+//        HCDC::Transmit(message.c_str(), message.Size() + 1);
     }
 
 #ifdef GUI

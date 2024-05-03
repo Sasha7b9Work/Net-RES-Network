@@ -31,15 +31,12 @@ void HAL_USART_HI50::Init(void (*_callback_on_receive)(pchar))
     callback_on_receive = _callback_on_receive;
 
     GPIO_InitTypeDef is;
-    is.Pin = GPIO_PIN_6;    // TX
+    //           TX           RX
+    is.Pin = GPIO_PIN_6 | GPIO_PIN_7;
     is.Mode = GPIO_MODE_AF_PP;
     is.Alternate = GPIO_AF7_USART1;
     is.Speed = GPIO_SPEED_FREQ_HIGH;
-    is.Pull = GPIO_PULLDOWN;
-
-    HAL_GPIO_Init(GPIOB, &is);
-
-    is.Pin = GPIO_PIN_7;    // RX
+    is.Pull = GPIO_NOPULL;
 
     HAL_GPIO_Init(GPIOB, &is);
 
@@ -50,16 +47,22 @@ void HAL_USART_HI50::Init(void (*_callback_on_receive)(pchar))
     handleUART.Init.Parity = UART_PARITY_NONE;
     handleUART.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     handleUART.Init.Mode = UART_MODE_TX_RX;
-    handleUART.Init.OverSampling = UART_OVERSAMPLING_8;
+    handleUART.Init.OverSampling = UART_OVERSAMPLING_16;
     handleUART.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
     handleUART.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
 
-    HAL_UART_Init(&handleUART);
+    if (HAL_UART_Init(&handleUART) != HAL_OK)
+    {
+        HAL::ErrorHandler();
+    }
 
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
 
-    HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1);
+    if (HAL_UART_Receive_IT(&handleUART, (uint8 *)&recv_byte, 1) != HAL_OK)
+    {
+        HAL::ErrorHandler();
+    }
 }
 
 
@@ -80,7 +83,10 @@ void HAL_USART_HI50::ReceiveCallback(uint8 byte)
     
     recv_buffer.Append(byte);
 
-    HAL_UART_Receive_IT(&handleUART, &recv_byte, 1);
+    if (HAL_UART_Receive_IT(&handleUART, &recv_byte, 1) != HAL_OK)
+    {
+        HAL::ErrorHandler();
+    }
 }
 
 

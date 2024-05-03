@@ -3,7 +3,6 @@
 #include "Modules/HI50/HI50.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include "Hardware/CDC/CDC.h"
 #include "Hardware/HAL/HAL.h"
 
 

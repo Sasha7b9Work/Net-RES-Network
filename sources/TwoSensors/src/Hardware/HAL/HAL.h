@@ -29,6 +29,8 @@ namespace HAL
     void Delay(unsigned int timeMS);
 
     uint GetUID();
+
+    void ErrorHandler();
 }
 
 

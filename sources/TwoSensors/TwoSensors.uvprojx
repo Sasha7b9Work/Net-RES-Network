@@ -682,61 +682,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware/CDC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_desc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ctlreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ioreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Hardware/HAL</GroupName>
           <Files>
             <File>
@@ -1780,61 +1725,6 @@
               <FileName>system_stm32f3xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Hardware\CMSIS\system_stm32f3xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/CDC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_desc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ctlreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_ioreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\common\STM32Cube_F3\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\CDC\usbd_desc.c</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CDC\CDC.cpp</FilePath>
             </File>
           </Files>
         </Group>
