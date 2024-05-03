@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;5&gt;.\src\Hardware\Modules\Laser\Laser.cpp</Filename>
+          <Filename>D:\Projects\RES-Network\RES-Network\sources\GTC-3\src\Hardware\Modules\Laser\Laser.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\5_Governor\src/Hardware/Modules/Laser/Laser.cpp\50</Expression>
         </Bp>
@@ -177,7 +177,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;5&gt;.\src\Hardware\Modules\Laser\Laser.cpp</Filename>
+          <Filename>D:\Projects\RES-Network\RES-Network\sources\GTC-3\src\Hardware\Modules\Laser\Laser.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\5_Governor\src/Hardware/Modules/Laser/Laser.cpp\54</Expression>
         </Bp>
