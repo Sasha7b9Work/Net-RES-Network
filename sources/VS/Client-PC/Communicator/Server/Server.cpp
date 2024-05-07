@@ -109,7 +109,9 @@ void ServerMeasures::Send(TypeMeasure::E type, float value)
     wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%02d-%02d %02d:%02d:%02d\"}\r\n", TypeMeasure::GetTitle(type), value,
         time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
 
-    socket->Write(message.GetData(), message.Length());
+    wxScopedCharBuffer message_utf8 = message.ToUTF8();
+
+    socket->Write(message_utf8, message.Length());
 
     time_last_send = Timer::CurrentTime();
 }
