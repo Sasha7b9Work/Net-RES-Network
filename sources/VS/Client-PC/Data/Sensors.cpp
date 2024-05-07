@@ -35,6 +35,25 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
 }
 
 
+pchar TypeMeasure::GetTitleEn(TypeMeasure::E type)
+{
+    static const pchar titles[Count] =
+    {
+        "Temperature",
+        "Pressure",
+        "Humidity",
+        "Dew point",
+        "Speed",
+        "Latitude",
+        "Longitude",
+        "Height",
+        "Azimuth"
+    };
+
+    return titles[type];
+}
+
+
 bool TypeMeasure::Exist(TypeMeasure::E type)
 {
     static const bool exists[Count] =
