@@ -111,7 +111,7 @@ void ServerMeasures::Send(TypeMeasure::E type, float value)
 
     wxScopedCharBuffer message_utf8 = message.ToUTF8();
 
-    socket->Write(message_utf8, message.Length());
+    socket->Write(message_utf8, message_utf8.length());
 
     time_last_send = Timer::CurrentTime();
 }
