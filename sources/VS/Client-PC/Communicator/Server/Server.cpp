@@ -83,7 +83,7 @@ void ServerMeasures::Update()
     {
         if (Timer::CurrentTime() - time_last_send > 5000)
         {
-            Send(TypeMeasure::Temperature, 25.0f);
+            Send(0xFFFFFFFF, TypeMeasure::Temperature, 25.0f);
         }
 
         return;
@@ -93,7 +93,7 @@ void ServerMeasures::Update()
 }
 
 
-void ServerMeasures::Send(TypeMeasure::E type, float value)
+void ServerMeasures::Send(uint id, TypeMeasure::E type, float value)
 {
     if (!is_connected)
     {
@@ -106,7 +106,8 @@ void ServerMeasures::Send(TypeMeasure::E type, float value)
 
     wxDateTime time = wxDateTime::Now();
 
-    wxString message = wxString::Format("{\"%s\":\"%f\",\"time\":\"%d-%02d-%02d %02d:%02d:%02d\"}\r\n", TypeMeasure::GetTitleEn(type), value,
+    wxString message = wxString::Format("{\"id\"=\"%08X\",\"%s\":\"%f\",\"time\":\"%d-%02d-%02d %02d:%02d:%02d\"}\r\n",
+        id, TypeMeasure::GetTitleEn(type), value,
         time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
 
     wxScopedCharBuffer message_utf8 = message.ToUTF8();

@@ -94,7 +94,7 @@ void Table::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 
     SetCellValue(row->second, TypeMeasure::NumColumn(type_meas), (float)value, color);
 
-    ServerMeasures::Send(type_meas, (float)value);
+    ServerMeasures::Send(id, type_meas, (float)value);
 }
 
 
