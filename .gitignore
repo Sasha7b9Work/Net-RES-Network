@@ -32,3 +32,9 @@ sources/5-Governor/Objects/
 sources/5-Governor/Listings-Debug/
 sources/5-Governor/Objects-Debug/
 sources/5-Governor/DebugConfig/
+
+sources/TwoSensors/Listings/
+sources/TwoSensors/Objects/
+sources/TwoSensors/Listings-Debug/
+sources/TwoSensors/Objects-Debug/
+sources/TwoSensors/DebugConfig/
