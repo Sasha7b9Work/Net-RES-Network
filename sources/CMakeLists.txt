@@ -11,6 +11,5 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
 endif()
 
 add_subdirectory(Device)
-add_subdirectory(GTC-3)
 add_subdirectory(MS-1)
 add_subdirectory(5-Governor)
