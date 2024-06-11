@@ -17,8 +17,8 @@ struct TypeMeasure
         Longitude,      // Долгота
         Altitude,       // Высота
         Azimuth,        // Азимут - угол от направления на север
+        Illuminate,     // Освещённость
         Count
-
     };
 
     static pchar GetTitle(TypeMeasure::E);

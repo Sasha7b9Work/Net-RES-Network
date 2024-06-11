@@ -28,7 +28,8 @@ pchar TypeMeasure::GetTitle(TypeMeasure::E type)
         "Широта",
         "Долгота",
         "Высота",
-        "Азимут"
+        "Азимут",
+        "Освещённость"
     };
 
     return titles[type];
@@ -47,7 +48,8 @@ pchar TypeMeasure::GetTitleEn(TypeMeasure::E type)
         "Latitude",
         "Longitude",
         "Height",
-        "Azimuth"
+        "Azimuth",
+        "Illuminate"
     };
 
     return titles[type];
@@ -58,6 +60,7 @@ bool TypeMeasure::Exist(TypeMeasure::E type)
 {
     static const bool exists[Count] =
     {
+        true,
         true,
         true,
         true,
@@ -129,7 +132,8 @@ pchar TypeMeasure::GetUnits(TypeMeasure::E type)
         "град",
         "град",
         "м",
-        "град"
+        "град",
+        "лк"
     };
 
     return units[type];
