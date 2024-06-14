@@ -1,0 +1,135 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\server\\server-pc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\server\\server-pc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\data\\appdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\data\\appdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\models\\parametermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\models\\parametermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|c:\\users\\user\\desktop\\diploma-all\\background process\\consoleapp4\\models\\dbmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBCFF88-0936-44A5-9FB3-63F180D097C1}|ConsoleApp4\\Background process.csproj|solutionrelative:consoleapp4\\models\\dbmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleApp4\\Program.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Program.cs",
+              "RelativeToolTip": "ConsoleApp4\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-31T02:53:13.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ParameterModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Models\\ParameterModel.cs",
+              "RelativeDocumentMoniker": "ConsoleApp4\\Models\\ParameterModel.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Models\\ParameterModel.cs",
+              "RelativeToolTip": "ConsoleApp4\\Models\\ParameterModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T21:36:48.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DbModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Models\\DbModel.cs",
+              "RelativeDocumentMoniker": "ConsoleApp4\\Models\\DbModel.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Models\\DbModel.cs",
+              "RelativeToolTip": "ConsoleApp4\\Models\\DbModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T21:23:55.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDatabase.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Data\\AppDatabase.cs",
+              "RelativeDocumentMoniker": "ConsoleApp4\\Data\\AppDatabase.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Data\\AppDatabase.cs",
+              "RelativeToolTip": "ConsoleApp4\\Data\\AppDatabase.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAMQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T20:56:59.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Config.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Config.cs",
+              "RelativeDocumentMoniker": "ConsoleApp4\\Config.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Config.cs",
+              "RelativeToolTip": "ConsoleApp4\\Config.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T20:01:09.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Server-PC.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Server\\Server-PC.cs",
+              "RelativeDocumentMoniker": "ConsoleApp4\\Server\\Server-PC.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\Server\\Server-PC.cs",
+              "RelativeToolTip": "ConsoleApp4\\Server\\Server-PC.cs",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAAAGEAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T19:24:55.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "config.json",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\config.json",
+              "RelativeDocumentMoniker": "ConsoleApp4\\config.json",
+              "ToolTip": "C:\\Users\\User\\Desktop\\diploma-all\\background process\\ConsoleApp4\\config.json",
+              "RelativeToolTip": "ConsoleApp4\\config.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-22T19:13:36.884Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Web-Service-Diploma.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Web-Service-Diploma.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\bootstrap\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\morris\\css\\morris.css",
+      "PackagePath": "staticwebassets\\lib\\morris\\css\\morris.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\morris\\js\\morris.js",
+      "PackagePath": "staticwebassets\\lib\\morris\\js\\morris.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\diploma-all\\web\\Web-Service-Diploma\\wwwroot\\lib\\morris\\js\\morris.min.js",
+      "PackagePath": "staticwebassets\\lib\\morris\\js\\morris.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Web-Service-Diploma.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Web-Service-Diploma.props",
+      "PackagePath": "build\\Web-Service-Diploma.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Web-Service-Diploma.props",
+      "PackagePath": "buildMultiTargeting\\Web-Service-Diploma.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Web-Service-Diploma.props",
+      "PackagePath": "buildTransitive\\Web-Service-Diploma.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
