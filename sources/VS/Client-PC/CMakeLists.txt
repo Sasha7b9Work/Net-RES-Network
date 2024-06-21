@@ -43,6 +43,7 @@ file(GLOB SRC                     *.h *.cpp)
 file(GLOB COMMUNICATOR            Communicator/*.*)
 file(GLOB COMMUNICATOR_COMPORT    Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_HC12       Communicator/HC12/*.*)
+file(GLOB COMMUNICATOR_HTTP       Communicator/HTTP/*.*)
 file(GLOB COMMUNICATOR_LAN        Communicator/LAN/*.*)
 file(GLOB COMMUNICATOR_LAN_LIBNET Communicator/LAN/libnet/*.*)
 file(GLOB COMMUNICATOR_RS232      Communicator/RS232/*.*)
@@ -60,6 +61,7 @@ source_group(src                     FILES ${SRC})
 source_group(Communicator            FILES ${COMMUNICATOR})
 source_group(Communicator/ComPort    FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/HC12       FILES ${COMMUNICATOR_HC12})
+source_group(Communicator/HTTP       FILES ${COMMUNICATOR_HTTP})
 source_group(Communicator/LAN        FILES ${COMMUNICATOR_LAN})
 source_group(Communicator/LAN/libnet FILES ${COMMUNICATOR_LAN_LIBNET})
 source_group(Communicator/RS232      FILES ${COMMUNICATOR_RS232})
@@ -86,6 +88,7 @@ add_executable( ${PROJECT_NAME}
     ${COMMUNICATOR}
     ${COMMUNICATOR_COMPORT}
     ${COMMUNICATOR_HC12}
+    ${COMMUNICATOR_HTTP}
     ${COMMUNICATOR_LAN}
     ${COMMUNICATOR_LAN_LIBNET}
     ${COMMUNICATOR_RS232}

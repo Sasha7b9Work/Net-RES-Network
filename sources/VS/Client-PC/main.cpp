@@ -10,6 +10,8 @@
 #include "Utils/Clock.h"
 #include "Controls/ConsoleSCPI.h"
 #include "Communicator/Server/Server.h"
+#include "Utils/Timer.h"
+#include "Communicator/HTTP/HTTP.h"
 
 
 using namespace std;
@@ -34,4 +36,15 @@ void Application::Update()
     Diagram::Pool::self->UpdateArea();
 
     ServerMeasures::Update();
+
+    {
+        static TimeMeterMS meter;
+
+        if (meter.ElapsedTime() > 5000)
+        {
+            meter.Reset();
+
+            HTTP::SendPOST(TypeMeasure::Temperature, (float)(std::rand() % 100));
+        }
+    }
 }
