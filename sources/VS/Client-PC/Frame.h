@@ -16,6 +16,8 @@ public:
 
     static Frame *self;
 
+    void OnWetRequestState(wxWebRequestEvent &);
+
 private:
 
     ModeView::E mode_view = ModeView::Full;

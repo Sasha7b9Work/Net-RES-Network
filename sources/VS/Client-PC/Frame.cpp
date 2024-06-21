@@ -62,7 +62,7 @@ Frame::Frame(const wxString &title)
 
     wxMenu *menuSettings = new wxMenu();
     wxMenu *menuSpeed = new wxMenu();
-    wxMenu* menuModeView = new wxMenu();
+    wxMenu *menuModeView = new wxMenu();
 
     menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_1, "1 сек", wxEmptyString, wxITEM_RADIO));
     menuSpeed->Append(new wxMenuItem(menuSpeed, ID_SPEED_2, "2 сек", wxEmptyString, wxITEM_RADIO));
@@ -77,15 +77,15 @@ Frame::Frame(const wxString &title)
     menuSettings->AppendSubMenu(menuSpeed, _("Скорость обновления"));
     menuSettings->AppendSubMenu(menuModeView, _("Вид"));
 
-//    wxMenu *menuTools = new wxMenu();
-//    menuTools->Append(TOOL_CONSOLE, _("Открыть консоль\tCtrl-K"), _("Открыть консоль"));
-//    menuTools->Append(TOOL_DATABASE, _("База данных\tCtrl-D"), _("База данных"));
+    //    wxMenu *menuTools = new wxMenu();
+    //    menuTools->Append(TOOL_CONSOLE, _("Открыть консоль\tCtrl-K"), _("Открыть консоль"));
+    //    menuTools->Append(TOOL_DATABASE, _("База данных\tCtrl-D"), _("База данных"));
 
     Bind(wxEVT_MENU, &Frame::OnMenuSettings, this);
 
     menuBar->Append(menuSettings, _("Настройки"));
 
-//    menuBar->Append(menuTools, _("Инструменты"));
+    //    menuBar->Append(menuTools, _("Инструменты"));
 
     wxFrameBase::SetMenuBar(menuBar);
 
@@ -125,7 +125,7 @@ void Frame::OnMenuSettings(wxCommandEvent &event)
 
         Set::TimeScale::Set(scales[event.GetId() - ID_SPEED_1]);
     }
-    else if(id >= ID_MODE_VIEW_FULL && id <= ID_MODE_VIEW_GRAPH)
+    else if (id >= ID_MODE_VIEW_FULL && id <= ID_MODE_VIEW_GRAPH)
     {
         SetModeView((ModeView::E)(id - ID_MODE_VIEW_FULL));
     }
@@ -217,4 +217,32 @@ void Frame::OnCloseWindow(wxCloseEvent &event)
     delete ConsoleSCPI::Self();
 
     event.Skip();
+}
+
+
+void Frame::OnWetRequestState(wxWebRequestEvent &event)
+{
+    switch (event.GetState())
+    {
+    case wxWebRequest::State_Completed:
+    {
+        LOG_WRITE(">>> RESPONSE : %s", event.GetResponse().AsString().ToStdString().c_str());
+        break;
+    }
+
+    case wxWebRequest::State_Failed:
+        break;
+
+    case wxWebRequest::State_Cancelled:
+        break;
+
+    case wxWebRequest::State_Unauthorized:
+        break;
+
+    case wxWebRequest::State_Active:
+        break;
+
+    case wxWebRequest::State_Idle:
+        break;
+    }
 }

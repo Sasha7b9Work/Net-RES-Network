@@ -23,6 +23,7 @@ typedef signed char int8;
 #include <wx/grid.h>
 #include <wx/socket.h>
 #include <wx/fileconf.h>
+#include <wx/webrequest.h>
 #pragma warning(pop)
 
 
