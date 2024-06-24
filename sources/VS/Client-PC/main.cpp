@@ -44,7 +44,7 @@ void Application::Update()
         {
             meter.Reset();
 
-            HTTP::SendPOST(TypeMeasure::Temperature, (float)(std::rand() % 100));
+//            HTTP::SendPOST(TypeMeasure::Temperature, (float)(std::rand() % 100));
         }
     }
 }
