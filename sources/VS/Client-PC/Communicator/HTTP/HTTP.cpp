@@ -12,13 +12,16 @@ namespace HTTP
 }
 
 
-void HTTP::SendPOST(TypeMeasure::E, float value)
+void HTTP::SendPOST(TypeMeasure::E type, float value)
 {
     wxWebRequest request = wxWebSession::GetDefault().CreateRequest(Frame::self, url);
 
     Frame::self->Bind(wxEVT_WEBREQUEST_STATE, &Frame::OnWetRequestState, Frame::self);
 
-    wxString body = "api_key=PtmAT51b3j4F8&value1=24.75&value2=54.27&value3=994.01&meas_time = 2024-06-17 16:45:29";
+    wxDateTime time = wxDateTime::Now();
+
+    wxString body = wxString::Format("api_key=PtmAT51b3j4F8&value%d=%10.2f&meas_time = %d-%02d-%02d %02d:%02d:%02d", (int)type, value,
+        time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
 
     request.SetData(body, content_type);
 

@@ -83,7 +83,7 @@ void ServerMeasures::Update()
     {
         if (Timer::CurrentTime() - time_last_send > 5000)
         {
-            _Send(0xFFFFFFFF, TypeMeasure::Temperature, 25.0f);
+            Send(0xFFFFFFFF, TypeMeasure::Temperature, 25.0f);
         }
 
         return;
@@ -93,7 +93,7 @@ void ServerMeasures::Update()
 }
 
 
-void ServerMeasures::_Send(uint id, TypeMeasure::E type, float value)
+void ServerMeasures::Send(uint id, TypeMeasure::E type, float value)
 {
     if (!is_connected)
     {

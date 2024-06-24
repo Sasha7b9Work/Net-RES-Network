@@ -3,6 +3,11 @@
 #include "Data/Sensors.h"
 
 
+/*
+*   Связь с сервером Кузнечикова
+*/
+
+
 namespace HTTP
 {
     void SendPOST(TypeMeasure::E, float value);

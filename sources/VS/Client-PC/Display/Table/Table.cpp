@@ -3,6 +3,7 @@
 #include "Display/Table/Table.h"
 #include "Data/Sensors.h"
 #include "Communicator/Server/Server.h"
+#include "Communicator/HTTP/HTTP.h"
 
 
 using namespace std;
@@ -94,7 +95,9 @@ void Table::SetMeasure(uint id, const wxColour &color, uint8 type, float value)
 
     SetCellValue(row->second, TypeMeasure::NumColumn(type_meas), (float)value, color);
 
-    ServerMeasures::_Send(id, type_meas, (float)value);
+    ServerMeasures::Send(id, type_meas, (float)value);
+
+    HTTP::SendPOST(type_meas, value);
 }
 
 
