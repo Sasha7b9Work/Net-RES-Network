@@ -8,6 +8,17 @@
 
 archive.zip
 
+doc/Client-PC/Mathew/web/.vs/
+doc/Client-PC/Mathew/web/Web-Service-Diploma/bin/
+doc/Client-PC/Mathew/background process/ConsoleApp4/obj/
+doc/Client-PC/Mathew/web/Web-Service-Parameters/obj/
+doc/Client-PC/Mathew/background process/ConsoleApp4/bin/
+doc/Client-PC/Mathew/web/Web-Service-Parameters/bin/
+doc/Client-PC/Mathew/web/Web-Service-Parameters/bin/
+doc/Client-PC/Mathew/background process/.vs/
+doc/Client-PC/Mathew/background process/.vs/ConsoleApp4/DesignTimeBuild/
+doc/Client-PC/Mathew/web/Web-Service-Diploma/obj/
+
 sources/generated/
 sources/Device/Listings/
 sources/Device/Objects/
