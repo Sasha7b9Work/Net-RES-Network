@@ -2,14 +2,10 @@
 #pragma once
 #include "usbd_cdc.h"
 
+extern void *handlePCD;        // PCD_HandleTypeDef
 
-struct CDC
-{
-    static void Init();
+void HCDC_Init();
 
-    static uint8_t Transmit(const void *buffer, int size);
+uint8_t HCDC_Transmit(const void *buffer, int size);
 
-    static void OnIRQHandler();
-
-    static void *handlePCD;        // PCD_HandleTypeDef
-};
+void HCDC_OnIRQHandler();

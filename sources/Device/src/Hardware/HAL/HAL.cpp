@@ -22,7 +22,7 @@ void HAL::Init()
 
     HAL_I2C1::Init();
 
-    CDC::Init();
+    HCDC_Init();
 }
 
 
