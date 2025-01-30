@@ -49,6 +49,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal_def.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
   */
@@ -603,6 +608,11 @@ void USB_ReadPMA(USB_TypeDef  *USBx, uint8_t *pbUsrBuf, uint16_t wPMABufAddr, ui
        /* STM32F103x6 || STM32F103xB || */
        /* STM32F103xE || STM32F103xG || */
        /* STM32F105xC || STM32F107xC    */
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif     
+
 
 #ifdef __cplusplus
 }

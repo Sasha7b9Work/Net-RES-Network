@@ -7,10 +7,14 @@
 #include <cstring>
 #include <cstdlib>
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wsign-conversion"
+#endif
+
 
 static bme280_dev dev;
 
-static unsigned int timeNext = 1;       // Время следующего измерения
+static uint timeNext = 1;       // Время следующего измерения
 
 
 void BME280::Init()
@@ -53,7 +57,7 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 100);
+    timeNext += (uint)TIME_MEASURE + (std::rand() % 100);
 
 #ifdef IN_MODE_TEST
 

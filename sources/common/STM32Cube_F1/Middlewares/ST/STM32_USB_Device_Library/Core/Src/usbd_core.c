@@ -28,6 +28,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_core.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+    #pragma clang diagnostic ignored "-Wunused-parameter"
+#endif
+
+
 /** @addtogroup STM32_USBD_DEVICE_LIBRARY
 * @{
 */
@@ -210,7 +216,7 @@ USBD_StatusTypeDef  USBD_Stop   (USBD_HandleTypeDef *pdev)
 * @param  pdev: device instance
 * @retval status
 */
-USBD_StatusTypeDef  USBD_RunTestMode (USBD_HandleTypeDef  *pdev) 
+USBD_StatusTypeDef  USBD_RunTestMode (USBD_HandleTypeDef  *pdev)
 {
   return USBD_OK;
 }

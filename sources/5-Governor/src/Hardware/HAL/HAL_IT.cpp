@@ -4,6 +4,9 @@
 #include "Hardware/Modules/HC12/HC12.h"
 #include <stm32f1xx_hal.h>
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wmissing-noreturn"
+#endif
 
 void NMI_Handler(void)
 {

@@ -75,6 +75,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+#endif
+
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
   */
@@ -1278,8 +1282,8 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
           /* Process Control Data OUT Packet*/
            HAL_PCD_DataOutStageCallback(hpcd, 0U);
           
-          PCD_SET_EP_RX_CNT(hpcd->Instance, PCD_ENDP0, ep->maxpacket);
-          PCD_SET_EP_RX_STATUS(hpcd->Instance, PCD_ENDP0, USB_EP_RX_VALID);
+          PCD_SET_EP_RX_CNT(hpcd->Instance, PCD_ENDP0, ep->maxpacket)
+          PCD_SET_EP_RX_STATUS(hpcd->Instance, PCD_ENDP0, USB_EP_RX_VALID)
         }
       }
     }
@@ -1324,7 +1328,7 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
               USB_ReadPMA(hpcd->Instance, ep->xfer_buff, ep->pmaaddr1, count);
             }
           }
-          PCD_FreeUserBuffer(hpcd->Instance, ep->num, PCD_EP_DBUF_OUT);  
+          PCD_FreeUserBuffer(hpcd->Instance, ep->num, PCD_EP_DBUF_OUT)
         }
         /*multi-packet on the NON control OUT endpoint*/
         ep->xfer_count+=count;
@@ -1378,7 +1382,7 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
               USB_WritePMA(hpcd->Instance, ep->xfer_buff, ep->pmaaddr1, ep->xfer_count);
             }
           }
-          PCD_FreeUserBuffer(hpcd->Instance, ep->num, PCD_EP_DBUF_IN);  
+          PCD_FreeUserBuffer(hpcd->Instance, ep->num, PCD_EP_DBUF_IN)
         }
         /*multi-packet on the NON control IN endpoint*/
         ep->xfer_count = PCD_GET_EP_TX_CNT(hpcd->Instance, ep->num);

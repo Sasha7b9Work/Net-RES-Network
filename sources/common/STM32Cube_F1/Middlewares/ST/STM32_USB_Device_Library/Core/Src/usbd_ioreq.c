@@ -28,6 +28,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_ioreq.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+#endif
+
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */

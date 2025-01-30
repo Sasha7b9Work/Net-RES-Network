@@ -1,7 +1,6 @@
 // 2024/01/11 10:43:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
-#include "Utils/RingBuffer.h"
 #include "Utils/Buffer.h"
 #include <stm32f1xx_hal.h>
 

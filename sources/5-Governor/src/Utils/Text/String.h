@@ -67,7 +67,7 @@ public:
         static char null_char = 0;
 
         return null_char;
-    };
+    }
 
     bool ToInt(int *out);
 
@@ -83,8 +83,9 @@ private:
 };
 
 
-class EmptyString : public String<>
+class EmptyString : public String<DEFAULT_SIZE_STRING>
 {
 public:
-    EmptyString() : String<>("--.--") { }
+//    EmptyString() : String<>("--.--") { }
+    EmptyString();
 };

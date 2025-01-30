@@ -10,6 +10,9 @@
 #include <cstdio>
 #include <cstdlib>
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 template      String<(int)DEFAULT_SIZE_STRING>::String(pchar, ...);
 template int  String<(int)DEFAULT_SIZE_STRING>::Draw(int, int, Color::E) const;
@@ -175,7 +178,7 @@ int String<capacity>::DrawWithLimitation(int x, int y, Color::E color, int limit
     while (*text)
     {
         x = Text::DrawCharWithLimitation(x, y, (uint8)*text, limitX, limitY, limitWidth, limitHeight);
-        result += Font::Symbol::Width((uint8)*text);
+        result += (uint)Font::Symbol::Width((uint8)*text);
         text++;
     }
 
@@ -428,4 +431,9 @@ bool String<capacity>::ToInt(int *out)
     }
 
     return true;
+}
+
+
+EmptyString::EmptyString() : String<>("--.--")
+{
 }

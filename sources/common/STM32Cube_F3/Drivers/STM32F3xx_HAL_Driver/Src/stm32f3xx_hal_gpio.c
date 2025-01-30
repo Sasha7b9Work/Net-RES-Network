@@ -106,8 +106,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
-#if defined(__ARMCC_VERSION)
-    #pragma clang diagnostic push
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic ignored "-Wall"
     #pragma clang diagnostic ignored "-Wextra"
     #pragma clang diagnostic ignored "-Wpadded"
@@ -549,8 +548,3 @@ __weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 /**
   * @}
   */
-
-
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
-#endif

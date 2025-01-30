@@ -11,7 +11,7 @@
   *          This file contains:
   *           - Data structures and the address mapping for all peripherals
   *           - Peripheral's registers declarations and bits definition
-  *           - Macros to access peripheral’s registers hardware
+  *           - Macros to access peripheral s registers hardware
   *  
   ******************************************************************************
   * @attention
@@ -140,7 +140,7 @@ typedef enum
   USART3_IRQn                 = 39,     /*!< USART3 global Interrupt                              */
   EXTI15_10_IRQn              = 40,     /*!< External Line[15:10] Interrupts                      */
   RTC_Alarm_IRQn              = 41,     /*!< RTC Alarm through EXTI Line Interrupt                */
-  USBWakeUp_IRQn              = 42,     /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */
+  USBWakeUp_IRQn              = 42      /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */
 } IRQn_Type;
 
 /**

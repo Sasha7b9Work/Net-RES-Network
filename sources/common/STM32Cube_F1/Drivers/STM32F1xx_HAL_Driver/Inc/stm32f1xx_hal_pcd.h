@@ -49,6 +49,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_ll_usb.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+     
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
   */
@@ -82,7 +86,7 @@ typedef enum
 {
   PCD_EP_DBUF_OUT,
   PCD_EP_DBUF_IN,
-  PCD_EP_DBUF_ERR,
+  PCD_EP_DBUF_ERR
 }PCD_EP_DBUF_DIR;
 
 /**

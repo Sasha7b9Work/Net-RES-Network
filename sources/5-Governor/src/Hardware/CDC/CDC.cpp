@@ -5,6 +5,9 @@
 #include <cstdarg>
 #include <cstdio>
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 static USBD_HandleTypeDef hUsbDeviceFS;
 static PCD_HandleTypeDef _handlePCD;
@@ -154,7 +157,7 @@ uint8 HCDC_Transmit(const void *buffer, int size)
 }
 
 
-void HCDC_TransmitF(char *format, ...)
+void HCDC_TransmitF(pchar format, ...)
 {
     char message[256];
     std::va_list args;

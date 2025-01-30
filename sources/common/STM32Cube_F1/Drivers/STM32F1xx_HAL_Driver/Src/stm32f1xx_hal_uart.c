@@ -169,6 +169,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wcast-align"
+#endif
+
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
   */

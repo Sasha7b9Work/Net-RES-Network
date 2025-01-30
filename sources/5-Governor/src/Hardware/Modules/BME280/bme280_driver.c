@@ -47,7 +47,14 @@
 
 /*! @file bme280.c
     @brief Sensor driver for BME280 sensor */
+#include "defines.h"
 #include "bme280_driver.h"
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+    #pragma clang diagnostic ignored "-Wfloat-conversion"
+    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+#endif
 
 /**\name Internal macros */
 /* To identify osr settings selected by user */

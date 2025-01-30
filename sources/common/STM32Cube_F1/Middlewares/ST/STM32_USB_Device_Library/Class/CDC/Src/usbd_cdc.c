@@ -63,6 +63,11 @@
 #include "usbd_desc.h"
 #include "usbd_ctlreq.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+    #pragma clang diagnostic ignored "-Wunused-parameter"
+    #pragma clang diagnostic ignored "-Wimplicit-fallthrough"
+#endif
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{

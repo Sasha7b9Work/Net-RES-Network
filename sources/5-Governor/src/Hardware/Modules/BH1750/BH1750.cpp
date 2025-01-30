@@ -5,6 +5,9 @@
 #include <stm32f1xx_hal.h>
 #include <cstdlib>
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wsign-conversion"
+#endif
 
 namespace BH1750
 {
@@ -48,7 +51,7 @@ bool BH1750::GetMeasure(float *illumination)
         return false;
     }
 
-    timeNext += TIME_MEASURE + (std::rand() % 100);
+    timeNext += (uint)(TIME_MEASURE + (std::rand() % 100));
 
 #ifdef IN_MODE_TEST
 

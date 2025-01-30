@@ -7,7 +7,7 @@ class Buffer
 {
 public:
 
-    Buffer() : size(0) {}; //-V730
+    Buffer() : size(0) {} //-V730
 
     T *Data() { return buffer; }
 
@@ -24,7 +24,7 @@ public:
 
     void Append(T value)
     {
-        if (Size() + sizeof(T) > size_buffer)
+        if (Size() + (int)sizeof(T) > size_buffer)
         {
 
         }
