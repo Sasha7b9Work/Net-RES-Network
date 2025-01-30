@@ -76,8 +76,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
-#if __ARMCLIB_VERSION >= 6000000
+#if defined(__ARMCC_VERSION)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wall"
+    #pragma clang diagnostic ignored "-Wextra"
+    #pragma clang diagnostic ignored "-Wpadded"
     #pragma clang diagnostic ignored "-Wswitch-enum"
+    #pragma clang diagnostic ignored "-Wcovered-switch-default"
 #endif
 
 /** @addtogroup STM32F3xx_HAL_Driver

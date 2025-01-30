@@ -5,6 +5,7 @@
 
 #ifndef WIN32
     #pragma clang diagnostic ignored "-Wmissing-field-initializers"
+    #pragma clang diagnostic ignored "-Wcovered-switch-default"
 #endif
 
 #define SW_I2C1_SCL_PORT    GPIOB

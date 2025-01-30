@@ -4,15 +4,6 @@
  extern "C" {
 #endif
 
-#ifndef WIN32
-    #pragma clang diagnostic ignored "-Wpadded"
-    #pragma clang diagnostic ignored "-Wcovered-switch-default"
-    #pragma clang diagnostic ignored "-Wshorten-64-to-32"
-    #pragma clang diagnostic ignored "-Wcast-align"
-    #pragma clang diagnostic ignored "-Wmissing-variable-declarations"
-    #pragma clang diagnostic ignored "-Wbad-function-cast"
-#endif
-
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 

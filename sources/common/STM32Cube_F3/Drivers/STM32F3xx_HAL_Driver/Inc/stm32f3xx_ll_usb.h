@@ -26,6 +26,11 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal_def.h"
+    
+#if defined(__ARMCC_VERSION)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
 
 #if defined (USB)
 /** @addtogroup STM32F3xx_HAL_Driver
@@ -249,3 +254,7 @@ void              USB_ReadPMA(USB_TypeDef *USBx, uint8_t *pbUsrBuf,
 
 
 #endif /* STM32F3xx_LL_USB_H */
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif

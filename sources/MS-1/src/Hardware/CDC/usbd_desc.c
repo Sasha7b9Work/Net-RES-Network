@@ -21,8 +21,10 @@
 #include "usbd_desc.h"
 #include "usbd_conf.h"
 
-#ifndef WIN32
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic ignored "-Wcast-qual"
+    #pragma clang diagnostic ignored "-Wmissing-variable-declarations"
+    #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #endif
 
 /* Private typedef -----------------------------------------------------------*/

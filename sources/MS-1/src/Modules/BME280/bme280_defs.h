@@ -55,6 +55,11 @@
 #ifndef BME280_DEFS_H_
 #define BME280_DEFS_H_
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wpadded"
+#endif
+
 /********************************************************/
 /* header includes */
 #ifdef __KERNEL__
@@ -369,6 +374,11 @@ struct bme280_dev { //-V802
 	/*! Sensor settings */
 	struct bme280_settings settings;
 };
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif
+
 
 #endif /* BME280_DEFS_H_ */
 /** @}*/

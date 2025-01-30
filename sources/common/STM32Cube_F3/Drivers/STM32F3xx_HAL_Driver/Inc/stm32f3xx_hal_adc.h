@@ -30,7 +30,15 @@
 /* Include ADC HAL Extended module */
 /* (include on top of file since ADC structures are defined in extended file) */
 #include "stm32f3xx_hal_adc_ex.h"
-   
+
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wall"
+    #pragma clang diagnostic ignored "-Wextra"
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+     
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
@@ -261,6 +269,10 @@ uint32_t                HAL_ADC_GetError(ADC_HandleTypeDef *hadc);
 /**
   * @}
   */
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif
 
 #ifdef __cplusplus
 }

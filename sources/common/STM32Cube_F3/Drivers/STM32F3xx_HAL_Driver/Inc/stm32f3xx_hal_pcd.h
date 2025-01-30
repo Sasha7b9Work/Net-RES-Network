@@ -27,6 +27,11 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_ll_usb.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+
 #if defined (USB)
 
 /** @addtogroup STM32F3xx_HAL_Driver
@@ -981,6 +986,11 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef *hpcd);
   * @}
   */
 #endif /* defined (USB) */
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif
+
 
 #ifdef __cplusplus
 }

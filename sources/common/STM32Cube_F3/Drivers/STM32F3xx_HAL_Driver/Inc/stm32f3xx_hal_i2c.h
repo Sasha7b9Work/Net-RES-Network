@@ -27,6 +27,11 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal_def.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+    
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
@@ -831,6 +836,10 @@ uint32_t             HAL_I2C_GetError(const I2C_HandleTypeDef *hi2c);
 /**
   * @}
   */
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif
 
 #ifdef __cplusplus
 }

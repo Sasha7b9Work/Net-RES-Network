@@ -5,12 +5,7 @@
 
   <Header>### uVision Project, (C) Keil Software</Header>
 
-  <WorkspaceName>WorkSpace</WorkspaceName>
-
-  <project>
-    <PathAndName>.\GTC-3\GTC-3.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
-  </project>
+  <WorkspaceName>D:\Projects\RES-Network\RES-Network\sources\Network.uvmpw</WorkspaceName>
 
   <project>
     <PathAndName>.\MS-1\MS-1.uvprojx</PathAndName>
@@ -22,6 +17,7 @@
 
   <project>
     <PathAndName>.\5-Governor\5-Governor.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>

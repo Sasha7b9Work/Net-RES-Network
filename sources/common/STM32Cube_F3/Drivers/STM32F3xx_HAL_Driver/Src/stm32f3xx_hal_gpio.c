@@ -102,8 +102,19 @@
   ******************************************************************************
   */
 
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
+
+#if defined(__ARMCC_VERSION)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wall"
+    #pragma clang diagnostic ignored "-Wextra"
+    #pragma clang diagnostic ignored "-Wpadded"
+    #pragma clang diagnostic ignored "-Wswitch-enum"
+    #pragma clang diagnostic ignored "-Wcovered-switch-default"
+    #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif
 
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
@@ -539,3 +550,7 @@ __weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @}
   */
 
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif

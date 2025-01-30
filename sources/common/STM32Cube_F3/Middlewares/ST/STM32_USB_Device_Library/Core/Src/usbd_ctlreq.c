@@ -21,8 +21,10 @@
 #include "usbd_ctlreq.h"
 #include "usbd_ioreq.h"
 
-#if __ARMCLIB_VERSION >= 6000000
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic ignored "-Wimplicit-int-conversion"
+    #pragma clang diagnostic ignored "-Wbad-function-cast"
+    #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #endif
 
 /** @addtogroup STM32_USBD_STATE_DEVICE_LIBRARY

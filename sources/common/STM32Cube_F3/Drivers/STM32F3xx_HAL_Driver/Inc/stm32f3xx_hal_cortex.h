@@ -27,6 +27,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal_def.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wall"
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif     
+     
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
@@ -415,6 +421,10 @@ void HAL_MPU_Enable(uint32_t MPU_Control);
   * @}
   */
   
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
+#endif
+
 #ifdef __cplusplus
 }
 #endif

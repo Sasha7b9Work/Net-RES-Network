@@ -71,9 +71,6 @@ namespace MemoryStorage
                 size = SIZE;
             }
 
-            static int counter = 0;
-            counter++;
-
             MemBuffer<SIZE> mem_buf;
 
             uint8 *src = mem_buf.Read(begin);

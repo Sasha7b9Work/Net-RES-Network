@@ -20,6 +20,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_core.h"
 
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif
+
 /** @addtogroup STM32_USBD_DEVICE_LIBRARY
 * @{
 */
