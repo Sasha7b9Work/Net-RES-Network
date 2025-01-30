@@ -9,7 +9,7 @@
 static USBD_HandleTypeDef hUsbDeviceFS;
 static PCD_HandleTypeDef _handlePCD;
 
-void *CDC::handlePCD = &_handlePCD;
+void *handlePCD = &_handlePCD;
 
 
 #define APP_RX_DATA_SIZE  1000
@@ -39,7 +39,7 @@ USBD_CDC_ItfTypeDef USBD_Interface_fops_FS =
 };
 
 
-void CDC::Init()
+void HCDC_Init()
 {
     USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
 
@@ -131,7 +131,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t */*Len*/)
 
 #ifndef GUI
 
-uint8 CDC::Transmit(const void *buffer, int size)
+uint8 HCDC_Transmit(const void *buffer, int size)
 {
     if (!buffer)
     {
@@ -154,7 +154,7 @@ uint8 CDC::Transmit(const void *buffer, int size)
 }
 
 
-void CDC::TransmitF(char *format, ...)
+void HCDC_TransmitF(char *format, ...)
 {
     char message[256];
     std::va_list args;
@@ -166,13 +166,13 @@ void CDC::TransmitF(char *format, ...)
 
     std::sprintf(data, "%s\r\n", message);
 
-    Transmit(data, (int)std::strlen(data));
+    HCDC_Transmit(data, (int)std::strlen(data));
 }
 
 #endif
 
 
-void CDC::OnIRQHandler()
+void HCDC_OnIRQHandler()
 {
     HAL_PCD_IRQHandler(&_handlePCD);
 }

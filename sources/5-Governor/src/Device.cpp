@@ -19,7 +19,7 @@ void Device::Init()
 {
     HAL::Init();
 
-    CDC::Init();
+    HCDC_Init();
 
     Timer::Delay(1000);
 }

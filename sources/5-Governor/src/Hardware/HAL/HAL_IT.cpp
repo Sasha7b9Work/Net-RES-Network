@@ -68,7 +68,7 @@ void SysTick_Handler(void)
 
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
-    CDC::OnIRQHandler();
+    HCDC_OnIRQHandler();
 }
 
 void USART1_IRQHandler(void)

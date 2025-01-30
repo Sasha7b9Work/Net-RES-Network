@@ -3,15 +3,13 @@
 #include "usbd_cdc.h"
 
 
-struct CDC
-{
-    static void Init();
+extern void *handlePCD;        // PCD_HandleTypeDef
 
-    static uint8 Transmit(const void *buffer, int size);
 
-    static void TransmitF(char *buffer, ...);
+void HCDC_Init();
 
-    static void OnIRQHandler();
+uint8 HCDC_Transmit(const void *buffer, int size);
 
-    static void *handlePCD;        // PCD_HandleTypeDef
-};
+void HCDC_TransmitF(char *buffer, ...);
+
+void HCDC_OnIRQHandler();

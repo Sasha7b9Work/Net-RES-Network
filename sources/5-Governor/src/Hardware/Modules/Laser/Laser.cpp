@@ -59,7 +59,7 @@ void Laser::CallbackOnReceive(pchar message)
         break;
 
     case State::WAIT_MEASURE:
-        CDC::TransmitF("%s", message);
+        HCDC_TransmitF("%s", message);
         HAL_USART1::Send(MEAS_HI);
         break;
     }
