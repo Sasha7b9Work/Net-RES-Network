@@ -4,8 +4,8 @@
 
 extern void *handlePCD;        // PCD_HandleTypeDef
 
-void HCDC_Init();
+void HCDC_Init(void);
 
 uint8_t HCDC_Transmit(const void *buffer, int size);
 
-void HCDC_OnIRQHandler();
+void HCDC_OnIRQHandler(void);

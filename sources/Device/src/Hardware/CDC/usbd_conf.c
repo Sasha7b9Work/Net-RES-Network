@@ -7,6 +7,10 @@
 #include "defines.h"
 #include "Hardware/CDC/CDC.h"
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#endif
+
 
 static USBD_StatusTypeDef USBD_Get_USB_Status(HAL_StatusTypeDef hal_status);
 
@@ -591,7 +595,7 @@ void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef * hpcd, uint8_t state)
   */
 USBD_StatusTypeDef USBD_Get_USB_Status(HAL_StatusTypeDef hal_status)
 {
-    USBD_StatusTypeDef usb_status = USBD_OK;
+    USBD_StatusTypeDef usb_status = USBD_FAIL;
 
     switch (hal_status)
     {
@@ -605,9 +609,6 @@ USBD_StatusTypeDef USBD_Get_USB_Status(HAL_StatusTypeDef hal_status)
         usb_status = USBD_BUSY;
         break;
     case HAL_TIMEOUT:
-        usb_status = USBD_FAIL;
-        break;
-    default:
         usb_status = USBD_FAIL;
         break;
     }

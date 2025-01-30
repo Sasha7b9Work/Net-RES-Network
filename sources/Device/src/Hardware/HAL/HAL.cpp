@@ -34,9 +34,11 @@ void HAL::Delay(unsigned int timeMS)
 
 static void SystemClock_Config()
 {
-    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-    RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+    RCC_OscInitTypeDef RCC_OscInitStruct;
+
+    RCC_ClkInitTypeDef RCC_ClkInitStruct;
+
+    RCC_PeriphCLKInitTypeDef PeriphClkInit;
   
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -64,7 +66,7 @@ static void SystemClock_Config()
 }
 
 
-void Error_Handler()
+__attribute__ ((noreturn)) void Error_Handler()
 {
     while(1)
     {

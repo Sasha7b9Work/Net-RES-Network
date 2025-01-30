@@ -13,7 +13,11 @@
 #include <cmath>
 #include <cctype>
 
-
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic ignored "-Wcomma"
+    #pragma clang diagnostic ignored "-Wfloat-equal"
+    #pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 #define  SYMBOL(x) (*(*(x)))
 
@@ -382,7 +386,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pchar text, 
         y += 9;
     }
 
-    LIMITATION(*height, y - top + 4, 0, 239);
+    LIMITATION(*height, y - top + 4, 0, 239)
 
     return curSymbol == numSymb;
 }
@@ -641,7 +645,7 @@ String<> SU::Float2String(float value, bool alwaysSign, int numDigits)
         format[5] = '.';
     }
 
-    std::snprintf(buffer, 19, format, std::fabs(value));
+    std::snprintf(buffer, 19, format, (double)std::fabs(value));
     
     if((int)std::strlen(buffer) > numDigits + 1)        // Это затычка на то, что число -9.99999 выводится как -10.000, хотя должно быть четыре цифры - 2 цифры после запятой
     {

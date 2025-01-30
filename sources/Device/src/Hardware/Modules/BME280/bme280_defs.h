@@ -69,6 +69,12 @@
 /*! @name		Common macros		        */
 /********************************************************/
 
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmacro-redefined"
+    #pragma clang diagnostic ignored "-Wpadded"
+#endif
+
 #ifndef GUI
  #define UINT8_C (unsigned char)
  #define INT8_C (signed char)
@@ -92,6 +98,10 @@
 #if !defined(INT64_C) && !defined(UINT64_C)
 #define INT64_C(x)      S64_C(x)
 #define UINT64_C(x)     U64_C(x)
+#endif
+
+#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+    #pragma clang diagnostic pop
 #endif
 
 /**@}*/
