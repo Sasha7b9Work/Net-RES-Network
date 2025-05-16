@@ -36,6 +36,8 @@ typedef unsigned char uchar;
 #ifdef WIN32
 //    #define IN_MODE_TEST
     #undef asm
+    #define __attribute__(x)
+    #define __attribute(x)
 #endif
 
 
