@@ -25,6 +25,7 @@ sources/Device/Objects/
 sources/Device/Listings-Debug/
 sources/Device/Objects-Debug/
 sources/Device/DebugConfig/
+sources/Device/RTE/
 
 sources/GTC-3/Listings/
 sources/GTC-3/Objects/
@@ -37,12 +38,14 @@ sources/MS-1/Objects/
 sources/MS-1/Listings-Debug/
 sources/MS-1/Objects-Debug/
 sources/MS-1/DebugConfig/
+sources/MS-1/RTE/
 
 sources/5-Governor/Listings/
 sources/5-Governor/Objects/
 sources/5-Governor/Listings-Debug/
 sources/5-Governor/Objects-Debug/
 sources/5-Governor/DebugConfig/
+sources/5-Governor/RTE/*
 
 sources/TwoSensors/Listings/
 sources/TwoSensors/Objects/
