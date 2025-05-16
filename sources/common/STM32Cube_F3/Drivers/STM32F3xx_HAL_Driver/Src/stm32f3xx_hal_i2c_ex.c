@@ -47,11 +47,6 @@
   @endverbatim
   */
 
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wall"
-#endif
-
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
 
@@ -367,7 +362,3 @@ void HAL_I2CEx_DisableFastModePlus(uint32_t ConfigFastModePlus)
 /**
   * @}
   */
-
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
-#endif

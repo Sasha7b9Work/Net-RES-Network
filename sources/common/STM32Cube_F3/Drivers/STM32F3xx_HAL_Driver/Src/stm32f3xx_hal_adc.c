@@ -386,22 +386,8 @@
     @endverbatim
   */
 
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wall"
-#endif
-
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
-
-#if defined(__ARMCC_VERSION)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wall"
-    #pragma clang diagnostic ignored "-Wextra"
-    #pragma clang diagnostic ignored "-Wpadded"
-    #pragma clang diagnostic ignored "-Wswitch-enum"
-    #pragma clang diagnostic ignored "-Wcovered-switch-default"
-#endif
 
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
@@ -1215,7 +1201,3 @@ uint32_t HAL_ADC_GetError(ADC_HandleTypeDef *hadc)
   * @}
   */ 
 
-
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
-#endif

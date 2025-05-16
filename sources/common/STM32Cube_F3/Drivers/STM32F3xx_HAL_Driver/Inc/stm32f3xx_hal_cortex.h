@@ -27,12 +27,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal_def.h"
 
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wall"
-    #pragma clang diagnostic ignored "-Wpadded"
-#endif     
-     
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
@@ -277,6 +271,8 @@ uint32_t HAL_SYSTICK_Config(uint32_t TicksNumb);
  */
 /* Peripheral Control functions ***********************************************/
 #if (__MPU_PRESENT == 1U)
+void HAL_MPU_EnableRegion(uint32_t RegionNumber);
+void HAL_MPU_DisableRegion(uint32_t RegionNumber);
 void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init);
 #endif /* __MPU_PRESENT */
 uint32_t HAL_NVIC_GetPriorityGrouping(void);
@@ -421,10 +417,6 @@ void HAL_MPU_Enable(uint32_t MPU_Control);
   * @}
   */
   
-#if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
-#endif
-
 #ifdef __cplusplus
 }
 #endif

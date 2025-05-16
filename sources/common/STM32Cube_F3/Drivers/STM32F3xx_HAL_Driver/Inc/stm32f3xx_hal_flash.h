@@ -25,12 +25,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal_def.h"
-
-#ifndef WIN32
-    #pragma clang diagnostic ignored "-Wpadded"
-#endif
-
-     
+   
 /** @addtogroup STM32F3xx_HAL_Driver
   * @{
   */
