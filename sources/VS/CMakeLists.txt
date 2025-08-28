@@ -46,4 +46,3 @@ endif()
 
 add_subdirectory(Client-PC)
 add_subdirectory(Device)
-add_subdirectory(MS-1)
