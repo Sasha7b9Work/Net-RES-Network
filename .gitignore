@@ -8,6 +8,9 @@
 
 archive.zip
 
+sources/GTC-3/RTE/*
+sources/TwoSensors/RTE/*
+
 doc/Client-PC/Mathew/web/.vs/
 doc/Client-PC/Mathew/web/Web-Service-Diploma/bin/
 doc/Client-PC/Mathew/background process/ConsoleApp4/obj/
